@@ -42,7 +42,7 @@ public class TMDbUser: NSObject, NSCoding, ResponseJSONObjectSerializable {
         guard let name = decoder.decodeObjectForKey("name") as? String else { return nil  }
         guard let userName = decoder.decodeObjectForKey("userName") as? String else { return nil }
         guard let gravatarURI = decoder.decodeObjectForKey("gravatarURI") as? String else { return nil }
-        self.dynamicType.init(userID: userID, name: name, userName: userName, gravatarURI: gravatarURI)
+        self.init(userID: userID, name: name, userName: userName, gravatarURI: gravatarURI)
     }
     
 }

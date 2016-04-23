@@ -331,6 +331,7 @@
 				111943371CCB909F001CF39B /* Alamofire */,
 				111943391CCB90BE001CF39B /* Router */,
 				1119433B1CCB90D0001CF39B /* Service */,
+				113946301CCBB051001CFAEA /* Store */,
 				111943381CCB90B5001CF39B /* Entities */,
 				1119433A1CCB90C8001CF39B /* Helpers */,
 				111942681CCB8CBE001CF39B /* Info.plist */,
@@ -544,7 +545,7 @@
 				111942F31CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift */,
 				111942F51CCB8EDE001CF39B /* ResponseJSONObjectSerializable.swift */,
 			);
-			name = Alamofire;
+			path = Alamofire;
 			sourceTree = "<group>";
 		};
 		111943381CCB90B5001CF39B /* Entities */ = {
@@ -560,7 +561,7 @@
 				111943001CCB8EE4001CF39B /* TMDbUser.swift */,
 				111943011CCB8EE4001CF39B /* TMDbVideo.swift */,
 			);
-			name = Entities;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		111943391CCB90BE001CF39B /* Router */ = {
@@ -571,7 +572,7 @@
 				1119430F1CCB8EF6001CF39B /* TMDbPeopleRouter.swift */,
 				111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */,
 			);
-			name = Router;
+			path = Router;
 			sourceTree = "<group>";
 		};
 		1119433A1CCB90C8001CF39B /* Helpers */ = {
@@ -579,7 +580,7 @@
 			children = (
 				1119430B1CCB8EEB001CF39B /* String+ToNSDate.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		1119433B1CCB90D0001CF39B /* Service */ = {
@@ -591,9 +592,16 @@
 				111943181CCB8EFC001CF39B /* TMDbSignInService.swift */,
 				111943191CCB8EFC001CF39B /* TMDbSignInServiceDelegate.swift */,
 				1119431A1CCB8EFC001CF39B /* TMDbUserService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		113946301CCBB051001CFAEA /* Store */ = {
+			isa = PBXGroup;
+			children = (
 				1119431B1CCB8EFC001CF39B /* TMDbUserStore.swift */,
 			);
-			name = Service;
+			path = Store;
 			sourceTree = "<group>";
 		};
 		2693F16C0142D84C17AC1C7B /* Frameworks */ = {

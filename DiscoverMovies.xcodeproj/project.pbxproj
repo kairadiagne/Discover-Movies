@@ -334,6 +334,7 @@
 				111943381CCB90B5001CF39B /* Entities */,
 				1119433A1CCB90C8001CF39B /* Helpers */,
 				111942681CCB8CBE001CF39B /* Info.plist */,
+				111942661CCB8CBE001CF39B /* TMDbMovieKit.h */,
 			);
 			path = TMDbMovieKit;
 			sourceTree = "<group>";
@@ -576,7 +577,6 @@
 		1119433A1CCB90C8001CF39B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				111942661CCB8CBE001CF39B /* TMDbMovieKit.h */,
 				1119430B1CCB8EEB001CF39B /* String+ToNSDate.swift */,
 			);
 			name = Helpers;

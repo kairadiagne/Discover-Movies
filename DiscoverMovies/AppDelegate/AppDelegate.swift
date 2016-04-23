@@ -2,20 +2,28 @@
 //  AppDelegate.swift
 //  DiscoverMovies
 //
-//  Created by Kaira Diagne on 23-04-16.
+//  Created by Kaira Diagne on 17-03-16.
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
 import UIKit
+import TMDbMovieKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        Theme.applyGlobalTheme()
+        // If the user reinstalls this app the previous sessionID is still stored in the keychain
+        // We need to remove this sessionID before we continue
+        let firstLaunch = !NSUserDefaults.standardUserDefaults().boolForKey("NotFirstLaunch")
+        if firstLaunch {
+            TMDbUserStore().deleteCredentialsAtFirstLaunch()
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "NotFirstLaunch")
+        }
         return true
     }
 

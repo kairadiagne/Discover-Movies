@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1119423B1CCB8CA0001CF39B"
-               BuildableName = "DiscoverMovies.app"
-               BlueprintName = "DiscoverMovies"
+               BlueprintIdentifier = "111942631CCB8CBE001CF39B"
+               BuildableName = "TMDbMovieKit.framework"
+               BlueprintName = "TMDbMovieKit"
                ReferencedContainer = "container:DiscoverMovies.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,36 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1119424F1CCB8CA0001CF39B"
-               BuildableName = "DiscoverMoviesTests.xctest"
-               BlueprintName = "DiscoverMoviesTests"
-               ReferencedContainer = "container:DiscoverMovies.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1119426C1CCB8CBF001CF39B"
-               BuildableName = "TMDbMovieKitTests.xctest"
-               BlueprintName = "TMDbMovieKitTests"
-               ReferencedContainer = "container:DiscoverMovies.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1119423B1CCB8CA0001CF39B"
-            BuildableName = "DiscoverMovies.app"
-            BlueprintName = "DiscoverMovies"
-            ReferencedContainer = "container:DiscoverMovies.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -71,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1119423B1CCB8CA0001CF39B"
-            BuildableName = "DiscoverMovies.app"
-            BlueprintName = "DiscoverMovies"
+            BlueprintIdentifier = "111942631CCB8CBE001CF39B"
+            BuildableName = "TMDbMovieKit.framework"
+            BlueprintName = "TMDbMovieKit"
             ReferencedContainer = "container:DiscoverMovies.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -90,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1119423B1CCB8CA0001CF39B"
-            BuildableName = "DiscoverMovies.app"
-            BlueprintName = "DiscoverMovies"
+            BlueprintIdentifier = "111942631CCB8CBE001CF39B"
+            BuildableName = "TMDbMovieKit.framework"
+            BlueprintName = "TMDbMovieKit"
             ReferencedContainer = "container:DiscoverMovies.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

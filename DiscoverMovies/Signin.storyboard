@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Sign In View Controller-->
+        <scene sceneID="Rhh-TU-OsW">
+            <objects>
+                <viewController storyboardIdentifier="SignInViewController" id="Sxm-8g-cgE" customClass="SignInViewController" customModule="DiscoverMovies" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="F8h-m1-tiT"/>
+                        <viewControllerLayoutGuide type="bottom" id="mVq-Jc-Ohv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="usU-ra-Mig" customClass="BackgroundView" customModule="DiscoverMovies" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8o-4E-zQv">
+                                <rect key="frame" x="267" y="28" width="67" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW7-Zs-bl8">
+                                <rect key="frame" x="-45" y="-37" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxO-VZ-4XG" customClass="CustomButton" customModule="DiscoverMovies" customModuleProvider="target">
+                                <rect key="frame" x="200" y="326" width="200" height="30"/>
+                                <state key="normal" title="Continue without signing in"/>
+                                <connections>
+                                    <action selector="continueWithoutSignIn:" destination="Sxm-8g-cgE" eventType="touchUpInside" id="T9y-dc-ZDj"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPm-IM-G0n">
+                                <rect key="frame" x="20" y="209" width="560" height="58"/>
+                                <string key="text">For some parts of this app it is required to sign in with a TMDb account (e.g. adding movies to your favoriteslist or watchlist). If you don’t have an TMDB account yet you can create one during the login procedure. If you want to discover movies, but don't want to sign in press the continue without signing in button. </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Helps you find and keep track of interesting movies to watch." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaM-E4-0RG">
+                                <rect key="frame" x="20" y="66" width="560" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJ3-3m-Mk3">
+                                <rect key="frame" x="-98" y="67" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAv-T1-NYN">
+                                <rect key="frame" x="20" y="269" width="560" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6u-AS-JIh" customClass="CustomButton" customModule="DiscoverMovies" customModuleProvider="target">
+                                <rect key="frame" x="200" y="288" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="pwc-CA-dqP"/>
+                                </constraints>
+                                <state key="normal" title="Sign in with TMDb"/>
+                                <connections>
+                                    <action selector="signin:" destination="Sxm-8g-cgE" eventType="touchUpInside" id="wy8-2g-ZBz"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="TMDbLogo" translatesAutoresizingMaskIntoConstraints="NO" id="mVg-B5-J9e">
+                                <rect key="frame" x="246" y="111" width="109" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="109" id="LIx-4S-cca"/>
+                                    <constraint firstAttribute="height" constant="90" id="ZCC-WU-5k5"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d8o-4E-zQv" firstAttribute="top" secondItem="F8h-m1-tiT" secondAttribute="bottom" constant="8" symbolic="YES" id="3r5-GW-jwA"/>
+                            <constraint firstItem="KPm-IM-G0n" firstAttribute="top" secondItem="mVg-B5-J9e" secondAttribute="bottom" constant="8" symbolic="YES" id="7an-pd-HKz"/>
+                            <constraint firstItem="h6u-AS-JIh" firstAttribute="width" secondItem="OxO-VZ-4XG" secondAttribute="width" id="7oL-Lh-nWy"/>
+                            <constraint firstAttribute="trailing" secondItem="kAv-T1-NYN" secondAttribute="trailing" constant="20" symbolic="YES" id="8gH-a3-zzM"/>
+                            <constraint firstAttribute="trailing" secondItem="xaM-E4-0RG" secondAttribute="trailing" constant="20" symbolic="YES" id="B0s-jQ-mDy"/>
+                            <constraint firstItem="d8o-4E-zQv" firstAttribute="centerX" secondItem="usU-ra-Mig" secondAttribute="centerX" id="CjN-nv-Hht"/>
+                            <constraint firstItem="h6u-AS-JIh" firstAttribute="centerX" secondItem="usU-ra-Mig" secondAttribute="centerX" id="NrP-oy-Mwd"/>
+                            <constraint firstItem="xaM-E4-0RG" firstAttribute="leading" secondItem="usU-ra-Mig" secondAttribute="leading" constant="20" symbolic="YES" id="PJr-xb-aG1"/>
+                            <constraint firstItem="mVg-B5-J9e" firstAttribute="top" secondItem="xaM-E4-0RG" secondAttribute="bottom" multiplier="1.2" constant="8" symbolic="YES" id="PpW-tM-fIu"/>
+                            <constraint firstItem="kAv-T1-NYN" firstAttribute="leading" secondItem="usU-ra-Mig" secondAttribute="leading" constant="20" symbolic="YES" id="TYh-s2-5vt"/>
+                            <constraint firstItem="KPm-IM-G0n" firstAttribute="leading" secondItem="usU-ra-Mig" secondAttribute="leading" constant="20" symbolic="YES" id="VWp-ja-0kR"/>
+                            <constraint firstAttribute="trailing" secondItem="KPm-IM-G0n" secondAttribute="trailing" constant="20" symbolic="YES" id="Ymn-hB-eVV"/>
+                            <constraint firstItem="OxO-VZ-4XG" firstAttribute="top" secondItem="h6u-AS-JIh" secondAttribute="bottom" constant="8" id="YxQ-VS-Wss"/>
+                            <constraint firstItem="kAv-T1-NYN" firstAttribute="top" secondItem="mVg-B5-J9e" secondAttribute="bottom" constant="68" id="e4p-Av-TBH"/>
+                            <constraint firstItem="xaM-E4-0RG" firstAttribute="top" secondItem="d8o-4E-zQv" secondAttribute="bottom" multiplier="1.2" constant="8" symbolic="YES" id="eAm-zW-6WW"/>
+                            <constraint firstItem="mVg-B5-J9e" firstAttribute="centerX" secondItem="usU-ra-Mig" secondAttribute="centerX" id="gvT-dp-BRz"/>
+                            <constraint firstItem="OxO-VZ-4XG" firstAttribute="centerX" secondItem="usU-ra-Mig" secondAttribute="centerX" id="jtK-Oi-FVq"/>
+                            <constraint firstItem="h6u-AS-JIh" firstAttribute="top" secondItem="KPm-IM-G0n" secondAttribute="bottom" multiplier="1.05" constant="8" symbolic="YES" id="oj6-v9-UWq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RrL-Ya-qsy"/>
+                    <connections>
+                        <outlet property="continueButton" destination="OxO-VZ-4XG" id="9oM-TE-7bR"/>
+                        <outlet property="continueButtonCenterX" destination="jtK-Oi-FVq" id="MA6-sW-fGG"/>
+                        <outlet property="descriptionLabel" destination="xaM-E4-0RG" id="MfV-IF-AAn"/>
+                        <outlet property="instructionLabel" destination="KPm-IM-G0n" id="qKU-RQ-zTZ"/>
+                        <outlet property="signInButton" destination="h6u-AS-JIh" id="Xer-l0-017"/>
+                        <outlet property="signInButtonCenterX" destination="NrP-oy-Mwd" id="wlT-VF-QfH"/>
+                        <outlet property="titleLabel" destination="d8o-4E-zQv" id="zhd-QK-37p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wYO-Xp-jan" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="268" y="-1776"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="TMDbLogo" width="261" height="184"/>
+    </resources>
+</document>

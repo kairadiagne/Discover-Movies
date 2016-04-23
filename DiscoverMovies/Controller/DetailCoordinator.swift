@@ -19,6 +19,7 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     var inFavorites: Bool?
     var inWatchList: Bool?
     var trailer: TMDbVideo?
+    var userIsSignedIn: Bool!
     
     private let movieService: TMDbMovieService!
     private let authorizedMovieService: TMDbAuthorizedMovieService!
@@ -26,6 +27,7 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     override init() {
         self.movieService = TMDbMovieService()
         self.authorizedMovieService = TMDbAuthorizedMovieService()
+        self.userIsSignedIn = TMDbUserStore().userIsSignedIn
     }
     
     // MARK: - Similar Movies
@@ -47,6 +49,7 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     // MARK: - Account states
     
     func getAccountStates(movieID: Int) {
+        guard userIsSignedIn == true else { return } // If the user is not signed in we do not want to fetch the accountstate
         authorizedMovieService.accountStateForMovie(movieID) { (response) in
             guard let inFavorites = response.inFavorites, inWatchList = response.inWatchList else { return }
             self.inFavorites = inFavorites

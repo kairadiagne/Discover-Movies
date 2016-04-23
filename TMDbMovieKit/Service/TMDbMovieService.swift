@@ -15,6 +15,8 @@ public typealias TMDbMovieCompletionHandler = (result: TMDbFetchResult<TMDbMovie
 public typealias TMDbReviewCompletionHandler = (result: TMDbFetchResult<TMDbReview>?, error: NSError?) -> ()
 public typealias TMDbVideosCompletionHandler = (result: [TMDbVideo]?, error: NSError?) -> ()
 
+// The
+
 // Response 
 typealias MovieResponse = Response<TMDbFetchResult<TMDbMovie>, NSError>
 

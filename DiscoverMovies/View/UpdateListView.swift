@@ -10,7 +10,9 @@ import UIKit
 import ChameleonFramework
 
 protocol UpdateListViewDelegate: class {
+    // Gets called when the user has pressed the button to add something to a list
     func updateListViewDidAddItemToList(identifier: String, listView: UpdateListView)
+    // Gets called when the user has pressed the button to remove something from a list
     func updateListViewDidRemoveItemFromList(identifier: String, listView: UpdateListView)
 }
 
@@ -20,10 +22,10 @@ class UpdateListView: UIView {
     // MARK: Properties
     
     weak var delegate: UpdateListViewDelegate?
-    var inList = false { didSet { setNeedsDisplay() } }
     @IBInspectable var fillColor: UIColor = UIColor.flatSkyBlueColor()
     @IBInspectable var borderColor: UIColor = UIColor.flatSkyBlueColor()
     @IBInspectable var lineWidth: CGFloat = 1.0
+    var inList = false { didSet { setNeedsDisplay() } }
     var identifier: String { return "" }
     
     // MARK: - Initializerss
@@ -49,10 +51,10 @@ class UpdateListView: UIView {
     func updateListViewDidGetTapped(sender: UITapGestureRecognizer) {
         guard let delegate = delegate else { return }
         if inList {
-            toggleState()
+//            toggleState()
             delegate.updateListViewDidRemoveItemFromList(identifier, listView: self)
         } else {
-            toggleState()
+//            toggleState()
             delegate.updateListViewDidAddItemToList(identifier, listView: self)
         }
     }

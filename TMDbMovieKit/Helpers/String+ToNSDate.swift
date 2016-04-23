@@ -12,9 +12,9 @@ extension String {
     
     func toDate() -> NSDate? {
         let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "yyy-MM-DD"
         return formatter.dateFromString(self)
     }
+    
     
 }

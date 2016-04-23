@@ -30,8 +30,8 @@ class VideoViewController: UIViewController {
     
     private func playVideo() {
         guard let youtubeID = video?.key else {
-            showAlertWithTitle("Error", message: "Could not play video", completionHandler: { _ in
-                self.navigationController?.popToRootViewControllerAnimated(true)
+            showAlertWithTitle("Trailer unavailable", message: "Couldn't find the trailer for this movie", completionHandler: { _ in
+                self.navigationController?.popToRootViewControllerAnimated(false)
             })
             return
         }

@@ -46,7 +46,7 @@ extension DetailTableViewCell {
     
     func configure(movie: TMDbMovie, image: UIImage?, url: NSURL?) {
         titleLabel.text = movie.title != nil ? movie.title! : "Unknown"
-        releaseDateLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!)": "Unknown"
+        releaseDateLabel.text = movie.releaseDate != nil ? movie.releaseDate!.toString(): "Unknown"
         descriptionLabel.text = movie.overview != nil ? movie.overview! : ""
         genreLabel.text = genreString(movie.genreStrings)
         

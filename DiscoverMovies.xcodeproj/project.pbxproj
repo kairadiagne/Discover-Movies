@@ -20,7 +20,6 @@
 		1119429C1CCB8DD4001CF39B /* NSDate+Comparing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119428F1CCB8DD4001CF39B /* NSDate+Comparing.swift */; };
 		1119429D1CCB8DD4001CF39B /* NSDate+CurrentYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942901CCB8DD4001CF39B /* NSDate+CurrentYear.swift */; };
 		1119429E1CCB8DD4001CF39B /* NSDate+Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942911CCB8DD4001CF39B /* NSDate+Year.swift */; };
-		1119429F1CCB8DD4001CF39B /* String+ToNSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942921CCB8DD4001CF39B /* String+ToNSDate.swift */; };
 		111942A01CCB8DD4001CF39B /* UIFont+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942931CCB8DD4001CF39B /* UIFont+Styles.swift */; };
 		111942A11CCB8DD4001CF39B /* UIImage+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942941CCB8DD4001CF39B /* UIImage+Placeholder.swift */; };
 		111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */; };
@@ -95,6 +94,7 @@
 		111943351CCB8FFE001CF39B /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943331CCB8FFE001CF39B /* DetailCoordinator.swift */; };
 		111943361CCB8FFE001CF39B /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943341CCB8FFE001CF39B /* DetailTableViewController.swift */; };
 		1119433C1CCB9361001CF39B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EF27C2B6BF80FF7BEB7179 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* NSDate+ToString.swift */; };
 		24430DFF360C636748A47847 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EF27C2B6BF80FF7BEB7179 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -165,7 +165,6 @@
 		1119428F1CCB8DD4001CF39B /* NSDate+Comparing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Comparing.swift"; sourceTree = "<group>"; };
 		111942901CCB8DD4001CF39B /* NSDate+CurrentYear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+CurrentYear.swift"; sourceTree = "<group>"; };
 		111942911CCB8DD4001CF39B /* NSDate+Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Year.swift"; sourceTree = "<group>"; };
-		111942921CCB8DD4001CF39B /* String+ToNSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToNSDate.swift"; sourceTree = "<group>"; };
 		111942931CCB8DD4001CF39B /* UIFont+Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Styles.swift"; sourceTree = "<group>"; };
 		111942941CCB8DD4001CF39B /* UIImage+Placeholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Placeholder.swift"; sourceTree = "<group>"; };
 		111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Transparent.swift"; sourceTree = "<group>"; };
@@ -239,6 +238,7 @@
 		111943311CCB8FCE001CF39B /* RevealMenuButtonShowable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealMenuButtonShowable.swift; sourceTree = "<group>"; };
 		111943331CCB8FFE001CF39B /* DetailCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 		111943341CCB8FFE001CF39B /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		113946311CCBBA80001CFAEA /* NSDate+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ToString.swift"; sourceTree = "<group>"; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A895D2EA354450437EF590D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,10 +307,10 @@
 			children = (
 				111942871CCB8D65001CF39B /* AppDelegate */,
 				111942821CCB8CF8001CF39B /* Controller */,
-				111942841CCB8D13001CF39B /* Helpers */,
 				111942831CCB8D0B001CF39B /* View */,
 				111942851CCB8D1C001CF39B /* Storyboard */,
 				111942881CCB8D6F001CF39B /* Theme */,
+				111942841CCB8D13001CF39B /* Helpers */,
 				111942861CCB8D2B001CF39B /* Supporting files */,
 			);
 			path = DiscoverMovies;
@@ -395,7 +395,7 @@
 				1119428F1CCB8DD4001CF39B /* NSDate+Comparing.swift */,
 				111942901CCB8DD4001CF39B /* NSDate+CurrentYear.swift */,
 				111942911CCB8DD4001CF39B /* NSDate+Year.swift */,
-				111942921CCB8DD4001CF39B /* String+ToNSDate.swift */,
+				113946311CCBBA80001CFAEA /* NSDate+ToString.swift */,
 				111942931CCB8DD4001CF39B /* UIFont+Styles.swift */,
 				111942941CCB8DD4001CF39B /* UIImage+Placeholder.swift */,
 				111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */,
@@ -446,8 +446,8 @@
 			isa = PBXGroup;
 			children = (
 				111943291CCB8FC2001CF39B /* CoordinatorDelegate.swift */,
-				1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */,
 				1119432B1CCB8FC2001CF39B /* ItemCoordinator.swift */,
+				1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */,
 				1119432C1CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift */,
 			);
 			name = "Base Classes";
@@ -885,7 +885,6 @@
 				111942E01CCB8E74001CF39B /* SearchViewController.swift in Sources */,
 				111942BF1CCB8DE5001CF39B /* WatchListView.swift in Sources */,
 				111942F21CCB8EB8001CF39B /* Theme.swift in Sources */,
-				1119429F1CCB8DD4001CF39B /* String+ToNSDate.swift in Sources */,
 				1119429B1CCB8DD4001CF39B /* MBProgressHUD+Configure.swift in Sources */,
 				111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */,
 				111942BC1CCB8DE5001CF39B /* ProfileImageView.swift in Sources */,
@@ -897,6 +896,7 @@
 				1119429E1CCB8DD4001CF39B /* NSDate+Year.swift in Sources */,
 				111942CC1CCB8E33001CF39B /* WatchListTableViewController.swift in Sources */,
 				111942991CCB8DD4001CF39B /* CosmosView+Configure.swift in Sources */,
+				113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */,
 				111942DE1CCB8E74001CF39B /* SearchCoordinator.swift in Sources */,
 				111942B61CCB8DE5001CF39B /* FavoriteView.swift in Sources */,
 				111942BD1CCB8DE5001CF39B /* ReviewTableViewCell.swift in Sources */,

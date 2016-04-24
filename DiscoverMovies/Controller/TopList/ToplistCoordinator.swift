@@ -11,7 +11,7 @@ import TMDbMovieKit
 
 class ToplistCoordinator: ItemCoordinator<TMDbMovie> {
     
-    private var movieService: TMDbMovieService
+    private let movieService: TMDbMovieService
     private var currentList: TMDbToplist = .Popular
     
     override init() {

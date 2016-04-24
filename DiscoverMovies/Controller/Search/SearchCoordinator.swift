@@ -16,7 +16,7 @@ enum Search {
 
 class SearchCoordinator: ItemCoordinator<TMDbMovie> {
     
-    private var movieService: TMDbMovieService
+    private let movieService: TMDbMovieService
     private var currentSearch: Search?
     
     override init() {

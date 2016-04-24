@@ -21,7 +21,7 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     var trailer: TMDbVideo?
     var userStatus: TMDBSiginStatus
     
-    private let movieService: TMDbMovieService!
+    private let movieService: TMDbMovieService
     
     override init() {
         self.movieService = TMDbMovieService(APIKey: Global.APIKey)

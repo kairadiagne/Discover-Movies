@@ -15,7 +15,7 @@ class ReviewCoordinator: ItemCoordinator<TMDbReview> {
     private var movieID: Int?
     
     override init() {
-        self.movieService = TMDbMovieService()
+        self.movieService = TMDbMovieService(APIKey: Global.APIKey)
     }
     
     // MARK: - Service Calls

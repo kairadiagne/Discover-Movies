@@ -16,18 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TMDbLogo" translatesAutoresizingMaskIntoConstraints="NO" id="i2t-tL-wzB">
-                                <rect key="frame" x="218" y="242" width="165" height="116"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="116" id="Y6T-eO-HaU"/>
-                                    <constraint firstAttribute="width" constant="165" id="pO5-gr-XKI"/>
-                                </constraints>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHT-sH-ZhE">
+                                <rect key="frame" x="190" y="279" width="220" height="41"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="i2t-tL-wzB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="A3O-3e-t2b"/>
-                            <constraint firstItem="i2t-tL-wzB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dn2-vc-3As"/>
+                            <constraint firstItem="RHT-sH-ZhE" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2QI-Ue-vZa"/>
+                            <constraint firstItem="RHT-sH-ZhE" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="BVH-rs-v7X"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,7 +35,4 @@
             <point key="canvasLocation" x="-278" y="366"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="TMDbLogo" width="261" height="184"/>
-    </resources>
 </document>

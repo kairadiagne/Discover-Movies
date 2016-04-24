@@ -11,14 +11,10 @@ import UIKit
 @IBDesignable
 class CustomButton: UIButton {
     
-    // MARK: - Constants
-    
     private struct Constants {
         static let Color = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0)
         static let BackgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0)
     }
-
-    // MARK: - Initializerss
     
     override init(frame: CGRect) {
         super.init(frame: frame)

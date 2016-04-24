@@ -16,11 +16,11 @@ protocol ProgressHudShowable: class {
     func hideProgressHUD()
 }
 
-extension ProgressHudShowable where Self: UITableViewController {
+extension ProgressHudShowable where Self: UIViewController {
     
     func configureProgressHUD() {
-        progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: tableView.bounds)
-        tableView.addSubview(progressHUD!)
+        progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
+        view.addSubview(progressHUD!)
     }
     
     func showProgressHUD() {

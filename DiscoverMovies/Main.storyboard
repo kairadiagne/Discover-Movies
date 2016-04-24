@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WcE-cH-D5A">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -227,11 +226,11 @@
             </objects>
             <point key="canvasLocation" x="3764" y="-404"/>
         </scene>
-        <!--Discover-->
+        <!--Toplist-->
         <scene sceneID="14n-b6-gOs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uDF-Ms-sbV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Discover" image="Discover" id="v86-VP-2sk"/>
+                    <tabBarItem key="tabBarItem" title="Toplist" image="MovieList" id="v86-VP-2sk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9PY-Ut-qbq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -286,11 +285,11 @@
             </objects>
             <point key="canvasLocation" x="1523" y="-768"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Discover-->
         <scene sceneID="6qT-jW-pyb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ty3-eG-FFn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="6O2-vN-WdI"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="Discover" id="6O2-vN-WdI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2oS-BL-P1R">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -626,37 +625,37 @@
         <scene sceneID="KNf-QS-Hoc">
             <objects>
                 <tableViewController storyboardIdentifier="DetailTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="heV-AR-Vgn" customClass="DetailTableViewController" customModule="DiscoverMovies" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="757" sectionHeaderHeight="28" sectionFooterHeight="28" id="jSh-FD-lVx">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="741" sectionHeaderHeight="28" sectionFooterHeight="28" id="jSh-FD-lVx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCellTableViewCell" rowHeight="693" id="ZyX-XQ-xYj" customClass="DetailTableViewCell" customModule="DiscoverMovies" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="693"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCellTableViewCell" rowHeight="741" id="ZyX-XQ-xYj" customClass="DetailTableViewCell" customModule="DiscoverMovies" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="741"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZyX-XQ-xYj" id="fkR-nf-Y6y">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="692"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="740"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OCs-gb-QZa" customClass="CosmosView" customModule="Cosmos">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCs-gb-QZa" customClass="CosmosView" customModule="Cosmos">
                                             <rect key="frame" x="240" y="410" width="120" height="20"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Description" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Diy-aX-eTH">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Diy-aX-eTH">
                                             <rect key="frame" x="20" y="451" width="560" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7C-Ft-H6T" customClass="HorizontalImageScroller" customModule="DiscoverMovies" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="494" width="560" height="122"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7C-Ft-H6T" customClass="HorizontalImageScroller" customModule="DiscoverMovies" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="494" width="560" height="169"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="114" placeholder="YES" id="g4S-Yr-xpX"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="160" placeholder="YES" id="g4S-Yr-xpX"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ke1-rI-E1d" customClass="CustomButton" customModule="DiscoverMovies" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="642" width="102" height="30"/>
+                                            <rect key="frame" x="20" y="690" width="102" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="102" id="ehh-C3-ofZ"/>
                                             </constraints>
@@ -668,7 +667,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5b-ez-gqM" customClass="CustomButton" customModule="DiscoverMovies" customModuleProvider="target">
-                                            <rect key="frame" x="478" y="642" width="102" height="30"/>
+                                            <rect key="frame" x="478" y="690" width="102" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="102" id="XLy-ky-UaE"/>
                                             </constraints>
@@ -679,7 +678,7 @@
                                                 </segue>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab3-PV-8MU">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab3-PV-8MU">
                                             <rect key="frame" x="283" y="333" width="34" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -702,12 +701,6 @@
                                                 <constraint firstAttribute="width" constant="35" id="bhn-CT-uxJ"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="releaseDate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aU4-3a-2H4">
-                                            <rect key="frame" x="254" y="357" width="92" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gG2-uU-61B" customClass="FavoriteView" customModule="DiscoverMovies" customModuleProvider="target">
                                             <rect key="frame" x="20" y="299" width="31" height="26"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -719,21 +712,20 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zxw-3x-MLU">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="291"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="450" id="02I-PZ-mpy"/>
                                                 <constraint firstAttribute="height" constant="291" id="CgV-Ih-dRc"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="02I-PZ-mpy"/>
-                                                </mask>
-                                            </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <mask key="constraints">
-                                                    <include reference="02I-PZ-mpy"/>
                                                     <exclude reference="CgV-Ih-dRc"/>
                                                 </mask>
                                             </variation>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="releaseDate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aU4-3a-2H4">
+                                            <rect key="frame" x="254" y="357" width="92" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Diy-aX-eTH" firstAttribute="leading" secondItem="fkR-nf-Y6y" secondAttribute="leading" constant="20" symbolic="YES" id="03i-AH-w9k"/>
@@ -750,7 +742,6 @@
                                         <constraint firstItem="OCs-gb-QZa" firstAttribute="centerX" secondItem="fkR-nf-Y6y" secondAttribute="centerX" id="VbO-Fe-mWl"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ab3-PV-8MU" secondAttribute="trailing" constant="20" symbolic="YES" id="W7Y-mi-fjg"/>
                                         <constraint firstItem="zxw-3x-MLU" firstAttribute="top" secondItem="fkR-nf-Y6y" secondAttribute="top" id="Z4y-10-jTl"/>
-                                        <constraint firstItem="9Gr-Ts-egF" firstAttribute="top" secondItem="zxw-3x-MLU" secondAttribute="bottom" constant="8" symbolic="YES" id="ZVQ-kg-745"/>
                                         <constraint firstItem="Ke1-rI-E1d" firstAttribute="leading" secondItem="fkR-nf-Y6y" secondAttribute="leading" constant="20" symbolic="YES" id="ZoN-Zq-3b3"/>
                                         <constraint firstAttribute="trailing" secondItem="Diy-aX-eTH" secondAttribute="trailing" constant="20" symbolic="YES" id="aPo-vN-VAQ"/>
                                         <constraint firstAttribute="bottom" secondItem="Ke1-rI-E1d" secondAttribute="bottom" constant="20" symbolic="YES" id="aa9-Tj-ldK"/>
@@ -759,7 +750,9 @@
                                         <constraint firstItem="gG2-uU-61B" firstAttribute="top" secondItem="zxw-3x-MLU" secondAttribute="bottom" constant="8" symbolic="YES" id="iOT-9O-pLR"/>
                                         <constraint firstItem="f7C-Ft-H6T" firstAttribute="top" secondItem="Diy-aX-eTH" secondAttribute="bottom" multiplier="1.03" constant="8" symbolic="YES" id="iRH-Os-tZd"/>
                                         <constraint firstItem="Diy-aX-eTH" firstAttribute="top" secondItem="OCs-gb-QZa" secondAttribute="bottom" multiplier="1.03" constant="8" symbolic="YES" id="nl3-sL-vBD"/>
+                                        <constraint firstItem="gG2-uU-61B" firstAttribute="top" secondItem="9Gr-Ts-egF" secondAttribute="top" id="ny8-8S-NUu"/>
                                         <constraint firstAttribute="trailing" secondItem="zxw-3x-MLU" secondAttribute="trailing" id="o7z-el-OSj"/>
+                                        <constraint firstItem="aU4-3a-2H4" firstAttribute="top" secondItem="ab3-PV-8MU" secondAttribute="bottom" constant="3" id="orl-aw-4o4"/>
                                         <constraint firstItem="ab3-PV-8MU" firstAttribute="top" secondItem="gG2-uU-61B" secondAttribute="bottom" constant="8" symbolic="YES" id="qMR-qK-2q3"/>
                                         <constraint firstItem="f7C-Ft-H6T" firstAttribute="leading" secondItem="fkR-nf-Y6y" secondAttribute="leading" constant="20" symbolic="YES" id="qPh-d6-w1i"/>
                                         <constraint firstItem="ab3-PV-8MU" firstAttribute="centerX" secondItem="fkR-nf-Y6y" secondAttribute="centerX" id="tzW-e5-MLr"/>
@@ -801,6 +794,7 @@
         <image name="Discover" width="32" height="21"/>
         <image name="Favorite" width="22" height="20"/>
         <image name="Logout" width="22" height="31"/>
+        <image name="MovieList" width="32" height="32"/>
         <image name="Watchlist" width="23" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>

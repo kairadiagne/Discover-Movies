@@ -18,19 +18,13 @@ protocol HorizontalImageScrollerDelegate: class {
 
 class HorizontalImageScroller: UIView, UIScrollViewDelegate {
     
-    // MARK: - Constants
-    
     struct Constants {
         static let Padding: CGFloat = 10.0
     }
     
-    // MARK: - Properties
-    
     weak var delegate: HorizontalImageScrollerDelegate?
     private var scrollView: UIScrollView!
     private var views = [UIImageView]()
-
-    // MARK: - Initializerss
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -8,19 +8,10 @@
 
 import Foundation
 
-public enum TMDbToplist: CustomStringConvertible {
-    case Popular
-    case TopRated
-    case Upcoming
-    
-    public var description: String {
-        switch self {
-        case .Popular:
-            return "popular"
-        case .TopRated:
-            return "top_rated"
-        case .Upcoming:
-            return "upcoming"
-        }
-    }
+public enum TMDbToplist: String {
+    case Popular = "popular"
+    case TopRated = "top_rated"
+    case Upcoming = "upcoming"
+    case NowPlaying = "now_playing"
 }
+

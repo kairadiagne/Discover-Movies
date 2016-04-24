@@ -25,7 +25,7 @@ class MenuTableViewController: UITableViewController {
     @IBOutlet weak var loginOutLabel: UILabel!
     @IBOutlet weak var profileImageview: ProfileImageView!
     
-    private let userInfoStore = TMDbUserStore()
+    private let userInfoStore = TMDbUserInfoStore()
     
     // MARK: - View Controller Life Cycle
     
@@ -33,13 +33,12 @@ class MenuTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView?.tableFooterView = UIView(frame: CGRectZero)
         userNameLabel.textColor = UIColor.flatSkyBlueColor()
-        // Get the latest userinfo
-        userInfoStore.refreshUserInfo()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        updateMenu(userInfoStore.userIsSignedIn, user: userInfoStore.user)
+        let userIsSignedIn = userInfoStore.userStatus == .Signedin
+        updateMenu(userIsSignedIn , user: userInfoStore.user)
     }
     
     private func updateMenu(authorized: Bool, user: TMDbUser?) {
@@ -54,7 +53,8 @@ class MenuTableViewController: UITableViewController {
     
     private func setProfileImage(gravatarURI: String?) {
         if let gravatarURI = gravatarURI {
-            let url = TMDbImageRouter.ProfileMedium(path: gravatarURI).url
+            let url = TMDbImageRouter.ProfileSmall(path: gravatarURI).url
+            print(url)
             profileImageview.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderProfileImage())
         } else {
             profileImageview.image = nil
@@ -85,8 +85,8 @@ class MenuTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Storyboard.ToggleSignInSegueIdentifier {
-            userInfoStore.userIsInPublicMode = false
-            userInfoStore.signOutUser()
+            userInfoStore.deactivatePublicMode()
+            userInfoStore.signOut()
         }
     }
 

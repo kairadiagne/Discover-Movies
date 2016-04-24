@@ -19,15 +19,13 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     var inFavorites: Bool?
     var inWatchList: Bool?
     var trailer: TMDbVideo?
-    var userIsSignedIn: Bool!
+    var userStatus: TMDBSiginStatus
     
     private let movieService: TMDbMovieService!
-    private let authorizedMovieService: TMDbAuthorizedMovieService!
     
     override init() {
-        self.movieService = TMDbMovieService()
-        self.authorizedMovieService = TMDbAuthorizedMovieService()
-        self.userIsSignedIn = TMDbUserStore().userIsSignedIn
+        self.movieService = TMDbMovieService(APIKey: Global.APIKey)
+        self.userStatus = TMDbUserInfoStore().userStatus
     }
     
     // MARK: - Similar Movies
@@ -49,8 +47,8 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     // MARK: - Account states
     
     func getAccountStates(movieID: Int) {
-        guard userIsSignedIn == true else { return } // If the user is not signed in we do not want to fetch the accountstate
-        authorizedMovieService.accountStateForMovie(movieID) { (response) in
+        guard userStatus == .Signedin else { return } // If the user is not signed in we do not want to fetch the accountstate
+        movieService.accountStateForMovie(movieID) { (response) in
             guard let inFavorites = response.inFavorites, inWatchList = response.inWatchList else { return }
             self.inFavorites = inFavorites
             self.inWatchList = inWatchList
@@ -59,7 +57,7 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     }
     
     func addToList(movieID: Int, list: String) {
-        authorizedMovieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: true) { (success, error) in
+        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: true) { (success, error) in
             guard error == nil else {
                 self.delegate?.coordinatorDidReceiveError(error!)
                 return
@@ -73,7 +71,7 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     }
     
     func removeFromList(movieID: Int, list: String) {
-        authorizedMovieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { (success, error) in
+        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { (success, error) in
             guard error == nil else {
                 self.delegate?.coordinatorDidReceiveError(error!)
                 return
@@ -89,7 +87,7 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     // MARK: - Trailer
     
     func fetchTrailer(movieID: Int) {
-        movieService.fetchTrailerForMovie(movieID) { (response) in
+        movieService.fetchVideosForMovie(movieID) { (response) in
             guard let videos = response.result else { return }
             let trailers = videos.filter { $0.type == "Trailer" }
             self.trailer = trailers.first

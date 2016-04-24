@@ -79,13 +79,11 @@
 		111943121CCB8EF6001CF39B /* TMDbMovieRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430E1CCB8EF6001CF39B /* TMDbMovieRouter.swift */; };
 		111943131CCB8EF6001CF39B /* TMDbPeopleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430F1CCB8EF6001CF39B /* TMDbPeopleRouter.swift */; };
 		111943141CCB8EF6001CF39B /* TMDbSignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */; };
-		1119431C1CCB8EFC001CF39B /* TMDbAuthorizedMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943151CCB8EFC001CF39B /* TMDbAuthorizedMovieService.swift */; };
 		1119431D1CCB8EFC001CF39B /* TMDbMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943161CCB8EFC001CF39B /* TMDbMovieService.swift */; };
 		1119431E1CCB8EFC001CF39B /* TMDbPeopleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943171CCB8EFC001CF39B /* TMDbPeopleService.swift */; };
 		1119431F1CCB8EFC001CF39B /* TMDbSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943181CCB8EFC001CF39B /* TMDbSignInService.swift */; };
 		111943201CCB8EFC001CF39B /* TMDbSignInServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943191CCB8EFC001CF39B /* TMDbSignInServiceDelegate.swift */; };
-		111943211CCB8EFC001CF39B /* TMDbUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119431A1CCB8EFC001CF39B /* TMDbUserService.swift */; };
-		111943221CCB8EFC001CF39B /* TMDbUserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119431B1CCB8EFC001CF39B /* TMDbUserStore.swift */; };
+		111943221CCB8EFC001CF39B /* TMDbUserInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119431B1CCB8EFC001CF39B /* TMDbUserInfoStore.swift */; };
 		1119432D1CCB8FC2001CF39B /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943291CCB8FC2001CF39B /* CoordinatorDelegate.swift */; };
 		1119432E1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */; };
 		1119432F1CCB8FC2001CF39B /* ItemCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119432B1CCB8FC2001CF39B /* ItemCoordinator.swift */; };
@@ -95,6 +93,7 @@
 		111943361CCB8FFE001CF39B /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943341CCB8FFE001CF39B /* DetailTableViewController.swift */; };
 		1119433C1CCB9361001CF39B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EF27C2B6BF80FF7BEB7179 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* NSDate+ToString.swift */; };
+		113946381CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946371CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift */; };
 		24430DFF360C636748A47847 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EF27C2B6BF80FF7BEB7179 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -214,7 +213,7 @@
 		111942FA1CCB8EE4001CF39B /* TMDbFetchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbFetchResult.swift; sourceTree = "<group>"; };
 		111942FB1CCB8EE4001CF39B /* TMDbGenres.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbGenres.swift; sourceTree = "<group>"; };
 		111942FC1CCB8EE4001CF39B /* TMDbMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovie.swift; sourceTree = "<group>"; };
-		111942FD1CCB8EE4001CF39B /* TMDbMovieTopList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieTopList.swift; sourceTree = "<group>"; };
+		111942FD1CCB8EE4001CF39B /* TMDbMovieTopList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TMDbMovieTopList.swift; path = ../Entities/TMDbMovieTopList.swift; sourceTree = "<group>"; };
 		111942FE1CCB8EE4001CF39B /* TMDbPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbPerson.swift; sourceTree = "<group>"; };
 		111942FF1CCB8EE4001CF39B /* TMDbReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbReview.swift; sourceTree = "<group>"; };
 		111943001CCB8EE4001CF39B /* TMDbUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUser.swift; sourceTree = "<group>"; };
@@ -224,13 +223,11 @@
 		1119430E1CCB8EF6001CF39B /* TMDbMovieRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieRouter.swift; sourceTree = "<group>"; };
 		1119430F1CCB8EF6001CF39B /* TMDbPeopleRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbPeopleRouter.swift; sourceTree = "<group>"; };
 		111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInRouter.swift; sourceTree = "<group>"; };
-		111943151CCB8EFC001CF39B /* TMDbAuthorizedMovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAuthorizedMovieService.swift; sourceTree = "<group>"; };
 		111943161CCB8EFC001CF39B /* TMDbMovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieService.swift; sourceTree = "<group>"; };
 		111943171CCB8EFC001CF39B /* TMDbPeopleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbPeopleService.swift; sourceTree = "<group>"; };
 		111943181CCB8EFC001CF39B /* TMDbSignInService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInService.swift; sourceTree = "<group>"; };
 		111943191CCB8EFC001CF39B /* TMDbSignInServiceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInServiceDelegate.swift; sourceTree = "<group>"; };
-		1119431A1CCB8EFC001CF39B /* TMDbUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserService.swift; sourceTree = "<group>"; };
-		1119431B1CCB8EFC001CF39B /* TMDbUserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserStore.swift; sourceTree = "<group>"; };
+		1119431B1CCB8EFC001CF39B /* TMDbUserInfoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserInfoStore.swift; sourceTree = "<group>"; };
 		111943291CCB8FC2001CF39B /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
 		1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverBaseTableViewController.swift; sourceTree = "<group>"; };
 		1119432B1CCB8FC2001CF39B /* ItemCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCoordinator.swift; sourceTree = "<group>"; };
@@ -239,6 +236,7 @@
 		111943331CCB8FFE001CF39B /* DetailCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 		111943341CCB8FFE001CF39B /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		113946311CCBBA80001CFAEA /* NSDate+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ToString.swift"; sourceTree = "<group>"; };
+		113946371CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableviewBackgroundMessagePresentable.swift; sourceTree = "<group>"; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A895D2EA354450437EF590D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -328,14 +326,13 @@
 		111942651CCB8CBE001CF39B /* TMDbMovieKit */ = {
 			isa = PBXGroup;
 			children = (
+				113946301CCBB051001CFAEA /* Store */,
 				111943371CCB909F001CF39B /* Alamofire */,
 				111943391CCB90BE001CF39B /* Router */,
 				1119433B1CCB90D0001CF39B /* Service */,
-				113946301CCBB051001CFAEA /* Store */,
 				111943381CCB90B5001CF39B /* Entities */,
 				1119433A1CCB90C8001CF39B /* Helpers */,
-				111942681CCB8CBE001CF39B /* Info.plist */,
-				111942661CCB8CBE001CF39B /* TMDbMovieKit.h */,
+				1139463D1CCD1C60001CFAEA /* Supporting files */,
 			);
 			path = TMDbMovieKit;
 			sourceTree = "<group>";
@@ -354,13 +351,13 @@
 			children = (
 				111942C01CCB8E03001CF39B /* Base Classes */,
 				111943241CCB8F51001CF39B /* Protocols */,
-				111942C11CCB8E13001CF39B /* Detail Movie */,
-				111942C21CCB8E19001CF39B /* List */,
 				111942C31CCB8E1D001CF39B /* Menu */,
-				111943271CCB8F8B001CF39B /* Toplist */,
-				111943281CCB8F93001CF39B /* Video */,
 				111943261CCB8F7E001CF39B /* Signin */,
+				111943271CCB8F8B001CF39B /* Toplist */,
 				111943251CCB8F64001CF39B /* Search */,
+				111942C21CCB8E19001CF39B /* List */,
+				111942C11CCB8E13001CF39B /* Detail Movie */,
+				111943281CCB8F93001CF39B /* Video */,
 				111943231CCB8F3F001CF39B /* Review */,
 			);
 			path = Controller;
@@ -371,17 +368,17 @@
 			children = (
 				111942A61CCB8DE5001CF39B /* BackgroundView.swift */,
 				111942A71CCB8DE5001CF39B /* CustomButton.swift */,
-				111942A81CCB8DE5001CF39B /* DetailTableViewCell.swift */,
-				111942A91CCB8DE5001CF39B /* FavoriteView.swift */,
-				111942AA1CCB8DE5001CF39B /* HorizontalImageScroller.swift */,
-				111942AB1CCB8DE5001CF39B /* ListTableViewCell.swift */,
-				111942AC1CCB8DE5001CF39B /* ListTableViewCell.xib */,
+				111942AF1CCB8DE5001CF39B /* ProfileImageView.swift */,
 				111942AD1CCB8DE5001CF39B /* MovieTableViewCell.swift */,
 				111942AE1CCB8DE5001CF39B /* MovieTableViewCell.xib */,
-				111942AF1CCB8DE5001CF39B /* ProfileImageView.swift */,
-				111942B01CCB8DE5001CF39B /* ReviewTableViewCell.swift */,
+				111942AB1CCB8DE5001CF39B /* ListTableViewCell.swift */,
+				111942AC1CCB8DE5001CF39B /* ListTableViewCell.xib */,
+				111942A81CCB8DE5001CF39B /* DetailTableViewCell.swift */,
+				111942AA1CCB8DE5001CF39B /* HorizontalImageScroller.swift */,
 				111942B11CCB8DE5001CF39B /* UpdateListView.swift */,
+				111942A91CCB8DE5001CF39B /* FavoriteView.swift */,
 				111942B21CCB8DE5001CF39B /* WatchListView.swift */,
+				111942B01CCB8DE5001CF39B /* ReviewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -450,7 +447,7 @@
 				1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */,
 				1119432C1CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift */,
 			);
-			name = "Base Classes";
+			path = "Base Classes";
 			sourceTree = "<group>";
 		};
 		111942C11CCB8E13001CF39B /* Detail Movie */ = {
@@ -459,7 +456,7 @@
 				111943331CCB8FFE001CF39B /* DetailCoordinator.swift */,
 				111943341CCB8FFE001CF39B /* DetailTableViewController.swift */,
 			);
-			name = "Detail Movie";
+			path = "Detail Movie";
 			sourceTree = "<group>";
 		};
 		111942C21CCB8E19001CF39B /* List */ = {
@@ -470,7 +467,7 @@
 				111942C81CCB8E33001CF39B /* WatchListTableViewController.swift */,
 				111942C51CCB8E33001CF39B /* FavoritesTableViewController.swift */,
 			);
-			name = List;
+			path = List;
 			sourceTree = "<group>";
 		};
 		111942C31CCB8E1D001CF39B /* Menu */ = {
@@ -478,7 +475,7 @@
 			children = (
 				111942CD1CCB8E3D001CF39B /* MenuTableViewController.swift */,
 			);
-			name = Menu;
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		111943231CCB8F3F001CF39B /* Review */ = {
@@ -487,7 +484,7 @@
 				111942D71CCB8E4E001CF39B /* ReviewCoordinator.swift */,
 				111942D81CCB8E4E001CF39B /* ReviewTableViewController.swift */,
 			);
-			name = Review;
+			path = Review;
 			sourceTree = "<group>";
 		};
 		111943241CCB8F51001CF39B /* Protocols */ = {
@@ -498,18 +495,19 @@
 				111942D11CCB8E47001CF39B /* ProgressHudShowable.swift */,
 				111942D21CCB8E47001CF39B /* PullToRefreshable.swift */,
 				111943311CCB8FCE001CF39B /* RevealMenuButtonShowable.swift */,
+				113946371CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift */,
 			);
-			name = Protocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		111943251CCB8F64001CF39B /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				111942DD1CCB8E74001CF39B /* SearchViewController.swift */,
 				111942DB1CCB8E74001CF39B /* SearchCoordinator.swift */,
 				111942DC1CCB8E74001CF39B /* SearchTableViewController.swift */,
-				111942DD1CCB8E74001CF39B /* SearchViewController.swift */,
 			);
-			name = Search;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		111943261CCB8F7E001CF39B /* Signin */ = {
@@ -518,7 +516,7 @@
 				111942E11CCB8E7E001CF39B /* SignInViewController.swift */,
 				111942E21CCB8E7E001CF39B /* SignInViewDelegate.swift */,
 			);
-			name = Signin;
+			path = Signin;
 			sourceTree = "<group>";
 		};
 		111943271CCB8F8B001CF39B /* Toplist */ = {
@@ -528,6 +526,7 @@
 				111942E61CCB8E85001CF39B /* ToplistTableViewController.swift */,
 			);
 			name = Toplist;
+			path = TopList;
 			sourceTree = "<group>";
 		};
 		111943281CCB8F93001CF39B /* Video */ = {
@@ -535,7 +534,7 @@
 			children = (
 				111942E91CCB8E8B001CF39B /* VideoViewController.swift */,
 			);
-			name = Video;
+			path = Video;
 			sourceTree = "<group>";
 		};
 		111943371CCB909F001CF39B /* Alamofire */ = {
@@ -551,15 +550,14 @@
 		111943381CCB90B5001CF39B /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				111942F91CCB8EE4001CF39B /* TMDbCredit.swift */,
 				111942FA1CCB8EE4001CF39B /* TMDbFetchResult.swift */,
-				111942FB1CCB8EE4001CF39B /* TMDbGenres.swift */,
 				111942FC1CCB8EE4001CF39B /* TMDbMovie.swift */,
-				111942FD1CCB8EE4001CF39B /* TMDbMovieTopList.swift */,
-				111942FE1CCB8EE4001CF39B /* TMDbPerson.swift */,
 				111942FF1CCB8EE4001CF39B /* TMDbReview.swift */,
-				111943001CCB8EE4001CF39B /* TMDbUser.swift */,
 				111943011CCB8EE4001CF39B /* TMDbVideo.swift */,
+				111942F91CCB8EE4001CF39B /* TMDbCredit.swift */,
+				111943001CCB8EE4001CF39B /* TMDbUser.swift */,
+				111942FE1CCB8EE4001CF39B /* TMDbPerson.swift */,
+				111942FB1CCB8EE4001CF39B /* TMDbGenres.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -567,10 +565,10 @@
 		111943391CCB90BE001CF39B /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */,
+				111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */,
 				1119430E1CCB8EF6001CF39B /* TMDbMovieRouter.swift */,
 				1119430F1CCB8EF6001CF39B /* TMDbPeopleRouter.swift */,
-				111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */,
+				1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -586,12 +584,11 @@
 		1119433B1CCB90D0001CF39B /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				111943151CCB8EFC001CF39B /* TMDbAuthorizedMovieService.swift */,
+				111943191CCB8EFC001CF39B /* TMDbSignInServiceDelegate.swift */,
+				111943181CCB8EFC001CF39B /* TMDbSignInService.swift */,
+				111942FD1CCB8EE4001CF39B /* TMDbMovieTopList.swift */,
 				111943161CCB8EFC001CF39B /* TMDbMovieService.swift */,
 				111943171CCB8EFC001CF39B /* TMDbPeopleService.swift */,
-				111943181CCB8EFC001CF39B /* TMDbSignInService.swift */,
-				111943191CCB8EFC001CF39B /* TMDbSignInServiceDelegate.swift */,
-				1119431A1CCB8EFC001CF39B /* TMDbUserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -599,9 +596,18 @@
 		113946301CCBB051001CFAEA /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				1119431B1CCB8EFC001CF39B /* TMDbUserStore.swift */,
+				1119431B1CCB8EFC001CF39B /* TMDbUserInfoStore.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		1139463D1CCD1C60001CFAEA /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				111942681CCB8CBE001CF39B /* Info.plist */,
+				111942661CCB8CBE001CF39B /* TMDbMovieKit.h */,
+			);
+			name = "Supporting files";
 			sourceTree = "<group>";
 		};
 		2693F16C0142D84C17AC1C7B /* Frameworks */ = {
@@ -861,6 +867,7 @@
 				111942EA1CCB8E8B001CF39B /* VideoViewController.swift in Sources */,
 				111943301CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift in Sources */,
 				111942DF1CCB8E74001CF39B /* SearchTableViewController.swift in Sources */,
+				113946381CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift in Sources */,
 				111942D91CCB8E4E001CF39B /* ReviewCoordinator.swift in Sources */,
 				111942E81CCB8E85001CF39B /* ToplistTableViewController.swift in Sources */,
 				111942BA1CCB8DE5001CF39B /* MovieTableViewCell.swift in Sources */,
@@ -920,13 +927,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				111943121CCB8EF6001CF39B /* TMDbMovieRouter.swift in Sources */,
-				111943221CCB8EFC001CF39B /* TMDbUserStore.swift in Sources */,
+				111943221CCB8EFC001CF39B /* TMDbUserInfoStore.swift in Sources */,
 				111943081CCB8EE4001CF39B /* TMDbReview.swift in Sources */,
 				111943051CCB8EE4001CF39B /* TMDbMovie.swift in Sources */,
 				1119431E1CCB8EFC001CF39B /* TMDbPeopleService.swift in Sources */,
 				111942F61CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift in Sources */,
 				1119430C1CCB8EEB001CF39B /* String+ToNSDate.swift in Sources */,
-				111943211CCB8EFC001CF39B /* TMDbUserService.swift in Sources */,
 				111943141CCB8EF6001CF39B /* TMDbSignInRouter.swift in Sources */,
 				111943021CCB8EE4001CF39B /* TMDbCredit.swift in Sources */,
 				1119430A1CCB8EE4001CF39B /* TMDbVideo.swift in Sources */,
@@ -937,7 +943,6 @@
 				1119431F1CCB8EFC001CF39B /* TMDbSignInService.swift in Sources */,
 				111942F81CCB8EDE001CF39B /* ResponseJSONObjectSerializable.swift in Sources */,
 				111943091CCB8EE4001CF39B /* TMDbUser.swift in Sources */,
-				1119431C1CCB8EFC001CF39B /* TMDbAuthorizedMovieService.swift in Sources */,
 				111943041CCB8EE4001CF39B /* TMDbGenres.swift in Sources */,
 				111943031CCB8EE4001CF39B /* TMDbFetchResult.swift in Sources */,
 				111943061CCB8EE4001CF39B /* TMDbMovieTopList.swift in Sources */,

@@ -8,8 +8,9 @@
 
 import UIKit
 import TMDbMovieKit
+import SDWebImage
 
-class SearchTableViewController: DiscoverBaseTableViewController {
+class SearchTableViewController: DiscoverBaseTableViewController, BackgroundMessagePresentable {
     
     private struct Storyboard {
         static let MovieCellIdentifier = "MovieCellIdentifier"
@@ -33,7 +34,7 @@ class SearchTableViewController: DiscoverBaseTableViewController {
         tableView.registerNib(nib, forCellReuseIdentifier: Storyboard.MovieCellIdentifier)
         tableView.estimatedRowHeight = 250
         tableView.rowHeight = UITableViewAutomaticDimension
-        setupBackground(withMessage: "Did not find any movies that matched your requirements")
+        configureViewWithBackgroundMessage("Did not find any movies that matched your requirements")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -82,22 +83,28 @@ class SearchTableViewController: DiscoverBaseTableViewController {
             if let destination = segue.destinationViewController as? DetailTableViewController {
                 if let cell = sender as? UITableViewCell {
                     if let index = tableView.indexPathForCell(cell) {
-                        destination.movie = searchCoordinator.items[index.row]
-                        // Check if image exists in cache?
-                        // destination.image = image from cache
+                        let movie = searchCoordinator.items[index.row]
+                        destination.movie = movie
+                        
+                        if let path = movie.backDropPath, url = TMDbImageRouter.BackDropMedium(path: path).url{
+                            if SDWebImageManager.sharedManager().cachedImageExistsForURL(url) == true {
+                                let key = SDWebImageManager.sharedManager().cacheKeyForURL(url)
+                                 destination.image = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
+                            }
+                        }
+                        
                     }
                 }
             }
         }
     }
-    
 }
 
 
 
 
 
-        
+
 
 
 

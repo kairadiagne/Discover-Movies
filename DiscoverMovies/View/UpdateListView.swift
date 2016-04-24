@@ -51,10 +51,10 @@ class UpdateListView: UIView {
     func updateListViewDidGetTapped(sender: UITapGestureRecognizer) {
         guard let delegate = delegate else { return }
         if inList {
-//            toggleState()
+            toggleState()
             delegate.updateListViewDidRemoveItemFromList(identifier, listView: self)
         } else {
-//            toggleState()
+            toggleState()
             delegate.updateListViewDidAddItemToList(identifier, listView: self)
         }
     }

@@ -16,5 +16,4 @@ extension String {
         return formatter.dateFromString(self)
     }
     
-    
 }

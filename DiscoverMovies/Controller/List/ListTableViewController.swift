@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class ListTableViewController: DiscoverBaseTableViewController, RevealMenuButtonShowable {
+class ListTableViewController: DiscoverBaseTableViewController, RevealMenuButtonShowable, BackgroundMessagePresentable{
     
     private struct Storyboard {
         static let ListCellIdentifier = "ListTableViewCell"
@@ -36,7 +36,7 @@ class ListTableViewController: DiscoverBaseTableViewController, RevealMenuButton
         tableView.registerNib(nib, forCellReuseIdentifier: Storyboard.ListCellIdentifier)
         tableView.estimatedRowHeight = 210
         tableView.rowHeight = UITableViewAutomaticDimension
-        setupBackground(withMessage: "You have not added any movies to this list yet")
+        configureViewWithBackgroundMessage("You have not added any movies to this list yet")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -133,7 +133,7 @@ extension ListTableViewController: AuthorizationErrorHandlerProtocol {
         let title = "Not signed in"
         let message = "To view this list it is required to sign in with your TMDb account"
         showAlertWithTitle(title, message: message) { _ in
-            TMDbUserStore().signOutUser()
+            TMDbUserInfoStore().signOut()
             guard let rootTabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier(Storyboard.RootTabBarVCIdentifier) else { return }
             self.revealViewController().pushFrontViewController(rootTabBarVC, animated: true)
         }

@@ -13,7 +13,7 @@ import MBProgressHUD
 import ChameleonFramework
 import BRYXBanner
 
-class DiscoverBaseTableViewController: UITableViewController, ItemCoordinatorDelegate, InternetErrorHandlerProtocol {
+class DiscoverBaseTableViewController: UITableViewController, ItemCoordinatorDelegate, InternetErrorHandlerProtocol,ProgressHudShowable {
     
     var banner: Banner?
     var progressHUD: MBProgressHUD?
@@ -48,15 +48,6 @@ class DiscoverBaseTableViewController: UITableViewController, ItemCoordinatorDel
             fatalError()
         }
     }
-
-}
-
-extension DiscoverBaseTableViewController: ProgressHudShowable {
-    
-    func coorDinatorDidUpdateWithItemsNextPage() {
-        hideProgressHUD()
-        tableView.reloadData()
-    }
     
     func coordinatorDidReceiveError(error: NSError) {
         hideProgressHUD()
@@ -64,4 +55,3 @@ extension DiscoverBaseTableViewController: ProgressHudShowable {
     }
     
 }
-

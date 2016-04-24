@@ -9,10 +9,16 @@
 import Foundation
 import Alamofire
 
+private struct Key {
+    static let RequestToken = "request_token"
+    static let SessionID = "session_id"
+    static let APIKey = "api_key"
+}
+
 enum TMDbSignInRouter: URLRequestConvertible {
-    case RequestToken
-    case SessionID(String)
-    case UserInfo(String)
+    case RequestToken(APIKey: String)
+    case SessionID(String, APIKey: String)
+    case UserInfo(String, APIKey: String)
     
     var URLRequest: NSMutableURLRequest {
         var method: Alamofire.Method {
@@ -27,16 +33,19 @@ enum TMDbSignInRouter: URLRequestConvertible {
         }
         
         let result: (path: String, parameters: [String: AnyObject]?) = {
-            var parameters: [String: AnyObject] = [TMDbRequestKey.API: TMDbAPI.APIKey]
+            var parameters = [String: AnyObject]()
             
             switch self {
-            case .RequestToken:
+            case .RequestToken(let APIKey):
+                parameters[Key.APIKey] = APIKey
                 return ("authentication/token/new", parameters)
-            case .SessionID(let token):
-                parameters[TMDbRequestKey.RequestToken] = token
+            case .SessionID(let token, let APIKey):
+                parameters[Key.RequestToken] = token
+                parameters[Key.APIKey] = APIKey
                 return ("authentication/session/new", parameters)
-            case .UserInfo(let sessionID):
-                parameters[TMDbRequestKey.SessionID] = sessionID
+            case .UserInfo(let sessionID, let APIKey):
+                parameters[Key.SessionID] = sessionID
+                parameters[Key.APIKey] = APIKey
                 return ("account", parameters)
             }
         }()

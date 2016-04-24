@@ -33,7 +33,7 @@ class SearchViewController: UIViewController, RevealMenuButtonShowable {
     var discover = Discover()
     var searchTitle: String?
     
-    // MARK - Textfield data input
+    // MARK - Data Input IQDropDownTextField
     
     private var genres: [String] { return TMDbGenres.allGenresAsString() }
     private let voteAverages: [String] = ["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10"]
@@ -50,6 +50,7 @@ class SearchViewController: UIViewController, RevealMenuButtonShowable {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+    
         // Create toolbar for DropDownTextFields
         let toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.Black
@@ -66,6 +67,15 @@ class SearchViewController: UIViewController, RevealMenuButtonShowable {
         genreField.configure(genres, toolbar: toolbar, delegate: self)
         averageVoteField.configure(voteAverages, toolbar: toolbar, delegate: self)
         titleField.delegate = self
+        
+        // Reset the searchFields and paramaters
+        yearField.selectedRow = 0
+        genreField.selectedRow = 0
+        averageVoteField.selectedRow = 0
+        titleField.text = ""
+        
+        discover = Discover()
+        searchTitle = nil
     }
     
     // MARK: - Actions
@@ -146,20 +156,28 @@ extension SearchViewController: IQDropDownTextFieldDelegate {
 
 extension SearchViewController: UITextFieldDelegate {
     
-    // Because IQDropDownTextField is a subclass of UITextField it also calls these delegate methods
-    // Whenever we begin editing a field we disable the buttons
+    /* 
+     Since IQDropDownTextField is a subclass of UITextField these delegate methods not only get called whenever
+     the title text field changes but also when the IQDropDowntextfields change. During editing of the text fields 
+     the search buttons are disabled.
+    */
+ 
     func textFieldDidBeginEditing(textField: UITextField) {
         discoverMoviesButton.enabled = false
         searchByTitleButton.enabled = false
     }
     
+    /* 
+      When the user is done editing the title textfield we update the searchTitle variable.
+     The values from the IQDropDownTextFields are being saved when an items gets selected in 
+     the IQDropDownTextField delegate.
+    */
+
+ 
     func textFieldDidEndEditing(textField: UITextField) {
-        // In this method we only want to save the value of the textfield to the title variable
-        // Saving of values from the IQDropDownTextFields is done in the IQDropDownDelegate
         if !(textField is IQDropDownTextField) {
             searchTitle = textField.text ?? ""
         }
-        // Enable search buttons
         discoverMoviesButton.enabled = true
         searchByTitleButton.enabled = true
     }

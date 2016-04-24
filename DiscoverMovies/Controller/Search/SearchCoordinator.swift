@@ -9,18 +9,18 @@
 import Foundation
 import TMDbMovieKit
 
-enum SearchType {
+enum Search {
     case Discover(year: String?, genre: Int?, averageVote: Float?)
     case SearchByTitle(title: String)
 }
 
 class SearchCoordinator: ItemCoordinator<TMDbMovie> {
     
-    private var movieService: TMDbMovieService!
-    private var currentSearch: SearchType?
+    private var movieService: TMDbMovieService
+    private var currentSearch: Search?
     
     override init() {
-        self.movieService = TMDbMovieService()
+        self.movieService = TMDbMovieService(APIKey: Global.APIKey)
     }
     
     // MARK: - Service Calls
@@ -34,7 +34,7 @@ class SearchCoordinator: ItemCoordinator<TMDbMovie> {
     }
     
     override func fetchNextPage() {
-        guard let currentSearch = currentSearch else { return } // TODO: Handle this error
+        guard let currentSearch = currentSearch else { return }
         switch currentSearch {
         case .Discover(let year, let genre, let averageVote):
             discover(year, genre: genre, averageVote: averageVote, page: nextPage)
@@ -46,7 +46,7 @@ class SearchCoordinator: ItemCoordinator<TMDbMovie> {
     private func discover(year: String?, genre: Int?, averageVote: Float?, page: Int?) {
         inProgress = true
         currentSearch = .Discover(year: year, genre: genre, averageVote: averageVote)
-        movieService.discoverMovies(year, genre: genre, voteAverage: averageVote, page: page ) { (response) in
+        movieService.discoverMovies(year, genre: genre, vote: averageVote, page: page ) { (response) in
             self.handleResponse(response)
         }
     }

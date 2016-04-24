@@ -50,6 +50,23 @@ class DetailTableViewController: DiscoverBaseTableViewController, AuthorizationE
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let detailCell = tableView.visibleCells.first as? DetailTableViewCell {
+            detailCell.prepareAnimation()
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let detailCell = tableView.visibleCells.first as? DetailTableViewCell {
+            detailCell.animate()
+        }
+        
+    }
+        
     // MARK: - UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -72,6 +89,7 @@ class DetailTableViewController: DiscoverBaseTableViewController, AuthorizationE
         let url = TMDbImageRouter.BackDropMedium(path: backDropPath).url ?? nil
         cell.configure(movie, image: image, url: url)
         cell.configureForAccountState(detailCoordinator.inFavorites, inWatchList: detailCoordinator.inWatchList)
+    
         return cell
     }
     
@@ -94,12 +112,7 @@ class DetailTableViewController: DiscoverBaseTableViewController, AuthorizationE
         showAlertWithTitle(title, message: message, completionHandler: nil)
     }
     
-    // MARK: - Navigation 
-    
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        return true 
-        // TODO: Trailer unavailable
-    }
+    // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Constants.WatchTrailerSegueIdentifier {

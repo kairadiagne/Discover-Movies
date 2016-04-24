@@ -17,10 +17,10 @@ class ListCoordinator: ItemCoordinator<TMDbMovie> {
     }
     
     var identifier = ""
-    private let authorizedMovieService: TMDbAuthorizedMovieService!
+    private let movieService: TMDbMovieService
     
     override init() {
-        self.authorizedMovieService = TMDbAuthorizedMovieService()
+        self.movieService = TMDbMovieService(APIKey: Global.APIKey)
     }
     
     // MARK: - Service Calls
@@ -39,7 +39,7 @@ class ListCoordinator: ItemCoordinator<TMDbMovie> {
     }
     
     private func fetchListWithIdentifier(identifier: String, page: Int?) {
-        authorizedMovieService.fetchMoviesInList(identifier, page: page) { (response) in
+        movieService.fetchMoviesInList(identifier, page: page) { (response) in
             self.handleResponse(response)
         }
     }
@@ -50,7 +50,7 @@ class ListCoordinator: ItemCoordinator<TMDbMovie> {
         guard let movieID = movie.movieID else { return }
         guard let index = self.items.indexOf(movie) else { return }
         
-        authorizedMovieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { (success, error) in
+        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { (success, error) in
             guard error == nil else {
                 self.delegate?.coordinatorDidReceiveError(error!)
                 return

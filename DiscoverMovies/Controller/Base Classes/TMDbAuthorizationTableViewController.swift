@@ -17,8 +17,8 @@ class TMDbAuthorizationTableViewController: DiscoverBaseTableViewController {
         static let SigninVCIdentifier = "SignInViewController"
     }
     
-    private let signInService = TMDbSignInService()
-    private let userInfoStore = TMDbUserStore()
+    private let signInService = TMDbSignInService(APIKey: Global.APIKey)
+    private let userInfoStore = TMDbUserInfoStore()
     private var safariVC: SFSafariViewController!
     
     private var userIsInTheMiddleOfLogin: Bool {
@@ -35,16 +35,27 @@ class TMDbAuthorizationTableViewController: DiscoverBaseTableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if !userInfoStore.userIsSignedIn && !userInfoStore.userIsInPublicMode && !userIsInTheMiddleOfLogin {
+        switch userInfoStore.userStatus {
+        case .Unknown where !userIsInTheMiddleOfLogin:
             presentSignInView()
+        case .Signedin:
+            print("signed in")
+        case .PublicMode:
+            print("Public mode")
+        default:
+            return
         }
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        if userIsInTheMiddleOfLogin && !userInfoStore.userIsSignedIn {
+        switch userInfoStore.userStatus {
+        case .Unknown where userIsInTheMiddleOfLogin:
             userIsInTheMiddleOfLogin = false
+        default:
+            return
         }
+        
     }
     
     func presentSignInView() {
@@ -91,6 +102,7 @@ extension TMDbAuthorizationTableViewController: TMDbSignInServiceDelegate {
     
     func TMDbSignInServiceSignInDidComplete() {
         userIsInTheMiddleOfLogin = false
+        signInService.fetchUserInfo()
     }
     
     func TMDbSignInServiceSignInDidFail(error: NSError) {

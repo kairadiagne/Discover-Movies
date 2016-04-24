@@ -15,7 +15,7 @@ class ToplistCoordinator: ItemCoordinator<TMDbMovie> {
     private var currentList: TMDbToplist = .Popular
     
     override init() {
-        self.movieService = TMDbMovieService()
+        self.movieService = TMDbMovieService(APIKey: Global.APIKey)
     }
     
     // MARK: - Service Calls
@@ -31,7 +31,7 @@ class ToplistCoordinator: ItemCoordinator<TMDbMovie> {
     
     private func fetchTopList(list: TMDbToplist, page: Int?) {
         inProgress = true
-        movieService.fetchTopList(list.description, page: page, completionHandler: { (response) in
+        movieService.fetchTopList(list.rawValue, page: page, completionHandler: { (response) in
             self.handleResponse(response)
         })
     }

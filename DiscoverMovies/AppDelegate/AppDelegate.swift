@@ -9,6 +9,10 @@
 import UIKit
 import TMDbMovieKit
 
+struct Global {
+    static let APIKey = "b23b0ad7a6c11640e4e232527f2e6d67"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,14 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         Theme.applyGlobalTheme()
+        
         // If the user reinstalls this app the previous sessionID is still stored in the keychain
         // We need to remove this sessionID before we continue
         let firstLaunch = !NSUserDefaults.standardUserDefaults().boolForKey("NotFirstLaunch")
         if firstLaunch {
-            TMDbUserStore().deleteCredentialsAtFirstLaunch()
+            TMDbUserInfoStore().resetCredentialsAtFirstLaunch()
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "NotFirstLaunch")
         }
+        
         return true
     }
 

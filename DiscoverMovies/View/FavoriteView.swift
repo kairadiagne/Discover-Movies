@@ -10,11 +10,7 @@ import UIKit
 
 class FavoriteView: UpdateListView {
     
-    // MARK: - Properties
-    
     override var identifier: String { return "favorite" }
-    
-    // MARK: - Drawing
     
     override func drawRect(rect: CGRect) {
         drawHeart(rect)

@@ -9,18 +9,35 @@
 import Foundation
 import Alamofire
 
+private struct Key {
+    static let ReleaseYear = "primary_release_year"
+    static let Genre = "with_genres"
+    static let Vote = "vote_average.gte"
+    static let Sort = "sort_by"
+    static let Page = "page"
+    static let SessionID = "session_id"
+    static let MediaID = "media_id"
+    static let MediaType = "media_type"
+    static let Favorite = "favorite"
+    static let WatchList = "watchlist"
+    static let StatusCode = "status_code"
+    static let Query = "query"
+    static let APIKey = "api_key"
+}
+
 enum TMDbMovieRouter: URLRequestConvertible {
-    case TopList(String, Int?)
-    case Discover(String?, Int?, Float?, Int?)
-    case SearchByTitle(String, Int?)
-    case List(String, String, Int, Int?)
-    case SimilarMovies(Int, Int?)
-    case Reviews(Int, Int?)
-    case Videos(Int)
-    case AccountState(Int, String)
-    case AddRemoveFromList([String: AnyObject], Int,  String, String)
+    case TopList(list: String, page: Int?, APIKey: String)
+    case Discover(year: String?, genre: Int?, vote:Float?, page: Int?, APIKey: String)
+    case SearchByTitle(title: String, page: Int?, APIKey: String)
+    case List(list: String, sessionID: String, accountID: Int, page: Int?, APIKey: String)
+    case SimilarMovies(id: Int, page: Int?, APIKey: String)
+    case Reviews(movieID: Int, page: Int?, APIKey: String)
+    case Videos(movieID: Int, APIKey: String)
+    case AccountState(movieID: Int, sessionID: String, APIKey: String)
+    case AddRemoveFromList(body: [String: AnyObject], accountID: Int, list: String, sessionID: String, APIKey: String)
     
     var URLRequest: NSMutableURLRequest {
+        
         var method: Alamofire.Method {
             switch self {
             case .TopList:
@@ -45,48 +62,58 @@ enum TMDbMovieRouter: URLRequestConvertible {
         }
         
         let result: (path: String, parameters: [String: AnyObject]?) = {
-            // TMDb only supports sending the API key as a query paramater and not through the header.
-            var parameters: [String: AnyObject] = [TMDbRequestKey.API: TMDbAPI.APIKey]
+        
+            var parameters = [String: AnyObject]()
         
             switch self {
-            case .TopList(let list, let page):
-                if let page = page { parameters[TMDbRequestKey.Page] = page }
+            case .TopList(let list, let page, let APIKey):
+                if let page = page { parameters[Key.Page] = page }
+                parameters[Key.APIKey] = APIKey
                 return ("movie/\(list)", parameters)
-            case .Discover(let year, let genre, let voteAverage, let page):
-                if let year = year { parameters[TMDbRequestKey.ReleaseYear] = year }
-                if let genre = genre { parameters[TMDbRequestKey.Genre] = genre }
-                if let voteAverage = voteAverage { parameters[TMDbRequestKey.VoteAverage] = voteAverage }
-                if let page = page { parameters[TMDbRequestKey.Page] = page }
-                parameters[TMDbRequestKey.Sort] = "popularity.desc"
+            case .Discover(let year, let genre, let voteAverage, let page, let APIKey):
+                if let year = year { parameters[Key.ReleaseYear] = year }
+                if let genre = genre { parameters[Key.Genre] = genre }
+                if let voteAverage = voteAverage { parameters[Key.Vote] = voteAverage }
+                if let page = page { parameters[Key.Page] = page }
+                parameters[Key.Sort] = "popularity.desc"
+                parameters[Key.APIKey] = APIKey
                 return ("discover/movie", parameters)
-            case .SearchByTitle(let title, let page):
-                parameters[TMDbRequestKey.Query] = title
-                if let page = page { parameters[TMDbRequestKey.Page] = page }
+            case .SearchByTitle(let title, let page, let APIKey):
+                parameters[Key.Query] = title
+                if let page = page { parameters[Key.Page] = page }
+                parameters[Key.APIKey] = APIKey
                 return ("search/movie", parameters)
-            case .List(let list, let sessionID, let accountID, let page):
-                parameters[TMDbRequestKey.SessionID] = sessionID
-                if let page = page { parameters[TMDbRequestKey.Page] = page }
+            case .List(let list, let sessionID, let accountID, let page, let APIKey):
+                parameters[Key.SessionID] = sessionID
+                if let page = page { parameters[Key.Page] = page }
+                parameters[Key.APIKey] = APIKey
                 return ("account/\(accountID)/\(list)/movies", parameters)
-            case .SimilarMovies(let movieID, let page):
-                if let page = page { parameters[TMDbRequestKey.Page] = page }
+            case .SimilarMovies(let movieID, let page, let APIKey):
+                if let page = page { parameters[Key.Page] = page }
+                parameters[Key.APIKey] = APIKey
                 return ("movie/\(movieID)/similar", parameters)
-            case .Reviews(let movieID, let page):
-                if let page = page { parameters[TMDbRequestKey.Page] = page }
+            case .Reviews(let movieID, let page, let APIKey):
+                if let page = page { parameters[Key.Page] = page }
+                parameters[Key.APIKey] = APIKey
                 return ("movie/\(movieID)/reviews", parameters)
-            case .Videos(let movieID):
+            case .Videos(let movieID, let APIKey):
+                parameters[Key.APIKey] = APIKey
                 return ("movie/\(movieID)/videos", parameters)
-            case .AccountState(let movieID, let sessionID):
-                parameters[TMDbRequestKey.SessionID] = sessionID
+            case .AccountState(let movieID, let sessionID, let APIKey):
+                parameters[Key.SessionID] = sessionID
+                parameters[Key.APIKey] = APIKey
                 return ("movie/\(movieID)/account_states", parameters)
-            case .AddRemoveFromList(_, let accountID, let list, let sessionID):
-                parameters[TMDbRequestKey.SessionID] = sessionID
+            case .AddRemoveFromList(_, let accountID, let list, let sessionID, let APIKey):
+                parameters[Key.SessionID] = sessionID
+                parameters[Key.APIKey] = APIKey
                 return("account/\(accountID)/\(list)", parameters)
             }
         }()
         
+        
         let body: [String: AnyObject]? = {
             switch self {
-            case .AddRemoveFromList(let body, _, _, _): return body
+            case .AddRemoveFromList(let body, _, _, _, _): return body
             default: return nil
             }
         }()

@@ -13,8 +13,6 @@ import TMDbMovieKit
 
 class DetailTableViewCell: UITableViewCell {
     
-    // MARK: - IB Outlets
-    
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -27,8 +25,6 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var watchTrailerButton: CustomButton!
     @IBOutlet weak var watchReviewButton: CustomButton!
     
-    // MARK: - Initializers
-
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel?.font = UIFont.H1()
@@ -38,9 +34,33 @@ class DetailTableViewCell: UITableViewCell {
         self.ratingView?.setToDefaultStyle()
     }
     
+    // MARK: - Animation 
+    
+    func prepareAnimation() {
+        favoriteView.alpha = 0.0
+        watchListView.alpha = 0.0
+        movieImageView.alpha = 0.4
+        watchTrailerButton.alpha = 0.0
+        watchReviewButton.alpha = 0.0
+    }
+    
+    func animate() {
+        
+        UIView.animateWithDuration(0.5) {
+            self.movieImageView.alpha = 1.0
+        }
+        
+        UIView.animateWithDuration(1.0, delay: 0.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: [.CurveEaseInOut], animations: {
+            self.favoriteView.alpha = 1.0
+            self.watchListView.alpha = 1.0
+            self.watchTrailerButton.alpha = 1.0
+            self.watchReviewButton.alpha = 1.0
+            }, completion: nil)
+    }
+        
 }
 
-// MARK: - Configure Method
+// MARK: - Configure Methods
 
 extension DetailTableViewCell {
     
@@ -84,3 +104,4 @@ extension DetailTableViewCell {
     }
 
 }
+ 

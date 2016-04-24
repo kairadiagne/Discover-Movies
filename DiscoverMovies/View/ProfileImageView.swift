@@ -10,8 +10,6 @@ import UIKit
 
 class ProfileImageView: UIImageView {
     
-    // MARK: - Initializers
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setUp()

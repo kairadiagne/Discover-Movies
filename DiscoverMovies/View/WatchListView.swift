@@ -10,11 +10,7 @@ import UIKit
 
 class WatchListView: UpdateListView {
     
-    // MARK: - Properties
-    
     override var identifier: String { return "watchlist" }
-    
-    // MARK: - Drawing
     
     override func drawRect(rect: CGRect) {
         drawWatchList(rect)

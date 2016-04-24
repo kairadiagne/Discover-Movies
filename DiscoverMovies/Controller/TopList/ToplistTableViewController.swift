@@ -9,6 +9,7 @@
 import UIKit
 import TMDbMovieKit
 import MBProgressHUD
+import SDWebImage
 
 class ToplistTableViewController: TMDbAuthorizationTableViewController, RevealMenuButtonShowable {
     
@@ -91,9 +92,15 @@ class ToplistTableViewController: TMDbAuthorizationTableViewController, RevealMe
             if let destination = segue.destinationViewController as? DetailTableViewController {
                 if let cell = sender as? UITableViewCell {
                     if let index = tableView.indexPathForCell(cell) {
-                        destination.movie = toplistCoordinator.items[index.row]
-                        // Check image in cache ?? 
-                        // destination.image = image from cache
+                        let movie = toplistCoordinator.items[index.row]
+                        destination.movie = movie
+                    
+                        if let path = movie.backDropPath, url = TMDbImageRouter.BackDropMedium(path: path).url{
+                            if SDWebImageManager.sharedManager().cachedImageExistsForURL(url) == true {
+                                let key = SDWebImageManager.sharedManager().cacheKeyForURL(url)
+                                destination.image = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
+                            }
+                        }
                     }
                 }
             }

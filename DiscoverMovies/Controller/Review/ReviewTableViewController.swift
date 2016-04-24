@@ -29,7 +29,7 @@ class ReviewTableViewController: DiscoverBaseTableViewController {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        setupBackground(withMessage: "There are no reviews about this movie")
+        setupBackground(withMessage: "There are no reviews for this movie")
     }
     
     // MARK: - UITableViewDataSource

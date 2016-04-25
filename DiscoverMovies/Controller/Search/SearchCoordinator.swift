@@ -46,16 +46,16 @@ class SearchCoordinator: ItemCoordinator<TMDbMovie> {
     private func discover(year: String?, genre: Int?, averageVote: Float?, page: Int?) {
         inProgress = true
         currentSearch = .Discover(year: year, genre: genre, averageVote: averageVote)
-        movieService.discoverMovies(year, genre: genre, vote: averageVote, page: page ) { (response) in
-            self.handleResponse(response)
+        movieService.discoverMovies(year, genre: genre, vote: averageVote, page: page ) { [weak self] (response) in
+            self?.handleResponse(response)
         }
     }
     
     private func searchByTitle(title: String, page: Int?) {
         inProgress = true
         currentSearch = .SearchByTitle(title: title)
-        movieService.searchForMovieWith(title, page: page) { (response) in
-            self.handleResponse(response)
+        movieService.searchForMovieWith(title, page: page) { [weak self] (response) in
+            self?.handleResponse(response)
         }
     }
     

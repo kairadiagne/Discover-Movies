@@ -47,39 +47,39 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     // MARK: - Account states
     
     func getAccountStates(movieID: Int) {
-        guard userStatus == .Signedin else { return } // If the user is not signed in we do not want to fetch the accountstate
-        movieService.accountStateForMovie(movieID) { (response) in
+        guard userStatus == .Signedin else { return } // If the user is not signed there is no need to check the account state
+        movieService.accountStateForMovie(movieID) { [weak self] (response) in
             guard let inFavorites = response.inFavorites, inWatchList = response.inWatchList else { return }
-            self.inFavorites = inFavorites
-            self.inWatchList = inWatchList
-            self.delegate?.coordinatorDidUpdateItems(self.page)
+            self?.inFavorites = inFavorites
+            self?.inWatchList = inWatchList
+            self?.delegate?.coordinatorDidUpdateItems(self?.page)
         }
     }
     
     func addToList(movieID: Int, list: String) {
-        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: true) { (success, error) in
+        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: true) { [weak self] (success, error) in
             guard error == nil else {
-                self.delegate?.coordinatorDidReceiveError(error!)
+                self?.delegate?.coordinatorDidReceiveError(error!)
                 return
             }
             if list == Constants.FavoritesIdentifier && success {
-                self.inFavorites = true
+                self?.inFavorites = true
             } else if list == Constants.WatchListIdentifier && success {
-                self.inWatchList = true
+                self?.inWatchList = true
             }
         }
     }
     
     func removeFromList(movieID: Int, list: String) {
-        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { (success, error) in
+        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { [weak self] (success, error) in
             guard error == nil else {
-                self.delegate?.coordinatorDidReceiveError(error!)
+                self?.delegate?.coordinatorDidReceiveError(error!)
                 return
             }
             if list == Constants.FavoritesIdentifier && success {
-                self.inFavorites = false
+                self?.inFavorites = false
             } else if list == Constants.WatchListIdentifier {
-                self.inWatchList = false
+                self?.inWatchList = false
             }
         }
     }
@@ -87,10 +87,10 @@ class DetailCoordinator: ItemCoordinator<TMDbMovie> {
     // MARK: - Trailer
     
     func fetchTrailer(movieID: Int) {
-        movieService.fetchVideosForMovie(movieID) { (response) in
+        movieService.fetchVideosForMovie(movieID) { [weak self] (response) in
             guard let videos = response.result else { return }
             let trailers = videos.filter { $0.type == "Trailer" }
-            self.trailer = trailers.first
+            self?.trailer = trailers.first
         }
     }
     

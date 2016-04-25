@@ -18,8 +18,19 @@ class SearchTableViewController: DiscoverBaseTableViewController, BackgroundMess
         static let ShowDetailSegueIdentifier = "ShowDetail"
     }
     
-    var discover: Discover? 
-    var searchTitle: String?
+    var discover: Discover?  {
+        didSet {
+            showProgressHUD()
+            searchCoordinator.discoverMoviesBy(discover?.year, genre: discover?.genre, averageVote: discover?.vote)
+        }
+    }
+    
+    var searchTitle: String? {
+        didSet {
+            showProgressHUD()
+            searchCoordinator.searchMoviesBy(searchTitle!)
+        }
+    }
 
     private let searchCoordinator = SearchCoordinator()
     
@@ -35,16 +46,6 @@ class SearchTableViewController: DiscoverBaseTableViewController, BackgroundMess
         tableView.estimatedRowHeight = 250
         tableView.rowHeight = UITableViewAutomaticDimension
         configureViewWithBackgroundMessage("Did not find any movies that matched your requirements")
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        showProgressHUD()
-        if searchTitle != nil {
-            searchCoordinator.searchMoviesBy(searchTitle!)
-        } else {
-            searchCoordinator.discoverMoviesBy(discover?.year, genre: discover?.genre, averageVote: discover?.vote)
-        }
     }
     
     // MARK: - UITableViewDataSource

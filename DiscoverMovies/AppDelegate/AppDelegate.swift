@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If the user reinstalls this app the previous sessionID is still stored in the keychain
         // We need to remove this sessionID before we continue
         let firstLaunch = !NSUserDefaults.standardUserDefaults().boolForKey("NotFirstLaunch")
+        
         if firstLaunch {
             TMDbUserInfoStore().resetCredentialsAtFirstLaunch()
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "NotFirstLaunch")

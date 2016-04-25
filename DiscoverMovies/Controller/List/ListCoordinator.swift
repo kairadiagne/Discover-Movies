@@ -50,13 +50,13 @@ class ListCoordinator: ItemCoordinator<TMDbMovie> {
         guard let movieID = movie.movieID else { return }
         guard let index = self.items.indexOf(movie) else { return }
         
-        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { (success, error) in
+        movieService.changeAccountStateForMovie(withID: movieID, inList: list, toStatus: false) { [weak self] (success, error) in
             guard error == nil else {
-                self.delegate?.coordinatorDidReceiveError(error!)
+                self?.delegate?.coordinatorDidReceiveError(error!)
                 return
             }
-            self.removeItemAtIndex(index)
-            self.delegate?.coordinatorDidUpdateItems(self.page)
+            self?.removeItemAtIndex(index)
+            self?.delegate?.coordinatorDidUpdateItems(self?.page)
         }
     }
     

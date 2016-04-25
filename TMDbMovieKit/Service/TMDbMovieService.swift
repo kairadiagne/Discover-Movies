@@ -19,6 +19,9 @@ public typealias TMDbChangeAccountStateCompletionHandler = (success: Bool, error
 
 public class TMDbMovieService {
     
+    // TODO: - Find out if this class should keep a weak reference to the requests in prorgess
+    // so they can be canceled once the class is being deinitialized. 
+    
     private let APIKey: String
     private let userInfoStore: TMDbUserInfoStore
     

@@ -31,8 +31,8 @@ class ToplistCoordinator: ItemCoordinator<TMDbMovie> {
     
     private func fetchTopList(list: TMDbToplist, page: Int?) {
         inProgress = true
-        movieService.fetchTopList(list.rawValue, page: page, completionHandler: { (response) in
-            self.handleResponse(response)
+        movieService.fetchTopList(list.rawValue, page: page, completionHandler: { [weak self] (response) in
+            self?.handleResponse(response)
         })
     }
     

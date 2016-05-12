@@ -9,29 +9,37 @@
 import UIKit
 import TMDbMovieKit
 
-struct Global {
-    static let APIKey = "b23b0ad7a6c11640e4e232527f2e6d67"
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    private struct Constants {
+        static let RootViewControllerNibName = "DiscoverViewController"
+    }
 
     var window: UIWindow?
-    
+    var navigationController = UINavigationController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        Theme.applyGlobalTheme()
+        // Apply the theme
+        Theme.applyGlobalTheme() 
         
-        // If the user reinstalls this app the previous sessionID is still stored in the keychain
-        // We need to remove this sessionID before we continue
-        let firstLaunch = !NSUserDefaults.standardUserDefaults().boolForKey("NotFirstLaunch")
+        // Register API key for use with TMDbMovieKit
+        TMDbSessionManager().registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
         
-        if firstLaunch {
-            TMDbUserInfoStore().resetCredentialsAtFirstLaunch()
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "NotFirstLaunch")
-        }
+        // Set up SWRevealController 
         
+        // Initialize navigation controller with root viewcontroller and set it as the windows root view controller // Later this becomes a SWRevealController
+        
+        let topListViewController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
+        let navigationController = UINavigationController(rootViewController: topListViewController)
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+        
+        // Make sure there is no sessionID stored in the keychain from previous installs 
+ 
         return true
     }
 

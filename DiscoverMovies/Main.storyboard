@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WcE-cH-D5A">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -626,7 +626,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="DetailTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="heV-AR-Vgn" customClass="DetailTableViewController" customModule="DiscoverMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="741" sectionHeaderHeight="28" sectionFooterHeight="28" id="jSh-FD-lVx">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -799,7 +799,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mpM-xr-3vC"/>
-        <segue reference="Kbf-wa-4AL"/>
         <segue reference="iwb-RA-2ue"/>
+        <segue reference="3qD-Za-7ES"/>
     </inferredMetricsTieBreakers>
 </document>

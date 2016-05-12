@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-public class TMDbUser: NSObject, NSCoding, ResponseJSONObjectSerializable {
+public class TMDbUser: NSObject, NSCoding, JSONSerializable {
     public var userID: Int?
     public var name: String?
     public var userName: String?

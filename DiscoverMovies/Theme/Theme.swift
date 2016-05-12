@@ -8,6 +8,7 @@
 
 import UIKit
 import ChameleonFramework
+import MBProgressHUD
 import youtube_ios_player_helper
 
 class Theme {
@@ -18,6 +19,7 @@ class Theme {
         static let BackgroundColor = UIColor(red: 25.0/255, green: 25.0/255, blue: 25.0/255, alpha: 1.0)
         static let LabelBackgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
         static let NavbarColor = UIColor(red: 27.0/255, green: 27.0/255, blue: 27.0/255, alpha: 1.0)
+        static let ProgressHUDColor =  UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 0.8)
     }
     
     // MARK: - Apply theme
@@ -32,6 +34,10 @@ class Theme {
     }
     
     // MARK: - Class Funcs
+    
+    class func styleViews() {
+        DetailView.appearance().backgroundColor = BaseColors.BackgroundColor
+    }
     
     class func styleTabBar() {
         UITabBar.appearance().barTintColor = BaseColors.NavbarColor
@@ -69,5 +75,11 @@ class Theme {
         UILabel.appearance().textColor = UIColor.whiteColor()
         UILabel.appearance().backgroundColor = UIColor.clearColor()
     }
+    
+    class func others() { // Change name when Refractoring this class
+        
+    }
+    
+    // HEX converter 
 
 }

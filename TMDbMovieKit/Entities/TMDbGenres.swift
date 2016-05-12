@@ -39,7 +39,7 @@ public struct TMDbGenres {
                    TMDbGenre(id: 37, name: "Western")
     ]
     
-    // MARK: - Static methods
+    // MARK: - Retrieval
     
     public static func genreWithID(genreID: Int) -> TMDbGenre? {
         return self.genres.filter { $0.id == genreID }.first

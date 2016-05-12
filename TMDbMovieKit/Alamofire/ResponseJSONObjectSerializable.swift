@@ -1,5 +1,5 @@
 //
-//  ResponseJSONObjectSerializable.swift
+//  JSONSerializable.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 13-04-16.
@@ -9,6 +9,6 @@
 import Foundation
 import SwiftyJSON
 
-public protocol ResponseJSONObjectSerializable {
+public protocol JSONSerializable {
     init?(json: SwiftyJSON.JSON)
 }

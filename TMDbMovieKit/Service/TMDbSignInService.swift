@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 /*
  TMDb authentication workflow: 
@@ -28,81 +27,53 @@ import SwiftyJSON
  
 */
 
-public class TMDbSignInService {
+class TMDbSignInService {
     
-    public weak var delegate: TMDbSignInServiceDelegate?
-    private var APIKey: String
-    private let userInfoStore: TMDbUserInfoStore
-    private var token: String = "" // TOD0: - Expirationdate ?
-   
-    public init(APIKey key: String) {
-        self.APIKey = key
-        self.userInfoStore = TMDbUserInfoStore()
+    private var APIKey: String {
+        return TMDbSessionInfoStore().APIKey
     }
+    
+    private var requestToken = ""
     
     // MARK: - Sign in 
     
     // Generates a valid request token for user based authentication
     
-    public func requestToken() {
-        
+    func getRequestToken(completionHandler: (url: NSURL?, error: NSError?) -> ()) {
         Alamofire.request(TMDbSignInRouter.RequestToken(APIKey: APIKey)).validate().responseJSON { (response) in
             guard response.result.error == nil else {
-                self.delegate?.TMDbSignInServiceCouldNotObtainToken(response.result.error!)
+                completionHandler(url: nil, error: response.result.error!)
                 return
             }
             
             if let token = response.result.value?["request_token"] as? String {
-                self.token = token
-                let authorizeURL = self.createAuthorizeURL(token)
-                self.delegate?.TMDbSignInServiceDidObtainToken(authorizeURL)
+                self.requestToken = token
+                let url = self.createAuthorizeURL(self.requestToken)
+                completionHandler(url: url, error: nil)
             }
         }
     }
     
     // Generates a session id for user based authentication
     
-    public func requestSessionID(){
-        Alamofire.request(TMDbSignInRouter.SessionID(token, APIKey: APIKey)).validate().responseJSON { (response) in
+    func requestSessionID(completionHandler: (sessionID: String?, error: NSError?) -> ()) {
+        Alamofire.request(TMDbSignInRouter.SessionID(requestToken, APIKey: APIKey)).validate().responseJSON { (response) in
             guard response.result.error == nil else {
-                self.delegate?.TMDbSignInServiceSignInDidFail(response.result.error!)
+                completionHandler(sessionID: nil, error: response.result.error!)
                 return
             }
             
             if let sessionID = response.result.value?["session_id"] as? String {
-                self.userInfoStore.persistSessionIDinStore(sessionID)
-                // If we work with expirationdate of requestoken we set request token to nil
-                self.delegate?.TMDbSignInServiceSignInDidComplete()
+                completionHandler(sessionID: sessionID, error: response.result.error!)
             }
         }
     }
-    
-    // Gets the basic information for an account
-    
-    public func fetchUserInfo() {
-        guard let sessionID = userInfoStore.sessionID else { return }
-        Alamofire.request(TMDbSignInRouter.UserInfo(sessionID, APIKey: APIKey)).validate().responseObject { (response: Response<TMDbUser, NSError>) in
-            guard response.result.error == nil else {
-                self.delegate?.TMDbSignInServiceSignInDidFail(response.result.error!)
-                return
-            }
-            if let user = response.result.value {
-                self.userInfoStore.persistUserInStore(user)
-            }
-        }
-    }
-    
-    // MARK: - Continue without sign in 
-    
-    public func activatePublicMode() {
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "userIsInpublicMode")
-    }
-    
-    // MARK: Helpers
+        
+    // MARK: - Create URL
     
     private func createAuthorizeURL(requestToken: String) -> NSURL? {
         let path: String = "\(TMDbAPI.AuthenticateURL)\(requestToken)"
-        let url: NSURL = NSURL(string: path)! // TODO: Is in in this situation acceptable to forece unwrap
+        let url = NSURL(string: path)
         return url
     }
 

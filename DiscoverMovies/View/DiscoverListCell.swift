@@ -1,5 +1,5 @@
 //
-//  MovieTableViewCell.swift
+//  DiscoverListCell.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 19-04-16.
@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class MovieTableViewCell: UITableViewCell {
+class DiscoverListCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
@@ -24,7 +24,7 @@ class MovieTableViewCell: UITableViewCell {
     
 }
 
-extension MovieTableViewCell {
+extension DiscoverListCell {
     
     func configure(movie: TMDbMovie, imageURL: NSURL?) {
         titleLabel.text = movie.title != nil ? movie.title! : "Unknown"

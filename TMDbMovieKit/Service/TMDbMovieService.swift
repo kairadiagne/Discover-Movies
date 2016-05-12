@@ -11,25 +11,26 @@ import Alamofire
 import SwiftyJSON
 
 // Completionhandlers
-public typealias TMDbMovieCompletionHandler = (result: TMDbFetchResult<TMDbMovie>?, error: NSError?) -> ()
-public typealias TMDbReviewCompletionHandler = (result: TMDbFetchResult<TMDbReview>?, error: NSError?) -> ()
-public typealias TMDbVideosCompletionHandler = (result: [TMDbVideo]?, error: NSError?) -> ()
-public typealias TMDbAccountStateCompletionHandler = (inFavorites: Bool?, inWatchList: Bool?, error: NSError?) -> ()
-public typealias TMDbChangeAccountStateCompletionHandler = (success: Bool, error: NSError?) -> ()
+typealias TMDbMovieCompletionHandler = (result: TMDbListHolder<TMDbMovie>?, error: NSError?) -> ()
+typealias TMDbReviewCompletionHandler = (result: TMDbListHolder<TMDbReview>?, error: NSError?) -> ()
+typealias TMDbVideosCompletionHandler = (result: [TMDbVideo]?, error: NSError?) -> ()
+typealias TMDbAccountStateCompletionHandler = (inFavorites: Bool?, inWatchList: Bool?, error: NSError?) -> ()
+typealias TMDbChangeAccountStateCompletionHandler = (success: Bool, error: NSError?) -> ()
 
-public class TMDbMovieService {
+class TMDbMovieService {
     
-    // TODO: - Find out if this class should keep a weak reference to the requests in prorgess
-    // so they can be canceled once the class is being deinitialized. 
-    
-    private let APIKey: String
-    private let userInfoStore: TMDbUserInfoStore
-    
-    public init(APIKey key: String) {
-        self.APIKey = key
-        self.userInfoStore = TMDbUserInfoStore()
+    private var APIKey: String {
+        return TMDbSessionInfoStore().APIKey
     }
-   
+    
+    private var sessionID: String? {
+        return TMDbSessionInfoStore().sessionID
+    }
+    
+    private var userID: Int? {
+        return TMDbSessionInfoStore().user?.userID
+    }
+    
     // MARK: - Fetch Lists of Movies
 
     /*
@@ -41,7 +42,7 @@ public class TMDbMovieService {
      
     */
     
-    public func fetchTopList(list: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
+    func fetchTopList(list: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
         Alamofire.request(TMDbMovieRouter.TopList(list: list, page: page, APIKey: APIKey)).validate().responseResult { (response) in
             completionHandler(result: response.result.value, error: response.result.error)
         }
@@ -52,7 +53,7 @@ public class TMDbMovieService {
      The group of movies that comes back as a response is sorted by popularity rating (Ascending)
     */
     
-    public func discoverMovies(year: String?, genre: Int?, vote: Float?, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
+    func discoverMovies(year: String?, genre: Int?, vote: Float?, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
         Alamofire.request(TMDbMovieRouter.Discover(year: year, genre: genre, vote: vote, page: page, APIKey: APIKey)).validate().responseResult { (response) in
             completionHandler(result: response.result.value, error: response.result.error)
         }
@@ -62,7 +63,7 @@ public class TMDbMovieService {
     // Search for movies by title.
  
     
-    public func searchForMovieWith(title: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
+    func searchForMovieWith(title: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
         Alamofire.request(TMDbMovieRouter.SearchByTitle(title: title, page: page, APIKey: APIKey)).validate().responseResult { (response) in
             completionHandler(result: response.result.value, error: response.result.error)
         }
@@ -70,7 +71,7 @@ public class TMDbMovieService {
     
     // Get the similar movies for a specific movie id.
  
-    public func fetchMoviesSimilarToMovie(withID id: Int, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
+    func fetchMoviesSimilarToMovie(withID id: Int, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
         Alamofire.request(TMDbMovieRouter.SimilarMovies(id: id, page: page, APIKey: APIKey)).validate().responseResult { (response) in
             completionHandler(result: response.result.value, error: response.result.error)
         }
@@ -81,13 +82,13 @@ public class TMDbMovieService {
     
     // Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
     
-    public func fetchVideosForMovie(movieID: Int, completionHandler: TMDbVideosCompletionHandler) {
+    func fetchVideosForMovie(movieID: Int, completionHandler: TMDbVideosCompletionHandler) {
         Alamofire.request(TMDbMovieRouter.Videos(movieID: movieID, APIKey: APIKey)).validate().responseArray("results") { (response) in
             completionHandler(result: response.result.value, error: response.result.error)
         }
     }
     
-    public func fetchReviews(movieID: Int, page: Int?, completionHandler: TMDbReviewCompletionHandler) {
+    func fetchReviews(movieID: Int, page: Int?, completionHandler: TMDbReviewCompletionHandler) {
         Alamofire.request(TMDbMovieRouter.Reviews(movieID: movieID, page: page, APIKey: APIKey)).validate().responseResult { (response) in
             completionHandler(result: response.result.value, error: response.result.error)
         }
@@ -106,13 +107,12 @@ public class TMDbMovieService {
      - Get the list of movies on an accounts watchlist
     */
     
-    public func fetchMoviesInList(list: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
-        guard userInfoStore.userStatus == .Signedin else { return completionHandler(result: nil, error: authorizationError) }
-        guard let sessionID = userInfoStore.sessionID else { return completionHandler(result: nil, error: authorizationError) }
-        guard let userID = userInfoStore.user?.userID else { return completionHandler(result: nil, error: authorizationError) }
+    func fetchMoviesInList(list: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
+        guard let sessionID = sessionID else { return completionHandler(result: nil, error: authorizationError) }
+        guard let userID = userID else { return completionHandler(result: nil, error: authorizationError) }
         
         Alamofire.request(TMDbMovieRouter.List(list: list, sessionID: sessionID, accountID: userID, page: page, APIKey: APIKey)).validate().responseResult {
-            (response: Response<TMDbFetchResult<TMDbMovie>, NSError>) in
+            (response: Response<TMDbListHolder<TMDbMovie>, NSError>) in
             if let response = response.response, unauthorizedError = self.checkResponseForAuthorizationError(response) {
                 completionHandler(result: nil, error: unauthorizedError)
             }
@@ -122,9 +122,8 @@ public class TMDbMovieService {
     
     // Lets the users get the status of wether or not the TV show has been rated or added to their favourite or watch list.
     
-    public func accountStateForMovie(movieID: Int, completionHandler: TMDbAccountStateCompletionHandler ) {
-        guard userInfoStore.userStatus == .Signedin else { return completionHandler(inFavorites: nil, inWatchList: nil, error: authorizationError) }
-        guard let sessionID = userInfoStore.sessionID else { return completionHandler(inFavorites: nil, inWatchList: nil, error: authorizationError) }
+    func accountStateForMovie(movieID: Int, completionHandler: TMDbAccountStateCompletionHandler ) {
+        guard let sessionID = sessionID else { return completionHandler(inFavorites: nil, inWatchList: nil, error: authorizationError) }
         
         Alamofire.request(TMDbMovieRouter.AccountState(movieID: movieID, sessionID: sessionID, APIKey: APIKey)).validate().responseJSON { (response) in
             if let response = response.response, unauthorizedError = self.checkResponseForAuthorizationError(response) {
@@ -137,11 +136,10 @@ public class TMDbMovieService {
     }
     
     // Add or remove a movie to an accounts favorite list or watchlist
-    
-    public func changeAccountStateForMovie(withID movieID: Int, inList list: String, toStatus status: Bool, completionHandler: TMDbChangeAccountStateCompletionHandler) {
-        guard userInfoStore.userStatus == .Signedin else { return completionHandler(success: false, error: authorizationError) }
-        guard let sessionID = userInfoStore.sessionID else { return completionHandler(success: false, error: authorizationError) }
-        guard let userID = userInfoStore.user?.userID else { return completionHandler(success: false, error: authorizationError) }
+
+    func changeAccountStateForMovie(withID movieID: Int, inList list: String, toStatus status: Bool, completionHandler: TMDbChangeAccountStateCompletionHandler) {
+        guard let sessionID = sessionID else { return completionHandler(success: false, error: authorizationError) }
+        guard let userID = userID else { return completionHandler(success: false, error: authorizationError) }
         
         let JSONBody: [String: AnyObject] = ["media_id": movieID, "media_type": "movie", list : status]
         
@@ -159,6 +157,8 @@ public class TMDbMovieService {
     }
     
     // MARK: - Helpers
+    
+    // Errro handeling should be done seperately ??
     
     private func checkResponseForAuthorizationError(urlResponse: NSHTTPURLResponse) -> NSError? {
         guard urlResponse.statusCode == 401 else { return nil }

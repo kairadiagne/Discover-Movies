@@ -9,7 +9,16 @@
 import Foundation
 import SwiftyJSON
 
-public struct TMDbVideo: ResponseJSONObjectSerializable, Equatable {
+private struct Keys {
+    static let VideoID = "id"
+    static let Key = "key"
+    static let Name = "name"
+    static let Site = "site"
+    static let Size = "size"
+    static let Type = "type"
+}
+
+public struct TMDbVideo: JSONSerializable {
     public var videoID: String?
     public var key: String?
     public var name: String?
@@ -29,11 +38,5 @@ public struct TMDbVideo: ResponseJSONObjectSerializable, Equatable {
 }
 
 public func ==(lhs: TMDbVideo, rhs: TMDbVideo) -> Bool {
-    if lhs.videoID != rhs.videoID { return false }
-    if lhs.key != rhs.key { return false }
-    if lhs.name != rhs.name { return false }
-    if lhs.site != rhs.site { return false }
-    if lhs.size != rhs.size { return false }
-    if lhs.type != rhs.type { return false }
-    return true
+    return lhs.videoID == rhs.videoID
 }

@@ -1,15 +1,15 @@
+////
+////  WatchListTableViewController.swift
+////  DiscoverMovies
+////
+////  Created by Kaira Diagne on 20-04-16.
+////  Copyright © 2016 Kaira Diagne. All rights reserved.
+////
 //
-//  WatchListTableViewController.swift
-//  DiscoverMovies
+//import UIKit
 //
-//  Created by Kaira Diagne on 20-04-16.
-//  Copyright © 2016 Kaira Diagne. All rights reserved.
+//class WatchListTableViewController: ListTableViewController {
 //
-
-import UIKit
-
-class WatchListTableViewController: ListTableViewController {
-
-   override var identifier: String { return "watchlist" }
-
-}
+//   override var identifier: String { return "watchlist" }
+//
+//}

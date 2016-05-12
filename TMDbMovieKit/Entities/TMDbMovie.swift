@@ -9,12 +9,26 @@
 import Foundation
 import SwiftyJSON
 
-public struct TMDbMovie: ResponseJSONObjectSerializable, Equatable {
+private struct Keys {
+    static let MovieID = "id"
+    static let Title = "title"
+    static let ReleaseDate = "release_date"
+    static let GenreID = "genre_ids"
+    static let GenreString = "genre_strings"
+    static let Overview = "overview"
+    static let VoteAverage = "vote_average"
+    static let Adult = "adult"
+    static let Popularity = "popularity"
+    static let PosterPath = "poster_path"
+    static let BackdropPath = "backdrop_path"
+}
+
+public struct TMDbMovie: JSONSerializable {
     public var movieID: Int?
     public var title: String?
     public var releaseDate: NSDate?
     public var genreIDs: [Int]
-    public var genreStrings: [String]
+    public var genreStrings: [String] = []
     public var overview: String?
     public var rating: Double?
     public var adult: Bool?
@@ -23,32 +37,24 @@ public struct TMDbMovie: ResponseJSONObjectSerializable, Equatable {
     public var backDropPath: String?
     
     public init?(json: SwiftyJSON.JSON) {
-        self.movieID = json["id"].int
-        self.title = json["title"].string
-        self.releaseDate = json["release_date"].string?.toDate()
-        self.genreIDs = json["genre_ids"].arrayValue.flatMap { $0.int }
+        self.movieID = json[Keys.MovieID].int
+        self.title = json[Keys.Title].string
+        self.releaseDate = json[Keys.ReleaseDate].string?.toDate()
+        self.genreIDs = json[Keys.GenreID].arrayValue.flatMap { $0.int }
+        self.overview = json[Keys.Overview].string
+        self.rating = json[Keys.VoteAverage].double
+        self.adult = json[Keys.Adult].bool
+        self.popularity = json[Keys.Popularity].int
+        self.posterPath = json[Keys.PosterPath].string
+        self.backDropPath = json[Keys.BackdropPath].string
+        
+        // Convert genre id's to array of strings
         self.genreStrings = genreIDs.map { return TMDbGenres.genreWithID($0)?.name }.flatMap { $0 }
-        self.overview = json["overview"].string
-        self.rating = json["vote_average"].double
-        self.adult = json["adult"].bool
-        self.popularity = json["popularity"].int
-        self.posterPath = json["poster_path"].string
-        self.backDropPath = json["backdrop_path"].string
     }
     
 }
 
 public func ==(lhs: TMDbMovie, rhs: TMDbMovie) -> Bool {
-    if lhs.movieID != rhs.movieID { return false }
-    if lhs.title != rhs.title { return false }
-    if lhs.releaseDate != rhs.releaseDate { return false }
-    if lhs.genreIDs != rhs.genreIDs { return false }
-    if lhs.genreStrings != rhs.genreStrings { return false }
-    if lhs.overview != rhs.overview { return false }
-    if lhs.rating != rhs.rating { return false }
-    if lhs.adult != rhs.adult { return false }
-    if lhs.popularity != rhs.popularity { return false }
-    if lhs.posterPath != rhs.posterPath { return false }
-    if lhs.backDropPath != rhs.backDropPath { return false }
-    return true
+    return lhs.movieID == rhs.movieID
 }
+

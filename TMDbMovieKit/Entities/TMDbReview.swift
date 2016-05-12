@@ -9,28 +9,31 @@
 import Foundation
 import SwiftyJSON
 
-public struct TMDbReview: ResponseJSONObjectSerializable, Equatable {
+private struct Keys {
+    static let ReviewID = "id"
+    static let Author = "author"
+    static let Content = "content"
+    static let URL = "url"
+}
+
+public struct TMDbReview: JSONSerializable {
     public var reviewID: Int?
     public var author: String?
     public var content: String?
     public var url: NSURL?
     
     public init?(json: SwiftyJSON.JSON) {
-        self.reviewID = json["id"].int
-        self.author = json["author"].string
-        self.content = json["content"].string
-        guard let urlString = json["url"].string else { return }
+        self.reviewID = json[Keys.ReviewID].int
+        self.author = json[Keys.Author].string
+        self.content = json[Keys.Content].string
+        guard let urlString = json[Keys.URL].string else { return }
         self.url = NSURL(string: urlString)
     }
     
 }
 
 public func ==(lhs: TMDbReview, rhs: TMDbReview) -> Bool {
-    if lhs.reviewID != rhs.reviewID { return false }
-    if lhs.author != rhs.author { return false }
-    if lhs.content != rhs.content { return false }
-    if lhs.url != rhs.url { return false }
-    return true
+    return lhs.reviewID == rhs.reviewID
 }
 
 

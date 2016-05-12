@@ -12,8 +12,8 @@ import SwiftyJSON
 
 extension Alamofire.Request {
     
-    public func responseResult<T: ResponseJSONObjectSerializable>(completionHandler: Response<TMDbFetchResult<T>, NSError> -> Void) -> Self {
-        let serializer = ResponseSerializer<TMDbFetchResult<T>, NSError> { request, response, data, error in
+    public func responseResult<T: JSONSerializable>(completionHandler: Response<TMDbListHolder<T>, NSError> -> Void) -> Self {
+        let serializer = ResponseSerializer<TMDbListHolder<T>, NSError> { request, response, data, error in
             guard error == nil else {
                 return .Failure(error!)
             }
@@ -30,7 +30,7 @@ extension Alamofire.Request {
             switch result {
             case .Success(let value):
                 let json = SwiftyJSON.JSON(value)
-                if let fetchResult = TMDbFetchResult<T>(json: json) {
+                if let fetchResult = TMDbListHolder<T>(json: json) {
                     return .Success(fetchResult)
                 } else {
                     let failureReason = "Object could not be created from JSON."
@@ -45,7 +45,7 @@ extension Alamofire.Request {
         return response(responseSerializer: serializer, completionHandler: completionHandler)
     }
     
-    public func responseArray<T: ResponseJSONObjectSerializable>(key: String, completionHandler: Response<[T], NSError> -> Void) -> Self {
+    public func responseArray<T: JSONSerializable>(key: String, completionHandler: Response<[T], NSError> -> Void) -> Self {
         let serializer = ResponseSerializer<[T], NSError> { request, response, data, error in
             guard error == nil else {
                 return .Failure(error!)
@@ -76,7 +76,7 @@ extension Alamofire.Request {
         return response(responseSerializer: serializer, completionHandler: completionHandler)
     }
     
-    public func responseObject<T: ResponseJSONObjectSerializable>(completionHandler: Response<T, NSError> -> Void) -> Self {
+    public func responseObject<T: JSONSerializable>(completionHandler: Response<T, NSError> -> Void) -> Self {
         let serializer = ResponseSerializer<T, NSError> { request, response, data, error in
             guard error == nil else {
                 return .Failure(error!)

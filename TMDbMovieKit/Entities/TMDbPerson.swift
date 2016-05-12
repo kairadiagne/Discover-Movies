@@ -9,17 +9,28 @@
 import Foundation
 import SwiftyJSON
 
-public struct TMDbPerson: ResponseJSONObjectSerializable, Equatable {
-    public var name: String?
+private struct Keys {
+    static let PersonID = "id"
+    static let Name = "name"
+    static let Popularity = "popularity"
+    static let ProfilePath = "profile_path"
+    static let Adult = "adult"
+    static let KnownFor = "know_for"
+    static let MediaType = "media_type"
+    static let Movies = "movie"
+}
+
+public class TMDbPerson: JSONSerializable {
     public var personID: Int?
+    public var name: String?
     public var popularity: Int?
     public var profilePath: String?
     public var adult: Bool?
     public var movies: [TMDbMovie] = []
     
-    public init?(json: SwiftyJSON.JSON) {
-        self.name = json["name"].string
+    public required init?(json: SwiftyJSON.JSON) {
         self.personID = json["id"].int
+        self.name = json["name"].string
         self.popularity = json["popularity"].int
         self.profilePath = json["profile_path"].string
         self.adult = json["adult"].bool
@@ -30,11 +41,5 @@ public struct TMDbPerson: ResponseJSONObjectSerializable, Equatable {
 }
 
 public func ==(lhs: TMDbPerson, rhs: TMDbPerson) -> Bool {
-    if lhs.name != rhs.name { return false }
-    if lhs.personID != rhs.personID { return false }
-    if lhs.popularity != rhs.popularity { return false }
-    if lhs.profilePath != rhs.profilePath { return false }
-    if lhs.adult != rhs.adult { return false }
-    if lhs.movies   != rhs.movies { return false }
-    return true
+    return lhs.personID == rhs.personID
 }

@@ -55,7 +55,6 @@
 		111942E31CCB8E7E001CF39B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942E11CCB8E7E001CF39B /* SignInViewController.swift */; };
 		111942E41CCB8E7E001CF39B /* SignInViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942E21CCB8E7E001CF39B /* SignInViewDelegate.swift */; };
 		111942E81CCB8E85001CF39B /* ToplistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942E61CCB8E85001CF39B /* ToplistTableViewController.swift */; };
-		111942EA1CCB8E8B001CF39B /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942E91CCB8E8B001CF39B /* VideoViewController.swift */; };
 		111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */; };
 		111942EF1CCB8EAE001CF39B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942EC1CCB8EAE001CF39B /* Main.storyboard */; };
 		111942F01CCB8EAE001CF39B /* Signin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942ED1CCB8EAE001CF39B /* Signin.storyboard */; };
@@ -97,7 +96,11 @@
 		EA6487A21CE356C300452DD0 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487A11CE356C300452DD0 /* DetailView.swift */; };
 		EA6487A81CE3CBCA00452DD0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487A71CE3CBCA00452DD0 /* SearchViewController.swift */; };
 		EA6487AA1CE3D21300452DD0 /* SDWebImage+CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487A91CE3D21300452DD0 /* SDWebImage+CachedImage.swift */; };
-		EA6487AC1CE46ED400452DD0 /* TMDbMovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487AB1CE46ED400452DD0 /* TMDbMovieManager.swift */; };
+		EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */; };
+		EA6487B21CE4AB2900452DD0 /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487B01CE4AB2900452DD0 /* VideoViewController.xib */; };
+		EA6487B41CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487B31CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift */; };
+		EA6487B61CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */; };
+		EA6487B81CE4BC9D00452DD0 /* TMDbMovieCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487B71CE4BC9D00452DD0 /* TMDbMovieCredit.swift */; };
 		EA782B7B1CE097B500DC38AD /* TMDbTopListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */; };
 		EA782B7D1CE0B5F100DC38AD /* TMDbSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */; };
 		EA782B7F1CE0C50000DC38AD /* TMDbAccountListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7E1CE0C50000DC38AD /* TMDbAccountListManager.swift */; };
@@ -216,7 +219,6 @@
 		111942E11CCB8E7E001CF39B /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		111942E21CCB8E7E001CF39B /* SignInViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewDelegate.swift; sourceTree = "<group>"; };
 		111942E61CCB8E85001CF39B /* ToplistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToplistTableViewController.swift; sourceTree = "<group>"; };
-		111942E91CCB8E8B001CF39B /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		111942EC1CCB8EAE001CF39B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		111942ED1CCB8EAE001CF39B /* Signin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Signin.storyboard; sourceTree = "<group>"; };
@@ -258,7 +260,11 @@
 		EA6487A11CE356C300452DD0 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		EA6487A71CE3CBCA00452DD0 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EA6487A91CE3D21300452DD0 /* SDWebImage+CachedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SDWebImage+CachedImage.swift"; sourceTree = "<group>"; };
-		EA6487AB1CE46ED400452DD0 /* TMDbMovieManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieManager.swift; sourceTree = "<group>"; };
+		EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		EA6487B01CE4AB2900452DD0 /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
+		EA6487B31CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbDataManagerNotifications.swift; sourceTree = "<group>"; };
+		EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieInfoManager.swift; sourceTree = "<group>"; };
+		EA6487B71CE4BC9D00452DD0 /* TMDbMovieCredit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieCredit.swift; sourceTree = "<group>"; };
 		EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopListManager.swift; sourceTree = "<group>"; };
 		EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInManager.swift; sourceTree = "<group>"; };
 		EA782B7E1CE0C50000DC38AD /* TMDbAccountListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAccountListManager.swift; sourceTree = "<group>"; };
@@ -393,7 +399,6 @@
 				111943251CCB8F64001CF39B /* Search */,
 				111942C21CCB8E19001CF39B /* List */,
 				111942C11CCB8E13001CF39B /* Detail Movie */,
-				111943281CCB8F93001CF39B /* Video */,
 				111943231CCB8F3F001CF39B /* Review */,
 			);
 			name = "Controller Old";
@@ -565,14 +570,6 @@
 			path = TopList;
 			sourceTree = "<group>";
 		};
-		111943281CCB8F93001CF39B /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				111942E91CCB8E8B001CF39B /* VideoViewController.swift */,
-			);
-			path = Video;
-			sourceTree = "<group>";
-		};
 		111943371CCB909F001CF39B /* Alamofire */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +587,7 @@
 				111942FC1CCB8EE4001CF39B /* TMDbMovie.swift */,
 				111942FF1CCB8EE4001CF39B /* TMDbReview.swift */,
 				111943011CCB8EE4001CF39B /* TMDbVideo.swift */,
+				EA6487B71CE4BC9D00452DD0 /* TMDbMovieCredit.swift */,
 				111942FE1CCB8EE4001CF39B /* TMDbPerson.swift */,
 				111943001CCB8EE4001CF39B /* TMDbUser.swift */,
 				111942FB1CCB8EE4001CF39B /* TMDbGenres.swift */,
@@ -664,13 +662,14 @@
 		EA782B771CE079E800DC38AD /* Data manager */ = {
 			isa = PBXGroup;
 			children = (
+				EA6487B31CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift */,
 				EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */,
 				EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */,
 				EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */,
 				EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */,
 				EA782B821CE0C54A00DC38AD /* TMDbMovieSearchManager.swift */,
+				EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */,
 				EA782B7E1CE0C50000DC38AD /* TMDbAccountListManager.swift */,
-				EA6487AB1CE46ED400452DD0 /* TMDbMovieManager.swift */,
 				EA782B861CE0CA4500DC38AD /* TMDbReviewManager.swift */,
 			);
 			name = "Data manager";
@@ -748,6 +747,8 @@
 		EAD2A8311CDC9ECC0005264B /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */,
+				EA6487B01CE4AB2900452DD0 /* VideoViewController.xib */,
 			);
 			name = Video;
 			sourceTree = "<group>";
@@ -989,6 +990,7 @@
 				111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */,
 				111942B91CCB8DE5001CF39B /* ListTableViewCell.xib in Resources */,
 				111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */,
+				EA6487B21CE4AB2900452DD0 /* VideoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1074,7 +1076,6 @@
 				111942CE1CCB8E3D001CF39B /* MenuTableViewController.swift in Sources */,
 				EAD2A8231CDC9D130005264B /* BaseViewController.swift in Sources */,
 				111942B51CCB8DE5001CF39B /* DetailTableViewCell.swift in Sources */,
-				111942EA1CCB8E8B001CF39B /* VideoViewController.swift in Sources */,
 				111943301CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift in Sources */,
 				111942DF1CCB8E74001CF39B /* SearchTableViewController.swift in Sources */,
 				113946381CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift in Sources */,
@@ -1096,6 +1097,7 @@
 				111942B71CCB8DE5001CF39B /* HorizontalImageScroller.swift in Sources */,
 				111942E41CCB8E7E001CF39B /* SignInViewDelegate.swift in Sources */,
 				111942B81CCB8DE5001CF39B /* ListTableViewCell.swift in Sources */,
+				EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */,
 				1119432E1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift in Sources */,
 				1119429D1CCB8DD4001CF39B /* NSDate+CurrentYear.swift in Sources */,
 				111942A31CCB8DD4001CF39B /* UINavigationController+StatusBarStyle.swift in Sources */,
@@ -1145,14 +1147,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				111943121CCB8EF6001CF39B /* TMDbMovieRouter.swift in Sources */,
+				EA6487B61CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift in Sources */,
 				EA782B7B1CE097B500DC38AD /* TMDbTopListManager.swift in Sources */,
 				111943081CCB8EE4001CF39B /* TMDbReview.swift in Sources */,
 				111943051CCB8EE4001CF39B /* TMDbMovie.swift in Sources */,
 				1119431E1CCB8EFC001CF39B /* TMDbPeopleService.swift in Sources */,
+				EA6487B81CE4BC9D00452DD0 /* TMDbMovieCredit.swift in Sources */,
 				111942F61CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift in Sources */,
 				1119430C1CCB8EEB001CF39B /* String+ToNSDate.swift in Sources */,
 				EA782B7F1CE0C50000DC38AD /* TMDbAccountListManager.swift in Sources */,
 				111943141CCB8EF6001CF39B /* TMDbSignInRouter.swift in Sources */,
+				EA6487B41CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift in Sources */,
 				EA782B8F1CE0E26C00DC38AD /* TMDbListHolder.swift in Sources */,
 				EA6487681CE1E65700452DD0 /* TMDbUserManager.swift in Sources */,
 				EA782B831CE0C54A00DC38AD /* TMDbMovieSearchManager.swift in Sources */,
@@ -1167,7 +1172,6 @@
 				111942F81CCB8EDE001CF39B /* ResponseJSONObjectSerializable.swift in Sources */,
 				EA6487661CE1E5CF00452DD0 /* TMDbSessionInfoStore.swift in Sources */,
 				EA782B871CE0CA4500DC38AD /* TMDbReviewManager.swift in Sources */,
-				EA6487AC1CE46ED400452DD0 /* TMDbMovieManager.swift in Sources */,
 				111943091CCB8EE4001CF39B /* TMDbUser.swift in Sources */,
 				111943041CCB8EE4001CF39B /* TMDbGenres.swift in Sources */,
 				111943131CCB8EF6001CF39B /* TMDbPeopleRouter.swift in Sources */,

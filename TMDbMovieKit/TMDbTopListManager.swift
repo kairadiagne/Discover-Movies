@@ -15,20 +15,9 @@ public enum TMDbToplist: String {
     case NowPlaying = "now_playing"
 }
 
-// MARK: - Notifications 
-
-// These notifications can be generic for all Data managers as long as the controller knows which object to listen to
-public let TMDbTopListManagerDidChangeNotification = "TMDbTopListManagerDidChangeNotification"
-public let TMDbTopListManagerDidReceiveErrorNotification = "TMDbTopListManagerDidReceiveErrorNotification"
-// TMDbTopListManagerIsUptoDateNotification ????? 
-
-// TODO - Refractor 
-
 public class TMDbTopListManager {
     
-    // MARK: - Properties
-    
-    // Public
+    // Public properties
     
     public var movies: [TMDbMovie] {
         guard let currentList = currentList else { return [] }
@@ -46,7 +35,7 @@ public class TMDbTopListManager {
         
     }
     
-    // Private
+    // Private properties
     
     private let movieService = TMDbMovieService()
     
@@ -92,13 +81,12 @@ public class TMDbTopListManager {
         fetchList(list, page: page)
     }
     
-    // MARK: Fetching 
+    // MARK: Fetching
     
     private func fetchList(list: TMDbToplist, page: Int?) {
         movieService.fetchTopList(list.rawValue, page: page, completionHandler: { (result, error) in
             guard error == nil else {
-                let notification = NSNotification(name: TMDbTopListManagerDidReceiveErrorNotification, object: nil)
-                NSNotificationCenter.defaultCenter().postNotification(notification)
+                self.postErrorNotification(error!)
                 return
             }
             
@@ -108,7 +96,7 @@ public class TMDbTopListManager {
         })
     }
     
-    // MARK: - Update data 
+    // MARK: - Handle Response
     
     private func updateData(data: TMDbListHolder<TMDbMovie>) {
         guard let list = currentList else { return }
@@ -126,14 +114,16 @@ public class TMDbTopListManager {
             }
             
             dispatch_async(dispatch_get_main_queue(), { 
-                let notification = NSNotification(name: TMDbTopListManagerDidChangeNotification, object: nil)
+                let notification = NSNotification(name: TMDManagerDataDidChangeNotification, object: nil)
                 NSNotificationCenter.defaultCenter().postNotification(notification)
             })
             
         }
-        
-        
-        
+    }
+    
+    private func postErrorNotification(error: NSError) {
+        let center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: nil, userInfo: ["error": error])
     }
     
 }

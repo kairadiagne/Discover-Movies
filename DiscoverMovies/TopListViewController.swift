@@ -29,7 +29,7 @@ class TopListViewController: DiscoverViewController {
         tableView.dataSource = topListDataProvider
         tableView.delegate = topListDataProvider
         
-        // Add UISegmented Control to navigation bar
+        // Configure UISegmented control for switching lists
         let switchListSelector = #selector(TopListViewController.switchTopList(_:))
         switchListControl = UISegmentedControl(items: ["Popular", "Top Rated", "Upcoming"])
         switchListControl.addTarget(self, action: switchListSelector, forControlEvents: .ValueChanged)
@@ -39,9 +39,9 @@ class TopListViewController: DiscoverViewController {
         // Sign up for Notifications 
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let selector = #selector(TopListViewController.updateNotification)
-        notificationCenter.addObserver(self, selector: selector, name: TMDbTopListManagerDidChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: selector, name: TMDManagerDataDidChangeNotification, object: nil)
         let errorSelector = #selector(TopListViewController.handleError)
-        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbTopListManagerDidReceiveErrorNotification, object: nil)
+        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: nil)
         
         // Perform initial fetch
         switchTopList(switchListControl)
@@ -69,7 +69,6 @@ class TopListViewController: DiscoverViewController {
     }
     
     private func loadMore() {
-        // Start loading ??
         topListManager.loadMore()
     }
     

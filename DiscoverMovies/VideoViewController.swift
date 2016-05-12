@@ -1,9 +1,9 @@
 //
 //  VideoViewController.swift
-//  Discover
+//  
 //
-//  Created by Kaira Diagne on 11-02-16.
-//  Copyright © 2016 Kaira Diagne. All rights reserved.
+//  Created by Kaira Diagne on 12/05/16.
+//
 //
 
 import UIKit
@@ -12,15 +12,26 @@ import youtube_ios_player_helper
 
 class VideoViewController: UIViewController {
     
-    @IBOutlet weak var playerView: YTPlayerView!
+    @IBOutlet weak var youtubeVideoView: YTPlayerView!
     
-    var video: TMDbVideo?
+    var video: TMDbVideo
+    
+    // MARK: - Initialization 
+    
+    required init(video: TMDbVideo) {
+        self.video = video
+        super.init(nibName: "VideoViewController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playerView.delegate = self
+        youtubeVideoView.delegate = self
         playVideo()
     }
     
@@ -30,13 +41,13 @@ class VideoViewController: UIViewController {
     }
     
     private func playVideo() {
-        guard let youtubeID = video?.key else {
+        guard let youtubeID = video.key else {
             showAlertWithTitle("Trailer unavailable", message: "Couldn't find the trailer for this movie", completionHandler: { _ in
                 self.navigationController?.popToRootViewControllerAnimated(false)
             })
             return
         }
-        playerView.loadWithVideoId(youtubeID)
+        youtubeVideoView.loadWithVideoId(youtubeID)
     }
     
 }
@@ -49,3 +60,4 @@ extension VideoViewController: YTPlayerViewDelegate {
         print(error)
     }
 }
+

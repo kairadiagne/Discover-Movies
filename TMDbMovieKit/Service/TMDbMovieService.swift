@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+// TODO: - Almofire requets with completiohandler that returns on the main thread
+
 // Completionhandlers
 typealias TMDbMovieCompletionHandler = (result: TMDbListHolder<TMDbMovie>?, error: NSError?) -> ()
 typealias TMDbReviewCompletionHandler = (result: TMDbListHolder<TMDbReview>?, error: NSError?) -> ()
@@ -94,6 +96,15 @@ class TMDbMovieService {
         }
     }
     
+    // Get the cast and crew information for a specific movie id.
+    
+    func fetchCreditsForMovie(withID id: Int, completionHandler: (credit: TMDbMovieCredit?, error: NSError?) -> ()) {
+        Alamofire.request(TMDbMovieRouter.MovieCredits(movieID: id, APIKey: APIKey)).validate().responseObject {
+            (response: Response<TMDbMovieCredit, NSError>) in
+            completionHandler(credit: response.result.value, error: response.result.error)
+        }
+    }
+    
     // MARK: - Calls that require user authentication
     
     /*  Steps to take when making a call that requires user authentication
@@ -158,7 +169,7 @@ class TMDbMovieService {
     
     // MARK: - Helpers
     
-    // Errro handeling should be done seperately ??
+    // TODO: - Advanced Error handeling (InternetConnection Error, Authorization error, 
     
     private func checkResponseForAuthorizationError(urlResponse: NSHTTPURLResponse) -> NSError? {
         guard urlResponse.statusCode == 401 else { return nil }

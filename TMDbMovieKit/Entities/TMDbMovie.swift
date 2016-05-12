@@ -36,6 +36,7 @@ public struct TMDbMovie: JSONSerializable {
     public var posterPath: String?
     public var backDropPath: String?
     
+    
     public init?(json: SwiftyJSON.JSON) {
         self.movieID = json[Keys.MovieID].int
         self.title = json[Keys.Title].string

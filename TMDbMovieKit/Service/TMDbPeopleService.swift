@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+// TODO: - Almofire requets with completiohandler that returns on the main thread
+
 public enum TMDbPersonList: String {
     case Popular = "popular"
     case Latest = "latest"

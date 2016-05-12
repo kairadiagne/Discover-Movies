@@ -53,4 +53,8 @@ public struct TMDbGenres {
         return genres.map { return $0.name }
     }
     
+    public static func mainGenre() -> String {
+        return genres.first?.name ?? ""
+    }
+    
 }

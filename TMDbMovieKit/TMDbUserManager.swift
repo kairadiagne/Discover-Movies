@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public class TMDbUserManager {
     
     public var user: TMDbUser? {
@@ -27,10 +28,9 @@ public class TMDbUserManager {
             
             if let user = user {
                 self.sessionInfoStore.persistUserInStore(user)
+                // Notification
             }
         }
     }
-    
-    // MARK: - Notifications
     
 }

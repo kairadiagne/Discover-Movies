@@ -6,8 +6,6 @@
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
-// TODO: - Advanced Error Handling
-
 import Foundation
 import Locksmith
 

@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 
+// TODO: - Almofire requets with completiohandler that returns on the main thread
+
 /*
  TMDb authentication workflow: 
  

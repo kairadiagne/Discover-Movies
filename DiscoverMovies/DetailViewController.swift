@@ -49,6 +49,13 @@ class DetailViewController: UIViewController {
         // Fetch aditional information about movie
         
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Reset navigationbar
+        navigationController?.navigationBar.setAsUnclear()
+    }
 
     // MARK: - Navigation
     

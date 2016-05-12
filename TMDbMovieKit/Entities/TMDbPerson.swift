@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+// TODO: - Change this class so it can be initialized with json data from the movie credit json
 private struct Keys {
     static let PersonID = "id"
     static let Name = "name"
@@ -18,10 +19,12 @@ private struct Keys {
     static let KnownFor = "know_for"
     static let MediaType = "media_type"
     static let Movies = "movie"
+    static let Job = "job"
 }
 
 public class TMDbPerson: JSONSerializable {
     public var personID: Int?
+    public var job: String?
     public var name: String?
     public var popularity: Int?
     public var profilePath: String?
@@ -29,12 +32,17 @@ public class TMDbPerson: JSONSerializable {
     public var movies: [TMDbMovie] = []
     
     public required init?(json: SwiftyJSON.JSON) {
-        self.personID = json["id"].int
-        self.name = json["name"].string
-        self.popularity = json["popularity"].int
-        self.profilePath = json["profile_path"].string
-        self.adult = json["adult"].bool
-        let movies: [TMDbMovie?] = json["know_for"].map { return $0.1["media_type"] == "movie" ? TMDbMovie(json: json): nil }
+        self.personID = json[Keys.PersonID].int
+        self.job = json[Keys.Job].string
+        self.name = json[Keys.Name].string
+        self.popularity = json[Keys.Popularity].int
+        self.profilePath = json[Keys.Popularity].string
+        self.adult = json[Keys.Adult].bool
+        
+        let movies: [TMDbMovie?] = json[Keys.KnownFor].map {
+            return $0.1[Keys.MediaType] == "movie" ? TMDbMovie(json: json): nil
+        }
+        
         self.movies = movies.flatMap { return $0 }
     }
     

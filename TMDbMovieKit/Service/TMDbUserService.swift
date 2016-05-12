@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+// TODO: - Almofire requets with completiohandler that returns on the main thread
+
 class TMDbUserService {
     
     private var APIKey: String {

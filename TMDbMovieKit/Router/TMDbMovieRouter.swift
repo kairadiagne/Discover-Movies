@@ -31,6 +31,7 @@ enum TMDbMovieRouter: URLRequestConvertible {
     case SearchByTitle(title: String, page: Int?, APIKey: String)
     case List(list: String, sessionID: String, accountID: Int, page: Int?, APIKey: String)
     case SimilarMovies(id: Int, page: Int?, APIKey: String)
+    case MovieCredits(movieID: Int, APIKey: String)
     case Reviews(movieID: Int, page: Int?, APIKey: String)
     case Videos(movieID: Int, APIKey: String)
     case AccountState(movieID: Int, sessionID: String, APIKey: String)
@@ -49,6 +50,8 @@ enum TMDbMovieRouter: URLRequestConvertible {
             case .List:
                 return .GET
             case .SimilarMovies:
+                return .GET
+            case .MovieCredits:
                 return .GET
             case .Reviews:
                 return .GET
@@ -92,6 +95,9 @@ enum TMDbMovieRouter: URLRequestConvertible {
                 if let page = page { parameters[Key.Page] = page }
                 parameters[Key.APIKey] = APIKey
                 return ("movie/\(movieID)/similar", parameters)
+            case .MovieCredits(let movieID, let APIKey):
+                parameters[Key.APIKey] = APIKey
+                return ("/movie/\(movieID)/credits", parameters)
             case .Reviews(let movieID, let page, let APIKey):
                 if let page = page { parameters[Key.Page] = page }
                 parameters[Key.APIKey] = APIKey

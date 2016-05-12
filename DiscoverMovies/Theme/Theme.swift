@@ -14,7 +14,7 @@ import youtube_ios_player_helper
 class Theme {
     
     // MARK: - Constants
-    
+
     struct BaseColors {
         static let BackgroundColor = UIColor(red: 25.0/255, green: 25.0/255, blue: 25.0/255, alpha: 1.0)
         static let LabelBackgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
@@ -25,9 +25,9 @@ class Theme {
     // MARK: - Apply theme
     
     class func applyGlobalTheme() {
+        styleViews()
         styleNavBar()
         styleTabBar()
-        styleBackgrounds()
         styleTableViews()
         styleTextFields()
         styleLabels()
@@ -36,7 +36,11 @@ class Theme {
     // MARK: - Class Funcs
     
     class func styleViews() {
+        UIScrollView.appearance().backgroundColor = BaseColors.BackgroundColor
         DetailView.appearance().backgroundColor = BaseColors.BackgroundColor
+        BackgroundView.appearance().backgroundColor = BaseColors.BackgroundColor
+        YTPlayerView.appearance().backgroundColor = BaseColors.BackgroundColor
+        
     }
     
     class func styleTabBar() {
@@ -52,12 +56,6 @@ class Theme {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().opaque = false
-    }
-
-    class func styleBackgrounds() {
-        BackgroundView.appearance().backgroundColor = BaseColors.BackgroundColor
-        HorizontalImageScroller.appearance().backgroundColor = BaseColors.BackgroundColor
-        YTPlayerView.appearance().backgroundColor = BaseColors.BackgroundColor
     }
     
     class func styleTableViews() {

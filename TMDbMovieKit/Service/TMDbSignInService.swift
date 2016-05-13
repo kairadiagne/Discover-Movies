@@ -41,7 +41,7 @@ class TMDbSignInService {
     
     // Generates a valid request token for user based authentication
     
-    func getRequestToken(completionHandler: (url: NSURL?, error: NSError?) -> ()) {
+    func getRequestToken(redirectURI: String, completionHandler: (url: NSURL?, error: NSError?) -> ()) {
         Alamofire.request(TMDbSignInRouter.RequestToken(APIKey: APIKey)).validate().responseJSON { (response) in
             guard response.result.error == nil else {
                 completionHandler(url: nil, error: response.result.error!)
@@ -50,7 +50,7 @@ class TMDbSignInService {
             
             if let token = response.result.value?["request_token"] as? String {
                 self.requestToken = token
-                let url = self.createAuthorizeURL(self.requestToken)
+                let url = self.createAuthorizeURL(self.requestToken, redirectURI: redirectURI)
                 completionHandler(url: url, error: nil)
             }
         }
@@ -73,8 +73,8 @@ class TMDbSignInService {
         
     // MARK: - Create URL
     
-    private func createAuthorizeURL(requestToken: String) -> NSURL? {
-        let path: String = "\(TMDbAPI.AuthenticateURL)\(requestToken)"
+    private func createAuthorizeURL(requestToken: String, redirectURI: String?) -> NSURL? {
+        let path: String = "\(TMDbAPI.AuthenticateURL)\(requestToken)?redirect_to=\(redirectURI)"
         let url = NSURL(string: path)
         return url
     }

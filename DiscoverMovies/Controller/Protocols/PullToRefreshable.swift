@@ -8,15 +8,18 @@
 
 import UIKit
 
-protocol PullToRefreshable: class {
+// MARK: - Protocol PullToRefreshable
+
+@objc protocol PullToRefreshable {
     var dateFormatter: NSDateFormatter { get }
-    func configureRefreshControl()
-    func addTargetToRefreshControl()
-    func refresh(sender: AnyObject)
+    var refreshControl: UIRefreshControl { get }
+     func refresh(sender: UIRefreshControl)
     func stopRefreshing()
 }
 
-extension PullToRefreshable where Self: UITableViewController {
+// MARK: - Default Implementation PullToRefreshable
+
+extension PullToRefreshable where Self: UIViewController {
     
     var dateFormatter: NSDateFormatter {
         let dateFormatter = NSDateFormatter()
@@ -25,24 +28,28 @@ extension PullToRefreshable where Self: UITableViewController {
         return dateFormatter
     }
     
-    func configureRefreshControl() {
-        if refreshControl == nil {
-            refreshControl = UIRefreshControl()
-            refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            addTargetToRefreshControl()
-        }
+    var refreshControl: UIRefreshControl {
+        let refreshControl = UIRefreshControl()
+        // TODO: - NSLocalizedString
+        let now = NSDate()
+        refreshControl.attributedTitle = NSMutableAttributedString(string: "Last Updated at " + dateFormatter.stringFromDate(now))
+        refreshControl.addTarget(self, action: #selector(PullToRefreshable.refresh(_:)), forControlEvents: .ValueChanged)
+        return UIRefreshControl()
     }
     
     func stopRefreshing() {
-        if refreshControl != nil && refreshControl!.refreshing {
-            refreshControl?.endRefreshing()
+        if refreshControl.refreshing {
+            refreshControl.endRefreshing()
+            
+            // Set title to last updated date (current date)
             let now = NSDate()
-            let updateString = NSMutableAttributedString(string: "Last Updated at " + dateFormatter.stringFromDate(now))
-            let range = NSRange(location: 0, length: updateString.length)
-            updateString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: range)
-            refreshControl?.attributedTitle = updateString
+            let lastUpdated = NSMutableAttributedString(string: "Last Updated at " + dateFormatter.stringFromDate(now))
+            let range = NSRange(location: 0, length: lastUpdated.length)
+            lastUpdated.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: range)
+            refreshControl.attributedTitle = lastUpdated
         }
     }
     
 }
+
 

@@ -28,8 +28,7 @@ class BaseTableView: UITableView {
         backgroundView = messageLabel
         backgroundView?.hidden = true
         
-        // Add empty UIView to the footer 
-        // Now when the tableview has empty cells on screen we will not see them
+        // Add empty UIView to the footer so that empty cells are not visible
         tableFooterView = UIView()
     }
     

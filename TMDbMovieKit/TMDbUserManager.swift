@@ -15,6 +15,8 @@ public class TMDbUserManager {
         return sessionInfoStore.user
     }
     
+    public init() { }
+    
     private let userService = TMDbUserService()
     
     private let sessionInfoStore = TMDbSessionInfoStore()

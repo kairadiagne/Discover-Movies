@@ -30,34 +30,22 @@
 		111942B41CCB8DE5001CF39B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942A71CCB8DE5001CF39B /* CustomButton.swift */; };
 		111942B51CCB8DE5001CF39B /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942A81CCB8DE5001CF39B /* DetailTableViewCell.swift */; };
 		111942B61CCB8DE5001CF39B /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942A91CCB8DE5001CF39B /* FavoriteView.swift */; };
-		111942B71CCB8DE5001CF39B /* HorizontalImageScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942AA1CCB8DE5001CF39B /* HorizontalImageScroller.swift */; };
 		111942B81CCB8DE5001CF39B /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942AB1CCB8DE5001CF39B /* ListTableViewCell.swift */; };
 		111942B91CCB8DE5001CF39B /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111942AC1CCB8DE5001CF39B /* ListTableViewCell.xib */; };
 		111942BA1CCB8DE5001CF39B /* DiscoverListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */; };
 		111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */; };
 		111942BC1CCB8DE5001CF39B /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942AF1CCB8DE5001CF39B /* ProfileImageView.swift */; };
-		111942BD1CCB8DE5001CF39B /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942B01CCB8DE5001CF39B /* ReviewTableViewCell.swift */; };
 		111942BE1CCB8DE5001CF39B /* UpdateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942B11CCB8DE5001CF39B /* UpdateListView.swift */; };
 		111942BF1CCB8DE5001CF39B /* WatchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942B21CCB8DE5001CF39B /* WatchListView.swift */; };
 		111942C91CCB8E33001CF39B /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942C51CCB8E33001CF39B /* FavoritesTableViewController.swift */; };
-		111942CA1CCB8E33001CF39B /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942C61CCB8E33001CF39B /* ListCoordinator.swift */; };
 		111942CB1CCB8E33001CF39B /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942C71CCB8E33001CF39B /* ListTableViewController.swift */; };
 		111942CC1CCB8E33001CF39B /* WatchListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942C81CCB8E33001CF39B /* WatchListTableViewController.swift */; };
-		111942CE1CCB8E3D001CF39B /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942CD1CCB8E3D001CF39B /* MenuTableViewController.swift */; };
-		111942D31CCB8E47001CF39B /* AuthorizationErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942CF1CCB8E47001CF39B /* AuthorizationErrorHandlerProtocol.swift */; };
-		111942D41CCB8E47001CF39B /* InternetErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D01CCB8E47001CF39B /* InternetErrorHandlerProtocol.swift */; };
-		111942D51CCB8E47001CF39B /* ProgressHudShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D11CCB8E47001CF39B /* ProgressHudShowable.swift */; };
 		111942D61CCB8E47001CF39B /* PullToRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D21CCB8E47001CF39B /* PullToRefreshable.swift */; };
 		111942D91CCB8E4E001CF39B /* ReviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D71CCB8E4E001CF39B /* ReviewCoordinator.swift */; };
 		111942DA1CCB8E4E001CF39B /* ReviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D81CCB8E4E001CF39B /* ReviewTableViewController.swift */; };
-		111942DF1CCB8E74001CF39B /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942DC1CCB8E74001CF39B /* SearchTableViewController.swift */; };
 		111942E01CCB8E74001CF39B /* SearchViewConfftroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */; };
-		111942E31CCB8E7E001CF39B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942E11CCB8E7E001CF39B /* SignInViewController.swift */; };
-		111942E41CCB8E7E001CF39B /* SignInViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942E21CCB8E7E001CF39B /* SignInViewDelegate.swift */; };
-		111942E81CCB8E85001CF39B /* ToplistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942E61CCB8E85001CF39B /* ToplistTableViewController.swift */; };
 		111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */; };
 		111942EF1CCB8EAE001CF39B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942EC1CCB8EAE001CF39B /* Main.storyboard */; };
-		111942F01CCB8EAE001CF39B /* Signin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942ED1CCB8EAE001CF39B /* Signin.storyboard */; };
 		111942F21CCB8EB8001CF39B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F11CCB8EB8001CF39B /* Theme.swift */; };
 		111942F61CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F31CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift */; };
 		111942F71CCB8EDE001CF39B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F41CCB8EDE001CF39B /* Constants.swift */; };
@@ -76,31 +64,43 @@
 		1119431D1CCB8EFC001CF39B /* TMDbMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943161CCB8EFC001CF39B /* TMDbMovieService.swift */; };
 		1119431E1CCB8EFC001CF39B /* TMDbPeopleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943171CCB8EFC001CF39B /* TMDbPeopleService.swift */; };
 		1119431F1CCB8EFC001CF39B /* TMDbSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943181CCB8EFC001CF39B /* TMDbSignInService.swift */; };
-		1119432D1CCB8FC2001CF39B /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943291CCB8FC2001CF39B /* CoordinatorDelegate.swift */; };
-		1119432E1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */; };
-		111943301CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119432C1CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift */; };
-		111943321CCB8FCE001CF39B /* RevealMenuButtonShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943311CCB8FCE001CF39B /* RevealMenuButtonShowable.swift */; };
+		111943321CCB8FCE001CF39B /* MenuButtonPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */; };
 		111943351CCB8FFE001CF39B /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943331CCB8FFE001CF39B /* DetailCoordinator.swift */; };
 		111943361CCB8FFE001CF39B /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943341CCB8FFE001CF39B /* DetailTableViewController.swift */; };
 		1119433C1CCB9361001CF39B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EF27C2B6BF80FF7BEB7179 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* NSDate+ToString.swift */; };
-		113946381CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946371CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift */; };
 		24430DFF360C636748A47847 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25EF27C2B6BF80FF7BEB7179 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		EA1F10761CDE0F0B00308A9D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1F10751CDE0F0B00308A9D /* RatingView.swift */; };
 		EA6487661CE1E5CF00452DD0 /* TMDbSessionInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487651CE1E5CF00452DD0 /* TMDbSessionInfoStore.swift */; };
 		EA6487681CE1E65700452DD0 /* TMDbUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */; };
-		EA6487711CE21E2300452DD0 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64876F1CE21E2300452DD0 /* DiscoverViewController.swift */; };
+		EA6487711CE21E2300452DD0 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64876F1CE21E2300452DD0 /* ListViewController.swift */; };
 		EA6487721CE21E2300452DD0 /* DiscoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487701CE21E2300452DD0 /* DiscoverViewController.xib */; };
 		EA64879F1CE3569700452DD0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64879D1CE3569700452DD0 /* DetailViewController.swift */; };
 		EA6487A01CE3569700452DD0 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA64879E1CE3569700452DD0 /* DetailViewController.xib */; };
 		EA6487A21CE356C300452DD0 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487A11CE356C300452DD0 /* DetailView.swift */; };
 		EA6487A81CE3CBCA00452DD0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487A71CE3CBCA00452DD0 /* SearchViewController.swift */; };
-		EA6487AA1CE3D21300452DD0 /* SDWebImage+CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487A91CE3D21300452DD0 /* SDWebImage+CachedImage.swift */; };
 		EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */; };
 		EA6487B21CE4AB2900452DD0 /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487B01CE4AB2900452DD0 /* VideoViewController.xib */; };
 		EA6487B41CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487B31CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift */; };
 		EA6487B61CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */; };
 		EA6487B81CE4BC9D00452DD0 /* TMDbMovieCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487B71CE4BC9D00452DD0 /* TMDbMovieCredit.swift */; };
+		EA6487BB1CE4E4C900452DD0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487B91CE4E4C900452DD0 /* MenuViewController.swift */; };
+		EA6487BC1CE4E4C900452DD0 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487BA1CE4E4C900452DD0 /* MenuViewController.xib */; };
+		EA6487BF1CE4E50100452DD0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487BD1CE4E50100452DD0 /* SignInViewController.swift */; };
+		EA6487C01CE4E50100452DD0 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487BE1CE4E50100452DD0 /* SignInViewController.xib */; };
+		EA6487C21CE4E55500452DD0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487C11CE4E55500452DD0 /* SignInView.swift */; };
+		EA6487C61CE503BD00452DD0 /* ReviewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487C41CE503BD00452DD0 /* ReviewControllerViewController.swift */; };
+		EA6487C71CE503BD00452DD0 /* ReviewControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487C51CE503BD00452DD0 /* ReviewControllerViewController.xib */; };
+		EA6487CC1CE5163100452DD0 /* ProgressHUDPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */; };
+		EA6487CE1CE5166A00452DD0 /* BannerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487CD1CE5166A00452DD0 /* BannerPresentable.swift */; };
+		EA6487D51CE5177300452DD0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487D41CE5177300452DD0 /* MenuView.swift */; };
+		EA6487D71CE51BF800452DD0 /* InternetErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487D61CE51BF800452DD0 /* InternetErrorHandleable.swift */; };
+		EA6487D91CE51F8000452DD0 /* AuthorizationErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487D81CE51F8000452DD0 /* AuthorizationErrorHandleable.swift */; };
+		EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */; };
+		EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */; };
+		EA6487E61CE5B50D00452DD0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */; };
+		EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */; };
+		EA6487F41CE61E1700452DD0 /* UIWebImage+CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487F31CE61E1700452DD0 /* UIWebImage+CachedImage.swift */; };
+		EA6487F81CE622B300452DD0 /* MenuDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487F71CE622B300452DD0 /* MenuDataProvider.swift */; };
 		EA782B7B1CE097B500DC38AD /* TMDbTopListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */; };
 		EA782B7D1CE0B5F100DC38AD /* TMDbSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */; };
 		EA782B7F1CE0C50000DC38AD /* TMDbAccountListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7E1CE0C50000DC38AD /* TMDbAccountListManager.swift */; };
@@ -109,12 +109,10 @@
 		EA782B8B1CE0D63C00DC38AD /* TMDbUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B8A1CE0D63C00DC38AD /* TMDbUserService.swift */; };
 		EA782B8F1CE0E26C00DC38AD /* TMDbListHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B8E1CE0E26C00DC38AD /* TMDbListHolder.swift */; };
 		EA782B931CE1D28800DC38AD /* TMDbSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */; };
-		EAD2A8231CDC9D130005264B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A8221CDC9D130005264B /* BaseViewController.swift */; };
-		EAD2A8251CDC9D340005264B /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A8241CDC9D340005264B /* BaseView.swift */; };
 		EAD2A83E1CDCBAEB0005264B /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */; };
 		EAD2A8401CDCC7820005264B /* TopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A83F1CDCC7820005264B /* TopListViewController.swift */; };
 		EAD2A8421CDCDF100005264B /* DiscoverDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */; };
-		EAD2A8591CDDE51D0005264B /* DiscoverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A8581CDDE51D0005264B /* DiscoverTableView.swift */; };
+		EAD2A8591CDDE51D0005264B /* ListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A8581CDDE51D0005264B /* ListTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,34 +192,22 @@
 		111942A71CCB8DE5001CF39B /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		111942A81CCB8DE5001CF39B /* DetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		111942A91CCB8DE5001CF39B /* FavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
-		111942AA1CCB8DE5001CF39B /* HorizontalImageScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalImageScroller.swift; sourceTree = "<group>"; };
 		111942AB1CCB8DE5001CF39B /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		111942AC1CCB8DE5001CF39B /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverListCell.swift; path = View/DiscoverListCell.swift; sourceTree = "<group>"; };
 		111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DiscoverListCell.xib; path = View/DiscoverListCell.xib; sourceTree = "<group>"; };
 		111942AF1CCB8DE5001CF39B /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
-		111942B01CCB8DE5001CF39B /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		111942B11CCB8DE5001CF39B /* UpdateListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateListView.swift; sourceTree = "<group>"; };
 		111942B21CCB8DE5001CF39B /* WatchListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListView.swift; sourceTree = "<group>"; };
-		111942C51CCB8E33001CF39B /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
-		111942C61CCB8E33001CF39B /* ListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
-		111942C71CCB8E33001CF39B /* ListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
-		111942C81CCB8E33001CF39B /* WatchListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListTableViewController.swift; sourceTree = "<group>"; };
-		111942CD1CCB8E3D001CF39B /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
-		111942CF1CCB8E47001CF39B /* AuthorizationErrorHandlerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationErrorHandlerProtocol.swift; sourceTree = "<group>"; };
-		111942D01CCB8E47001CF39B /* InternetErrorHandlerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetErrorHandlerProtocol.swift; sourceTree = "<group>"; };
-		111942D11CCB8E47001CF39B /* ProgressHudShowable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHudShowable.swift; sourceTree = "<group>"; };
-		111942D21CCB8E47001CF39B /* PullToRefreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshable.swift; sourceTree = "<group>"; };
-		111942D71CCB8E4E001CF39B /* ReviewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCoordinator.swift; sourceTree = "<group>"; };
-		111942D81CCB8E4E001CF39B /* ReviewTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewController.swift; sourceTree = "<group>"; };
-		111942DC1CCB8E74001CF39B /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewConfftroller.swift; sourceTree = "<group>"; };
-		111942E11CCB8E7E001CF39B /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		111942E21CCB8E7E001CF39B /* SignInViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewDelegate.swift; sourceTree = "<group>"; };
-		111942E61CCB8E85001CF39B /* ToplistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToplistTableViewController.swift; sourceTree = "<group>"; };
+		111942C51CCB8E33001CF39B /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoritesTableViewController.swift; path = List/FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		111942C71CCB8E33001CF39B /* ListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTableViewController.swift; path = List/ListTableViewController.swift; sourceTree = "<group>"; };
+		111942C81CCB8E33001CF39B /* WatchListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatchListTableViewController.swift; path = List/WatchListTableViewController.swift; sourceTree = "<group>"; };
+		111942D21CCB8E47001CF39B /* PullToRefreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PullToRefreshable.swift; path = Controller/Protocols/PullToRefreshable.swift; sourceTree = "<group>"; };
+		111942D71CCB8E4E001CF39B /* ReviewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReviewCoordinator.swift; path = Review/ReviewCoordinator.swift; sourceTree = "<group>"; };
+		111942D81CCB8E4E001CF39B /* ReviewTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReviewTableViewController.swift; path = Review/ReviewTableViewController.swift; sourceTree = "<group>"; };
+		111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewConfftroller.swift; path = Search/SearchViewConfftroller.swift; sourceTree = "<group>"; };
 		111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		111942EC1CCB8EAE001CF39B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		111942ED1CCB8EAE001CF39B /* Signin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Signin.storyboard; sourceTree = "<group>"; };
 		111942F11CCB8EB8001CF39B /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		111942F31CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+JSONSerializable.swift"; sourceTree = "<group>"; };
 		111942F41CCB8EDE001CF39B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -240,31 +226,43 @@
 		111943161CCB8EFC001CF39B /* TMDbMovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieService.swift; sourceTree = "<group>"; };
 		111943171CCB8EFC001CF39B /* TMDbPeopleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbPeopleService.swift; sourceTree = "<group>"; };
 		111943181CCB8EFC001CF39B /* TMDbSignInService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInService.swift; sourceTree = "<group>"; };
-		111943291CCB8FC2001CF39B /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
-		1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverBaseTableViewController.swift; sourceTree = "<group>"; };
-		1119432C1CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAuthorizationTableViewController.swift; sourceTree = "<group>"; };
-		111943311CCB8FCE001CF39B /* RevealMenuButtonShowable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealMenuButtonShowable.swift; sourceTree = "<group>"; };
-		111943331CCB8FFE001CF39B /* DetailCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
-		111943341CCB8FFE001CF39B /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButtonPresentable.swift; path = Controller/Protocols/MenuButtonPresentable.swift; sourceTree = "<group>"; };
+		111943331CCB8FFE001CF39B /* DetailCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailCoordinator.swift; path = "Detail Movie/DetailCoordinator.swift"; sourceTree = "<group>"; };
+		111943341CCB8FFE001CF39B /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTableViewController.swift; path = "Detail Movie/DetailTableViewController.swift"; sourceTree = "<group>"; };
 		113946311CCBBA80001CFAEA /* NSDate+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ToString.swift"; sourceTree = "<group>"; };
-		113946371CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableviewBackgroundMessagePresentable.swift; sourceTree = "<group>"; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A895D2EA354450437EF590D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		EA1F10751CDE0F0B00308A9D /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		EA6487651CE1E5CF00452DD0 /* TMDbSessionInfoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSessionInfoStore.swift; sourceTree = "<group>"; };
 		EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserManager.swift; sourceTree = "<group>"; };
-		EA64876F1CE21E2300452DD0 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		EA64876F1CE21E2300452DD0 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		EA6487701CE21E2300452DD0 /* DiscoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverViewController.xib; sourceTree = "<group>"; };
 		EA64879D1CE3569700452DD0 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		EA64879E1CE3569700452DD0 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		EA6487A11CE356C300452DD0 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		EA6487A71CE3CBCA00452DD0 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		EA6487A91CE3D21300452DD0 /* SDWebImage+CachedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SDWebImage+CachedImage.swift"; sourceTree = "<group>"; };
 		EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EA6487B01CE4AB2900452DD0 /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
 		EA6487B31CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbDataManagerNotifications.swift; sourceTree = "<group>"; };
 		EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieInfoManager.swift; sourceTree = "<group>"; };
 		EA6487B71CE4BC9D00452DD0 /* TMDbMovieCredit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieCredit.swift; sourceTree = "<group>"; };
+		EA6487B91CE4E4C900452DD0 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		EA6487BA1CE4E4C900452DD0 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		EA6487BD1CE4E50100452DD0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		EA6487BE1CE4E50100452DD0 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		EA6487C11CE4E55500452DD0 /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		EA6487C41CE503BD00452DD0 /* ReviewControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewControllerViewController.swift; sourceTree = "<group>"; };
+		EA6487C51CE503BD00452DD0 /* ReviewControllerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewControllerViewController.xib; sourceTree = "<group>"; };
+		EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUDPresentable.swift; sourceTree = "<group>"; };
+		EA6487CD1CE5166A00452DD0 /* BannerPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerPresentable.swift; sourceTree = "<group>"; };
+		EA6487D41CE5177300452DD0 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		EA6487D61CE51BF800452DD0 /* InternetErrorHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetErrorHandleable.swift; sourceTree = "<group>"; };
+		EA6487D81CE51F8000452DD0 /* AuthorizationErrorHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationErrorHandleable.swift; sourceTree = "<group>"; };
+		EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
+		EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
+		EA6487F31CE61E1700452DD0 /* UIWebImage+CachedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWebImage+CachedImage.swift"; sourceTree = "<group>"; };
+		EA6487F71CE622B300452DD0 /* MenuDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuDataProvider.swift; sourceTree = "<group>"; };
 		EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopListManager.swift; sourceTree = "<group>"; };
 		EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInManager.swift; sourceTree = "<group>"; };
 		EA782B7E1CE0C50000DC38AD /* TMDbAccountListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAccountListManager.swift; sourceTree = "<group>"; };
@@ -273,12 +271,10 @@
 		EA782B8A1CE0D63C00DC38AD /* TMDbUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserService.swift; sourceTree = "<group>"; };
 		EA782B8E1CE0E26C00DC38AD /* TMDbListHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbListHolder.swift; sourceTree = "<group>"; };
 		EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TMDbSessionManager.swift; path = Service/TMDbSessionManager.swift; sourceTree = "<group>"; };
-		EAD2A8221CDC9D130005264B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		EAD2A8241CDC9D340005264B /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		EAD2A83F1CDCC7820005264B /* TopListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListViewController.swift; sourceTree = "<group>"; };
 		EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverDataProvider.swift; sourceTree = "<group>"; };
-		EAD2A8581CDDE51D0005264B /* DiscoverTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableView.swift; sourceTree = "<group>"; };
+		EAD2A8581CDDE51D0005264B /* ListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				111942871CCB8D65001CF39B /* AppDelegate */,
-				EAD2A8211CDC9D000005264B /* Controller */,
+				EAD2A8211CDC9D000005264B /* Controller + View */,
 				111942821CCB8CF8001CF39B /* Controller Old */,
 				111942831CCB8D0B001CF39B /* View Old */,
 				111942851CCB8D1C001CF39B /* Storyboard */,
@@ -391,15 +387,14 @@
 		111942821CCB8CF8001CF39B /* Controller Old */ = {
 			isa = PBXGroup;
 			children = (
-				111942C01CCB8E03001CF39B /* Base Classes */,
-				111943241CCB8F51001CF39B /* Protocols */,
-				111942C31CCB8E1D001CF39B /* Menu */,
-				111943261CCB8F7E001CF39B /* Signin */,
-				111943271CCB8F8B001CF39B /* Toplist */,
-				111943251CCB8F64001CF39B /* Search */,
-				111942C21CCB8E19001CF39B /* List */,
-				111942C11CCB8E13001CF39B /* Detail Movie */,
-				111943231CCB8F3F001CF39B /* Review */,
+				111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */,
+				111942C71CCB8E33001CF39B /* ListTableViewController.swift */,
+				111942C81CCB8E33001CF39B /* WatchListTableViewController.swift */,
+				111942C51CCB8E33001CF39B /* FavoritesTableViewController.swift */,
+				111943331CCB8FFE001CF39B /* DetailCoordinator.swift */,
+				111943341CCB8FFE001CF39B /* DetailTableViewController.swift */,
+				111942D71CCB8E4E001CF39B /* ReviewCoordinator.swift */,
+				111942D81CCB8E4E001CF39B /* ReviewTableViewController.swift */,
 			);
 			name = "Controller Old";
 			path = Controller;
@@ -414,12 +409,9 @@
 				111942AB1CCB8DE5001CF39B /* ListTableViewCell.swift */,
 				111942AC1CCB8DE5001CF39B /* ListTableViewCell.xib */,
 				111942A81CCB8DE5001CF39B /* DetailTableViewCell.swift */,
-				111942AA1CCB8DE5001CF39B /* HorizontalImageScroller.swift */,
 				111942B11CCB8DE5001CF39B /* UpdateListView.swift */,
 				111942A91CCB8DE5001CF39B /* FavoriteView.swift */,
 				111942B21CCB8DE5001CF39B /* WatchListView.swift */,
-				111942B01CCB8DE5001CF39B /* ReviewTableViewCell.swift */,
-				EA1F10751CDE0F0B00308A9D /* RatingView.swift */,
 			);
 			name = "View Old";
 			path = View;
@@ -428,7 +420,6 @@
 		111942841CCB8D13001CF39B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EA6487A91CE3D21300452DD0 /* SDWebImage+CachedImage.swift */,
 				1119428C1CCB8DD4001CF39B /* CosmosView+Configure.swift */,
 				1119428D1CCB8DD4001CF39B /* IQDropDownTextField+Configure.swift */,
 				1119428E1CCB8DD4001CF39B /* MBProgressHUD+Configure.swift */,
@@ -442,6 +433,7 @@
 				111942961CCB8DD4001CF39B /* UINavigationController+StatusBarStyle.swift */,
 				111942971CCB8DD4001CF39B /* UITableView+setupBackGround.swift */,
 				111942981CCB8DD4001CF39B /* UIViewController+Alert.swift */,
+				EA6487F31CE61E1700452DD0 /* UIWebImage+CachedImage.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -450,7 +442,6 @@
 			isa = PBXGroup;
 			children = (
 				111942EC1CCB8EAE001CF39B /* Main.storyboard */,
-				111942ED1CCB8EAE001CF39B /* Signin.storyboard */,
 				111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */,
 			);
 			name = Storyboard;
@@ -481,93 +472,6 @@
 				111942F11CCB8EB8001CF39B /* Theme.swift */,
 			);
 			path = Theme;
-			sourceTree = "<group>";
-		};
-		111942C01CCB8E03001CF39B /* Base Classes */ = {
-			isa = PBXGroup;
-			children = (
-				111943291CCB8FC2001CF39B /* CoordinatorDelegate.swift */,
-				1119432A1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift */,
-				1119432C1CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift */,
-			);
-			path = "Base Classes";
-			sourceTree = "<group>";
-		};
-		111942C11CCB8E13001CF39B /* Detail Movie */ = {
-			isa = PBXGroup;
-			children = (
-				111943331CCB8FFE001CF39B /* DetailCoordinator.swift */,
-				111943341CCB8FFE001CF39B /* DetailTableViewController.swift */,
-			);
-			path = "Detail Movie";
-			sourceTree = "<group>";
-		};
-		111942C21CCB8E19001CF39B /* List */ = {
-			isa = PBXGroup;
-			children = (
-				111942C61CCB8E33001CF39B /* ListCoordinator.swift */,
-				111942C71CCB8E33001CF39B /* ListTableViewController.swift */,
-				111942C81CCB8E33001CF39B /* WatchListTableViewController.swift */,
-				111942C51CCB8E33001CF39B /* FavoritesTableViewController.swift */,
-			);
-			path = List;
-			sourceTree = "<group>";
-		};
-		111942C31CCB8E1D001CF39B /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				111942CD1CCB8E3D001CF39B /* MenuTableViewController.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		111943231CCB8F3F001CF39B /* Review */ = {
-			isa = PBXGroup;
-			children = (
-				111942D71CCB8E4E001CF39B /* ReviewCoordinator.swift */,
-				111942D81CCB8E4E001CF39B /* ReviewTableViewController.swift */,
-			);
-			path = Review;
-			sourceTree = "<group>";
-		};
-		111943241CCB8F51001CF39B /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				111942CF1CCB8E47001CF39B /* AuthorizationErrorHandlerProtocol.swift */,
-				111942D01CCB8E47001CF39B /* InternetErrorHandlerProtocol.swift */,
-				111942D11CCB8E47001CF39B /* ProgressHudShowable.swift */,
-				111942D21CCB8E47001CF39B /* PullToRefreshable.swift */,
-				111943311CCB8FCE001CF39B /* RevealMenuButtonShowable.swift */,
-				113946371CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		111943251CCB8F64001CF39B /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */,
-				111942DC1CCB8E74001CF39B /* SearchTableViewController.swift */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		111943261CCB8F7E001CF39B /* Signin */ = {
-			isa = PBXGroup;
-			children = (
-				111942E11CCB8E7E001CF39B /* SignInViewController.swift */,
-				111942E21CCB8E7E001CF39B /* SignInViewDelegate.swift */,
-			);
-			path = Signin;
-			sourceTree = "<group>";
-		};
-		111943271CCB8F8B001CF39B /* Toplist */ = {
-			isa = PBXGroup;
-			children = (
-				111942E61CCB8E85001CF39B /* ToplistTableViewController.swift */,
-			);
-			name = Toplist;
-			path = TopList;
 			sourceTree = "<group>";
 		};
 		111943371CCB909F001CF39B /* Alamofire */ = {
@@ -642,21 +546,163 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA6487A51CE3CB5000452DD0 /* TableView */ = {
+		EA6487A61CE3CB6B00452DD0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2A8581CDDE51D0005264B /* DiscoverTableView.swift */,
+				EAD2A83F1CDCC7820005264B /* TopListViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EA6487C31CE4E56300452DD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487C11CE4E55500452DD0 /* SignInView.swift */,
+				EA6487BE1CE4E50100452DD0 /* SignInViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EA6487C81CE5133400452DD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487A11CE356C300452DD0 /* DetailView.swift */,
+				EA64879E1CE3569700452DD0 /* DetailViewController.xib */,
+				EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EA6487C91CE5134000452DD0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EA64879D1CE3569700452DD0 /* DetailViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EA6487CA1CE5162200452DD0 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487DA1CE5209400452DD0 /* Protocol */,
+				EA6487E71CE5B51200452DD0 /* BaseViewController */,
+				EAD2A8261CDC9D390005264B /* ListBaseViewController */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		EA6487CF1CE5173600452DD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487B01CE4AB2900452DD0 /* VideoViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EA6487D01CE5173D00452DD0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EA6487D11CE5174500452DD0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487BD1CE4E50100452DD0 /* SignInViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EA6487D21CE5175100452DD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487D41CE5177300452DD0 /* MenuView.swift */,
+				EA6487BA1CE4E4C900452DD0 /* MenuViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EA6487D31CE5175600452DD0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487B91CE4E4C900452DD0 /* MenuViewController.swift */,
+				EA6487F71CE622B300452DD0 /* MenuDataProvider.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EA6487DA1CE5209400452DD0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */,
+				EA6487CD1CE5166A00452DD0 /* BannerPresentable.swift */,
+				EA6487D61CE51BF800452DD0 /* InternetErrorHandleable.swift */,
+				EA6487D81CE51F8000452DD0 /* AuthorizationErrorHandleable.swift */,
+				111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */,
+				111942D21CCB8E47001CF39B /* PullToRefreshable.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		EA6487DB1CE529BE00452DD0 /* BaseTableView */ = {
+			isa = PBXGroup;
+			children = (
+				EAD2A8581CDDE51D0005264B /* ListTableView.swift */,
 				EA6487701CE21E2300452DD0 /* DiscoverViewController.xib */,
+			);
+			name = BaseTableView;
+			sourceTree = "<group>";
+		};
+		EA6487DC1CE529C900452DD0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EA64876F1CE21E2300452DD0 /* ListViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EA6487DD1CE5308800452DD0 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */,
+				EA6487DB1CE529BE00452DD0 /* BaseTableView */,
 			);
 			name = TableView;
 			sourceTree = "<group>";
 		};
-		EA6487A61CE3CB6B00452DD0 /* Controller */ = {
+		EA6487DE1CE5A4A100452DD0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EA64876F1CE21E2300452DD0 /* DiscoverViewController.swift */,
+				EA6487C41CE503BD00452DD0 /* ReviewControllerViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		EA6487DF1CE5A4AA00452DD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487C51CE503BD00452DD0 /* ReviewControllerViewController.xib */,
+				EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EA6487E41CE5A5DE00452DD0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		EA6487E71CE5B51200452DD0 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */,
+			);
+			name = BaseViewController;
 			sourceTree = "<group>";
 		};
 		EA782B771CE079E800DC38AD /* Data manager */ = {
@@ -684,39 +730,39 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		EAD2A8211CDC9D000005264B /* Controller */ = {
+		EAD2A8211CDC9D000005264B /* Controller + View */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2A8261CDC9D390005264B /* Base */,
-				EAD2A82D1CDC9E650005264B /* TopList & Search */,
+				EA6487CA1CE5162200452DD0 /* Base */,
+				EAD2A8341CDC9EF30005264B /* Menu */,
+				EAD2A8331CDC9EEB0005264B /* Sign in */,
+				EAD2A82D1CDC9E650005264B /* TopList */,
+				EAD2A82E1CDC9E7F0005264B /* Search */,
 				EAD2A82F1CDC9E910005264B /* AccountList */,
-				EAD2A8321CDC9EDE0005264B /* Review */,
 				EAD2A8301CDC9EAF0005264B /* Detail Movie */,
 				EAD2A8311CDC9ECC0005264B /* Video */,
-				EAD2A8331CDC9EEB0005264B /* Sign in */,
-				EAD2A8341CDC9EF30005264B /* Menu */,
+				EAD2A8321CDC9EDE0005264B /* Review */,
 			);
-			name = Controller;
+			name = "Controller + View";
 			sourceTree = "<group>";
 		};
-		EAD2A8261CDC9D390005264B /* Base */ = {
+		EAD2A8261CDC9D390005264B /* ListBaseViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2A8241CDC9D340005264B /* BaseView.swift */,
-				EAD2A8221CDC9D130005264B /* BaseViewController.swift */,
-				EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */,
+				EA6487DD1CE5308800452DD0 /* TableView */,
+				EA6487DC1CE529C900452DD0 /* Controller */,
+				EAD2A85A1CDDE6560005264B /* TableViewCell */,
 			);
-			name = Base;
+			name = ListBaseViewController;
 			sourceTree = "<group>";
 		};
-		EAD2A82D1CDC9E650005264B /* TopList & Search */ = {
+		EAD2A82D1CDC9E650005264B /* TopList */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2A85C1CDDE7630005264B /* Discover */,
-				EAD2A85D1CDDE7750005264B /* TopList */,
-				EAD2A82E1CDC9E7F0005264B /* Search */,
+				EA6487A61CE3CB6B00452DD0 /* Controller */,
+				EAD2A84F1CDDE3E60005264B /* DataProvider */,
 			);
-			name = "TopList & Search";
+			name = TopList;
 			sourceTree = "<group>";
 		};
 		EAD2A82E1CDC9E7F0005264B /* Search */ = {
@@ -737,9 +783,8 @@
 		EAD2A8301CDC9EAF0005264B /* Detail Movie */ = {
 			isa = PBXGroup;
 			children = (
-				EA64879D1CE3569700452DD0 /* DetailViewController.swift */,
-				EA6487A11CE356C300452DD0 /* DetailView.swift */,
-				EA64879E1CE3569700452DD0 /* DetailViewController.xib */,
+				EA6487C91CE5134000452DD0 /* Controller */,
+				EA6487C81CE5133400452DD0 /* View */,
 			);
 			name = "Detail Movie";
 			sourceTree = "<group>";
@@ -747,8 +792,8 @@
 		EAD2A8311CDC9ECC0005264B /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */,
-				EA6487B01CE4AB2900452DD0 /* VideoViewController.xib */,
+				EA6487D01CE5173D00452DD0 /* Controller */,
+				EA6487CF1CE5173600452DD0 /* View */,
 			);
 			name = Video;
 			sourceTree = "<group>";
@@ -756,6 +801,9 @@
 		EAD2A8321CDC9EDE0005264B /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				EA6487DE1CE5A4A100452DD0 /* Controller */,
+				EA6487DF1CE5A4AA00452DD0 /* View */,
+				EA6487E41CE5A5DE00452DD0 /* Cell */,
 			);
 			name = Review;
 			sourceTree = "<group>";
@@ -763,6 +811,8 @@
 		EAD2A8331CDC9EEB0005264B /* Sign in */ = {
 			isa = PBXGroup;
 			children = (
+				EA6487D11CE5174500452DD0 /* Controller */,
+				EA6487C31CE4E56300452DD0 /* View */,
 			);
 			name = "Sign in";
 			sourceTree = "<group>";
@@ -770,16 +820,10 @@
 		EAD2A8341CDC9EF30005264B /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				EA6487D31CE5175600452DD0 /* Controller */,
+				EA6487D21CE5175100452DD0 /* View */,
 			);
 			name = Menu;
-			sourceTree = "<group>";
-		};
-		EAD2A84D1CDDE3BD0005264B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				EAD2A83F1CDCC7820005264B /* TopListViewController.swift */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		EAD2A84F1CDDE3E60005264B /* DataProvider */ = {
@@ -797,25 +841,6 @@
 				111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */,
 			);
 			name = TableViewCell;
-			sourceTree = "<group>";
-		};
-		EAD2A85C1CDDE7630005264B /* Discover */ = {
-			isa = PBXGroup;
-			children = (
-				EA6487A61CE3CB6B00452DD0 /* Controller */,
-				EA6487A51CE3CB5000452DD0 /* TableView */,
-				EAD2A85A1CDDE6560005264B /* TableViewCell */,
-				EAD2A84F1CDDE3E60005264B /* DataProvider */,
-			);
-			name = Discover;
-			sourceTree = "<group>";
-		};
-		EAD2A85D1CDDE7750005264B /* TopList */ = {
-			isa = PBXGroup;
-			children = (
-				EAD2A84D1CDDE3BD0005264B /* Controller */,
-			);
-			name = TopList;
 			sourceTree = "<group>";
 		};
 		EAD2A8641CDDE82F0005264B /* Controller */ = {
@@ -982,13 +1007,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6487C71CE503BD00452DD0 /* ReviewControllerViewController.xib in Resources */,
 				EA6487A01CE3569700452DD0 /* DetailViewController.xib in Resources */,
-				111942F01CCB8EAE001CF39B /* Signin.storyboard in Resources */,
 				EA6487721CE21E2300452DD0 /* DiscoverViewController.xib in Resources */,
 				111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */,
 				111942EF1CCB8EAE001CF39B /* Main.storyboard in Resources */,
 				111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */,
 				111942B91CCB8DE5001CF39B /* ListTableViewCell.xib in Resources */,
+				EA6487BC1CE4E4C900452DD0 /* MenuViewController.xib in Resources */,
+				EA6487C01CE4E50100452DD0 /* SignInViewController.xib in Resources */,
+				EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */,
 				111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */,
 				EA6487B21CE4AB2900452DD0 /* VideoViewController.xib in Resources */,
 			);
@@ -1070,54 +1098,49 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA6487A81CE3CBCA00452DD0 /* SearchViewController.swift in Sources */,
-				111942D41CCB8E47001CF39B /* InternetErrorHandlerProtocol.swift in Sources */,
 				111942B31CCB8DE5001CF39B /* BackgroundView.swift in Sources */,
+				EA6487D71CE51BF800452DD0 /* InternetErrorHandleable.swift in Sources */,
 				111942C91CCB8E33001CF39B /* FavoritesTableViewController.swift in Sources */,
-				111942CE1CCB8E3D001CF39B /* MenuTableViewController.swift in Sources */,
-				EAD2A8231CDC9D130005264B /* BaseViewController.swift in Sources */,
+				EA6487F81CE622B300452DD0 /* MenuDataProvider.swift in Sources */,
+				EA6487E61CE5B50D00452DD0 /* BaseViewController.swift in Sources */,
 				111942B51CCB8DE5001CF39B /* DetailTableViewCell.swift in Sources */,
-				111943301CCB8FC2001CF39B /* TMDbAuthorizationTableViewController.swift in Sources */,
-				111942DF1CCB8E74001CF39B /* SearchTableViewController.swift in Sources */,
-				113946381CCBDD2B001CFAEA /* TableviewBackgroundMessagePresentable.swift in Sources */,
 				111942D91CCB8E4E001CF39B /* ReviewCoordinator.swift in Sources */,
-				111942E81CCB8E85001CF39B /* ToplistTableViewController.swift in Sources */,
 				111942BA1CCB8DE5001CF39B /* DiscoverListCell.swift in Sources */,
 				111943351CCB8FFE001CF39B /* DetailCoordinator.swift in Sources */,
-				111943321CCB8FCE001CF39B /* RevealMenuButtonShowable.swift in Sources */,
+				EA6487C21CE4E55500452DD0 /* SignInView.swift in Sources */,
+				111943321CCB8FCE001CF39B /* MenuButtonPresentable.swift in Sources */,
 				1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */,
 				111942D61CCB8E47001CF39B /* PullToRefreshable.swift in Sources */,
+				EA6487CE1CE5166A00452DD0 /* BannerPresentable.swift in Sources */,
 				1119429A1CCB8DD4001CF39B /* IQDropDownTextField+Configure.swift in Sources */,
-				111942D31CCB8E47001CF39B /* AuthorizationErrorHandlerProtocol.swift in Sources */,
-				1119432D1CCB8FC2001CF39B /* CoordinatorDelegate.swift in Sources */,
 				111942A41CCB8DD4001CF39B /* UITableView+setupBackGround.swift in Sources */,
 				111942B41CCB8DE5001CF39B /* CustomButton.swift in Sources */,
 				EAD2A8401CDCC7820005264B /* TopListViewController.swift in Sources */,
 				111942A01CCB8DD4001CF39B /* UIFont+Styles.swift in Sources */,
 				1119429C1CCB8DD4001CF39B /* NSDate+Comparing.swift in Sources */,
-				111942B71CCB8DE5001CF39B /* HorizontalImageScroller.swift in Sources */,
-				111942E41CCB8E7E001CF39B /* SignInViewDelegate.swift in Sources */,
 				111942B81CCB8DE5001CF39B /* ListTableViewCell.swift in Sources */,
 				EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */,
-				1119432E1CCB8FC2001CF39B /* DiscoverBaseTableViewController.swift in Sources */,
+				EA6487C61CE503BD00452DD0 /* ReviewControllerViewController.swift in Sources */,
 				1119429D1CCB8DD4001CF39B /* NSDate+CurrentYear.swift in Sources */,
+				EA6487BB1CE4E4C900452DD0 /* MenuViewController.swift in Sources */,
 				111942A31CCB8DD4001CF39B /* UINavigationController+StatusBarStyle.swift in Sources */,
 				111942DA1CCB8E4E001CF39B /* ReviewTableViewController.swift in Sources */,
+				EA6487CC1CE5163100452DD0 /* ProgressHUDPresentable.swift in Sources */,
+				EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */,
 				111942E01CCB8E74001CF39B /* SearchViewConfftroller.swift in Sources */,
 				111942BF1CCB8DE5001CF39B /* WatchListView.swift in Sources */,
+				EA6487D91CE51F8000452DD0 /* AuthorizationErrorHandleable.swift in Sources */,
 				111942F21CCB8EB8001CF39B /* Theme.swift in Sources */,
 				1119429B1CCB8DD4001CF39B /* MBProgressHUD+Configure.swift in Sources */,
+				EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */,
 				EAD2A83E1CDCBAEB0005264B /* BaseTableView.swift in Sources */,
 				111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */,
-				EA1F10761CDE0F0B00308A9D /* RatingView.swift in Sources */,
 				111942BC1CCB8DE5001CF39B /* ProfileImageView.swift in Sources */,
-				EAD2A8591CDDE51D0005264B /* DiscoverTableView.swift in Sources */,
+				EAD2A8591CDDE51D0005264B /* ListTableView.swift in Sources */,
 				111942BE1CCB8DE5001CF39B /* UpdateListView.swift in Sources */,
-				EA6487AA1CE3D21300452DD0 /* SDWebImage+CachedImage.swift in Sources */,
-				111942E31CCB8E7E001CF39B /* SignInViewController.swift in Sources */,
-				111942CA1CCB8E33001CF39B /* ListCoordinator.swift in Sources */,
-				EA6487711CE21E2300452DD0 /* DiscoverViewController.swift in Sources */,
-				EAD2A8251CDC9D340005264B /* BaseView.swift in Sources */,
+				EA6487711CE21E2300452DD0 /* ListViewController.swift in Sources */,
 				EA6487A21CE356C300452DD0 /* DetailView.swift in Sources */,
+				EA6487D51CE5177300452DD0 /* MenuView.swift in Sources */,
 				111942A11CCB8DD4001CF39B /* UIImage+Placeholder.swift in Sources */,
 				1119429E1CCB8DD4001CF39B /* NSDate+Year.swift in Sources */,
 				111942CC1CCB8E33001CF39B /* WatchListTableViewController.swift in Sources */,
@@ -1125,11 +1148,11 @@
 				113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */,
 				EA64879F1CE3569700452DD0 /* DetailViewController.swift in Sources */,
 				111942B61CCB8DE5001CF39B /* FavoriteView.swift in Sources */,
-				111942BD1CCB8DE5001CF39B /* ReviewTableViewCell.swift in Sources */,
 				111943361CCB8FFE001CF39B /* DetailTableViewController.swift in Sources */,
 				EAD2A8421CDCDF100005264B /* DiscoverDataProvider.swift in Sources */,
+				EA6487BF1CE4E50100452DD0 /* SignInViewController.swift in Sources */,
 				111942A51CCB8DD4001CF39B /* UIViewController+Alert.swift in Sources */,
-				111942D51CCB8E47001CF39B /* ProgressHudShowable.swift in Sources */,
+				EA6487F41CE61E1700452DD0 /* UIWebImage+CachedImage.swift in Sources */,
 				111942CB1CCB8E33001CF39B /* ListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

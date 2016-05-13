@@ -2,59 +2,32 @@
 //  BaseViewController.swift
 //  DiscoverMovies
 //
-//  Created by Kaira Diagne on 06/05/16.
+//  Created by Kaira Diagne on 13/05/16.
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
 import UIKit
+import BRYXBanner
+import MBProgressHUD
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresentable, InternetErrorHandleable {
+
+    private struct Constants {
+        static let HUDSize = CGSize(width: 40, height: 40)
+    }
     
-    var baseView: BaseView! // Not working 
+    var banner: Banner?
+    
+    var progressHUD: MBProgressHUD?
     
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        baseView = BaseView(frame: view.bounds)
-        view = baseView
+        
+        // Setup ProgressHUD
+        progressHUD = MBProgressHUD.hudWithSize(Constants.HUDSize, forFrame: view.bounds)
+        view.addSubview(progressHUD!)
     }
-    
-    // MARK: - Error Handling
-    
-    func detectInternetConnectionError(error: NSError) {
-        if error.code == NSURLErrorNotConnectedToInternet {
-            handleInternetConnectionError()
-        }
-    }
-    
-    func handleInternetConnectionError() {
-        let title = "No Internet Connection"
-        let message = "Couldn't load any information, please check your connection and try again later"
-        baseView.showBanner(title, message: message)
-    }
-    
-    func detectAuthoirzationError(error: NSError) {
-        if error.domain == NSURLErrorDomain && error.code == NSURLErrorUserAuthenticationRequired {
-            handleAuthorizationError()
-        }
-    }
-    
-    func handleAuthorizationError() { }
-    
-    // MARK: - Loading && Banner
-    
-    func startLoading() {
-        baseView.showProgressHUD()
-    }
-    
-    func stopLoading() {
-        baseView.dismissProgressHUD()
-    }
-    
-    func showBanner(title: String, message: String) {
-        baseView.showBanner(title, message: message)
-    }
-}
 
+}

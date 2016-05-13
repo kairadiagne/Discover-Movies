@@ -36,8 +36,8 @@ class DetailView: UIView {
     // Add to watch list button 
     // Watch Trailer button
     // Read reviews button 
-   
-    var headerImageView: UIImageView!
+    
+    var gradientImageView: GradientView!
     
     // MARK: - Initialization
     
@@ -53,23 +53,19 @@ class DetailView: UIView {
         self.overviewLabel?.font = UIFont.Body()
         self.castLabel?.font = UIFont.Caption1()
         self.similarMoviesLabel?.font = UIFont.Caption1()
-        
-        // Setup header image
+       
+        // Setup Header Gradient ImageView
         let frame = CGRect(x: 0, y: 0, width: bounds.width, height: Constants.HeaderHeight)
-        headerImageView = UIImageView(frame: frame)
-        headerImageView.contentMode = .ScaleAspectFill
-        contentView.addSubview(headerImageView)
-        // Gradient layer over imageview
-        let gradientColors = [Theme.BaseColors.BackgroundColor, UIColor.clearColor()]
-        headerImageView.addLineairGradient(gradientColors)
-        
-        
+        let gradientColors = [Theme.BaseColors.BackgroundColor.CGColor, UIColor.clearColor().CGColor]
+        self.gradientImageView = GradientView(frame: frame, gradientColors: gradientColors)
+        self.contentView.addSubview(gradientImageView)
+       
         // Setup the scrollview
-        detailScrollView.delegate = self
-        detailScrollView.contentInset = UIEdgeInsets(top: Constants.HeaderHeight, left: 0, bottom: 0, right: 0)
-        detailScrollView.contentOffset = CGPoint(x: 0, y: -Constants.HeaderHeight)
+        self.detailScrollView.delegate = self
+        self.detailScrollView.contentInset = UIEdgeInsets(top: Constants.HeaderHeight, left: 0, bottom: 0, right: 0)
+        self.detailScrollView.contentOffset = CGPoint(x: 0, y: -Constants.HeaderHeight)
         
-        updateHeaderView()
+        self.updateHeaderView()
     }
     
     // MARK: - View Configuration
@@ -82,17 +78,15 @@ class DetailView: UIView {
             headerRect.origin.y = detailScrollView.contentOffset.y
             headerRect.size.height = -detailScrollView.contentOffset.y
         }
-        
-        headerImageView.frame = headerRect
-        
+
+        gradientImageView.frame = headerRect
     }
   
     func configureForMovie(movie: TMDbMovie, image: UIImage) {
         titleLabel.text = movie.title! ?? "Unknown"
         genreLabel.text = "" // Implement in genre 
         overviewLabel.text = movie.overview ?? "N/A"
-        headerImageView.image = image
-        headerImageView.setNeedsDisplay()
+        gradientImageView.image = image
     }
     
     func configureWithMovieCredits(credits: String) {
@@ -112,14 +106,13 @@ class DetailView: UIView {
     }
     
     private func configureForImage(image: UIImage) {
-//        movieImageView.image = image
+//        movieImageView.image = image5
     }
     
     private func configureForImageWithURL(url: NSURL) {
 //        movieImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
     }
     
- 
 }
 
 // MARK: - UIScrollViewDelegate
@@ -132,32 +125,7 @@ extension DetailView: UIScrollViewDelegate {
     
 }
 
-extension UIImageView {
-    
-    // Adds a lineair gradient to the bottom or the top of the imageView
-    func addLineairGradient(colors: [UIColor], fromTop: Bool = false) {
-        // Convert colors to CGColors
-        var gradientColors = [CGColor]()
-        for color in colors {
-            gradientColors.append(color.CGColor)
-        }
-        
-        // Create gradient layer and add it to the image view
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = frame
-        gradientLayer.needsDisplayOnBoundsChange = true
-        gradientLayer.colors = gradientColors
-        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
-        gradientLayer.endPoint = CGPoint(x: 0, y: 0.5)
-        layer.addSublayer(gradientLayer)
-        
-//        A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-        layer.needsDisplayOnBoundsChange = true
 
-    }
-
-}
-    
     
     
     

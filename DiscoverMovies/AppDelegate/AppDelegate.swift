@@ -8,6 +8,7 @@
 
 import UIKit
 import TMDbMovieKit
+import SWRevealViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     var window: UIWindow?
-    var navigationController = UINavigationController()
+    
+    var revealViewController: SWRevealViewController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -27,19 +29,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Register API key for use with TMDbMovieKit
         TMDbSessionManager().registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
         
-        // Set up SWRevealController 
-        
-        // Initialize navigation controller with root viewcontroller and set it as the windows root view controller // Later this becomes a SWRevealController
-        
+        // Set up SWRevealController
+        let rearViewController = MenuViewController()
         let topListViewController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
-        let navigationController = UINavigationController(rootViewController: topListViewController)
+        let frontViewController = UINavigationController(rootViewController: topListViewController)
+        revealViewController = SWRevealViewController(rearViewController: rearViewController, frontViewController: frontViewController)
         
+        // TODO: - Decide if I need the Delegate methods from SWRevealController.
+        // They could be usefull when performing animations etc.
+        
+        // Add the SWRevealController as the root view controller of the window
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = navigationController
+        window?.rootViewController = revealViewController
         window?.makeKeyAndVisible()
         
-        // Make sure there is no sessionID stored in the keychain from previous installs 
+        // TODO: - Make sure there is no sessionID stored in the keychain from previous installs
  
+        return true
+    }
+    
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        print("URL was opened")
         return true
     }
 

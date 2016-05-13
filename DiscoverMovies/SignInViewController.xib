@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController" customModule="DiscoverMovies" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="SignInView" customModule="DiscoverMovies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TMDbLogo" translatesAutoresizingMaskIntoConstraints="NO" id="4yG-0P-6jX">
+                    <rect key="frame" x="246" y="78" width="109" height="184"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="109" id="eFP-sm-wOo"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLS-s9-OlD">
+                    <rect key="frame" x="20" y="270" width="560" height="58"/>
+                    <string key="text">For some parts of this app it is required to sign in with a TMDb account (e.g. adding movies to your favoriteslist or watchlist). If you don’t have an TMDB account yet you can create one during the login procedure. If you want to discover movies, but don't want to sign in press the continue without signing in button. </string>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Helps you find and keep track of interesting movies to watch." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiY-1C-TnJ">
+                    <rect key="frame" x="20" y="49" width="560" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1s-LN-CSv" customClass="CustomButton" customModule="DiscoverMovies" customModuleProvider="target">
+                    <rect key="frame" x="200" y="407" width="200" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="TL2-8D-KNg"/>
+                    </constraints>
+                    <state key="normal" title="Continue without signing in"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIa-gk-Ymu">
+                    <rect key="frame" x="20" y="20" width="560" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-ks-LmZ" customClass="CustomButton" customModule="DiscoverMovies" customModuleProvider="target">
+                    <rect key="frame" x="200" y="369" width="200" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="q3J-ET-p6g"/>
+                    </constraints>
+                    <state key="normal" title="Sign in with TMDb"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2O7-m2-zQE"/>
+                <constraint firstItem="4yG-0P-6jX" firstAttribute="top" secondItem="XiY-1C-TnJ" secondAttribute="bottom" constant="8" symbolic="YES" id="5KC-Ge-t5o"/>
+                <constraint firstAttribute="trailing" secondItem="XiY-1C-TnJ" secondAttribute="trailing" constant="20" symbolic="YES" id="7XM-Y6-EBU"/>
+                <constraint firstItem="ixj-ks-LmZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Aea-gU-cby"/>
+                <constraint firstItem="kLS-s9-OlD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="Cdb-bR-2Tx"/>
+                <constraint firstItem="ixj-ks-LmZ" firstAttribute="top" secondItem="kLS-s9-OlD" secondAttribute="bottom" multiplier="1.1" constant="8" symbolic="YES" id="INg-RW-lcz"/>
+                <constraint firstAttribute="trailing" secondItem="kLS-s9-OlD" secondAttribute="trailing" constant="20" symbolic="YES" id="KGZ-lF-Ykz"/>
+                <constraint firstItem="kLS-s9-OlD" firstAttribute="top" secondItem="4yG-0P-6jX" secondAttribute="bottom" constant="8" symbolic="YES" id="Kbm-NB-qiK"/>
+                <constraint firstItem="4yG-0P-6jX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RUH-8Y-mNe"/>
+                <constraint firstItem="XiY-1C-TnJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="TNV-Ng-zAu"/>
+                <constraint firstItem="XiY-1C-TnJ" firstAttribute="top" secondItem="jIa-gk-Ymu" secondAttribute="bottom" constant="8" symbolic="YES" id="YLt-JW-rfC"/>
+                <constraint firstItem="jIa-gk-Ymu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="YpI-ZO-uKB"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V1s-LN-CSv" secondAttribute="bottom" constant="149" id="ZsK-mR-xep"/>
+                <constraint firstAttribute="trailing" secondItem="jIa-gk-Ymu" secondAttribute="trailing" constant="20" symbolic="YES" id="aQi-3v-84l"/>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" constant="8" symbolic="YES" id="lvq-84-5Hv"/>
+                <constraint firstItem="jIa-gk-Ymu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="xGI-Mb-ljq"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionLabel" destination="XiY-1C-TnJ" id="pOb-IX-7PW"/>
+                <outlet property="instructionLabel" destination="kLS-s9-OlD" id="g2t-1N-qqD"/>
+                <outlet property="publicModeButton" destination="V1s-LN-CSv" id="KdI-tv-XTy"/>
+                <outlet property="signInButton" destination="ixj-ks-LmZ" id="HRj-Qn-vOf"/>
+                <outlet property="titleLabel" destination="jIa-gk-Ymu" id="Qpr-Vf-tu7"/>
+                <outlet property="tmdbLogo" destination="4yG-0P-6jX" id="4wt-1X-7Xl"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="TMDbLogo" width="261" height="184"/>
+    </resources>
+</document>

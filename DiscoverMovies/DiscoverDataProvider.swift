@@ -9,6 +9,8 @@
 import UIKit
 import TMDbMovieKit
 
+// TODO: - Can be called MovieListDataProvider 
+
 class DiscoverDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var didSelectBlock: ((movie: TMDbMovie) -> ())?
@@ -47,9 +49,10 @@ class DiscoverDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if indexPath.row != 0 && indexPath.row % 15 == 1 {
-//            loadMoreBlock?()
-//        }
+        if movies.count - 5 == indexPath.row {
+            loadMoreBlock?()
+        }
+        
     }
 }
 

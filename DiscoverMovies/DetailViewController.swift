@@ -15,17 +15,17 @@ class DetailViewController: UIViewController {
     
     var movie: TMDbMovie
     var image: UIImage?
-    
-    // 
+    var imageURL: NSURL?
     
     // Collection view datasource [Similar movies]
     // Collection view datasource [
     
     // MARK: - Initialization 
     
-    required init(movie: TMDbMovie, image: UIImage? = nil) {
+    required init(movie: TMDbMovie, image: UIImage? = nil, imageURL url: NSURL? = nil) {
         self.movie = movie
         self.image = image
+        self.imageURL = url
         super.init(nibName: "DetailViewController", bundle: nil)
     }
     
@@ -41,13 +41,20 @@ class DetailViewController: UIViewController {
         // Configure navigation bar 
         navigationController?.navigationBar.setAsTransparent()
         
-        // Conform to delegates and datasources collection views: Similar movies,
+        // Turn automatic adjustment of scrollViewInsets to navigation bar off
+        automaticallyAdjustsScrollViewInsets = false
         
-        // Configure the view
-        detailView.configureForMovie(movie, image: image!)
+        // Conform to delegates and datasources collection views: Similar movies,
         
         // Fetch aditional information about movie
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Configure Detail View
+        detailView.configureForMovie(movie, image: image!)
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class SearchViewController: DiscoverViewController {
+class SearchViewController: ListViewController {
     
     private let searchManager = TMDbMovieSearchManager()
     private let dataProvider = DiscoverDataProvider()

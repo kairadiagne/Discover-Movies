@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class TopListViewController: DiscoverViewController {
+class TopListViewController: ListViewController, MenuButtonPresentable {
     
     private let topListDataProvider = DiscoverDataProvider()
     private let topListManager = TMDbTopListManager()
@@ -21,6 +21,9 @@ class TopListViewController: DiscoverViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add menu button to navigation bar
+        addMenuButton()
     
         // Set up the topListDataProvider
         topListDataProvider.cellIdentifier = "DiscoverListIdentifier"
@@ -55,7 +58,10 @@ class TopListViewController: DiscoverViewController {
     // MARK: - Fetching
     
     func switchTopList(control: UISegmentedControl) {
-        // Start Loading ??
+        // Start Loading
+        showProgressHUD()
+        
+        // Request List
         switch switchListControl.selectedSegmentIndex {
         case 0:
             topListManager.reloadTopIfNeeded(true, list: .Popular)
@@ -69,30 +75,24 @@ class TopListViewController: DiscoverViewController {
     }
     
     private func loadMore() {
-        topListManager.loadMore()
+        if !topListManager.inProgress {
+            topListManager.loadMore()
+        }
     }
     
     // MARK: - Notifications
     
-    func updateNotification() {
-        // Stop Loading ??
+    override func updateNotification(notification: NSNotification) {
+        super.updateNotification(notification)
         topListDataProvider.updateMovies(topListManager.movies)
         tableView.reloadData()
-    }
-    
-    func handleError() {
-        
     }
     
     // MARK: - Navigation
     
     private func showDetailViewControllerForMovie(movie: TMDbMovie) {
-        let detailViewController = DetailViewController(movie: movie)
-        
-        if let path = movie.backDropPath, url = TMDbImageRouter.BackDropMedium(path: path).url {
-            detailViewController.image = SDWebImageManager.sharedManager().cachedImageForURL(url)
-        }
-        
+        let (image, url) = SDWebImageManager.sharedManager().getImageFromCache(movie)
+        let detailViewController = DetailViewController(movie: movie, image: image, imageURL: url)
         navigationController?.pushViewController(detailViewController, animated: true)
         
     }

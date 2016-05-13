@@ -16,7 +16,7 @@ class Theme {
     // MARK: - Constants
 
     struct BaseColors {
-        static let BackgroundColor = UIColor(red: 25.0/255, green: 25.0/255, blue: 25.0/255, alpha: 1.0)
+        static let BackgroundColor = UIColor(red: 30.0/255, green: 30.0/255, blue: 30.0/255, alpha: 1.0) // #634d36
         static let LabelBackgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
         static let NavbarColor = UIColor(red: 27.0/255, green: 27.0/255, blue: 27.0/255, alpha: 1.0)
         static let ProgressHUDColor =  UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 0.8)

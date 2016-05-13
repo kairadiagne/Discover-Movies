@@ -35,6 +35,8 @@ public class TMDbTopListManager {
         
     }
     
+    public var inProgress: Bool = false
+    
     // Private properties
     
     private let movieService = TMDbMovieService()
@@ -51,13 +53,14 @@ public class TMDbTopListManager {
     
     // MARK: - Initialization 
     
-    public init () { } // Singleton 
+    public init () { }  
     
     // MARK: - Fetching
 
     public func reloadTopIfNeeded(forceOnline: Bool, list: TMDbToplist) {
         // For know I let NSURLCache handle the caching
         currentList = list
+        inProgress = true
         fetchList(list, page: 1)
     }
     
@@ -85,6 +88,7 @@ public class TMDbTopListManager {
     
     private func fetchList(list: TMDbToplist, page: Int?) {
         movieService.fetchTopList(list.rawValue, page: page, completionHandler: { (result, error) in
+            self.inProgress = false
             guard error == nil else {
                 self.postErrorNotification(error!)
                 return

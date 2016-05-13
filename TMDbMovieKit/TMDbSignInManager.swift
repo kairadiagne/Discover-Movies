@@ -9,9 +9,9 @@
 import Foundation
 
 public protocol TMDbSignInDelegate {
-    func TMDbSignInDelegateShouldRequestAuthorization(url: NSURL)
-    func TMDbSignInDelegateSigninDidFail(error: NSError)
-    func TMDbSignInDelegateSigninDidComplete()
+    func signInDelegateShouldRequestAuthorization(url: NSURL)
+    func signInDelegateSigninDidFail(error: NSError)
+    func signInDelegateSigninDidComplete()
 }
 
 public enum TMDBSigInStatus {
@@ -33,18 +33,22 @@ public class TMDbSignInManager {
     private let signInService = TMDbSignInService()
     
     private let sessionInfoStore = TMDbSessionInfoStore()
-
+    
+    // MARK: - Initialization
+    
+    public init() { }
+    
     // MARK: - Sign In
     
-    public func requestToken() {
-        signInService.getRequestToken { (url, error) in
+    public func requestToken(redirectURI: String) {
+        signInService.getRequestToken(redirectURI) { (url, error) in
             guard error == nil else {
-                self.delegate?.TMDbSignInDelegateSigninDidFail(error!)
+                self.delegate?.signInDelegateSigninDidFail(error!)
                 return
             }
             
             if let url = url {
-               self.delegate?.TMDbSignInDelegateShouldRequestAuthorization(url)
+               self.delegate?.signInDelegateShouldRequestAuthorization(url)
             }
         }
     }
@@ -52,13 +56,13 @@ public class TMDbSignInManager {
     public func requestSessionID() {
         signInService.requestSessionID { (sessionID, error) in
             guard error != nil else {
-                self.delegate?.TMDbSignInDelegateSigninDidFail(error!)
+                self.delegate?.signInDelegateSigninDidFail(error!)
                 return 
             }
             
             if let sessionID = sessionID {
                 self.sessionInfoStore.persistSessionIDinStore(sessionID)
-                self.delegate?.TMDbSignInDelegateSigninDidComplete()
+                self.delegate?.signInDelegateSigninDidComplete()
             }
         }
     }

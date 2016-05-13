@@ -107,9 +107,7 @@
 //    }
 //    
 //    func handleAuthorizationError() {
-//        let title = "Sign in Required"
-//        let message = "This feature requires you to sign in with a TMDb account"
-//        showAlertWithTitle(title, message: message, completionHandler: nil)
+//        
 //    }
 //    
 //    // MARK: - Navigation

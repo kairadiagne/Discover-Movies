@@ -76,7 +76,7 @@ public class TMDbMovieSearchManager {
         }
     }
     
-    // MARK: - Update Data 
+    // MARK: - Handle Response 
     
     private func updateData(data: TMDbListHolder<TMDbMovie>) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { 

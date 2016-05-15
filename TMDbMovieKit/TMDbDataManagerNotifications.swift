@@ -8,8 +8,6 @@
 
 import Foundation
 
-// ManagerDidChange 
+public let TMDbManagerDataDidUpdateNotification = "TMDbDataManagerDataDidUpdateNotification"
 public let TMDManagerDataDidChangeNotification = "TMDbManagerDataDidChangeNotification"
-public let TMDbManagerIsUpToDateNotification = "TMDbManagerIsUpToDateNotification"
 public let TMDbManagerDidReceiveErrorNotification = "TMDbManagerDidReceiveErrorNotification"
-

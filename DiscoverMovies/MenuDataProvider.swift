@@ -8,12 +8,7 @@
 
 import UIKit
 
-enum MenuCell: String {
-    case ProfileCell
-    case MenuItem
-}
-
-class MenuDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
+class MenuDataSource: NSObject, UITableViewDataSource {
     
     private let menuItems = [Int]() // Array Of Type menu Item
     
@@ -34,24 +29,9 @@ class MenuDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch MenuCell {
-            
-        }
         return UITableViewCell()
     }
-    
-    
-    
-    
-    
-    // MARK: - UITableViewDelegate
-    
-    
-    
-    
-    
-    
-    
+
     
 }
 

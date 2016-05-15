@@ -83,8 +83,8 @@ public class TMDbMovieSearchManager {
             self.search.update(data)
             
             dispatch_async(dispatch_get_main_queue(), { 
-                let notification = NSNotification(name: TMDbManagerIsUpToDateNotification, object: nil)
-                NSNotificationCenter.defaultCenter().postNotification(notification)
+//                let notification = NSNotification(name: TMDbManagerIsUpToDateNotification, object: nil)
+//                NSNotificationCenter.defaultCenter().postNotification(notification)
             })
         }
         

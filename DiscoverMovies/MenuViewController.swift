@@ -8,57 +8,77 @@
 
 import UIKit
 import TMDbMovieKit
-// import SDWebImage
-//import ChameleonFramework
 
 class MenuViewController: ListViewController {
     
     private let signInManager = TMDbSignInManager()
     
-    private let dataProvider = MenuDataProvider()
-    
-    @IBOutlet weak var tableView: BaseTableView!
+    private let dataProvider = MenuDataSource()
     
     // MARK: - View Controller Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+//        tableView.dataSource = dataProvider
+//        tableView.delegate = self
     }
-    
+        
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         // Check the signinstatus and act accordingly
             // Update the menu
-       
     }
     
-    // MARK: - Navigation
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Animate things
+    }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
     
-    // MARK: - UITab
+    // MARK: - UITableViewDelegate 
     
-    // MARK: - UITableViewDelegate
-    //
-    //    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-    //        switch indexPath.row {
-    //        case 0: return nil
-    //        default: return indexPath
-    //        }
-    //    }
-    //
-    //    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    //        switch indexPath.row {
-    //        case 0: return false
-    //        default: return true
-    //        }
-    //    }
     
+    
+    
+    // MARK: - Navigation
+    
+    
+ 
+}
+
+extension MenuViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        switch indexPath.row {
+//
+//        }
+    }
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        switch indexPath.row {
+        case 0:
+            return nil
+        default:
+            return indexPath
+        }
+    }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        switch indexPath.row {
+        case 0:
+            return false
+        default:
+            return true
+        }
+    }
+    
+}
     // View Related code
     
 //    private func updateMenu(authorized: Bool, user: TMDbUser?) {
@@ -81,7 +101,7 @@ class MenuViewController: ListViewController {
         //        }
         //    }
 
-}
+//}
 
 //
 //    @IBOutlet weak var favoriteCell: UITableViewCell!

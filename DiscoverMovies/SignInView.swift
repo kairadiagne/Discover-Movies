@@ -21,7 +21,7 @@ class SignInView: UIView {
         super.awakeFromNib()
         titleLabel.font = UIFont.H1()
         descriptionLabel.font = UIFont.Body()
-        instructionLabel.font = UIFont.Caption1()
+        instructionLabel.font = UIFont.Caption()
     }
     
 }

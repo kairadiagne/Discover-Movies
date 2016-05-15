@@ -21,7 +21,7 @@ class ListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.Body()
-        self.overviewLabel.font = UIFont.Caption1()
+        self.overviewLabel.font = UIFont.Caption()
         self.ratingView.setToDefaultStyle()
     }
 

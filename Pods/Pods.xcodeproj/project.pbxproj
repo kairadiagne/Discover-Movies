@@ -1445,6 +1445,29 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0640;
+				TargetAttributes = {
+					0B95182E2E9A25405BECD358 = {
+						DevelopmentTeam = F7QZZ88EN3;
+					};
+					27BE28011A3502F717D885D8 = {
+						DevelopmentTeam = F7QZZ88EN3;
+					};
+					3694B7A6CADFF91FA0CA6769 = {
+						DevelopmentTeam = F7QZZ88EN3;
+					};
+					51DE0D14B9D724C39AFB7AE4 = {
+						DevelopmentTeam = F7QZZ88EN3;
+					};
+					56FBA8378B0DA07806809DAA = {
+						DevelopmentTeam = F7QZZ88EN3;
+					};
+					E827147403D3A6D98729C329 = {
+						DevelopmentTeam = F7QZZ88EN3;
+					};
+					ED34003FFDCAA81F0A3BFEF2 = {
+						DevelopmentTeam = F7QZZ88EN3;
+					};
+				};
 			};
 			buildConfigurationList = 0A5272FB73BA8F48673ED4D1 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1757,6 +1780,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F73B025C4E420F43C7852982 /* Pods-MBProgressHUD-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1772,6 +1796,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-MBProgressHUD/Pods-MBProgressHUD.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = MBProgressHUD;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1784,6 +1809,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96F97CFF2ED405BB87216FDC /* Pods-SDWebImage-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1799,6 +1825,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-SDWebImage/Pods-SDWebImage.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = SDWebImage;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1811,6 +1838,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81E552CEE47DBA5BE20B8217 /* Pods-BRYXBanner-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1826,6 +1854,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-BRYXBanner/Pods-BRYXBanner.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = BRYXBanner;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1900,6 +1929,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81E552CEE47DBA5BE20B8217 /* Pods-BRYXBanner-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1915,6 +1945,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-BRYXBanner/Pods-BRYXBanner.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = BRYXBanner;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1928,6 +1959,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E387C24F472AE2B27A882B44 /* Pods-Cosmos-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1943,6 +1975,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-Cosmos/Pods-Cosmos.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Cosmos;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1956,6 +1989,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAA40B48002F6A178BB23DED /* Pods-Alamofire-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1971,6 +2005,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-Alamofire/Pods-Alamofire.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Alamofire;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2037,6 +2072,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19BC6EF1326E44D3532AD563 /* Pods-Locksmith-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2052,6 +2088,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-Locksmith/Pods-Locksmith.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Locksmith;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2170,6 +2207,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E387C24F472AE2B27A882B44 /* Pods-Cosmos-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2185,6 +2223,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-Cosmos/Pods-Cosmos.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Cosmos;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2197,6 +2236,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F73B025C4E420F43C7852982 /* Pods-MBProgressHUD-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2212,6 +2252,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-MBProgressHUD/Pods-MBProgressHUD.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = MBProgressHUD;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2224,6 +2265,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C83803114C350D8E33F74CB /* Pods-ChameleonFramework-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2239,6 +2281,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-ChameleonFramework/Pods-ChameleonFramework.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = ChameleonFramework;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2251,6 +2294,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAA40B48002F6A178BB23DED /* Pods-Alamofire-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2266,6 +2310,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-Alamofire/Pods-Alamofire.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Alamofire;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2279,6 +2324,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96F97CFF2ED405BB87216FDC /* Pods-SDWebImage-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2294,6 +2340,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-SDWebImage/Pods-SDWebImage.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = SDWebImage;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2319,6 +2366,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19BC6EF1326E44D3532AD563 /* Pods-Locksmith-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2334,6 +2382,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-Locksmith/Pods-Locksmith.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Locksmith;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2401,6 +2450,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C83803114C350D8E33F74CB /* Pods-ChameleonFramework-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2416,6 +2466,7 @@
 				MODULEMAP_FILE = "Target Support Files/Pods-ChameleonFramework/Pods-ChameleonFramework.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = ChameleonFramework;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

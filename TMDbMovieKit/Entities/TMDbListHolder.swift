@@ -18,7 +18,7 @@ private struct Keys {
     static let TimeStamp = "timestamp"
 }
 
-public struct TMDbListHolder<Item: JSONSerializable>: JSONSerializable  {
+public class TMDbListHolder<Item: JSONSerializable>: JSONSerializable  {
     var page: Int = 0
     var pageCount: Int = 0
     var nextPage: Int?
@@ -28,7 +28,7 @@ public struct TMDbListHolder<Item: JSONSerializable>: JSONSerializable  {
     
     init() { }
     
-    public init?(json: SwiftyJSON.JSON) {
+    public required init?(json: SwiftyJSON.JSON) {
         self.page = json[Keys.Page].intValue
         self.pageCount = json[Keys.PageCount].intValue
         self.nextPage = self.page < self.pageCount ? self.page + 1 : nil
@@ -39,7 +39,7 @@ public struct TMDbListHolder<Item: JSONSerializable>: JSONSerializable  {
     
     // MARK: - Updating Data
     
-    mutating func update(list: TMDbListHolder<Item>) {
+    func update(list: TMDbListHolder<Item>) {
         self.page = list.page
         self.nextPage = list.nextPage
         self.pageCount = list.pageCount

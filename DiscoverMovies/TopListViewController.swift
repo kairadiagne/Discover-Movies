@@ -32,19 +32,17 @@ class TopListViewController: ListViewController, MenuButtonPresentable {
         tableView.dataSource = topListDataProvider
         tableView.delegate = topListDataProvider
         
+        // Sign up for notifications from toplistDataManager
+        signUpForUpdateNotification(topListManager)
+        signUpForChangeNotification(topListManager)
+        signUpErrorNotification(topListManager)
+        
         // Configure UISegmented control for switching lists
         let switchListSelector = #selector(TopListViewController.switchTopList(_:))
         switchListControl = UISegmentedControl(items: ["Popular", "Top Rated", "Upcoming"])
         switchListControl.addTarget(self, action: switchListSelector, forControlEvents: .ValueChanged)
         switchListControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = switchListControl
-        
-        // Sign up for Notifications 
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        let selector = #selector(TopListViewController.updateNotification)
-        notificationCenter.addObserver(self, selector: selector, name: TMDManagerDataDidChangeNotification, object: nil)
-        let errorSelector = #selector(TopListViewController.handleError)
-        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: nil)
         
         // Perform initial fetch
         switchTopList(switchListControl)
@@ -58,7 +56,6 @@ class TopListViewController: ListViewController, MenuButtonPresentable {
     // MARK: - Fetching
     
     func switchTopList(control: UISegmentedControl) {
-        // Start Loading
         showProgressHUD()
         
         // Request List
@@ -88,13 +85,18 @@ class TopListViewController: ListViewController, MenuButtonPresentable {
         tableView.reloadData()
     }
     
+    override func changeNotification(notification: NSNotification) {
+        super.changeNotification(notification)
+        topListDataProvider.updateMovies(topListManager.movies)
+        tableView.reloadData()
+    }
+    
     // MARK: - Navigation
     
     private func showDetailViewControllerForMovie(movie: TMDbMovie) {
         let (image, url) = SDWebImageManager.sharedManager().getImageFromCache(movie)
         let detailViewController = DetailViewController(movie: movie, image: image, imageURL: url)
         navigationController?.pushViewController(detailViewController, animated: true)
-        
     }
     
 }

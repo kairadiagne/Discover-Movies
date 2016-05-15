@@ -8,6 +8,7 @@
 
 import Foundation
 
-class TMDbReviewManager {
+public class TMDbReviewManager {
     
+   public init() { }
 }

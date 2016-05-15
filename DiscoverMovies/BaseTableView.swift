@@ -44,7 +44,7 @@ class BaseTableView: UITableView {
         backgroundView?.hidden = true
     }
     
-    func tableViewScrollToTop() {
+    func scrollToTop() {
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
     }

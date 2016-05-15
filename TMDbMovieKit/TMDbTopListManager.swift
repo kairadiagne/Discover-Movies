@@ -87,6 +87,8 @@ public class TMDbTopListManager {
     // MARK: Fetching
     
     private func fetchList(list: TMDbToplist, page: Int?) {
+        guard let currentList = currentList else { return }
+        
         movieService.fetchTopList(list.rawValue, page: page, completionHandler: { (result, error) in
             self.inProgress = false
             guard error == nil else {
@@ -95,39 +97,53 @@ public class TMDbTopListManager {
             }
             
             if let data = result {
-                self.updateData(data)
+                switch currentList {
+                case .Popular:
+                    self.updateList(self.popular, withData: data)
+                case .TopRated:
+                    self.updateList(self.topRated, withData: data)
+                case .Upcoming:
+                    self.updateList(self.upcoming, withData: data)
+                case .NowPlaying:
+                    self.updateList(self.nowPlaying, withData: data)
+                }
+
             }
         })
     }
     
     // MARK: - Handle Response
     
-    private func updateData(data: TMDbListHolder<TMDbMovie>) {
-        guard let list = currentList else { return }
-        
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { 
-            switch list {
-            case .Popular:
-                self.popular.update(data)
-            case .TopRated:
-                self.topRated.update(data)
-            case .Upcoming:
-                self.upcoming.update(data)
-            case .NowPlaying:
-                self.nowPlaying.update(data)
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), { 
-                let notification = NSNotification(name: TMDManagerDataDidChangeNotification, object: nil)
-                NSNotificationCenter.defaultCenter().postNotification(notification)
+    private func updateList(list: TMDbListHolder<TMDbMovie>, withData data: TMDbListHolder<TMDbMovie>) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+           list.update(data)
+
+            dispatch_async(dispatch_get_main_queue(), {
+                if list.page == 1 {
+                    self.postUpdateNotification()
+                } else if list.page > 1 {
+                    self.postChangeNotification()
+                }
             })
-            
         }
+    }
+ 
+    
+    // MARK: - Notifications
+    
+    private func postUpdateNotification() {
+        let center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName(TMDbManagerDataDidUpdateNotification, object: self)
+    }
+    
+    private func postChangeNotification() {
+        let center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName(TMDManagerDataDidChangeNotification, object: self)
     }
     
     private func postErrorNotification(error: NSError) {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: nil, userInfo: ["error": error])
+        center.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: self, userInfo: ["error": error])
     }
     
 }

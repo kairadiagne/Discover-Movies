@@ -23,7 +23,7 @@ private struct Keys {
     static let BackdropPath = "backdrop_path"
 }
 
-public struct TMDbMovie: JSONSerializable {
+public struct TMDbMovie: JSONSerializable, Equatable {
     public var movieID: Int?
     public var title: String?
     public var releaseDate: NSDate?

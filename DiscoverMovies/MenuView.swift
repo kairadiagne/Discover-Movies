@@ -8,6 +8,19 @@
 
 import UIKit
 
-class MenuView: UITableView {
-
+class MenuHeaderView: UIView {
+    
+    var profileImageView: ProfileImageView!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+//        self.profileImageView = ProfileImageView()
+        
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

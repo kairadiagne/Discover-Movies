@@ -9,7 +9,6 @@
         <!--Search-->
         <scene sceneID="GEU-JD-ECv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NXq-Oh-8yv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="a87-qS-5qo" customClass="SearchViewController" customModule="DiscoverMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hCD-SC-fIg"/>
@@ -21,7 +20,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Discover movies by year, genre, average vote" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-3w-xtu">
                                 <rect key="frame" x="128" y="91" width="345" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -117,6 +116,7 @@
                         <outlet property="yearField" destination="CVy-o9-eI4" id="FCH-fj-n32"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NXq-Oh-8yv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="610" y="-3099"/>
         </scene>

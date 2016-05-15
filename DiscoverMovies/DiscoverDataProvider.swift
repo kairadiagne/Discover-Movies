@@ -35,8 +35,7 @@ class DiscoverDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! DiscoverListCell
         let movie = movies[indexPath.row]
-        // This should change
-        let imageURL = movie.backDropPath != nil ? TMDbImageRouter.BackDropMedium(path: movie.backDropPath!).url: nil
+        let imageURL = movie.backDropPath != nil ? TMDbImageRouter.BackDropMedium(path: movie.backDropPath!).url: nil 
         cell.configure(movie, imageURL: imageURL)
         return cell
     }

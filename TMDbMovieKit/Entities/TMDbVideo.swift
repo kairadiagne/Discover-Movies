@@ -18,7 +18,7 @@ private struct Keys {
     static let Type = "type"
 }
 
-public struct TMDbVideo: JSONSerializable {
+public struct TMDbVideo: JSONSerializable, Equatable {
     public var videoID: String?
     public var key: String?
     public var name: String?

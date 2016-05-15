@@ -24,6 +24,8 @@ public class TMDbMovieInfoManager {
         return similarMovieResults.items
     }
     
+    public private(set) var movieCredit: TMDbMovieCredit?
+    
     public var video: TMDbVideo? {
         return videoResults.first
     }
@@ -49,18 +51,24 @@ public class TMDbMovieInfoManager {
     public func reloadIfNeeded(forceOnline: Bool, movieID: Int) {
         self.movieID = movieID
         
+        // Load movie info
+        loadAccountState()
+        loadSimilarMovies()
+        loadMovieCredits()
+        loadVideos()
     }
     
     func loadAccountState() {
         guard let movieID = movieID else { return }
         movieService.accountStateForMovie(movieID) { (inFavorites, inWatchList, error) in
-            guard error != nil else {
-                // Error notification
+            guard error == nil else {
+                self.postErrorNotification(error!)
                 return
             }
             
             if let inFavorites = inFavorites, inWatchList = inWatchList {
                 self.accountState = (inFavorites: inFavorites, inWatchList: inWatchList)
+                self.postUpdateNotification() // MultiThreading
             }
         }
     }
@@ -68,10 +76,14 @@ public class TMDbMovieInfoManager {
     func loadSimilarMovies() {
         guard let movieID = movieID else { return }
         movieService.fetchMoviesSimilarToMovie(withID: movieID, page: nil) { (result, error) in
-            guard error != nil else {
-                // Error notification
+            guard error == nil else {
+                self.postErrorNotification(error!)
                 return
-                
+            }
+            
+            if let result = result {
+                self.similarMovieResults.update(result)
+                self.postUpdateNotification() // Multithreading
             }
         }
     }
@@ -79,10 +91,15 @@ public class TMDbMovieInfoManager {
     func loadMovieCredits() {
         guard let movieID = movieID else { return }
         movieService.fetchCreditsForMovie(withID: movieID) { (credit, error) in
-            guard error != nil else {
-                // Error notification
+            guard error == nil else {
+                print(error!)
+                self.postErrorNotification(error!)
                 return
-                
+            }
+            
+            if let credit = credit {
+                self.movieCredit = credit
+                self.postUpdateNotification() // Multithreading
             }
         }
     }
@@ -90,13 +107,26 @@ public class TMDbMovieInfoManager {
     func loadVideos() {
         guard let movieID = movieID else { return }
         movieService.fetchVideosForMovie(movieID) { (result, error) in
-            guard error != nil else {
-                // Error notification
+            guard error == nil else {
                 return
-                
+            }
+            
+            if let result = result {
+                self.videoResults = result // Multithreading
             }
         }
     }
     
+    // MARK: - Notifications
     
+    func postUpdateNotification() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.postNotificationName(TMDbManagerDataDidUpdateNotification, object: nil)
+    }
+    
+    func postErrorNotification(error: NSError) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: nil, userInfo: ["error": error])
+    }
+
 }

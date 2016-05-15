@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TMDbMovieKit
 import BRYXBanner
 import MBProgressHUD
 
@@ -18,12 +19,33 @@ class ListViewController: BaseViewController {
 
     @IBOutlet weak var tableView: ListTableView!
     
+    // MARK: - Sign up for TMDbDataManagerNotifications
+    
+    func signUpForUpdateNotification(object: AnyObject) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        let updateSelector = #selector(TopListViewController.updateNotification(_:))
+        notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: object)
+    }
+    
+    func signUpForChangeNotification(object: AnyObject) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        let changeSelector = #selector(TopListViewController.changeNotification(_:))
+        notificationCenter.addObserver(self, selector: changeSelector, name: TMDManagerDataDidChangeNotification, object: object)
+    }
+    
+    func signUpErrorNotification(object: AnyObject) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        let errorSelector = #selector(TopListViewController.handleError)
+        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: object)
+    }
+    
     // MARK: - Handle Incoming Notifications
     
-    // These methods are for handeling incoming notifications from the data manager
-    // They automatically hide the progress hud if there is one and check for basic error. 
-    
     func updateNotification(notification: NSNotification) {
+        hideProgressHUD()
+    }
+    
+    func changeNotification(notification: NSNotification) {
         hideProgressHUD()
     }
     
@@ -36,6 +58,7 @@ class ListViewController: BaseViewController {
     }
    
 }
+
 
 
 

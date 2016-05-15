@@ -97,7 +97,7 @@ enum TMDbMovieRouter: URLRequestConvertible {
                 return ("movie/\(movieID)/similar", parameters)
             case .MovieCredits(let movieID, let APIKey):
                 parameters[Key.APIKey] = APIKey
-                return ("/movie/\(movieID)/credits", parameters)
+                return ("movie/\(movieID)/credits", parameters)
             case .Reviews(let movieID, let page, let APIKey):
                 if let page = page { parameters[Key.Page] = page }
                 parameters[Key.APIKey] = APIKey

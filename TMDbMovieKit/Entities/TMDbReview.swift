@@ -16,7 +16,7 @@ private struct Keys {
     static let URL = "url"
 }
 
-public struct TMDbReview: JSONSerializable {
+public struct TMDbReview: JSONSerializable, Equatable {
     public var reviewID: Int?
     public var author: String?
     public var content: String?

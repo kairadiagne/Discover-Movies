@@ -2,142 +2,34 @@
 //  MenuViewController.swift
 //  DiscoverMovies
 //
-//  Created by Kaira Diagne on 12/05/16.
+//  Created by Kaira Diagne on 16/05/16.
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
 import UIKit
-import TMDbMovieKit
 
-class MenuViewController: ListViewController {
-    
-    private let signInManager = TMDbSignInManager()
-    
-    private let dataProvider = MenuDataSource()
-    
-    // MARK: - View Controller Life Cycle
+class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        tableView.dataSource = dataProvider
-//        tableView.delegate = self
+
+        // Do any additional setup after loading the view.
     }
-        
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Check the signinstatus and act accordingly
-            // Update the menu
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Animate things
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
-    }
-    
-    // MARK: - UITableViewDelegate 
-    
-    
-    
-    
+
+    /*
     // MARK: - Navigation
-    
-    
- 
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }
-
-extension MenuViewController: UITableViewDelegate {
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        switch indexPath.row {
-//
-//        }
-    }
-    
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        switch indexPath.row {
-        case 0:
-            return nil
-        default:
-            return indexPath
-        }
-    }
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        switch indexPath.row {
-        case 0:
-            return false
-        default:
-            return true
-        }
-    }
-    
-}
-    // View Related code
-    
-//    private func updateMenu(authorized: Bool, user: TMDbUser?) {
-//        userNameLabel.text = user?.name ?? "Guest"
-//        loginOutLabel.text = authorized ? "Sign Out" : "Sign in"
-//        favoriteCell.userInteractionEnabled = authorized
-//        favoriteLabel.enabled = authorized
-//        watchListCell.userInteractionEnabled = authorized
-//        watchListLabel.enabled = authorized
-//        setProfileImage(user?.gravatarURI)
-//    }
-    
-//    private func setProfileImage(gravatarURI: String?) {
-        //        if let gravatarURI = gravatarURI {
-        //            let url = TMDbImageRouter.ProfileSmall(path: gravatarURI).url
-        //            print(url)
-        //            profileImageview.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderProfileImage())
-        //        } else {
-        //            profileImageview.image = nil
-        //        }
-        //    }
-
-//}
-
-//
-//    @IBOutlet weak var favoriteCell: UITableViewCell!
-//    @IBOutlet weak var favoriteLabel: UILabel!
-//    @IBOutlet weak var watchListCell: UITableViewCell!
-//    @IBOutlet weak var watchListLabel: UILabel!
-//    @IBOutlet weak var userNameLabel: UILabel!
-//    @IBOutlet weak var loginOutLabel: UILabel!
-//    @IBOutlet weak var profileImageview: ProfileImageView!
-//
-///
-//        
-//        userNameLabel.textColor = UIColor.flatSkyBlueColor()
-//    }
-//
-//
-//
-//
-//
-//
-//
-//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-//        return .LightContent
-//    }
-//
-//
-//
-//    // MARK: - Navigation
-//
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == Storyboard.ToggleSignInSegueIdentifier {
-//            userInfoStore.deactivatePublicMode()
-//            userInfoStore.signOut()
-//        }
-//    }
-//
-//}
-//
-

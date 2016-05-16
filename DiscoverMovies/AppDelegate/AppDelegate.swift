@@ -14,7 +14,7 @@ import SWRevealViewController
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private struct Constants {
-        static let RootViewControllerNibName = "DiscoverViewController"
+        static let RootViewControllerNibName = "ListViewController"
     }
 
     var window: UIWindow?

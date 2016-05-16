@@ -22,7 +22,7 @@ class ListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.Body()
         self.overviewLabel.font = UIFont.Caption()
-        self.ratingView.setToDefaultStyle()
+//        self.ratingView.setToDefaultStyle()
     }
 
 }
@@ -34,7 +34,7 @@ extension ListTableViewCell {
     func configure(movie: TMDbMovie, imageURL: NSURL?) {
         titleLabel.text = movie.title != nil ? movie.title! : "Unknown"
         overviewLabel.text = movie.overview != nil ? movie.overview! : ""
-        if let rating = movie.rating { ratingView.configureForRating(rating) }
+//        if let rating = movie.rating { ratingView.configureForRating(rating) }
         movieImageView.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
     }
 

@@ -30,6 +30,8 @@ public class TMDbSignInManager {
     
     public var delegate: TMDbSignInDelegate?
     
+    public var inProgress = false
+    
     private let signInService = TMDbSignInService()
     
     private let sessionInfoStore = TMDbSessionInfoStore()
@@ -41,11 +43,15 @@ public class TMDbSignInManager {
     // MARK: - Sign In
     
     public func requestToken(redirectURI: String) {
-        signInService.getRequestToken(redirectURI) { (url, error) in
+        inProgress = true
+        signInService.getRequestToken() { (url, error) in
             guard error == nil else {
+                self.inProgress = false
                 self.delegate?.signInDelegateSigninDidFail(error!)
                 return
             }
+            
+            print(url)
             
             if let url = url {
                self.delegate?.signInDelegateShouldRequestAuthorization(url)
@@ -55,12 +61,14 @@ public class TMDbSignInManager {
     
     public func requestSessionID() {
         signInService.requestSessionID { (sessionID, error) in
-            guard error != nil else {
+            guard error == nil else {
+                self.inProgress = false
                 self.delegate?.signInDelegateSigninDidFail(error!)
                 return 
             }
             
             if let sessionID = sessionID {
+                self.inProgress = false
                 self.sessionInfoStore.persistSessionIDinStore(sessionID)
                 self.delegate?.signInDelegateSigninDidComplete()
             }

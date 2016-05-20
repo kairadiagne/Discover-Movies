@@ -26,8 +26,6 @@ class GradientImageView: UIImageView {
         self.gradientLayer.startPoint = startPoint
         self.gradientLayer.endPoint = endPoint
         self.layer.addSublayer(gradientLayer)
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

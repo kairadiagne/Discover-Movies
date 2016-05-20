@@ -8,7 +8,7 @@
 
 import UIKit
 import TMDbMovieKit
-import BRYXBanner
+import SafariServices
 
 class SignInViewController: BaseViewController {
     
@@ -18,7 +18,7 @@ class SignInViewController: BaseViewController {
     
     private let signInManager = TMDbSignInManager()
     private let userManager = TMDbUserManager()
-    private let webView = UIWebView()
+    private var authorizationViewController: SFSafariViewController!
     
     // MARK: - View Controller Life Cycle
 
@@ -46,29 +46,21 @@ class SignInViewController: BaseViewController {
     }
     
     func authorizeOnTMDb(url: NSURL) {
-        // Configure webview
-        webView.frame = view.bounds
-        webView.delegate = self
-        webView.scalesPageToFit = true
-        webView.hidden = false
-        view.addSubview(webView)
-        
-        // Load authorization URL
-        let authorizationRequest = NSURLRequest(URL: url)
-        webView.loadRequest(authorizationRequest)
+        authorizationViewController = SFSafariViewController(URL: url)
+        authorizationViewController.delegate = self
+        presentViewController(authorizationViewController, animated: true, completion: nil)
+
     }
     
     func requestSessionID() {
         showProgressHUD()
         signInManager.requestSessionID()
-        webView.hidden = true
     }
     
     // MARK: - Errror Handling
     
     func handleError(error: NSError) {
         detectInternetConnectionError(error)
-        // Other error is alert (An error ocurred during the sign in process please try again).
     }
     
     // MARK: - Navigation
@@ -96,28 +88,35 @@ extension SignInViewController: TMDbSignInDelegate {
     
     func signInDelegateSigninDidFail(error: NSError) {
         hideProgressHUD()
-        webView.hidden = true
-        webView.stopLoading()
         self.handleError(error)
     }
     
 }
 
-extension SignInViewController: UIWebViewDelegate {
+extension SignInViewController: SFSafariViewControllerDelegate {
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        // Check if the url that is being loaded by the webview is our redirect URI
-        if let url = request.URL {
-            if url == Constants.RedirectURI {
-                requestSessionID()
-            }
+    func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+        if !didLoadSuccessfully {
+            controller.dismissViewControllerAnimated(true, completion: nil)
         }
-        return true
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        guard let error = error else { return }
-        self.handleError(error)
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        requestSessionID()
     }
 }
+
+
+
+    
+
+
+    
+
+    
+
+    
+
+
+
 

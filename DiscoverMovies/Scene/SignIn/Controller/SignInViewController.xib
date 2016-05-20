@@ -40,6 +40,9 @@
                         <constraint firstAttribute="width" constant="200" id="TL2-8D-KNg"/>
                     </constraints>
                     <state key="normal" title="Continue without signing in"/>
+                    <connections>
+                        <action selector="activatePublicMode:" destination="-1" eventType="touchUpInside" id="d2V-lI-vlk"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIa-gk-Ymu">
                     <rect key="frame" x="20" y="20" width="560" height="21"/>
@@ -53,6 +56,9 @@
                         <constraint firstAttribute="width" constant="200" id="q3J-ET-p6g"/>
                     </constraints>
                     <state key="normal" title="Sign in with TMDb"/>
+                    <connections>
+                        <action selector="signIn:" destination="-1" eventType="touchUpInside" id="cAb-8z-dzA"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -9,18 +9,22 @@
 import UIKit
 import TMDbMovieKit
 
-// TODO: - Can be called MovieListDataProvider 
-
-class DiscoverDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
-    
-    var didSelectBlock: ((movie: TMDbMovie) -> ())?
-    var loadMoreBlock: (() -> ())?
+class DiscoverDataProvider: NSObject, UITableViewDataSource {
     
     var cellIdentifier: String = ""
     
     // MARK: - Data
      
     private var movies: [TMDbMovie] = []
+    
+    var movieCount: Int {
+        return movies.count
+    }
+    
+    func movieAtIndex(index: Int) -> TMDbMovie? {
+        guard index >= 0 && index <= movieCount else { return nil }
+        return movies[index]
+    }
     
     func updateMovies(movies: [TMDbMovie]) {
         self.movies = movies
@@ -40,19 +44,6 @@ class DiscoverDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    // MARK: - UITableViewDelegate
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let movie = movies[indexPath.row]
-        didSelectBlock?(movie: movie)
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if movies.count - 5 == indexPath.row {
-            loadMoreBlock?()
-        }
-        
-    }
 }
 
 

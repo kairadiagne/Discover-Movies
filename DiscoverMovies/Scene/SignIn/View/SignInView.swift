@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInView: UIView {
+class SignInView: BackgroundView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!

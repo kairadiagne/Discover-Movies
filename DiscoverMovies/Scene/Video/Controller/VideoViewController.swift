@@ -42,6 +42,7 @@ class VideoViewController: UIViewController {
     
     private func playVideo() {
         guard let youtubeID = video.key else {
+            // TODO: NSLocalizedString
             showAlertWithTitle("Trailer unavailable", message: "Couldn't find the trailer for this movie", completionHandler: { _ in
                 self.navigationController?.popToRootViewControllerAnimated(false)
             })

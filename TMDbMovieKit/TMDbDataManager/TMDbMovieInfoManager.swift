@@ -48,6 +48,8 @@ public class TMDbMovieInfoManager {
     
     // MARK: - Fetching
     
+    // TODO: Maybe this should be one big appended path fetch for the movie with this ID
+    
     public func reloadIfNeeded(forceOnline: Bool, movieID: Int) {
         self.movieID = movieID
         

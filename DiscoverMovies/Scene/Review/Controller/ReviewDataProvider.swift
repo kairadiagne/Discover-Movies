@@ -7,29 +7,33 @@
 //
 
 import UIKit
-import TMDbMovieKit 
+import TMDbMovieKit
+
+// TODO: - Show Background Message. How??
 
 class ReviewDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
-    private struct Constants {
-        static let ReviewCellIdentifier = "ReviewCell"
-    }
-    
     private var reviews = [TMDbReview]()
     
-    var loadMoreBlock: (() -> ())?
+    var cellIdentifier = ""
+    
+    var reviewCount: Int {
+        return reviews.count
+    }
+    
+    func reviewForIndex(index: Int) -> TMDbReview? {
+        guard index >= 0 && index <= reviewCount else { return nil }
+        return reviews[index]
+    }
     
     // MARK: - UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if reviews.count == 0 {
-//            tableView.showMessage
-        }
         return reviews.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.ReviewCellIdentifier, forIndexPath: indexPath) as! ReviewTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ReviewTableViewCell
         let review = reviews[indexPath.row]
         cell.configure(review)
         return cell
@@ -37,18 +41,6 @@ class ReviewDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     func updateWithReviews(reviews: [TMDbReview]) {
         self.reviews = reviews
-    }
-    
-    // MARK: - UITableViewDelegate
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if reviews.count - 5 == indexPath.row {
-            loadMoreBlock?()
-        }
-    }
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
     }
     
 }

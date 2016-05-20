@@ -12,8 +12,6 @@ import TMDbMovieKit
 class MenuTableView: UITableView {
     
     private struct Constants {
-        static let MenuCellIdentifier = "MenuCell"
-        static let MenuCellNibName = "MenuTableViewCell"
         static let ProfileHeaderHeight: CGFloat = 200
     }
     
@@ -23,9 +21,6 @@ class MenuTableView: UITableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        let nib = UINib(nibName: Constants.MenuCellNibName, bundle: nil)
-        registerNib(nib, forCellReuseIdentifier: Constants.MenuCellIdentifier)
         
         scrollEnabled = false
         

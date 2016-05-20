@@ -28,4 +28,8 @@ extension UIColor {
         return UIColor(red: 46/255, green: 52/255, blue: 56/255, alpha: 0.8)
     }
     
+    static func buttonColor() -> UIColor {
+        return UIColor(red: 162/255, green: 222/255, blue: 208/255, alpha: 0.8)
+    }
+    
 }

@@ -17,7 +17,27 @@ class ListViewController: BaseViewController {
         static let UserInfoKey = "error"
     }
 
-    @IBOutlet weak var tableView: ListTableView!
+    @IBOutlet weak var tableView: BaseTableView!
+    
+    private var signInManager = TMDbSignInManager()
+    
+    // MARK: - View Controller Life Cycle
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Check if we are signedin or in public mode or else we need to load the signin view controller
+        switch signInManager.signInStatus {
+        case .NotAvailable:
+           showSignInViewController()
+        default: break
+        }
+    }
+    
+    // TODO: - Should this be moved to the base view conroller. In other words should this be behavior every view controller in this app should or could have??
+    // The same goes for the checking og the signInStatus!!
+    // Then this listview conytoller sole responsibility is just providing a tableView for subclasses.
+    // Then we can also look up some of the behavior UITableViewController gives us out of the box and recreate this functionality in this view controller.
     
     // MARK: - Sign up for TMDbDataManagerNotifications
     
@@ -60,6 +80,13 @@ class ListViewController: BaseViewController {
         // Extract the error from the notification
         guard let error = notification.userInfo?[Constants.UserInfoKey] as? NSError else { return }
         detectInternetConnectionError(error)
+    }
+    
+    // MARK: - Navigation 
+    
+    func showSignInViewController() {
+        let signInViewController = SignInViewController()
+        presentViewController(signInViewController, animated: true, completion: nil) // Present modally
     }
    
 }

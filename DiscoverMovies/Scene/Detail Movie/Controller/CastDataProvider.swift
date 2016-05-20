@@ -11,8 +11,10 @@ import TMDbMovieKit
 
 class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    private struct Constants {
-        static let PersonCellIdentifier = "PersonCell"
+    var cellIdentifier = ""
+    
+    var count: Int {
+        return movieCredit?.cast.count ?? 0
     }
     
     private var movieCredit: TMDbMovieCredit?
@@ -25,10 +27,7 @@ class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.PersonCellIdentifier,
-                                                                        forIndexPath: indexPath) as! PersonCollectionViewCell
-        
-        // Configure cell with member of cast
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PersonCollectionViewCell
         guard let castMember = movieCredit?.cast[indexPath.row] else { return cell }
         cell.configureWithCastMember(castMember)
         return cell

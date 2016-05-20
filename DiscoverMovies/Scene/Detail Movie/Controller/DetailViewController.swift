@@ -9,7 +9,14 @@
 import UIKit
 import TMDbMovieKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: BaseViewController {
+    
+    private struct Constants {
+        static let MovieCellIdentifier = "MovieCell"
+        static let MovieCellNibName = "MovieCollectionViewCell"
+        static let PersonCellIdentifier = "PersonCell"
+        static let PersonCellNibName = "PersonCollectionViewCell"
+    }
     
     var detailView: DetailView { return view as! DetailView }
     
@@ -40,28 +47,34 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.setAsTransparent()
         automaticallyAdjustsScrollViewInsets = false
-        
-        // Set up collection view dataproviders
-        detailView.castCollectionView.delegate = castDataProvider
+       
+        castDataProvider.cellIdentifier = Constants.PersonCellIdentifier
         detailView.castCollectionView.dataSource = castDataProvider
-        detailView.similarMoviesCollectionView.delegate = similarMoviesDataProvider
-        detailView.similarMoviesCollectionView.dataSource = similarMoviesDataProvider
-        similarMoviesDataProvider.didSelectBlock = DetailViewController.showDetailSimilarMovie(self)
         
-        // Sign up for notifications 
-        let notificationCenter = NSNotificationCenter.defaultCenter()
+        similarMoviesDataProvider.cellIdentifier = Constants.MovieCellIdentifier
+        detailView.similarMoviesCollectionView.dataSource = similarMoviesDataProvider
+        detailView.similarMoviesCollectionView.delegate = self
+        
+        let movieCellNib = UINib(nibName: Constants.MovieCellNibName, bundle: nil)
+        let personCellNib = UINib(nibName: Constants.PersonCellNibName, bundle: nil)
+        detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: Constants.PersonCellIdentifier)
+        detailView.similarMoviesCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: Constants.MovieCellIdentifier)
+        
         let updateSelector = #selector(DetailViewController.update(_:))
+        let errorSelector = #selector(DetailViewController.handleError(_:))
+        let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: nil)
+        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        // Configure for movie
         detailView.configureForMovie(movie, image: image)
         
-        // Fetch aditional info about the movie
-        guard let movieID = movie.movieID else { return }
-        movieInfoManager.reloadIfNeeded(true, movieID: movieID)
+        if let movieID = movie.movieID {
+            movieInfoManager.reloadIfNeeded(true, movieID: movieID)
+        }
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -69,14 +82,27 @@ class DetailViewController: UIViewController {
         navigationController?.navigationBar.setAsUnclear()
     }
     
+    // MARK: - Actions 
+    
+    @IBAction func favouriteButtonGotTapped(sender: FavouriteButton) {
+        // Add or remove movie from favourites
+    }
+    
     // MARK: - Notifications 
     
     func update(notification: NSNotification) {
         similarMoviesDataProvider.updateWithMovies(movieInfoManager.similarMovies)
         
-        guard let movieCredit = movieInfoManager.movieCredit else { return } // Rare code
-        castDataProvider.updateWithMovieCredit(movieCredit: movieCredit)
-        detailView.configureWithMovieCredit(movieCredit)
+        if let movieCredit = movieInfoManager.movieCredit { // Ugly sollution
+            if castDataProvider.count == 0 {
+                castDataProvider.updateWithMovieCredit(movieCredit: movieCredit)
+                detailView.configureWithMovieCredit(movieCredit)
+            }
+        }
+    }
+    
+    func handleError(notification: NSNotification) {
+        // Extract and check the error
     }
 
     // MARK: - Navigation
@@ -97,6 +123,18 @@ class DetailViewController: UIViewController {
         
     }
 
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension DetailViewController: UICollectionViewDelegate {
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if collectionView == detailView.similarMoviesCollectionView{
+            guard let movie = similarMoviesDataProvider.movieAtIndex(indexPath.row) else { return }
+            showDetailSimilarMovie(movie)
+        }
+    }
 }
 
 

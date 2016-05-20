@@ -10,14 +10,10 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class DetailView: UIView {
+class DetailView: BackgroundView {
     
     private struct Constants {
         static let HeaderHeight: CGFloat = 291
-        static let MovieCellIdentifier = "MovieCell"
-        static let MovieCellNibName = "MovieCollectionViewCell"
-        static let PersonCellIdentifier = "PersonCell"
-        static let PersonCellNibName = "PersonCollectionViewCell"
     }
     
     // Static content
@@ -40,7 +36,8 @@ class DetailView: UIView {
     @IBOutlet weak var castCollectionView: UICollectionView!
     @IBOutlet weak var similarMoviesCollectionView: UICollectionView!
     
-    // Favorite button
+    @IBOutlet weak var favouriteButton: FavouriteButton!
+    @IBOutlet weak var watchListButton: WatchListButton!
     // Add to watch list button 
     // Watch Trailer button
     // Read reviews button 
@@ -52,6 +49,7 @@ class DetailView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupFontsForLabels()
+        setUpButtons()
         setupCollectionView()
         setupHeaderImageView()
         setupScrollView()
@@ -73,16 +71,17 @@ class DetailView: UIView {
         self.directorValueLabel.font = UIFont.Caption()
     }
     
+    private func setUpButtons() {
+        favouriteButton.lineColor = UIColor.buttonColor()
+        favouriteButton.fillColor = UIColor.buttonColor()
+        watchListButton.lineColor = UIColor.buttonColor()
+        watchListButton.fillColor = UIColor.buttonColor()
+    }
+    
     private func setupCollectionView() {
         // Assign custom flow layout
         self.similarMoviesCollectionView.collectionViewLayout = DetailFlowLayout()
-        self.castCollectionView.collectionViewLayout = DetailFlowLayout()
-        
-        // Register nibs 
-        let movieCellNib = UINib(nibName: Constants.MovieCellNibName, bundle: nil)
-        let personCellNib = UINib(nibName: Constants.PersonCellNibName, bundle: nil)
-        self.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: Constants.PersonCellIdentifier)
-        self.similarMoviesCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: Constants.MovieCellIdentifier)
+        self.castCollectionView.collectionViewLayout = DetailFlowLayout()       
     }
     
     private func setupScrollView() {

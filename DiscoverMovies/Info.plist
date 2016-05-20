@@ -26,9 +26,7 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>New item</key>
-			<string></string>
-			<key>api.themoviedb.org</key>
+			<key>themoviedb.org</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -63,14 +61,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>discover</string>
-        </array>
-    </dict>
-    </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>discover</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

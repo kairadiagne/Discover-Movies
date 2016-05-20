@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class TopListViewController: ListViewController, MenuButtonPresentable {
+class TopListViewController: DiscoverListViewController, MenuButtonPresentable {
     
     private let topListDataProvider = DiscoverDataProvider()
     private let topListManager = TMDbTopListManager()
@@ -27,10 +27,8 @@ class TopListViewController: ListViewController, MenuButtonPresentable {
     
         // Set up the topListDataProvider
         topListDataProvider.cellIdentifier = "DiscoverListIdentifier"
-        topListDataProvider.didSelectBlock = TopListViewController.showDetailViewControllerForMovie(self)
-        topListDataProvider.loadMoreBlock = TopListViewController.loadMore(self)
         tableView.dataSource = topListDataProvider
-        tableView.delegate = topListDataProvider
+        tableView.delegate = self
         
         // Sign up for notifications from toplistDataManager
         signUpForUpdateNotification(topListManager)
@@ -70,10 +68,6 @@ class TopListViewController: ListViewController, MenuButtonPresentable {
         }
     }
     
-    private func loadMore() {
-       topListManager.loadMore()
-    }
-    
     // MARK: - Notifications
     
     override func updateNotification(notification: NSNotification) {
@@ -96,6 +90,22 @@ class TopListViewController: ListViewController, MenuButtonPresentable {
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
+}
+
+// MARK: - UITableViewDelegate
+
+extension TopListViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let movie = topListDataProvider.movieAtIndex(indexPath.row) else { return }
+        showDetailViewControllerForMovie(movie)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if topListDataProvider.movieCount - 5 == indexPath.row {
+            topListManager.loadMore()
+        }
+    }
 }
 
 

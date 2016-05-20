@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class SearchViewController: ListViewController {
+class SearchViewController: DiscoverListViewController {
     
     private let searchManager = TMDbMovieSearchManager()
     private let dataProvider = DiscoverDataProvider()
@@ -26,8 +26,6 @@ class SearchViewController: ListViewController {
         
         // Set up data provider
         dataProvider.cellIdentifier = "DiscoverListIdentifier"
-        dataProvider.didSelectBlock = SearchViewController.showDetailViewControllerForMovie(self)
-        dataProvider.loadMoreBlock = SearchViewController.loadMore(self)
     }
     
     // MARK: - Fetching

@@ -9,17 +9,18 @@
 import UIKit
 import TMDbMovieKit
 
-class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    private struct Constants {
-        static let MovieCellIdentifier = "MovieCell"
-    }
-    
-    var didSelectBlock: ((movie: TMDbMovie) -> ())?
+class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
+
+    var cellIdentifier = ""
     
     private var movies = [TMDbMovie]()
     
     private var collectionView: UICollectionView?
+    
+    func movieAtIndex(index: Int) -> TMDbMovie? {
+        guard index >= 0 || index <= movies.count else { return nil }
+        return movies[index]
+    }
     
     // MARK: - UICollectionViewDataSource
     
@@ -29,9 +30,7 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.MovieCellIdentifier,
-                                                                         forIndexPath: indexPath) as! MovieCollectionViewCell
-        // Configure cell with movie
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! MovieCollectionViewCell
         let movie = movies[indexPath.row]
         cell.configureWithMovie(movie)
         return cell
@@ -44,11 +43,5 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource, UICollecti
         collectionView?.reloadData()
     }
     
-    // MARK: UICollectionViewDelegate
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let movie = movies[indexPath.row]
-        didSelectBlock?(movie: movie)
-    }
     
 }

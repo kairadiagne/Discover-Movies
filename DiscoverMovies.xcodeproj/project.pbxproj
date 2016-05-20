@@ -85,10 +85,13 @@
 		EA782B8B1CE0D63C00DC38AD /* TMDbUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B8A1CE0D63C00DC38AD /* TMDbUserService.swift */; };
 		EA782B8F1CE0E26C00DC38AD /* TMDbListHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B8E1CE0E26C00DC38AD /* TMDbListHolder.swift */; };
 		EA782B931CE1D28800DC38AD /* TMDbSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */; };
+		EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */; };
+		EAA862081CEDDD7500C76D4D /* DiscoverListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA862071CEDDD7500C76D4D /* DiscoverListViewController.swift */; };
+		EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA8620C1CEE41C300C76D4D /* WatchListButton.swift */; };
+		EAA8620F1CEE582800C76D4D /* AnimatedShapeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA8620E1CEE582800C76D4D /* AnimatedShapeButton.swift */; };
 		EAD2A83E1CDCBAEB0005264B /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */; };
 		EAD2A8401CDCC7820005264B /* TopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A83F1CDCC7820005264B /* TopListViewController.swift */; };
 		EAD2A8421CDCDF100005264B /* DiscoverDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */; };
-		EAD2A8591CDDE51D0005264B /* ListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2A8581CDDE51D0005264B /* ListTableView.swift */; };
 		EADA5A6C1CE8A53700C2FAE8 /* TMDbCastMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A6B1CE8A53700C2FAE8 /* TMDbCastMember.swift */; };
 		EADA5A6E1CE8A54200C2FAE8 /* TMDbCrewMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A6D1CE8A54200C2FAE8 /* TMDbCrewMember.swift */; };
 		EADA5A711CE8AD9A00C2FAE8 /* PersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A6F1CE8AD9A00C2FAE8 /* PersonCollectionViewCell.swift */; };
@@ -98,7 +101,6 @@
 		EADA5A7B1CE8B44600C2FAE8 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADA5A791CE8B44600C2FAE8 /* MovieCollectionViewCell.xib */; };
 		EADA5A7F1CE8D00B00C2FAE8 /* DetailFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A7E1CE8D00B00C2FAE8 /* DetailFlowLayout.swift */; };
 		EADA5A811CE9AA2200C2FAE8 /* ReviewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A801CE9AA2200C2FAE8 /* ReviewDataProvider.swift */; };
-		EADA5A8D1CEA0D6E00C2FAE8 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A8C1CEA0D6E00C2FAE8 /* FavoriteButton.swift */; };
 		EADA5A921CEA290500C2FAE8 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A901CEA290500C2FAE8 /* MenuTableViewCell.swift */; };
 		EADA5A931CEA290500C2FAE8 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADA5A911CEA290500C2FAE8 /* MenuTableViewCell.xib */; };
 		EADA5A961CEA309800C2FAE8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A941CEA309800C2FAE8 /* MenuViewController.swift */; };
@@ -184,8 +186,8 @@
 		111942A71CCB8DE5001CF39B /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		111942AB1CCB8DE5001CF39B /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		111942AC1CCB8DE5001CF39B /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
-		111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverListCell.swift; sourceTree = "<group>"; };
-		111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverListCell.xib; sourceTree = "<group>"; };
+		111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverListCell.swift; path = Discover/ListCell/DiscoverListCell.swift; sourceTree = "<group>"; };
+		111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DiscoverListCell.xib; path = Discover/ListCell/DiscoverListCell.xib; sourceTree = "<group>"; };
 		111942D21CCB8E47001CF39B /* PullToRefreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshable.swift; sourceTree = "<group>"; };
 		111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewConfftroller.swift; sourceTree = "<group>"; };
 		111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -244,10 +246,13 @@
 		EA782B8A1CE0D63C00DC38AD /* TMDbUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserService.swift; sourceTree = "<group>"; };
 		EA782B8E1CE0E26C00DC38AD /* TMDbListHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbListHolder.swift; sourceTree = "<group>"; };
 		EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSessionManager.swift; sourceTree = "<group>"; };
+		EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteButton.swift; sourceTree = "<group>"; };
+		EAA862071CEDDD7500C76D4D /* DiscoverListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverListViewController.swift; sourceTree = "<group>"; };
+		EAA8620C1CEE41C300C76D4D /* WatchListButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListButton.swift; sourceTree = "<group>"; };
+		EAA8620E1CEE582800C76D4D /* AnimatedShapeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedShapeButton.swift; sourceTree = "<group>"; };
 		EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		EAD2A83F1CDCC7820005264B /* TopListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListViewController.swift; sourceTree = "<group>"; };
-		EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverDataProvider.swift; sourceTree = "<group>"; };
-		EAD2A8581CDDE51D0005264B /* ListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableView.swift; sourceTree = "<group>"; };
+		EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverDataProvider.swift; path = Discover/TopList/Controller/DiscoverDataProvider.swift; sourceTree = "<group>"; };
 		EADA5A6B1CE8A53700C2FAE8 /* TMDbCastMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCastMember.swift; sourceTree = "<group>"; };
 		EADA5A6D1CE8A54200C2FAE8 /* TMDbCrewMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCrewMember.swift; sourceTree = "<group>"; };
 		EADA5A6F1CE8AD9A00C2FAE8 /* PersonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -257,7 +262,6 @@
 		EADA5A791CE8B44600C2FAE8 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
 		EADA5A7E1CE8D00B00C2FAE8 /* DetailFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailFlowLayout.swift; sourceTree = "<group>"; };
 		EADA5A801CE9AA2200C2FAE8 /* ReviewDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewDataProvider.swift; sourceTree = "<group>"; };
-		EADA5A8C1CEA0D6E00C2FAE8 /* FavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		EADA5A901CEA290500C2FAE8 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		EADA5A911CEA290500C2FAE8 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		EADA5A941CEA309800C2FAE8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -529,7 +533,6 @@
 			isa = PBXGroup;
 			children = (
 				EAD2A83F1CDCC7820005264B /* TopListViewController.swift */,
-				EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -661,6 +664,33 @@
 			path = Store;
 			sourceTree = "<group>";
 		};
+		EAA862091CEDE1DC00C76D4D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EAA8620B1CEDE20C00C76D4D /* Controller */,
+				EAA8620A1CEDE1FA00C76D4D /* Cell */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		EAA8620A1CEDE1FA00C76D4D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */,
+				111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		EAA8620B1CEDE20C00C76D4D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EAA862071CEDDD7500C76D4D /* DiscoverListViewController.swift */,
+				EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		EAD2A8211CDC9D000005264B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,16 +781,6 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
-		EAD2A85A1CDDE6560005264B /* DiscoverListCell */ = {
-			isa = PBXGroup;
-			children = (
-				111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */,
-				111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */,
-			);
-			name = DiscoverListCell;
-			path = Discover/ListCell;
-			sourceTree = "<group>";
-		};
 		EAD2A8641CDDE82F0005264B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -812,7 +832,9 @@
 		EADA5A8B1CEA0D3E00C2FAE8 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				EADA5A8C1CEA0D6E00C2FAE8 /* FavoriteButton.swift */,
+				EAA8620E1CEE582800C76D4D /* AnimatedShapeButton.swift */,
+				EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */,
+				EAA8620C1CEE41C300C76D4D /* WatchListButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -850,7 +872,6 @@
 			isa = PBXGroup;
 			children = (
 				EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */,
-				EAD2A8581CDDE51D0005264B /* ListTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -858,7 +879,7 @@
 		EADA5AA41CEA64CB00C2FAE8 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2A85A1CDDE6560005264B /* DiscoverListCell */,
+				EAA862091CEDE1DC00C76D4D /* Base */,
 				EAD2A82D1CDC9E650005264B /* TopList */,
 				EAD2A82E1CDC9E7F0005264B /* Search */,
 			);
@@ -1114,6 +1135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAA8620F1CEE582800C76D4D /* AnimatedShapeButton.swift in Sources */,
 				EA6487A81CE3CBCA00452DD0 /* SearchViewController.swift in Sources */,
 				111942B31CCB8DE5001CF39B /* BackgroundView.swift in Sources */,
 				EADA5A921CEA290500C2FAE8 /* MenuTableViewCell.swift in Sources */,
@@ -1126,7 +1148,6 @@
 				111942BA1CCB8DE5001CF39B /* DiscoverListCell.swift in Sources */,
 				EA6487C21CE4E55500452DD0 /* SignInView.swift in Sources */,
 				EADA5AA61CEA664300C2FAE8 /* SimilarMoviesDataProvider.swift in Sources */,
-				EADA5A8D1CEA0D6E00C2FAE8 /* FavoriteButton.swift in Sources */,
 				111943321CCB8FCE001CF39B /* MenuButtonPresentable.swift in Sources */,
 				EADA5AA81CEA6B3700C2FAE8 /* FontStack.swift in Sources */,
 				1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */,
@@ -1151,15 +1172,17 @@
 				1119429B1CCB8DD4001CF39B /* MBProgressHUD+Configure.swift in Sources */,
 				EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */,
 				EADA5AAA1CEA6B6A00C2FAE8 /* Colors.swift in Sources */,
+				EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */,
 				EAD2A83E1CDCBAEB0005264B /* BaseTableView.swift in Sources */,
 				111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */,
-				EAD2A8591CDDE51D0005264B /* ListTableView.swift in Sources */,
 				EA6487711CE21E2300452DD0 /* ListViewController.swift in Sources */,
+				EAA862081CEDDD7500C76D4D /* DiscoverListViewController.swift in Sources */,
 				EA6487A21CE356C300452DD0 /* DetailView.swift in Sources */,
 				111942A11CCB8DD4001CF39B /* UIImage+Placeholder.swift in Sources */,
 				1119429E1CCB8DD4001CF39B /* NSDate+Year.swift in Sources */,
 				113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */,
 				EA64879F1CE3569700452DD0 /* DetailViewController.swift in Sources */,
+				EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */,
 				EAD2A8421CDCDF100005264B /* DiscoverDataProvider.swift in Sources */,
 				EA6487BF1CE4E50100452DD0 /* SignInViewController.swift in Sources */,
 				111942A51CCB8DD4001CF39B /* UIViewController+Alert.swift in Sources */,

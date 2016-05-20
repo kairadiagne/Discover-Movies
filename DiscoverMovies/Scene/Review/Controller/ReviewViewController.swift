@@ -13,15 +13,15 @@ class ReviewViewController: ListViewController {
     
     private let movie: TMDbMovie
     private let reviewManager = TMDbReviewManager()
-    private let dataProvider = ReviewDataProvider()
+    private let reviewDataProvider = ReviewDataProvider()
     
     // MARK: - View Controller Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataProvider.loadMoreBlock = ReviewViewController.loadmore(self)
-        tableView.dataSource = dataProvider
-        tableView.delegate = dataProvider
+        reviewDataProvider.cellIdentifier = "ReviewCell"
+        tableView.dataSource = reviewDataProvider
+        tableView.delegate = self
         
         signUpForUpdateNotification(self.reviewManager)
         signUpForChangeNotification(self.reviewManager)
@@ -47,13 +47,13 @@ class ReviewViewController: ListViewController {
     
     override func updateNotification(notification: NSNotification) {
         super.updateNotification(notification)
-        dataProvider.updateWithReviews(reviewManager.reviews)
+        reviewDataProvider.updateWithReviews(reviewManager.reviews)
         tableView.reloadData()
     }
     
     override func changeNotification(notification: NSNotification) {
         super.changeNotification(notification)
-        dataProvider.updateWithReviews(reviewManager.reviews)
+        reviewDataProvider.updateWithReviews(reviewManager.reviews)
         tableView.reloadData()
     }
     
@@ -62,5 +62,22 @@ class ReviewViewController: ListViewController {
     func loadmore() {
         reviewManager.loadMore()
     }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension ReviewViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if reviewDataProvider.reviewCount - 5 == indexPath.row {
+            loadmore()
+        }
+    }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
     
 }

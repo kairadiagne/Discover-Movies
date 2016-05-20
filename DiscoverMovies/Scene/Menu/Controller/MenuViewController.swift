@@ -29,20 +29,27 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
         
-        let notificationCenter = NSNotificationCenter.defaultCenter()
+        // Set up table view
+        tableView.dataSource = self
+        let nib = UINib(nibName: Constants.MenuCellNibName, bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: Constants.MenuCellIdentifier)
+        
+        // Sign up for notifcations from user manager
         let updateSelector = #selector(MenuViewController.update(_:))
+        let errorSelector = #selector(MenuViewController.handleError(_:))
+        let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: userManager)
+        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: userManager)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if signInManager.signInStatus == .Signedin {
+        if signInStatus == .Signedin {
             userManager.reloadIfNeeded(true)
         } else {
-           tableView.configureForUser(nil, url: nil)
+            tableView.configureForUser(nil, url: nil)
         }
         
     }
@@ -57,6 +64,10 @@ class MenuViewController: UIViewController {
         guard let user = userManager.user, path = user.gravatarURI else { return }
         let url = TMDbImageRouter.ProfileMedium(path: path).url
         tableView.configureForUser(user, url: url)
+    }
+    
+    func handleError(notification: NSNotification) {
+        
     }
     
     // MARK: - Navigation
@@ -103,9 +114,6 @@ extension MenuViewController: UITableViewDataSource {
     }
     
 }
-
-
-
 
 
 

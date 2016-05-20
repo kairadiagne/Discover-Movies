@@ -88,7 +88,9 @@ extern NSInteger const IQOptionalTextFieldIndex;
 @protocol IQDropDownTextFieldDelegate <UITextFieldDelegate>
 
 @optional
--(void)textField:(nonnull IQDropDownTextField*)textField didSelectItem:(nullable NSString*)item; //Called when textField changes it's selected item.
+-(void)textField:(nonnull IQDropDownTextField*)textField didSelectItem:(nullable NSString*)item; //Called when textField changes it's selected item. Supported for IQDropDownModeTextPicker
+
+-(void)textField:(nonnull IQDropDownTextField*)textField didSelectDate:(nullable NSDate*)date; //Called when textField changes it's selected item. Supported for IQDropDownModeTimePicker, IQDropDownModeDatePicker, IQDropDownModeDateTimePicker
 
 @end
 
@@ -161,9 +163,14 @@ extern NSInteger const IQOptionalTextFieldIndex;
 ///-------------------------------
 
 /**
- Items to show in pickerView. Please use [ NSArray of NSString ] format for setter method, For example. @[ @"1", @"2", @"3", ]
+ Items to show in pickerView. Please use [ NSArray of NSString ] format for setter method, For example. @[ @"1", @"2", @"3", ]. This field must be set.
  */
 @property (nonnull, nonatomic, copy) NSArray <NSString*> *itemList;
+
+/**
+ If this is set then we'll show textfield's text from this list instead from regular itemList. This is only for showing different messaging in textfield's text. This itemListUI array must be identical to itemList array.
+ */
+@property (nonnull, nonatomic, copy) NSArray <NSString*> *itemListUI;
 
 /**
  Selected row index of selected item.

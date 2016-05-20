@@ -49,7 +49,6 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
 
 @synthesize dropDownMode = _dropDownMode;
 @synthesize itemList = _itemList;
-@synthesize selectedItem = _selectedItem;
 @synthesize isOptionalDropDown = _isOptionalDropDown;
 @synthesize datePickerMode = _datePickerMode;
 @synthesize minimumDate = _minimumDate;
@@ -82,7 +81,6 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
     self.delegate = nil;
     _dataSource = nil;
     _optionalItemText = nil;
-    _selectedItem = nil;
     _itemList = nil;
 }
 
@@ -327,14 +325,13 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
             }
             else
             {
-                
-                super.text = (row == 0) ? @"" : [_itemList objectAtIndex:row-1];
+                super.text = (row == 0) ? @"" : [_itemListUI?:_itemList objectAtIndex:row-1];
             }
             [self.pickerView selectRow:row inComponent:0 animated:animated];
         }
         else
         {
-            super.text = [_itemList objectAtIndex:row];
+            super.text = [_itemListUI?:_itemList objectAtIndex:row];
             [self.pickerView selectRow:row inComponent:0 animated:animated];
         }
     }
@@ -485,6 +482,55 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
     [self.dateTimePicker setLocale:self.dropDownDateTimeFormater.locale];
 }
 
+- (NSString*)selectedItem
+{
+    switch (_dropDownMode)
+    {
+        case IQDropDownModeTextPicker:
+        {
+            NSInteger selectedRow = -1;
+            if (self.isOptionalDropDown)
+            {
+                selectedRow = [self.pickerView selectedRowInComponent:0]-1;
+            }
+            else
+            {
+                selectedRow = [self.pickerView selectedRowInComponent:0];
+            }
+            
+            if (selectedRow >= 0)
+            {
+                return [_itemList objectAtIndex:selectedRow];
+            }
+            else
+            {
+                return nil;
+            }
+        }
+            break;
+        case IQDropDownModeDatePicker:
+        {
+            return [self.dropDownDateFormatter stringFromDate:self.datePicker.date];
+        }
+            break;
+        case IQDropDownModeTimePicker:
+        {
+            return [self.dropDownTimeFormatter stringFromDate:self.timePicker.date];
+        }
+            break;
+        case IQDropDownModeDateTimePicker:
+        {
+            return [self.dropDownDateTimeFormater stringFromDate:self.dateTimePicker.date];
+        }
+            break;
+        case IQDropDownModeTextField:
+        {
+            return super.text;
+        }
+            break;
+    }
+}
+
 -(void)setSelectedItem:(NSString *)selectedItem
 {
     [self setSelectedItem:selectedItem animated:NO shouldNotifyDelegate:NO];
@@ -502,12 +548,10 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
         case IQDropDownModeTextPicker:
             if ([_ItemListsInternal containsObject:selectedItem])
             {
-                _selectedItem = selectedItem;
-                
                 [self setSelectedRow:[_ItemListsInternal indexOfObject:selectedItem] animated:animated];
                 
                 if (shouldNotifyDelegate && [self.delegate respondsToSelector:@selector(textField:didSelectItem:)])
-                    [self.delegate textField:self didSelectItem:_selectedItem];
+                    [self.delegate textField:self didSelectItem:selectedItem];
             }
             break;
         case IQDropDownModeDatePicker:
@@ -515,12 +559,11 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
             NSDate *date = [self.dropDownDateFormatter dateFromString:selectedItem];
             if (date)
             {
-                _selectedItem = selectedItem;
                 super.text = selectedItem;
                 [self.datePicker setDate:date animated:animated];
                 
-                if (shouldNotifyDelegate && [self.delegate respondsToSelector:@selector(textField:didSelectItem:)])
-                    [self.delegate textField:self didSelectItem:_selectedItem];
+                if (shouldNotifyDelegate && [self.delegate respondsToSelector:@selector(textField:didSelectDate:)])
+                    [self.delegate textField:self didSelectDate:date];
             }
             else if ([selectedItem length])
             {
@@ -533,12 +576,11 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
             NSDate *date = [self.dropDownTimeFormatter dateFromString:selectedItem];
             if (date)
             {
-                _selectedItem = selectedItem;
                 super.text = selectedItem;
                 [self.timePicker setDate:date animated:animated];
                 
-                if (shouldNotifyDelegate && [self.delegate respondsToSelector:@selector(textField:didSelectItem:)])
-                    [self.delegate textField:self didSelectItem:_selectedItem];
+                if (shouldNotifyDelegate && [self.delegate respondsToSelector:@selector(textField:didSelectDate:)])
+                    [self.delegate textField:self didSelectDate:date];
             }
             else if([selectedItem length])
             {
@@ -551,12 +593,11 @@ NSInteger const IQOptionalTextFieldIndex =  -1;
             NSDate *date = [self.dropDownDateTimeFormater dateFromString:selectedItem];
             if (date)
             {
-                _selectedItem = selectedItem;
                 super.text = selectedItem;
-                [self.timePicker setDate:date animated:animated];
+                [self.dateTimePicker setDate:date animated:animated];
                 
-                if (shouldNotifyDelegate && [self.delegate respondsToSelector:@selector(textField:didSelectItem:)])
-                    [self.delegate textField:self didSelectItem:_selectedItem];
+                if (shouldNotifyDelegate && [self.delegate respondsToSelector:@selector(textField:didSelectDate:)])
+                    [self.delegate textField:self didSelectDate:date];
             }
             else if([selectedItem length])
             {

@@ -30,7 +30,6 @@
 		111942D61CCB8E47001CF39B /* PullToRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D21CCB8E47001CF39B /* PullToRefreshable.swift */; };
 		111942E01CCB8E74001CF39B /* SearchViewConfftroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */; };
 		111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */; };
-		111942EF1CCB8EAE001CF39B /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942EC1CCB8EAE001CF39B /* Menu.storyboard */; };
 		111942F21CCB8EB8001CF39B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F11CCB8EB8001CF39B /* Theme.swift */; };
 		111942F61CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F31CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift */; };
 		111942F71CCB8EDE001CF39B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F41CCB8EDE001CF39B /* Constants.swift */; };
@@ -52,7 +51,9 @@
 		113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* NSDate+ToString.swift */; };
 		2FD0C58EA1F83D58CE8F5738 /* Pods_Networking_TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F2009B39EE3FB694D55FCB /* Pods_Networking_TMDbMovieKit.framework */; };
 		D816CF16474C99AD6B06FE41 /* Pods_Networking_DiscoverMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517321B22A00C2578060F5E8 /* Pods_Networking_DiscoverMovies.framework */; };
-		EA01FB021CEEFEEC007C9992 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01FB011CEEFEEC007C9992 /* Caching.swift */; };
+		EA288F061CF2F7BE004FAEEF /* MenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F051CF2F7BE004FAEEF /* MenuDataSource.swift */; };
+		EA288F081CF301C1004FAEEF /* MenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA288F071CF301C1004FAEEF /* MenuHeaderView.xib */; };
+		EA288F0A1CF338BA004FAEEF /* TMDbCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F091CF338BA004FAEEF /* TMDbCachedData.swift */; };
 		EA6487681CE1E65700452DD0 /* TMDbUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */; };
 		EA6487711CE21E2300452DD0 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64876F1CE21E2300452DD0 /* ListViewController.swift */; };
 		EA6487721CE21E2300452DD0 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487701CE21E2300452DD0 /* ListViewController.xib */; };
@@ -107,7 +108,6 @@
 		EADA5A961CEA309800C2FAE8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A941CEA309800C2FAE8 /* MenuViewController.swift */; };
 		EADA5A971CEA309800C2FAE8 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADA5A951CEA309800C2FAE8 /* MenuViewController.xib */; };
 		EADA5A9D1CEA3C8400C2FAE8 /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A9C1CEA3C8400C2FAE8 /* MenuTableView.swift */; };
-		EADA5A9F1CEA3E0400C2FAE8 /* MenuHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADA5A9E1CEA3E0400C2FAE8 /* MenuHeaderView.xib */; };
 		EADA5AA11CEA3E1000C2FAE8 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5AA01CEA3E1000C2FAE8 /* MenuHeaderView.swift */; };
 		EADA5AA61CEA664300C2FAE8 /* SimilarMoviesDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5AA51CEA664300C2FAE8 /* SimilarMoviesDataProvider.swift */; };
 		EADA5AA81CEA6B3700C2FAE8 /* FontStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5AA71CEA6B3700C2FAE8 /* FontStack.swift */; };
@@ -192,7 +192,6 @@
 		111942D21CCB8E47001CF39B /* PullToRefreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshable.swift; sourceTree = "<group>"; };
 		111942DD1CCB8E74001CF39B /* SearchViewConfftroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewConfftroller.swift; sourceTree = "<group>"; };
 		111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		111942EC1CCB8EAE001CF39B /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Menu.storyboard; path = ../Menu.storyboard; sourceTree = "<group>"; };
 		111942F11CCB8EB8001CF39B /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		111942F31CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+JSONSerializable.swift"; sourceTree = "<group>"; };
 		111942F41CCB8EDE001CF39B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -218,7 +217,9 @@
 		BA5CC387001572C734217AFD /* Pods-Networking-TMDbMovieKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-TMDbMovieKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-TMDbMovieKit/Pods-Networking-TMDbMovieKit.release.xcconfig"; sourceTree = "<group>"; };
 		C0F2009B39EE3FB694D55FCB /* Pods_Networking_TMDbMovieKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking_TMDbMovieKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D240CDE2964B81D596798CDB /* Pods-Networking-DiscoverMovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-DiscoverMovies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-DiscoverMovies/Pods-Networking-DiscoverMovies.debug.xcconfig"; sourceTree = "<group>"; };
-		EA01FB011CEEFEEC007C9992 /* Caching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
+		EA288F051CF2F7BE004FAEEF /* MenuDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuDataSource.swift; sourceTree = "<group>"; };
+		EA288F071CF301C1004FAEEF /* MenuHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuHeaderView.xib; sourceTree = "<group>"; };
+		EA288F091CF338BA004FAEEF /* TMDbCachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCachedData.swift; sourceTree = "<group>"; };
 		EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserManager.swift; sourceTree = "<group>"; };
 		EA64876F1CE21E2300452DD0 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		EA6487701CE21E2300452DD0 /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
@@ -273,7 +274,6 @@
 		EADA5A941CEA309800C2FAE8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		EADA5A951CEA309800C2FAE8 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		EADA5A9C1CEA3C8400C2FAE8 /* MenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
-		EADA5A9E1CEA3E0400C2FAE8 /* MenuHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuHeaderView.xib; sourceTree = "<group>"; };
 		EADA5AA01CEA3E1000C2FAE8 /* MenuHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
 		EADA5AA51CEA664300C2FAE8 /* SimilarMoviesDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarMoviesDataProvider.swift; sourceTree = "<group>"; };
 		EADA5AA71CEA6B3700C2FAE8 /* FontStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontStack.swift; sourceTree = "<group>"; };
@@ -347,9 +347,8 @@
 				111942871CCB8D65001CF39B /* AppDelegate */,
 				EAD2A8211CDC9D000005264B /* Scene */,
 				111942881CCB8D6F001CF39B /* Theme */,
-				111942841CCB8D13001CF39B /* Helpers */,
+				111942841CCB8D13001CF39B /* Utils */,
 				111942831CCB8D0B001CF39B /* View (old) */,
-				111942821CCB8CF8001CF39B /* Controller Old */,
 				111942851CCB8D1C001CF39B /* Storyboard */,
 			);
 			path = DiscoverMovies;
@@ -388,15 +387,6 @@
 			path = TMDbMovieKitTests;
 			sourceTree = "<group>";
 		};
-		111942821CCB8CF8001CF39B /* Controller Old */ = {
-			isa = PBXGroup;
-			children = (
-				111942EC1CCB8EAE001CF39B /* Menu.storyboard */,
-			);
-			name = "Controller Old";
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		111942831CCB8D0B001CF39B /* View (old) */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,7 +399,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		111942841CCB8D13001CF39B /* Helpers */ = {
+		111942841CCB8D13001CF39B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				1119428D1CCB8DD4001CF39B /* IQDropDownTextField+Configure.swift */,
@@ -422,6 +412,7 @@
 				111942981CCB8DD4001CF39B /* UIViewController+Alert.swift */,
 				EA6487F31CE61E1700452DD0 /* UIWebImage+CachedImage.swift */,
 			);
+			name = Utils;
 			path = Helpers;
 			sourceTree = "<group>";
 		};
@@ -611,6 +602,7 @@
 			children = (
 				EADA5A941CEA309800C2FAE8 /* MenuViewController.swift */,
 				EADA5A951CEA309800C2FAE8 /* MenuViewController.xib */,
+				EA288F051CF2F7BE004FAEEF /* MenuDataSource.swift */,
 			);
 			name = Controller;
 			path = Menu/Controller;
@@ -670,7 +662,7 @@
 				EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */,
 				EA782B7E1CE0C50000DC38AD /* TMDbAccountListManager.swift */,
 				EA782B861CE0CA4500DC38AD /* TMDbReviewManager.swift */,
-				EA01FB011CEEFEEC007C9992 /* Caching.swift */,
+				EA288F091CF338BA004FAEEF /* TMDbCachedData.swift */,
 			);
 			name = "Data manager";
 			path = TMDbDataManager;
@@ -882,7 +874,7 @@
 			isa = PBXGroup;
 			children = (
 				EADA5AA01CEA3E1000C2FAE8 /* MenuHeaderView.swift */,
-				EADA5A9E1CEA3E0400C2FAE8 /* MenuHeaderView.xib */,
+				EA288F071CF301C1004FAEEF /* MenuHeaderView.xib */,
 			);
 			name = "Menu HeaderView";
 			path = "Menu/Menu Header View";
@@ -1058,15 +1050,14 @@
 				EA6487A01CE3569700452DD0 /* DetailViewController.xib in Resources */,
 				EA6487721CE21E2300452DD0 /* ListViewController.xib in Resources */,
 				111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */,
-				111942EF1CCB8EAE001CF39B /* Menu.storyboard in Resources */,
 				111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */,
-				EADA5A9F1CEA3E0400C2FAE8 /* MenuHeaderView.xib in Resources */,
 				EADA5A971CEA309800C2FAE8 /* MenuViewController.xib in Resources */,
 				111942B91CCB8DE5001CF39B /* ListTableViewCell.xib in Resources */,
 				EA6487C01CE4E50100452DD0 /* SignInViewController.xib in Resources */,
 				EADA5A721CE8AD9A00C2FAE8 /* PersonCollectionViewCell.xib in Resources */,
 				EADA5A931CEA290500C2FAE8 /* MenuTableViewCell.xib in Resources */,
 				EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */,
+				EA288F081CF301C1004FAEEF /* MenuHeaderView.xib in Resources */,
 				111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */,
 				EA6487B21CE4AB2900452DD0 /* VideoViewController.xib in Resources */,
 				EADA5A7B1CE8B44600C2FAE8 /* MovieCollectionViewCell.xib in Resources */,
@@ -1199,6 +1190,7 @@
 				EA6487CE1CE5166A00452DD0 /* BannerPresentable.swift in Sources */,
 				1119429A1CCB8DD4001CF39B /* IQDropDownTextField+Configure.swift in Sources */,
 				111942B41CCB8DE5001CF39B /* CustomButton.swift in Sources */,
+				EA288F061CF2F7BE004FAEEF /* MenuDataSource.swift in Sources */,
 				EAD2A8401CDCC7820005264B /* TopListViewController.swift in Sources */,
 				111942B81CCB8DE5001CF39B /* ListTableViewCell.swift in Sources */,
 				EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */,
@@ -1254,6 +1246,7 @@
 				EA6487B81CE4BC9D00452DD0 /* TMDbMovieCredit.swift in Sources */,
 				111942F61CCB8EDE001CF39B /* AlamofireRequest+JSONSerializable.swift in Sources */,
 				1119430C1CCB8EEB001CF39B /* String+ToNSDate.swift in Sources */,
+				EA288F0A1CF338BA004FAEEF /* TMDbCachedData.swift in Sources */,
 				EA782B7F1CE0C50000DC38AD /* TMDbAccountListManager.swift in Sources */,
 				111943141CCB8EF6001CF39B /* TMDbSignInRouter.swift in Sources */,
 				EA6487B41CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift in Sources */,
@@ -1267,7 +1260,6 @@
 				111942F71CCB8EDE001CF39B /* Constants.swift in Sources */,
 				1119431F1CCB8EFC001CF39B /* TMDbSignInService.swift in Sources */,
 				EA782B7D1CE0B5F100DC38AD /* TMDbSignInManager.swift in Sources */,
-				EA01FB021CEEFEEC007C9992 /* Caching.swift in Sources */,
 				EA782B8B1CE0D63C00DC38AD /* TMDbUserService.swift in Sources */,
 				111942F81CCB8EDE001CF39B /* ResponseJSONObjectSerializable.swift in Sources */,
 				EA782B871CE0CA4500DC38AD /* TMDbReviewManager.swift in Sources */,

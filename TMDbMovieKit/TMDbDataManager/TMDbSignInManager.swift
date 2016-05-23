@@ -14,19 +14,7 @@ public protocol TMDbSignInDelegate {
     func signInDelegateSigninDidComplete()
 }
 
-public enum TMDBSigInStatus {
-    case Signedin
-    case PublicMode
-    case NotAvailable
-}
-
 public class TMDbSignInManager {
-    
-    public var signInStatus: TMDBSigInStatus {
-        if sessionInfoStore.sessionID != nil { return .Signedin }
-        if publicModeActivated { return .PublicMode }
-        return .NotAvailable
-    }
     
     public var delegate: TMDbSignInDelegate?
     
@@ -76,10 +64,6 @@ public class TMDbSignInManager {
     }
     
     // MARK: - Public Mode
-    
-    var publicModeActivated: Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey("userIsInpublicMode")
-    }
     
     public func activatePublicMode() {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "userIsInpublicMode")

@@ -1,9 +1,9 @@
 //
 //  MenuTableViewCell.swift
-//  
+//  DiscoverMovies
 //
 //  Created by Kaira Diagne on 16/05/16.
-//
+//  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
 import UIKit
@@ -23,10 +23,11 @@ class MenuTableViewCell: UITableViewCell {
     
     // MARK: - Configure
     
-    func configureWithItem(text: String, imageName name: String) {
-        self.menuLabel.text = text
-        let image = UIImage(named: name)
-        self.menuImage.setBackgroundImage(image, forState: .Normal)
+    func configureWithMenuItem(menuItem: MenuItem) {
+        menuLabel.text = menuItem.title
+
+        guard let icon = menuItem.icon else { return }
+        menuImage.setBackgroundImage(icon, forState: .Normal)
     }
     
 }

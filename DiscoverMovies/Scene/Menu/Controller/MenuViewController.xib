@@ -6,12 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController" customModule="DiscoverMovies" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="Al3-MU-Fme" id="Dax-Aw-Zbn"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="HY0-pJ-FqR"/>
+                <outlet property="tableView" destination="Al3-MU-Fme" id="7PJ-vR-z8e"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="ct9-7t-0jS"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="MenuTableView" customModule="DiscoverMovies" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -22,11 +22,12 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Al3-MU-Fme" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BWb-ji-t9G"/>
-                <constraint firstAttribute="bottom" secondItem="Al3-MU-Fme" secondAttribute="bottom" id="Lb7-BS-05m"/>
-                <constraint firstItem="Al3-MU-Fme" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="M9l-Mk-kAO"/>
-                <constraint firstAttribute="trailing" secondItem="Al3-MU-Fme" secondAttribute="trailing" id="wAT-9I-Wow"/>
+                <constraint firstItem="Al3-MU-Fme" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Dap-He-xPe"/>
+                <constraint firstAttribute="bottom" secondItem="Al3-MU-Fme" secondAttribute="bottom" id="cPC-2h-krT"/>
+                <constraint firstAttribute="trailing" secondItem="Al3-MU-Fme" secondAttribute="trailing" id="fRe-Al-ZMO"/>
+                <constraint firstItem="Al3-MU-Fme" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="idz-7n-W1a"/>
             </constraints>
+            <point key="canvasLocation" x="352" y="226"/>
         </view>
     </objects>
 </document>

@@ -9,17 +9,38 @@
 import Foundation
 import Locksmith
 
+public enum TMDBSigInStatus {
+    case Signedin
+    case PublicMode
+    case NotAvailable
+}
+
 public class TMDbSessionManager {
     
     public init() { }
     
     let sessionInfoStore = TMDbSessionInfoStore()
     
+    // MARK: - API Key
+    
     public func registerAPIKey(APIKey key: String) {
         sessionInfoStore.APIKey = key
     }
     
+    // MARK: - Signin Status
+    
+    public var signInStatus: TMDBSigInStatus {
+        if sessionInfoStore.sessionID != nil { return .Signedin }
+        if publicModeActivated { return .PublicMode }
+        return .NotAvailable
+    }
+    
+    private var publicModeActivated: Bool {
+        return NSUserDefaults.standardUserDefaults().boolForKey("userIsInpublicMode")
+    }
+    
 }
+
 
 
 

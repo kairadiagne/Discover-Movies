@@ -15,9 +15,11 @@ class SignInViewController: BaseViewController {
     private struct Constants {
         static let RedirectURI = "discover://"
     }
+
+    private let userManager = TMDbUserManager()
     
     private let signInManager = TMDbSignInManager()
-    private let userManager = TMDbUserManager()
+    
     private var authorizationViewController: SFSafariViewController!
     
     // MARK: - View Controller Life Cycle
@@ -49,7 +51,6 @@ class SignInViewController: BaseViewController {
         authorizationViewController = SFSafariViewController(URL: url)
         authorizationViewController.delegate = self
         presentViewController(authorizationViewController, animated: true, completion: nil)
-
     }
     
     func requestSessionID() {

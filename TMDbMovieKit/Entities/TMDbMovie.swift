@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
+
 
 private struct Keys {
     static let MovieID = "id"
@@ -23,39 +24,75 @@ private struct Keys {
     static let BackdropPath = "backdrop_path"
 }
 
-public struct TMDbMovie: JSONSerializable, Equatable {
-    public var movieID: Int?
-    public var title: String?
-    public var releaseDate: NSDate?
-    public var genreIDs: [Int]
-    public var genreStrings: [String] = []
+
+public class TMDbMovie: NSObject, Mappable, NSCoding {
+    
+    public var movieID: Int = 0
+    public var title: String = ""
     public var overview: String?
+    public var releaseDate: NSDate?
+    public var genre: [TMDbGenre] = []
     public var rating: Double?
     public var adult: Bool?
-    public var popularity: Int?
     public var posterPath: String?
     public var backDropPath: String?
     
     
-    public init?(json: SwiftyJSON.JSON) {
-        self.movieID = json[Keys.MovieID].int
-        self.title = json[Keys.Title].string
-        self.releaseDate = json[Keys.ReleaseDate].string?.toDate()
-        self.genreIDs = json[Keys.GenreID].arrayValue.flatMap { $0.int }
-        self.overview = json[Keys.Overview].string
-        self.rating = json[Keys.VoteAverage].double
-        self.adult = json[Keys.Adult].bool
-        self.popularity = json[Keys.Popularity].int
-        self.posterPath = json[Keys.PosterPath].string
-        self.backDropPath = json[Keys.BackdropPath].string
+    public required init?(_ map: Map) {
+        super.init()
         
-        // Convert genre id's to array of strings
-        self.genreStrings = genreIDs.map { return TMDbGenres.genreWithID($0)?.name }.flatMap { $0 }
+        guard map[Keys.MovieID].value() != nil else { return nil }
+        guard map[Keys.Title].value() != nil else { return nil }
+    }
+    
+    public func mapping(map: Map) {
+        self.movieID            <- map[Keys.MovieID]
+        self.title              <- map[Keys.Title]
+        self.overview           <- map[Keys.Overview]
+        self.releaseDate        <- (map[Keys.ReleaseDate], DateTransform())
+        self.rating             <- map[Keys.VoteAverage]
+        self.adult              <- map[Keys.Adult]
+        self.posterPath         <- map[Keys.PosterPath]
+        self.backDropPath       <- map[Keys.BackdropPath]
+        
+        // Genre
+        for map[Keys.GenreID]
+        
+    }
+    
+    // MARK: - NSCoding
+    
+    public func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(movieID, forKey: Keys.MovieID)
+        aCoder.encodeObject(title, forKey: Keys.Title)
+        aCoder.encodeObject(overview, forKey: Keys.Overview)
+        aCoder.encodeObject(releaseDate, forKey: Keys.ReleaseDate)
+        aCoder
+        aCoder.encodeObject(rating, forKey: Keys.VoteAverage)
+        aCoder.encodeObject(adult, forKey: Keys.Adult)
+        aCoder.encodeObject(posterPath, forKey: Keys.PosterPath)
+        aCoder.encodeObject(backDropPath, forKey: Keys.BackdropPath)
+    }
+    
+    self.genreStrings = genreIDs.map { return TMDbGenres.genreWithID($0)?.name }.flatMap { $0 }
+    
+    
+    
+    public required init?(coder aDecoder: NSCoder) {
+        self.movieID = aDecoder.decodeObjectForKey(Keys.MovieID) as! Int
+        self.title = aDecoder.decodeObjectForKey(Keys.Title) as! String
+        self.overview = aDecoder.decodeObjectForKey(Keys.Overview) as? String
+        self.releaseDate = aDecoder.decodeObjectForKey(Keys.ReleaseDate) as? NSDate
+//        self.genre 
+        self.rating = aDecoder.decodeObjectForKey(Keys.Adult) as? Double
+        self.adult = aDecoder.decodeObjectForKey(Keys.Adult) as? Bool
+        self.posterPath = aDecoder.decodeObjectForKey(Keys.PosterPath) as? String
+        self.backDropPath = aDecoder.decodeObjectForKey(Keys.BackdropPath) as? String
     }
     
 }
 
-public func ==(lhs: TMDbMovie, rhs: TMDbMovie) -> Bool {
-    return lhs.movieID == rhs.movieID
-}
+
+
+
 

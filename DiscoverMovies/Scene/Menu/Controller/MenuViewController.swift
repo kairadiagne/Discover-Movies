@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: BaseViewController {
     
     private struct Constants {
         static let MenuCellIdentifier = "MenuCell"
@@ -18,40 +18,40 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: MenuTableView!
     
-    private let signInManager = TMDbSignInManager()
     private let userManager = TMDbUserManager()
-    
-    private var signInStatus: TMDBSigInStatus {
-        return signInManager.signInStatus
-    }
+    private let signInmanager = TMDbSignInManager()
+    private let datasource = MenuDataSource()
     
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up table view
-        tableView.dataSource = self
         let nib = UINib(nibName: Constants.MenuCellNibName, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: Constants.MenuCellIdentifier)
         
-        // Sign up for notifcations from user manager
-        let updateSelector = #selector(MenuViewController.update(_:))
-        let errorSelector = #selector(MenuViewController.handleError(_:))
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: userManager)
-        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: userManager)
+        datasource.identifier = Constants.MenuCellIdentifier
+        tableView.dataSource = datasource
+        tableView.delegate = self
+        
+        signUpForUpdateNotification(userManager)
+        signUpErrorNotification(userManager)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if signInStatus == .Signedin {
-            userManager.reloadIfNeeded(true)
-        } else {
-            tableView.configureForUser(nil, url: nil)
+        if sessionManager.signInStatus == .Signedin {
+           userManager.reloadIfNeeded(true)
         }
-        
+    }
+    
+    private func updateMenuheaderView() {
+        if let user = userManager.user, path = user.gravatarURI, url = TMDbImageRouter.PosterMedium(path: path).url {
+            tableView.configureProfileHeader(user, url: url)
+        } else {
+            tableView.configureProfileHeader()
+        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -60,62 +60,47 @@ class MenuViewController: UIViewController {
     
     // MARK: - Notifications
     
-    func update(notification: NSNotification) {
-        guard let user = userManager.user, path = user.gravatarURI else { return }
-        let url = TMDbImageRouter.ProfileMedium(path: path).url
-        tableView.configureForUser(user, url: url)
-    }
-    
-    func handleError(notification: NSNotification) {
-        
+    override func updateNotification(notification: NSNotification) {
+        updateMenuheaderView()
     }
     
     // MARK: - Navigation
     
-    func signout() {
-        
+    func showTopListViewController() {
+        let topListViewController = TopListViewController()
+        self.navigationController?.pushViewController(topListViewController, animated: true)
     }
-        
-    func showFavoritesViewControlelr() {
-        
-    }
-        
+    
     func showWatchListViewController() {
         
     }
+    
+    func showFavoritesViewControlelr() {
         
-    func showDiscoverViewController() {
-        
+    }
+    
+    func signout() {
+        signInmanager.signOut()
+        showTopListViewController()
     }
     
 }
 
-extension MenuViewController: UITableViewDataSource {
+extension MenuViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.MenuCellIdentifier) as! MenuTableViewCell
-        switch indexPath.row {
-        case 0:
-            cell.configureWithItem("Discover movies", imageName: "Discover")
-        case 1:
-            cell.configureWithItem("Movies I want to watch", imageName: "Watchlist")
-        case 2:
-            cell.configureWithItem("My favorite movies", imageName: "Favorite")
-        case 3:
-            cell.configureWithItem("Signout", imageName: "Logout")
-        default:
-            fatalError()
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let menuItem = datasource.itemForIndex(indexPath.row) else { return }
+        
+        switch menuItem {
+        case .DiscoverMovies:
+            showTopListViewController()
+        case .Favorites:
+            showFavoritesViewControlelr()
+        case .WatchList:
+            showWatchListViewController()
+        case .Signout:
+            signout()
         }
-        return cell
     }
     
 }
-
-
-
-
-

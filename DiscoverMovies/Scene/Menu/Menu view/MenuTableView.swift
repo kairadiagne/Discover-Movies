@@ -8,37 +8,43 @@
 
 import UIKit
 import TMDbMovieKit
+import SDWebImage
 
 class MenuTableView: UITableView {
     
     private struct Constants {
         static let ProfileHeaderHeight: CGFloat = 200
+        static let HeaderViewNibName = "MenuHeaderView"
     }
     
-    private var headerView = MenuHeaderView()
-    
-    // MARK: - Awake from Nib
+    private var headerView: MenuHeaderView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         scrollEnabled = false
-        
-        // Add profile header view
         contentInset = UIEdgeInsets(top: Constants.ProfileHeaderHeight, left: 0, bottom: 0, right: 0)
-        headerView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: Constants.ProfileHeaderHeight)
-        addSubview(headerView)
+        
+//        headerView = MenuHeaderView.loadFromNib()
+//        headerView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.6, height: Constants.ProfileHeaderHeight)
+//        addSubview(headerView)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        headerView.frame.size.width = self.bounds.width
+//        headerView.frame.size.width = self.bounds.width
     }
     
     // MARK: - Configure
-    
-    func configureForUser(user: TMDbUser?, url: NSURL?) {
-        headerView.configure(user, url: url)
+
+    func configureProfileHeader(user: TMDbUser? = nil, url: NSURL? = nil) {
+//        if let user = user, url = url  {
+//            headerView.profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+//            headerView.usernameLabel.text = user.name != nil ? user.name! : "Unknown"
+//        } else {
+//            headerView.profileImageView.image = nil
+//            headerView.usernameLabel.text = "Sign in"
+//        }
     }
     
 }

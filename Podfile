@@ -5,7 +5,7 @@ use_frameworks!
 abstract_target 'Networking' do
     pod 'Alamofire'
     pod 'RealmSwift'
-    pod 'ObjectMapper'
+    pod 'AlamofireObjectMapper'
     pod 'SwiftyJSON'
     pod 'Locksmith'
     

@@ -8,16 +8,23 @@
 
 import Foundation
 import Alamofire
+import AlamofireObjectMapper
+
+struct Constants {
+    static let APIKey = "api_key"
+    static let BaseURL = "https://api.themoviedb.org/3/"
+}
+
+// Remove later
 import SwiftyJSON
 
 // TODO: - Almofire requets with completiohandler that returns on the main thread
 
 // Completionhandlers
-typealias TMDbMovieCompletionHandler = (result: TMDbListHolder<TMDbMovie>?, error: NSError?) -> ()
-typealias TMDbReviewCompletionHandler = (result: TMDbListHolder<TMDbReview>?, error: NSError?) -> ()
-typealias TMDbVideosCompletionHandler = (result: [TMDbVideo]?, error: NSError?) -> ()
-typealias TMDbAccountStateCompletionHandler = (inFavorites: Bool?, inWatchList: Bool?, error: NSError?) -> ()
-typealias TMDbChangeAccountStateCompletionHandler = (success: Bool, error: NSError?) -> ()
+//typealias TMDbReviewCompletionHandler = (result: TMDbListHolder<TMDbReview>?, error: NSError?) -> ()
+//typealias TMDbVideosCompletionHandler = (result: [TMDbVideo]?, error: NSError?) -> ()
+//typealias TMDbAccountStateCompletionHandler = (inFavorites: Bool?, inWatchList: Bool?, error: NSError?) -> ()
+//typealias TMDbChangeAccountStateCompletionHandler = (success: Bool, error: NSError?) -> ()
 
 class TMDbMovieService {
     
@@ -35,31 +42,59 @@ class TMDbMovieService {
     
     // MARK: - Fetch Lists of Movies
 
-    /*
-     Fetch a TMDb Toplist (refresh evrery day):
-     - Popular: Get the list of popular movies on the Movie Databse.
-     - Top rated: Get the list of top rated movies. by default this list will onlu include movies that have 50 or more votes.
-     - Upcoming: Get the list of upcoming movies by release date. This list refreshes every day. 
-     - Now playing: get the list of movies playing that have been, or are being released this week.
-     
-    */
     
-    func fetchTopList(list: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
-        Alamofire.request(TMDbMovieRouter.TopList(list: list, page: page, APIKey: APIKey)).validate().responseResult { (response) in
-            completionHandler(result: response.result.value, error: response.result.error)
+    // Fetch a TMDb Toplist (refresh evrery day):
+    
+    typealias MovieListCompletionHandler = (result: TMDbList<TMDbMovie>?, error: NSError?) -> ()
+    typealias MovieListResponse = (Response<TMDbList<TMDbMovie>, NSError>)
+    
+    func fetchList(endpoint: String, parameters: [String: AnyObject], completionHandler: MovieListCompletionHandler) {
+        // Add API Key to every request
+        var parameters = parameters
+        parameters[Constants.APIKey] = APIKey
+        
+        // Create the URL 
+        let url = Constants.BaseURL + endpoint
+        
+        // Perform request
+        Alamofire.request(.GET, url, parameters: parameters, encoding: .URLEncodedInURL, headers: nil).validate()
+            .responseObject { (response: MovieListResponse) in
+                completionHandler(result: response.result.value, error: response.result.error)
         }
     }
     
-    /* 
-     Discover movies by different types of data like average rating, year of release and genre.
-     The group of movies that comes back as a response is sorted by popularity rating (Ascending)
-    */
+    // This function can be used for all the 
     
-    func discoverMovies(year: String?, genre: Int?, vote: Float?, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
-        Alamofire.request(TMDbMovieRouter.Discover(year: year, genre: genre, vote: vote, page: page, APIKey: APIKey)).validate().responseResult { (response) in
-            completionHandler(result: response.result.value, error: response.result.error)
+    
+    
+    
+    
+    
+    
+    // Discover movies by average rating, releaseyear, genre (Sorted ascending by popularity)
+    
+    func discover(year: String?, genre: Int?, vote: Float?, page: Int?, completionHandler: MovieListCompletionHandler) {
+        Alamofire.request(TMDbMovieRouter.Discover(year: year, genre: genre, vote: vote, page: page, APIKey: APIKey)).validate()
+            .responseObject { (response: MovieListResponse) in
+                completionHandler(result: response.result.value, error: response.result.error)
         }
     }
+    
+    // Search for a movie by its title
+    
+    func moviesByTitle(title: String, page: Int?, completionHandler: MovieListCompletionHandler) {
+        Alamofire.request(TMDbMovieRouter.SearchByTitle(title: title, page: page, APIKey: APIKey)).validate()
+            .responseObject { (response: MovieListResponse) in
+                completionHandler(result: response.result.value, error: response.result.error)
+        }
+    }
+
+    
+    
+    
+
+    
+  
     
     
     // Search for movies by title.

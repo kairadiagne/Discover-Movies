@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
 private struct Keys {
     static let ReviewID = "id"
@@ -16,25 +16,48 @@ private struct Keys {
     static let URL = "url"
 }
 
-public struct TMDbReview: JSONSerializable, Equatable {
-    public var reviewID: Int?
+public class TMDbReview: NSObject, Mappable, NSCoding {
+    
+    public var reviewID: Int = 0
     public var author: String?
     public var content: String?
-    public var url: NSURL?
+    public var path: String?
     
-    public init?(json: SwiftyJSON.JSON) {
-        self.reviewID = json[Keys.ReviewID].int
-        self.author = json[Keys.Author].string
-        self.content = json[Keys.Content].string
-        guard let urlString = json[Keys.URL].string else { return }
-        self.url = NSURL(string: urlString)
+    public required init?(_ map: Map) {
+        super.init()
+        
+        guard map[Keys.ReviewID].value() != nil else { return nil }
     }
     
+    public func mapping(map: Map) {
+        self.reviewID   <- map[Keys.ReviewID]
+        self.author     <- map[Keys.Author]
+        self.content    <- map[Keys.Content]
+        self.path       <- map[Keys.URL]
+    }
+    
+    // MARK: - NSCoding
+    
+    public func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(reviewID, forKey: Keys.ReviewID)
+        aCoder.encodeObject(author, forKey: Keys.Author)
+        aCoder.encodeObject(content, forKey: Keys.Content)
+        aCoder.encodeObject(path, forKey: Keys.URL)
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        guard let reviewID = aDecoder.decodeObjectForKey(Keys.ReviewID) as? Int else { return nil }
+        
+        super.init()
+        
+        self.reviewID = reviewID
+        self.author = aDecoder.decodeObjectForKey(Keys.Author) as? String
+        self.content = aDecoder.decodeObjectForKey(Keys.Content) as? String
+        self.path = aDecoder.decodeObjectForKey(Keys.URL) as? String
+    }
+
 }
 
-public func ==(lhs: TMDbReview, rhs: TMDbReview) -> Bool {
-    return lhs.reviewID == rhs.reviewID
-}
 
 
 

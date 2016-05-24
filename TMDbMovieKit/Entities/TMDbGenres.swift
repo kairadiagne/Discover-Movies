@@ -8,53 +8,75 @@
 
 import Foundation
 
-public struct TMDbGenre {
-    var id: Int
-    var name: String
+public enum TMDbGenre: Int {
+    case Action = 28
+    case Adventure = 12
+    case Animation = 16
+    case Comedy = 35
+    case Crime = 80
+    case Documentary = 99
+    case Drama = 18
+    case Family = 10751
+    case Fantasy = 14
+    case Foreign = 10769
+    case History = 36
+    case Horror = 27
+    case Music = 10402
+    case Mystery = 9648
+    case Romance = 10749
+    case ScienceFiction = 878
+    case TVMovie = 10770
+    case Thriller = 53
+    case War = 10752
+    case Western = 37
+    
+    public var name: String? {
+        switch self {
+        case Action:
+            return "Action"
+        case Adventure:
+            return "Adventure"
+        case Animation:
+            return "Animation"
+        case Comedy:
+            return "Comedy"
+        case Crime:
+            return "Crime"
+        case Documentary:
+            return "Documentary"
+        case Drama:
+            return "Drama"
+        case Family:
+            return "Family"
+        case Fantasy:
+            return "Fantasy"
+        case Foreign:
+            return "Foreign"
+        case History:
+            return "History"
+        case Horror:
+            return "Horror"
+        case Music:
+            return "Music"
+        case Mystery:
+            return "Mystery"
+        case Romance:
+            return "Romance"
+        case ScienceFiction:
+            return "Science Fiction"
+        case TVMovie:
+            return "TV Movie"
+        case Thriller:
+            return "Thriller"
+        case War:
+            return "War"
+        case Western:
+            return "Western"
+        }
+    }
+    
 }
+    
+    
+   
 
-public struct TMDbGenres {
-    
-    // MARK: - Properties
-    
-    private static let genres = [ TMDbGenre(id: 28, name: "Action"),
-                   TMDbGenre(id: 12, name: "Adventure"),
-                   TMDbGenre(id: 16, name: "Animation"),
-                   TMDbGenre(id: 35, name: "Comedy"),
-                   TMDbGenre(id: 80, name: "Crime"),
-                   TMDbGenre(id: 99, name: "Documentary"),
-                   TMDbGenre(id: 18, name: "Drama"),
-                   TMDbGenre(id: 10751, name: "Family"),
-                   TMDbGenre(id: 14, name: "Fantasy"),
-                   TMDbGenre(id: 10769, name: "Foreign"),
-                   TMDbGenre(id: 36, name: "History"),
-                   TMDbGenre(id: 27, name: "Horror"),
-                   TMDbGenre(id: 10402, name: "Music"),
-                   TMDbGenre(id: 9648, name: "Mystery"),
-                   TMDbGenre(id: 10749, name: "Romance"),
-                   TMDbGenre(id: 878, name: "Science Fiction"),
-                   TMDbGenre(id: 10770, name: "TV Movie"),
-                   TMDbGenre(id: 53, name: "Thriller"),
-                   TMDbGenre(id: 10752, name: "War"),
-                   TMDbGenre(id: 37, name: "Western")
-    ]
-    
-    // MARK: - Retrieval
-    
-    public static func genreWithID(genreID: Int) -> TMDbGenre? {
-        return self.genres.filter { $0.id == genreID }.first
-    }
-    
-    public static func idForGenreWithName(name: String) -> Int? {
-        return self.genres.filter { $0.name == name }.first?.id
-    }
-    
-    public static func allGenresAsString() -> [String] {
-        return genres.map { return $0.name }
-    }
-    
-    public static func mainGenre() -> String {
-        return genres.first?.name ?? ""
-    }
-    
-}

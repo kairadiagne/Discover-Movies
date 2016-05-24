@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
 private struct Keys {
     static let Cast = "cast"
@@ -17,31 +17,30 @@ private struct Keys {
     static let Order = "order"
     static let ProfilePath = "profile_path"
     static let Crew = "crew"
-    static let Directing = "Director"
+    static let Director = "Director"
 }
 
-public struct TMDbMovieCredit: JSONSerializable, Equatable {
-    public var creditID: Int?
+public class TMDbMovieCredit: NSObject, Mappable {
+    
+    public var creditID: Int = 0
     public var cast: [TMDbCastMember] = []
     public var crew: [TMDbCrewMember] = []
     public var director: TMDbCrewMember?
     
-    public init?(json: SwiftyJSON.JSON) {
-        self.creditID = json[Keys.CreditID].int
-        self.cast = json[Keys.Cast].flatMap { return TMDbCastMember(json: $0.1) }
-        self.crew = json[Keys.Crew].flatMap { return TMDbCrewMember(json: $0.1) }
+    public required init?(_ map: Map) {
+        guard map[Keys.CreditID].value() != nil else { return nil }
+    }
+    
+    public func mapping(map: Map) {
+        self.creditID   <- map[Keys.CreditID]
+        self.cast       <- map[Keys.Cast]
+        self.crew       <- map[Keys.Crew]
         
-        // Filter out the director from the crew members
-        let filteredCrew = crew.filter { return $0.job == Keys.Directing }
-        self.director = filteredCrew.first ?? nil
+        // Grab the director from the crew array
+        self.director = crew.filter { return $0.job == Keys.Director }.first ?? nil
     }
     
 }
-
-public func ==(rhs: TMDbMovieCredit, lhs: TMDbMovieCredit) -> Bool {
-    return rhs.creditID == lhs.creditID
-}
-
 
 
 

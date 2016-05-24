@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 public enum TMDbToplist: String {
     case Popular = "popular"
@@ -87,8 +88,79 @@ public class TMDbTopListManager {
     
     // MARK: Fetching
     
-    private func fetchList(list: TMDbToplist, page: Int?) {
+    private func fetchList(list: TMDbToplist, page: Int) {
         guard let currentList = currentList else { return }
+        
+        let urlString = "movie/\(list.rawValue)"
+        let parameters: [String: AnyObject] = ["page": page]
+        
+        
+        
+        Alamofire.request(.GET, <#T##URLString: URLStringConvertible##URLStringConvertible#>, parameters: <#T##[String : AnyObject]?#>, encoding: <#T##ParameterEncoding#>, headers: <#T##[String : String]?#>)
+        
+        
+        
+        
+        
+        
+        switch self {
+        case .TopList(let list, let page, let APIKey):
+            if let page = page { parameters[Key.Page] = page }
+            parameters[Key.APIKey] = APIKey
+            return ("movie/\(list)", parameters)
+        case .Discover(let year, let genre, let voteAverage, let page, let APIKey):
+            if let year = year { parameters[Key.ReleaseYear] = year }
+            if let genre = genre { parameters[Key.Genre] = genre }
+            if let voteAverage = voteAverage { parameters[Key.Vote] = voteAverage }
+            if let page = page { parameters[Key.Page] = page }
+            parameters[Key.Sort] = "popularity.desc"
+            parameters[Key.APIKey] = APIKey
+            return ("discover/movie", parameters)
+        case .SearchByTitle(let title, let page, let APIKey):
+            parameters[Key.Query] = title
+            if let page = page { parameters[Key.Page] = page }
+            parameters[Key.APIKey] = APIKey
+            return ("search/movie", parameters)
+        case .List(let list, let sessionID, let accountID, let page, let APIKey):
+            parameters[Key.SessionID] = sessionID
+            if let page = page { parameters[Key.Page] = page }
+            parameters[Key.APIKey] = APIKey
+            return ("account/\(accountID)/\(list)/movies", parameters)
+        case .SimilarMovies(let movieID, let page, let APIKey):
+            if let page = page { parameters[Key.Page] = page }
+            parameters[Key.APIKey] = APIKey
+            return ("movie/\(movieID)/similar", parameters)
+        case .MovieCredits(let movieID, let APIKey):
+            parameters[Key.APIKey] = APIKey
+            return ("movie/\(movieID)/credits", parameters)
+        case .Reviews(let movieID, let page, let APIKey):
+            if let page = page { parameters[Key.Page] = page }
+            parameters[Key.APIKey] = APIKey
+            return ("movie/\(movieID)/reviews", parameters)
+        case .Videos(let movieID, let APIKey):
+            parameters[Key.APIKey] = APIKey
+            return ("movie/\(movieID)/videos", parameters)
+        case .AccountState(let movieID, let sessionID, let APIKey):
+            parameters[Key.SessionID] = sessionID
+            parameters[Key.APIKey] = APIKey
+            return ("movie/\(movieID)/account_states", parameters)
+        case .AddRemoveFromList(_, let accountID, let list, let sessionID, let APIKey):
+            parameters[Key.SessionID] = sessionID
+            parameters[Key.APIKey] = APIKey
+            return("account/\(accountID)/\(list)", parameters)
+        }
+    }()
+    
+        Alamofire.request(<#T##URLRequest: URLRequestConvertible##URLRequestConvertible#>)
+    
+        i
+//        func fetchToplist(list: String, page: Int?, completionHandler: MovieListCompletionHandler) {
+//            Alamofire.request(TMDbMovieRouter.TopList(list: list, page: page, APIKey: APIKey)).validate()
+//                .responseObject { (response: MovieListResponse) in
+//                    completionHandler(result: response.result.value, error: response.result.error)
+//            }
+//        }
+        
         
         movieService.fetchTopList(list.rawValue, page: page, completionHandler: { (result, error) in
             self.inProgress = false

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AlamofireObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>BRYXBanner-BRYXBanner.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -92,42 +97,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01E1DB7F9F48890FC65F31979A9CD32B</key>
+		<key>2FE1C978B8352E987B0B933CA1C32BC6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0A940B161F3D51EEB528605B32EB8D42</key>
+		<key>32A25F9BB2B02EEDC7EAD392C7010E59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0C6777CDA3A989E5698AC9AAD79C65B8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>30C1CE18C8814DB026E107D2A5440314</key>
+		<key>33069647BC82FA25D90E537E5D2467FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3511258FF1DED3401C4B456024D5FA41</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>37381666BFBDA3AF03D79E9A18B59708</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3BACAF76E63C351BA86B802D3FBF0030</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>51AD12EFACE9CCFFBE5FD20C9CE3E63B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,6 +127,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>76AADD338C831E062D6B303DC6CBE731</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
@@ -152,12 +142,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>940684C46F28CE987CF93BD793340B82</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9B57F4EE4746045CEAE2D933A3C8EC9E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D5D6200D4BE741574DBD4FB768A6F55B</key>
+		<key>BB31C34FCDED62C3B77B244675598095</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BCD83D17FF41E932CDE5C868D99F124B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C5CBCAA97E951CC882334464FBDF983D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D59212084235A048B4E5E9360EE19AA9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,7 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FACB0E436062F4875EBDAC5EB8E2695D</key>
+		<key>FBD082A0D35F7917EAB9DD9D3CCA9976</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,36 +7,39 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
 private struct Keys {
     static let CreditID = "credit_id"
     static let Name = "name"
-    static let ID = "id"
+    static let PersonID = "id"
     static let Department = "department"
     static let Job = "job"
     static let ProfilePath = "profile_path"
 }
 
-public struct TMDbCrewMember: JSONSerializable, Equatable {
-    public var creditID: String?
+public class TMDbCrewMember: NSObject, Mappable {
+    
+    public var creditID: String = ""
+    public var personID: Int = 0
     public var name: String?
-    public var personID: Int?
     public var department: String?
     public var job: String?
     public var profilePath: String?
     
-    public init?(json: SwiftyJSON.JSON) {
-        self.creditID = json[Keys.CreditID].string
-        self.name = json[Keys.Name].string
-        self.personID = json[Keys.ID].int
-        self.department = json[Keys.Department].string
-        self.job = json[Keys.Job].string
-        self.profilePath = json[Keys.ProfilePath].string
+    public required init?(_ map: Map) {
+        guard map[Keys.CreditID].value() != nil else { return nil }
+        guard map[Keys.PersonID].value() != nil else { return nil }
     }
-   
+    
+    public func mapping(map: Map) {
+        self.creditID       <- map[Keys.CreditID]
+        self.name           <- map[Keys.Name]
+        self.personID       <- map[Keys.PersonID]
+        self.department     <- map[Keys.Department]
+        self.job            <- map[Keys.Job]
+        self.profilePath    <- map[Keys.ProfilePath]
+    }
+    
 }
 
-public func ==(rhs: TMDbCrewMember, lhs: TMDbCrewMember) -> Bool {
-    return rhs.personID == lhs.personID
-}

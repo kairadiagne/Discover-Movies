@@ -7,41 +7,47 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
 private struct Keys {
     static let CreditID = "credit_id"
     static let Name = "name"
-    static let ID = "id"
+    static let PersonID = "id"
     static let CastID = "cast_id"
     static let Character = "character"
     static let Order = "order"
     static let Profile_path = "profile_path"
 }
 
-public struct TMDbCastMember: JSONSerializable, Equatable {
-    public var creditID: String?
-    public var name: String?
-    public var personID: Int?
-    public var castID: Int?
+public class TMDbCastMember: NSObject, Mappable {
+    
+    public var creditID: String = ""
+    public var personID: Int = 0
+    public var castID = 0
+    public var name: String = ""
     public var character: String?
     public var order: Int?
     public var profilePath: String?
     
-    public init?(json: SwiftyJSON.JSON) {
-        self.creditID = json[Keys.CreditID].string
-        self.name = json[Keys.Name].string
-        self.personID = json[Keys.ID].int
-        self.castID = json[Keys.CastID].int
-        self.character = json[Keys.Character].string
-        self.order = json[Keys.Order].int
-        self.profilePath = json[Keys.Profile_path].string
+    public required init?(_ map: Map) {
+        super.init()
+        
+        guard map[Keys.CreditID].value() != nil else { return nil }
+        guard map[Keys.PersonID].value() != nil else { return nil }
+        guard map[Keys.CastID].value() != nil else { return nil }
+        guard map[Keys.Name].value() != nil else { return nil }
     }
-   
-}
-
-public func ==(rhs: TMDbCastMember, lhs: TMDbCastMember) -> Bool {
-    return rhs.personID == lhs.personID
+    
+    public func mapping(map: Map) {
+        self.creditID       <- map[Keys.CreditID]
+        self.personID       <- map[Keys.PersonID]
+        self.castID         <- map[Keys.CastID]
+        self.name           <- map[Keys.Name]
+        self.character      <- map[Keys.Character]
+        self.order          <- map[Keys.Order]
+        self.profilePath    <- map[Keys.Profile_path]
+    }
+    
 }
 
 

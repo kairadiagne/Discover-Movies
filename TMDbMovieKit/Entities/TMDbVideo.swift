@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
 private struct Keys {
     static let VideoID = "id"
@@ -15,28 +15,31 @@ private struct Keys {
     static let Name = "name"
     static let Site = "site"
     static let Size = "size"
-    static let Type = "type"
+    static let VideoType = "type"
 }
 
-public struct TMDbVideo: JSONSerializable, Equatable {
-    public var videoID: String?
-    public var key: String?
+public class TMDbVideo: NSObject, Mappable {
+    
+    public var videoID: Int = 0
+    public var key: String = ""
+    public var site: String = ""
     public var name: String?
-    public var site: String?
-    public var size: Int?
+    public var size: String?
     public var type: String?
     
-    public init?(json: SwiftyJSON.JSON) {
-        self.videoID = json["id"].string
-        self.key = json["key"].string
-        self.name = json["name"].string
-        self.site = json["site"].string
-        self.size = json["size"].int
-        self.type = json["type"].string
+    public required init?(_ map: Map) {
+        guard map[Keys.VideoID].value() != nil else { return nil }
+        guard map[Keys.Key].value() != nil else { return nil }
+        guard map[Keys.Site].value() != nil else { return nil }
     }
     
-}
-
-public func ==(lhs: TMDbVideo, rhs: TMDbVideo) -> Bool {
-    return lhs.videoID == rhs.videoID
+    public func mapping(map: Map) {
+        self.videoID    <- map[Keys.VideoID]
+        self.key        <- map[Keys.Key]
+        self.name       <- map[Keys.Name]
+        self.site       <- map[Keys.Site]
+        self.size       <- map[Keys.Size]
+        self.type       <- map[Keys.VideoType]
+    }
+    
 }

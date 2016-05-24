@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
 private struct Keys {
     static let Page = "page"
@@ -18,39 +18,38 @@ private struct Keys {
     static let TimeStamp = "timestamp"
 }
 
-public class TMDbListHolder<Item: JSONSerializable>: JSONSerializable  {
-    var page: Int = 0
-    var pageCount: Int = 0
-    var nextPage: Int?
-    var resultCount: Int = 0
-    var items: [Item] = []
-    var timeStamp: NSDate?
+public class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable {
     
-    init() { }
+    public var page: Int = 0
+    public var pageCount: Int = 0
+    public var nextPage: Int?
+    public var resultCount: Int = 0
+    public var items: [Item] = []
+    public var timeStamp: NSDate?
     
-    public required init?(json: SwiftyJSON.JSON) {
-        self.page = json[Keys.Page].intValue
-        self.pageCount = json[Keys.PageCount].intValue
-        self.nextPage = self.page < self.pageCount ? self.page + 1 : nil
-        self.resultCount = json[Keys.ResultCount].intValue
-        self.items = json[Keys.Items].flatMap { Item(json: $0.1) }
-        self.timeStamp = NSDate()
+    public required init?(_ map: Map) { }
+    
+    public func mapping(map: Map) {
+        self.page           <- map[Keys.Page]
+        self.pageCount      <- map[Keys.PageCount]
+        self.nextPage       <- map[Keys.NextPage]
+        self.resultCount    <- map[Keys.ResultCount]
+        self.items          <- map[Keys.Items]
     }
     
-    // MARK: - Updating Data
+    // MARK: - Update with new items 
     
-    func update(list: TMDbListHolder<Item>) {
-        self.page = list.page
-        self.nextPage = list.nextPage
-        self.pageCount = list.pageCount
-        self.resultCount = list.resultCount
-            
+    func update(data: TMDbList<Item>) {
+        page = data.page
+        nextPage = data.nextPage
+        pageCount = data.pageCount
+        resultCount = data.resultCount
+        
         if self.page > 1 {
-            self.items.appendContentsOf(list.items)
+            self.items.appendContentsOf(data.items)
         } else {
-            self.items = list.items
+            self.items = data.items
         }
-       
     }
     
 }

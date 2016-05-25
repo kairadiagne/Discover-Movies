@@ -26,44 +26,25 @@ import SwiftyJSON
 //typealias TMDbAccountStateCompletionHandler = (inFavorites: Bool?, inWatchList: Bool?, error: NSError?) -> ()
 //typealias TMDbChangeAccountStateCompletionHandler = (success: Bool, error: NSError?) -> ()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class TMDbMovieService {
     
-    private var APIKey: String {
-        return TMDbSessionInfoStore().APIKey
-    }
-    
-    private var sessionID: String? {
-        return TMDbSessionInfoStore().sessionID
-    }
-    
-    private var userID: Int? {
-        return TMDbSessionInfoStore().user?.userID
-    }
-    
-    // MARK: - Fetch Lists of Movies
-
-    
-    // Fetch a TMDb Toplist (refresh evrery day):
-    
-    typealias MovieListCompletionHandler = (result: TMDbList<TMDbMovie>?, error: NSError?) -> ()
-    typealias MovieListResponse = (Response<TMDbList<TMDbMovie>, NSError>)
-    
-    func fetchList(endpoint: String, parameters: [String: AnyObject], completionHandler: MovieListCompletionHandler) {
-        // Add API Key to every request
-        var parameters = parameters
-        parameters[Constants.APIKey] = APIKey
-        
-        // Create the URL 
-        let url = Constants.BaseURL + endpoint
-        
-        // Perform request
-        Alamofire.request(.GET, url, parameters: parameters, encoding: .URLEncodedInURL, headers: nil).validate()
-            .responseObject { (response: MovieListResponse) in
-                completionHandler(result: response.result.value, error: response.result.error)
-        }
-    }
-    
-    // This function can be used for all the 
+   
     
     
     
@@ -71,23 +52,7 @@ class TMDbMovieService {
     
     
     
-    // Discover movies by average rating, releaseyear, genre (Sorted ascending by popularity)
     
-    func discover(year: String?, genre: Int?, vote: Float?, page: Int?, completionHandler: MovieListCompletionHandler) {
-        Alamofire.request(TMDbMovieRouter.Discover(year: year, genre: genre, vote: vote, page: page, APIKey: APIKey)).validate()
-            .responseObject { (response: MovieListResponse) in
-                completionHandler(result: response.result.value, error: response.result.error)
-        }
-    }
-    
-    // Search for a movie by its title
-    
-    func moviesByTitle(title: String, page: Int?, completionHandler: MovieListCompletionHandler) {
-        Alamofire.request(TMDbMovieRouter.SearchByTitle(title: title, page: page, APIKey: APIKey)).validate()
-            .responseObject { (response: MovieListResponse) in
-                completionHandler(result: response.result.value, error: response.result.error)
-        }
-    }
 
     
     
@@ -97,22 +62,11 @@ class TMDbMovieService {
   
     
     
-    // Search for movies by title.
- 
     
-    func searchForMovieWith(title: String, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
-        Alamofire.request(TMDbMovieRouter.SearchByTitle(title: title, page: page, APIKey: APIKey)).validate().responseResult { (response) in
-            completionHandler(result: response.result.value, error: response.result.error)
-        }
-    }
     
     // Get the similar movies for a specific movie id.
  
-    func fetchMoviesSimilarToMovie(withID id: Int, page: Int?, completionHandler: TMDbMovieCompletionHandler) {
-        Alamofire.request(TMDbMovieRouter.SimilarMovies(id: id, page: page, APIKey: APIKey)).validate().responseResult { (response) in
-            completionHandler(result: response.result.value, error: response.result.error)
-        }
-    }
+    
     
     // MARK: - Fetch Additional info About Movie
     

@@ -41,8 +41,6 @@
 		1119430C1CCB8EEB001CF39B /* String+ToNSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430B1CCB8EEB001CF39B /* String+ToNSDate.swift */; };
 		111943111CCB8EF6001CF39B /* TMDbImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */; };
 		111943121CCB8EF6001CF39B /* TMDbMovieRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430E1CCB8EF6001CF39B /* TMDbMovieRouter.swift */; };
-		111943131CCB8EF6001CF39B /* TMDbPeopleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430F1CCB8EF6001CF39B /* TMDbPeopleRouter.swift */; };
-		111943141CCB8EF6001CF39B /* TMDbSignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */; };
 		1119431D1CCB8EFC001CF39B /* TMDbMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943161CCB8EFC001CF39B /* TMDbMovieService.swift */; };
 		1119431F1CCB8EFC001CF39B /* TMDbSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943181CCB8EFC001CF39B /* TMDbSignInService.swift */; };
 		111943321CCB8FCE001CF39B /* MenuButtonPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */; };
@@ -54,6 +52,10 @@
 		EA288F0A1CF338BA004FAEEF /* TMDbCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F091CF338BA004FAEEF /* TMDbCachedData.swift */; };
 		EA288F1B1CF4401E004FAEEF /* TMDbMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1A1CF4401E004FAEEF /* TMDbMovie.swift */; };
 		EA288F1D1CF46F11004FAEEF /* TMDbAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1C1CF46F11004FAEEF /* TMDbAPIClient.swift */; };
+		EA288F1F1CF4EE8C004FAEEF /* TMDbAccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1E1CF4EE8C004FAEEF /* TMDbAccountState.swift */; };
+		EA288F211CF4EE99004FAEEF /* TMDbMovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F201CF4EE99004FAEEF /* TMDbMovieInfo.swift */; };
+		EA288F231CF57955004FAEEF /* TMDbRequestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F221CF57955004FAEEF /* TMDbRequestToken.swift */; };
+		EA288F251CF58347004FAEEF /* TMDbSessionID.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F241CF58347004FAEEF /* TMDbSessionID.swift */; };
 		EA6487681CE1E65700452DD0 /* TMDbUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */; };
 		EA6487711CE21E2300452DD0 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64876F1CE21E2300452DD0 /* ListViewController.swift */; };
 		EA6487721CE21E2300452DD0 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487701CE21E2300452DD0 /* ListViewController.xib */; };
@@ -203,8 +205,6 @@
 		1119430B1CCB8EEB001CF39B /* String+ToNSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToNSDate.swift"; sourceTree = "<group>"; };
 		1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbImageRouter.swift; sourceTree = "<group>"; };
 		1119430E1CCB8EF6001CF39B /* TMDbMovieRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieRouter.swift; sourceTree = "<group>"; };
-		1119430F1CCB8EF6001CF39B /* TMDbPeopleRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbPeopleRouter.swift; sourceTree = "<group>"; };
-		111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInRouter.swift; sourceTree = "<group>"; };
 		111943161CCB8EFC001CF39B /* TMDbMovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieService.swift; sourceTree = "<group>"; };
 		111943181CCB8EFC001CF39B /* TMDbSignInService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInService.swift; sourceTree = "<group>"; };
 		111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButtonPresentable.swift; sourceTree = "<group>"; };
@@ -220,6 +220,10 @@
 		EA288F091CF338BA004FAEEF /* TMDbCachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCachedData.swift; sourceTree = "<group>"; };
 		EA288F1A1CF4401E004FAEEF /* TMDbMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovie.swift; sourceTree = "<group>"; };
 		EA288F1C1CF46F11004FAEEF /* TMDbAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAPIClient.swift; sourceTree = "<group>"; };
+		EA288F1E1CF4EE8C004FAEEF /* TMDbAccountState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAccountState.swift; sourceTree = "<group>"; };
+		EA288F201CF4EE99004FAEEF /* TMDbMovieInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieInfo.swift; sourceTree = "<group>"; };
+		EA288F221CF57955004FAEEF /* TMDbRequestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbRequestToken.swift; sourceTree = "<group>"; };
+		EA288F241CF58347004FAEEF /* TMDbSessionID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSessionID.swift; sourceTree = "<group>"; };
 		EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserManager.swift; sourceTree = "<group>"; };
 		EA64876F1CE21E2300452DD0 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		EA6487701CE21E2300452DD0 /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
@@ -467,14 +471,18 @@
 			isa = PBXGroup;
 			children = (
 				EA782B8E1CE0E26C00DC38AD /* TMDbListHolder.swift */,
+				EA288F201CF4EE99004FAEEF /* TMDbMovieInfo.swift */,
 				EA288F1A1CF4401E004FAEEF /* TMDbMovie.swift */,
 				111942FF1CCB8EE4001CF39B /* TMDbReview.swift */,
 				111943011CCB8EE4001CF39B /* TMDbVideo.swift */,
 				EA6487B71CE4BC9D00452DD0 /* TMDbMovieCredit.swift */,
 				EADA5A6B1CE8A53700C2FAE8 /* TMDbCastMember.swift */,
 				EADA5A6D1CE8A54200C2FAE8 /* TMDbCrewMember.swift */,
+				EA288F1E1CF4EE8C004FAEEF /* TMDbAccountState.swift */,
 				111943001CCB8EE4001CF39B /* TMDbUser.swift */,
 				111942FB1CCB8EE4001CF39B /* TMDbGenres.swift */,
+				EA288F221CF57955004FAEEF /* TMDbRequestToken.swift */,
+				EA288F241CF58347004FAEEF /* TMDbSessionID.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -482,9 +490,7 @@
 		111943391CCB90BE001CF39B /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				111943101CCB8EF6001CF39B /* TMDbSignInRouter.swift */,
 				1119430E1CCB8EF6001CF39B /* TMDbMovieRouter.swift */,
-				1119430F1CCB8EF6001CF39B /* TMDbPeopleRouter.swift */,
 				1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */,
 			);
 			path = Router;
@@ -1249,7 +1255,6 @@
 				1119430C1CCB8EEB001CF39B /* String+ToNSDate.swift in Sources */,
 				EA288F0A1CF338BA004FAEEF /* TMDbCachedData.swift in Sources */,
 				EA782B7F1CE0C50000DC38AD /* TMDbAccountListManager.swift in Sources */,
-				111943141CCB8EF6001CF39B /* TMDbSignInRouter.swift in Sources */,
 				EA6487B41CE4AE0A00452DD0 /* TMDbDataManagerNotifications.swift in Sources */,
 				EA782B8F1CE0E26C00DC38AD /* TMDbListHolder.swift in Sources */,
 				EA6487681CE1E65700452DD0 /* TMDbUserManager.swift in Sources */,
@@ -1261,15 +1266,18 @@
 				111942F71CCB8EDE001CF39B /* Constants.swift in Sources */,
 				1119431F1CCB8EFC001CF39B /* TMDbSignInService.swift in Sources */,
 				EA782B7D1CE0B5F100DC38AD /* TMDbSignInManager.swift in Sources */,
+				EA288F251CF58347004FAEEF /* TMDbSessionID.swift in Sources */,
 				EA782B8B1CE0D63C00DC38AD /* TMDbUserService.swift in Sources */,
 				111942F81CCB8EDE001CF39B /* ResponseJSONObjectSerializable.swift in Sources */,
 				EA782B871CE0CA4500DC38AD /* TMDbReviewManager.swift in Sources */,
+				EA288F211CF4EE99004FAEEF /* TMDbMovieInfo.swift in Sources */,
 				EAE605C81CEA72C500D904EB /* TMDbSessionInfoStore.swift in Sources */,
 				EADA5A6C1CE8A53700C2FAE8 /* TMDbCastMember.swift in Sources */,
 				111943091CCB8EE4001CF39B /* TMDbUser.swift in Sources */,
 				111943041CCB8EE4001CF39B /* TMDbGenres.swift in Sources */,
-				111943131CCB8EF6001CF39B /* TMDbPeopleRouter.swift in Sources */,
+				EA288F231CF57955004FAEEF /* TMDbRequestToken.swift in Sources */,
 				111943111CCB8EF6001CF39B /* TMDbImageRouter.swift in Sources */,
+				EA288F1F1CF4EE8C004FAEEF /* TMDbAccountState.swift in Sources */,
 				EADA5A6E1CE8A54200C2FAE8 /* TMDbCrewMember.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1403,7 +1411,7 @@
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = coe.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1420,7 +1428,7 @@
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = coe.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 			};

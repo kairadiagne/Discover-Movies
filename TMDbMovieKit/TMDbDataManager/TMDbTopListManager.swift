@@ -9,12 +9,7 @@
 import Foundation
 import Alamofire
 
-public enum TMDbToplist: String {
-    case Popular = "popular"
-    case TopRated = "top_rated"
-    case Upcoming = "upcoming"
-    case NowPlaying = "now_playing"
-}
+
 
 public class TMDbTopListManager {
     

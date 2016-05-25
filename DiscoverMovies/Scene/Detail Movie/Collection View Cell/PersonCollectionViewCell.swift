@@ -25,8 +25,8 @@ class PersonCollectionViewCell: UICollectionViewCell {
     // MARK: - Configure Cell
     
     func configureWithCastMember(member: TMDbCastMember) {
-        guard let name = member.name, path = member.profilePath else { return }
-        nameLabel.text = name
+        guard let path = member.profilePath else { return }
+        nameLabel.text = member.name
         
         if let url = TMDbImageRouter.PosterMedium(path: path).url {
              profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())

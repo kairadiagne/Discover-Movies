@@ -8,23 +8,39 @@
 
 import Foundation
 import Alamofire
+import AlamofireObjectMapper
+
+/*
+ TMDb authentication workflow:
+ 
+ - Step 1: Create a new request token: This is a temporary token that is required to ask the user for permission to access their account.
+ You can generate any number of request tokens but hey will expire after 60 minutes. As soon as a valid sessionID has been created the token
+ will be destroyed.
+ 
+ - Step 2: Ask the user for permission via the website:
+ The next step is to take the token you got from step 1 and direct your use to the following URL:
+ https://www.themoviedb.org/authenticate/REQUEST_TOKen
+ The callback URK is also accessible via the Authentication-Callback header that gets returned.
+ You can also pass in a redirect_param when making this call which will redirect the user once the authentication flow has been completed.
+ 
+ - Step 3: Create a session ID: Assuming the reques token was authorized in step 2, you can nog go and request a session ID.
+ The results of this query will return a session_id value. This is the value required in all of the write methods.
+ 
+ */
 
 class TMDbSignInClient: TMDbAPIClient {
     
     private var requestToken: TMDbRequestToken?
     
-    // MARK: - Sign In
-    
     // Generates a valid request token for user based authentication
     
     func getRequestToken(completionHandler: (url: NSURL?, error: NSError?) -> Void) {
         
-        var parameters: [String: AnyObject] = [:]
-        parameters["api_key"] = APIKey
+        let parameters: [String: AnyObject] = [:]
         
-        let url = URL.Base + "authentication/token/new"
+        let endpoint = "authentication/token/new"
         
-        Alamofire.request(.GET, url, parameters: parameters, encoding: .URLEncodedInURL, headers: nil).validate()
+        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbRequestToken, NSError>) in
                 
                 guard response.result.error == nil else {
@@ -46,13 +62,16 @@ class TMDbSignInClient: TMDbAPIClient {
     
     func requestSessionID(completionHandler: (sessionID: TMDbSessionID?, error: NSError?) -> Void) {
         
-        var parameters: [String: AnyObject] = [:]
-        parameters["api_key"] = APIKey
-        parameters["request_token"] = requestToken?.token ?? ""
+        guard let requestToken = requestToken?.token else {
+            // Return error 
+            return
+        }
         
-        let url = URL.Base + "authentication/session/new"
+        let parameters: [String: AnyObject] = ["request_token": requestToken]
         
-        Alamofire.request(.GET, url, parameters: parameters, encoding: .URLEncodedInURL, headers: nil).validate()
+        let endpoint = "authentication/session/new"
+        
+        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbSessionID, NSError>) in
                 
                 guard response.result.error == nil else {

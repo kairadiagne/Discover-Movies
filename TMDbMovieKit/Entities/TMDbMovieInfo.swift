@@ -17,7 +17,7 @@ private struct Keys {
 
 public class TMDbMovieInfo: NSObject, Mappable {
     
-    public var similarMovies: TMDbList<TMDbMovie>?
+    var similarMovies: TMDbList<TMDbMovie>?
     public var credits: TMDbMovieCredit?
     public var trailers: [TMDbVideo]?
     

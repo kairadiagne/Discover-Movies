@@ -14,20 +14,13 @@ import ObjectMapper
 class TMDbRequestToken: NSObject, Mappable {
     
     var token: String = ""
-    var expirationDate = ""
+    var expirationDate = NSDate()
     
-    init?(_ map: Map) {
-        
-    }
+    required init?(_ map: Map) { }
     
     func mapping(map: Map) {
-        
+        self.token              <- map["request_token"]
+        self.expirationDate     <- (map["expires_at"], DateTransform())
     }
-    
-    if let token = response.result.value?["request_token"] as? String {
-        self.requestToken = token
-        let url = self.createAuthorizeURL(self.requestToken)
-        completionHandler(url: url, error: nil)
-    
-    
+
 }

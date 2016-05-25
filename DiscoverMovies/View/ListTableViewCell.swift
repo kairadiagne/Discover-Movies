@@ -8,7 +8,6 @@
 
 import UIKit
 import TMDbMovieKit
-import Cosmos
 import SDWebImage
 
 class ListTableViewCell: UITableViewCell {
@@ -16,13 +15,11 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
-    @IBOutlet weak var ratingView: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.Body()
         self.overviewLabel.font = UIFont.Caption()
-//        self.ratingView.setToDefaultStyle()
     }
 
 }
@@ -32,7 +29,7 @@ class ListTableViewCell: UITableViewCell {
 extension ListTableViewCell {
     
     func configure(movie: TMDbMovie, imageURL: NSURL?) {
-        titleLabel.text = movie.title != nil ? movie.title! : "Unknown"
+        titleLabel.text = movie.title
         overviewLabel.text = movie.overview != nil ? movie.overview! : ""
 //        if let rating = movie.rating { ratingView.configureForRating(rating) }
         movieImageView.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())

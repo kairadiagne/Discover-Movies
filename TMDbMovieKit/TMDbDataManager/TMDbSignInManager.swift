@@ -20,7 +20,7 @@ public class TMDbSignInManager {
     
     public var inProgress = false
     
-    private let signInService = TMDbSignInService()
+//    private let signInService = TMDbSignInService()
     
     private let sessionInfoStore = TMDbSessionInfoStore()
     
@@ -31,36 +31,36 @@ public class TMDbSignInManager {
     // MARK: - Sign In
     
     public func requestToken(redirectURI: String) {
-        inProgress = true
-        signInService.getRequestToken() { (url, error) in
-            guard error == nil else {
-                self.inProgress = false
-                self.delegate?.signInDelegateSigninDidFail(error!)
-                return
-            }
-            
-            print(url)
-            
-            if let url = url {
-               self.delegate?.signInDelegateShouldRequestAuthorization(url)
-            }
-        }
+//        inProgress = true
+//        signInService.getRequestToken() { (url, error) in
+//            guard error == nil else {
+//                self.inProgress = false
+//                self.delegate?.signInDelegateSigninDidFail(error!)
+//                return
+//            }
+//            
+//            print(url)
+//            
+//            if let url = url {
+//               self.delegate?.signInDelegateShouldRequestAuthorization(url)
+//            }
+//        }
     }
     
     public func requestSessionID() {
-        signInService.requestSessionID { (sessionID, error) in
-            guard error == nil else {
-                self.inProgress = false
-                self.delegate?.signInDelegateSigninDidFail(error!)
-                return 
-            }
-            
-            if let sessionID = sessionID {
-                self.inProgress = false
-                self.sessionInfoStore.persistSessionIDinStore(sessionID)
-                self.delegate?.signInDelegateSigninDidComplete()
-            }
-        }
+//        signInService.requestSessionID { (sessionID, error) in
+//            guard error == nil else {
+//                self.inProgress = false
+//                self.delegate?.signInDelegateSigninDidFail(error!)
+//                return 
+//            }
+//            
+//            if let sessionID = sessionID {
+//                self.inProgress = false
+//                self.sessionInfoStore.persistSessionIDinStore(sessionID)
+//                self.delegate?.signInDelegateSigninDidComplete()
+//            }
+//        }
     }
     
     // MARK: - Public Mode

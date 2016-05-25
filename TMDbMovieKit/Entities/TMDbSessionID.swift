@@ -14,7 +14,7 @@ class TMDbSessionID: NSObject, Mappable {
     var sessionID: String = ""
     var timeStamp : NSDate = NSDate()
     
-    init?(_ map: Map) {    }
+    required init?(_ map: Map) {    }
     
     func mapping(map: Map) {
     

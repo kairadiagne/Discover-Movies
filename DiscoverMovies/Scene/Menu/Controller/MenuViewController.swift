@@ -47,11 +47,11 @@ class MenuViewController: BaseViewController {
     }
     
     private func updateMenuheaderView() {
-        if let user = userManager.user, path = user.gravatarURI, url = TMDbImageRouter.PosterMedium(path: path).url {
-            tableView.configureProfileHeader(user, url: url)
-        } else {
-            tableView.configureProfileHeader()
-        }
+//        if let user = userManager.user, path = user.gravatarURI, url = TMDbImageRouter.PosterMedium(path: path).url {
+//            tableView.configureProfileHeader(user, url: url)
+//        } else {
+//            tableView.configureProfileHeader()
+//        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

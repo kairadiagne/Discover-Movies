@@ -21,7 +21,8 @@ public class TMDbMovieInfoManager {
     }
     
     public var similarMovies: [TMDbMovie] {
-        return similarMovieResults.items
+//        return similarMovieResults.items
+        return []
     }
     
     public private(set) var movieCredit: TMDbMovieCredit?
@@ -34,11 +35,11 @@ public class TMDbMovieInfoManager {
     
     private var movieID: Int?
     
-    private let movieService = TMDbMovieService()
+//    private let movieService = TMDbMovieService()
     
     private var accountState = (inFavorites: false, inWatchList: false)
     
-    private var similarMovieResults = TMDbListHolder<TMDbMovie>()
+//    private var similarMovieResults = TMDbList<TMDbMovie>()
     
     private var videoResults = [TMDbVideo]()
     
@@ -61,62 +62,62 @@ public class TMDbMovieInfoManager {
     }
     
     func loadAccountState() {
-        guard let movieID = movieID else { return }
-        movieService.accountStateForMovie(movieID) { (inFavorites, inWatchList, error) in
-            guard error == nil else {
-                self.postErrorNotification(error!)
-                return
-            }
-            
-            if let inFavorites = inFavorites, inWatchList = inWatchList {
-                self.accountState = (inFavorites: inFavorites, inWatchList: inWatchList)
-                self.postUpdateNotification() // MultiThreading
-            }
-        }
+//        guard let movieID = movieID else { return }
+//        movieService.accountStateForMovie(movieID) { (inFavorites, inWatchList, error) in
+//            guard error == nil else {
+//                self.postErrorNotification(error!)
+//                return
+//            }
+//            
+//            if let inFavorites = inFavorites, inWatchList = inWatchList {
+//                self.accountState = (inFavorites: inFavorites, inWatchList: inWatchList)
+//                self.postUpdateNotification() // MultiThreading
+//            }
+//        }
     }
     
     func loadSimilarMovies() {
-        guard let movieID = movieID else { return }
-        movieService.fetchMoviesSimilarToMovie(withID: movieID, page: nil) { (result, error) in
-            guard error == nil else {
-                self.postErrorNotification(error!)
-                return
-            }
-            
-            if let result = result {
-                self.similarMovieResults.update(result)
-                self.postUpdateNotification() // Multithreading
-            }
-        }
+//        guard let movieID = movieID else { return }
+//        movieService.fetchMoviesSimilarToMovie(withID: movieID, page: nil) { (result, error) in
+//            guard error == nil else {
+//                self.postErrorNotification(error!)
+//                return
+//            }
+//            
+//            if let result = result {
+//                self.similarMovieResults.update(result)
+//                self.postUpdateNotification() // Multithreading
+//            }
+//        }
     }
     
     func loadMovieCredits() {
-        guard let movieID = movieID else { return }
-        movieService.fetchCreditsForMovie(withID: movieID) { (credit, error) in
-            guard error == nil else {
-                print(error!)
-                self.postErrorNotification(error!)
-                return
-            }
-            
-            if let credit = credit {
-                self.movieCredit = credit
-                self.postUpdateNotification() // Multithreading
-            }
-        }
+//        guard let movieID = movieID else { return }
+//        movieService.fetchCreditsForMovie(withID: movieID) { (credit, error) in
+//            guard error == nil else {
+//                print(error!)
+//                self.postErrorNotification(error!)
+//                return
+//            }
+//            
+//            if let credit = credit {
+//                self.movieCredit = credit
+//                self.postUpdateNotification() // Multithreading
+//            }
+//        }
     }
     
     func loadVideos() {
-        guard let movieID = movieID else { return }
-        movieService.fetchVideosForMovie(movieID) { (result, error) in
-            guard error == nil else {
-                return
-            }
-            
-            if let result = result {
-                self.videoResults = result // Multithreading
-            }
-        }
+//        guard let movieID = movieID else { return }
+//        movieService.fetchVideosForMovie(movieID) { (result, error) in
+//            guard error == nil else {
+//                return
+//            }
+//            
+//            if let result = result {
+//                self.videoResults = result // Multithreading
+//            }
+//        }
     }
     
     // MARK: - Notifications

@@ -4,7 +4,6 @@ use_frameworks!
 
 abstract_target 'Networking' do
     pod 'Alamofire'
-    pod 'RealmSwift'
     pod 'AlamofireObjectMapper'
     pod 'SwiftyJSON'
     pod 'Locksmith'
@@ -13,7 +12,6 @@ abstract_target 'Networking' do
         pod 'SDWebImage'
         pod 'ChameleonFramework'
         pod 'IQDropDownTextField'
-        pod 'Cosmos'
         pod 'youtube-ios-player-helper'
         pod 'SWRevealViewController'
         pod 'BRYXBanner'

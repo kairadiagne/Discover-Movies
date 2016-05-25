@@ -26,7 +26,7 @@ public class TMDbReview: NSObject, Mappable, NSCoding {
     public required init?(_ map: Map) {
         super.init()
         
-        guard map[Keys.ReviewID].value() != nil else { return nil }
+        guard map[Keys.ReviewID].value() == nil else { return nil }
     }
     
     public func mapping(map: Map) {

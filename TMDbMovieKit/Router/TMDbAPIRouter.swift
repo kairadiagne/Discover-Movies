@@ -13,6 +13,10 @@ enum TMDbAPIRouter: URLRequestConvertible {
     case GET(endpoint: String, parameters: [String: AnyObject])
     case POST(endpoint: String, parameters: [String: AnyObject], body: [String: AnyObject])
     
+    var APIKey: String {
+        return TMDbSessionInfoStore().APIKey
+    }
+    
     var URLRequest: NSMutableURLRequest {
         
         var method: Alamofire.Method {
@@ -28,13 +32,21 @@ enum TMDbAPIRouter: URLRequestConvertible {
             
             switch self {
             case GET(let endpoint , var parameters):
-                parameters["api_key"] = ""
+                parameters["api_key"] = APIKey
                 return (endpoint, parameters)
             case POST(let endpoint, var parameters, _):
-                parameters["api_key"] = ""
+                parameters["api_key"] = APIKey
                 return (endpoint, parameters)
             }
             
+        }()
+        
+        let body: [String: AnyObject]? = {
+            switch self {
+            case .POST(_, _, let body):
+                return body
+            default: return nil
+            }
         }()
         
         
@@ -46,27 +58,10 @@ enum TMDbAPIRouter: URLRequestConvertible {
         let QueryEncoding = Alamofire.ParameterEncoding.URLEncodedInURL
         let JSONEncoding = Alamofire.ParameterEncoding.JSON
         let (encodeRequest, _) = QueryEncoding.encode(URLRequest, parameters: result.parameters) // Query
-//        let (finalRequest, _) = JSONEncoding.encode(encodeRequest.URLRequest, parameters: body) // Body
+        let (finalRequest, _) = JSONEncoding.encode(encodeRequest.URLRequest, parameters: body) // Body
         finalRequest.HTTPMethod = method.rawValue
         print(finalRequest)
         return finalRequest
         
     }
 }
-
-
-//        
-//        let result: (path: String, parameters: [String: AnyObject]?) = {
-//       
-//        
-//        
-//        let body: [String: AnyObject]? = {
-//            switch self {
-//            case .AddRemoveFromList(let body, _, _, _, _): return body
-//            default: return nil
-//            }
-//        }()
-//        
-//     
-//    }
-//}

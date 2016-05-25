@@ -127,9 +127,9 @@ class DetailView: BackgroundView {
     // MARK: - Configure Methods
   
     func configureForMovie(movie: TMDbMovie, image: UIImage? = nil, url: NSURL? = nil) {
-        titleLabel.text = movie.title! ?? "Unknown"
+        titleLabel.text = movie.title
         overviewLabel.text = movie.overview ?? "N/A"
-        genreValueLabel.text = movie.genreStrings.count > 0 ? "\(movie.genreStrings.first!)" : "Unknown"
+//        genreValueLabel.text = movie.genreStrings.count > 0 ? "\(movie.genreStrings.first!)" : "Unknown"
         ratingValueLabel.text = "\(movie.rating!)\\10.0"
         releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
         setImage(image, url: url)

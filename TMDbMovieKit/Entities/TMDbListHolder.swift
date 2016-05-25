@@ -18,18 +18,21 @@ private struct Keys {
     static let TimeStamp = "timestamp"
 }
 
-public class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable {
+class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable {
     
-    public var page: Int = 0
-    public var pageCount: Int = 0
-    public var nextPage: Int?
-    public var resultCount: Int = 0
-    public var items: [Item] = []
-    public var timeStamp: NSDate?
+    var page: Int = 0
+    var pageCount: Int = 0
+    var nextPage: Int?
+    var resultCount: Int = 0
+    var items: [Item] = []
     
-    public required init?(_ map: Map) { }
+    override init() {
+        super.init()    
+    }
     
-    public func mapping(map: Map) {
+    required init?(_ map: Map) { }
+    
+    func mapping(map: Map) {
         self.page           <- map[Keys.Page]
         self.pageCount      <- map[Keys.PageCount]
         self.nextPage       <- map[Keys.NextPage]

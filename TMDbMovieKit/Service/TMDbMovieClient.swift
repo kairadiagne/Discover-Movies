@@ -9,23 +9,30 @@
 import Foundation
 import Alamofire
 
+public enum TMDbAccountList: String {
+    case Favorites = "favorite"
+    case Watchlist = "watchlist"
+}
+
+public enum TMDbToplist: String {
+    case Popular = "popular"
+    case TopRated = "top_rated"
+    case Upcoming = "upcoming"
+    case NowPlaying = "now_playing"
+}
+
 class TMDbMovieClient: TMDbAPIClient {
-    
-    typealias MovieListCompletionHandler = (Result<TMDbList<TMDbMovie>, NSError>) -> Void
-    
-    typealias MovieListResponse = (Response<TMDbList<TMDbMovie>, NSError>)
 
     // Fetches themoviedb toplist (Popular, Toprated, Upcoming, Now playing)
     
-    func fetchToplist(list: TMDbToplist, page: Int, completionHandler: MovieListCompletionHandler) {
+    func fetchToplist(list: TMDbToplist, page: Int, completionHandler: (Result<TMDbList<TMDbMovie>, NSError>) -> Void) {
         
-        var parameters: [String: AnyObject] = [:]
-        parameters["page"] = page
-
+        let parameters: [String: AnyObject] = ["page": page]
+        
         let endpoint = "movie/\(list.rawValue)"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
-            .responseObject { (response: MovieListResponse) in
+            .responseObject { (response: Response<TMDbList<TMDbMovie>, NSError>) in
                 
                 completionHandler(response.result)
         }
@@ -33,19 +40,19 @@ class TMDbMovieClient: TMDbAPIClient {
     
     // Searches for movies by year, genre, vote and sorts the results based on popularity rating (Asscending)
     
-    func discover(year: String?, genre: Int?, vote: Float?, page: Int, completionHandler: MovieListCompletionHandler) {
+    func discover(year: String?, genre: Int?, vote: Float?, page: Int, completionHandler: (Result<TMDbList<TMDbMovie>, NSError>) -> Void) {
         
         var parameters: [String: AnyObject] = [:]
-        parameters["primary_release_year"] = year ?? nil // Remove nil coloascing??
-        parameters["with_genres"] = genre ?? nil // Remove nil coloascing??
-        parameters["vote_average.gte"] = vote ?? nil // Remove nil coloascing??
+        parameters["primary_release_year"] = year
+        parameters["with_genres"] = genre
+        parameters["vote_average.gte"] = vote
         parameters["page"] = page
         parameters["sort_by"] = "popularity.desc"
         
         let endpoint =  "discover/movie"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
-            .responseObject { (response: MovieListResponse) in
+            .responseObject { (response: Response<TMDbList<TMDbMovie>, NSError>) in
                 
                 completionHandler(response.result)
         }
@@ -53,116 +60,122 @@ class TMDbMovieClient: TMDbAPIClient {
     
     // Search for movies by title
     
-    func movieWithTitle(title: String, page: Int, completionHandler: MovieListCompletionHandler) {
-        
-        var parameters: [String: AnyObject] = [:]
-        parameters["page"] = page
-        
-        let endpoint = URL.Base + "search/movie"
+    func movieWithTitle(title: String, page: Int, completionHandler: (Result<TMDbList<TMDbMovie>, NSError>) -> Void) {
+    
+        let parameters: [String: AnyObject] = ["page": page, "query": title]
+    
+        let endpoint = "search/movie"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
-            .responseObject { (response: MovieListResponse) in
-                
+            .responseObject { (response: Response<TMDbList<TMDbMovie>, NSError>) in
+    
                 completionHandler(response.result)
         }
     }
     
-    // Checks if a movie belongs to the watchlist and/or favorites list
+    // Fetches the favorites list or the watchlist
     
-    func fetchAccountList(list: TMDbAccountList, page: Int, completionHandler: MovieListCompletionHandler) {
+    func fetchAccountList(list: TMDbAccountList, page: Int, completionHandler: (Result<TMDbList<TMDbMovie>, NSError>) -> Void) {
+
+        guard let sessionID = sessionID , userID = userID else {
+            // Return error
+            return
+        }
         
-        var parameters: [String: AnyObject] = [:]
-        parameters["page"] = page
-        parameters["session_id"] = sessionID ?? "" // Remove "" coloascing??
-        
+        let parameters: [String: AnyObject] = ["page": page, "session_id": sessionID]
+
         let endpoint = "account/\(userID)/\(list)/movies"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
-            .responseObject { (response: MovieListResponse) in
-                
+            .responseObject { (response: Response<TMDbList<TMDbMovie>, NSError>) in
+    
                 completionHandler(response.result)
         }
     }
     
-    // Changes the status of a movie in the watchlist or favorites list
+    // Checks wether the movie is in the watchlsit and/or favorite list
     
     func accountStateForMovie(movieID: Int, completionHandler: Result<TMDbAccountState, NSError> -> Void) {
-
-        var parameters: [String: AnyObject] = [:]
-        parameters["session_id"] = sessionID ?? ""
+        
+        guard let sessionID = sessionID else {
+            // Return error 
+            return
+        }
+        
+        let parameters: [String: AnyObject] = ["session_id": sessionID]
         
         let endpoint = "movie/\(movieID)/account_states"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbAccountState, NSError>) in
-    
+                
                 completionHandler(response.result)
         }
     }
     
+    // Adds or removes a movie from the watchlist or favoritelist
+    
     func changeStateForMovie(movieID: Int, inList: String, toState state: Bool, completionHandler: (error: NSError?) -> Void) {
         
-        var parameters: [String: AnyObject] = [:]
-        parameters["session_id"] = sessionID
+        guard let sessionID = sessionID, userID = userID else {
+            // Return error
+            return
+        }
+    
+        let parameters: [String: AnyObject] = ["session_id": sessionID]
         
-        let accountID = 0
         let list = ""
 
-        let endpoint = "account/\(accountID)/\(list)"
+        let endpoint = "account/\(userID)/\(list)"
     
-        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
+        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate() // POST
             .response { (request, response, data, error) in
                 
                 guard error == nil else {
                     completionHandler(error: error)
                     return
                 }
-                
+    
                 completionHandler(error: nil)
         }
         
     }
     
-   // MARK: - Additional Movie Info
-    
-    typealias MovieInfoCompletionHandler = (Result<TMDbMovieInfo, NSError>) -> Void
-    
     // Fetches additional info about a movie (Similar movies, movie credits,  trailers)
     
-    func fetchAdditionalInfoMovie(movieID: Int, completionHandler: MovieInfoCompletionHandler) {
+    func fetchAdditionalInfoMovie(movieID: Int, completionHandler: (Result<TMDbMovieInfo, NSError>) -> Void) {
         
-        var parameters: [String: AnyObject] = [:]
-        parameters["append_to_response"] = "similar,credits,trailers"
+        let parameters: [String: AnyObject] = ["append_to_response": "similar,credits,trailers"]
         
         let endpoint = "movie/\(movieID)"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbMovieInfo, NSError>) in
-                
+
                 completionHandler(response.result)
         }
     }
     
-    // MARK: - Reviews
-    
-    typealias ReviewCompletionHandler = (Result<TMDbList<TMDbReview>, NSError>) -> Void
-    
     // Fetches reviews about a specific movie
     
-    func fetchReviews(movieID: Int, page: Int?, completionHandler: ReviewCompletionHandler) {
+    func fetchReviews(movieID: Int, page: Int?, completionHandler: (Result<TMDbList<TMDbReview>, NSError>) -> Void) {
+    
+        let parameters: [String: AnyObject] = [:]
+    
+        let endpoint = "\(movieID)/reviews"
         
-        var parameters: [String: AnyObject] = [:]
-        parameters["api_key"] = APIKey
-        
-        let url = URL.Base + "\(movieID)/reviews"
-        
-        Alamofire.request(.GET, url, parameters: parameters, encoding: .URLEncodedInURL, headers: nil).validate()
+        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbList<TMDbReview>, NSError>) in
                 
-                completionHandler(response.result)
+              completionHandler(response.result)
         }
     }
     
 }
+    
+
+
+            
+
 
 

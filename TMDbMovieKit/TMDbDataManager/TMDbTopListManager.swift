@@ -35,17 +35,17 @@ public class TMDbTopListManager {
     
     // Private properties
     
-    private let movieService = TMDbMovieService()
+    private let movieClient = TMDbMovieClient()
     
     private var currentList: TMDbToplist?
     
-    private var popular = TMDbListHolder<TMDbMovie>()
+    private var popular = TMDbList<TMDbMovie>()
     
-    private var topRated = TMDbListHolder<TMDbMovie>()
+    private var topRated = TMDbList<TMDbMovie>()
     
-    private var upcoming = TMDbListHolder<TMDbMovie>()
+    private var upcoming = TMDbList<TMDbMovie>()
     
-    private var nowPlaying = TMDbListHolder<TMDbMovie>()
+    private var nowPlaying = TMDbList<TMDbMovie>()
     
     // MARK: - Initialization 
     
@@ -54,8 +54,14 @@ public class TMDbTopListManager {
     // MARK: - Fetching
 
     public func reloadTopIfNeeded(forceOnline: Bool, list: TMDbToplist) {
-        // For know I let NSURLCache handle the caching
         currentList = list
+        
+        // if list != loading && list needs refresh 
+            // isloading // inprogress
+            // Fetch page 1
+        //  if forceOnline 
+            // isloading // inprogress
+            // Fetch page 1
         inProgress = true
         fetchList(list, page: 1)
     }
@@ -65,17 +71,17 @@ public class TMDbTopListManager {
         guard let list = currentList else { return }
     
         // Check which page we need to fetch
-        var page: Int?
+        var page: Int
         
         switch list {
         case .Popular:
-            page = popular.nextPage
+            page = popular.nextPage ?? 1
         case .TopRated:
-            page = topRated.nextPage
+            page = topRated.nextPage ?? 1
         case .NowPlaying:
-            page = nowPlaying.nextPage
+            page = nowPlaying.nextPage ?? 1
         case .Upcoming:
-            page = upcoming.nextPage
+            page = upcoming.nextPage ?? 1
         }
         
         fetchList(list, page: page)
@@ -86,85 +92,21 @@ public class TMDbTopListManager {
     private func fetchList(list: TMDbToplist, page: Int) {
         guard let currentList = currentList else { return }
         
-        let urlString = "movie/\(list.rawValue)"
-        let parameters: [String: AnyObject] = ["page": page]
+        inProgress = true
         
+        movieClient.fetchToplist(list, page: page) { (response) in
         
-        
-        Alamofire.request(.GET, <#T##URLString: URLStringConvertible##URLStringConvertible#>, parameters: <#T##[String : AnyObject]?#>, encoding: <#T##ParameterEncoding#>, headers: <#T##[String : String]?#>)
-        
-        
-        
-        
-        
-        
-        switch self {
-        case .TopList(let list, let page, let APIKey):
-            if let page = page { parameters[Key.Page] = page }
-            parameters[Key.APIKey] = APIKey
-            return ("movie/\(list)", parameters)
-        case .Discover(let year, let genre, let voteAverage, let page, let APIKey):
-            if let year = year { parameters[Key.ReleaseYear] = year }
-            if let genre = genre { parameters[Key.Genre] = genre }
-            if let voteAverage = voteAverage { parameters[Key.Vote] = voteAverage }
-            if let page = page { parameters[Key.Page] = page }
-            parameters[Key.Sort] = "popularity.desc"
-            parameters[Key.APIKey] = APIKey
-            return ("discover/movie", parameters)
-        case .SearchByTitle(let title, let page, let APIKey):
-            parameters[Key.Query] = title
-            if let page = page { parameters[Key.Page] = page }
-            parameters[Key.APIKey] = APIKey
-            return ("search/movie", parameters)
-        case .List(let list, let sessionID, let accountID, let page, let APIKey):
-            parameters[Key.SessionID] = sessionID
-            if let page = page { parameters[Key.Page] = page }
-            parameters[Key.APIKey] = APIKey
-            return ("account/\(accountID)/\(list)/movies", parameters)
-        case .SimilarMovies(let movieID, let page, let APIKey):
-            if let page = page { parameters[Key.Page] = page }
-            parameters[Key.APIKey] = APIKey
-            return ("movie/\(movieID)/similar", parameters)
-        case .MovieCredits(let movieID, let APIKey):
-            parameters[Key.APIKey] = APIKey
-            return ("movie/\(movieID)/credits", parameters)
-        case .Reviews(let movieID, let page, let APIKey):
-            if let page = page { parameters[Key.Page] = page }
-            parameters[Key.APIKey] = APIKey
-            return ("movie/\(movieID)/reviews", parameters)
-        case .Videos(let movieID, let APIKey):
-            parameters[Key.APIKey] = APIKey
-            return ("movie/\(movieID)/videos", parameters)
-        case .AccountState(let movieID, let sessionID, let APIKey):
-            parameters[Key.SessionID] = sessionID
-            parameters[Key.APIKey] = APIKey
-            return ("movie/\(movieID)/account_states", parameters)
-        case .AddRemoveFromList(_, let accountID, let list, let sessionID, let APIKey):
-            parameters[Key.SessionID] = sessionID
-            parameters[Key.APIKey] = APIKey
-            return("account/\(accountID)/\(list)", parameters)
-        }
-    }()
-    
-        Alamofire.request(<#T##URLRequest: URLRequestConvertible##URLRequestConvertible#>)
-    
-        i
-//        func fetchToplist(list: String, page: Int?, completionHandler: MovieListCompletionHandler) {
-//            Alamofire.request(TMDbMovieRouter.TopList(list: list, page: page, APIKey: APIKey)).validate()
-//                .responseObject { (response: MovieListResponse) in
-//                    completionHandler(result: response.result.value, error: response.result.error)
-//            }
-//        }
-        
-        
-        movieService.fetchTopList(list.rawValue, page: page, completionHandler: { (result, error) in
             self.inProgress = false
-            guard error == nil else {
-                self.postErrorNotification(error!)
+            
+            guard response.error == nil else {
+                print(response.error)
+                self.postErrorNotification(response.error!)
                 return
             }
             
-            if let data = result {
+            // Update list in cached data 
+            
+            if let data = response.value {
                 switch currentList {
                 case .Popular:
                     self.updateList(self.popular, withData: data)
@@ -177,12 +119,12 @@ public class TMDbTopListManager {
                 }
 
             }
-        })
+        }
     }
     
     // MARK: - Handle Response
     
-    private func updateList(list: TMDbListHolder<TMDbMovie>, withData data: TMDbListHolder<TMDbMovie>) {
+    private func updateList(list: TMDbList<TMDbMovie>, withData data: TMDbList<TMDbMovie>) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
            list.update(data)
 

@@ -69,12 +69,10 @@ class DetailViewController: BaseViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        detailView.configureForMovie(movie, image: image)
         
-        if let movieID = movie.movieID {
-            movieInfoManager.reloadIfNeeded(true, movieID: movieID)
-        }
+        detailView.configureForMovie(movie, image: image)
 
+        movieInfoManager.reloadIfNeeded(true, movieID:movie.movieID)
     }
     
     override func viewWillDisappear(animated: Bool) {

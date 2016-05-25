@@ -14,7 +14,7 @@ public class TMDbReviewManager {
         return [TMDbReview]()
     }
     
-    private let movieService = TMDbMovieService()
+//    private let movieService = TMDbMovieService()
     
     // MARK: - Fetching 
     

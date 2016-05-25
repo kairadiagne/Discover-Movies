@@ -22,7 +22,6 @@ private struct Keys {
     static let BackdropPath = "backdrop_path"
 }
 
-
 public class TMDbMovie: NSObject, Mappable, NSCoding {
     
     public var movieID: Int = 0
@@ -37,8 +36,8 @@ public class TMDbMovie: NSObject, Mappable, NSCoding {
     
     
     public required init?(_ map: Map) {
-        guard map[Keys.MovieID].value() != nil else { return nil }
-        guard map[Keys.Title].value() != nil else { return nil }
+//        guard map[Keys.MovieID].value() != nil else { return nil }
+//        guard map[Keys.Title].value() != nil else { return nil }
     }
     
     public func mapping(map: Map) {

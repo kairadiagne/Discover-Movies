@@ -30,12 +30,10 @@ public class TMDbCastMember: NSObject, Mappable {
     public var profilePath: String?
     
     public required init?(_ map: Map) {
-        super.init()
-        
-        guard map[Keys.CreditID].value() != nil else { return nil }
-        guard map[Keys.PersonID].value() != nil else { return nil }
-        guard map[Keys.CastID].value() != nil else { return nil }
-        guard map[Keys.Name].value() != nil else { return nil }
+        guard map.JSONDictionary[Keys.CreditID] != nil else { return nil }
+        guard map.JSONDictionary[Keys.PersonID] != nil else { return nil }
+        guard map.JSONDictionary[Keys.CastID] != nil else { return nil }
+        guard map.JSONDictionary[Keys.Name] != nil else { return nil }
     }
     
     public func mapping(map: Map) {

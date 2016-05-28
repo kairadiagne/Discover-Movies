@@ -29,6 +29,10 @@ class SignInViewController: BaseViewController {
         signInManager.delegate = self
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     // MARK: - Actions
     
     @IBAction func signIn(sender: UIButton) {

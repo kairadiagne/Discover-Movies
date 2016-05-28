@@ -17,22 +17,30 @@ class MenuTableView: UITableView {
         static let HeaderViewNibName = "MenuHeaderView"
     }
     
-    private var headerView: MenuHeaderView!
+    @IBOutlet weak var discoverLabel: UILabel!
+    @IBOutlet weak var watchListLabel: UILabel!
+    @IBOutlet weak var favoritesLabel: UILabel!
+    @IBOutlet weak var signoutlabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
     
+    @IBOutlet weak var usernameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        scrollEnabled = false
-        contentInset = UIEdgeInsets(top: Constants.ProfileHeaderHeight, left: 0, bottom: 0, right: 0)
+        discoverLabel.font = UIFont.h3()
+        watchListLabel.font = UIFont.h3()
+        favoritesLabel.font = UIFont.h3()
+        signoutlabel.font = UIFont.h3()
         
-//        headerView = MenuHeaderView.loadFromNib()
-//        headerView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.6, height: Constants.ProfileHeaderHeight)
-//        addSubview(headerView)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        headerView.frame.size.width = self.bounds.width
+        profileImageView.layer.borderWidth = 2
+        profileImageView.layer.backgroundColor = UIColor.clearColor()
+        profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        profileImageView.layer.masksToBounds = false
+        self.layer.cornerRadius = 2
+        self.clipsToBounds = true
+        
+        backgroundColor = UIColor.
+
     }
     
     // MARK: - Configure

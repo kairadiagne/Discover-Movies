@@ -8,8 +8,6 @@
 
 import UIKit
 
-// MARK: - Colors
-
 extension UIColor {
     
     static func backgroundColor() -> UIColor {

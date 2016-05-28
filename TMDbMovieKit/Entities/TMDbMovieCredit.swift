@@ -22,17 +22,13 @@ private struct Keys {
 
 public class TMDbMovieCredit: NSObject, Mappable {
     
-    public var creditID: Int = 0
     public var cast: [TMDbCastMember] = []
     public var crew: [TMDbCrewMember] = []
     public var director: TMDbCrewMember?
     
-    public required init?(_ map: Map) {
-        guard map[Keys.CreditID].value() != nil else { return nil }
-    }
+    public required init?(_ map: Map) { }
     
     public func mapping(map: Map) {
-        self.creditID   <- map[Keys.CreditID]
         self.cast       <- map[Keys.Cast]
         self.crew       <- map[Keys.Crew]
         

@@ -35,7 +35,6 @@ class TMDbSignInClient: TMDbAPIClient {
     // Generates a valid request token for user based authentication
     
     func getRequestToken(completionHandler: (url: NSURL?, error: NSError?) -> Void) {
-        
         let parameters: [String: AnyObject] = [:]
         
         let endpoint = "authentication/token/new"
@@ -60,8 +59,7 @@ class TMDbSignInClient: TMDbAPIClient {
         
     }
     
-    func requestSessionID(completionHandler: (sessionID: TMDbSessionID?, error: NSError?) -> Void) {
-        
+    func requestSessionID(completionHandler: (sessionID: String?, error: NSError?) -> Void) {
         guard let requestToken = requestToken?.token else {
             // Return error 
             return
@@ -72,19 +70,20 @@ class TMDbSignInClient: TMDbAPIClient {
         let endpoint = "authentication/session/new"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
-            .responseObject { (response: Response<TMDbSessionID, NSError>) in
+            .responseJSON { (response) in
                 
                 guard response.result.error == nil else {
                     completionHandler(sessionID: nil, error: response.result.error!)
                     return
                 }
                 
-                if let sessionID = response.result.value {
+                if let sessionID = response.result.value?["session_id"] as? String {
                     completionHandler(sessionID: sessionID, error: nil)
                 }
-        }
-        
+                
+            }
     }
-    
+
+
 }
 

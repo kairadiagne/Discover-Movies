@@ -24,4 +24,14 @@ class SignInView: BackgroundView {
         instructionLabel.font = UIFont.Caption()
     }
     
+    // Gradient background view in standard color 
+    // Rechthoekig buttons met border color white
+    // Animate the button press
+    // Signinbutton
+        // or 
+    // continue without signin button 
+    
+// Explain that it uses data from the moviedb.org
+    // Elements should animate on screen with alpha 
+    
 }

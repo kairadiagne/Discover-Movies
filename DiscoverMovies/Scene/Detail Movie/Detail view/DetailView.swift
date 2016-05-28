@@ -38,7 +38,6 @@ class DetailView: BackgroundView {
     
     @IBOutlet weak var favouriteButton: FavouriteButton!
     @IBOutlet weak var watchListButton: WatchListButton!
-    // Add to watch list button 
     // Watch Trailer button
     // Read reviews button 
 
@@ -111,7 +110,6 @@ class DetailView: BackgroundView {
     // MARK: - Header
 
     func updateHeaderView() {
-        // Get the current size of the header
         var headerRect = CGRect(x: 0, y: -Constants.HeaderHeight, width: detailScrollView.bounds.width, height: Constants.HeaderHeight)
         
         // If the scroll view offset is greater than the header height adjust the header rect
@@ -119,8 +117,7 @@ class DetailView: BackgroundView {
             headerRect.origin.y = detailScrollView.contentOffset.y
             headerRect.size.height = -detailScrollView.contentOffset.y
         }
-        
-        // Update header image view frame
+    
         headerImageView.frame = headerRect
     }
     
@@ -129,32 +126,29 @@ class DetailView: BackgroundView {
     func configureForMovie(movie: TMDbMovie, image: UIImage? = nil, url: NSURL? = nil) {
         titleLabel.text = movie.title
         overviewLabel.text = movie.overview ?? "N/A"
-//        genreValueLabel.text = movie.genreStrings.count > 0 ? "\(movie.genreStrings.first!)" : "Unknown"
+        genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
         ratingValueLabel.text = "\(movie.rating!)\\10.0"
         releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
         setImage(image, url: url)
     }
     
     func configureWithMovieCredit(movieCredit: TMDbMovieCredit) {
-        directorValueLabel.text = movieCredit.director?.name != nil ? movieCredit.director?.name! : nil
+        directorValueLabel.text = movieCredit.director?.name ?? "Unknown"
     }
     
-    func configureForStatus(inFavorites: Bool, inWatchList: Bool) {
-        // favorite button highlighted
-        // watchlist button highlighted
+    func configureForAccountState(accountState: TMDbAccountState) {
+        favouriteButton.setAsSelected(accountState.favoriteStatus)
+        watchListButton.setAsSelected(accountState.watchlistStatus)
     }
-    
-    // MARK: - Helper functions
     
     private func setImage(image: UIImage?, url: NSURL?) {
         if let image = image {
-           headerImageView.image = image
+            headerImageView.image = image
         } else if let url = url {
-           headerImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+            headerImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
         }
-        
     }
-
+   
 }
 
 // MARK: - UIScrollViewDelegate
@@ -168,7 +162,6 @@ extension DetailView: UIScrollViewDelegate {
 }
 
 
-    
 
     
 

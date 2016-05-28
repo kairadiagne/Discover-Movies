@@ -28,9 +28,9 @@ public class TMDbVideo: NSObject, Mappable {
     public var type: String?
     
     public required init?(_ map: Map) {
-        guard map[Keys.VideoID].value() != nil else { return nil }
-        guard map[Keys.Key].value() != nil else { return nil }
-        guard map[Keys.Site].value() != nil else { return nil }
+        guard map.JSONDictionary[Keys.VideoID] != nil else { return nil }
+        guard map.JSONDictionary[Keys.Key] != nil else { return nil }
+        guard map.JSONDictionary[Keys.Site] != nil else { return nil }
     }
     
     public func mapping(map: Map) {

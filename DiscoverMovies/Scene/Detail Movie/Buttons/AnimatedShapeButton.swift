@@ -36,7 +36,15 @@ class AnimatedShapeButton: UIControl {
         }
     }
     
-    private(set) var status: Status = .NotSelected
+    private(set) var status: Status = .NotSelected {
+        didSet {
+            if status == .Selected {
+                changeFillAnimated(true, duration: 0.25, key: Constants.FillAnimationKey)
+            } else {
+                changeFillAnimated(false, duration: 0.25, key: Constants.UnfillAnimationkey)
+            }
+        }
+    }
       
     // MARK: - Layers
     
@@ -72,11 +80,17 @@ class AnimatedShapeButton: UIControl {
     func toggleState() {
         switch status {
         case .Selected:
-            changeFillAnimated(false, duration: 0.25, key: Constants.UnfillAnimationkey)
             status = .NotSelected
         case .NotSelected:
-            changeFillAnimated(true, duration: 0.25, key: Constants.FillAnimationKey)
             status = .Selected
+        }
+    }
+    
+    func setAsSelected(selected: Bool) {
+        if selected && status != .Selected {
+            status = .Selected
+        } else if !selected && status != .NotSelected {
+            status = .NotSelected
         }
     }
     

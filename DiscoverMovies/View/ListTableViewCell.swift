@@ -24,6 +24,8 @@ class ListTableViewCell: UITableViewCell {
 
 }
 
+// TODO: - Rating 
+
 // MARK: - Configure Methods
 
 extension ListTableViewCell {
@@ -31,7 +33,6 @@ extension ListTableViewCell {
     func configure(movie: TMDbMovie, imageURL: NSURL?) {
         titleLabel.text = movie.title
         overviewLabel.text = movie.overview != nil ? movie.overview! : ""
-//        if let rating = movie.rating { ratingView.configureForRating(rating) }
         movieImageView.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
     }
 

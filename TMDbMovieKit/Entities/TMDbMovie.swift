@@ -34,10 +34,9 @@ public class TMDbMovie: NSObject, Mappable, NSCoding {
     public var posterPath: String?
     public var backDropPath: String?
     
-    
     public required init?(_ map: Map) {
-//        guard map[Keys.MovieID].value() != nil else { return nil }
-//        guard map[Keys.Title].value() != nil else { return nil }
+        guard map.JSONDictionary[Keys.MovieID] != nil else { return nil }
+        guard map.JSONDictionary[Keys.Title] != nil else { return nil }
     }
     
     public func mapping(map: Map) {

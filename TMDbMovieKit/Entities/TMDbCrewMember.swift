@@ -28,8 +28,8 @@ public class TMDbCrewMember: NSObject, Mappable {
     public var profilePath: String?
     
     public required init?(_ map: Map) {
-        guard map[Keys.CreditID].value() != nil else { return nil }
-        guard map[Keys.PersonID].value() != nil else { return nil }
+        guard map.JSONDictionary[Keys.CreditID] != nil else { return nil }
+        guard map.JSONDictionary[Keys.PersonID] != nil else { return nil }
     }
     
     public func mapping(map: Map) {

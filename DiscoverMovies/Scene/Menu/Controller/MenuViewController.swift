@@ -9,74 +9,74 @@
 import UIKit
 import TMDbMovieKit
 
-class MenuViewController: BaseViewController {
+class MenuViewController: UITableViewController {
     
     private struct Constants {
-        static let MenuCellIdentifier = "MenuCell"
-        static let MenuCellNibName = "MenuTableViewCell"
+        static let Identifier = "MenuViewController"
+        static let MenuCellIdentifier = "MenuTableViewCell"
     }
     
-    @IBOutlet weak var tableView: MenuTableView!
+    // MARK: - Storyboard
     
+    class func instantiatefromStoryboard() -> MenuViewController {
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        return storyboard.instantiateViewControllerWithIdentifier(Constants.Identifier) as! MenuViewController
+    }
+
     private let userManager = TMDbUserManager()
     private let signInmanager = TMDbSignInManager()
-    private let datasource = MenuDataSource()
     
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nib = UINib(nibName: Constants.MenuCellNibName, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: Constants.MenuCellIdentifier)
         
-        datasource.identifier = Constants.MenuCellIdentifier
-        tableView.dataSource = datasource
-        tableView.delegate = self
         
-        signUpForUpdateNotification(userManager)
-        signUpErrorNotification(userManager)
+//        signUpForUpdateNotification(userManager)
+//        signUpErrorNotification(userManager)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if sessionManager.signInStatus == .Signedin {
-           userManager.reloadIfNeeded(true)
-        }
-    }
-    
-    private func updateMenuheaderView() {
-//        if let user = userManager.user, path = user.gravatarURI, url = TMDbImageRouter.PosterMedium(path: path).url {
-//            tableView.configureProfileHeader(user, url: url)
-//        } else {
-//            tableView.configureProfileHeader()
+//        if sessionManager.signInStatus == .Signedin {
+//           userManager.reloadIfNeeded(true)
 //        }
     }
     
+//    private func updateMenuheaderView() {
+////        if let user = userManager.user, path = user.gravatarURI, url = TMDbImageRouter.PosterMedium(path: path).url {
+////            tableView.configureProfileHeader(user, url: url)
+////        } else {
+////            tableView.configureProfileHeader()
+////        }
+//    }
+//    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
     
     // MARK: - Notifications
     
-    override func updateNotification(notification: NSNotification) {
-        updateMenuheaderView()
-    }
+//    override func updateNotification(notification: NSNotification) {
+////        updateMenuheaderView()
+//    }
     
     // MARK: - Navigation
     
     func showTopListViewController() {
-        let topListViewController = TopListViewController()
-        self.navigationController?.pushViewController(topListViewController, animated: true)
+        let topListVieWController = TopListViewController()
+        revealViewController()?.pushFrontViewController(topListVieWController, animated: true)
+
     }
     
     func showWatchListViewController() {
-        
+       // Show watchlist view controller
     }
     
     func showFavoritesViewControlelr() {
-        
+        // Show favorites view controller
     }
     
     func signout() {
@@ -84,23 +84,27 @@ class MenuViewController: BaseViewController {
         showTopListViewController()
     }
     
-}
-
-extension MenuViewController: UITableViewDelegate {
+    // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard let menuItem = datasource.itemForIndex(indexPath.row) else { return }
-        
-        switch menuItem {
-        case .DiscoverMovies:
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.row {
+        case 0:
             showTopListViewController()
-        case .Favorites:
+        case 1:
             showFavoritesViewControlelr()
-        case .WatchList:
+        case 2:
             showWatchListViewController()
-        case .Signout:
+        case 3:
             signout()
+        default:
+            fatalError()
         }
     }
+    
+}
+
+extension MenuViewController {
+    
+   
     
 }

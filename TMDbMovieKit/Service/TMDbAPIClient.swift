@@ -9,17 +9,25 @@
 import Foundation
 
 class TMDbAPIClient {
+    
+    // MARK: - Initialization
+    
+    init() { }
+    
+    // MARK: - Properties
+    
+    private let infoStore = TMDbSessionInfoStore()
 
     var APIKey: String {
-        return TMDbSessionInfoStore().APIKey
+        return infoStore.APIKey
     }
     
     var sessionID: String? {
-        return TMDbSessionInfoStore().sessionID
+        return infoStore.sessionID
     }
     
     var userID: Int? {
-        return TMDbSessionInfoStore().user?.userID
+        return infoStore.user?.userID
     }
     
 }

@@ -25,7 +25,7 @@ public class TMDbUser: NSObject, Mappable, NSCoding {
     
     public required init?(_ map: Map) {
         super.init()
-        guard map[Keys.UserID].value() != nil else { return nil }
+        guard map.JSONDictionary[Keys.UserID] != nil else { return nil }
     }
     
     public func mapping(map: Map) {

@@ -48,20 +48,17 @@ enum TMDbAPIRouter: URLRequestConvertible {
             default: return nil
             }
         }()
-        
-        
-        // BODY
-        
+    
         var URL = NSURL(string: TMDbAPI.BaseURL)!
         URL = URL.URLByAppendingPathComponent(result.path)
         let URLRequest = NSURLRequest(URL: URL)
+        
         let QueryEncoding = Alamofire.ParameterEncoding.URLEncodedInURL
         let JSONEncoding = Alamofire.ParameterEncoding.JSON
-        let (encodeRequest, _) = QueryEncoding.encode(URLRequest, parameters: result.parameters) // Query
-        let (finalRequest, _) = JSONEncoding.encode(encodeRequest.URLRequest, parameters: body) // Body
+        let (encodeRequest, _) = QueryEncoding.encode(URLRequest, parameters: result.parameters)
+        let (finalRequest, _) = JSONEncoding.encode(encodeRequest.URLRequest, parameters: body)
         finalRequest.HTTPMethod = method.rawValue
-        print(finalRequest)
-        return finalRequest
         
+        return finalRequest
     }
 }

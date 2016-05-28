@@ -9,10 +9,9 @@
 import Foundation
 import Locksmith
 
-// TODO: - Save to NSKeyedArchiver instead of NSUserDefaults
-// TODO: - Saving should be down off the Main Thread
-
 class TMDbSessionInfoStore {
+    
+    private let writeQueue = dispatch_queue_create("com.discoverMovies.app.write", DISPATCH_QUEUE_SERIAL)
     
     // MARK: - SessionID
     

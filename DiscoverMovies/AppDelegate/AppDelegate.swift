@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TMDbSessionManager().registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
         
         // Set up SWRevealController
-        let rearViewController = MenuViewController()
+        let rearViewController =  MenuViewController.instantiatefromStoryboard()
         let topListViewController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
         let frontViewController = UINavigationController(rootViewController: topListViewController)
         revealViewController = SWRevealViewController(rearViewController: rearViewController, frontViewController: frontViewController)

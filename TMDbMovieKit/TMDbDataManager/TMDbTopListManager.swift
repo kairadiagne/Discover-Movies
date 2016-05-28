@@ -9,9 +9,16 @@
 import Foundation
 import Alamofire
 
-
-
 public class TMDbTopListManager {
+    
+    // Classes that confom to NSCoding can be serialized and deserialized into data that can be either be achived to diskor distributed across a network.
+    // Of course serialization is only one part of the story. Determining where this data will persist is another question.
+    // There are two approachs: writing to the local file system and using NSUserdefaults.
+    
+    // NSkeyedArchiver and NSkeyedUnArchiver provide a convenient API to read / write objects directly to / from disk.
+    // We  can set its collection property from the file manager:
+    // NSKeyedArchiver.archiveRootObject(books, toFile: "/path/to/archive")
+    //  NSKeyedUnarchiver.unarchiveObjectWithFile("/path/to/archive") as? [Book] else { return nil }
     
     // Public properties
     

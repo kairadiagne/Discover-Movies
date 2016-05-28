@@ -9,8 +9,6 @@
 import Foundation
 import ObjectMapper
 
-// TODO: - Make this clean
-
 class TMDbRequestToken: NSObject, Mappable {
     
     var token: String = ""

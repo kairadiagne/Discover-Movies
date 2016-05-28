@@ -65,14 +65,14 @@ class DetailViewController: BaseViewController {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: nil)
         notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: nil)
+        
+        detailView.configureForMovie(movie, image: image)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        detailView.configureForMovie(movie, image: image)
-
-        movieInfoManager.reloadIfNeeded(true, movieID:movie.movieID)
+        movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
+        movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -82,25 +82,46 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Actions 
     
-    @IBAction func favouriteButtonGotTapped(sender: FavouriteButton) {
-        // Add or remove movie from favourites
-    }
-    
-    // MARK: - Notifications 
-    
-    func update(notification: NSNotification) {
-        similarMoviesDataProvider.updateWithMovies(movieInfoManager.similarMovies)
-        
-        if let movieCredit = movieInfoManager.movieCredit { // Ugly sollution
-            if castDataProvider.count == 0 {
-                castDataProvider.updateWithMovieCredit(movieCredit: movieCredit)
-                detailView.configureWithMovieCredit(movieCredit)
-            }
+    @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
+        switch sender.status {
+        case .Selected:
+            movieInfoManager.addMovieToList(movie.movieID, list: TMDbAccountList.Favorites)
+        case .NotSelected:
+            movieInfoManager.removeMovieFromList(movie.movieID, list: TMDbAccountList.Favorites)
         }
     }
     
+    @IBAction func watchListDidGetTapped(sender: WatchListButton) {
+        switch sender.status {
+        case .Selected:
+            movieInfoManager.addMovieToList(movie.movieID, list: TMDbAccountList.Watchlist)
+        case .NotSelected:
+            movieInfoManager.removeMovieFromList(movie.movieID, list: TMDbAccountList.Watchlist)
+        }
+    }
+  
+    // MARK: - Notifications 
+    
+    func update(notification: NSNotification) {
+        
+        if let similarMovies = movieInfoManager.similarMovies {
+            similarMoviesDataProvider.updateWithMovies(similarMovies)
+        }
+        
+        if let accountState = movieInfoManager.accountState {
+            detailView.configureForAccountState(accountState)
+        }
+        
+        if let movieCredit = movieInfoManager.movieCredit {
+            castDataProvider.updateWithMovieCredit(movieCredit)
+            detailView.configureWithMovieCredit(movieCredit)
+        }
+        
+    }
+    
     func handleError(notification: NSNotification) {
-        // Extract and check the error
+        super.handleErrorNotification(notification)
+        // Check for authorization error 
     }
 
     // MARK: - Navigation
@@ -111,8 +132,13 @@ class DetailViewController: BaseViewController {
     }
     
     private func showTrailer(movie: TMDbMovie) {
-//        let videoViewController = VideoViewController(video: )
-//        navigationController?.pshViewController(VideoViewController, animated: true)
+        guard let trailer = movieInfoManager.trailers?.first else {
+            // Show trailer is unaivalble message 
+            return
+        }
+        
+        let videoViewController = VideoViewController(video: trailer)
+        navigationController?.pushViewController(videoViewController, animated: true)
     }
     
     private func showReviews(movie: TMDbMovie) {
@@ -129,8 +155,9 @@ extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == detailView.similarMoviesCollectionView{
-            guard let movie = similarMoviesDataProvider.movieAtIndex(indexPath.row) else { return }
-            showDetailSimilarMovie(movie)
+            if let movie = similarMoviesDataProvider.movieAtIndex(indexPath.row) {
+                showDetailSimilarMovie(movie)
+            }
         }
     }
 }

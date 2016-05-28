@@ -10,38 +10,23 @@ import Foundation
 
 public class TMDbMovieInfoManager {
     
-    // Public Properties
+    private let movieClient = TMDbMovieClient()
     
-    public var inFavorites: Bool {
-        return accountState.inFavorites
+    public var similarMovies: [TMDbMovie]? {
+        return movieInfo?.similarMovies?.items
     }
     
-    public var inWatchList: Bool {
-        return accountState.inWatchList
+    public var accountState: TMDbAccountState?
+    
+    public var movieCredit: TMDbMovieCredit? {
+        return movieInfo?.credits
     }
     
-    public var similarMovies: [TMDbMovie] {
-//        return similarMovieResults.items
-        return []
+    public var trailers: [TMDbVideo]? {
+        return movieInfo?.trailers
     }
     
-    public private(set) var movieCredit: TMDbMovieCredit?
-    
-    public var video: TMDbVideo? {
-        return videoResults.first
-    }
-    
-    // Private Properties
-    
-    private var movieID: Int?
-    
-//    private let movieService = TMDbMovieService()
-    
-    private var accountState = (inFavorites: false, inWatchList: false)
-    
-//    private var similarMovieResults = TMDbList<TMDbMovie>()
-    
-    private var videoResults = [TMDbVideo]()
+    private var movieInfo: TMDbMovieInfo?
     
     // MARK: - Initialization
     
@@ -49,75 +34,58 @@ public class TMDbMovieInfoManager {
     
     // MARK: - Fetching
     
-    // TODO: Maybe this should be one big appended path fetch for the movie with this ID
-    
-    public func reloadIfNeeded(forceOnline: Bool, movieID: Int) {
-        self.movieID = movieID
-        
-        // Load movie info
-        loadAccountState()
-        loadSimilarMovies()
-        loadMovieCredits()
-        loadVideos()
+    public func loadInfoAboutMovieWithID(movieID: Int) {
+        movieClient.fetchAdditionalInfoMovie(movieID) { (response) in
+            
+            guard response.error == nil else {
+                self.postErrorNotification(response.error!)
+                return
+            }
+            
+            if  let movieInfo = response.value {
+                self.movieInfo = movieInfo
+                self.postUpdateNotification()
+            }
+        }
     }
     
-    func loadAccountState() {
-//        guard let movieID = movieID else { return }
-//        movieService.accountStateForMovie(movieID) { (inFavorites, inWatchList, error) in
-//            guard error == nil else {
-//                self.postErrorNotification(error!)
-//                return
-//            }
-//            
-//            if let inFavorites = inFavorites, inWatchList = inWatchList {
-//                self.accountState = (inFavorites: inFavorites, inWatchList: inWatchList)
-//                self.postUpdateNotification() // MultiThreading
-//            }
-//        }
+    public func loadAccountStateForMovieWithID(movieID: Int) {
+        movieClient.accountStateForMovie(movieID) { (response) in
+            
+            guard response.error == nil else {
+                self.postErrorNotification(response.error!)
+                return
+            }
+            
+            if let accountState = response.value {
+                self.accountState = accountState
+                self.postUpdateNotification()
+            }
+        }
     }
     
-    func loadSimilarMovies() {
-//        guard let movieID = movieID else { return }
-//        movieService.fetchMoviesSimilarToMovie(withID: movieID, page: nil) { (result, error) in
-//            guard error == nil else {
-//                self.postErrorNotification(error!)
-//                return
-//            }
-//            
-//            if let result = result {
-//                self.similarMovieResults.update(result)
-//                self.postUpdateNotification() // Multithreading
-//            }
-//        }
+    public func addMovieToList(movieID: Int, list: TMDbAccountList) {
+        movieClient.changeStateForMovie(movieID, inList: list.rawValue, toState: true) { (error) in
+            
+            guard error == nil else {
+                self.postErrorNotification(error!)
+                return
+            }
+            
+            self.postUpdateNotification()
+        }
     }
     
-    func loadMovieCredits() {
-//        guard let movieID = movieID else { return }
-//        movieService.fetchCreditsForMovie(withID: movieID) { (credit, error) in
-//            guard error == nil else {
-//                print(error!)
-//                self.postErrorNotification(error!)
-//                return
-//            }
-//            
-//            if let credit = credit {
-//                self.movieCredit = credit
-//                self.postUpdateNotification() // Multithreading
-//            }
-//        }
-    }
-    
-    func loadVideos() {
-//        guard let movieID = movieID else { return }
-//        movieService.fetchVideosForMovie(movieID) { (result, error) in
-//            guard error == nil else {
-//                return
-//            }
-//            
-//            if let result = result {
-//                self.videoResults = result // Multithreading
-//            }
-//        }
+    public func removeMovieFromList(movieID: Int, list: TMDbAccountList) {
+        movieClient.changeStateForMovie(movieID, inList: list.rawValue, toState: false) { (error) in
+            
+            guard error == nil else {
+                self.postErrorNotification(error!)
+                return
+            }
+            
+            self.postUpdateNotification()
+        }
     }
     
     // MARK: - Notifications

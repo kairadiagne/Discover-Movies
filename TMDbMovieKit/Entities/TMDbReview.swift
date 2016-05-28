@@ -24,9 +24,7 @@ public class TMDbReview: NSObject, Mappable, NSCoding {
     public var path: String?
     
     public required init?(_ map: Map) {
-        super.init()
-        
-        guard map[Keys.ReviewID].value() == nil else { return nil }
+        guard map.JSONDictionary[Keys.ReviewID] != nil else { return nil }
     }
     
     public func mapping(map: Map) {

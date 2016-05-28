@@ -35,7 +35,7 @@ class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDe
     
     // MARk: - Update
     
-    func updateWithMovieCredit(movieCredit credit: TMDbMovieCredit) {
+    func updateWithMovieCredit(credit: TMDbMovieCredit) {
         movieCredit = credit
         collectionView?.reloadData()
     }

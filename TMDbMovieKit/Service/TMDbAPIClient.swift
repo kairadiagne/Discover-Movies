@@ -10,11 +10,7 @@ import Foundation
 
 class TMDbAPIClient {
     
-    // MARK: - Initialization
-    
     init() { }
-    
-    // MARK: - Properties
     
     private let infoStore = TMDbSessionInfoStore()
 
@@ -28,6 +24,10 @@ class TMDbAPIClient {
     
     var userID: Int? {
         return infoStore.user?.userID
+    }
+    
+    var authorizationError: NSError {
+        return NSError(domain: NSURLErrorDomain, code: NSURLErrorUserAuthenticationRequired, userInfo: nil)
     }
     
 }

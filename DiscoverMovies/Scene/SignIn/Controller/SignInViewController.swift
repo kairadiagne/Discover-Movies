@@ -87,7 +87,7 @@ extension SignInViewController: TMDbSignInDelegate {
     
     func signInDelegateSigninDidComplete() {
         hideProgressHUD()
-        userManager.reloadIfNeeded(true)
+        userManager.loadUserInfo()
         dismissSignInViewController()
     }
     

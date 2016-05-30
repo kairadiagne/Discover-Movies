@@ -14,30 +14,30 @@ class TMDbUserClient: TMDbAPIClient {
     // Gets information about the user
     
     func fetchUserInfo(completionHandler: (user: TMDbUser?, error: NSError?) -> Void) {
-        
         guard let sessionID = sessionID else {
-            // Return error 
+            completionHandler(user: nil, error: authorizationError)
             return
         }
         
-//        var parameters: [String: AnyObject] = ["session_id": sessionID]
-//        
-//        let endpoint = "account"
-//        
-//        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
-//            .responseObject { (response: Response<TMDbUser, NSError>) in
-//            
-//                guard response.error == nil else {
-//                    completionHandler(user: nil, error: response.error)
-//                    return
-//                }
-//                
-//                if let user = response.result.value {
-//                    completionHandler(user: user, error: nil)
-//                    return
-//                }
-//        }
+        let paramaters: [String: AnyObject] = ["session_id": sessionID]
+        
+        let endpoint = "account"
+        
+        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: paramaters)).validate()
+            .responseObject { (response: Response<TMDbUser, NSError>) in
+                
+                guard response.result.error == nil else {
+                    completionHandler(user: nil, error: response.result.error)
+                    return
+                }
+                
+                if let user = response.result.value {
+                    completionHandler(user: user, error: nil)
+                    return
+                }
+        }
         
     }
     
 }
+

@@ -17,22 +17,24 @@ public class TMDbUserManager {
     
     public init() { }
     
-//    private let userService = TMDbUserService()
+    private let userClient = TMDbUserClient()
     
     private let sessionInfoStore = TMDbSessionInfoStore()
     
-    public func reloadIfNeeded(force: Bool) {
-//        userService.fetchUserInfo { (user, error) in
-//            guard error == nil else {
-//                self.postErrorNotification(error!) // Multithreading
-//                return
-//            }
-//            
-//            if let user = user {
-//                self.sessionInfoStore.persistUserInStore(user) // Multithreading
-//                self.postUpdateNotification()
-//            }
-//        }
+    // MARK: - Fetching
+    
+    public func loadUserInfo() {
+        userClient.fetchUserInfo { (user, error) in
+            guard error == nil else {
+                self.postErrorNotification(error!)
+                return
+            }
+            
+            if let user = user {
+                self.sessionInfoStore.persistUserInStore(user)
+                self.postUpdateNotification()
+            }
+        }
     }
     
     // MARK: - Notifications

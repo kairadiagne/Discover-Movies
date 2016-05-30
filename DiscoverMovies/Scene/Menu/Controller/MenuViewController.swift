@@ -29,26 +29,36 @@ class MenuViewController: UITableViewController {
     private let userManager = TMDbUserManager()
     private let signInmanager = TMDbSignInManager()
     private let sessionManager = TMDbSessionManager()
-        
+    
+    private var signedIn: Bool {
+        switch sessionManager.signInStatus {
+        case .Signedin:
+            return true
+        default:
+            return false
+        }
+    }
+    
     private var presentedRow = 1
     
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        let updateSelector = #selector(MenuViewController.handleUserInfoUpdate)
+        notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: userManager)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if sessionManager.signInStatus == .Signedin {
-            userManager.reloadIfNeeded(true)
+        if signedIn {
+            userManager.loadUserInfo()
             menuTableview.updateMenu(true, user: userManager.user)
         } else {
             menuTableview.updateMenu(false, user: nil)
         }
-    
     }
    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -56,8 +66,11 @@ class MenuViewController: UITableViewController {
     }
     
     // MARK: - Notifications
-
     
+    func handleUserInfoUpdate() {
+        menuTableview.updateMenu(true, user: userManager.user)
+    }
+
     // MARK: - Navigation
     
     func showTopListViewController() {
@@ -67,15 +80,18 @@ class MenuViewController: UITableViewController {
     }
     
     func showWatchListViewController() {
-       // Show watchlist view controller
     }
     
     func showFavoritesViewControlelr() {
-        // Show favorites view controller
     }
     
-    func signout() {
-        signInmanager.signOut()
+    func toggleSignIn() {
+        if signedIn {
+            signInmanager.signOut()
+        } else {
+            signInmanager.deactivatePublicMode()
+        }
+        
         showTopListViewController()
     }
     
@@ -91,30 +107,24 @@ class MenuViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        // If we are trying to push the same row or perform an operation that does not imply frontViewController replacement
-        // we'll just set the postion and return.
-        
+   
+        // If we are trying to push the same row we change the position of the front view controller
         if indexPath.row == presentedRow {
             self.revealViewController()?.setFrontViewPosition(.LeftSide, animated: true)
             return
         }
         
         switch indexPath.row {
-        case 0:
-            break
         case 1:
             showTopListViewController()
-            
         case 2:
             showFavoritesViewControlelr()
-            
         case 3:
             showWatchListViewController()
         case 4:
-            signout()
+            toggleSignIn()
         default:
-            fatalError()
+            break
         }
     }
     

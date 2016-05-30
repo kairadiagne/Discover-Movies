@@ -26,8 +26,12 @@ class TMDbSessionInfoStore {
     }
     
     func deleteSessionIDFromStore() {
-        do { try Locksmith.deleteDataForUserAccount("User") }
-        catch { print("Error deleting sessionID from store") }
+        do {
+            try Locksmith.deleteDataForUserAccount("User")
+        }
+        catch {
+            print("Error deleting sessionID from store")
+        }
     }
     
     // MARK: - UserInfo

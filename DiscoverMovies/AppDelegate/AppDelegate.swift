@@ -22,23 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var revealViewController: SWRevealViewController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        // Apply the theme
         Theme.applyGlobalTheme() 
         
-        // Register API key for use with TMDbMovieKit
         TMDbSessionManager().registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
         
-        // Set up SWRevealController
         let rearViewController =  MenuViewController.instantiatefromStoryboard()
         let topListViewController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
         let frontViewController = UINavigationController(rootViewController: topListViewController)
         revealViewController = SWRevealViewController(rearViewController: rearViewController, frontViewController: frontViewController)
         
-        // TODO: - Decide if I need the Delegate methods from SWRevealController.
-        // They could be usefull when performing animations etc.
-        
-        // Add the SWRevealController as the root view controller of the window
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = revealViewController
         window?.makeKeyAndVisible()

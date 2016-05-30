@@ -10,18 +10,27 @@ import UIKit
 
 class SignInView: BackgroundView {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+ 
     @IBOutlet weak var tmdbLogo: UIImageView!
-    @IBOutlet weak var instructionLabel: UILabel!
-    @IBOutlet weak var signInButton: CustomButton!
-    @IBOutlet weak var publicModeButton: CustomButton!
-    
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var publicModeButton: UIButton!
+    @IBOutlet weak var orLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var signUpLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.font = UIFont.H1()
-        descriptionLabel.font = UIFont.Body()
-        instructionLabel.font = UIFont.Caption()
+        orLabel.font = UIFont.Body()
+        titleLabel.font = UIFont.Body()
+        signUpLabel.font = UIFont.Body()
+        
+        signInButton.tintColor = UIColor.whiteColor()
+        signInButton.layer.borderWidth = 0.5
+        signInButton.layer.borderColor = UIColor.whiteColor().CGColor
+        signInButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).CGColor
+        signInButton.layer.cornerRadius = 5
+        publicModeButton.tintColor = UIColor.whiteColor()
     }
     
     // Gradient background view in standard color 
@@ -35,3 +44,4 @@ class SignInView: BackgroundView {
     // Elements should animate on screen with alpha 
     
 }
+

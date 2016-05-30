@@ -61,7 +61,6 @@ class TMDbSignInClient: TMDbAPIClient {
     
     func requestSessionID(completionHandler: (sessionID: String?, error: NSError?) -> Void) {
         guard let requestToken = requestToken?.token else {
-            // Return error 
             return
         }
         

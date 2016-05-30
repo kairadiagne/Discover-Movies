@@ -38,10 +38,9 @@ class DetailView: BackgroundView {
     
     @IBOutlet weak var favouriteButton: FavouriteButton!
     @IBOutlet weak var watchListButton: WatchListButton!
-    // Watch Trailer button
     // Read reviews button 
 
-    var headerImageView: GradientImageView!
+    var headerImageView: DetailHeaderView!
     
     // MARK: - Initialization
     
@@ -78,7 +77,6 @@ class DetailView: BackgroundView {
     }
     
     private func setupCollectionView() {
-        // Assign custom flow layout
         self.similarMoviesCollectionView.collectionViewLayout = DetailFlowLayout()
         self.castCollectionView.collectionViewLayout = DetailFlowLayout()       
     }
@@ -90,11 +88,7 @@ class DetailView: BackgroundView {
     }
     
     private func setupHeaderImageView() {
-        let frame = CGRect(x: 0, y: 0, width: bounds.width, height: Constants.HeaderHeight)
-        let gradientColors = [UIColor.backgroundColor().CGColor, UIColor.clearColor().CGColor]
-        let startPoint = CGPoint(x: 0, y: 1)
-        let endPoint = CGPoint(x: 0, y: 0.1)
-        self.headerImageView = GradientImageView(gradientColors: gradientColors, startPoint: startPoint, endPoint: endPoint)
+        self.headerImageView = DetailHeaderView.loadFromNIB()
         self.headerImageView.contentMode = .ScaleAspectFill
         self.headerImageView.frame = frame
         self.contentView.addSubview(headerImageView)
@@ -143,9 +137,9 @@ class DetailView: BackgroundView {
     
     private func setImage(image: UIImage?, url: NSURL?) {
         if let image = image {
-            headerImageView.image = image
+            headerImageView.detailImageView.image = image
         } else if let url = url {
-            headerImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+            headerImageView.detailImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
         }
     }
    

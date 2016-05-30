@@ -34,8 +34,8 @@ class MenuTableView: UITableView {
         profileImageView.layer.borderWidth = 2
         profileImageView.layer.backgroundColor = UIColor.clearColor().CGColor
         profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
-        profileImageView.layer.masksToBounds = false
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+        profileImageView.layer.masksToBounds = true
     }
     
     override func layoutSubviews() {
@@ -47,7 +47,7 @@ class MenuTableView: UITableView {
     
     func updateMenu(signedIn: Bool, user: TMDbUser?) {
         usernameLabel.text = user?.name ?? "Guest"
-        signoutlabel.text = signedIn ? "Sign in" : "Sign out"
+        signoutlabel.text = signedIn ? "Sign out" : "Sign in" 
         watchListLabel.enabled = signedIn
         watchlistCell.userInteractionEnabled = signedIn
         favoritesLabel.enabled = signedIn

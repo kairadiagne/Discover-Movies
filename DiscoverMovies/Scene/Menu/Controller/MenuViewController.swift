@@ -14,6 +14,7 @@ class MenuViewController: UITableViewController {
     private struct Constants {
         static let Identifier = "MenuViewController"
         static let MenuCellIdentifier = "MenuTableViewCell"
+        static let RootViewControllerNibName = "ListViewController"
     }
     
     // MARK: - Storyboard
@@ -23,52 +24,46 @@ class MenuViewController: UITableViewController {
         return storyboard.instantiateViewControllerWithIdentifier(Constants.Identifier) as! MenuViewController
     }
 
+    @IBOutlet weak var menuTableview: MenuTableView!
+    
     private let userManager = TMDbUserManager()
     private let signInmanager = TMDbSignInManager()
+    private let sessionManager = TMDbSessionManager()
+        
+    private var presentedRow = 1
     
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-//        signUpForUpdateNotification(userManager)
-//        signUpErrorNotification(userManager)
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        if sessionManager.signInStatus == .Signedin {
-//           userManager.reloadIfNeeded(true)
-//        }
-    }
+        if sessionManager.signInStatus == .Signedin {
+            userManager.reloadIfNeeded(true)
+            menuTableview.updateMenu(true, user: userManager.user)
+        } else {
+            menuTableview.updateMenu(false, user: nil)
+        }
     
-//    private func updateMenuheaderView() {
-////        if let user = userManager.user, path = user.gravatarURI, url = TMDbImageRouter.PosterMedium(path: path).url {
-////            tableView.configureProfileHeader(user, url: url)
-////        } else {
-////            tableView.configureProfileHeader()
-////        }
-//    }
-//    
+    }
+   
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
     
     // MARK: - Notifications
-    
-//    override func updateNotification(notification: NSNotification) {
-////        updateMenuheaderView()
-//    }
+
     
     // MARK: - Navigation
     
     func showTopListViewController() {
-        let topListVieWController = TopListViewController()
-        revealViewController()?.pushFrontViewController(topListVieWController, animated: true)
-
+        let topListVieWController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
+        let navigationController = UINavigationController(rootViewController: topListVieWController)
+        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showWatchListViewController() {
@@ -86,25 +81,41 @@ class MenuViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         switch indexPath.row {
         case 0:
-            showTopListViewController()
+            return false
+        default:
+            return true 
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // If we are trying to push the same row or perform an operation that does not imply frontViewController replacement
+        // we'll just set the postion and return.
+        
+        if indexPath.row == presentedRow {
+            self.revealViewController()?.setFrontViewPosition(.LeftSide, animated: true)
+            return
+        }
+        
+        switch indexPath.row {
+        case 0:
+            break
         case 1:
-            showFavoritesViewControlelr()
+            showTopListViewController()
+            
         case 2:
-            showWatchListViewController()
+            showFavoritesViewControlelr()
+            
         case 3:
+            showWatchListViewController()
+        case 4:
             signout()
         default:
             fatalError()
         }
     }
-    
-}
-
-extension MenuViewController {
-    
-   
     
 }

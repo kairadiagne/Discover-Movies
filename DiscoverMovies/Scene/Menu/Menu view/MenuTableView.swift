@@ -9,50 +9,55 @@
 import UIKit
 import TMDbMovieKit
 import SDWebImage
+import SWRevealViewController
 
 class MenuTableView: UITableView {
-    
-    private struct Constants {
-        static let ProfileHeaderHeight: CGFloat = 200
-        static let HeaderViewNibName = "MenuHeaderView"
-    }
     
     @IBOutlet weak var discoverLabel: UILabel!
     @IBOutlet weak var watchListLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
     @IBOutlet weak var signoutlabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    
     @IBOutlet weak var usernameLabel: UILabel!
+    
+    @IBOutlet weak var watchlistCell: UITableViewCell!
+    @IBOutlet weak var favoriteCell: UITableViewCell!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        discoverLabel.font = UIFont.h3()
-        watchListLabel.font = UIFont.h3()
-        favoritesLabel.font = UIFont.h3()
-        signoutlabel.font = UIFont.h3()
+        discoverLabel.font = UIFont.H3()
+        watchListLabel.font = UIFont.H3()
+        favoritesLabel.font = UIFont.H3()
+        signoutlabel.font = UIFont.H3()
         
         profileImageView.layer.borderWidth = 2
-        profileImageView.layer.backgroundColor = UIColor.clearColor()
+        profileImageView.layer.backgroundColor = UIColor.clearColor().CGColor
         profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
         profileImageView.layer.masksToBounds = false
-        self.layer.cornerRadius = 2
-        self.clipsToBounds = true
-        
-        backgroundColor = UIColor.
-
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        usernameLabel.center.x = profileImageView.center.x
     }
     
     // MARK: - Configure
-
-    func configureProfileHeader(user: TMDbUser? = nil, url: NSURL? = nil) {
-//        if let user = user, url = url  {
-//            headerView.profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
-//            headerView.usernameLabel.text = user.name != nil ? user.name! : "Unknown"
-//        } else {
-//            headerView.profileImageView.image = nil
-//            headerView.usernameLabel.text = "Sign in"
-//        }
+    
+    func updateMenu(signedIn: Bool, user: TMDbUser?) {
+        usernameLabel.text = user?.name ?? "Guest"
+        signoutlabel.text = signedIn ? "Sign in" : "Sign out"
+        watchListLabel.enabled = signedIn
+        watchlistCell.userInteractionEnabled = signedIn
+        favoritesLabel.enabled = signedIn
+        favoriteCell.userInteractionEnabled = signedIn
+        
+        if let path = user?.profilePath, url = TMDbImageRouter.ProfileSmall(path: path).url {
+            profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+        } else {
+            profileImageView.image = nil
+        }
     }
     
 }

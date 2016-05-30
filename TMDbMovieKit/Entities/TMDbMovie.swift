@@ -43,12 +43,16 @@ public class TMDbMovie: NSObject, Mappable, NSCoding {
         self.movieID            <- map[Keys.MovieID]
         self.title              <- map[Keys.Title]
         self.overview           <- map[Keys.Overview]
-        self.releaseDate        <- (map[Keys.ReleaseDate], DateTransform())
+        var dateString: String = ""
+        dateString              <- map[Keys.ReleaseDate]
+        self.releaseDate        = dateString.toDate()
         self.genres             <- map[Keys.Genre]
         self.rating             <- map[Keys.VoteAverage]
         self.adult              <- map[Keys.Adult]
         self.posterPath         <- map[Keys.PosterPath]
         self.backDropPath       <- map[Keys.BackdropPath]
+        
+        
     }
     
     // MARK: - NSCoding

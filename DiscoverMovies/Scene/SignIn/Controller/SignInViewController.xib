@@ -15,34 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Movie" translatesAutoresizingMaskIntoConstraints="NO" id="4yG-0P-6jX">
-                    <rect key="frame" x="246" y="8" width="109" height="136"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="136" id="I9c-GM-pp4"/>
-                        <constraint firstAttribute="width" constant="109" id="eFP-sm-wOo"/>
-                    </constraints>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-ks-LmZ">
-                    <rect key="frame" x="20" y="281" width="560" height="70"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="70" id="XVW-ni-xiJ"/>
-                    </constraints>
-                    <state key="normal" title="Sign in with TMDb"/>
-                    <connections>
-                        <action selector="signIn:" destination="-1" eventType="touchUpInside" id="cAb-8z-dzA"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-or-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yf-KF-CKh">
-                    <rect key="frame" x="285" y="359" width="31" height="11"/>
+                    <rect key="frame" x="285" y="371" width="31" height="11"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="11" id="PvS-H8-iSI"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover movies" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6c-me-zhm">
-                    <rect key="frame" x="20" y="152" width="560" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -54,13 +31,37 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1s-LN-CSv">
-                    <rect key="frame" x="20" y="378" width="560" height="70"/>
+                    <rect key="frame" x="20" y="398" width="560" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="70" id="zys-fz-3Po"/>
+                        <constraint firstAttribute="height" constant="50" id="zys-fz-3Po"/>
                     </constraints>
                     <state key="normal" title="Continue without signing in"/>
                     <connections>
                         <action selector="activatePublicMode:" destination="-1" eventType="touchUpInside" id="d2V-lI-vlk"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover movies" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6c-me-zhm">
+                    <rect key="frame" x="237" y="209" width="126" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-vG-QgW">
+                    <rect key="frame" x="268" y="99" width="64" height="102"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="102" id="UCZ-Yf-Bro"/>
+                        <constraint firstAttribute="height" constant="102" id="p86-LH-3IE"/>
+                    </constraints>
+                    <state key="normal" image="Movie"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-ks-LmZ">
+                    <rect key="frame" x="20" y="306" width="560" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="XVW-ni-xiJ"/>
+                    </constraints>
+                    <state key="normal" title="Sign in with TMDb"/>
+                    <connections>
+                        <action selector="signIn:" destination="-1" eventType="touchUpInside" id="cAb-8z-dzA"/>
                     </connections>
                 </button>
             </subviews>
@@ -68,29 +69,28 @@
             <constraints>
                 <constraint firstItem="Tyh-RF-Qzv" firstAttribute="top" secondItem="V1s-LN-CSv" secondAttribute="bottom" multiplier="1.2" constant="8" symbolic="YES" id="1bo-c4-25a"/>
                 <constraint firstAttribute="trailing" secondItem="ixj-ks-LmZ" secondAttribute="trailing" constant="20" symbolic="YES" id="4H4-WK-Dn6"/>
-                <constraint firstItem="s6c-me-zhm" firstAttribute="top" secondItem="4yG-0P-6jX" secondAttribute="bottom" constant="8" symbolic="YES" id="6mA-Qc-8ct"/>
                 <constraint firstItem="ixj-ks-LmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="7Ym-IK-fzl"/>
+                <constraint firstItem="tRY-vG-QgW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.5" id="8bF-Sz-JK6"/>
                 <constraint firstAttribute="trailing" secondItem="Tyh-RF-Qzv" secondAttribute="trailing" constant="20" symbolic="YES" id="97k-9g-MFF"/>
-                <constraint firstItem="5Yf-KF-CKh" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" constant="8" symbolic="YES" id="99J-hg-fZS"/>
-                <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="5Yf-KF-CKh" secondAttribute="bottom" constant="8" symbolic="YES" id="DIW-fJ-Q9Z"/>
-                <constraint firstItem="ixj-ks-LmZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6c-me-zhm" secondAttribute="bottom" constant="101" id="Deq-AF-2Nt"/>
-                <constraint firstItem="4yG-0P-6jX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="OvF-ny-YgO"/>
-                <constraint firstItem="4yG-0P-6jX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RUH-8Y-mNe"/>
-                <constraint firstItem="s6c-me-zhm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="X0t-i3-S7C"/>
+                <constraint firstItem="5Yf-KF-CKh" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" multiplier="1.02" constant="8" symbolic="YES" id="99J-hg-fZS"/>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="5Yf-KF-CKh" secondAttribute="bottom" multiplier="1.02" constant="8" symbolic="YES" id="DIW-fJ-Q9Z"/>
+                <constraint firstItem="tRY-vG-QgW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Daw-b8-aIt"/>
+                <constraint firstItem="s6c-me-zhm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QaS-Ed-cnE"/>
+                <constraint firstItem="s6c-me-zhm" firstAttribute="top" secondItem="tRY-vG-QgW" secondAttribute="bottom" constant="8" symbolic="YES" id="Yra-wY-W63"/>
                 <constraint firstAttribute="bottom" secondItem="Tyh-RF-Qzv" secondAttribute="bottom" constant="14" id="a72-R9-Dj8"/>
+                <constraint firstItem="ixj-ks-LmZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="s6c-me-zhm" secondAttribute="bottom" constant="74" id="eDo-GJ-qCk"/>
                 <constraint firstItem="Tyh-RF-Qzv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="eUD-iN-MLG"/>
                 <constraint firstItem="V1s-LN-CSv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="hWy-ZM-m6B"/>
                 <constraint firstItem="5Yf-KF-CKh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jHh-Wd-C7a"/>
-                <constraint firstAttribute="trailing" secondItem="s6c-me-zhm" secondAttribute="trailing" constant="20" symbolic="YES" id="kWq-bv-Q6M"/>
                 <constraint firstAttribute="trailing" secondItem="V1s-LN-CSv" secondAttribute="trailing" constant="20" symbolic="YES" id="zhN-T9-f7B"/>
             </constraints>
             <connections>
+                <outlet property="logoImage" destination="tRY-vG-QgW" id="PqY-HU-aCq"/>
                 <outlet property="orLabel" destination="5Yf-KF-CKh" id="o2o-3K-A0o"/>
                 <outlet property="publicModeButton" destination="V1s-LN-CSv" id="aYM-mV-C7k"/>
                 <outlet property="signInButton" destination="ixj-ks-LmZ" id="DoF-GH-CqH"/>
                 <outlet property="signUpLabel" destination="Tyh-RF-Qzv" id="jPo-0A-boo"/>
                 <outlet property="titleLabel" destination="s6c-me-zhm" id="2hv-ic-Iuc"/>
-                <outlet property="tmdbLogo" destination="4yG-0P-6jX" id="4wt-1X-7Xl"/>
             </connections>
             <point key="canvasLocation" x="632" y="420"/>
         </view>

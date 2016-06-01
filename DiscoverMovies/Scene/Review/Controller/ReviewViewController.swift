@@ -11,28 +11,21 @@ import TMDbMovieKit
 
 class ReviewViewController: ListViewController {
     
+    private struct Constants {
+        static let ReviewCellIdentifier = "ReviewCell"
+        static let ReviewCellNibName = "ReviewTableViewCell"
+        static let DefaultRowHeight: CGFloat = 200
+    }
+    
     private let movie: TMDbMovie
     private let reviewManager = TMDbReviewManager()
     private let reviewDataProvider = ReviewDataProvider()
-    
-    // MARK: - View Controller Life Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        reviewDataProvider.cellIdentifier = "ReviewCell"
-        tableView.dataSource = reviewDataProvider
-        tableView.delegate = self
-        
-        signUpForUpdateNotification(self.reviewManager)
-        signUpForChangeNotification(self.reviewManager)
-        signUpErrorNotification(self.reviewManager)
-    }
     
     // MARK: - Initialization
     
     init(movie: TMDbMovie) {
         self.movie = movie
-        super.init(nibName: "ReviewViewController", bundle: nil)
+        super.init(nibName: "ListViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,6 +34,31 @@ class ReviewViewController: ListViewController {
     
     deinit {
         stopObservingNotifications()
+    }
+    
+    // MARK: - View Controller Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        reviewDataProvider.cellIdentifier = Constants.ReviewCellIdentifier
+        
+        tableView.dataSource = reviewDataProvider
+        tableView.delegate = self
+        
+        let reviewNIB = UINib(nibName: Constants.ReviewCellNibName, bundle: nil)
+        tableView.registerNib(reviewNIB, forCellReuseIdentifier: Constants.ReviewCellIdentifier)
+        
+        tableView.estimatedRowHeight = Constants.DefaultRowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        signUpForUpdateNotification(self.reviewManager)
+        signUpForChangeNotification(self.reviewManager)
+        signUpErrorNotification(self.reviewManager)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        reviewManager.loadReviews(movie.movieID)
     }
     
     // MARK: - Notifications 

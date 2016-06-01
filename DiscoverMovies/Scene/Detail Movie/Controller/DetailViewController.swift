@@ -45,7 +45,6 @@ class DetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.setAsTransparent()
         automaticallyAdjustsScrollViewInsets = false
        
         castDataProvider.cellIdentifier = Constants.PersonCellIdentifier
@@ -59,18 +58,19 @@ class DetailViewController: BaseViewController {
         let personCellNib = UINib(nibName: Constants.PersonCellNibName, bundle: nil)
         detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: Constants.PersonCellIdentifier)
         detailView.similarMoviesCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: Constants.MovieCellIdentifier)
+    
+        signUpForUpdateNotification(movieInfoManager)
+        signUpErrorNotification(movieInfoManager)
         
-        let updateSelector = #selector(DetailViewController.update(_:))
-        let errorSelector = #selector(DetailViewController.handleError(_:))
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: nil)
-        notificationCenter.addObserver(self, selector: errorSelector, name: TMDbManagerDidReceiveErrorNotification, object: nil)
-        
+        detailView.delegate = self
         detailView.configureForMovie(movie, image: image)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.setAsTransparent()
+        
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
     }
@@ -100,9 +100,14 @@ class DetailViewController: BaseViewController {
         }
     }
   
+    @IBAction func reviewsButtonGotTapped(sender: UIButton) {
+        showReviews(movie)
+    }
+    
     // MARK: - Notifications 
     
-    func update(notification: NSNotification) {
+    override func updateNotification(notification: NSNotification) {
+        super.updateNotification(notification )
         
         if let similarMovies = movieInfoManager.similarMovies {
             similarMoviesDataProvider.updateWithMovies(similarMovies)
@@ -119,9 +124,10 @@ class DetailViewController: BaseViewController {
         
     }
     
-    func handleError(notification: NSNotification) {
+    override func handleErrorNotification(notification: NSNotification) {
         super.handleErrorNotification(notification)
-        // Check for authorization error 
+        
+        // Handle authorization error
     }
 
     // MARK: - Navigation
@@ -131,20 +137,15 @@ class DetailViewController: BaseViewController {
         navigationController?.pushViewController(detailViewControlelr, animated: true)
     }
     
-    private func showTrailer(movie: TMDbMovie) {
-        guard let trailer = movieInfoManager.trailers?.first else {
-            // Show trailer is unaivalble message 
-            return
-        }
-        
-        let videoViewController = VideoViewController(video: trailer)
-        navigationController?.pushViewController(videoViewController, animated: true)
+    private func showTrailer() {
+        guard let video = movieInfoManager.trailers?.first else { return }
+        let videoController = VideoViewController(video: video)
+        navigationController?.pushViewController(videoController, animated: true )
     }
     
     private func showReviews(movie: TMDbMovie) {
         let reviewViewController = ReviewViewController(movie: movie)
         navigationController?.pushViewController(reviewViewController, animated: true)
-        
     }
 
 }
@@ -159,6 +160,15 @@ extension DetailViewController: UICollectionViewDelegate {
                 showDetailSimilarMovie(movie)
             }
         }
+    }
+}
+
+// MARK: - DetailViewDelegate 
+
+extension DetailViewController: DetailHeaderViewDelegate {
+    
+    func detailHeaderViewDelegateDidTapPlayButton() {
+        showTrailer()
     }
 }
 

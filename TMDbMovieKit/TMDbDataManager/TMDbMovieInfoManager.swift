@@ -92,12 +92,12 @@ public class TMDbMovieInfoManager {
     
     func postUpdateNotification() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(TMDbManagerDataDidUpdateNotification, object: nil)
+        notificationCenter.postNotificationName(TMDbManagerDataDidUpdateNotification, object: self)
     }
     
     func postErrorNotification(error: NSError) {
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: nil, userInfo: ["error": error])
+        notificationCenter.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: self, userInfo: ["error": error])
     }
 
 }

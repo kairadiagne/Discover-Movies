@@ -10,10 +10,16 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
+@objc protocol DetailHeaderViewDelegate {
+    func detailHeaderViewDelegateDidTapPlayButton()
+}
+
 class DetailView: BackgroundView {
     
     private struct Constants {
         static let HeaderHeight: CGFloat = 291
+        static let PlayButtonSize = CGSize(width: 50, height: 50)
+        static let FillViewSize = CGSize(width: 30, height: 30)
     }
     
     // Static content
@@ -38,9 +44,13 @@ class DetailView: BackgroundView {
     
     @IBOutlet weak var favouriteButton: FavouriteButton!
     @IBOutlet weak var watchListButton: WatchListButton!
-    // Read reviews button 
-
-    var headerImageView: DetailHeaderView!
+    @IBOutlet weak var readReviewsButton: UIButton!
+    
+    var headerImageView: GradientImageView!
+    var playButton = UIButton()
+    var fillView = UIView()
+    
+    weak var delegate: DetailHeaderViewDelegate?
     
     // MARK: - Initialization
     
@@ -49,8 +59,9 @@ class DetailView: BackgroundView {
         setupFontsForLabels()
         setUpButtons()
         setupCollectionView()
-        setupHeaderImageView()
+        setupHeaderView()
         setupScrollView()
+        setUpPlayButton()
         updateHeaderView()
     }
     
@@ -70,10 +81,13 @@ class DetailView: BackgroundView {
     }
     
     private func setUpButtons() {
-        favouriteButton.lineColor = UIColor.buttonColor()
-        favouriteButton.fillColor = UIColor.buttonColor()
-        watchListButton.lineColor = UIColor.buttonColor()
-        watchListButton.fillColor = UIColor.buttonColor()
+        self.favouriteButton.lineColor = UIColor.buttonColor()
+        self.favouriteButton.fillColor = UIColor.buttonColor()
+        self.watchListButton.lineColor = UIColor.buttonColor()
+        self.watchListButton.fillColor = UIColor.buttonColor()
+        self.readReviewsButton.tintColor = UIColor.buttonColor()
+        self.readReviewsButton.layer.borderWidth = 1.0
+        self.readReviewsButton.layer.borderColor = UIColor.buttonColor().CGColor
     }
     
     private func setupCollectionView() {
@@ -87,11 +101,41 @@ class DetailView: BackgroundView {
         self.detailScrollView.contentOffset = CGPoint(x: 0, y: -Constants.HeaderHeight)
     }
     
-    private func setupHeaderImageView() {
-        self.headerImageView = DetailHeaderView.loadFromNIB()
+    private func setupHeaderView() {
+        let colors = [UIColor.backgroundColor().CGColor, UIColor.clearColor().CGColor]
+        let startPoint = CGPoint(x: 0, y: 1)
+        let endPoint = CGPoint(x: 0, y: 0.1)
+        self.headerImageView = GradientImageView(colors: colors, startPoint: startPoint, endPoint: endPoint, frame: CGRect.zero)
         self.headerImageView.contentMode = .ScaleAspectFill
-        self.headerImageView.frame = frame
         self.contentView.addSubview(headerImageView)
+    }
+    
+    private func setUpPlayButton() {
+        self.playButton = UIButton()
+        self.playButton.translatesAutoresizingMaskIntoConstraints = false
+        self.playButton.setImage(UIImage(named: "play"), forState: .Normal)
+        self.playButton.tintColor = UIColor.backgroundColor()
+        let playSelector = #selector(delegate?.detailHeaderViewDelegateDidTapPlayButton)
+        self.playButton.addTarget(self, action: playSelector, forControlEvents: .TouchUpInside)
+        
+        self.fillView = UIView()
+        self.fillView.translatesAutoresizingMaskIntoConstraints = false
+        self.fillView.backgroundColor = UIColor.whiteColor()
+        
+        self.addSubview(self.fillView)
+        self.addSubview(self.playButton)
+            
+        self.fillView.centerXAnchor.constraintEqualToAnchor(self.headerImageView.centerXAnchor).active = true
+        self.fillView.centerYAnchor.constraintEqualToAnchor(self.headerImageView.centerYAnchor).active = true
+        self.fillView.heightAnchor.constraintEqualToConstant(Constants.FillViewSize.height).active = true
+        self.fillView.widthAnchor.constraintEqualToConstant(Constants.FillViewSize.width).active = true
+            
+        self.playButton.centerXAnchor.constraintEqualToAnchor(self.headerImageView.centerXAnchor).active = true
+        self.playButton.centerYAnchor.constraintEqualToAnchor(self.headerImageView.centerYAnchor).active = true
+        self.playButton.heightAnchor.constraintEqualToConstant(Constants.PlayButtonSize.height).active = true
+        self.playButton.widthAnchor.constraintEqualToConstant(Constants.PlayButtonSize.width).active = true
+        
+        self.bringSubviewToFront(self.playButton)
     }
     
     // MARK: - Life Cycle
@@ -135,14 +179,25 @@ class DetailView: BackgroundView {
         watchListButton.setAsSelected(accountState.watchlistStatus)
     }
     
+    // Move to header view
     private func setImage(image: UIImage?, url: NSURL?) {
         if let image = image {
-            headerImageView.detailImageView.image = image
+            headerImageView.image = image
         } else if let url = url {
-            headerImageView.detailImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+            headerImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
         }
     }
-   
+    
+    // MARK: - Animation 
+    
+    func prepareForAnimation() {
+//        detailScrollView.scrollViewInset
+    }
+    
+    func animateOnScreen() {
+        
+    }
+
 }
 
 // MARK: - UIScrollViewDelegate
@@ -152,19 +207,5 @@ extension DetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         updateHeaderView()
     }
-    
+
 }
-
-
-
-    
-
-
-
-
-
-
-
-
-
-

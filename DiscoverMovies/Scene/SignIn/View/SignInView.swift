@@ -10,8 +10,7 @@ import UIKit
 
 class SignInView: BackgroundView {
 
- 
-    @IBOutlet weak var tmdbLogo: UIImageView!
+    @IBOutlet weak var logoImage: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var publicModeButton: UIButton!
     @IBOutlet weak var orLabel: UILabel!
@@ -22,26 +21,26 @@ class SignInView: BackgroundView {
         super.awakeFromNib()
         titleLabel.font = UIFont.H1()
         orLabel.font = UIFont.Body()
-        titleLabel.font = UIFont.Body()
-        signUpLabel.font = UIFont.Body()
+        signUpLabel.font = UIFont.Caption2()
         
+        logoImage.tintColor = UIColor.whiteColor()
+        logoImage.userInteractionEnabled = false
+    
         signInButton.tintColor = UIColor.whiteColor()
-        signInButton.layer.borderWidth = 0.5
+        signInButton.layer.borderWidth = 1.0
         signInButton.layer.borderColor = UIColor.whiteColor().CGColor
         signInButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).CGColor
-        signInButton.layer.cornerRadius = 5
+        
         publicModeButton.tintColor = UIColor.whiteColor()
+        publicModeButton.layer.borderWidth = 1.0
+        publicModeButton.layer.borderColor = UIColor.whiteColor().CGColor
+        publicModeButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).CGColor
     }
     
-    // Gradient background view in standard color 
-    // Rechthoekig buttons met border color white
-    // Animate the button press
-    // Signinbutton
-        // or 
-    // continue without signin button 
+    // MARK: - Animations 
     
-// Explain that it uses data from the moviedb.org
-    // Elements should animate on screen with alpha 
+   
+    
     
 }
 

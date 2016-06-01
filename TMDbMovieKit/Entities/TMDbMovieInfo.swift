@@ -12,7 +12,7 @@ import ObjectMapper
 private struct Keys {
     static let Similar = "similar"
     static let Credits = "credits"
-    static let trailers = "trailers"
+    static let trailers = "trailers.youtube"
 }
 
 public class TMDbMovieInfo: NSObject, Mappable {

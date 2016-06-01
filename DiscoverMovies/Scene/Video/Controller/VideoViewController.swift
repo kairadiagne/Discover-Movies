@@ -12,15 +12,18 @@ import youtube_ios_player_helper
 
 class VideoViewController: UIViewController {
     
-    @IBOutlet weak var youtubeVideoView: YTPlayerView!
+    let youtubeView = YTPlayerView()
     
-    var video: TMDbVideo
+    var video: TMDbVideo!
     
     // MARK: - Initialization 
-    
+  
     required init(video: TMDbVideo) {
+        super.init(nibName: nil, bundle: nil)
         self.video = video
-        super.init(nibName: "VideoViewController", bundle: nil)
+        
+        self.youtubeView.translatesAutoresizingMaskIntoConstraints = false
+        self.youtubeView.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,8 +34,12 @@ class VideoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        youtubeVideoView.delegate = self
-        playVideo()
+        self.view.addSubview(youtubeView)
+        
+        youtubeView.leadingAnchor.constraintEqualToAnchor(self.view.leadingAnchor, constant: 0).active = true
+        youtubeView.topAnchor.constraintEqualToAnchor(self.view.topAnchor, constant: 0).active = true
+        youtubeView.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: 0).active = true
+        youtubeView.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor, constant: 0).active = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,15 +47,9 @@ class VideoViewController: UIViewController {
         navigationController?.navigationBar.setAsUnclear()
     }
     
-    private func playVideo() {
-//        guard let youtubeID = video.key else {
-//            // TODO: NSLocalizedString
-//            showAlertWithTitle("Trailer unavailable", message: "Couldn't find the trailer for this movie", completionHandler: { _ in
-//                self.navigationController?.popToRootViewControllerAnimated(false)
-//            })
-//            return
-//        }
-        youtubeVideoView.loadWithVideoId(video.key)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        youtubeView.loadWithVideoId(video.source)
     }
     
 }
@@ -59,6 +60,23 @@ extension VideoViewController: YTPlayerViewDelegate {
     
     func playerView(playerView: YTPlayerView, receivedError error: YTPlayerError) {
         print(error)
+        // Handle the different errors that can occur: 
+        // YTPayerError
+        // - KYTPlayerErrorInvalidParam
+        // - KYTPlayerErrorHTML5Error
+        // - KYTPlayerErrorVideoNotFound
+        // - KYTPlayerErrorNotEmbeddable
+        // - KYTPlayerErrorUnknown
+    }
+    
+    func playerViewPreferredInitialLoadingView(playerView: YTPlayerView) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.backgroundColor()
+        return view
+    }
+    
+    func playerViewPreferredWebViewBackgroundColor(playerView: YTPlayerView) -> UIColor {
+        return UIColor.backgroundColor()
     }
 }
 

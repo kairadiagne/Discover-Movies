@@ -19,7 +19,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Sk-Zl-6au">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="666"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="736"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Similar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW3-nm-1vz">
                                     <rect key="frame" x="20" y="457" width="52" height="21"/>
@@ -139,14 +139,26 @@
                                         <action selector="favoriteButtonDidGetTapped:" destination="-1" eventType="valueChanged" id="BYD-uv-JnT"/>
                                     </connections>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWn-90-Bpl">
+                                    <rect key="frame" x="240" y="686" width="120" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="120" id="tk8-qF-O6s"/>
+                                    </constraints>
+                                    <state key="normal" title="Read Reviews"/>
+                                    <connections>
+                                        <action selector="reviewsButtonGotTapped:" destination="-1" eventType="touchUpInside" id="89E-aC-Ycm"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="1ZJ-Hj-JOc" firstAttribute="leading" secondItem="4Sk-Zl-6au" secondAttribute="leading" constant="20" symbolic="YES" id="0m5-de-jpF"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="FWn-90-Bpl" secondAttribute="bottom" constant="20" symbolic="YES" id="1Rg-Lo-PNE"/>
                                 <constraint firstAttribute="trailing" secondItem="RfM-Yd-N62" secondAttribute="trailing" constant="20" symbolic="YES" id="5FB-Wn-XX5"/>
                                 <constraint firstAttribute="trailing" secondItem="XML-Op-1bV" secondAttribute="trailing" constant="20" symbolic="YES" id="8Jc-5s-hR8"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YT0-2N-TEi" secondAttribute="bottom" constant="20" symbolic="YES" id="9iw-Zc-rD7"/>
                                 <constraint firstItem="rV8-fA-ECL" firstAttribute="top" secondItem="4Sk-Zl-6au" secondAttribute="top" constant="20" symbolic="YES" id="C32-gc-BdQ"/>
                                 <constraint firstItem="zop-Vf-mhd" firstAttribute="baseline" secondItem="8xu-xY-va1" secondAttribute="baseline" id="CQz-SQ-PBb"/>
+                                <constraint firstItem="FWn-90-Bpl" firstAttribute="centerX" secondItem="4Sk-Zl-6au" secondAttribute="centerX" id="FCj-KU-V1H"/>
                                 <constraint firstItem="YT0-2N-TEi" firstAttribute="top" secondItem="qW3-nm-1vz" secondAttribute="bottom" constant="8" symbolic="YES" id="GV1-LJ-cb8"/>
                                 <constraint firstItem="CuR-z8-gm7" firstAttribute="leading" secondItem="4Sk-Zl-6au" secondAttribute="leading" constant="20" symbolic="YES" id="HC6-cE-naE"/>
                                 <constraint firstItem="ygV-VC-yWL" firstAttribute="baseline" secondItem="rV8-fA-ECL" secondAttribute="baseline" id="I6A-GH-BvH"/>
@@ -181,7 +193,13 @@
                                 <constraint firstItem="M5l-QA-5iz" firstAttribute="baseline" secondItem="RfM-Yd-N62" secondAttribute="baseline" id="txU-0A-ITC"/>
                                 <constraint firstItem="fLB-ai-GVB" firstAttribute="leading" secondItem="4Sk-Zl-6au" secondAttribute="leading" constant="20" symbolic="YES" id="voT-hA-kdN"/>
                                 <constraint firstItem="M5l-QA-5iz" firstAttribute="top" secondItem="1ZJ-Hj-JOc" secondAttribute="bottom" constant="8" symbolic="YES" id="ysY-Qf-LOd"/>
+                                <constraint firstItem="FWn-90-Bpl" firstAttribute="top" secondItem="YT0-2N-TEi" secondAttribute="bottom" multiplier="1.05" constant="8" symbolic="YES" id="zdK-bf-Lz1"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="9iw-Zc-rD7"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -215,6 +233,7 @@
                 <outlet property="overviewLabel" destination="yYR-KM-b3A" id="YrA-aq-k9O"/>
                 <outlet property="ratingLabel" destination="QOC-yn-cIW" id="KFU-D4-FS4"/>
                 <outlet property="ratingValueLabel" destination="WKX-3m-iZK" id="PEi-q3-Yvy"/>
+                <outlet property="readReviewsButton" destination="FWn-90-Bpl" id="VAe-5S-Lrt"/>
                 <outlet property="releaseLabel" destination="M5l-QA-5iz" id="Ob8-y6-7Dq"/>
                 <outlet property="releaseValueLabel" destination="RfM-Yd-N62" id="AUQ-Xz-bkX"/>
                 <outlet property="similarMoviesCollectionView" destination="YT0-2N-TEi" id="Tge-8l-4sv"/>
@@ -224,5 +243,11 @@
             </connections>
             <point key="canvasLocation" x="129" y="-253"/>
         </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VgI-fE-TDk">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="Button"/>
+            <point key="canvasLocation" x="117" y="-1"/>
+        </button>
     </objects>
 </document>

@@ -150,7 +150,7 @@ class TMDbMovieClient: TMDbAPIClient {
     func fetchReviews(movieID: Int, page: Int?, completionHandler: (Result<TMDbList<TMDbReview>, NSError>) -> Void) {
         let parameters: [String: AnyObject] = [:]
     
-        let endpoint = "\(movieID)/reviews"
+        let endpoint = "movie/\(movieID)/reviews"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbList<TMDbReview>, NSError>) in

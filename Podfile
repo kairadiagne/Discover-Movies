@@ -5,7 +5,6 @@ use_frameworks!
 abstract_target 'Networking' do
     pod 'Alamofire'
     pod 'AlamofireObjectMapper'
-    pod 'SwiftyJSON'
     pod 'Locksmith'
     
     target 'DiscoverMovies' do

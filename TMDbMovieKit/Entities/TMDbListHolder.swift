@@ -41,8 +41,8 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
     }
     
     // MARK: - Update with new items 
-    
-    func update(data: TMDbList<Item>) {
+
+    func update(data: TMDbList<Item>) {        
         page = data.page
         nextPage = data.nextPage
         pageCount = data.pageCount
@@ -70,7 +70,3 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
     }
     
 }
-
-
-
-

@@ -24,7 +24,7 @@ class Theme {
         styleLabels()
     }
     
-    // MARK: - Apply Seperate
+    // MARK: - Seperate Styling
     
     class func styleNavBar() {
         UINavigationBar.appearance().barTintColor = UIColor.navbarColor()
@@ -38,7 +38,6 @@ class Theme {
         UIScrollView.appearance().backgroundColor = UIColor.backgroundColor()
         BackgroundView.appearance().backgroundColor = UIColor.backgroundColor()
         YTPlayerView.appearance().backgroundColor = UIColor.backgroundColor()
-        UIWebView.appearance().backgroundColor = UIColor.backgroundColor()
     }
     
     class func styleTabBar() {

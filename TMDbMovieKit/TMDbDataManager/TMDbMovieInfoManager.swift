@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbMovieInfoManager {
+public class TMDbMovieInfoManager { // Conform to Data Manager
     
     private let movieClient = TMDbMovieClient()
     
@@ -92,12 +92,12 @@ public class TMDbMovieInfoManager {
     
     func postUpdateNotification() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(TMDbManagerDataDidUpdateNotification, object: self)
+        notificationCenter.postNotificationName(TMDbDataManagerNotification.DataDidUpdate.name, object: self)
     }
     
     func postErrorNotification(error: NSError) {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: self, userInfo: ["error": error])
+        let center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
     }
 
 }

@@ -11,6 +11,8 @@ import TMDbMovieKit
 
 class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    // MARK: Properties
+    
     var cellIdentifier = ""
     
     var count: Int {
@@ -20,6 +22,8 @@ class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDe
     private var movieCredit: TMDbMovieCredit?
     
     private var collectionView: UICollectionView?
+    
+    // MARK: UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.collectionView = collectionView
@@ -33,7 +37,7 @@ class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     
-    // MARk: - Update
+    // MARk: Update
     
     func updateWithMovieCredit(credit: TMDbMovieCredit) {
         movieCredit = credit

@@ -12,17 +12,21 @@ import SafariServices
 
 class SignInViewController: BaseViewController {
     
+    // MARK: Constants
+    
     private struct Constants {
         static let RedirectURI = "discover://"
     }
+    
+    // MARK: Properties
 
     private let userManager = TMDbUserManager()
     
     private let signInManager = TMDbSignInManager()
     
-    private var authorizationViewController: SFSafariViewController!
+    private var safariViewController: SFSafariViewController!
     
-    // MARK: - View Controller Life Cycle
+    // MARK: View Controller Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,7 @@ class SignInViewController: BaseViewController {
         return .LightContent
     }
     
-    // MARK: - Actions
+    // MARK: Actions
     
     @IBAction func signIn(sender: UIButton) {
         activateSignInFlow()
@@ -44,17 +48,17 @@ class SignInViewController: BaseViewController {
         dismissSignInViewController()
     }
     
-    // MARK: - SignIn 
+    @IBAction func signUp(sender: UIButton) {
+        guard let url = NSURL(string: "https://www.themoviedb.org/account/signup") else { return }
+        safariViewController = SFSafariViewController(URL: url)
+        presentViewController(safariViewController, animated: true, completion: nil)
+    }
+        
+    // MARK: SignIn
     
     func activateSignInFlow() {
         showProgressHUD()
         signInManager.requestToken(Constants.RedirectURI)
-    }
-    
-    func authorizeOnTMDb(url: NSURL) {
-        authorizationViewController = SFSafariViewController(URL: url)
-        authorizationViewController.delegate = self
-        presentViewController(authorizationViewController, animated: true, completion: nil)
     }
     
     func requestSessionID() {
@@ -62,13 +66,19 @@ class SignInViewController: BaseViewController {
         signInManager.requestSessionID()
     }
     
-    // MARK: - Errror Handling
+    func requestAuthorization(url: NSURL) {
+        safariViewController = SFSafariViewController(URL: url)
+        safariViewController.delegate = self
+        presentViewController(safariViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: Handle Errors
     
     func handleError(error: NSError) {
         detectInternetConnectionError(error)
     }
     
-    // MARK: - Navigation
+    // MARK: Navigation
     
     func dismissSignInViewController() {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
@@ -76,13 +86,13 @@ class SignInViewController: BaseViewController {
 
 }
 
-// MARK: - TMDbSignInmanager
+// MARK: TMDbSignInDelegate
 
 extension SignInViewController: TMDbSignInDelegate {
     
     func signInDelegateShouldRequestAuthorization(url: NSURL) {
         hideProgressHUD()
-        authorizeOnTMDb(url)
+        requestAuthorization(url)
     }
     
     func signInDelegateSigninDidComplete() {
@@ -98,6 +108,8 @@ extension SignInViewController: TMDbSignInDelegate {
     
 }
 
+// MARK: SFSafariViewControllerDelegate
+
 extension SignInViewController: SFSafariViewControllerDelegate {
     
     func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
@@ -108,6 +120,8 @@ extension SignInViewController: SFSafariViewControllerDelegate {
     
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
         requestSessionID()
+        // How to distinguis between the request for sessionID
+        // And the request where you sign up and get back to the app 
     }
 }
 

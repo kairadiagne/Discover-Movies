@@ -55,6 +55,7 @@
 		EA288F2A1CF58D42004FAEEF /* TMDbUserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F291CF58D42004FAEEF /* TMDbUserClient.swift */; };
 		EA288F2C1CF58D4C004FAEEF /* TMDbSignInClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F2B1CF58D4C004FAEEF /* TMDbSignInClient.swift */; };
 		EA288F2E1CF59057004FAEEF /* TMDbAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F2D1CF59057004FAEEF /* TMDbAPIRouter.swift */; };
+		EA31C1FB1CFF3D3D00EC3223 /* TMDbDataManagerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31C1FA1CFF3D3D00EC3223 /* TMDbDataManagerListener.swift */; };
 		EA6487681CE1E65700452DD0 /* TMDbUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */; };
 		EA6487711CE21E2300452DD0 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64876F1CE21E2300452DD0 /* ListViewController.swift */; };
 		EA6487721CE21E2300452DD0 /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487701CE21E2300452DD0 /* ListViewController.xib */; };
@@ -216,6 +217,7 @@
 		EA288F291CF58D42004FAEEF /* TMDbUserClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserClient.swift; sourceTree = "<group>"; };
 		EA288F2B1CF58D4C004FAEEF /* TMDbSignInClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInClient.swift; sourceTree = "<group>"; };
 		EA288F2D1CF59057004FAEEF /* TMDbAPIRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAPIRouter.swift; sourceTree = "<group>"; };
+		EA31C1FA1CFF3D3D00EC3223 /* TMDbDataManagerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TMDbDataManagerListener.swift; path = Base/Controller/TMDbDataManagerListener.swift; sourceTree = "<group>"; };
 		EA6487671CE1E65700452DD0 /* TMDbUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUserManager.swift; sourceTree = "<group>"; };
 		EA64876F1CE21E2300452DD0 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		EA6487701CE21E2300452DD0 /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
@@ -706,6 +708,7 @@
 		EAD2A8211CDC9D000005264B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				EA31C1FA1CFF3D3D00EC3223 /* TMDbDataManagerListener.swift */,
 				EA6487CA1CE5162200452DD0 /* Base */,
 				EAD2A8341CDC9EF30005264B /* Menu */,
 				EAD2A8331CDC9EEB0005264B /* Sign in */,
@@ -1161,6 +1164,7 @@
 				1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */,
 				111942D61CCB8E47001CF39B /* PullToRefreshable.swift in Sources */,
 				EA6487CE1CE5166A00452DD0 /* BannerPresentable.swift in Sources */,
+				EA31C1FB1CFF3D3D00EC3223 /* TMDbDataManagerListener.swift in Sources */,
 				1119429A1CCB8DD4001CF39B /* IQDropDownTextField+Configure.swift in Sources */,
 				111942B41CCB8DE5001CF39B /* CustomButton.swift in Sources */,
 				EAD2A8401CDCC7820005264B /* TopListViewController.swift in Sources */,
@@ -1372,11 +1376,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = coe.;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1389,11 +1395,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = coe.;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 			};
 			name = Release;

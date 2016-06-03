@@ -16,6 +16,8 @@ enum Status {
 @IBDesignable
 class AnimatedShapeButton: UIControl {
     
+    // MARK: Properties
+    
     struct Constants {
         static let FillAnimationKey = "fillAnimation"
         static let GrowAnimationKey = "growAnimation"
@@ -45,14 +47,14 @@ class AnimatedShapeButton: UIControl {
             }
         }
     }
-      
-    // MARK: - Layers
     
     var shapeLayer = CAShapeLayer()
+    
     var fillLayer = CAShapeLayer()
+    
     var maskLayer = CAShapeLayer()
     
-    // MARK: - Initialization 
+    // MARK: Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,7 +77,7 @@ class AnimatedShapeButton: UIControl {
         self.setupLayers()
     }
     
-    // MARK: - State 
+    // MARK: State
     
     func toggleState() {
         switch status {
@@ -94,11 +96,11 @@ class AnimatedShapeButton: UIControl {
         }
     }
     
-    // MARK: - Drawing 
+    // MARK: Drawing
     
     func setupLayers() { } // Required for subclass
     
-    // MARK: - User Interaction
+    // MARK: User Interaction
     
     // Called when a touch event enters the control’s bounds.
     
@@ -120,7 +122,7 @@ class AnimatedShapeButton: UIControl {
         sendActionsForControlEvents(.ValueChanged)
     }
     
-    // MARK: - Animation
+    // MARK: Animation
     
     func changeFillAnimated(fill: Bool, duration: Double, key: String) {
         let unfilledRect = CGRect(x: bounds.width / 2, y: bounds.height / 2, width: 0, height: 0)
@@ -150,7 +152,7 @@ class AnimatedShapeButton: UIControl {
         self.layer.addAnimation(scaleAnimation, forKey: key)
     }
     
-    // MARK: - CABasicAnimation Delegate
+    // MARK: CABasicAnimation Delegate
     
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         

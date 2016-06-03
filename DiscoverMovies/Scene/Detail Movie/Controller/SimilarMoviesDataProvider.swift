@@ -10,6 +10,8 @@ import UIKit
 import TMDbMovieKit
 
 class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
+    
+    // MARK: Properties
 
     var cellIdentifier = ""
     
@@ -17,14 +19,9 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
     
     private var collectionView: UICollectionView?
     
-    func movieAtIndex(index: Int) -> TMDbMovie? {
-        guard index >= 0 || index <= movies.count else { return nil }
-        return movies[index]
-    }
-    
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         self.collectionView = collectionView
         return movies.count
     }
@@ -43,5 +40,9 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
         collectionView?.reloadData()
     }
     
+    func movieAtIndex(index: Int) -> TMDbMovie?{
+        guard index >= 0 || index <= movies.count else { return nil }
+        return movies[index]
+    }
     
 }

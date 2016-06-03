@@ -40,6 +40,7 @@ enum TMDbAPIRouter: URLRequestConvertible {
             }
             
         }()
+    
         
         let body: [String: AnyObject]? = {
             switch self {

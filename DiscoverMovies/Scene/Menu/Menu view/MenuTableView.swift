@@ -13,15 +13,25 @@ import SWRevealViewController
 
 class MenuTableView: UITableView {
     
+    // MARK: Properties
+    
     @IBOutlet weak var discoverLabel: UILabel!
+    
     @IBOutlet weak var watchListLabel: UILabel!
+    
     @IBOutlet weak var favoritesLabel: UILabel!
+    
     @IBOutlet weak var signoutlabel: UILabel!
+    
     @IBOutlet weak var profileImageView: UIImageView!
+    
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var watchlistCell: UITableViewCell!
+    
     @IBOutlet weak var favoriteCell: UITableViewCell!
+    
+    // MARK: Awake From Nib
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,12 +48,14 @@ class MenuTableView: UITableView {
         profileImageView.layer.masksToBounds = true
     }
     
+    // MARK: - Life Cycle 
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         usernameLabel.center.x = profileImageView.center.x
     }
     
-    // MARK: - Configure
+    // MARK: Configure
     
     func updateMenu(signedIn: Bool, user: TMDbUser?) {
         usernameLabel.text = user?.name ?? "Guest"

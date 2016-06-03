@@ -8,6 +8,22 @@
 
 import Foundation
 
-public let TMDbManagerDataDidUpdateNotification = "TMDbDataManagerDataDidUpdateNotification"
-public let TMDManagerDataDidChangeNotification = "TMDbManagerDataDidChangeNotification"
-public let TMDbManagerDidReceiveErrorNotification = "TMDbManagerDidReceiveErrorNotification"
+public enum TMDbDataManagerNotification {
+    case DataDidUpdate
+    case DataDidChange
+    case DidReceiveError
+    
+    public var name: String {
+        switch self {
+        case .DataDidUpdate:
+            return "TMDbDataManagerDataDidUpdateNotification"
+        case .DataDidChange:
+            return "TMDbManagerDataDidChangeNotification"
+        case .DidReceiveError:
+            return "TMDbManagerDidReceiveErrorNotification"
+        }
+    }
+
+}
+
+

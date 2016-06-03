@@ -11,10 +11,13 @@ import TMDbMovieKit
 
 class ReviewTableViewCell: UITableViewCell {
     
+    // MARK: Properties
+    
     @IBOutlet weak var authorLabel: UILabel!
+    
     @IBOutlet weak var contentLabel: UILabel!
     
-    // MARK: - Initialization 
+    // MARK: - Initializers
     
     override func awakeFromNib() {
         super.awakeFromNib()

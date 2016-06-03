@@ -55,7 +55,7 @@ public class TMDbMovie: NSObject, Mappable, NSCoding {
         
     }
     
-    // MARK: - NSCoding
+    // MARK: NSCoding
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(movieID, forKey: Keys.MovieID)
@@ -77,8 +77,6 @@ public class TMDbMovie: NSObject, Mappable, NSCoding {
         guard let movieID = aDecoder.decodeObjectForKey(Keys.MovieID) as? Int else { return nil }
         guard let title = aDecoder.decodeObjectForKey(Keys.Title) as? String else { return nil }
         
-        super.init()
-        
         self.movieID = movieID
         self.title = title
         self.overview = aDecoder.decodeObjectForKey(Keys.Overview) as? String
@@ -89,15 +87,18 @@ public class TMDbMovie: NSObject, Mappable, NSCoding {
         self.posterPath = aDecoder.decodeObjectForKey(Keys.PosterPath) as? String
         self.backDropPath = aDecoder.decodeObjectForKey(Keys.BackdropPath) as? String
         
-        // Retrieve genreIDs and convert them back to enum
+        // Retrieve genreIDs and convert them back to enum valus
         let genreIDs = aDecoder.decodeObjectForKey(Keys.Genre) as! [Int]
         self.genres = genreIDs.flatMap { return TMDbGenre(rawValue: $0) }
     }
     
+    // MARK: Equality
+    
+    override public func isEqual(object: AnyObject?) -> Bool {
+        if let movie = object as? TMDbMovie {
+            return movieID == movie.movieID
+        }
+        return false
+    }
+    
 }
-
-
-
-
-
-

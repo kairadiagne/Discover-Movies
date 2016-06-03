@@ -15,14 +15,14 @@ class PersonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    // MARK: - Initialization 
+    // MARK: Initializers
     
     override func awakeFromNib() {
         super.awakeFromNib()
         nameLabel.font = UIFont.Caption2()
     }
     
-    // MARK: - Configure Cell
+    // MARK: Configure 
     
     func configureWithCastMember(member: TMDbCastMember) {
         guard let path = member.profilePath else { return }

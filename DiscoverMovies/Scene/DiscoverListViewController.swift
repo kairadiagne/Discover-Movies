@@ -8,7 +8,9 @@
 
 import UIKit
 
-class DiscoverListViewController: ListViewController {
+class DiscoverListViewController: ListViewController, MenuButtonPresentable {
+    
+    // MARK:  Constants
     
     private struct Constants {
         static let DiscoverCellNibName = "DiscoverListCell"
@@ -16,8 +18,18 @@ class DiscoverListViewController: ListViewController {
         static let DiscoverCellRowHeight: CGFloat = 250
     }
     
+    // MARK: Properties
+    
+    var tableViewDataProvider = DiscoverDataProvider()
+    
+    // MARK: View Controller Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addMenuButton()
+        
+        tableViewDataProvider.cellIdentifier = Constants.DiscoverCellIdentifier
+        tableView.dataSource = tableViewDataProvider
         
         let nib = UINib(nibName: Constants.DiscoverCellNibName, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: Constants.DiscoverCellIdentifier)

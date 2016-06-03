@@ -22,9 +22,12 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
     
     var page: Int = 0
     var pageCount: Int = 0
-    var nextPage: Int?
     var resultCount: Int = 0
     var items: [Item] = []
+    
+    var nextPage: Int? {
+        return page < pageCount ? page + 1 : nil
+    }
     
     override init() {
         super.init()    
@@ -35,7 +38,6 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
     func mapping(map: Map) {
         self.page           <- map[Keys.Page]
         self.pageCount      <- map[Keys.PageCount]
-        self.nextPage       <- map[Keys.NextPage]
         self.resultCount    <- map[Keys.ResultCount]
         self.items          <- map[Keys.Items]
     }
@@ -44,7 +46,6 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
 
     func update(data: TMDbList<Item>) {        
         page = data.page
-        nextPage = data.nextPage
         pageCount = data.pageCount
         resultCount = data.resultCount
         
@@ -55,10 +56,10 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
         }
     }
     
-    // MARK: - NSCoding
+    // MARK: NSCoding
     
     required init?(coder aDecoder: NSCoder) {
-        
+         // TODO: - Implement
     }
     
     func encodeWithCoder(aCoder: NSCoder) {

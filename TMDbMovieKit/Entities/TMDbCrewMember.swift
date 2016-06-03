@@ -41,5 +41,16 @@ public class TMDbCrewMember: NSObject, Mappable {
         self.profilePath    <- map[Keys.ProfilePath]
     }
     
+    // MARK Equality
+    
+    override public func isEqual(object: AnyObject?) -> Bool {
+        if let crewMember = object as? TMDbCrewMember {
+            if creditID == crewMember.creditID && personID == crewMember.personID {
+                return true
+            }
+        }
+        return false 
+    }
+    
 }
 

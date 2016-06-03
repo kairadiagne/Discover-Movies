@@ -9,10 +9,12 @@
 import UIKit
 
 class GradientImageView: UIImageView {
+    
+    // MARK: Properties
 
     var gradientLayer: CAGradientLayer!
         
-    // MARK: - Initializer
+    // MARK: Initializers
     
     init(colors: [CGColor], startPoint: CGPoint, endPoint: CGPoint, frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +31,7 @@ class GradientImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View Life Cycle
+    // MARK: View Life Cycle
     
     override func layoutSubviews() {
         super.layoutSubviews()

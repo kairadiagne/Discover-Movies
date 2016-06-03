@@ -72,18 +72,20 @@ public class TMDbReviewManager {
     
     private func postUpdateNotification() {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbManagerDataDidUpdateNotification, object: self)
+        center.postNotificationName(TMDbDataManagerNotification.DataDidUpdate.name, object: self)
     }
+    
+    let center = NSNotificationCenter.defaultCenter()
+    
     
     private func postChangeNotification() {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDManagerDataDidChangeNotification, object: self)
+        center.postNotificationName(TMDbDataManagerNotification.DataDidChange.name, object: self)
     }
     
     private func postErrorNotification(error: NSError) {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: self, userInfo: ["error": error])
+        center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
     }
     
-
 }

@@ -24,7 +24,7 @@ class Theme {
         styleLabels()
     }
     
-    // MARK: - Seperate Styling
+    // MARK: - Style Components
     
     class func styleNavBar() {
         UINavigationBar.appearance().barTintColor = UIColor.navbarColor()

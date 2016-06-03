@@ -15,7 +15,6 @@ class BaseTableView: UITableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // Create and configure message label
         let frame = CGRect(origin: .zero, size: bounds.size)
         messageLabel = UILabel(frame: frame)
         messageLabel.textAlignment = .Center
@@ -24,7 +23,6 @@ class BaseTableView: UITableView {
         messageLabel.font = UIFont.Body()
         messageLabel.tintColor = UIColor.redColor()
         
-        // Add message label to backgroundView
         backgroundView = messageLabel
         backgroundView?.hidden = true
         

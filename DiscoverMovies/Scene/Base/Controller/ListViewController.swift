@@ -11,11 +11,17 @@ import TMDbMovieKit
 import BRYXBanner
 import MBProgressHUD
 
-class ListViewController: BaseViewController {
+class ListViewController: BaseViewController, UITableViewDelegate {
 
     @IBOutlet weak var tableView: BaseTableView!
     
     // MARK: - View Controller Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.delegate = self
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -26,6 +32,7 @@ class ListViewController: BaseViewController {
     }
     
 }
+
 
 
 

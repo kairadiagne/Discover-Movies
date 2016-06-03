@@ -34,7 +34,7 @@ public class TMDbReview: NSObject, Mappable, NSCoding {
         self.path       <- map[Keys.URL]
     }
     
-    // MARK: - NSCoding
+    // MARK: NSCoding
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(reviewID, forKey: Keys.ReviewID)
@@ -46,12 +46,19 @@ public class TMDbReview: NSObject, Mappable, NSCoding {
     public required init?(coder aDecoder: NSCoder) {
         guard let reviewID = aDecoder.decodeObjectForKey(Keys.ReviewID) as? Int else { return nil }
         
-        super.init()
-        
         self.reviewID = reviewID
         self.author = aDecoder.decodeObjectForKey(Keys.Author) as? String
         self.content = aDecoder.decodeObjectForKey(Keys.Content) as? String
         self.path = aDecoder.decodeObjectForKey(Keys.URL) as? String
+    }
+    
+    // MARK: Equality
+    
+    override public func isEqual(object: AnyObject?) -> Bool {
+        if let review = object as? TMDbReview {
+            return reviewID == review.reviewID
+        }
+        return false 
     }
 
 }

@@ -16,43 +16,65 @@ import SDWebImage
 
 class DetailView: BackgroundView {
     
+    // MARK: Constants
+    
     private struct Constants {
         static let HeaderHeight: CGFloat = 291
         static let PlayButtonSize = CGSize(width: 50, height: 50)
         static let FillViewSize = CGSize(width: 30, height: 30)
     }
     
-    // Static content
+    // MARK: Properties
+    
     @IBOutlet weak var directorLabel: UILabel!
+    
     @IBOutlet weak var genreLabel: UILabel!
+    
     @IBOutlet weak var releaseLabel: UILabel!
+    
     @IBOutlet weak var ratingLabel: UILabel!
+    
     @IBOutlet weak var castLabel: UILabel!
+    
     @IBOutlet weak var similarMoviesLabel: UILabel!
-
-    // Dynamic content
+    
     @IBOutlet weak var detailScrollView: UIScrollView!
+    
     @IBOutlet weak var contentView: UIView!
+    
     @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var overviewLabel: UILabel!
+    
     @IBOutlet weak var directorValueLabel: UILabel!
+    
     @IBOutlet weak var genreValueLabel: UILabel!
+    
     @IBOutlet weak var releaseValueLabel: UILabel!
+    
     @IBOutlet weak var ratingValueLabel: UILabel!
+    
     @IBOutlet weak var castCollectionView: UICollectionView!
+    
     @IBOutlet weak var similarMoviesCollectionView: UICollectionView!
     
     @IBOutlet weak var favouriteButton: FavouriteButton!
+    
     @IBOutlet weak var watchListButton: WatchListButton!
+    
     @IBOutlet weak var readReviewsButton: UIButton!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
     var headerImageView: GradientImageView!
+    
     var playButton = UIButton()
+    
     var fillView = UIView()
     
     weak var delegate: DetailHeaderViewDelegate?
-    
-    // MARK: - Initialization
+   
+    // MARK: Awake From Nib
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,8 +83,8 @@ class DetailView: BackgroundView {
         setupCollectionView()
         setupHeaderView()
         setupScrollView()
-        setUpPlayButton()
         updateHeaderView()
+        setUpPlayButton()
     }
     
     private func setupFontsForLabels() {
@@ -107,23 +129,22 @@ class DetailView: BackgroundView {
         let endPoint = CGPoint(x: 0, y: 0.1)
         self.headerImageView = GradientImageView(colors: colors, startPoint: startPoint, endPoint: endPoint, frame: CGRect.zero)
         self.headerImageView.contentMode = .ScaleAspectFill
-        self.contentView.addSubview(headerImageView)
+        
+        self.detailScrollView.addSubview(headerImageView)
     }
     
     private func setUpPlayButton() {
-        self.playButton = UIButton()
         self.playButton.translatesAutoresizingMaskIntoConstraints = false
         self.playButton.setImage(UIImage(named: "play"), forState: .Normal)
         self.playButton.tintColor = UIColor.backgroundColor()
-        let playSelector = #selector(delegate?.detailHeaderViewDelegateDidTapPlayButton)
+        let playSelector = #selector(DetailView.detailButtonPressed)
         self.playButton.addTarget(self, action: playSelector, forControlEvents: .TouchUpInside)
         
-        self.fillView = UIView()
         self.fillView.translatesAutoresizingMaskIntoConstraints = false
         self.fillView.backgroundColor = UIColor.whiteColor()
         
-        self.addSubview(self.fillView)
-        self.addSubview(self.playButton)
+        self.detailScrollView.addSubview(self.fillView)
+        self.detailScrollView.addSubview(self.playButton)
             
         self.fillView.centerXAnchor.constraintEqualToAnchor(self.headerImageView.centerXAnchor).active = true
         self.fillView.centerYAnchor.constraintEqualToAnchor(self.headerImageView.centerYAnchor).active = true
@@ -134,23 +155,21 @@ class DetailView: BackgroundView {
         self.playButton.centerYAnchor.constraintEqualToAnchor(self.headerImageView.centerYAnchor).active = true
         self.playButton.heightAnchor.constraintEqualToConstant(Constants.PlayButtonSize.height).active = true
         self.playButton.widthAnchor.constraintEqualToConstant(Constants.PlayButtonSize.width).active = true
-        
-        self.bringSubviewToFront(self.playButton)
     }
     
-    // MARK: - Life Cycle
+    // MARK: Life Cycle
     
     override func layoutSubviews() {
         super.layoutSubviews()
         headerImageView.frame.size.width = self.bounds.width
     }
     
-    // MARK: - Header
+    // MARK: Header
 
     func updateHeaderView() {
         var headerRect = CGRect(x: 0, y: -Constants.HeaderHeight, width: detailScrollView.bounds.width, height: Constants.HeaderHeight)
         
-        // If the scroll view offset is greater than the header height adjust the header rect
+        // If the y offset of the scrollview is greater than the headerheight the headerheight gets adjusted (grows in height)
         if detailScrollView.contentOffset.y < -Constants.HeaderHeight {
             headerRect.origin.y = detailScrollView.contentOffset.y
             headerRect.size.height = -detailScrollView.contentOffset.y
@@ -159,7 +178,9 @@ class DetailView: BackgroundView {
         headerImageView.frame = headerRect
     }
     
-    // MARK: - Configure Methods
+    // MARK: Configure
+    
+    // TODO: - Configure methods need to be more clear (Single method)
   
     func configureForMovie(movie: TMDbMovie, image: UIImage? = nil, url: NSURL? = nil) {
         titleLabel.text = movie.title
@@ -179,7 +200,6 @@ class DetailView: BackgroundView {
         watchListButton.setAsSelected(accountState.watchlistStatus)
     }
     
-    // Move to header view
     private func setImage(image: UIImage?, url: NSURL?) {
         if let image = image {
             headerImageView.image = image
@@ -188,19 +208,44 @@ class DetailView: BackgroundView {
         }
     }
     
-    // MARK: - Animation 
+    // MARK: Actions
     
-    func prepareForAnimation() {
-//        detailScrollView.scrollViewInset
+    func detailButtonPressed() {
+        delegate?.detailHeaderViewDelegateDidTapPlayButton()
     }
     
-    func animateOnScreen() {
+    // MARK: Animation
+
+    func prepareForAnimation() { // Naming??
+        headerImageView.alpha = 0.2
+        topConstraint.constant += bounds.height / 4
+        layoutIfNeeded()
+    }
+    
+    func startAnimation() { // Naming??
+        
+        UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: { 
+            self.topConstraint.constant -= self.bounds.height
+            
+            self.topConstraint.constant -= self.bounds.height / 4
+            self.layoutIfNeeded()
+            self.headerImageView.alpha = 1.0
+            }, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
+        
+        
+//        UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: { // Bouncines spring
+//            
+//            }, completion: nil)
+        
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.CurveEaseInOut], animations: {
+           
+            }, completion: nil)
         
     }
 
 }
 
-// MARK: - UIScrollViewDelegate
+// MARK: UIScrollViewDelegate
 
 extension DetailView: UIScrollViewDelegate {
     

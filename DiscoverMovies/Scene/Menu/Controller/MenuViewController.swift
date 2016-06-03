@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class MenuViewController: UITableViewController {
+class MenuViewController: UITableViewController, TMDbDataManagerListenerDelegate {
     
     private struct Constants {
         static let Identifier = "MenuViewController"
@@ -17,7 +17,7 @@ class MenuViewController: UITableViewController {
         static let RootViewControllerNibName = "ListViewController"
     }
     
-    // MARK: - Storyboard
+    // MARK: Storyboard
     
     class func instantiatefromStoryboard() -> MenuViewController {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
@@ -29,6 +29,7 @@ class MenuViewController: UITableViewController {
     private let userManager = TMDbUserManager()
     private let signInmanager = TMDbSignInManager()
     private let sessionManager = TMDbSessionManager()
+    private var userListener: TMDbDataManagerListener<TMDbUserManager>!
     
     private var signedIn: Bool {
         switch sessionManager.signInStatus {
@@ -41,13 +42,11 @@ class MenuViewController: UITableViewController {
     
     private var presentedRow = 1
     
-    // MARK: - View Controller Life Cycle
+    // MARK: View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        let updateSelector = #selector(MenuViewController.handleUserInfoUpdate)
-        notificationCenter.addObserver(self, selector: updateSelector, name: TMDbManagerDataDidUpdateNotification, object: userManager)
+        userListener = TMDbDataManagerListener(delegate: self, manager: userManager)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,13 +64,13 @@ class MenuViewController: UITableViewController {
         return .LightContent
     }
     
-    // MARK: - Notifications
+    // MARK: Notifications
     
-    func handleUserInfoUpdate() {
+    func dataManagerDataDidUpdateNotification(notification: NSNotification) {
         menuTableview.updateMenu(true, user: userManager.user)
     }
 
-    // MARK: - Navigation
+    // MARK: Navigation
     
     func showTopListViewController() {
         let topListVieWController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
@@ -95,7 +94,7 @@ class MenuViewController: UITableViewController {
         showTopListViewController()
     }
     
-    // MARK: - UITableViewDelegate
+    // MARK: UITableViewDelegate
     
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         switch indexPath.row {

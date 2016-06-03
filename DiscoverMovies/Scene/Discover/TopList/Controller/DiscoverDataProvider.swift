@@ -13,7 +13,7 @@ class DiscoverDataProvider: NSObject, UITableViewDataSource {
     
     var cellIdentifier: String = ""
     
-    // MARK: - Data
+    // MARK: Data
      
     private var movies: [TMDbMovie] = []
     
@@ -30,7 +30,7 @@ class DiscoverDataProvider: NSObject, UITableViewDataSource {
         self.movies = movies
     }
     
-    // MARL: - UITableViewDataSource
+    // MARK: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count

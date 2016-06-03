@@ -46,9 +46,7 @@ public class TMDbUser: NSObject, Mappable, NSCoding {
     
     public required init?(coder decoder: NSCoder) {
         guard let userID = decoder.decodeObjectForKey(Keys.UserID) as? Int else { return nil }
-        
-        super.init()
-
+    
         self.userID = userID
         self.name = decoder.decodeObjectForKey(Keys.Name) as? String
         self.userName = decoder.decodeObjectForKey(Keys.Username) as? String

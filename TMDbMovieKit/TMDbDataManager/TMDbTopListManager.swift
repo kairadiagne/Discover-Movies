@@ -9,7 +9,14 @@
 import Foundation
 import Alamofire
 
-public class TMDbTopListManager {
+protocol TMDbDataManager: class {
+    var inProgress: Bool { get set }
+    func postUpdateNotification()
+    func postChangeNotification()
+    func postErrorNotification(error: NSError)
+}
+
+public class TMDbTopListManager: TMDbDataManager {
     
     // Classes that confom to NSCoding can be serialized and deserialized into data that can be either be achived to diskor distributed across a network.
     // Of course serialization is only one part of the story. Determining where this data will persist is another question.
@@ -18,7 +25,7 @@ public class TMDbTopListManager {
     // NSkeyedArchiver and NSkeyedUnArchiver provide a convenient API to read / write objects directly to / from disk.
     // We  can set its collection property from the file manager:
     // NSKeyedArchiver.archiveRootObject(books, toFile: "/path/to/archive")
-    //  NSKeyedUnarchiver.unarchiveObjectWithFile("/path/to/archive") as? [Book] else { return nil }
+    // NSKeyedUnarchiver.unarchiveObjectWithFile("/path/to/archive") as? [Book] else { return nil }
     
     // Public properties
     
@@ -148,19 +155,19 @@ public class TMDbTopListManager {
     
     // MARK: - Notifications
     
-    private func postUpdateNotification() {
+    func postUpdateNotification() {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbManagerDataDidUpdateNotification, object: self)
+        center.postNotificationName(TMDbDataManagerNotification.DataDidUpdate.name, object: self)
     }
     
-    private func postChangeNotification() {
+    func postChangeNotification() {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDManagerDataDidChangeNotification, object: self)
+        center.postNotificationName(TMDbDataManagerNotification.DataDidChange.name, object: self)
     }
     
-    private func postErrorNotification(error: NSError) {
+    func postErrorNotification(error: NSError) {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: self, userInfo: ["error": error])
+        center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
     }
     
 }

@@ -13,6 +13,8 @@ import TMDbMovieKit
 
 class ReviewDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: Properties
+    
     private var reviews = [TMDbReview]()
     
     var cellIdentifier = ""
@@ -21,12 +23,7 @@ class ReviewDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
         return reviews.count
     }
     
-    func reviewForIndex(index: Int) -> TMDbReview? {
-        guard index >= 0 && index <= reviewCount else { return nil }
-        return reviews[index]
-    }
-    
-    // MARK: - UITableViewDataSource
+    // MARK: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reviews.count
@@ -39,8 +36,15 @@ class ReviewDataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // MARK: Update / Retrieve item
+    
     func updateWithReviews(reviews: [TMDbReview]) {
         self.reviews = reviews
+    }
+    
+    func reviewForIndex(index: Int) -> TMDbReview? {
+        guard index >= 0 && index <= reviewCount else { return nil }
+        return reviews[index]
     }
     
 }

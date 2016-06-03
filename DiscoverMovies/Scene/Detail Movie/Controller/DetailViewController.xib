@@ -155,6 +155,7 @@
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="FWn-90-Bpl" secondAttribute="bottom" constant="20" symbolic="YES" id="1Rg-Lo-PNE"/>
                                 <constraint firstAttribute="trailing" secondItem="RfM-Yd-N62" secondAttribute="trailing" constant="20" symbolic="YES" id="5FB-Wn-XX5"/>
                                 <constraint firstAttribute="trailing" secondItem="XML-Op-1bV" secondAttribute="trailing" constant="20" symbolic="YES" id="8Jc-5s-hR8"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cZf-HR-WxX" secondAttribute="trailing" constant="20" symbolic="YES" id="9WN-Xp-8pZ"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YT0-2N-TEi" secondAttribute="bottom" constant="20" symbolic="YES" id="9iw-Zc-rD7"/>
                                 <constraint firstItem="rV8-fA-ECL" firstAttribute="top" secondItem="4Sk-Zl-6au" secondAttribute="top" constant="20" symbolic="YES" id="C32-gc-BdQ"/>
                                 <constraint firstItem="zop-Vf-mhd" firstAttribute="baseline" secondItem="8xu-xY-va1" secondAttribute="baseline" id="CQz-SQ-PBb"/>
@@ -239,6 +240,7 @@
                 <outlet property="similarMoviesCollectionView" destination="YT0-2N-TEi" id="Tge-8l-4sv"/>
                 <outlet property="similarMoviesLabel" destination="qW3-nm-1vz" id="Uuq-IZ-RS0"/>
                 <outlet property="titleLabel" destination="cZf-HR-WxX" id="C64-ns-0Ly"/>
+                <outlet property="topConstraint" destination="C32-gc-BdQ" id="Toa-fr-lI1"/>
                 <outlet property="watchListButton" destination="ygV-VC-yWL" id="QtF-hO-kSB"/>
             </connections>
             <point key="canvasLocation" x="129" y="-253"/>

@@ -11,8 +11,9 @@ import MBProgressHUD
 
 // MARK: - Protocol ProgressHUDPresentable
 
-protocol ProgressHUDPresentable {
+protocol ProgressHUDPresentable: class {
     var progressHUD: MBProgressHUD? { get set }
+    func setupProgressHUD()
     func showProgressHUD()
     func hideProgressHUD() 
 }
@@ -20,6 +21,11 @@ protocol ProgressHUDPresentable {
 // MARK: - Default Implementation ProgressHUDPresentable
 
 extension ProgressHUDPresentable where Self: UIViewController {
+    
+    func setupProgressHUD() {
+        progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
+        view.addSubview(progressHUD!)
+    }
     
     func showProgressHUD() {
         progressHUD?.show(true)

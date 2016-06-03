@@ -9,10 +9,12 @@
 import UIKit
 
 class FavouriteButton: AnimatedShapeButton {
+    
+    // MARK: Properties
 
     private let lineWidth: CGFloat = 1.0
     
-    // MARK: - Drawing 
+    // MARK: Generate Shape
     
     override func setupLayers() {
         // Generate the layer that shows the unfilled star. (This layer is always on screen)

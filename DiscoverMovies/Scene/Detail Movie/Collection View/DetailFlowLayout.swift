@@ -10,6 +10,8 @@ import UIKit
 
 class DetailFlowLayout: UICollectionViewFlowLayout {
     
+    // MARK: Initalizers
+    
     override init() {
         super.init()
         self.scrollDirection = .Horizontal

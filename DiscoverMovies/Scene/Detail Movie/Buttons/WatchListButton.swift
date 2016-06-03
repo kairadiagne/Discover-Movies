@@ -9,10 +9,12 @@
 import UIKit
 
 class WatchListButton: AnimatedShapeButton {
+    
+    // MARK: Properties
 
     private let lineWidth: CGFloat = 1
     
-    // MARK: - Drawing
+    // MARK: Generate Shape
     
     override func setupLayers() {
         shapeLayer.frame = bounds
@@ -72,7 +74,7 @@ class WatchListButton: AnimatedShapeButton {
         return rectanglePath
     }
     
-    // MARK: - Animation
+    // MARK: Animation
     
     override func changeFillAnimated(fill: Bool, duration: Double, key: String) {
         let unfilledRect = CGRect(x: bounds.width / 2, y: bounds.height / 2, width: 0, height: 0)

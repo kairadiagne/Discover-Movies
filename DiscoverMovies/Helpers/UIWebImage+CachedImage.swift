@@ -13,6 +13,7 @@ import SDWebImage
 public extension SDWebImageManager {
     
     // Returns the URL if the image does not exist in the cache
+    
     public func getImageFromCache(movie: TMDbMovie) -> (image: UIImage?, url: NSURL?) {
         guard let path = movie.backDropPath, url = TMDbImageRouter.BackDropMedium(path: path).url else { return (nil, nil) }
         guard let key = SDWebImageManager.sharedManager().cacheKeyForURL(url) else { return (nil, url) }

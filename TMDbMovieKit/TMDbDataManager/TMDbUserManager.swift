@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public class TMDbUserManager {
     
     public var user: TMDbUser? {
@@ -41,12 +40,14 @@ public class TMDbUserManager {
     
     private func postUpdateNotification() {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbManagerDataDidUpdateNotification, object: self)
+        center.postNotificationName(TMDbDataManagerNotification.DataDidUpdate.name, object: self)
     }
     
     private func postErrorNotification(error: NSError) {
         let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbManagerDidReceiveErrorNotification, object: self, userInfo: ["error": error])
+        center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
     }
+    
+    
     
 }

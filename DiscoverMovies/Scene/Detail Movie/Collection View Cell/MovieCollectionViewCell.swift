@@ -11,10 +11,12 @@ import TMDbMovieKit
 import SDWebImage
 
 class MovieCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: Properties
 
     @IBOutlet weak var movieImageView: UIImageView!
     
-    // MARK: - Configure Cell
+    // MARK: Configure Cell
     
     func configureWithMovie(movie: TMDbMovie) {
         guard let path = movie.posterPath else { return }

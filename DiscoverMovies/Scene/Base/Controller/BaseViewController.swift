@@ -13,7 +13,7 @@ import MBProgressHUD
 
 class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresentable, InternetErrorHandleable, TMDbDataManagerListenerDelegate {
     
-    // MARK: Constants 
+    // MARK: Types
     
     private struct Constants {
         static let UserInfoKey = "error"
@@ -45,18 +45,18 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     // MARK: Notifications
     
+    func dataManagerDataDidUpdateNotification(notification: NSNotification) {
+        hideProgressHUD()
+    }
+    
     func dataManagerDataDidChangeNotification(notification: NSNotification) {
         hideProgressHUD()
     }
         
     func dataManagerDidReceiveErrorNotification(error: NSError?) {
         hideProgressHUD()
-    }
         
-    func dataManagerDataDidUpdateNotification(notification: NSNotification) {
-        hideProgressHUD()
-        
-        if let error = notification.userInfo?[Constants.UserInfoKey] as? NSError {
+        if let error = error {
             detectInternetConnectionError(error)
         }
     }

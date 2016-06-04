@@ -19,7 +19,6 @@ class ListViewController: BaseViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
     }
     

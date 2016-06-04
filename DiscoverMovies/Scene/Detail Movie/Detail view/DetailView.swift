@@ -107,8 +107,9 @@ class DetailView: BackgroundView {
         self.favouriteButton.fillColor = UIColor.buttonColor()
         self.watchListButton.lineColor = UIColor.buttonColor()
         self.watchListButton.fillColor = UIColor.buttonColor()
+        
         self.readReviewsButton.tintColor = UIColor.buttonColor()
-        self.readReviewsButton.layer.borderWidth = 1.0
+        self.readReviewsButton.layer.borderWidth = 1.5
         self.readReviewsButton.layer.borderColor = UIColor.buttonColor().CGColor
     }
     
@@ -129,13 +130,12 @@ class DetailView: BackgroundView {
         let endPoint = CGPoint(x: 0, y: 0.1)
         self.headerImageView = GradientImageView(colors: colors, startPoint: startPoint, endPoint: endPoint, frame: CGRect.zero)
         self.headerImageView.contentMode = .ScaleAspectFill
-        
         self.detailScrollView.addSubview(headerImageView)
     }
     
     private func setUpPlayButton() {
         self.playButton.translatesAutoresizingMaskIntoConstraints = false
-        self.playButton.setImage(UIImage(named: "play"), forState: .Normal)
+        self.playButton.setImage(UIImage.playIcon(), forState: .Normal)
         self.playButton.tintColor = UIColor.backgroundColor()
         let playSelector = #selector(DetailView.detailButtonPressed)
         self.playButton.addTarget(self, action: playSelector, forControlEvents: .TouchUpInside)
@@ -157,6 +157,29 @@ class DetailView: BackgroundView {
         self.playButton.widthAnchor.constraintEqualToConstant(Constants.PlayButtonSize.width).active = true
     }
     
+    // MARK: UICollectionView
+    
+    func registerCollectionViewDataSources(castSource: UICollectionViewDataSource, similarMoviesSource: UICollectionViewDataSource) {
+        castCollectionView.dataSource = castSource
+        similarMoviesCollectionView.dataSource = similarMoviesSource
+    }
+    
+    func registerCollectionViewDelegate(delegate: UICollectionViewDelegate) {
+        similarMoviesCollectionView.delegate = delegate
+    }
+    
+    func registerCollectionViewCells(castIdentifier: String, movieIdentifier: String) {
+        let movieCellNib = UINib(nibName: MovieCollectionViewCell.defaultIdentiier(), bundle: nil)
+        let personCellNib = UINib(nibName: PersonCollectionViewCell.defaultIdentiier(), bundle: nil)
+        castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: castIdentifier)
+        similarMoviesCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: movieIdentifier)
+    }
+    
+    func reloadCollectionViews() {
+        castCollectionView.reloadData()
+        similarMoviesCollectionView.reloadData()
+    }
+    
     // MARK: Life Cycle
     
     override func layoutSubviews() {
@@ -169,7 +192,7 @@ class DetailView: BackgroundView {
     func updateHeaderView() {
         var headerRect = CGRect(x: 0, y: -Constants.HeaderHeight, width: detailScrollView.bounds.width, height: Constants.HeaderHeight)
         
-        // If the y offset of the scrollview is greater than the headerheight the headerheight gets adjusted (grows in height)
+        // Header grows when the Y ofsset of the scroll view is greater then the headerheight
         if detailScrollView.contentOffset.y < -Constants.HeaderHeight {
             headerRect.origin.y = detailScrollView.contentOffset.y
             headerRect.size.height = -detailScrollView.contentOffset.y
@@ -180,32 +203,27 @@ class DetailView: BackgroundView {
     
     // MARK: Configure
     
-    // TODO: - Configure methods need to be more clear (Single method)
-  
-    func configureForMovie(movie: TMDbMovie, image: UIImage? = nil, url: NSURL? = nil) {
+    func configure(movie: TMDbMovie, image: UIImage? = nil) {
         titleLabel.text = movie.title
         overviewLabel.text = movie.overview ?? "N/A"
         genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
-        ratingValueLabel.text = "\(movie.rating!)\\10.0"
+        ratingValueLabel.text = "\(movie.rating!)\\10.0" // Round
         releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
-        setImage(image, url: url)
-    }
-    
-    func configureWithMovieCredit(movieCredit: TMDbMovieCredit) {
-        directorValueLabel.text = movieCredit.director?.name ?? "Unknown"
-    }
-    
-    func configureForAccountState(accountState: TMDbAccountState) {
-        favouriteButton.setAsSelected(accountState.favoriteStatus)
-        watchListButton.setAsSelected(accountState.watchlistStatus)
-    }
-    
-    private func setImage(image: UIImage?, url: NSURL?) {
+        
         if let image = image {
             headerImageView.image = image
-        } else if let url = url {
+        } else if let path = movie.backDropPath, url = TMDbImageRouter.BackDropMedium(path: path).url {
             headerImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
         }
+    }
+    
+    func configureWithCredit(credit: TMDbMovieCredit) {
+        directorValueLabel.text = credit.director?.name ?? "Unknown"
+    }
+    
+    func configureForAccountState(state: TMDbAccountState) {
+        favouriteButton.setAsSelected(state.favoriteStatus)
+        watchListButton.setAsSelected(state.watchlistStatus)
     }
     
     // MARK: Actions
@@ -215,31 +233,28 @@ class DetailView: BackgroundView {
     }
     
     // MARK: Animation
-
-    func prepareForAnimation() { // Naming??
-        headerImageView.alpha = 0.2
-        topConstraint.constant += bounds.height / 4
-        layoutIfNeeded()
+    
+    func prepareForOnScreenAnimation() {
+        if detailScrollView.contentOffset.y == -Constants.HeaderHeight {
+            headerImageView.alpha = 0.5
+            topConstraint.constant += bounds.height / 4
+            layoutIfNeeded()
+        }
+        
     }
     
-    func startAnimation() { // Naming??
-        
-        UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: { 
-            self.topConstraint.constant -= self.bounds.height
+    func animateOnScreen() {
+        if detailScrollView.contentOffset.y == -Constants.HeaderHeight {
+            UIView.animateWithDuration(0.4, delay: 0.0, options: [.CurveEaseInOut], animations: {
+                self.topConstraint.constant -= self.bounds.height / 4
+                self.layoutIfNeeded()
+                }, completion: nil)
             
-            self.topConstraint.constant -= self.bounds.height / 4
-            self.layoutIfNeeded()
-            self.headerImageView.alpha = 1.0
-            }, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
-        
-        
-//        UIView.animateWithDuration(0.5, delay: 0, options: [.CurveEaseInOut], animations: { // Bouncines spring
-//            
-//            }, completion: nil)
-        
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.CurveEaseInOut], animations: {
-           
-            }, completion: nil)
+            UIView.animateWithDuration(0.8, delay: 0.3, options: [.CurveEaseInOut], animations: {
+                self.headerImageView.alpha = 1.0
+                }, completion: nil)
+            
+        }
         
     }
 

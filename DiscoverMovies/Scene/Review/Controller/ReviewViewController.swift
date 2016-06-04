@@ -15,7 +15,6 @@ class ReviewViewController: ListViewController {
     
     private struct Constants {
         static let ReviewCellIdentifier = "ReviewCell"
-        static let ReviewCellNibName = "ReviewTableViewCell"
         static let DefaultRowHeight: CGFloat = 200
     }
     
@@ -47,11 +46,9 @@ class ReviewViewController: ListViewController {
         super.viewDidLoad()
         reviewDataProvider.cellIdentifier = Constants.ReviewCellIdentifier
         
+        let reviewCellNib = UINib(nibName: ReviewTableViewCell.defaultIdentifier(), bundle: nil)
+        tableView.registerNib(reviewCellNib, forCellReuseIdentifier: Constants.ReviewCellIdentifier)
         tableView.dataSource = reviewDataProvider
-        
-        let reviewNIB = UINib(nibName: Constants.ReviewCellNibName, bundle: nil)
-        tableView.registerNib(reviewNIB, forCellReuseIdentifier: Constants.ReviewCellIdentifier)
-        
         tableView.estimatedRowHeight = Constants.DefaultRowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
     }

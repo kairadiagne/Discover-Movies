@@ -1,5 +1,5 @@
 //
-//  UIImage+Placeholder.swift
+//  UIImage+Defaults.swift
 //  Discover
 //
 //  Created by Kaira Diagne on 10-03-16.
@@ -16,6 +16,14 @@ extension UIImage {
     
     static func placeholderProfileImage() -> UIImage {
         return UIImage(named: "ProfileImagePlaceholder") ?? UIImage()
+    }
+    
+    static func playIcon() -> UIImage {
+        return UIImage(named: "play") ?? UIImage()
+    }
+    
+    static func menuIcon() -> UIImage {
+        return UIImage(named: "Menu") ?? UIImage()
     }
     
 }

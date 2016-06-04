@@ -15,20 +15,16 @@ class DetailViewController: BaseViewController {
     
     private struct Constants {
         static let MovieCellIdentifier = "MovieCell"
-        static let MovieCellNibName = "MovieCollectionViewCell"
         static let PersonCellIdentifier = "PersonCell"
-        static let PersonCellNibName = "PersonCollectionViewCell"
     }
     
     // MARK: Properties
     
-    var detailView: DetailView { return view as! DetailView }
-    
+    @IBOutlet var detailView: DetailView!
+
     let movie: TMDbMovie
     
     var image: UIImage?
-    
-    var imageURL: NSURL?
     
     private let movieInfoManager = TMDbMovieInfoManager()
     
@@ -38,15 +34,12 @@ class DetailViewController: BaseViewController {
     
     private var movieInfoListener: TMDbDataManagerListener<TMDbMovieInfoManager>!
 
-    // MARK: - Initializers
+    // MARK: Initializers
     
-    required init(movie: TMDbMovie, image: UIImage? = nil, imageURL url: NSURL? = nil) {
+    required init(movie: TMDbMovie, image: UIImage? = nil) {
         self.movie = movie
         self.image = image
-        self.imageURL = url
-        
         super.init(nibName: "DetailViewController", bundle: nil)
-        
         self.movieInfoListener = TMDbDataManagerListener(delegate: self, manager: movieInfoManager)
     }
     
@@ -59,37 +52,29 @@ class DetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
-       
+        
+        detailView.registerCollectionViewCells(Constants.PersonCellIdentifier, movieIdentifier: Constants.MovieCellIdentifier)
+        detailView.registerCollectionViewDataSources(castDataProvider, similarMoviesSource: similarMoviesDataProvider)
         castDataProvider.cellIdentifier = Constants.PersonCellIdentifier
-        detailView.castCollectionView.dataSource = castDataProvider
-        
         similarMoviesDataProvider.cellIdentifier = Constants.MovieCellIdentifier
-        detailView.similarMoviesCollectionView.dataSource = similarMoviesDataProvider
-        detailView.similarMoviesCollectionView.delegate = self
+        detailView.registerCollectionViewDelegate(self)
         
-        let movieCellNib = UINib(nibName: Constants.MovieCellNibName, bundle: nil)
-        let personCellNib = UINib(nibName: Constants.PersonCellNibName, bundle: nil)
-        detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: Constants.PersonCellIdentifier)
-        detailView.similarMoviesCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: Constants.MovieCellIdentifier)
-    
-        detailView.delegate = self
-        detailView.configureForMovie(movie, image: image)
+        detailView.configure(movie, image: image)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.navigationBar.setAsTransparent()
         
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
         
-        detailView.prepareForAnimation()
+        detailView.prepareForOnScreenAnimation()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        detailView.startAnimation()
+        detailView.animateOnScreen()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -134,15 +119,15 @@ class DetailViewController: BaseViewController {
         
         if let accountState = movieInfoManager.accountState {
             detailView.configureForAccountState(accountState)
+            detailView.reloadCollectionViews()
         }
         
         if let movieCredit = movieInfoManager.movieCredit {
             castDataProvider.updateWithMovieCredit(movieCredit)
-            detailView.configureWithMovieCredit(movieCredit)
-        } else {
-           // Show "Unknown message" in director label
-           // Show message in
+            detailView.configureWithCredit(movieCredit)
+            detailView.reloadCollectionViews()
         }
+        
     }
     
     override func dataManagerDidReceiveErrorNotification(error: NSError?) {
@@ -170,7 +155,7 @@ class DetailViewController: BaseViewController {
 
 }
 
-// MARK: UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate
 
 extension DetailViewController: UICollectionViewDelegate {
     
@@ -183,7 +168,7 @@ extension DetailViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: DetailViewDelegate
+// MARK: - DetailViewDelegate
 
 extension DetailViewController: DetailHeaderViewDelegate {
     

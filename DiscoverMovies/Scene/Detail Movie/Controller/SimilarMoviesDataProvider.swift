@@ -17,12 +17,9 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
     
     private var movies = [TMDbMovie]()
     
-    private var collectionView: UICollectionView?
-    
     // MARK: - UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        self.collectionView = collectionView
         return movies.count
     }
     
@@ -37,7 +34,6 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
     
     func updateWithMovies(movies: [TMDbMovie]) {
         self.movies = movies
-        collectionView?.reloadData()
     }
     
     func movieAtIndex(index: Int) -> TMDbMovie?{

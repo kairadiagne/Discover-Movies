@@ -24,7 +24,7 @@ extension MenuButtonPresentable where Self: UIViewController {
         view.addGestureRecognizer(revealViewController.panGestureRecognizer())
         
         let menuButton = UIBarButtonItem()
-        menuButton.image = UIImage(named: "Menu")
+        menuButton.image = UIImage.menuIcon()
         menuButton.target = revealViewController
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         navigationItem.leftBarButtonItem = menuButton

@@ -18,16 +18,7 @@ protocol TMDbDataManager: class {
 
 public class TMDbTopListManager: TMDbDataManager {
     
-    // Classes that confom to NSCoding can be serialized and deserialized into data that can be either be achived to diskor distributed across a network.
-    // Of course serialization is only one part of the story. Determining where this data will persist is another question.
-    // There are two approachs: writing to the local file system and using NSUserdefaults.
-    
-    // NSkeyedArchiver and NSkeyedUnArchiver provide a convenient API to read / write objects directly to / from disk.
-    // We  can set its collection property from the file manager:
-    // NSKeyedArchiver.archiveRootObject(books, toFile: "/path/to/archive")
-    // NSKeyedUnarchiver.unarchiveObjectWithFile("/path/to/archive") as? [Book] else { return nil }
-    
-    // Public properties
+    // MARK: Properties
     
     public var movies: [TMDbMovie] {
         guard let currentList = currentList else { return [] }
@@ -46,8 +37,6 @@ public class TMDbTopListManager: TMDbDataManager {
     }
     
     public var inProgress: Bool = false
-    
-    // Private properties
     
     private let movieClient = TMDbMovieClient()
     
@@ -136,7 +125,7 @@ public class TMDbTopListManager: TMDbDataManager {
         }
     }
     
-    // MARK: - Handle Response
+    // MARK: Response Handling
     
     private func updateList(list: TMDbList<TMDbMovie>, withData data: TMDbList<TMDbMovie>) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
@@ -172,7 +161,17 @@ public class TMDbTopListManager: TMDbDataManager {
     
 }
 
-    
+// Classes that confom to NSCoding can be serialized and deserialized into data that can be either be achived to diskor distributed across a network.
+// Of course serialization is only one part of the story. Determining where this data will persist is another question.
+// There are two approachs: writing to the local file system and using NSUserdefaults.
+
+// NSkeyedArchiver and NSkeyedUnArchiver provide a convenient API to read / write objects directly to / from disk.
+// We  can set its collection property from the file manager:
+// NSKeyedArchiver.archiveRootObject(books, toFile: "/path/to/archive")
+// NSKeyedUnarchiver.unarchiveObjectWithFile("/path/to/archive") as? [Book] else { return nil }
+
+
+
 
 
 

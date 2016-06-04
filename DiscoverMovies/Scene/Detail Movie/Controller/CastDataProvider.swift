@@ -21,12 +21,9 @@ class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDe
     
     private var movieCredit: TMDbMovieCredit?
     
-    private var collectionView: UICollectionView?
-    
     // MARK: UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.collectionView = collectionView
         return movieCredit?.cast.count ?? 0
     }
     
@@ -37,11 +34,10 @@ class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     
-    // MARk: Update
+    // MARK: Update
     
     func updateWithMovieCredit(credit: TMDbMovieCredit) {
         movieCredit = credit
-        collectionView?.reloadData()
     }
     
 }

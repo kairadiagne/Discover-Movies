@@ -27,8 +27,11 @@ class MenuViewController: UITableViewController, TMDbDataManagerListenerDelegate
     @IBOutlet weak var menuTableview: MenuTableView!
     
     private let userManager = TMDbUserManager()
+    
     private let signInmanager = TMDbSignInManager()
+    
     private let sessionManager = TMDbSessionManager()
+    
     private var userListener: TMDbDataManagerListener<TMDbUserManager>!
     
     private var signedIn: Bool {
@@ -79,9 +82,11 @@ class MenuViewController: UITableViewController, TMDbDataManagerListenerDelegate
     }
     
     func showWatchListViewController() {
+        
     }
     
     func showFavoritesViewControlelr() {
+        
     }
     
     func toggleSignIn() {

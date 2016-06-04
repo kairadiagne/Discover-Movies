@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import TMDbMovieKit
+import SDWebImage
 
 class DiscoverListViewController: ListViewController, MenuButtonPresentable {
     
-    // MARK:  Constants
+    // MARK: Constants
     
     private struct Constants {
         static let DiscoverCellNibName = "DiscoverListCell"
@@ -26,6 +28,7 @@ class DiscoverListViewController: ListViewController, MenuButtonPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addMenuButton()
         
         tableViewDataProvider.cellIdentifier = Constants.DiscoverCellIdentifier
@@ -36,5 +39,12 @@ class DiscoverListViewController: ListViewController, MenuButtonPresentable {
         tableView.rowHeight = Constants.DiscoverCellRowHeight
     }
     
+    // MARK: Navigation
+    
+    func showDetailViewControllerForMovie(movie: TMDbMovie) { 
+        let image = SDWebImageManager.sharedManager().getImageFromCache(movie)
+        let detailViewController = DetailViewController(movie: movie, image: image)
+        navigationController?.pushViewController(detailViewController, animated: false)
+    }
     
 }

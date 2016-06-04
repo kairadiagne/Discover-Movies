@@ -11,8 +11,11 @@ import TMDbMovieKit
 import SDWebImage
 
 class PersonCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: Properties
 
     @IBOutlet weak var profileImageView: UIImageView!
+    
     @IBOutlet weak var nameLabel: UILabel!
     
     // MARK: Initializers

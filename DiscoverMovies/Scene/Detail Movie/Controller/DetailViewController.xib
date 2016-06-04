@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="DiscoverMovies" customModuleProvider="target">
             <connections>
+                <outlet property="detailView" destination="i5M-Pr-FkT" id="1PJ-nD-xCY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="zEO-28-X4i"/>
             </connections>
         </placeholder>
@@ -105,18 +106,6 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="CuR-z8-gm7">
-                                    <rect key="frame" x="20" y="289" width="560" height="160"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="160" id="0yI-3h-YIe"/>
-                                    </constraints>
-                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="xKo-yW-dnc">
-                                        <size key="itemSize" width="107" height="160"/>
-                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </collectionViewFlowLayout>
-                                </collectionView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ygV-VC-yWL" customClass="WatchListButton" customModule="DiscoverMovies" customModuleProvider="target">
                                     <rect key="frame" x="555" y="20" width="25" height="25"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -149,6 +138,18 @@
                                         <action selector="reviewsButtonGotTapped:" destination="-1" eventType="touchUpInside" id="89E-aC-Ycm"/>
                                     </connections>
                                 </button>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="CuR-z8-gm7">
+                                    <rect key="frame" x="20" y="289" width="560" height="160"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="160" id="0yI-3h-YIe"/>
+                                    </constraints>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="xKo-yW-dnc">
+                                        <size key="itemSize" width="107" height="160"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="1ZJ-Hj-JOc" firstAttribute="leading" secondItem="4Sk-Zl-6au" secondAttribute="leading" constant="20" symbolic="YES" id="0m5-de-jpF"/>

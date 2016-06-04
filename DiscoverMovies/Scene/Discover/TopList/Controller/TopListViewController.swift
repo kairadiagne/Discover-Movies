@@ -81,14 +81,6 @@ class TopListViewController: DiscoverListViewController {
             topListDataManager.loadMore()
         }
     }
-
-    // MARK: Navigation
-    
-    private func showDetailViewControllerForMovie(movie: TMDbMovie) { // Should be in a subclass ??
-        let (image, url) = SDWebImageManager.sharedManager().getImageFromCache(movie)
-        let detailViewController = DetailViewController(movie: movie, image: image, imageURL: url)
-        navigationController?.pushViewController(detailViewController, animated: false)
-    }
     
 }
 

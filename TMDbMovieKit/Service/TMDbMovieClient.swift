@@ -22,8 +22,6 @@ public enum TMDbToplist: String {
 }
 
 class TMDbMovieClient: TMDbAPIClient {
-    
-    // MARK: - Fetching
 
     // Fetches themoviedb toplist (Popular, Toprated, Upcoming, Now playing)
     

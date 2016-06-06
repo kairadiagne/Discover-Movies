@@ -8,14 +8,15 @@
 
 import Foundation
 
-public class TMDbMovieInfoManager { // Conform to Data Manager
+public class TMDbMovieInfoManager: TMDbDataManager {
     
-    private let movieClient = TMDbMovieClient()
+    // MARK: Properties
+    
+    public var inProgress = false
     
     public var similarMovies: [TMDbMovie]? {
         return movieInfo?.similarMovies?.items
     }
-    
     public var accountState: TMDbAccountState?
     
     public var movieCredit: TMDbMovieCredit? {
@@ -28,7 +29,9 @@ public class TMDbMovieInfoManager { // Conform to Data Manager
     
     private var movieInfo: TMDbMovieInfo?
     
-    // MARK: - Initialization
+    private let movieClient = TMDbMovieClient()
+    
+    // MARK: - Initializers
     
     public init() { }
     
@@ -36,16 +39,20 @@ public class TMDbMovieInfoManager { // Conform to Data Manager
     
     public func loadInfoAboutMovieWithID(movieID: Int) {
         movieClient.fetchAdditionalInfoMovie(movieID) { (response) in
-            
             guard response.error == nil else {
                 self.postErrorNotification(response.error!)
                 return
             }
             
-            if  let movieInfo = response.value {
-                self.movieInfo = movieInfo
-                self.postUpdateNotification()
-            }
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { 
+                if  let movieInfo = response.value {
+                    self.movieInfo = movieInfo
+                    
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        self.postUpdateNotification()
+                    })
+                }
+            })
         }
     }
     
@@ -57,10 +64,15 @@ public class TMDbMovieInfoManager { // Conform to Data Manager
                 return
             }
             
-            if let accountState = response.value {
-                self.accountState = accountState
-                self.postUpdateNotification()
-            }
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+                if let accountState = response.state {
+                    self.accountState = accountState
+                    
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        self.postUpdateNotification()
+                    })
+                }
+            })
         }
     }
     
@@ -86,18 +98,6 @@ public class TMDbMovieInfoManager { // Conform to Data Manager
             
             self.postUpdateNotification()
         }
-    }
-    
-    // MARK: - Notifications
-    
-    func postUpdateNotification() {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(TMDbDataManagerNotification.DataDidUpdate.name, object: self)
-    }
-    
-    func postErrorNotification(error: NSError) {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
     }
 
 }

@@ -17,9 +17,13 @@ public enum TMDBSigInStatus {
 
 public class TMDbSessionManager {
     
-    public init() { }
+    // MARK: Properties
     
     let sessionInfoStore = TMDbSessionInfoStore()
+    
+    // MARK: Initializers
+    
+    public init() { }
     
     // MARK: - API Key
     

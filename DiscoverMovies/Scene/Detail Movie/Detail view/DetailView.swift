@@ -70,8 +70,6 @@ class DetailView: BackgroundView {
     
     var playButton = UIButton()
     
-    var fillView = UIView()
-    
     weak var delegate: DetailHeaderViewDelegate?
    
     // MARK: Awake From Nib
@@ -136,20 +134,9 @@ class DetailView: BackgroundView {
     private func setUpPlayButton() {
         self.playButton.translatesAutoresizingMaskIntoConstraints = false
         self.playButton.setImage(UIImage.playIcon(), forState: .Normal)
-        self.playButton.tintColor = UIColor.backgroundColor()
         let playSelector = #selector(DetailView.detailButtonPressed)
         self.playButton.addTarget(self, action: playSelector, forControlEvents: .TouchUpInside)
-        
-        self.fillView.translatesAutoresizingMaskIntoConstraints = false
-        self.fillView.backgroundColor = UIColor.whiteColor()
-        
-        self.detailScrollView.addSubview(self.fillView)
         self.detailScrollView.addSubview(self.playButton)
-            
-        self.fillView.centerXAnchor.constraintEqualToAnchor(self.headerImageView.centerXAnchor).active = true
-        self.fillView.centerYAnchor.constraintEqualToAnchor(self.headerImageView.centerYAnchor).active = true
-        self.fillView.heightAnchor.constraintEqualToConstant(Constants.FillViewSize.height).active = true
-        self.fillView.widthAnchor.constraintEqualToConstant(Constants.FillViewSize.width).active = true
             
         self.playButton.centerXAnchor.constraintEqualToAnchor(self.headerImageView.centerXAnchor).active = true
         self.playButton.centerYAnchor.constraintEqualToAnchor(self.headerImageView.centerYAnchor).active = true
@@ -236,8 +223,9 @@ class DetailView: BackgroundView {
     
     func prepareForOnScreenAnimation() {
         if detailScrollView.contentOffset.y == -Constants.HeaderHeight {
-            headerImageView.alpha = 0.5
-            topConstraint.constant += bounds.height / 4
+            headerImageView.alpha = 0.25
+            playButton.alpha = 0
+            topConstraint.constant += bounds.height / 2.5
             layoutIfNeeded()
         }
         
@@ -245,17 +233,21 @@ class DetailView: BackgroundView {
     
     func animateOnScreen() {
         if detailScrollView.contentOffset.y == -Constants.HeaderHeight {
-            UIView.animateWithDuration(0.4, delay: 0.0, options: [.CurveEaseInOut], animations: {
-                self.topConstraint.constant -= self.bounds.height / 4
+            
+            UIView.animateWithDuration(0.75, delay: 0.0, options: [.CurveEaseInOut], animations: {
+                self.topConstraint.constant -= self.bounds.height / 2.5
                 self.layoutIfNeeded()
                 }, completion: nil)
             
-            UIView.animateWithDuration(0.8, delay: 0.3, options: [.CurveEaseInOut], animations: {
+            UIView.animateWithDuration(0.5, delay: 0.3, options: [.CurveEaseInOut], animations: {
                 self.headerImageView.alpha = 1.0
                 }, completion: nil)
             
+            UIView.animateWithDuration(0.65, delay: 0.8, options: [.CurveEaseInOut], animations: {
+                self.playButton.alpha = 1.0
+                }, completion: nil)
+            
         }
-        
     }
 
 }

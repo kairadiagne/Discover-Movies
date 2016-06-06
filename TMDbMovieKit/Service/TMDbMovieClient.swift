@@ -69,10 +69,9 @@ class TMDbMovieClient: TMDbAPIClient {
     
     // Fetches the favorites list or the watchlist
     
-    func fetchAccountList(list: TMDbAccountList, page: Int, completionHandler: (Result<TMDbList<TMDbMovie>, NSError>) -> Void) {
+    func fetchAccountList(list: TMDbAccountList, page: Int, completionHandler: (list: TMDbList<TMDbMovie>?, error: NSError?) -> Void) {
         guard let sessionID = sessionID , userID = userID else {
-            // Return error
-            return
+            return completionHandler(list: nil, error: authorizationError)
         }
         
         let parameters: [String: AnyObject] = ["page": page, "session_id": sessionID]
@@ -81,16 +80,15 @@ class TMDbMovieClient: TMDbAPIClient {
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbList<TMDbMovie>, NSError>) in
-                completionHandler(response.result)
+                completionHandler(list: response.result.value, error: nil)
         }
     }
     
     // Checks wether the movie is in the watchlsit and/or favorite list
     
-    func accountStateForMovie(movieID: Int, completionHandler: Result<TMDbAccountState, NSError> -> Void) {
+    func accountStateForMovie(movieID: Int, completionHandler: (state: TMDbAccountState?, error: NSError?) -> Void) {
         guard let sessionID = sessionID else {
-            // Return error 
-            return
+            return completionHandler(state: nil, error: authorizationError)
         }
         
         let parameters: [String: AnyObject] = ["session_id": sessionID]
@@ -99,7 +97,7 @@ class TMDbMovieClient: TMDbAPIClient {
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbAccountState, NSError>) in
-                completionHandler(response.result)
+                completionHandler(state: response.result.value, error: nil)
         }
     }
     
@@ -107,8 +105,7 @@ class TMDbMovieClient: TMDbAPIClient {
     
     func changeStateForMovie(movieID: Int, inList: String, toState state: Bool, completionHandler: (error: NSError?) -> Void) {
         guard let sessionID = sessionID, userID = userID else {
-            // Return error
-            return
+            return completionHandler(error: authorizationError)
         }
     
         let parameters: [String: AnyObject] = ["session_id": sessionID]

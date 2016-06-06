@@ -1,9 +1,9 @@
 //
 //  VideoViewController.swift
-//  
+//  DiscoverMovies
 //
 //  Created by Kaira Diagne on 12/05/16.
-//
+//  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
 import UIKit
@@ -81,13 +81,7 @@ extension VideoViewController: YTPlayerViewDelegate {
     
     func playerView(playerView: YTPlayerView, receivedError error: YTPlayerError) {
         print(error)
-        // Handle the different errors that can occur: 
-        // YTPayerError
-        // - KYTPlayerErrorInvalidParam
-        // - KYTPlayerErrorHTML5Error
-        // - KYTPlayerErrorVideoNotFound
-        // - KYTPlayerErrorNotEmbeddable
-        // - KYTPlayerErrorUnknown
+        // Communicate to the user that an error has occured.
     }
     
 }

@@ -59,7 +59,10 @@ class DetailViewController: BaseViewController {
         similarMoviesDataProvider.cellIdentifier = Constants.MovieCellIdentifier
         detailView.registerCollectionViewDelegate(self)
         
+        detailView.delegate = self
+        
         detailView.configure(movie, image: image)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -68,13 +71,12 @@ class DetailViewController: BaseViewController {
         
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
-        
-        detailView.prepareForOnScreenAnimation()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        detailView.animateOnScreen()
+        detailView.prepareForOnScreenAnimation()
+        detailView.animateOnScreen() // Animate only the first time the screen is loaded 
     }
     
     override func viewWillDisappear(animated: Bool) {

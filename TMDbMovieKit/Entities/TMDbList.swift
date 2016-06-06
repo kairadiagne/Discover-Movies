@@ -1,5 +1,5 @@
 //
-//  TMDbListHolder.swift
+//  TMDbList.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 09/05/16.

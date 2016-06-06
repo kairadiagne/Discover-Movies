@@ -9,7 +9,9 @@
 import Foundation
 import Alamofire
 
-public class TMDbReviewManager {
+public class TMDbReviewManager: TMDbDataManager {
+    
+    public var inProgress = true
     
     public var reviews: [TMDbReview] {
         return reviewList.items
@@ -66,26 +68,6 @@ public class TMDbReviewManager {
                 }
             }
         }
-    }
-    
-    // MARK: - Notifications
-    
-    private func postUpdateNotification() {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbDataManagerNotification.DataDidUpdate.name, object: self)
-    }
-    
-    let center = NSNotificationCenter.defaultCenter()
-    
-    
-    private func postChangeNotification() {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbDataManagerNotification.DataDidChange.name, object: self)
-    }
-    
-    private func postErrorNotification(error: NSError) {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
     }
     
 }

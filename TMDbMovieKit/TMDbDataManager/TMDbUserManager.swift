@@ -8,11 +8,17 @@
 
 import Foundation
 
-public class TMDbUserManager {
+public class TMDbUserManager: TMDbDataManager {
+    
+    // MARK: Properties
+    
+    public var inProgress = false
     
     public var user: TMDbUser? {
         return sessionInfoStore.user
     }
+    
+    // MARK: - Initializers
     
     public init() { }
     
@@ -23,31 +29,27 @@ public class TMDbUserManager {
     // MARK: - Fetching
     
     public func loadUserInfo() {
+        inProgress = true
+        
         userClient.fetchUserInfo { (user, error) in
+            self.inProgress = false
+            
             guard error == nil else {
                 self.postErrorNotification(error!)
                 return
             }
             
-            if let user = user {
-                self.sessionInfoStore.persistUserInStore(user)
-                self.postUpdateNotification()
-            }
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+                if let user = user {
+                    self.sessionInfoStore.persistUserInStore(user)
+                    
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        self.postUpdateNotification()
+                    })
+                    
+                }
+            })
+            
         }
     }
-    
-    // MARK: - Notifications
-    
-    private func postUpdateNotification() {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbDataManagerNotification.DataDidUpdate.name, object: self)
-    }
-    
-    private func postErrorNotification(error: NSError) {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
-    }
-    
-    
-    
 }

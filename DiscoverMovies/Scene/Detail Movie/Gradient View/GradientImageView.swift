@@ -35,13 +35,13 @@ class GradientImageView: UIImageView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // Override default animation of properties layer.
-        CATransaction.begin()
-        // Actions triggered as a result of property changes made within this transaction group are supressed.
-        CATransaction.setDisableActions(true)
-        self.gradientLayer.frame = self.bounds
-        // Commit all changes made during the current transaction
-        CATransaction.commit()
+//        // Override default animation of properties layer.
+//        CATransaction.begin()
+//        // Actions triggered as a result of property changes made within this transaction group are supressed.
+//        CATransaction.setDisableActions(true)
+//        self.gradientLayer.frame = self.bounds
+//        // Commit all changes made during the current transaction
+//        CATransaction.commit()
     }
     
 }

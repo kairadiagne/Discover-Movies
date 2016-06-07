@@ -8,15 +8,9 @@
 
 import UIKit
 
-enum Status {
-    case Selected
-    case NotSelected
-}
-
-@IBDesignable
 class AnimatedShapeButton: UIControl {
     
-    // MARK: Properties
+    // MARK: Types
     
     struct Constants {
         static let FillAnimationKey = "fillAnimation"
@@ -25,28 +19,7 @@ class AnimatedShapeButton: UIControl {
         static let UnfillAnimationkey = "UnfillAnimation"
     }
     
-    @IBInspectable var lineColor = UIColor.blueColor() {
-        didSet {
-            shapeLayer.strokeColor = lineColor.CGColor
-            fillLayer.strokeColor = lineColor.CGColor
-        }
-    }
-    
-    @IBInspectable var fillColor = UIColor.blueColor() {
-        didSet {
-            fillLayer.fillColor = lineColor.CGColor
-        }
-    }
-    
-    private(set) var status: Status = .NotSelected {
-        didSet {
-            if status == .Selected {
-                changeFillAnimated(true, duration: 0.25, key: Constants.FillAnimationKey)
-            } else {
-                changeFillAnimated(false, duration: 0.25, key: Constants.UnfillAnimationkey)
-            }
-        }
-    }
+    // MARK: Properties
     
     var shapeLayer = CAShapeLayer()
     
@@ -54,16 +27,29 @@ class AnimatedShapeButton: UIControl {
     
     var maskLayer = CAShapeLayer()
     
+    var lineColor = UIColor.blueColor() {
+        didSet {
+            shapeLayer.strokeColor = lineColor.CGColor
+            fillLayer.strokeColor = lineColor.CGColor
+        }
+    }
+    
+    var fillColor = UIColor.blueColor() {
+        didSet {
+            fillLayer.fillColor = lineColor.CGColor
+        }
+    }
+
     // MARK: Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpButton()
+        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setUpButton()
+        commonInit()
     }
     
     convenience init(frame: CGRect, strokeColor: UIColor, fillColor: UIColor) {
@@ -72,53 +58,27 @@ class AnimatedShapeButton: UIControl {
         self.lineColor = strokeColor
     }
     
-    private func setUpButton() {
+    private func commonInit() {
         self.backgroundColor = UIColor.clearColor()
         self.setupLayers()
-    }
-    
-    // MARK: State
-    
-    func toggleState() {
-        switch status {
-        case .Selected:
-            status = .NotSelected
-        case .NotSelected:
-            status = .Selected
-        }
-    }
-    
-    func setAsSelected(selected: Bool) {
-        if selected && status != .Selected {
-            status = .Selected
-        } else if !selected && status != .NotSelected {
-            status = .NotSelected
-        }
     }
     
     // MARK: Drawing
     
     func setupLayers() { } // Required for subclass
     
-    // MARK: User Interaction
-    
-    // Called when a touch event enters the control’s bounds.
-    
+    // MARK: Touch events
+
     override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         return true
     }
-    
-    // Called when a touch event associated with the control is updated.
     
     override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         return true
     }
     
-    // Called when a touch event associated with the control ends.
-    
     override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
         super.endTrackingWithTouch(touch, withEvent: event)
-        toggleState()
         sendActionsForControlEvents(.ValueChanged)
     }
     

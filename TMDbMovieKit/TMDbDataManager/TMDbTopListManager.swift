@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TMDbTopListManager: TMDbDataManager { // Loading Data
+public class TMDbTopListManager: TMDbDataManager {
     
     // MARK: Properties
     
@@ -58,6 +58,12 @@ public class TMDbTopListManager: TMDbDataManager { // Loading Data
     
     private func fetchList(list: TMDbToplist, page: Int) {
         guard let currentList = currentList else { return }
+        
+        cache.loadDataFromCache(directoryForCurrentList(list)) { (data) in
+            if let list = data  {
+                print(list)
+            }
+        }
         
         inProgress = true
         

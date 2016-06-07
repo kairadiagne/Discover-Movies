@@ -16,22 +16,22 @@ enum Directory {
     case Favorites
     case Watchlist
     
-    var archiveURL: NSURL {
+    var filePath: NSURL {
         let cachesDirectory = NSFileManager().URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask).first!
         
         switch self {
         case .Popular:
             return cachesDirectory.URLByAppendingPathComponent("popular.dat")
         case .TopRated:
-            return cachesDirectory.URLByAppendingPathComponent("toprated.dat")
+            return cachesDirectory.URLByAppendingPathComponent("MovieListCache/toprated.dat")
         case .Upcoming:
-            return cachesDirectory.URLByAppendingPathComponent("upcoming.dat")
+            return cachesDirectory.URLByAppendingPathComponent("MovieListCache/upcoming.dat")
         case .NowPlaying:
-            return cachesDirectory.URLByAppendingPathComponent("nowplaying.dat")
+            return cachesDirectory.URLByAppendingPathComponent("MovieListCache/nowplaying.dat")
         case .Favorites:
-            return cachesDirectory.URLByAppendingPathComponent("favorites.dat")
+            return cachesDirectory.URLByAppendingPathComponent("MovieListCache/favorites.dat")
         case .Watchlist:
-            return cachesDirectory.URLByAppendingPathComponent("watchlist.dat")
+            return cachesDirectory.URLByAppendingPathComponent("MovieListCache/watchlist.dat")
         }
     }
     

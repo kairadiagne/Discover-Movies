@@ -21,22 +21,20 @@ class TMDbCache<T: NSCoding> {
             let data = NSKeyedArchiver.archivedDataWithRootObject(data)
             do {
                 // Atomic writes guarantee that the dat is either saved in its entirety, or it fails completely.
-                try data.writeToFile("directory.archiveURL.path!", options: .AtomicWrite )
+                try data.writeToFile(directory.filePath.path!, options: .AtomicWrite )
             }
             catch let error {
                 print("Save to disk operation failed: \(error)")
             }
         }
     }
-    
 
-    
     // MARK: Retrieve from Disk
     
     func loadDataFromCache(directory: Directory, completionHandler: (data: T?) -> Void) {
         var cachedData: T?
         dispatch_async(queue) {
-            if let data = NSKeyedUnarchiver.unarchiveObjectWithFile(directory.archiveURL.path!) as? T {
+            if let data = NSKeyedUnarchiver.unarchiveObjectWithFile(directory.filePath.path!) as? T {
                 cachedData = data
             }
         }

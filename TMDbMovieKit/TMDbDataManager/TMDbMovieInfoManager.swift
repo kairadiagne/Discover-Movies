@@ -76,27 +76,15 @@ public class TMDbMovieInfoManager: TMDbDataManager {
         }
     }
     
-    public func addMovieToList(movieID: Int, list: TMDbAccountList) {
-        movieClient.changeStateForMovie(movieID, inList: list.rawValue, toState: true) { (error) in
-            
+    public func toggleStateOfMovieInList(state: Bool, movieID: Int, list: TMDbAccountList) {
+        movieClient.changeStateForMovie(movieID, inList: list.rawValue, toState: state) { (error) in
             guard error == nil else {
                 self.postErrorNotification(error!)
                 return
             }
             
             self.postUpdateNotification()
-        }
-    }
-    
-    public func removeMovieFromList(movieID: Int, list: TMDbAccountList) {
-        movieClient.changeStateForMovie(movieID, inList: list.rawValue, toState: false) { (error) in
             
-            guard error == nil else {
-                self.postErrorNotification(error!)
-                return
-            }
-            
-            self.postUpdateNotification()
         }
     }
 

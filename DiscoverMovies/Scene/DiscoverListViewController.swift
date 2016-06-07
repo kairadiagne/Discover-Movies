@@ -44,7 +44,7 @@ class DiscoverListViewController: ListViewController, MenuButtonPresentable {
     func showDetailViewControllerForMovie(movie: TMDbMovie) { 
         let image = SDWebImageManager.sharedManager().getImageFromCache(movie)
         let detailViewController = DetailViewController(movie: movie, image: image)
-        navigationController?.pushViewController(detailViewController, animated: false)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
 }

@@ -62,6 +62,7 @@ class DetailViewController: BaseViewController {
         detailView.delegate = self
         
         detailView.configure(movie, image: image)
+        print("DidLoad: \(view.bounds)")
         
     }
     
@@ -71,12 +72,16 @@ class DetailViewController: BaseViewController {
         
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
+        
+        detailView.prepareForOnScreenAnimation()
+        print("WillAppear: \(view.bounds)")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        detailView.prepareForOnScreenAnimation()
+        
         detailView.animateOnScreen() // Animate only the first time the screen is loaded 
+        print("DidAppear: \(view.bounds)")
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -87,21 +92,11 @@ class DetailViewController: BaseViewController {
     // MARK: Actions
     
     @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
-        switch sender.status {
-        case .Selected:
-            movieInfoManager.addMovieToList(movie.movieID, list: TMDbAccountList.Favorites)
-        case .NotSelected:
-            movieInfoManager.removeMovieFromList(movie.movieID, list: TMDbAccountList.Favorites)
-        }
+       movieInfoManager.toggleStateOfMovieInList(sender.selected, movieID: movie.movieID, list: .Favorites)
     }
     
     @IBAction func watchListDidGetTapped(sender: WatchListButton) {
-        switch sender.status {
-        case .Selected:
-            movieInfoManager.addMovieToList(movie.movieID, list: TMDbAccountList.Watchlist)
-        case .NotSelected:
-            movieInfoManager.removeMovieFromList(movie.movieID, list: TMDbAccountList.Watchlist)
-        }
+       movieInfoManager.toggleStateOfMovieInList(sender.selected, movieID: movie.movieID, list: .Watchlist)
     }
 
     @IBAction func reviewsButtonGotTapped(sender: UIButton) {

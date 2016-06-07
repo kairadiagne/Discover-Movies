@@ -102,7 +102,6 @@
 		EADA5A771CE8AE9700C2FAE8 /* CastDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A761CE8AE9700C2FAE8 /* CastDataProvider.swift */; };
 		EADA5A7A1CE8B44600C2FAE8 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A781CE8B44600C2FAE8 /* MovieCollectionViewCell.swift */; };
 		EADA5A7B1CE8B44600C2FAE8 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADA5A791CE8B44600C2FAE8 /* MovieCollectionViewCell.xib */; };
-		EADA5A7F1CE8D00B00C2FAE8 /* DetailFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A7E1CE8D00B00C2FAE8 /* DetailFlowLayout.swift */; };
 		EADA5A811CE9AA2200C2FAE8 /* ReviewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A801CE9AA2200C2FAE8 /* ReviewDataProvider.swift */; };
 		EADA5A961CEA309800C2FAE8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A941CEA309800C2FAE8 /* MenuViewController.swift */; };
 		EADA5A9D1CEA3C8400C2FAE8 /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADA5A9C1CEA3C8400C2FAE8 /* MenuTableView.swift */; };
@@ -265,7 +264,6 @@
 		EADA5A761CE8AE9700C2FAE8 /* CastDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastDataProvider.swift; sourceTree = "<group>"; };
 		EADA5A781CE8B44600C2FAE8 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		EADA5A791CE8B44600C2FAE8 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
-		EADA5A7E1CE8D00B00C2FAE8 /* DetailFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailFlowLayout.swift; sourceTree = "<group>"; };
 		EADA5A801CE9AA2200C2FAE8 /* ReviewDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewDataProvider.swift; sourceTree = "<group>"; };
 		EADA5A941CEA309800C2FAE8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		EADA5A9C1CEA3C8400C2FAE8 /* MenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
@@ -755,7 +753,6 @@
 				EA6487C91CE5134000452DD0 /* Controller */,
 				EADA5A741CE8AE2400C2FAE8 /* DetailView */,
 				EADA5A751CE8AE3100C2FAE8 /* GradientImageView */,
-				EADA5A8A1CEA0D2A00C2FAE8 /* ColletionView */,
 				EADA5A731CE8ADFF00C2FAE8 /* CollectionViewCell */,
 				EADA5A8B1CEA0D3E00C2FAE8 /* Buttons */,
 			);
@@ -834,15 +831,6 @@
 			);
 			name = GradientImageView;
 			path = "Gradient View";
-			sourceTree = "<group>";
-		};
-		EADA5A8A1CEA0D2A00C2FAE8 /* ColletionView */ = {
-			isa = PBXGroup;
-			children = (
-				EADA5A7E1CE8D00B00C2FAE8 /* DetailFlowLayout.swift */,
-			);
-			name = ColletionView;
-			path = "Collection View";
 			sourceTree = "<group>";
 		};
 		EADA5A8B1CEA0D3E00C2FAE8 /* Buttons */ = {
@@ -1154,7 +1142,6 @@
 				EAA8620F1CEE582800C76D4D /* AnimatedShapeButton.swift in Sources */,
 				EA6487A81CE3CBCA00452DD0 /* SearchViewController.swift in Sources */,
 				111942B31CCB8DE5001CF39B /* BackgroundView.swift in Sources */,
-				EADA5A7F1CE8D00B00C2FAE8 /* DetailFlowLayout.swift in Sources */,
 				EA6487D71CE51BF800452DD0 /* InternetErrorHandleable.swift in Sources */,
 				EADA5A7A1CE8B44600C2FAE8 /* MovieCollectionViewCell.swift in Sources */,
 				EA6487E61CE5B50D00452DD0 /* BaseViewController.swift in Sources */,

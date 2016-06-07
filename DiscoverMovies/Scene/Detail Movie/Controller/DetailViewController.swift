@@ -59,8 +59,6 @@ class DetailViewController: BaseViewController {
         similarMoviesDataProvider.cellIdentifier = Constants.MovieCellIdentifier
         detailView.registerCollectionViewDelegate(self)
         
-        detailView.delegate = self
-        
         detailView.configure(movie, image: image)
         print("DidLoad: \(view.bounds)")
         
@@ -73,14 +71,16 @@ class DetailViewController: BaseViewController {
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
         
-        detailView.prepareForOnScreenAnimation()
         print("WillAppear: \(view.bounds)")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        detailView.animateOnScreen() // Animate only the first time the screen is loaded 
+        detailView.animateOnScreen()
+        
+        
+        
         print("DidAppear: \(view.bounds)")
     }
     
@@ -101,6 +101,10 @@ class DetailViewController: BaseViewController {
 
     @IBAction func reviewsButtonGotTapped(sender: UIButton) {
         showReviews(movie)
+    }
+    
+    @IBAction func playButtonGotTapped(sender: UIButton) {
+        showTrailer()
     }
     
     // MARK: Notifications
@@ -157,21 +161,10 @@ class DetailViewController: BaseViewController {
 extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if collectionView == detailView.similarMoviesCollectionView{
-            if let movie = similarMoviesDataProvider.movieAtIndex(indexPath.row) {
-                showDetailSimilarMovie(movie)
-            }
-        }
+        guard let movie = similarMoviesDataProvider.movieAtIndex(indexPath.row) else { return }
+        showDetailSimilarMovie(movie)
     }
-}
-
-// MARK: - DetailViewDelegate
-
-extension DetailViewController: DetailHeaderViewDelegate {
     
-    func detailHeaderViewDelegateDidTapPlayButton() {
-        showTrailer()
-    }
 }
 
 

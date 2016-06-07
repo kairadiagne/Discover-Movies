@@ -38,6 +38,7 @@ class Theme {
         UIScrollView.appearance().backgroundColor = UIColor.backgroundColor()
         BackgroundView.appearance().backgroundColor = UIColor.backgroundColor()
         YTPlayerView.appearance().backgroundColor = UIColor.backgroundColor()
+        UIStackView.appearance().backgroundColor = UIColor.backgroundColor()
     }
     
     class func styleTabBar() {

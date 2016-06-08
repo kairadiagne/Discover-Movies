@@ -10,11 +10,17 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-// Can we choose a different navigation controler delegate
-// Use navigation controller delegate to see when the animation of showing the view controller has ended
-// When push view controller is not animated updateconstraints and layoutsubviews are being caled after or in viewdidAppear
+protocol DetailViewDelegate: class {
+    func detailViewDelegateDidTapTrailerButton()
+}
 
-class DetailView: BackgroundView {
+class DetailView: BackgroundView, UIScrollViewDelegate {
+    
+    // MARK: - Types 
+    
+    private struct Constants {
+        static let ImageHeaderHeight: CGFloat = 290
+    }
     
     // MARK: Properties
     
@@ -52,21 +58,27 @@ class DetailView: BackgroundView {
     
     @IBOutlet weak var readReviewsButton: UIButton!
     
-    @IBOutlet weak var imageHeader: GradientImageView!
-    
     @IBOutlet weak var favouriteControl: FavouriteButton!
     
     @IBOutlet weak var watchListControl: WatchListButton!
     
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var topImageHeaderConstraint: NSLayoutConstraint!
-   
+    @IBOutlet weak var animatedConstraint: NSLayoutConstraint!
+    
+    var imageHeader: GradientImageView!
+    
+    var playButton: UIButton!
+    
+    weak var delegate: DetailViewDelegate?
+    
+    var didAnimate = false
+
     // MARK: Awake From Nib
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Fonts Labels
+        
         self.titleLabel.font = UIFont.H1()
         self.overviewLabel.font = UIFont.Body()
         self.directorLabel.font = UIFont.H2()
@@ -80,46 +92,74 @@ class DetailView: BackgroundView {
         self.castLabel.font = UIFont.H2()
         self.similarLabel.font = UIFont.H2()
         
-        // Color of buttons 
         self.favouriteControl.lineColor = UIColor.buttonColor()
         self.favouriteControl.fillColor = UIColor.buttonColor()
         self.watchListControl.lineColor = UIColor.buttonColor()
         self.watchListControl.fillColor = UIColor.buttonColor()
-        
+    
         self.readReviewsButton.tintColor = UIColor.buttonColor()
         self.readReviewsButton.layer.borderWidth = 1.5
         self.readReviewsButton.layer.borderColor = UIColor.buttonColor().CGColor
         
-        // Scrollview 
+        let colors = [UIColor.backgroundColor().CGColor, UIColor.clearColor().CGColor]
+        let startPoint = CGPoint(x: 0, y: 1)
+        let endPoint = CGPoint(x: 0, y: 0.1)
+        
+        self.imageHeader = GradientImageView(colors: colors, startPoint: startPoint, endPoint: endPoint, frame: .zero)
+        self.imageHeader.contentMode = .ScaleAspectFill
+        self.detailScrollView.addSubview(self.imageHeader)
+        
+        self.playButton = UIButton()
+        self.playButton.setImage(UIImage.playIcon(), forState: .Normal)
+        let selector = #selector(DetailView.playButtonTapped(_:))
+        self.playButton.addTarget(delegate, action: selector, forControlEvents: .TouchUpInside)
+        self.detailScrollView.addSubview(self.playButton)
+
+        self.playButton.translatesAutoresizingMaskIntoConstraints = false
+        self.playButton.centerXAnchor.constraintEqualToAnchor(self.imageHeader.centerXAnchor).active = true
+        self.playButton.centerYAnchor.constraintEqualToAnchor(self.imageHeader.centerYAnchor).active = true
+        self.playButton.widthAnchor.constraintEqualToAnchor(self.contentView.widthAnchor, multiplier: 0.13).active = true
+        self.playButton.heightAnchor.constraintEqualToAnchor(self.contentView.widthAnchor, multiplier: 0.13).active = true
+        
+        self.detailScrollView.contentInset = UIEdgeInsets(top: Constants.ImageHeaderHeight, left: 0, bottom: 0, right: 0)
+        self.detailScrollView.contentOffset = CGPoint(x: 0, y: -Constants.ImageHeaderHeight)
         self.detailScrollView.delegate = self
         
-        // Prepare for animation 
-        self.imageHeader.alpha = 0.2
+        self.imageHeader.alpha = 0.3
         self.playButton.alpha = 0.0
     }
     
-    // MARK: Life Cycle
-    
+    // MARK: Life Cyle
+
     override func layoutSubviews() {
         super.layoutSubviews()
+        updateHeaderImageFrame()
+    }
+
+    // MARK: UIScrollViewDelegate
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        updateHeaderImageFrame()
     }
     
-    override func updateConstraints() {
-        super.updateConstraints()
+    // MARK: HeaderImageView
+    
+    private func updateHeaderImageFrame() {
+        var imageHeaderFrame = CGRect(x: 0, y: -Constants.ImageHeaderHeight, width: detailScrollView.bounds.width, height: Constants.ImageHeaderHeight)
+
+        if detailScrollView.contentOffset.y < -Constants.ImageHeaderHeight {
+            imageHeaderFrame.origin.y = detailScrollView.contentOffset.y
+            imageHeaderFrame.size.height = -detailScrollView.contentOffset.y
+        }
+        
+        imageHeader.frame = imageHeaderFrame
     }
     
     // MARK: UICollectionView
     
-    func registerCollectionViewCells(castIdentifier: String, movieIdentifier: String) {
-        let movieCellNib = UINib(nibName: MovieCollectionViewCell.defaultIdentiier(), bundle: nil)
-        let personCellNib = UINib(nibName: PersonCollectionViewCell.defaultIdentiier(), bundle: nil)
-        castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: castIdentifier)
-        similarMovieCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: movieIdentifier)
-    }
-    
-    func registerCollectionViewDataSources(castSource: UICollectionViewDataSource, similarMoviesSource: UICollectionViewDataSource) {
-        castCollectionView.dataSource = castSource
-        similarMovieCollectionView.dataSource = similarMoviesSource
+    func registerDataSources(cast: UICollectionViewDataSource ,similar: UICollectionViewDataSource) {
+        castCollectionView.dataSource = cast
+        similarMovieCollectionView.dataSource = similar
     }
     
     func registerCollectionViewDelegate(delegate: UICollectionViewDelegate) {
@@ -131,13 +171,11 @@ class DetailView: BackgroundView {
         similarMovieCollectionView.reloadData()
     }
     
-    // MARK: Configure
-    
     func configure(movie: TMDbMovie, image: UIImage? = nil) {
         titleLabel.text = movie.title
         overviewLabel.text = movie.overview ?? "N/A"
         genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
-        ratingValueLabel.text = "\(movie.rating!)\\10.0" // Round
+        ratingValueLabel.text = "\(movie.rating!)\\10.0"
         releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
         
         if let image = image {
@@ -152,33 +190,37 @@ class DetailView: BackgroundView {
     }
     
     func configureForAccountState(state: TMDbAccountState) {
-        favouriteControl.selected = state.favoriteStatus
-        watchListControl.selected = state.watchlistStatus
+        favouriteControl.setSelectedState(state.favoriteStatus)
+        watchListControl.setSelectedState(state.watchlistStatus)
+    }
+    
+    // MARK: Actions
+    
+    func playButtonTapped(button: UIButton) {
+        delegate?.detailViewDelegateDidTapTrailerButton()
     }
     
     // MARK: Animation
     
-    private var didAnimate = false
-    
     func animateOnScreen() {
-        // Lookup how to animate constraints on apple developers website.
-        UIView.animateWithDuration(0.5, delay: 0.0, options: [.CurveEaseInOut], animations: { 
-            self.imageHeader.alpha = 1.0
-            }, completion: nil)
-        
-        UIView.animateWithDuration(0.5, delay: 0.0, options: [.CurveEaseInOut], animations: {
-            self.playButton.alpha = 1.0
-        }, completion: nil)
+        if !didAnimate {
+            didAnimate = true
+            // Ensure that all pending layout operations have been completed
+            self.layoutIfNeeded()
+            
+            UIView.animateWithDuration(0.5, delay: 0.0, options: [.CurveEaseInOut], animations: {
+                self.topConstraint.priority = 750
+                self.animatedConstraint.priority = 250
+                self.layoutIfNeeded()
+                }, completion: nil)
+            
+            UIView.animateWithDuration(0.5, delay: 0.3, options: [.CurveEaseInOut], animations: {
+                self.imageHeader.alpha = 1.0
+                }, completion: nil)
+            
+            UIView.animateWithDuration(0.2, delay: 0.6, options: [.CurveEaseInOut], animations: {
+                self.playButton.alpha = 1.0
+                }, completion: nil)
+        }
     }
-
-}
-
-// MARK: UIScrollViewDelegate
-
-extension DetailView: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        // Do some kind of calculation for size of header view and stretchy parelax scrolling effetc.
-    }
-
 }

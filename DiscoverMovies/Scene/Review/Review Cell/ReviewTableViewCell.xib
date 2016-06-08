@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,26 +13,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="372" height="138"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A movie review by ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-1g-ur1">
-                        <rect key="frame" x="20" y="20" width="157" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyF-ch-T8J">
-                        <rect key="frame" x="20" y="49" width="62" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="a3v-ea-mcd">
+                        <rect key="frame" x="20" y="20" width="332" height="98"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="A movie review by ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-1g-ur1">
+                                <rect key="frame" x="0.0" y="0.0" width="157" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Content" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyF-ch-T8J">
+                                <rect key="frame" x="0.0" y="29" width="62" height="69"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="9JL-1g-ur1" firstAttribute="leading" secondItem="6I0-s8-iFB" secondAttribute="leading" constant="20" symbolic="YES" id="8Aw-uo-1ec"/>
-                    <constraint firstItem="LyF-ch-T8J" firstAttribute="top" secondItem="9JL-1g-ur1" secondAttribute="bottom" constant="8" symbolic="YES" id="RNx-XW-ay7"/>
-                    <constraint firstItem="LyF-ch-T8J" firstAttribute="leading" secondItem="6I0-s8-iFB" secondAttribute="leading" constant="20" symbolic="YES" id="VPx-vq-0GG"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="LyF-ch-T8J" secondAttribute="bottom" constant="49" id="dji-ZI-R0F"/>
-                    <constraint firstItem="9JL-1g-ur1" firstAttribute="top" secondItem="6I0-s8-iFB" secondAttribute="top" constant="20" symbolic="YES" id="oFJ-u2-iB7"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LyF-ch-T8J" secondAttribute="trailing" constant="20" symbolic="YES" id="y5w-t0-yXG"/>
+                    <constraint firstAttribute="trailing" secondItem="a3v-ea-mcd" secondAttribute="trailing" constant="20" symbolic="YES" id="512-YL-mzs"/>
+                    <constraint firstItem="a3v-ea-mcd" firstAttribute="leading" secondItem="6I0-s8-iFB" secondAttribute="leading" constant="20" symbolic="YES" id="Eq5-jm-LxS"/>
+                    <constraint firstItem="a3v-ea-mcd" firstAttribute="top" secondItem="6I0-s8-iFB" secondAttribute="top" constant="20" symbolic="YES" id="VdF-Gw-9gA"/>
+                    <constraint firstAttribute="bottom" secondItem="a3v-ea-mcd" secondAttribute="bottom" constant="20" symbolic="YES" id="aSJ-Tf-3l0"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

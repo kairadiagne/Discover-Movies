@@ -53,15 +53,20 @@ class DetailViewController: BaseViewController {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
         
-        detailView.registerCollectionViewCells(Constants.PersonCellIdentifier, movieIdentifier: Constants.MovieCellIdentifier)
-        detailView.registerCollectionViewDataSources(castDataProvider, similarMoviesSource: similarMoviesDataProvider)
         castDataProvider.cellIdentifier = Constants.PersonCellIdentifier
         similarMoviesDataProvider.cellIdentifier = Constants.MovieCellIdentifier
+        
+        detailView.registerDataSources(castDataProvider, similar: similarMoviesDataProvider)
         detailView.registerCollectionViewDelegate(self)
         
-        detailView.configure(movie, image: image)
-        print("DidLoad: \(view.bounds)")
+        let movieCellNib = UINib(nibName: MovieCollectionViewCell.defaultIdentfier(), bundle: nil)
+        let personCellNib = UINib(nibName: PersonCollectionViewCell.defaultIdentfier(), bundle: nil)
+        detailView.similarMovieCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: Constants.MovieCellIdentifier)
+        detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: Constants.PersonCellIdentifier)
         
+        detailView.delegate = self
+        
+        detailView.configure(movie, image: image)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -70,18 +75,11 @@ class DetailViewController: BaseViewController {
         
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
-        
-        print("WillAppear: \(view.bounds)")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         detailView.animateOnScreen()
-        
-        
-        
-        print("DidAppear: \(view.bounds)")
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -101,10 +99,6 @@ class DetailViewController: BaseViewController {
 
     @IBAction func reviewsButtonGotTapped(sender: UIButton) {
         showReviews(movie)
-    }
-    
-    @IBAction func playButtonGotTapped(sender: UIButton) {
-        showTrailer()
     }
     
     // MARK: Notifications
@@ -167,5 +161,12 @@ extension DetailViewController: UICollectionViewDelegate {
     
 }
 
+// MARK: - DetailViewDelegate
 
+extension DetailViewController: DetailViewDelegate {
+    
+    func detailViewDelegateDidTapTrailerButton() {
+        showTrailer()
+    }
 
+}

@@ -19,7 +19,7 @@ extension UIImage {
     }
     
     static func playIcon() -> UIImage {
-        return UIImage(named: "play") ?? UIImage()
+        return UIImage(named: "Play") ?? UIImage()
     }
     
     static func menuIcon() -> UIImage {

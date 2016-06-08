@@ -39,7 +39,7 @@ class AnimatedShapeButton: UIControl {
             fillLayer.fillColor = lineColor.CGColor
         }
     }
-
+    
     // MARK: Initializers
     
     override init(frame: CGRect) {
@@ -79,11 +79,26 @@ class AnimatedShapeButton: UIControl {
     
     override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
         super.endTrackingWithTouch(touch, withEvent: event)
+        setSelectedState(!selected)
         sendActionsForControlEvents(.ValueChanged)
     }
     
-    // MARK: Animation
+    // MARK: Change State
+
+    func setSelectedState(shouldBeSelected: Bool) {
+        guard self.selected != shouldBeSelected else { return }
+        
+        if shouldBeSelected {
+            changeFillAnimated(true, duration: 0.3, key: Constants.FillAnimationKey)
+        } else if !shouldBeSelected {
+            changeFillAnimated(false, duration: 0.3, key: Constants.UnfillAnimationkey)
+        }
+        
+        self.selected = !self.selected
+    }
     
+    // MARK: Animation
+
     func changeFillAnimated(fill: Bool, duration: Double, key: String) {
         let unfilledRect = CGRect(x: bounds.width / 2, y: bounds.height / 2, width: 0, height: 0)
         let filledRect = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.width)

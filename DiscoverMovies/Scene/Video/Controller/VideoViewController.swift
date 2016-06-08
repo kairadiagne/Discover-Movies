@@ -25,7 +25,6 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
   
     required init(video: TMDbVideo) {
         super.init(nibName: nil, bundle: nil)
-        
         self.video = video
         
         self.youtubeView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,14 +39,14 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.addSubview(youtubeView)
-        
-        setupProgressHUD()
-        
         youtubeView.leadingAnchor.constraintEqualToAnchor(self.view.leadingAnchor, constant: 0).active = true
         youtubeView.topAnchor.constraintEqualToAnchor(self.view.topAnchor, constant: 0).active = true
         youtubeView.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: 0).active = true
         youtubeView.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor, constant: 0).active = true
+        
+        setupProgressHUD()
         
         youtubeView.loadWithVideoId(video.source)
     }

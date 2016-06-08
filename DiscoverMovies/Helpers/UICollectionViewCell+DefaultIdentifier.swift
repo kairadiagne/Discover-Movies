@@ -10,7 +10,7 @@ import UIKit
 
 extension UICollectionViewCell {
     
-    public class func defaultIdentiier() -> String {
+    public class func defaultIdentfier() -> String {
         return String(self)
     }
 }

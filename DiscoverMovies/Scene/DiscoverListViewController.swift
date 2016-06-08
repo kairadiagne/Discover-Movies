@@ -28,7 +28,6 @@ class DiscoverListViewController: ListViewController, MenuButtonPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addMenuButton()
         
         tableViewDataProvider.cellIdentifier = Constants.DiscoverCellIdentifier
@@ -44,8 +43,7 @@ class DiscoverListViewController: ListViewController, MenuButtonPresentable {
     func showDetailViewControllerForMovie(movie: TMDbMovie) { 
         let image = SDWebImageManager.sharedManager().getImageFromCache(movie)
         let detailViewController = DetailViewController(movie: movie, image: image)
-        navigationController?.pushViewController(detailViewController, animated: true)
-        
+        navigationController?.pushViewController(detailViewController, animated: false)
     }
     
 }

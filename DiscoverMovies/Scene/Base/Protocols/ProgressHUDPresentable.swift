@@ -24,6 +24,7 @@ extension ProgressHUDPresentable where Self: UIViewController {
     
     func setupProgressHUD() {
         progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
+        progressHUD?.userInteractionEnabled = false 
         view.addSubview(progressHUD!)
     }
     

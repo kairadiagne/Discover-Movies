@@ -13,7 +13,7 @@ import UIKit
 @objc protocol PullToRefreshable {
     var dateFormatter: NSDateFormatter { get }
     var refreshControl: UIRefreshControl { get }
-     func refresh(sender: UIRefreshControl)
+    func refresh(sender: UIRefreshControl)
     func stopRefreshing()
 }
 

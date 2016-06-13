@@ -36,10 +36,10 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
     required init?(_ map: Map) { }
     
     func mapping(map: Map) {
-        self.page           <- map[Keys.Page]
-        self.pageCount      <- map[Keys.PageCount]
-        self.resultCount    <- map[Keys.ResultCount]
-        self.items          <- map[Keys.Items]
+        self.page         <- map[Keys.Page]
+        self.pageCount    <- map[Keys.PageCount]
+        self.resultCount  <- map[Keys.ResultCount]
+        self.items        <- map[Keys.Items]
     }
     
     // MARK: - Update with new items 

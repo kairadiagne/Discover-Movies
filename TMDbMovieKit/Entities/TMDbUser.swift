@@ -29,10 +29,10 @@ public class TMDbUser: NSObject, Mappable, NSCoding {
     }
     
     public func mapping(map: Map) {
-        self.userID         <- map[Keys.UserID]
-        self.name           <- map[Keys.Name]
-        self.userName       <- map[Keys.Username]
-        self.profilePath    <- map[Keys.ProfilePath]
+        self.userID       <- map[Keys.UserID]
+        self.name         <- map[Keys.Name]
+        self.userName     <- map[Keys.Username]
+        self.profilePath  <- map[Keys.ProfilePath]
     }
     
     // MARK: - NSCoding

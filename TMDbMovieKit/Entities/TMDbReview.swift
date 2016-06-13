@@ -28,10 +28,10 @@ public class TMDbReview: NSObject, Mappable, NSCoding {
     }
     
     public func mapping(map: Map) {
-        self.reviewID   <- map[Keys.ReviewID]
-        self.author     <- map[Keys.Author]
-        self.content    <- map[Keys.Content]
-        self.path       <- map[Keys.URL]
+        self.reviewID  <- map[Keys.ReviewID]
+        self.author    <- map[Keys.Author]
+        self.content   <- map[Keys.Content]
+        self.path      <- map[Keys.URL]
     }
     
     // MARK: NSCoding

@@ -17,8 +17,8 @@ class TMDbRequestToken: NSObject, Mappable {
     required init?(_ map: Map) { }
     
     func mapping(map: Map) {
-        self.token              <- map["request_token"]
-        self.expirationDate     <- (map["expires_at"], DateTransform())
+        self.token           <- map["request_token"]
+        self.expirationDate  <- (map["expires_at"], DateTransform())
     }
 
 }

@@ -7,8 +7,4 @@
 //
 
 import Foundation
-//
-//public class TMDbAccountListManager: TMDbDataManager {
-//    
-//    
-//}
+/

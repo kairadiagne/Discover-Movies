@@ -33,12 +33,12 @@ public class TMDbCrewMember: NSObject, Mappable {
     }
     
     public func mapping(map: Map) {
-        self.creditID       <- map[Keys.CreditID]
-        self.name           <- map[Keys.Name]
-        self.personID       <- map[Keys.PersonID]
-        self.department     <- map[Keys.Department]
-        self.job            <- map[Keys.Job]
-        self.profilePath    <- map[Keys.ProfilePath]
+        self.creditID     <- map[Keys.CreditID]
+        self.name         <- map[Keys.Name]
+        self.personID     <- map[Keys.PersonID]
+        self.department   <- map[Keys.Department]
+        self.job          <- map[Keys.Job]
+        self.profilePath  <- map[Keys.ProfilePath]
     }
     
     // MARK Equality

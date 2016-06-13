@@ -36,7 +36,7 @@ public class TMDbTopListManager: TMDbDataManager {
     
     // MARK: Initializers
     
-    public init () { }
+    public init() { }
     
     // MARK: Fetching
     

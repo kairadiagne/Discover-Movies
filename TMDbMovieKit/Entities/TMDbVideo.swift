@@ -28,10 +28,10 @@ public class TMDbVideo: NSObject, Mappable {
     }
     
     public func mapping(map: Map) {
-        self.source        <- map[Keys.Source]
-        self.name       <- map[Keys.Name]
-        self.size       <- map[Keys.Size]
-        self.type       <- map[Keys.VideoType]
+        self.source   <- map[Keys.Source]
+        self.name     <- map[Keys.Name]
+        self.size     <- map[Keys.Size]
+        self.type     <- map[Keys.VideoType]
     }
     
 }

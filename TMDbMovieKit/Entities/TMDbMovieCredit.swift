@@ -29,8 +29,8 @@ public class TMDbMovieCredit: NSObject, Mappable {
     public required init?(_ map: Map) { }
     
     public func mapping(map: Map) {
-        self.cast       <- map[Keys.Cast]
-        self.crew       <- map[Keys.Crew]
+        self.cast  <- map[Keys.Cast]
+        self.crew  <- map[Keys.Crew]
         
         // Grab the director from the crew array
         self.director = crew.filter { return $0.job == Keys.Director }.first ?? nil

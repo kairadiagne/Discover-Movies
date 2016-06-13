@@ -37,13 +37,13 @@ public class TMDbCastMember: NSObject, Mappable {
     }
     
     public func mapping(map: Map) {
-        self.creditID       <- map[Keys.CreditID]
-        self.personID       <- map[Keys.PersonID]
-        self.castID         <- map[Keys.CastID]
-        self.name           <- map[Keys.Name]
-        self.character      <- map[Keys.Character]
-        self.order          <- map[Keys.Order]
-        self.profilePath    <- map[Keys.Profile_path]
+        self.creditID     <- map[Keys.CreditID]
+        self.personID     <- map[Keys.PersonID]
+        self.castID       <- map[Keys.CastID]
+        self.name         <- map[Keys.Name]
+        self.character    <- map[Keys.Character]
+        self.order        <- map[Keys.Order]
+        self.profilePath  <- map[Keys.Profile_path]
     }
     
     // MARK: Equality

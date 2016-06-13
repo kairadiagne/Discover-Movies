@@ -22,8 +22,8 @@ public class TMDbAccountState: NSObject, Mappable {
     public required init?(_ map: Map) { }
     
     public func mapping(map: Map) {
-        self.favoriteStatus     <- map[Keys.Favorite]
-        self.watchlistStatus    <- map[Keys.Watchlist]
+        self.favoriteStatus   <- map[Keys.Favorite]
+        self.watchlistStatus  <- map[Keys.Watchlist]
     }
     
 }

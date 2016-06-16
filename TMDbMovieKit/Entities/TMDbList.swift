@@ -18,7 +18,7 @@ private struct Keys {
     static let TimeStamp = "timestamp"
 }
 
-class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding {
+class TMDbList<Item: Mappable>: NSObject, Mappable {
     
     var page: Int = 0
     var pageCount: Int = 0
@@ -30,7 +30,7 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
     }
     
     override init() {
-        super.init()    
+        super.init()
     }
     
     required init?(_ map: Map) { }
@@ -54,20 +54,6 @@ class TMDbList<Item: protocol<Mappable, NSCoding>>: NSObject, Mappable, NSCoding
         } else {
             self.items = data.items
         }
-    }
-    
-    // MARK: NSCoding
-    
-    required init?(coder aDecoder: NSCoder) {
-         // TODO: - Implement
-    }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(page, forKey: Keys.Page)
-        aCoder.encodeObject(pageCount, forKey: Keys.PageCount)
-        aCoder.encodeObject(nextPage, forKey: Keys.NextPage)
-        aCoder.encodeObject(resultCount, forKey: Keys.ResultCount)
-        aCoder.encodeObject(items, forKey: Keys.Items)
     }
     
 }

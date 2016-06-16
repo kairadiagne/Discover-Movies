@@ -65,3 +65,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// TODO: 
+// - Authorization Error Check: Account list Controller, DetailController
+// - SearchView SearchViewController, SearchListViewController
+// - Background Messages when no data (detail view controller collection views, accountListController, ReviewController
+// - Error Messages (No trailer, No Reviews, Not authorized)
+// - Localization
+// - Pull to refresh (Account list controller)
+// - Clear Keychain on first lauch
+// - UserInfoStore Multihreading keyed archiver ??
+// - Order files in subfolders and sycnhronize with finder
+// - Sign in screen: (Remove sign up button, inform user that sign up can be done when clicking on sign in and then in the webview on sign up)
+
+

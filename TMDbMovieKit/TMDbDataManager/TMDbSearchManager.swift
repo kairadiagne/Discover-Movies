@@ -9,12 +9,12 @@
 import Foundation
 import Alamofire
 
-enum TMDbSearchType {
+public enum TMDbSearchType {
     case Discover(year: String, genre: Int, rating: Float)
     case SearchByTitle(title: String)
 }
 
-public class TMDbSearchManager: TMDbDataManager {
+public class TMDbSearchManager: TMDbBaseDataManager {
     
     public var inProgress = false
     
@@ -28,11 +28,7 @@ public class TMDbSearchManager: TMDbDataManager {
     
     private let movieClient = TMDbMovieClient()
     
-    // MARK: Initializers
-    
-    public init() { }
-    
-    // MARK: Fetching
+    // MARK: API Calls 
     
     public func discover(year: String, genre: TMDbGenre, rating: Float) {
         currentSearch = .Discover(year: year, genre: genre.rawValue, rating: rating)
@@ -43,6 +39,7 @@ public class TMDbSearchManager: TMDbDataManager {
     }
     
     public func loadMore() {
+        guard !isLoading else { return }
         guard let currentSearch = currentSearch else { return }
         guard let nextPage = searchResults.nextPage else { return }
         
@@ -55,43 +52,32 @@ public class TMDbSearchManager: TMDbDataManager {
     }
     
     private func fetchMoviesWithTitle(title: String, page: Int) {
-        inProgress = true
+        isLoading = true
         
-        movieClient.movieWithTitle(title, page: page) { (response) in
-            self.handleResponse(response)
+        movieClient.movieWithTitle(title, page: page) { (list, error) in
+            self.handleResponse(list: list, error: error)
         }
     }
     
     private func discoverMoviesBy(year: String, genre: Int, rating: Float, page: Int) {
-        inProgress = true
+        isLoading = true
         
-        movieClient.discover(year, genre: genre, vote: rating, page: page) { (response) in
-            self.handleResponse(response)
+        movieClient.discover(year, genre: genre, vote: rating, page: page) { (list, error) in
+            self.handleResponse(list: list, error: error)
         }
         
     }
     
     // MARK: Response
     
-    private func handleResponse(response: Result<TMDbList<TMDbMovie>, NSError>) {
-        guard response.error == nil else {
-            self.postErrorNotification(response.error!)
+    private func handleResponse(list list: TMDbList<TMDbMovie>?, error: NSError?) {
+        guard error == nil else {
+            self.postErrorNotification(error!)
             return
         }
         
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            if let results = response.value {
-               self.searchResults.update(results)
-                
-            
-                dispatch_async(dispatch_get_main_queue(), { 
-                    if results.page == 1 {
-                        self.postUpdateNotification()
-                    } else if results.page < 1 {
-                        self.postChangeNotification()
-                    }
-                })
-            }
+        if let results = list{
+            self.updateList(self.searchResults, withData: results)
         }
         
     }

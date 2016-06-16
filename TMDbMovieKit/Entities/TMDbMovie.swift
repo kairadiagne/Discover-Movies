@@ -22,7 +22,7 @@ private struct Keys {
     static let BackdropPath = "backdrop_path"
 }
 
-public class TMDbMovie: NSObject, Mappable, NSCoding {
+public class TMDbMovie: NSObject, Mappable {
     
     public var movieID: Int = 0
     public var title: String = ""
@@ -43,53 +43,15 @@ public class TMDbMovie: NSObject, Mappable, NSCoding {
         self.movieID           <- map[Keys.MovieID]
         self.title             <- map[Keys.Title]
         self.overview          <- map[Keys.Overview]
-        var dateString: String = ""
-        dateString             <- map[Keys.ReleaseDate]
-        self.releaseDate        = dateString.toDate()
         self.genres            <- map[Keys.Genre]
         self.rating            <- map[Keys.VoteAverage]
         self.adult             <- map[Keys.Adult]
         self.posterPath        <- map[Keys.PosterPath]
         self.backDropPath      <- map[Keys.BackdropPath]
         
-        
-    }
-    
-    // MARK: NSCoding
-    
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(movieID, forKey: Keys.MovieID)
-        aCoder.encodeObject(title, forKey: Keys.Title)
-        aCoder.encodeObject(overview, forKey: Keys.Overview)
-        aCoder.encodeObject(releaseDate, forKey: Keys.ReleaseDate)
-        aCoder.encodeObject(rating, forKey: Keys.VoteAverage)
-        aCoder.encodeObject(adult, forKey: Keys.Adult)
-        aCoder.encodeObject(posterPath, forKey: Keys.PosterPath)
-        aCoder.encodeObject(backDropPath, forKey: Keys.BackdropPath)
-        
-        // Convert array of TMDbGenre to array of rawvalues
-        let genreIDs = genres.map { return $0.rawValue }
-        aCoder.encodeObject(genreIDs, forKey: Keys.Genre)
-        
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        guard let movieID = aDecoder.decodeObjectForKey(Keys.MovieID) as? Int else { return nil }
-        guard let title = aDecoder.decodeObjectForKey(Keys.Title) as? String else { return nil }
-        
-        self.movieID = movieID
-        self.title = title
-        self.overview = aDecoder.decodeObjectForKey(Keys.Overview) as? String
-        self.releaseDate = aDecoder.decodeObjectForKey(Keys.ReleaseDate) as? NSDate
-        self.genres = aDecoder.decodeObjectForKey(Keys.Genre) as! [TMDbGenre]
-        self.rating = aDecoder.decodeDoubleForKey(Keys.Adult)
-        self.adult = aDecoder.decodeBoolForKey(Keys.PosterPath)
-        self.posterPath = aDecoder.decodeObjectForKey(Keys.PosterPath) as? String
-        self.backDropPath = aDecoder.decodeObjectForKey(Keys.BackdropPath) as? String
-        
-        // Retrieve genreIDs and convert them back to enum valus
-        let genreIDs = aDecoder.decodeObjectForKey(Keys.Genre) as! [Int]
-        self.genres = genreIDs.flatMap { return TMDbGenre(rawValue: $0) }
+        var dateString: String = ""
+        dateString             <- map[Keys.ReleaseDate]
+        self.releaseDate        = dateString.toDate()
     }
     
     // MARK: Equality

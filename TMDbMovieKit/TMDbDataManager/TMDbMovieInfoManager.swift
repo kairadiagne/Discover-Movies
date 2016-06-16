@@ -8,16 +8,13 @@
 
 import Foundation
 
-public class TMDbMovieInfoManager: TMDbDataManager {
+public class TMDbMovieInfoManager: TMDbBaseDataManager {
     
     // MARK: Properties
-    
-    public var inProgress = false
-    
+
     public var similarMovies: [TMDbMovie]? {
         return movieInfo?.similarMovies?.items
     }
-    public var accountState: TMDbAccountState?
     
     public var movieCredit: TMDbMovieCredit? {
         return movieInfo?.credits
@@ -27,15 +24,13 @@ public class TMDbMovieInfoManager: TMDbDataManager {
         return movieInfo?.trailers
     }
     
+    public var accountState: TMDbAccountState?
+    
     private var movieInfo: TMDbMovieInfo?
     
     private let movieClient = TMDbMovieClient()
     
-    // MARK: - Initializers
-    
-    public init() { }
-    
-    // MARK: - Fetching
+    // MARK: - API Calls
     
     public func loadInfoAboutMovieWithID(movieID: Int) {
         movieClient.fetchAdditionalInfoMovie(movieID) { (response) in
@@ -82,9 +77,6 @@ public class TMDbMovieInfoManager: TMDbDataManager {
                 self.postErrorNotification(error!)
                 return
             }
-            
-            self.postUpdateNotification()
-            
         }
     }
 

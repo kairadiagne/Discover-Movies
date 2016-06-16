@@ -8,19 +8,13 @@
 
 import Foundation
 
-public class TMDbUserManager: TMDbDataManager {
+public class TMDbUserManager: TMDbBaseDataManager {
     
     // MARK: Properties
-    
-    public var inProgress = false
     
     public var user: TMDbUser? {
         return sessionInfoStore.user
     }
-    
-    // MARK: - Initializers
-    
-    public init() { }
     
     private let userClient = TMDbUserClient()
     
@@ -29,10 +23,10 @@ public class TMDbUserManager: TMDbDataManager {
     // MARK: - Fetching
     
     public func loadUserInfo() {
-        inProgress = true
+        isLoading = true
         
         userClient.fetchUserInfo { (user, error) in
-            self.inProgress = false
+            self.isLoading = false
             
             guard error == nil else {
                 self.postErrorNotification(error!)

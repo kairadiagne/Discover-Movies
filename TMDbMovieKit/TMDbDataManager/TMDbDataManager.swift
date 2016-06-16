@@ -7,8 +7,7 @@
 //
 
 import Foundation
-
-// MARK: TMDbDataManagerNotification
+import ObjectMapper
 
 public enum TMDbDataManagerNotification {
     case DataDidUpdate
@@ -28,18 +27,17 @@ public enum TMDbDataManagerNotification {
     
 }
 
-// MARK: TMDbDataManager
-
-protocol TMDbDataManager: class {
-    var inProgress: Bool { get set }
-    func postUpdateNotification()
-    func postChangeNotification()
-    func postErrorNotification(error: NSError)
-}
-
-// MARK: - Default Implementation 
-
-extension TMDbDataManager { // Should not be exposed to outside of class 
+public class TMDbBaseDataManager {
+    
+    // MARK: Properties
+    
+    public var isLoading = false
+    
+    // MARK: Initializers
+    
+    public init() { }
+    
+    // MARK: Notifications
     
     func postUpdateNotification() {
         let center = NSNotificationCenter.defaultCenter()
@@ -56,5 +54,48 @@ extension TMDbDataManager { // Should not be exposed to outside of class
         center.postNotificationName(TMDbDataManagerNotification.DidReceiveError.name, object: self, userInfo: ["error": error])
     }
     
+    public func addChangeObserver(observer: AnyObject, selector aSelector: Selector) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(observer, selector: aSelector, name: TMDbDataManagerNotification.DataDidChange.name, object: self)
+    }
+    
+    public func addUpdateObserver(observer: AnyObject, selector aSelector: Selector) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(observer, selector: aSelector, name: TMDbDataManagerNotification.DataDidUpdate.name, object: self)
+    }
+    
+    public func addErrorObserver(observer: AnyObject, selector aSelector: Selector) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(observer, selector: aSelector, name: TMDbDataManagerNotification.DidReceiveError.name, object: self)
+    }
+    
+    public func removeObserver(observer: AnyObject) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(observer, name: TMDbDataManagerNotification.DataDidUpdate.name, object: self)
+        notificationCenter.removeObserver(observer, name: TMDbDataManagerNotification.DataDidChange.name, object: self)
+        notificationCenter.removeObserver(observer, name: TMDbDataManagerNotification.DidReceiveError.name, object: self)
+    }
+    
+    // MARK: Update List
+    
+    func updateList<T: Mappable>(list: TMDbList<T>, withData data: TMDbList<T>) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { 
+            list.update(data)
+            
+            dispatch_async(dispatch_get_main_queue(), { 
+                if list.page == 1 {
+                    self.postUpdateNotification()
+                } else if list.page > 1 {
+                    self.postChangeNotification()
+                }
+            })
+        }
+    }
+    
+   
+
 }
+
+
+
 

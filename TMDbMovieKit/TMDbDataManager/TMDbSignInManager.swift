@@ -30,7 +30,7 @@ public class TMDbSignInManager {
     
     // MARK: - Sign In
     
-    public func requestToken(redirectURI: String) {
+    public func requestToken() {
         isLoading = true
         
         signInClient.getRequestToken { (url, error) in

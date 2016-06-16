@@ -16,7 +16,7 @@ private struct Keys {
     static let URL = "url"
 }
 
-public class TMDbReview: NSObject, Mappable, NSCoding {
+public class TMDbReview: NSObject, Mappable {
     
     public var reviewID: Int = 0
     public var author: String?
@@ -33,25 +33,7 @@ public class TMDbReview: NSObject, Mappable, NSCoding {
         self.content   <- map[Keys.Content]
         self.path      <- map[Keys.URL]
     }
-    
-    // MARK: NSCoding
-    
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(reviewID, forKey: Keys.ReviewID)
-        aCoder.encodeObject(author, forKey: Keys.Author)
-        aCoder.encodeObject(content, forKey: Keys.Content)
-        aCoder.encodeObject(path, forKey: Keys.URL)
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        guard let reviewID = aDecoder.decodeObjectForKey(Keys.ReviewID) as? Int else { return nil }
-        
-        self.reviewID = reviewID
-        self.author = aDecoder.decodeObjectForKey(Keys.Author) as? String
-        self.content = aDecoder.decodeObjectForKey(Keys.Content) as? String
-        self.path = aDecoder.decodeObjectForKey(Keys.URL) as? String
-    }
-    
+
     // MARK: Equality
     
     override public func isEqual(object: AnyObject?) -> Bool {

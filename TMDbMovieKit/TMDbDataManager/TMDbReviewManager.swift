@@ -9,9 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TMDbReviewManager: TMDbDataManager {
-    
-    public var inProgress = true
+public class TMDbReviewManager: TMDbBaseDataManager {
     
     public var reviews: [TMDbReview] {
         return reviewList.items
@@ -19,53 +17,34 @@ public class TMDbReviewManager: TMDbDataManager {
 
     private let movieClient = TMDbMovieClient()
     
-    private var movieID: Int?
-    
     private var reviewList = TMDbList<TMDbReview>()
     
-    // MARK: - Initialization 
+    private var movieID: Int?
     
-    public init() { }
-    
-    // MARK: - Fetching 
+    // MARK: - API Calls
     
     public func loadReviews(movieID: Int) {
         self.movieID = movieID
+        isLoading = true
         fetchReviews(movieID, page: 1)
     }
     
     public func loadMore() {
+        guard !isLoading else { return }
         guard let movieID = movieID else { return }
         guard let nextPage = reviewList.nextPage else { return }
         fetchReviews(movieID, page: nextPage)
     }
     
     private func fetchReviews(movieID: Int, page: Int) {
-        movieClient.fetchReviews(movieID, page: page) { (response: Result<TMDbList<TMDbReview>, NSError>) in
-            
-            guard response.error == nil else {
-                self.postErrorNotification(response.error!)
+        movieClient.fetchReviews(movieID, page: page) { (list, error) in
+            guard error == nil else  {
+                self.postErrorNotification(error!)
                 return
             }
             
-            if let reviewList = response.value {
-                self.updateList(self.reviewList, withData: reviewList)
-            }
-        }
-    }
-    
-    // MARK: - Handle Response 
-    
-    private func updateList(list: TMDbList<TMDbReview>, withData data: TMDbList<TMDbReview>) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            list.update(data)
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                if list.page == 1 {
-                    self.postUpdateNotification()
-                } else if list.page > 1 {
-                    self.postChangeNotification()
-                }
+            if let result = list {
+                self.updateList(self.reviewList, withData: result)
             }
         }
     }

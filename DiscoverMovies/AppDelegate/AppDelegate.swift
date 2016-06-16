@@ -67,9 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // TODO: 
 // - Authorization Error Check: Account list Controller, DetailController
+// - Error Messages (No trailer, No Reviews, Not authorized)
 // - SearchView SearchViewController, SearchListViewController
 // - Background Messages when no data (detail view controller collection views, accountListController, ReviewController
-// - Error Messages (No trailer, No Reviews, Not authorized)
+
 // - Localization
 // - Pull to refresh (Account list controller)
 // - Clear Keychain on first lauch

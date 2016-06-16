@@ -88,6 +88,7 @@
 		EA870C4A1D11980C009C71D5 /* AccountListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C481D11980C009C71D5 /* AccountListTableViewCell.swift */; };
 		EA870C671D12CC98009C71D5 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA870C661D12CC98009C71D5 /* Menu.storyboard */; };
 		EA870C691D12CE5F009C71D5 /* AccountListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA870C681D12CE5F009C71D5 /* AccountListTableViewCell.xib */; };
+		EA870C6D1D12D68D009C71D5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA870C6F1D12D68D009C71D5 /* Localizable.strings */; };
 		EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */; };
 		EAA862081CEDDD7500C76D4D /* DiscoverListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA862071CEDDD7500C76D4D /* DiscoverListViewController.swift */; };
 		EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA8620C1CEE41C300C76D4D /* WatchListButton.swift */; };
@@ -250,6 +251,7 @@
 		EA870C481D11980C009C71D5 /* AccountListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListTableViewCell.swift; path = "DiscoverMovies/UserInterface/5. AccountList/AccountListTableViewCell/AccountListTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		EA870C661D12CC98009C71D5 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		EA870C681D12CE5F009C71D5 /* AccountListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountListTableViewCell.xib; sourceTree = "<group>"; };
+		EA870C6E1D12D68D009C71D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteButton.swift; sourceTree = "<group>"; };
 		EAA862071CEDDD7500C76D4D /* DiscoverListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverListViewController.swift; sourceTree = "<group>"; };
 		EAA8620C1CEE41C300C76D4D /* WatchListButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListButton.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 			children = (
 				111942871CCB8D65001CF39B /* Application */,
 				EAD2A8211CDC9D000005264B /* UserInterface */,
+				EA870C6A1D12D642009C71D5 /* Localization */,
 				111942881CCB8D6F001CF39B /* Theme */,
 				111942841CCB8D13001CF39B /* Extensions */,
 				111942861CCB8D2B001CF39B /* Supporting files */,
@@ -743,6 +746,14 @@
 			name = Constants;
 			sourceTree = "<group>";
 		};
+		EA870C6A1D12D642009C71D5 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				EA870C6F1D12D68D009C71D5 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		EAA862091CEDE1DC00C76D4D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -1087,6 +1098,7 @@
 				EA6487C01CE4E50100452DD0 /* SignInViewController.xib in Resources */,
 				EADA5A721CE8AD9A00C2FAE8 /* PersonCollectionViewCell.xib in Resources */,
 				115559CB1D0C432A0055042C /* SearchView.xib in Resources */,
+				EA870C6D1D12D68D009C71D5 /* Localizable.strings in Resources */,
 				EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */,
 				111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */,
 				EADA5A7B1CE8B44600C2FAE8 /* MovieCollectionViewCell.xib in Resources */,
@@ -1332,6 +1344,17 @@
 			targetProxy = 111942771CCB8CBF001CF39B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EA870C6F1D12D68D009C71D5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA870C6E1D12D68D009C71D5 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		111942571CCB8CA0001CF39B /* Debug */ = {

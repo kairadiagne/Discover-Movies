@@ -42,12 +42,6 @@ class SignInViewController: BaseViewController {
         dismissSignInViewController()
     }
     
-    @IBAction func signUp(sender: UIButton) {
-        guard let url = NSURL(string: "https://www.themoviedb.org/account/signup") else { return }
-        safariViewController = SFSafariViewController(URL: url)
-        presentViewController(safariViewController, animated: true, completion: nil)
-    }
-        
     // MARK: SignIn
     
     func activateSignInFlow() {

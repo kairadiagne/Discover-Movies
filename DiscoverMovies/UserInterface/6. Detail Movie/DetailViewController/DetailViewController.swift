@@ -11,32 +11,27 @@ import TMDbMovieKit
 
 class DetailViewController: BaseViewController {
     
-    // MARK: Constants
-    
-    private struct Constants {
-        static let MovieCellIdentifier = "MovieCell"
-        static let PersonCellIdentifier = "PersonCell"
-    }
-    
     // MARK: Properties
     
     @IBOutlet var detailView: DetailView!
 
-    let movie: TMDbMovie
+    private let movie: TMDbMovie
     
-    var image: UIImage?
+    private var image: UIImage?
     
     private let movieInfoManager = TMDbMovieInfoManager()
     
-    private let castDataProvider = CastDataProvider()
+    private let castDataProvider: CastDataProvider
     
-    private let similarMoviesDataProvider = SimilarMovieDataProvider()
-
+    private let similarMoviesDataProvider: SimilarMovieDataProvider
+    
     // MARK: Initializers
     
     init(movie: TMDbMovie, image: UIImage? = nil) {
         self.movie = movie
         self.image = image
+        self.castDataProvider = CastDataProvider(cellIdentifier: PersonCollectionViewCell.defaultIdentfier())
+        self.similarMoviesDataProvider = SimilarMovieDataProvider(cellIdentifier: MovieCollectionViewCell.defaultIdentfier())
         super.init(nibName: "DetailViewController", bundle: nil)
     }
     
@@ -50,19 +45,15 @@ class DetailViewController: BaseViewController {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
         
-        castDataProvider.cellIdentifier = Constants.PersonCellIdentifier
-        similarMoviesDataProvider.cellIdentifier = Constants.MovieCellIdentifier
+        let movieCellNib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
+        let personCellNib = UINib(nibName: PersonCollectionViewCell.nibName(), bundle: nil)
+        detailView.similarMovieCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
+        detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
         
         detailView.registerDataSources(castDataProvider, similar: similarMoviesDataProvider)
         detailView.registerCollectionViewDelegate(self)
         
-        let movieCellNib = UINib(nibName: MovieCollectionViewCell.defaultIdentfier(), bundle: nil)
-        let personCellNib = UINib(nibName: PersonCollectionViewCell.defaultIdentfier(), bundle: nil)
-        detailView.similarMovieCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: Constants.MovieCellIdentifier)
-        detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: Constants.PersonCellIdentifier)
-        
         detailView.delegate = self
-        
         detailView.configure(movie, image: image)
     }
     

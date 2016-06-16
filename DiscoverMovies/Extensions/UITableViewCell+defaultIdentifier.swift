@@ -17,5 +17,6 @@ extension UITableViewCell {
     public class func nibName() -> String {
         return String(self)
     }
+    
 }
 

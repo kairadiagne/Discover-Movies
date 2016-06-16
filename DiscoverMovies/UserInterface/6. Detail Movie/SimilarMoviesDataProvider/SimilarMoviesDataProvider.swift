@@ -13,9 +13,15 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
     
     // MARK: Properties
 
-    var cellIdentifier = ""
+    private var cellIdentifier: String
     
     private var movies = [TMDbMovie]()
+    
+    // MARK: Initializer
+    
+    init(cellIdentifier: String) {
+        self.cellIdentifier = cellIdentifier
+    }
     
     // MARK: - UICollectionViewDataSource
     

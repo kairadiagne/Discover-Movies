@@ -9,14 +9,20 @@
 import UIKit
 import TMDbMovieKit
 
-class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class CastDataProvider: NSObject, UICollectionViewDataSource {
     
     // MARK: Properties
     
-    var cellIdentifier = ""
-    
     var count: Int {
         return movieCredit?.cast.count ?? 0
+    }
+    
+    var cellIdentifier: String
+    
+    // MARK: Initializer
+    
+    init(cellIdentifier: String) {
+        self.cellIdentifier = cellIdentifier
     }
     
     private var movieCredit: TMDbMovieCredit?
@@ -41,5 +47,3 @@ class CastDataProvider: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
 }
-
-

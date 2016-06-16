@@ -13,4 +13,9 @@ extension UICollectionViewCell {
     public class func defaultIdentfier() -> String {
         return String(self)
     }
+    
+    public class func nibName() -> String {
+        return String(self)
+    }
+    
 }

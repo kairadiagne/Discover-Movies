@@ -335,7 +335,7 @@
 		1119423E1CCB8CA0001CF39B /* DiscoverMovies */ = {
 			isa = PBXGroup;
 			children = (
-				111942871CCB8D65001CF39B /* AppDelegate */,
+				111942871CCB8D65001CF39B /* Application */,
 				EAD2A8211CDC9D000005264B /* UserInterface */,
 				111942881CCB8D6F001CF39B /* Theme */,
 				111942841CCB8D13001CF39B /* Extensions */,
@@ -404,11 +404,12 @@
 			name = "Supporting files";
 			sourceTree = "<group>";
 		};
-		111942871CCB8D65001CF39B /* AppDelegate */ = {
+		111942871CCB8D65001CF39B /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				1119428A1CCB8DBF001CF39B /* AppDelegate.swift */,
 			);
+			name = Application;
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};

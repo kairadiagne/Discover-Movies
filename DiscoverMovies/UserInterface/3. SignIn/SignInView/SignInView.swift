@@ -22,18 +22,13 @@ class SignInView: BackgroundView {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var signUpButton: UIButton!
-    
     // MARK: Awake From Nib
 
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.font = UIFont.H1()
         orLabel.font = UIFont.Body()
-        
-        signUpButton.titleLabel?.font = UIFont.Caption2()
-        signUpButton.tintColor = UIColor.whiteColor()
-        
+    
         logoImage.tintColor = UIColor.whiteColor()
         logoImage.userInteractionEnabled = false
     

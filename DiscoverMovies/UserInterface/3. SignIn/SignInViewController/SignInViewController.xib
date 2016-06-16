@@ -40,7 +40,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-vG-QgW">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-vG-QgW">
                     <rect key="frame" x="268" y="99" width="64" height="102"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="102" id="UCZ-Yf-Bro"/>
@@ -58,16 +58,6 @@
                         <action selector="signIn:" destination="-1" eventType="touchUpInside" id="cAb-8z-dzA"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="YbE-is-dzc">
-                    <rect key="frame" x="20" y="532" width="560" height="48"/>
-                    <state key="normal">
-                        <string key="title">Don't have an account yet, click here to sign up 
-</string>
-                    </state>
-                    <connections>
-                        <action selector="signUp:" destination="-1" eventType="touchUpInside" id="W27-OY-kbv"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -75,17 +65,14 @@
                 <constraint firstItem="ixj-ks-LmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="7Ym-IK-fzl"/>
                 <constraint firstItem="tRY-vG-QgW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.5" id="8bF-Sz-JK6"/>
                 <constraint firstItem="5Yf-KF-CKh" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" multiplier="1.02" constant="8" symbolic="YES" id="99J-hg-fZS"/>
-                <constraint firstAttribute="trailing" secondItem="YbE-is-dzc" secondAttribute="trailing" constant="20" symbolic="YES" id="9xn-CX-1vO"/>
-                <constraint firstItem="YbE-is-dzc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="V1s-LN-CSv" secondAttribute="bottom" constant="8" symbolic="YES" id="B0Q-4A-IZk"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V1s-LN-CSv" secondAttribute="bottom" constant="151" id="BWb-sl-G85"/>
                 <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="5Yf-KF-CKh" secondAttribute="bottom" multiplier="1.02" constant="8" symbolic="YES" id="DIW-fJ-Q9Z"/>
                 <constraint firstItem="tRY-vG-QgW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Daw-b8-aIt"/>
                 <constraint firstItem="ixj-ks-LmZ" firstAttribute="top" secondItem="s6c-me-zhm" secondAttribute="bottom" multiplier="1.3" constant="8" symbolic="YES" id="HsY-8P-QTs"/>
                 <constraint firstItem="s6c-me-zhm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QaS-Ed-cnE"/>
-                <constraint firstItem="YbE-is-dzc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="YUd-ha-6lJ"/>
                 <constraint firstItem="s6c-me-zhm" firstAttribute="top" secondItem="tRY-vG-QgW" secondAttribute="bottom" constant="8" symbolic="YES" id="Yra-wY-W63"/>
                 <constraint firstItem="V1s-LN-CSv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="hWy-ZM-m6B"/>
                 <constraint firstItem="5Yf-KF-CKh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jHh-Wd-C7a"/>
-                <constraint firstAttribute="bottom" secondItem="YbE-is-dzc" secondAttribute="bottom" constant="20" symbolic="YES" id="rtL-NR-5IW"/>
                 <constraint firstAttribute="trailing" secondItem="V1s-LN-CSv" secondAttribute="trailing" constant="20" symbolic="YES" id="zhN-T9-f7B"/>
             </constraints>
             <connections>
@@ -93,7 +80,6 @@
                 <outlet property="orLabel" destination="5Yf-KF-CKh" id="o2o-3K-A0o"/>
                 <outlet property="publicModeButton" destination="V1s-LN-CSv" id="aYM-mV-C7k"/>
                 <outlet property="signInButton" destination="ixj-ks-LmZ" id="DoF-GH-CqH"/>
-                <outlet property="signUpButton" destination="YbE-is-dzc" id="jZX-nc-z23"/>
                 <outlet property="titleLabel" destination="s6c-me-zhm" id="2hv-ic-Iuc"/>
             </connections>
             <point key="canvasLocation" x="632" y="420"/>

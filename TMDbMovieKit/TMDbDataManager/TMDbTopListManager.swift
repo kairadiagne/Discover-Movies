@@ -40,7 +40,7 @@ public class TMDbTopListManager: TMDbBaseDataManager {
     }
     
     public func loadMore() {
-        guard !isLoading else { return } // Check state
+        guard state != .Loading else { return }
         guard let currentList = currentList else { return }
         guard let nextPage = resultsForCurrentList(currentList)?.nextPage else { return }
         fetchList(currentList, page: nextPage)
@@ -51,13 +51,12 @@ public class TMDbTopListManager: TMDbBaseDataManager {
     private func fetchList(list: TMDbToplist, page: Int) {
         guard let currentList = currentList else { return }
         
-        isLoading = true  // Update State
+        state = .Loading
 
         movieClient.fetchToplist(list, page: page) { (response) in
-            self.isLoading = false
-            
+
             guard response.error == nil else {
-                self.postErrorNotification(response.error!)
+                self.handleError(response.error!)
                 return
             }
             

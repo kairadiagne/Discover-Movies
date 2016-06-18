@@ -50,11 +50,11 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
     
     @IBOutlet weak var castLabel: UILabel!
     
-    @IBOutlet weak var castCollectionView: UICollectionView!
+    @IBOutlet weak var castCollectionView: BaseCollectionView!
     
     @IBOutlet weak var similarLabel: UILabel!
     
-    @IBOutlet weak var similarMovieCollectionView: UICollectionView!
+    @IBOutlet weak var similarMovieCollectionView: BaseCollectionView!
     
     @IBOutlet weak var readReviewsButton: UIButton!
     

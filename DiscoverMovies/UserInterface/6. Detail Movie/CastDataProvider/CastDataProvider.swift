@@ -14,10 +14,12 @@ class CastDataProvider: NSObject, UICollectionViewDataSource {
     // MARK: Properties
     
     var count: Int {
-        return movieCredit?.cast.count ?? 0
+        return castMembers?.count ?? 0
     }
     
     var cellIdentifier: String
+    
+    private var castMembers: [TMDbCastMember]?
     
     // MARK: Initializer
     
@@ -25,25 +27,23 @@ class CastDataProvider: NSObject, UICollectionViewDataSource {
         self.cellIdentifier = cellIdentifier
     }
     
-    private var movieCredit: TMDbMovieCredit?
-    
     // MARK: UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieCredit?.cast.count ?? 0
+        return castMembers?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PersonCollectionViewCell
-        guard let castMember = movieCredit?.cast[indexPath.row] else { return cell }
+        guard let castMember = castMembers?[indexPath.row] else { return cell }
         cell.configureWithCastMember(castMember)
         return cell
     }
     
     // MARK: Update
     
-    func updateWithMovieCredit(credit: TMDbMovieCredit) {
-        movieCredit = credit
+    func updateWithCast(castMembers: [TMDbCastMember]) {
+        self.castMembers = castMembers
     }
     
 }

@@ -16,8 +16,6 @@ public enum TMDbSearchType {
 
 public class TMDbSearchManager: TMDbBaseDataManager {
     
-    public var inProgress = false
-    
     public var movies: [TMDbMovie] {
         return searchResults.items
     }
@@ -39,7 +37,7 @@ public class TMDbSearchManager: TMDbBaseDataManager {
     }
     
     public func loadMore() {
-        guard !isLoading else { return }
+        guard state != .Loading else { return }
         guard let currentSearch = currentSearch else { return }
         guard let nextPage = searchResults.nextPage else { return }
         
@@ -52,7 +50,7 @@ public class TMDbSearchManager: TMDbBaseDataManager {
     }
     
     private func fetchMoviesWithTitle(title: String, page: Int) {
-        isLoading = true
+        state = .Loading
         
         movieClient.movieWithTitle(title, page: page) { (list, error) in
             self.handleResponse(list: list, error: error)
@@ -60,7 +58,7 @@ public class TMDbSearchManager: TMDbBaseDataManager {
     }
     
     private func discoverMoviesBy(year: String, genre: Int, rating: Float, page: Int) {
-        isLoading = true
+        state = .Loading
         
         movieClient.discover(year, genre: genre, vote: rating, page: page) { (list, error) in
             self.handleResponse(list: list, error: error)
@@ -72,7 +70,7 @@ public class TMDbSearchManager: TMDbBaseDataManager {
     
     private func handleResponse(list list: TMDbList<TMDbMovie>?, error: NSError?) {
         guard error == nil else {
-            self.postErrorNotification(error!)
+            self.handleError(error!)
             return
         }
         

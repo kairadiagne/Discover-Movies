@@ -47,14 +47,13 @@ class ReviewViewController: ListViewController {
         tableView.dataSource = reviewDataProvider
         tableView.estimatedRowHeight = Constants.DefaultRowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        title = "Reviews" // NSLocalizedString
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         reviewManager.addChangeObserver(self, selector: #selector(ReviewViewController.dataDidChangeNotification(_:)))
-        reviewManager.addUpdateObserver(self, selector: #selector(ReviewViewController.dataDidUpdateNotification(_:)))
-        reviewManager.addErrorObserver(self, selector: #selector(ReviewViewController.didReceiveErrorNotification(_:)))
-        
         reviewManager.loadReviews(movie.movieID)
     }
     
@@ -69,18 +68,28 @@ class ReviewViewController: ListViewController {
     }
     
     // MARK: Notifications
-    
-    override func dataDidUpdateNotification(notification: NSNotification) {
-        super.dataDidUpdateNotification(notification)
-        updateData()
-    }
-    
+
     override func dataDidChangeNotification(notification: NSNotification) {
         super.dataDidChangeNotification(notification)
-        updateData()
+        
+        switch reviewManager.state {
+        case .Loading:
+            showProgressHUD()
+        case .DataDidLoad:
+            updateTableView()
+        case .DataDidUpdate:
+            updateTableView()
+            tableView.scrollToTop()
+        case .NoData:
+            tableView.showMessage("There are no reviews for this movie yet") // NSLocalizedString
+        case .Error:
+            handleErrorState(reviewManager.lastError)
+        default:
+            return
+        }
     }
     
-    private func updateData() {
+    private func updateTableView() {
         reviewDataProvider.updateWithItems(reviewManager.reviews)
         tableView.reloadData()
     }

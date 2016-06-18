@@ -104,7 +104,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ypl-or-G67">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ypl-or-G67" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="29" width="560" height="130"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="130" id="OX9-Ff-nE1"/>
@@ -127,7 +127,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1Rn-dH-qEL">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1Rn-dH-qEL" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="29" width="560" height="130"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="130" id="Vn6-Wu-3xR"/>

@@ -1,4 +1,4 @@
-w//
+//
 //  AppDelegate.swift
 //  DiscoverMovies
 //
@@ -69,12 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // - Authorization Error Check: Account list Controller, DetailController
 // - Error Messages (No trailer, No Reviews, Not authorized)
 // - SearchView SearchViewController, SearchListViewController
-// - Background Messages when no data (detail view controller collection views, accountListController, ReviewController
 
 // - Localization
 // - Pull to refresh (Account list controller)
 // - Clear Keychain on first lauch
 // - UserInfoStore Multihreading keyed archiver ??
-// - Sign in screen: (Remove sign up button, inform user that sign up can be done when clicking on sign in and then in the webview on sign up)
+
 
 

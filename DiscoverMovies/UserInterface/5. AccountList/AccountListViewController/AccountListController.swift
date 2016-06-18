@@ -49,15 +49,17 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = dataProvider
         
-        navigationController?.title = accountList.rawValue
+        title = accountList.rawValue
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        accountListDataManager.addUpdateObserver(self, selector: #selector(AccountListController.dataDidChangeNotification(_:)))
         accountListDataManager.addChangeObserver(self, selector: #selector(AccountListController.dataDidChangeNotification(_:)))
-        accountListDataManager.addErrorObserver(self, selector: #selector(AccountListController.didReceiveErrorNotification(_:)))
-        accountListDataManager.loadTop(accountList) // Only load if not coming from detailView Use Boolean
+        loadList()
+    }
+    
+    private func loadList() {
+        accountListDataManager.loadTop(accountList)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -71,39 +73,49 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         accountListDataManager.loadTop(accountList)
     }
     
-    // MARK: Notifications 
-    
     override func dataDidChangeNotification(notification: NSNotification) {
         super.dataDidChangeNotification(notification)
-        updateData()
+        
+        switch accountListDataManager.state {
+        case .Loading:
+            showProgressHUD()
+        case .DataDidLoad:
+            updateTableView()
+        case .DataDidUpdate:
+            updateTableView()
+            tableView.scrollToTop()
+        case .NoData:
+            tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
+        case .Error:
+            handleErrorState(accountListDataManager.lastError, authorizationRequired: true)
+        default:
+            return
+        }
     }
     
-    override func dataDidUpdateNotification(notification: NSNotification) {
-        super.dataDidUpdateNotification(notification)
-        updateData()
-    }
-    
-    private func updateData() {
+    func updateTableView() {
         dataProvider.updateWithItems(accountListDataManager.movies)
         tableView.reloadData()
     }
-    
-    override func didReceiveErrorNotification(notification: NSNotification) {
-        super.didReceiveErrorNotification(notification)
-        // Handle AuthorizationError
-    }
-    
+
     // MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         guard let movie = dataProvider.itemAtIndex(indexPath.row) else { return }
-        // Show detail screen movie
+        showDetailViewControllerForMovie(movie)
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if dataProvider.itemCount - 5 == indexPath.row {
             accountListDataManager.loadMore()
         }
+    }
+    
+    // MARK: Navigation 
+    
+    func showDetailViewControllerForMovie(movie: TMDbMovie) {
+        let detailViewController = DetailViewController(movie: movie)
+        navigationController?.pushViewController(detailViewController, animated: false)
     }
     
 }

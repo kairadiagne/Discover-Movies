@@ -21,6 +21,8 @@ class DetailViewController: BaseViewController {
     
     private let movieInfoManager = TMDbMovieInfoManager()
     
+   
+    
     private let castDataProvider: CastDataProvider
     
     private let similarMoviesDataProvider: SimilarMovieDataProvider
@@ -55,15 +57,18 @@ class DetailViewController: BaseViewController {
         
         detailView.delegate = self
         detailView.configure(movie, image: image)
+        
+        detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
+        detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.setAsTransparent()
         
-        movieInfoManager.addUpdateObserver(self, selector: #selector(DetailViewController.dataDidUpdateNotification(_:)))
-        movieInfoManager.addErrorObserver(self, selector: #selector(DetailViewController.didReceiveErrorNotification(_:)))
-        
+        movieInfoManager.addChangeObserver(self, selector: #selector(DetailViewController.dataDidChangeNotification(_:)))
+
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
     }
@@ -76,18 +81,17 @@ class DetailViewController: BaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.setAsUnclear()
-        
         movieInfoManager.removeObserver(self)
     }
     
     // MARK: Actions
     
     @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
-       movieInfoManager.toggleStateOfMovieInList(sender.selected, movieID: movie.movieID, list: .Favorites)
+       movieInfoManager.toggleStateOfMovieInList(movie.movieID, list: .Favorites)
     }
     
     @IBAction func watchListDidGetTapped(sender: WatchListButton) {
-       movieInfoManager.toggleStateOfMovieInList(sender.selected, movieID: movie.movieID, list: .Watchlist)
+       movieInfoManager.toggleStateOfMovieInList(movie.movieID, list: .Watchlist)
     }
 
     @IBAction func reviewsButtonGotTapped(sender: UIButton) {
@@ -96,31 +100,37 @@ class DetailViewController: BaseViewController {
     
     // MARK: Notifications
     
-    override func dataDidUpdateNotification(notification: NSNotification) {
-        super.dataDidUpdateNotification(notification)
+    override func dataDidChangeNotification(notification: NSNotification) {
+        super.dataDidChangeNotification(notification)
         
+        switch movieInfoManager.state {
+        case .Loading:
+            showProgressHUD()
+        case .DataDidLoad:
+            update()
+        case .Error:
+            handleErrorState(movieInfoManager.lastError, authorizationRequired: signedIn )
+        default:
+            return
+        }
+    }
+    
+    private func update() {
         if let similarMovies = movieInfoManager.similarMovies {
+            detailView.similarMovieCollectionView.hideMessage()
             similarMoviesDataProvider.updateWithMovies(similarMovies)
-        } else {
-            // Show message in collection view: Similar movies
+        }
+        
+        if let cast = movieInfoManager.cast {
+            detailView.castCollectionView.hideMessage()
+            castDataProvider.updateWithCast(cast)
         }
         
         if let accountState = movieInfoManager.accountState {
             detailView.configureForAccountState(accountState)
-            detailView.reloadCollectionViews()
         }
         
-        if let movieCredit = movieInfoManager.movieCredit {
-            castDataProvider.updateWithMovieCredit(movieCredit)
-            detailView.configureWithCredit(movieCredit)
-            detailView.reloadCollectionViews()
-        }
-        
-    }
-    
-    override func didReceiveErrorNotification(notification: NSNotification) {
-       super.didReceiveErrorNotification(notification)
-        // Handle authorization error
+        detailView.reloadCollectionViews()
     }
 
     // MARK: Navigation

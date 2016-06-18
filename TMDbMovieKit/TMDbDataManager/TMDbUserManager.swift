@@ -23,13 +23,11 @@ public class TMDbUserManager: TMDbBaseDataManager {
     // MARK: - Fetching
     
     public func loadUserInfo() {
-        isLoading = true
+        state = .Loading
         
         userClient.fetchUserInfo { (user, error) in
-            self.isLoading = false
-            
             guard error == nil else {
-                self.postErrorNotification(error!)
+                self.handleError(error!)
                 return
             }
             
@@ -38,7 +36,7 @@ public class TMDbUserManager: TMDbBaseDataManager {
                     self.sessionInfoStore.persistUserInStore(user)
                     
                     dispatch_async(dispatch_get_main_queue(), { 
-                        self.postUpdateNotification()
+                        self.state = .DataDidLoad
                     })
                     
                 }

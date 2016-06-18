@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import ChameleonFramework
 import youtube_ios_player_helper
 
 class Theme {
@@ -19,6 +20,7 @@ class Theme {
         styleViews()
         styleTabBar()
         styleTableViews()
+        styleCollectionViews()
         styleTextFields()
         styleLabels()
     }
@@ -34,7 +36,6 @@ class Theme {
     }
     
     class func styleViews() {
-        UIScrollView.appearance().backgroundColor = UIColor.backgroundColor()
         BackgroundView.appearance().backgroundColor = UIColor.backgroundColor()
         YTPlayerView.appearance().backgroundColor = UIColor.backgroundColor()
         UIStackView.appearance().backgroundColor = UIColor.backgroundColor()
@@ -51,6 +52,10 @@ class Theme {
         UITableView.appearance().backgroundColor = UIColor.backgroundColor()
         UITableViewCell.appearance().backgroundColor = UIColor.backgroundColor()
         UITableView.appearance().separatorColor = UIColor(red: 60.0/255.0, green: 60.0/255.0, blue: 60.0/255.0, alpha: 60.0/255.0)
+    }
+    
+    class func styleCollectionViews() {
+        UICollectionView.appearance().backgroundColor = UIColor.backgroundColor()
     }
     
     class func styleTextFields() {

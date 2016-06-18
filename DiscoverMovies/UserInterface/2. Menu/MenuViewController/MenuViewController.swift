@@ -48,7 +48,7 @@ class MenuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userManager.addUpdateObserver(self, selector: #selector(MenuViewController.dataDidUpdateNotification(_:)))
+//        userManager.addUpdateObserver(self, selector: #selector(MenuViewController.dataDidUpdateNotification(_:)))
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -116,7 +116,7 @@ class MenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
    
         // If we are trying to push the same row we change the position of the front view controller
-        if indexPath.row == presentedRow {
+        if indexPath.row == presentedRow && indexPath.row != 4 {
             self.revealViewController()?.setFrontViewPosition(.LeftSide, animated: true)
             return
         }

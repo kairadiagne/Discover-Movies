@@ -69,8 +69,6 @@
 		EA6487C61CE503BD00452DD0 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487C41CE503BD00452DD0 /* ReviewViewController.swift */; };
 		EA6487CC1CE5163100452DD0 /* ProgressHUDPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */; };
 		EA6487CE1CE5166A00452DD0 /* BannerPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487CD1CE5166A00452DD0 /* BannerPresentable.swift */; };
-		EA6487D71CE51BF800452DD0 /* InternetErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487D61CE51BF800452DD0 /* InternetErrorHandleable.swift */; };
-		EA6487D91CE51F8000452DD0 /* AuthorizationErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487D81CE51F8000452DD0 /* AuthorizationErrorHandleable.swift */; };
 		EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */; };
 		EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */; };
 		EA6487E61CE5B50D00452DD0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */; };
@@ -89,6 +87,8 @@
 		EA870C671D12CC98009C71D5 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA870C661D12CC98009C71D5 /* Menu.storyboard */; };
 		EA870C691D12CE5F009C71D5 /* AccountListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA870C681D12CE5F009C71D5 /* AccountListTableViewCell.xib */; };
 		EA870C6D1D12D68D009C71D5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA870C6F1D12D68D009C71D5 /* Localizable.strings */; };
+		EA870C761D141B92009C71D5 /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C751D141B92009C71D5 /* BaseCollectionView.swift */; };
+		EA870C781D141FAA009C71D5 /* BackgroundMessagePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C771D141FAA009C71D5 /* BackgroundMessagePresentable.swift */; };
 		EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */; };
 		EAA862081CEDDD7500C76D4D /* DiscoverListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA862071CEDDD7500C76D4D /* DiscoverListViewController.swift */; };
 		EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA8620C1CEE41C300C76D4D /* WatchListButton.swift */; };
@@ -221,7 +221,7 @@
 		EA64876F1CE21E2300452DD0 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		EA6487701CE21E2300452DD0 /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
 		EA64879D1CE3569700452DD0 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		EA64879E1CE3569700452DD0 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		EA64879E1CE3569700452DD0 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = ../DetailViewController/DetailViewController.xib; sourceTree = "<group>"; };
 		EA6487A11CE356C300452DD0 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbMovieInfoManager.swift; sourceTree = "<group>"; };
@@ -232,8 +232,6 @@
 		EA6487C41CE503BD00452DD0 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUDPresentable.swift; sourceTree = "<group>"; };
 		EA6487CD1CE5166A00452DD0 /* BannerPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerPresentable.swift; sourceTree = "<group>"; };
-		EA6487D61CE51BF800452DD0 /* InternetErrorHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetErrorHandleable.swift; sourceTree = "<group>"; };
-		EA6487D81CE51F8000452DD0 /* AuthorizationErrorHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationErrorHandleable.swift; sourceTree = "<group>"; };
 		EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReviewTableViewCell.xib; path = "../Review Cell/ReviewTableViewCell.xib"; sourceTree = "<group>"; };
 		EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -252,11 +250,13 @@
 		EA870C661D12CC98009C71D5 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		EA870C681D12CE5F009C71D5 /* AccountListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountListTableViewCell.xib; sourceTree = "<group>"; };
 		EA870C6E1D12D68D009C71D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EA870C751D141B92009C71D5 /* BaseCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
+		EA870C771D141FAA009C71D5 /* BackgroundMessagePresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundMessagePresentable.swift; sourceTree = "<group>"; };
 		EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteButton.swift; sourceTree = "<group>"; };
 		EAA862071CEDDD7500C76D4D /* DiscoverListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverListViewController.swift; sourceTree = "<group>"; };
 		EAA8620C1CEE41C300C76D4D /* WatchListButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListButton.swift; sourceTree = "<group>"; };
 		EAA8620E1CEE582800C76D4D /* AnimatedShapeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedShapeButton.swift; sourceTree = "<group>"; };
-		EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
+		EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseTableView.swift; path = ../BaseViewController/BaseTableView.swift; sourceTree = "<group>"; };
 		EAD2A83F1CDCC7820005264B /* TopListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListViewController.swift; sourceTree = "<group>"; };
 		EAD2A8411CDCDF100005264B /* DiscoverDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverDataProvider.swift; sourceTree = "<group>"; };
 		EADA5A6B1CE8A53700C2FAE8 /* TMDbCastMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCastMember.swift; sourceTree = "<group>"; };
@@ -543,7 +543,6 @@
 			isa = PBXGroup;
 			children = (
 				EA64879D1CE3569700452DD0 /* DetailViewController.swift */,
-				EA64879E1CE3569700452DD0 /* DetailViewController.xib */,
 			);
 			path = DetailViewController;
 			sourceTree = "<group>";
@@ -554,6 +553,7 @@
 				EA6487DA1CE5209400452DD0 /* Protocols */,
 				EA870C591D12B325009C71D5 /* BaseViewController */,
 				EA870C5B1D12B34C009C71D5 /* ListViewController */,
+				EA870C741D141B63009C71D5 /* CollectionView */,
 			);
 			name = Base;
 			path = "1. Base";
@@ -581,11 +581,10 @@
 			children = (
 				EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */,
 				EA6487CD1CE5166A00452DD0 /* BannerPresentable.swift */,
-				EA6487D61CE51BF800452DD0 /* InternetErrorHandleable.swift */,
-				EA6487D81CE51F8000452DD0 /* AuthorizationErrorHandleable.swift */,
 				111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */,
 				111942D21CCB8E47001CF39B /* PullToRefreshable.swift */,
 				EA870C371D1174D2009C71D5 /* DataProvider.swift */,
+				EA870C771D141FAA009C71D5 /* BackgroundMessagePresentable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -656,7 +655,6 @@
 			isa = PBXGroup;
 			children = (
 				EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */,
-				EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -664,6 +662,7 @@
 		EA870C5B1D12B34C009C71D5 /* ListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EAD2A83D1CDCBAEB0005264B /* BaseTableView.swift */,
 				EA64876F1CE21E2300452DD0 /* ListViewController.swift */,
 				EA6487701CE21E2300452DD0 /* ListViewController.xib */,
 			);
@@ -752,6 +751,15 @@
 				EA870C6F1D12D68D009C71D5 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		EA870C741D141B63009C71D5 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				EA870C751D141B92009C71D5 /* BaseCollectionView.swift */,
+			);
+			name = CollectionView;
+			path = ListViewController;
 			sourceTree = "<group>";
 		};
 		EAA862091CEDE1DC00C76D4D /* Shared */ = {
@@ -904,6 +912,7 @@
 			isa = PBXGroup;
 			children = (
 				EA6487A11CE356C300452DD0 /* DetailView.swift */,
+				EA64879E1CE3569700452DD0 /* DetailViewController.xib */,
 			);
 			name = DetailView;
 			path = "Detail view";
@@ -1212,8 +1221,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA8620F1CEE582800C76D4D /* AnimatedShapeButton.swift in Sources */,
+				EA870C761D141B92009C71D5 /* BaseCollectionView.swift in Sources */,
 				111942B31CCB8DE5001CF39B /* BackgroundView.swift in Sources */,
-				EA6487D71CE51BF800452DD0 /* InternetErrorHandleable.swift in Sources */,
 				EADA5A7A1CE8B44600C2FAE8 /* MovieCollectionViewCell.swift in Sources */,
 				EA6487E61CE5B50D00452DD0 /* BaseViewController.swift in Sources */,
 				EADA5A711CE8AD9A00C2FAE8 /* PersonCollectionViewCell.swift in Sources */,
@@ -1239,7 +1248,6 @@
 				EADA5A811CE9AA2200C2FAE8 /* ReviewDataProvider.swift in Sources */,
 				EADA5A961CEA309800C2FAE8 /* MenuViewController.swift in Sources */,
 				EADA5A771CE8AE9700C2FAE8 /* CastDataProvider.swift in Sources */,
-				EA6487D91CE51F8000452DD0 /* AuthorizationErrorHandleable.swift in Sources */,
 				EA870C361D1170C4009C71D5 /* AccountListController.swift in Sources */,
 				111942F21CCB8EB8001CF39B /* Theme.swift in Sources */,
 				1119429B1CCB8DD4001CF39B /* MBProgressHUD+Configure.swift in Sources */,
@@ -1247,6 +1255,7 @@
 				115559C51D0C353B0055042C /* SearchViewController.swift in Sources */,
 				EADA5AAA1CEA6B6A00C2FAE8 /* Colors.swift in Sources */,
 				EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */,
+				EA870C781D141FAA009C71D5 /* BackgroundMessagePresentable.swift in Sources */,
 				EAD2A83E1CDCBAEB0005264B /* BaseTableView.swift in Sources */,
 				111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */,
 				EA870C381D1174D2009C71D5 /* DataProvider.swift in Sources */,

@@ -11,7 +11,7 @@ import TMDbMovieKit
 import BRYXBanner
 import MBProgressHUD
 
-class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresentable, InternetErrorHandleable {
+class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresentable {
     
     // MARK: Types
     
@@ -36,35 +36,58 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         }
     }
     
-    // MARK: View Controller Life Cycle
+    var signedIn: Bool {
+        return sessionManager.signInStatus == .Signedin ? true: false 
+    }
+    
+    // MARK: View Controller LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupProgressHUD()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
+        progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
+        progressHUD?.userInteractionEnabled = false
+        view.addSubview(progressHUD!)
     }
     
     // MARK: Notifications
     
-    func dataDidUpdateNotification(notification: NSNotification) {
-        hideProgressHUD()
-    }
-    
     func dataDidChangeNotification(notification: NSNotification) {
         hideProgressHUD()
     }
-        
-    func didReceiveErrorNotification(notification: NSNotification) {
-        hideProgressHUD()
-        
-        if let error = notification.userInfo?["error"] as? NSError {
-            detectInternetConnectionError(error)
-        }
+    
+    //MARK: Communicate State 
+    
+    func presentBannerOnInternetError() {
+        let title = "No, Internet Connection" // NSLocalized String
+        let message = "Couldn't load any information, please check your connection and try again later" // NSLocalized String
+        showBanner(title, message: message, color: UIColor.flatOrangeColor())
     }
     
+    func presentAlertOnAuthorizationError() {
+        let title = "Authorization Error" // NSLocalized String
+        let message = "This feature requires you to sign in with a TMDb account" // NSLocalized String
+    }
+    
+    func presentAlertOnUnknownError() {
+        let title = "Unknown Error" // NSLocalized String
+        let message = "An unknown error occurred" // NSLocalized String
+    }
+    
+    func handleErrorState(error: TMDbError?, authorizationRequired: Bool = false) {
+        guard let error = error else { return }
+        
+        switch error {
+        case .Network:
+            presentBannerOnInternetError()
+        case .Authorization:
+            if authorizationRequired {
+                presentAlertOnAuthorizationError()
+            }
+        case .Unknown:
+            presentAlertOnUnknownError()
+        }
+    }
+
     // MARK: Navigation
     
     func showSignInViewController() {
@@ -73,5 +96,4 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     }
 
 }
-
 

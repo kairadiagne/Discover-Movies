@@ -16,8 +16,16 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
         return movieInfo?.similarMovies?.items
     }
     
-    public var movieCredit: TMDbMovieCredit? {
-        return movieInfo?.credits
+    public var cast: [TMDbCastMember]? {
+        return movieInfo?.credits?.cast
+    }
+    
+    public var crew: [TMDbCrewMember]? {
+        return movieInfo?.credits?.crew
+    }
+    
+    public var trailer: TMDbVideo? {
+        return movieInfo?.trailers?.first
     }
     
     public var trailers: [TMDbVideo]? {
@@ -35,7 +43,7 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
     public func loadInfoAboutMovieWithID(movieID: Int) {
         movieClient.fetchAdditionalInfoMovie(movieID) { (response) in
             guard response.error == nil else {
-                self.postErrorNotification(response.error!)
+                self.handleError(response.error!)
                 return
             }
             
@@ -43,8 +51,8 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
                 if  let movieInfo = response.value {
                     self.movieInfo = movieInfo
                     
-                    dispatch_async(dispatch_get_main_queue(), { 
-                        self.postUpdateNotification()
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.state = .DataDidLoad
                     })
                 }
             })
@@ -55,7 +63,7 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
         movieClient.accountStateForMovie(movieID) { (response) in
             
             guard response.error == nil else {
-                self.postErrorNotification(response.error!)
+//                self.handleError(response.error!)
                 return
             }
             
@@ -64,17 +72,28 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
                     self.accountState = accountState
                     
                     dispatch_async(dispatch_get_main_queue(), { 
-                        self.postUpdateNotification()
+                        self.state = .DataDidLoad
                     })
                 }
             })
         }
     }
     
-    public func toggleStateOfMovieInList(state: Bool, movieID: Int, list: TMDbAccountList) {
-        movieClient.changeStateForMovie(movieID, inList: list.rawValue, toState: state) { (error) in
+    public func toggleStateOfMovieInList(movieID: Int, list: TMDbAccountList) {
+        guard let accountState = accountState else { return }
+        
+        switch list {
+        case .Favorites:
+            changeStateForMovie(movieID, inList: list.rawValue, toState: !accountState.favoriteStatus)
+        case .Watchlist:
+            changeStateForMovie(movieID, inList: list.rawValue, toState: !accountState.watchlistStatus)
+        }
+    }
+    
+    private func changeStateForMovie(movieID: Int, inList list: String, toState state: Bool) {
+        movieClient.changeStateForMovie(movieID, inList: list, toState: state) { (error) in
             guard error == nil else {
-                self.postErrorNotification(error!)
+                self.handleError(error!)
                 return
             }
         }

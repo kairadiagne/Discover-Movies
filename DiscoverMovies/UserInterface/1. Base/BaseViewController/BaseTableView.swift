@@ -8,43 +8,22 @@
 
 import UIKit
 
-class BaseTableView: UITableView {
+class BaseTableView: UITableView, BackgroundMessagePresentable {
     
-    var messageLabel: UILabel!
-    
+    var messageLabel: UILabel?
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        let frame = CGRect(origin: .zero, size: bounds.size)
-        messageLabel = UILabel(frame: frame)
-        messageLabel.textAlignment = .Center
-        messageLabel.numberOfLines = 0
-        messageLabel.lineBreakMode = .ByWordWrapping
-        messageLabel.font = UIFont.Body()
-        messageLabel.tintColor = UIColor.redColor()
-        
-        backgroundView = messageLabel
-        backgroundView?.hidden = true
-        
         // Add empty UIView to the footer so that empty cells are not visible
-        tableFooterView = UIView()
-    }
-    
-    // MARK: - Behaviors
-    
-    func showMessage(message: String) {
-        messageLabel.text = message
-        backgroundView?.hidden = false
-    }
-    
-    func hideMessage() {
-        messageLabel.text = nil
-        backgroundView?.hidden = true
+        self.tableFooterView = UIView()
     }
     
     func scrollToTop() {
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+        if numberOfRowsInSection(0) > 0 {
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+        }
     }
 
 }
+

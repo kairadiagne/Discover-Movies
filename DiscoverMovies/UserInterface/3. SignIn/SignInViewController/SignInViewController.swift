@@ -63,7 +63,7 @@ class SignInViewController: BaseViewController {
     // MARK: Handle Errors
     
     func handleError(error: NSError) {
-        detectInternetConnectionError(error)
+//        detectInternetConnectionError(error)
     }
     
     // MARK: Navigation

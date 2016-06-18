@@ -31,7 +31,7 @@ public class TMDbAccountListDataManager: TMDbBaseDataManager {
     }
     
     public func loadMore() {
-        guard !isLoading else { return }
+        guard state != .Loading else { return }
         guard let currentList = currentList else { return }
         guard let nextPage = list.nextPage else { return }
         fetchList(currentList, page: nextPage)
@@ -42,14 +42,12 @@ public class TMDbAccountListDataManager: TMDbBaseDataManager {
     private func fetchList(list: TMDbAccountList, page: Int) {
         guard let _ = currentList else { return }
         
-        isLoading = true
+        state = .Loading
         
         movieClient.fetchAccountList(list, page: page) { (list, error) in
-            self.isLoading = false
             
             guard error == nil else {
-                print(error)
-                self.postErrorNotification(error!)
+                self.handleError(error!)
                 return
             }
             

@@ -25,12 +25,11 @@ public class TMDbReviewManager: TMDbBaseDataManager {
     
     public func loadReviews(movieID: Int) {
         self.movieID = movieID
-        isLoading = true
         fetchReviews(movieID, page: 1)
     }
     
     public func loadMore() {
-        guard !isLoading else { return }
+        guard state != .Loading else { return }
         guard let movieID = movieID else { return }
         guard let nextPage = reviewList.nextPage else { return }
         fetchReviews(movieID, page: nextPage)
@@ -39,7 +38,7 @@ public class TMDbReviewManager: TMDbBaseDataManager {
     private func fetchReviews(movieID: Int, page: Int) {
         movieClient.fetchReviews(movieID, page: page) { (list, error) in
             guard error == nil else  {
-                self.postErrorNotification(error!)
+                self.handleError(error!)
                 return
             }
             

@@ -28,15 +28,12 @@ class TopListViewController: DiscoverListViewController {
         switchListControl.addTarget(self, action: switchListSelector, forControlEvents: .ValueChanged)
         switchListControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = switchListControl
-        
-        switchTopList(switchListControl) // Fetch Data
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         topListDataManager.addChangeObserver(self, selector: #selector(TopListViewController.dataDidChangeNotification(_:)))
-        topListDataManager.addUpdateObserver(self, selector: #selector(TopListViewController.dataDidUpdateNotification(_:)))
-        topListDataManager.addErrorObserver(self, selector: #selector(TopListViewController.didReceiveErrorNotification(_:)))
+        switchTopList(switchListControl)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -47,8 +44,6 @@ class TopListViewController: DiscoverListViewController {
     // MARK: Fetching
     
     func switchTopList(control: UISegmentedControl) {
-        showProgressHUD()
-        
         switch switchListControl.selectedSegmentIndex {
         case 0:
             topListDataManager.loadTop(.Popular)
@@ -65,15 +60,25 @@ class TopListViewController: DiscoverListViewController {
     
     override func dataDidChangeNotification(notification: NSNotification) {
         super.dataDidChangeNotification(notification)
-        updateData()
+        
+        switch topListDataManager.state {
+        case .Loading:
+            showProgressHUD()
+        case .DataDidLoad:
+            updateTableView()
+        case .DataDidUpdate:
+            updateTableView()
+            tableView.scrollToTop()
+        case .NoData:
+            tableView.showMessage("No Data")
+        case .Error:
+            handleErrorState(topListDataManager.lastError)
+         default:
+            return
+        }
     }
     
-    override func dataDidUpdateNotification(notification: NSNotification) {
-        super.dataDidChangeNotification(notification)
-        updateData()
-    }
-    
-    private func updateData() {
+    private func updateTableView() {
         tableViewDataProvider.updateWithItems(topListDataManager.movies)
         tableView.reloadData()
     }
@@ -92,6 +97,5 @@ class TopListViewController: DiscoverListViewController {
     }
     
 }
-
 
 

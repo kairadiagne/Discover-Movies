@@ -28,7 +28,7 @@ class TMDbList<Item: Mappable>: NSObject, Mappable {
     var nextPage: Int? {
         return page < pageCount ? page + 1 : nil
     }
-    
+
     override init() {
         super.init()
     }
@@ -44,7 +44,10 @@ class TMDbList<Item: Mappable>: NSObject, Mappable {
     
     // MARK: - Update with new items 
 
-    func update(data: TMDbList<Item>) {        
+    func update(data: TMDbList<Item>) -> Bool { // Completion handler and run on a background queue user initiated 0 // test if the completionhandler is still on a background thread
+        // Check if it tries to update with the same page (and if there where any changes (compare page number and the movies order)
+            // If equal dont update
+            // If not equal update
         page = data.page
         pageCount = data.pageCount
         resultCount = data.resultCount
@@ -54,6 +57,8 @@ class TMDbList<Item: Mappable>: NSObject, Mappable {
         } else {
             self.items = data.items
         }
+        
+        return true // Return true if updated else return false 
     }
     
 }

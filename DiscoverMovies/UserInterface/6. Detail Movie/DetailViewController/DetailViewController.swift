@@ -21,8 +21,6 @@ class DetailViewController: BaseViewController {
     
     private let movieInfoManager = TMDbMovieInfoManager()
     
-   
-    
     private let castDataProvider: CastDataProvider
     
     private let similarMoviesDataProvider: SimilarMovieDataProvider

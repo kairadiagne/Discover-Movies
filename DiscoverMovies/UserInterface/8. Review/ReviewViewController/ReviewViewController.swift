@@ -84,8 +84,6 @@ class ReviewViewController: ListViewController {
             tableView.showMessage("There are no reviews for this movie yet") // NSLocalizedString
         case .Error:
             handleErrorState(reviewManager.lastError)
-        default:
-            return
         }
     }
     

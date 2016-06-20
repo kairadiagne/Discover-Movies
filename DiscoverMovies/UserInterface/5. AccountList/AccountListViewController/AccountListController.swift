@@ -88,8 +88,6 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
             tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
         case .Error:
             handleErrorState(accountListDataManager.lastError, authorizationRequired: true)
-        default:
-            return
         }
     }
     

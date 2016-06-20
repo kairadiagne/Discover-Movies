@@ -18,15 +18,13 @@ public enum TMDbDataManagerNotification {
             return "TMDbManagerDataDidChangeNotification"
         }
     }
-    
 }
 
 public enum TMDbState {
-    case Normal
+    case NoData
     case Loading
     case DataDidLoad
     case DataDidUpdate
-    case NoData
     case Error
 }
 
@@ -40,7 +38,7 @@ public class TMDbBaseDataManager {
     
     // MARK: Properties
     
-    public var state: TMDbState = .Normal {
+    public var state: TMDbState = .NoData {
         didSet {
             postChangeNotification()
         }
@@ -73,20 +71,25 @@ public class TMDbBaseDataManager {
     
     func updateList<T: Mappable>(list: TMDbList<T>, withData data: TMDbList<T>) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            list.update(data)
+            list.update(data) // make bool so didUpdate
             
-            dispatch_async(dispatch_get_main_queue(), { 
+            // If state has not changed 
+                // Do not change state
+            // If state has changed
+                // If data.items.count == 0
+                    // .NoData
+            // If data.page == 1
+                // .DataDidLoad
+            // If data.page > 1 {
+                // .DataDidUpdate
+            
+            dispatch_async(dispatch_get_main_queue(), {
                 if data.items.count == 0 {
                     self.state = .NoData
-                } else {
-                    if data.nextPage == 0 {
-                        self.state = .DataDidLoad
-                    } else if data.nextPage > 1 {
-                        self.state = .DataDidUpdate
-                    } else {
-                        self.state = .Normal
-                    }
-                    
+                } else if data.page == 1 {
+                    self.state = .DataDidLoad
+                } else if data.page > 1 {
+                    self.state = .DataDidUpdate
                 }
             })
         }

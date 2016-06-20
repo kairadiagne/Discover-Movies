@@ -60,6 +60,8 @@ enum TMDbAPIRouter: URLRequestConvertible {
         let (finalRequest, _) = JSONEncoding.encode(encodeRequest.URLRequest, parameters: body)
         finalRequest.HTTPMethod = method.rawValue
         
+        print(finalRequest)
+        
         return finalRequest
     }
 }

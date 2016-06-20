@@ -66,15 +66,13 @@ class TopListViewController: DiscoverListViewController {
             showProgressHUD()
         case .DataDidLoad:
             updateTableView()
+            tableView.scrollToTop()
         case .DataDidUpdate:
             updateTableView()
-            tableView.scrollToTop()
         case .NoData:
             tableView.showMessage("No Data")
         case .Error:
             handleErrorState(topListDataManager.lastError)
-         default:
-            return
         }
     }
     
@@ -95,7 +93,7 @@ class TopListViewController: DiscoverListViewController {
             topListDataManager.loadMore()
         }
     }
-    
+
 }
 
 

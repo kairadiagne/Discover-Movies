@@ -20,10 +20,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="860"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDT-22-E70" customClass="BackgroundView" customModule="DiscoverMovies" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="860"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="860"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="3le-n8-VGv">
-                                    <rect key="frame" x="20" y="287" width="560" height="88"/>
+                                    <rect key="frame" x="20" y="287" width="560" height="87"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="yBn-ML-ttI">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -60,7 +60,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OdH-bF-D7W">
-                                            <rect key="frame" x="0.0" y="45" width="560" height="21"/>
+                                            <rect key="frame" x="0.0" y="44" width="560" height="21"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Released in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ok7-gX-HmQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="364" height="21"/>
@@ -77,7 +77,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Feo-6a-JUp">
-                                            <rect key="frame" x="0.0" y="67" width="560" height="21"/>
+                                            <rect key="frame" x="0.0" y="66" width="560" height="21"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaB-cT-rdQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="291" height="21"/>
@@ -96,7 +96,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="96w-P8-AHS">
-                                    <rect key="frame" x="20" y="597" width="560" height="159"/>
+                                    <rect key="frame" x="20" y="596" width="560" height="159"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97x-2e-JFz">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -119,7 +119,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XGT-PL-ZaT">
-                                    <rect key="frame" x="20" y="402" width="560" height="159"/>
+                                    <rect key="frame" x="20" y="401" width="560" height="159"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIP-K4-94z">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -223,7 +223,7 @@
                         <constraint firstItem="aDT-22-E70" firstAttribute="leading" secondItem="lF2-M2-yvA" secondAttribute="leading" id="CMr-sY-B9E"/>
                         <constraint firstAttribute="trailing" secondItem="aDT-22-E70" secondAttribute="trailing" id="LJf-HV-Bq6"/>
                         <constraint firstAttribute="bottom" secondItem="aDT-22-E70" secondAttribute="bottom" id="dEn-iE-THo"/>
-                        <constraint firstItem="aDT-22-E70" firstAttribute="top" secondItem="lF2-M2-yvA" secondAttribute="top" id="f8L-tf-vvj"/>
+                        <constraint firstItem="aDT-22-E70" firstAttribute="top" secondItem="lF2-M2-yvA" secondAttribute="top" constant="64" id="f8L-tf-vvj"/>
                     </constraints>
                 </scrollView>
             </subviews>
@@ -254,6 +254,7 @@
                 <outlet property="readReviewsButton" destination="PcT-En-esZ" id="yIH-4s-vjd"/>
                 <outlet property="releaseLabel" destination="ok7-gX-HmQ" id="y7s-cj-mxS"/>
                 <outlet property="releaseValueLabel" destination="e0e-jN-Zhi" id="DZX-Dl-Aej"/>
+                <outlet property="scrollTopConstraint" destination="f8L-tf-vvj" id="qTr-Mc-RL4"/>
                 <outlet property="similarLabel" destination="97x-2e-JFz" id="mjL-Wq-XRg"/>
                 <outlet property="similarMovieCollectionView" destination="ypl-or-G67" id="fY3-8C-nld"/>
                 <outlet property="titleLabel" destination="Xx6-h4-YkF" id="pzp-EI-MmH"/>

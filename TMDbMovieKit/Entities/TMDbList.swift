@@ -15,7 +15,6 @@ private struct Keys {
     static let PageCount = "total_pages"
     static let ResultCount = "total_results"
     static let Items = "results"
-    static let TimeStamp = "timestamp"
 }
 
 class TMDbList<Item: Mappable>: NSObject, Mappable {
@@ -42,23 +41,24 @@ class TMDbList<Item: Mappable>: NSObject, Mappable {
         self.items        <- map[Keys.Items]
     }
     
-    // MARK: - Update with new items 
+    // MARK: Update
 
-    func update(data: TMDbList<Item>) -> Bool { // Completion handler and run on a background queue user initiated 0 // test if the completionhandler is still on a background thread
-        // Check if it tries to update with the same page (and if there where any changes (compare page number and the movies order)
-            // If equal dont update
-            // If not equal update
+    func update(data: TMDbList<Item>) -> Bool {
+        // Check equality of data 
+        guard data != self else { return false }
+        
+        // Handle results
         page = data.page
         pageCount = data.pageCount
         resultCount = data.resultCount
         
         if self.page > 1 {
-            self.items.appendContentsOf(data.items)
+            items.appendContentsOf(data.items)
         } else {
-            self.items = data.items
+            items = data.items
         }
         
-        return true // Return true if updated else return false 
+        return true 
     }
     
 }

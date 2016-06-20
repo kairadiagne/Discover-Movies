@@ -66,6 +66,8 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
     
     @IBOutlet weak var animatedConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var scrollTopConstraint: NSLayoutConstraint!
+    
     var imageHeader: GradientImageView!
     
     var playButton: UIButton!
@@ -73,6 +75,15 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
     weak var delegate: DetailViewDelegate?
     
     var didAnimate = false
+    
+    // Later change this (naming, and calculate with percetages (relative))
+    
+    var defaultOffset: CGFloat {
+        return Constants.ImageHeaderHeight - scrollTopConstraint.constant
+    }
+    
+    // imageheaderheight (relative so use percentage)
+    
 
     // MARK: Awake From Nib
     
@@ -107,13 +118,14 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
         
         self.imageHeader = GradientImageView(colors: colors, startPoint: startPoint, endPoint: endPoint, frame: .zero)
         self.imageHeader.contentMode = .ScaleAspectFill
-        self.detailScrollView.addSubview(self.imageHeader)
+        self.imageHeader.userInteractionEnabled = false
+        self.addSubview(self.imageHeader)
         
         self.playButton = UIButton()
         self.playButton.setImage(UIImage.playIcon(), forState: .Normal)
         let selector = #selector(DetailView.playButtonTapped(_:))
         self.playButton.addTarget(delegate, action: selector, forControlEvents: .TouchUpInside)
-        self.detailScrollView.addSubview(self.playButton)
+        self.addSubview(self.playButton)
 
         self.playButton.translatesAutoresizingMaskIntoConstraints = false
         self.playButton.centerXAnchor.constraintEqualToAnchor(self.imageHeader.centerXAnchor).active = true
@@ -121,8 +133,6 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
         self.playButton.widthAnchor.constraintEqualToAnchor(self.contentView.widthAnchor, multiplier: 0.13).active = true
         self.playButton.heightAnchor.constraintEqualToAnchor(self.contentView.widthAnchor, multiplier: 0.13).active = true
         
-        self.detailScrollView.contentInset = UIEdgeInsets(top: Constants.ImageHeaderHeight, left: 0, bottom: 0, right: 0)
-        self.detailScrollView.contentOffset = CGPoint(x: 0, y: -Constants.ImageHeaderHeight)
         self.detailScrollView.delegate = self
         
         self.imageHeader.alpha = 0.3
@@ -137,23 +147,70 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
     }
 
     // MARK: UIScrollViewDelegate
-    
+
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        updateHeaderImageFrame()
+        var frame = CGRect(x: imageHeader.frame.origin.x, y: imageHeader.frame.origin.y, width: imageHeader.frame.size.width, height: imageHeader.frame.size.height)
+        frame.size.height += -detailScrollView.contentOffset.y
+        self.imageHeader.frame = frame
     }
     
     // MARK: HeaderImageView
     
     private func updateHeaderImageFrame() {
-        var imageHeaderFrame = CGRect(x: 0, y: -Constants.ImageHeaderHeight, width: detailScrollView.bounds.width, height: Constants.ImageHeaderHeight)
-
-        if detailScrollView.contentOffset.y < -Constants.ImageHeaderHeight {
-            imageHeaderFrame.origin.y = detailScrollView.contentOffset.y
-            imageHeaderFrame.size.height = -detailScrollView.contentOffset.y
-        }
+        // Set the height of the header
+        self.imageHeader.frame = CGRect(x: 0, y: 0, width: bounds.width, height: Constants.ImageHeaderHeight)
         
-        imageHeader.frame = imageHeaderFrame
+        self.detailScrollView.contentInset = UIEdgeInsets(top: defaultOffset, left: 0, bottom: 0, right: 0)
+        
+        
+        
+        
+        
+//        let imageframe = CGRect(x: 0, y: 0, width: self.bounds.width, height: imageHeaderHeight)
+//        print("HeaderFrame: \(imageHeader.frame)")
+//        var imageHeaderFrame = CGRect(x: 0, y: Constants.ImageHeaderHeight, width: detailScrollView.bounds.width, height: -Constants.ImageHeaderHeight)
+        
+//        print("OffSet: \(detailScrollView.contentOffset)")
+//        print("Inset: \(detailScrollView.contentInset)")
+//        
+//        let calculation = detailScrollView.contentOffset.y - detailScrollView.contentInset.top
+        
+//        if calculation < 0 {
+//            imageHeader.frame.size.height = detailScrollView.contentOffset.y * -1 // Convert to postive valeu find cleaner sollution
+//            detailScrollView.contentInset.top = -detailScrollView.contentOffset.y
+//        } else if calculation == 0 {
+            // Image header should be standard height (Default)
+            // Inset is height
+//        } else if calculation > 0 {
+            // Image header should be smaller
+            // Inset should be header height
+//        } else if calculation >= 44 {
+            // image header should be 44
+            // Inste should be 44
+//        }
+        
+//        imageHeader.frame = imageframe
+    
+//        if detailScrollView.contentOffset.y < Constants.ImageHeaderHeight {
+////            detailScrollView.contentInset.top = detailScrollView.contentOffset.y
+//        }
+//        
+//        
+//        
+//        
+//        if detailScrollView.contentOffset.y >= -Constants.ImageHeaderYCuttOff {
+////            detailScrollView.contentInset = UIEdgeInsets(top: Constants.MinImageHaderHeight, left: 0 , bottom: 0, right: 0)
+////            imageHeaderFrame.origin.y = -Constants.ImageHeaderYCuttOff
+////            imageHeaderFrame.size.height = -Constants.MinImageHaderHeight
+//        } else if detailScrollView.contentOffset.y < -Constants.ImageHeaderHeight {
+////            imageHeaderFrame.origin.y = detailScrollView.contentOffset.y
+////            imageHeaderFrame.size.height = -detailScrollView.contentOffset.y
+//        }
+    
+//        imageHeader.frame = imageHeaderFrame
     }
+    
+    
     
     // MARK: UICollectionView
     

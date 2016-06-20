@@ -71,17 +71,12 @@ public class TMDbBaseDataManager {
     
     func updateList<T: Mappable>(list: TMDbList<T>, withData data: TMDbList<T>) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            list.update(data) // make bool so didUpdate
             
-            // If state has not changed 
-                // Do not change state
-            // If state has changed
-                // If data.items.count == 0
-                    // .NoData
-            // If data.page == 1
-                // .DataDidLoad
-            // If data.page > 1 {
-                // .DataDidUpdate
+            let didUpdate = list.update(data)
+            
+            if !didUpdate {
+                return
+            }
             
             dispatch_async(dispatch_get_main_queue(), {
                 if data.items.count == 0 {
@@ -92,6 +87,7 @@ public class TMDbBaseDataManager {
                     self.state = .DataDidUpdate
                 }
             })
+
         }
     }
     
@@ -105,6 +101,8 @@ public class TMDbBaseDataManager {
         } else {
             lastError = .Unknown
         }
+        
+        state = .Error
         
     }
 

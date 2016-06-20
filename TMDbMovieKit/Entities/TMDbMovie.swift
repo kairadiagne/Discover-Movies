@@ -22,7 +22,7 @@ private struct Keys {
     static let BackdropPath = "backdrop_path"
 }
 
-public class TMDbMovie: NSObject, Mappable {
+public struct TMDbMovie: Mappable, Equatable {
     
     public var movieID: Int = 0
     public var title: String = ""
@@ -34,12 +34,12 @@ public class TMDbMovie: NSObject, Mappable {
     public var posterPath: String?
     public var backDropPath: String?
     
-    public required init?(_ map: Map) {
+    public init?(_ map: Map) {
         guard map.JSONDictionary[Keys.MovieID] != nil else { return nil }
         guard map.JSONDictionary[Keys.Title] != nil else { return nil }
     }
     
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         self.movieID           <- map[Keys.MovieID]
         self.title             <- map[Keys.Title]
         self.overview          <- map[Keys.Overview]
@@ -54,13 +54,8 @@ public class TMDbMovie: NSObject, Mappable {
         self.releaseDate        = dateString.toDate()
     }
     
-    // MARK: Equality
-    
-    override public func isEqual(object: AnyObject?) -> Bool {
-        if let movie = object as? TMDbMovie {
-            return movieID == movie.movieID
-        }
-        return false
-    }
-    
+}
+
+public func ==(lhs: TMDbMovie, rhs: TMDbMovie) -> Bool {
+    return lhs.movieID == rhs.movieID ? true : false
 }

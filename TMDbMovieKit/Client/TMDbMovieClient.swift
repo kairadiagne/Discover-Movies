@@ -21,6 +21,8 @@ public enum TMDbToplist: String {
     case NowPlaying = "now_playing"
 }
 
+import Alamofire
+
 class TMDbMovieClient: TMDbAPIClient {
 
     // Fetches themoviedb toplist (Popular, Toprated, Upcoming, Now playing)
@@ -29,7 +31,7 @@ class TMDbMovieClient: TMDbAPIClient {
         let parameters: [String: AnyObject] = ["page": page]
         
         let endpoint = "movie/\(list.rawValue)"
-        
+    
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
             .responseObject { (response: Response<TMDbList<TMDbMovie>, NSError>) in
                 completionHandler(list: response.result.value, error: response.result.error)

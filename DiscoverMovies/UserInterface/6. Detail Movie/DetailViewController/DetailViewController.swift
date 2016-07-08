@@ -50,15 +50,14 @@ class DetailViewController: BaseViewController {
         detailView.similarMovieCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
         detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
         
-        detailView.registerDataSources(castDataProvider, similar: similarMoviesDataProvider)
-        detailView.registerCollectionViewDelegate(self)
-        
+        detailView.registerCollectionViewDelegates(self, castDataSource: castDataProvider, similarMovieDataSource: similarMoviesDataProvider)
         detailView.delegate = self
-        detailView.configure(movie, image: image)
         
         detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
         detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
         
+        detailView.movie = movie
+        detailView.image = image
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -105,30 +104,25 @@ class DetailViewController: BaseViewController {
         case .Loading:
             showProgressHUD()
         case .DataDidLoad:
-            update()
+            if let similarMovies = movieInfoManager.similarMovies {
+                detailView.similarMovieCollectionView.hideMessage()
+                similarMoviesDataProvider.updateWithMovies(similarMovies)
+            }
+            
+            if let cast = movieInfoManager.cast {
+                detailView.castCollectionView.hideMessage()
+                castDataProvider.updateWithCast(cast)
+            }
+            
+            detailView.accountState = movieInfoManager.accountState
+//            detailView.movieCredit = movieInfoManager.credit 
+            
+            
         case .Error:
             handleErrorState(movieInfoManager.lastError, authorizationRequired: signedIn )
         default:
             return
         }
-    }
-    
-    private func update() {
-        if let similarMovies = movieInfoManager.similarMovies {
-            detailView.similarMovieCollectionView.hideMessage()
-            similarMoviesDataProvider.updateWithMovies(similarMovies)
-        }
-        
-        if let cast = movieInfoManager.cast {
-            detailView.castCollectionView.hideMessage()
-            castDataProvider.updateWithCast(cast)
-        }
-        
-        if let accountState = movieInfoManager.accountState {
-            detailView.configureForAccountState(accountState)
-        }
-        
-        detailView.reloadCollectionViews()
     }
 
     // MARK: Navigation

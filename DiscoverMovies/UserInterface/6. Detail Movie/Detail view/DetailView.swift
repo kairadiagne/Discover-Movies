@@ -10,95 +10,55 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-protocol DetailViewDelegate: class {
-    func detailViewDelegateDidTapTrailerButton()
-}
-
-class DetailView: BackgroundView, UIScrollViewDelegate {
+class DetailView: BackgroundView {
     
-    // MARK: - Types 
-    
-    private struct Constants {
-        static let ImageHeaderHeight: CGFloat = 290
-        static let DefaultInset: CGFloat = 64
-    }
-    
-    // MARK: UI Properties
+    // MARK: Outlet Properties
     
     @IBOutlet weak var detailScrollView: UIScrollView!
-    
     @IBOutlet weak var contentView: BackgroundView!
-    
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var overviewLabel: UILabel!
-    
     @IBOutlet weak var directorLabel: UILabel!
-    
     @IBOutlet weak var directorValueLabel: UILabel!
-    
     @IBOutlet weak var genreLabel: UILabel!
-    
     @IBOutlet weak var genreValueLabel: UILabel!
-    
     @IBOutlet weak var releaseLabel: UILabel!
-    
     @IBOutlet weak var releaseValueLabel: UILabel!
-    
     @IBOutlet weak var ratingLabel: UILabel!
-    
     @IBOutlet weak var ratingValueLabel: UILabel!
-    
     @IBOutlet weak var castLabel: UILabel!
-    
     @IBOutlet weak var castCollectionView: BaseCollectionView!
-    
     @IBOutlet weak var similarLabel: UILabel!
-    
     @IBOutlet weak var similarMovieCollectionView: BaseCollectionView!
-    
     @IBOutlet weak var readReviewsButton: UIButton!
-    
     @IBOutlet weak var favouriteControl: FavouriteButton!
-    
     @IBOutlet weak var watchListControl: WatchListButton!
-    
+    @IBOutlet weak var header: GradientImageView!
+    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var animationConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollTop: NSLayoutConstraint!
+    @IBOutlet weak var headerTop: NSLayoutConstraint!
     
-    var imageHeader: GradientImageView!
+    // MARK: Other Properties
     
-    var playButton: UIButton!
+    private var didAnimate = false
     
-    // MARK: Data Properties
+    private var topInset: CGFloat {
+        return header.frame.height - scrollTop.constant
+    }
     
-    var movie: TMDbMovie? { didSet { loadUI() } }
-    
-    var image: UIImage? { didSet { loadUI() } }
-    
-    var imageURL: NSURL? { didSet { loadUI() } }
-    
-    var movieCredit: TMDbMovieCredit? { didSet { loadUI() } }
-    
-    var accountState: TMDbAccountState? { didSet { loadUI() } }
-    
-    // MAKR: Other Properties
-    
-    weak var delegate: DetailViewDelegate?
-    
-    var didAnimate = false
+    private var openHeader: CGFloat {
+        let contentInsetY = detailScrollView.contentInset.top
+        let contentOffSetY = detailScrollView.contentOffset.y
+        let position = (contentInsetY + contentOffSetY) / contentInsetY
+        return min(1, max(0, position))
+    }
     
     // MARK: Setup UI
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupFontsForLabels()
-        customizeControls()
-        setupImageHeader()
-        setupPlayButton()
-        setupForAnimation()
-    }
-    
-    private func setupFontsForLabels() {
         self.titleLabel.font = UIFont.H1()
         self.overviewLabel.font = UIFont.Body()
         self.directorLabel.font = UIFont.H2()
@@ -111,9 +71,7 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
         self.ratingValueLabel.font = UIFont.Caption()
         self.castLabel.font = UIFont.H2()
         self.similarLabel.font = UIFont.H2()
-    }
-    
-    private func customizeControls() {
+        
         self.favouriteControl.lineColor = UIColor.buttonColor()
         self.favouriteControl.fillColor = UIColor.buttonColor()
         self.watchListControl.lineColor = UIColor.buttonColor()
@@ -122,87 +80,54 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
         self.readReviewsButton.tintColor = UIColor.buttonColor()
         self.readReviewsButton.layer.borderWidth = 1.5
         self.readReviewsButton.layer.borderColor = UIColor.buttonColor().CGColor
-    }
-    
-    private func setupImageHeader() {
-        let colors = [UIColor.backgroundColor().CGColor, UIColor.clearColor().CGColor]
-        let startPoint = CGPoint(x: 0, y: 1)
-        let endPoint = CGPoint(x: 0, y: 0.1)
         
-        self.imageHeader = GradientImageView(colors: colors, startPoint: startPoint, endPoint: endPoint, frame: .zero)
-        self.imageHeader.contentMode = .ScaleAspectFill
-        self.imageHeader.userInteractionEnabled = false
-        self.addSubview(self.imageHeader)
-    }
-    
-    private func setupPlayButton() {
-        self.playButton = UIButton()
-        self.playButton.setImage(UIImage.playIcon(), forState: .Normal)
-        let selector = #selector(DetailView.playButtonTapped(_:))
-        self.playButton.addTarget(delegate, action: selector, forControlEvents: .TouchUpInside)
-        self.addSubview(self.playButton)
+        detailScrollView.delegate = self
+        detailScrollView.bounces = false
         
-        self.playButton.translatesAutoresizingMaskIntoConstraints = false
-        self.playButton.centerXAnchor.constraintEqualToAnchor(self.imageHeader.centerXAnchor).active = true
-        self.playButton.centerYAnchor.constraintEqualToAnchor(self.imageHeader.centerYAnchor).active = true
-        self.playButton.widthAnchor.constraintEqualToAnchor(self.contentView.widthAnchor, multiplier: 0.13).active = true
-        self.playButton.heightAnchor.constraintEqualToAnchor(self.contentView.widthAnchor, multiplier: 0.13).active = true
+        // Change for animation
+        self.header.alpha = 0.3
+        self.playButton.alpha = 0.3
     }
     
-    private func setupForAnimation() {
-        self.imageHeader.alpha = 0.3
-        self.playButton.alpha = 0.0
+    // MARK: LifeCycle 
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.detailScrollView.contentInset.top = topInset
     }
+
+    // MARK: Configure
     
-    // MARK: Configure & Loading
-    
-    func loadUI() {
-        // Configure with movie 
-        if let movie = movie {
-            titleLabel.text = movie.title
-            overviewLabel.text = movie.overview ?? "N/A"
-            genreLabel.text = movie.genres.first?.name ?? "Unknown"
-            ratingValueLabel.text = "\(movie.rating)\\10.0" // Number Formatter
-            releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
-        }
+    func configure(withMovie movie: TMDbMovie, image: UIImage?) {
+        titleLabel.text = movie.title
+        overviewLabel.text = movie.overview ?? "N/A"
+        genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
+        ratingValueLabel.text = movie.rating != nil ? "\(movie.rating!)\\10.0" : "0.0\\10.0"
+        releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
         
-        // If image is available set the header image
         if let image = image {
-            imageHeader.image = image
+            header.image = image
         }
         
-        // If image is not available load from web
-        if let imageURL = imageURL {
-            imageHeader.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
+        if let path = movie.backDropPath {
+            let imageURL = TMDbImageRouter.BackDropMedium(path: path).url ?? NSURL()
+            header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
         }
+
+    }
+    
+    func configure(withDirector director: TMDbCrewMember?, withAccountState accountState: TMDbAccountState?) {
+        directorValueLabel.text = director?.name ?? "Unknown"
         
-        // Configure with director
-        directorValueLabel.text = movieCredit?.director?.name ?? "Unknown"
-        
-        // Configure favorite & watchlist control
-        if let state = accountState {
-            favouriteControl.setSelectedState(state.favoriteStatus)
-            watchListControl.setSelectedState(state.watchlistStatus)
+        if let accountState = accountState {
+            favouriteControl.setSelectedState(accountState.favoriteStatus)
+            watchListControl.setSelectedState(accountState.watchlistStatus)
         }
     }
     
     func reloadCollectionViews() {
         castCollectionView.reloadData()
         similarMovieCollectionView.reloadData()
-    }
-    
-    // MARK: UICollectionView
-    
-    func registerCollectionViewDelegates(delegate: UICollectionViewDelegate, castDataSource: UICollectionViewDataSource, similarMovieDataSource: UICollectionViewDataSource) {
-        castCollectionView.dataSource = castDataSource
-        similarMovieCollectionView.dataSource = similarMovieDataSource
-        similarMovieCollectionView.delegate = delegate
-    }
-    
-    // MARK: Actions
-    
-    func playButtonTapped(button: UIButton) {
-        delegate?.detailViewDelegateDidTapTrailerButton()
     }
     
     // MARK: Animation
@@ -219,7 +144,7 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
                 }, completion: nil)
             
             UIView.animateWithDuration(0.5, delay: 0.3, options: [.CurveEaseInOut], animations: {
-                self.imageHeader.alpha = 1.0
+                self.header.alpha = 1.0
                 }, completion: nil)
             
             UIView.animateWithDuration(0.2, delay: 0.6, options: [.CurveEaseInOut], animations: {
@@ -230,6 +155,16 @@ class DetailView: BackgroundView, UIScrollViewDelegate {
     
 }
 
-//        detailScrollView.contentInset = UIEdgeInsets(top: Constants.ImageHeaderHeight, left: 0, bottom: 0, right: 0)
-//        self.detailScrollView.contentOffset = CGPoint(x: 0, y: -Constants.ImageHeaderHeight)
-//        self.detailScrollView.delegate = self
+// MARK: - UIScrollViewDelegate
+
+extension DetailView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        headerTop.constant = openHeader * -header.frame.height * 0.8
+        playButton.alpha = -openHeader + 1
+        detailScrollView.bounces = detailScrollView.contentOffset.y > topInset
+    }
+    
+}
+
+

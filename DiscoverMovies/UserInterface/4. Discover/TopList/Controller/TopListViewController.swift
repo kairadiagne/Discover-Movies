@@ -15,7 +15,6 @@ class TopListViewController: DiscoverListViewController {
     // MARK: Properties
     
     var switchListControl: UISegmentedControl!
-    
     private let topListDataManager = TMDbTopListManager()
     
     // MARK: View Controller Life Cycle

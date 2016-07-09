@@ -13,19 +13,18 @@ class GradientImageView: UIImageView {
     // MARK: Properties
 
     var gradientLayer = CAGradientLayer()
+    var colors: [CGColor] = [UIColor.backgroundColor().CGColor, UIColor.clearColor().CGColor]
+    var startPoint = CGPoint(x: 0, y: 1)
+    var endPoint = CGPoint(x: 0, y: 0.1)
     
     // MARK: Initializers
     
-    init(colors: [CGColor], startPoint: CGPoint, endPoint: CGPoint, frame: CGRect) {
-        super.init(frame: frame)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         self.gradientLayer.colors = colors
         self.gradientLayer.startPoint = startPoint
         self.gradientLayer.endPoint = endPoint
         self.layer.addSublayer(self.gradientLayer)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: Life Cycle

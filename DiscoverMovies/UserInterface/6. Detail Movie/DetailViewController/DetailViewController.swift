@@ -14,24 +14,18 @@ class DetailViewController: BaseViewController {
     // MARK: Properties
     
     @IBOutlet var detailView: DetailView!
+    @IBOutlet var castDataProvider: CastDataProvider!
+    @IBOutlet var similarMoviesDataProvider: SimilarMovieDataProvider!
 
     private let movie: TMDbMovie
-    
     private var image: UIImage?
-    
     private let movieInfoManager = TMDbMovieInfoManager()
-    
-    private let castDataProvider: CastDataProvider
-    
-    private let similarMoviesDataProvider: SimilarMovieDataProvider
-    
+
     // MARK: Initializers
     
     init(movie: TMDbMovie, image: UIImage? = nil) {
         self.movie = movie
         self.image = image
-        self.castDataProvider = CastDataProvider(cellIdentifier: PersonCollectionViewCell.defaultIdentfier())
-        self.similarMoviesDataProvider = SimilarMovieDataProvider(cellIdentifier: MovieCollectionViewCell.defaultIdentfier())
         super.init(nibName: "DetailViewController", bundle: nil)
     }
     
@@ -50,14 +44,11 @@ class DetailViewController: BaseViewController {
         detailView.similarMovieCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
         detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
         
-        detailView.registerCollectionViewDelegates(self, castDataSource: castDataProvider, similarMovieDataSource: similarMoviesDataProvider)
-        detailView.delegate = self
-        
         detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
         detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
         
-        detailView.movie = movie
-        detailView.image = image
+        detailView.configure(withMovie: movie, image: image)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,7 +56,6 @@ class DetailViewController: BaseViewController {
         navigationController?.navigationBar.setAsTransparent()
         
         movieInfoManager.addChangeObserver(self, selector: #selector(DetailViewController.dataDidChangeNotification(_:)))
-
         movieInfoManager.loadInfoAboutMovieWithID(movie.movieID)
         movieInfoManager.loadAccountStateForMovieWithID(movie.movieID)
     }
@@ -95,6 +85,10 @@ class DetailViewController: BaseViewController {
         showReviews(movie)
     }
     
+    @IBAction func playButtonTapped(sender: UIButton) {
+        showTrailer()
+    }
+    
     // MARK: Notifications
     
     override func dataDidChangeNotification(notification: NSNotification) {
@@ -104,25 +98,28 @@ class DetailViewController: BaseViewController {
         case .Loading:
             showProgressHUD()
         case .DataDidLoad:
-            if let similarMovies = movieInfoManager.similarMovies {
-                detailView.similarMovieCollectionView.hideMessage()
-                similarMoviesDataProvider.updateWithMovies(similarMovies)
-            }
-            
-            if let cast = movieInfoManager.cast {
-                detailView.castCollectionView.hideMessage()
-                castDataProvider.updateWithCast(cast)
-            }
-            
-            detailView.accountState = movieInfoManager.accountState
-//            detailView.movieCredit = movieInfoManager.credit 
-            
-            
+            update()
         case .Error:
             handleErrorState(movieInfoManager.lastError, authorizationRequired: signedIn )
         default:
             return
         }
+    }
+    
+    private func update() {
+        if let similarMovies = movieInfoManager.similarMovies {
+            detailView.similarMovieCollectionView.hideMessage()
+            similarMoviesDataProvider.updateWithMovies(similarMovies)
+            detailView.reloadCollectionViews()
+        }
+        
+        if let cast = movieInfoManager.cast {
+            detailView.castCollectionView.hideMessage()
+            castDataProvider.updateWithCast(cast)
+            detailView.reloadCollectionViews()
+        }
+        
+        detailView.configure(withDirector: movieInfoManager.director, withAccountState: movieInfoManager.accountState)
     }
 
     // MARK: Navigation
@@ -154,14 +151,4 @@ extension DetailViewController: UICollectionViewDelegate {
         showDetailSimilarMovie(movie)
     }
     
-}
-
-// MARK: - DetailViewDelegate
-
-extension DetailViewController: DetailViewDelegate {
-    
-    func detailViewDelegateDidTapTrailerButton() {
-        showTrailer()
-    }
-
 }

@@ -24,6 +24,10 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
         return movieInfo?.credits?.crew
     }
     
+    public var director: TMDbCrewMember? {
+        return movieInfo?.credits?.director
+    }
+    
     public var trailer: TMDbVideo? {
         return movieInfo?.trailers?.first
     }

@@ -11,7 +11,7 @@ import TMDbMovieKit
 
 class ReviewViewController: ListViewController {
     
-    // MARK: Constants
+    // MARK: Types
     
     private struct Constants {
         static let ReviewCellIdentifier = "ReviewCell"
@@ -21,9 +21,7 @@ class ReviewViewController: ListViewController {
     // MARK: Properties
     
     private let movie: TMDbMovie
-    
     private let reviewManager = TMDbReviewManager()
-    
     private let reviewDataProvider = ReviewDataProvider()
     
     // MARK: Initializers

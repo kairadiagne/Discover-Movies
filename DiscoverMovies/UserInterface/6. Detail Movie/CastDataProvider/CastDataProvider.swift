@@ -17,15 +17,9 @@ class CastDataProvider: NSObject, UICollectionViewDataSource {
         return castMembers?.count ?? 0
     }
     
-    var cellIdentifier: String
+    var cellIdentifier: String = PersonCollectionViewCell.defaultIdentfier()
     
     private var castMembers: [TMDbCastMember]?
-    
-    // MARK: Initializer
-    
-    init(cellIdentifier: String) {
-        self.cellIdentifier = cellIdentifier
-    }
     
     // MARK: UICollectionViewDataSource
     

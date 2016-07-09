@@ -21,9 +21,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     // MARK: Properties
     
     private let accountListDataManager = TMDbAccountListDataManager()
-    
     private let dataProvider = AccountListDataProvider()
-    
     private let accountList: TMDbAccountList
     
     // MARK: Initializers

@@ -22,11 +22,9 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     // MARK: Properties
     
     var banner: Banner?
-    
     var progressHUD: MBProgressHUD?
-    
     var sessionManager = TMDbSessionManager()
-    
+
     var shouldShowSignInViewController: Bool {
         switch sessionManager.signInStatus {
         case .NotAvailable:

@@ -16,9 +16,7 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
     // MARK: Properties
     
     var progressHUD: MBProgressHUD?
-
     let youtubeView = YTPlayerView()
-    
     var video: TMDbVideo!
     
     // MARK: Initialization

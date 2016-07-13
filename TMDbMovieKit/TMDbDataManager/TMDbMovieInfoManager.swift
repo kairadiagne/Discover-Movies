@@ -11,6 +11,16 @@ import Foundation
 public class TMDbMovieInfoManager: TMDbBaseDataManager {
     
     // MARK: Properties
+    
+    public private(set) var movie: TMDbMovie!
+    
+    public var inFavorites: Bool {
+        return movie.inFavorites
+    }
+    
+    public var inWatchList: Bool {
+        return movie.inWatchList
+    }
 
     public var similarMovies: [TMDbMovie]? {
         return movieInfo?.similarMovies?.items
@@ -36,15 +46,25 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
         return movieInfo?.trailers
     }
     
-    public var accountState: TMDbAccountState?
-    
     private var movieInfo: TMDbMovieInfo?
-    
     private let movieClient = TMDbMovieClient()
+    
+    // MARK: - Initialization 
+    
+    public init(withMovie movie: TMDbMovie) {
+        self.movie = movie
+        super.init()
+        
+        self.loadInfoAboutMovieWithID(movie.movieID)
+        
+        if TMDbSessionManager().signInStatus == .Signedin {
+            self.loadAccountStateForMovie(movie.movieID)
+        }
+    }
     
     // MARK: - API Calls
     
-    public func loadInfoAboutMovieWithID(movieID: Int) {
+    private func loadInfoAboutMovieWithID(movieID: Int) {
         movieClient.fetchAdditionalInfoMovie(movieID) { (response) in
             guard response.error == nil else {
                 self.handleError(response.error!)
@@ -63,17 +83,18 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
         }
     }
     
-    public func loadAccountStateForMovieWithID(movieID: Int) {
+    private func loadAccountStateForMovie(movieID: Int) {
         movieClient.accountStateForMovie(movieID) { (response) in
             
             guard response.error == nil else {
-//                self.handleError(response.error!)
+                self.handleError(response.error!) // return error if signed in
                 return
             }
             
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
                 if let accountState = response.state {
-                    self.accountState = accountState
+                    self.movie.inFavorites = accountState.favoriteStatus
+                    self.movie.inWatchList = accountState.watchlistStatus
                     
                     dispatch_async(dispatch_get_main_queue(), { 
                         self.state = .DataDidLoad
@@ -83,23 +104,29 @@ public class TMDbMovieInfoManager: TMDbBaseDataManager {
         }
     }
     
-    public func toggleStateOfMovieInList(movieID: Int, list: TMDbAccountList) {
-        guard let accountState = accountState else { return }
-        
-        switch list {
-        case .Favorites:
-            changeStateForMovie(movieID, inList: list.rawValue, toState: !accountState.favoriteStatus)
-        case .Watchlist:
-            changeStateForMovie(movieID, inList: list.rawValue, toState: !accountState.watchlistStatus)
-        }
+    public func toggleStatusOfMovieInList(list: TMDbAccountList, status: Bool) {
+        changeStateForMovie(movie.movieID, inList: list, toState: status)
     }
     
-    private func changeStateForMovie(movieID: Int, inList list: String, toState state: Bool) {
-        movieClient.changeStateForMovie(movieID, inList: list, toState: state) { (error) in
+    private func changeStateForMovie(movieID: Int, inList list: TMDbAccountList, toState state: Bool) {
+        movieClient.changeStateForMovie(movieID, inList: list.rawValue, toState: state) { (error) in
             guard error == nil else {
                 self.handleError(error!)
                 return
             }
+    
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+                switch list {
+                case .Favorites:
+                    self.movie.inFavorites = state
+                case .Watchlist:
+                    self.movie.inWatchList = state
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), { 
+                    self.state = .DataDidLoad
+                })
+            })
         }
     }
 

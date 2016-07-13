@@ -33,6 +33,8 @@ public struct TMDbMovie: Mappable, Equatable {
     public var adult: Bool?
     public var posterPath: String?
     public var backDropPath: String?
+    public var inFavorites = false
+    public var inWatchList = false
     
     public init?(_ map: Map) {
         guard map.JSONDictionary[Keys.MovieID] != nil else { return nil }
@@ -40,14 +42,14 @@ public struct TMDbMovie: Mappable, Equatable {
     }
     
     public mutating func mapping(map: Map) {
-        self.movieID           <- map[Keys.MovieID]
-        self.title             <- map[Keys.Title]
-        self.overview          <- map[Keys.Overview]
-        self.genres            <- map[Keys.Genre]
-        self.rating            <- map[Keys.VoteAverage]
-        self.adult             <- map[Keys.Adult]
-        self.posterPath        <- map[Keys.PosterPath]
-        self.backDropPath      <- map[Keys.BackdropPath]
+        self.movieID       <- map[Keys.MovieID]
+        self.title         <- map[Keys.Title]
+        self.overview      <- map[Keys.Overview]
+        self.genres        <- map[Keys.Genre]
+        self.rating        <- map[Keys.VoteAverage]
+        self.adult         <- map[Keys.Adult]
+        self.posterPath    <- map[Keys.PosterPath]
+        self.backDropPath  <- map[Keys.BackdropPath]
         
         var dateString: String = ""
         dateString             <- map[Keys.ReleaseDate]

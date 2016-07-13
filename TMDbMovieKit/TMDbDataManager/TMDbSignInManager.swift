@@ -17,11 +17,8 @@ public protocol TMDbSignInDelegate {
 public class TMDbSignInManager {
     
     public var delegate: TMDbSignInDelegate?
-    
     private var isLoading = false
-    
     private let signInClient = TMDbSignInClient()
-    
     private let sessionInfoStore = TMDbSessionInfoStore()
     
     // MARK: - Initialization

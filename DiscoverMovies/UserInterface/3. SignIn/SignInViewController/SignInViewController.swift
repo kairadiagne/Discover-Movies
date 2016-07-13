@@ -15,9 +15,7 @@ class SignInViewController: BaseViewController {
     // MARK: Properties
 
     private let userManager = TMDbUserManager()
-    
     private let signInManager = TMDbSignInManager()
-    
     private var safariViewController: SFSafariViewController!
     
     // MARK: View Controller Life Cycle

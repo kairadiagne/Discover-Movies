@@ -17,7 +17,7 @@ class DetailView: BackgroundView {
     @IBOutlet weak var detailScrollView: UIScrollView!
     @IBOutlet weak var contentView: BackgroundView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var directorLabel: UILabel!
     @IBOutlet weak var directorValueLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -36,8 +36,8 @@ class DetailView: BackgroundView {
     @IBOutlet weak var header: GradientImageView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var animationConstraint: NSLayoutConstraint!
-    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollTop: NSLayoutConstraint!
+    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerTop: NSLayoutConstraint!
     
     // MARK: Other Properties
@@ -60,7 +60,7 @@ class DetailView: BackgroundView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.H1()
-        self.overviewLabel.font = UIFont.Body()
+        self.descriptionLabel.font = UIFont.Body()
         self.directorLabel.font = UIFont.H2()
         self.directorValueLabel.font = UIFont.Caption()
         self.releaseLabel.font = UIFont.H2()
@@ -100,7 +100,7 @@ class DetailView: BackgroundView {
     
     func configure(withMovie movie: TMDbMovie, image: UIImage?) {
         titleLabel.text = movie.title
-        overviewLabel.text = movie.overview ?? "N/A"
+        descriptionLabel.text = movie.overview ?? "N/A"
         genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
         ratingValueLabel.text = movie.rating != nil ? "\(movie.rating!)\\10.0" : "0.0\\10.0"
         releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
@@ -116,13 +116,10 @@ class DetailView: BackgroundView {
 
     }
     
-    func configure(withDirector director: TMDbCrewMember?, withAccountState accountState: TMDbAccountState?) {
+    func configure(withDirector director: TMDbCrewMember?, inFavorites: Bool, inWatchList: Bool) {
         directorValueLabel.text = director?.name ?? "Unknown"
-        
-        if let accountState = accountState {
-            favouriteControl.setSelectedState(accountState.favoriteStatus)
-            watchListControl.setSelectedState(accountState.watchlistStatus)
-        }
+        favouriteControl.setSelectedState(inFavorites)
+        watchListControl.setSelectedState(inWatchList)
     }
     
     func reloadCollectionViews() {

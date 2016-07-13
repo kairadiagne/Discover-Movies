@@ -52,6 +52,7 @@ class TMDbSignInClient: TMDbAPIClient {
                     
                     let path: String = "\(TMDbAPI.AuthenticateURL)\(requestToken.token)"
                     let url = NSURL(string: path)
+                    print(url)
     
                     completionHandler(url: url, error: nil)
                 }

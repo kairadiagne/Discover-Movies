@@ -9,16 +9,12 @@
 import UIKit
 import TMDbMovieKit
 
-// TODO: - Show Background Message. How??
-
 class ReviewDataProvider: NSObject, DataProvider, UITableViewDataSource {
     
     // MARK: Properties
     
     typealias Item = TMDbReview
-    
     typealias Cell = ReviewTableViewCell
-    
     var items: [Item] = []
     
     // MARK: UITableViewDataSource

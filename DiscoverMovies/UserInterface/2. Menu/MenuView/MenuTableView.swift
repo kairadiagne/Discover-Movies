@@ -16,19 +16,12 @@ class MenuTableView: UITableView {
     // MARK: Properties
     
     @IBOutlet weak var discoverLabel: UILabel!
-    
     @IBOutlet weak var watchListLabel: UILabel!
-    
     @IBOutlet weak var favoritesLabel: UILabel!
-    
     @IBOutlet weak var signoutlabel: UILabel!
-    
     @IBOutlet weak var profileImageView: UIImageView!
-    
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var watchlistCell: UITableViewCell!
-    
     @IBOutlet weak var favoriteCell: UITableViewCell!
     
     // MARK: Awake From Nib

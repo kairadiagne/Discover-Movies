@@ -19,21 +19,15 @@ public class TMDbTopListManager: TMDbBaseDataManager {
     }
     
     public var page = 1
-    
     private var currentList: TMDbToplist?
-
     private let movieClient = TMDbMovieClient()
-    
     private var popular = TMDbList<TMDbMovie>()
-    
     private var topRated = TMDbList<TMDbMovie>()
-    
     private var upcoming = TMDbList<TMDbMovie>()
-    
     private var nowPlaying = TMDbList<TMDbMovie>()
     
-    // MARK: Fetching
-    
+    // MARK: Request Data
+
     public func loadTop(list: TMDbToplist) {
         currentList = list
         fetchList(list, page: 1)

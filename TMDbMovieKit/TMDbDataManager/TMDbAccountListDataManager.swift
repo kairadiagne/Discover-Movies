@@ -22,12 +22,11 @@ public class TMDbAccountListDataManager: TMDbBaseDataManager {
     
     private var list = TMDbList<TMDbMovie>()
     
-    // MARK: Fetching 
+    // MARK: request Data
     
     public func loadTop(list: TMDbAccountList) {
         currentList = list
         fetchList(list, page: 1)
-        
     }
     
     public func loadMore() {

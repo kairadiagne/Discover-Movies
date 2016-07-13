@@ -14,11 +14,7 @@ class DiscoverDataProvider: NSObject, DataProvider, UITableViewDataSource {
     // MARK: Properties
     
     typealias Item = TMDbMovie
-    
     typealias Cell = DiscoverListCell
-    
-    // MARK: Data
-    
     var items: [Item] = []
     
     // MARK: UITableViewDataSource

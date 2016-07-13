@@ -16,9 +16,7 @@ public class TMDbReviewManager: TMDbBaseDataManager {
     }
 
     private let movieClient = TMDbMovieClient()
-    
     private var reviewList = TMDbList<TMDbReview>()
-    
     private var movieID: Int?
     
     // MARK: - API Calls

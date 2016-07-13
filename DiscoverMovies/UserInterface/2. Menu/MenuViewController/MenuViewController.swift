@@ -10,28 +10,20 @@ import UIKit
 import TMDbMovieKit
 
 class MenuViewController: UITableViewController {
-    
-    private struct Constants {
-        static let Identifier = "MenuViewController"
-        static let MenuCellIdentifier = "MenuTableViewCell"
-        static let RootViewControllerNibName = "ListViewController"
-    }
-    
+
     // MARK: Storyboard
     
     class func instantiatefromStoryboard() -> MenuViewController {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        return storyboard.instantiateViewControllerWithIdentifier(Constants.Identifier) as! MenuViewController
+        return storyboard.instantiateViewControllerWithIdentifier(String(MenuViewController)) as! MenuViewController
     }
 
     @IBOutlet weak var menuTableview: MenuTableView!
     
     private let userManager = TMDbUserManager()
-    
     private let signInmanager = TMDbSignInManager()
-    
     private let sessionManager = TMDbSessionManager()
-    
+
     private var signedIn: Bool {
         switch sessionManager.signInStatus {
         case .Signedin:
@@ -47,7 +39,6 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 //        userManager.addUpdateObserver(self, selector: #selector(MenuViewController.dataDidUpdateNotification(_:)))
     }
     
@@ -75,7 +66,7 @@ class MenuViewController: UITableViewController {
     // MARK: Navigation
     
     func showTopListViewController() {
-        let topListVieWController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
+        let topListVieWController = TopListViewController(nibName: String(ListViewController), bundle: nil)
         let navigationController = UINavigationController(rootViewController: topListVieWController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }

@@ -11,7 +11,7 @@ import Alamofire
 
 class TMDbUserClient: TMDbAPIClient {
     
-    // Gets information about the user
+    // Get information about the user
     
     func fetchUserInfo(completionHandler: (user: TMDbUser?, error: NSError?) -> Void) {
         guard let sessionID = sessionID else {

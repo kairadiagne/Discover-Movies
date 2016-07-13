@@ -9,31 +9,6 @@
 import Foundation
 import ObjectMapper
 
-public enum TMDbDataManagerNotification {
-    case DataDidChange
-    
-    public var name: String {
-        switch self {
-        case .DataDidChange:
-            return "TMDbManagerDataDidChangeNotification"
-        }
-    }
-}
-
-public enum TMDbState {
-    case NoData
-    case Loading
-    case DataDidLoad
-    case DataDidUpdate
-    case Error
-}
-
-public enum TMDbError {
-    case Authorization
-    case Network
-    case Unknown
-}
-
 public class TMDbBaseDataManager {
     
     // MARK: Properties
@@ -49,23 +24,6 @@ public class TMDbBaseDataManager {
     // MARK: Initializers
     
     public init() { }
-    
-    // MARK: Notifications
-    
-    func postChangeNotification() {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName(TMDbDataManagerNotification.DataDidChange.name, object: self)
-    }
-    
-    public func addChangeObserver(observer: AnyObject, selector aSelector: Selector) {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(observer, selector: aSelector, name: TMDbDataManagerNotification.DataDidChange.name, object: self)
-    }
-    
-    public func removeObserver(observer: AnyObject) {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.removeObserver(observer, name: TMDbDataManagerNotification.DataDidChange.name, object: self)
-    }
     
     // MARK: Update List
     
@@ -103,7 +61,55 @@ public class TMDbBaseDataManager {
         }
         
         state = .Error
-        
     }
+    
+    // MARK: Notifications
+    
+    func postChangeNotification() {
+        let center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName(TMDbDataManagerNotification.DataDidChange.name, object: self)
+    }
+    
+    public func addChangeObserver(observer: AnyObject, selector aSelector: Selector) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(observer, selector: aSelector, name: TMDbDataManagerNotification.DataDidChange.name, object: self)
+    }
+    
+    public func removeObserver(observer: AnyObject) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(observer, name: TMDbDataManagerNotification.DataDidChange.name, object: self)
+    }
+    
 
+}
+
+// MARK: TMDbDataManagerNotification 
+
+public enum TMDbDataManagerNotification {
+    case DataDidChange
+    
+    public var name: String {
+        switch self {
+        case .DataDidChange:
+            return "TMDbManagerDataDidChangeNotification"
+        }
+    }
+}
+
+// MARK: TMDBState
+
+public enum TMDbState {
+    case NoData
+    case Loading
+    case DataDidLoad
+    case DataDidUpdate
+    case Error
+}
+
+// MARK: TMDbError
+
+public enum TMDbError {
+    case Authorization
+    case Network
+    case Unknown
 }

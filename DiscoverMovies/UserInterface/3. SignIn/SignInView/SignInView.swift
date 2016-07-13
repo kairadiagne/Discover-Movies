@@ -13,13 +13,9 @@ class SignInView: BackgroundView {
     // MARK: Properties
 
     @IBOutlet weak var logoImage: UIButton!
-    
     @IBOutlet weak var signInButton: UIButton!
-    
     @IBOutlet weak var publicModeButton: UIButton!
-    
     @IBOutlet weak var orLabel: UILabel!
-    
     @IBOutlet weak var titleLabel: UILabel!
     
     // MARK: Awake From Nib
@@ -42,12 +38,6 @@ class SignInView: BackgroundView {
         publicModeButton.layer.borderColor = UIColor.whiteColor().CGColor
         publicModeButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).CGColor
     }
-    
-    // MARK: Animations 
-    
-    // Loading animaiton delayed a bit (spinning old analogue film roll/ camera
-    
-    // Animate Buttons?
     
 }
 

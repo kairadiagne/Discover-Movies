@@ -14,7 +14,6 @@ class ReviewViewController: ListViewController {
     // MARK: Types
     
     private struct Constants {
-        static let ReviewCellIdentifier = "ReviewCell"
         static let DefaultRowHeight: CGFloat = 200
     }
     

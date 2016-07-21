@@ -9,20 +9,6 @@
 import Foundation
 import Alamofire
 
-public enum TMDbAccountList: String {
-    case Favorites = "favorite"
-    case Watchlist = "watchlist"
-}
-
-public enum TMDbToplist: String {
-    case Popular = "popular"
-    case TopRated = "top_rated"
-    case Upcoming = "upcoming"
-    case NowPlaying = "now_playing"
-}
-
-import Alamofire
-
 class TMDbMovieClient: TMDbAPIClient {
 
     // Fetches themoviedb toplist (Popular, Toprated, Upcoming, Now playing)

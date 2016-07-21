@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+// Use principles of launch mode manager 
 public class TMDbUserManager: TMDbBaseDataManager {
     
     // MARK: Properties

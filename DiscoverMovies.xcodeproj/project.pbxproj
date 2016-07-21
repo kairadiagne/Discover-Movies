@@ -34,6 +34,7 @@
 		1119430C1CCB8EEB001CF39B /* String+ToNSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430B1CCB8EEB001CF39B /* String+ToNSDate.swift */; };
 		111943111CCB8EF6001CF39B /* TMDbImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */; };
 		111943321CCB8FCE001CF39B /* MenuButtonPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */; };
+		1135DC191D4176D60011110E /* TMDbTopListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1135DC181D4176D60011110E /* TMDbTopListManager.swift */; };
 		113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* NSDate+ToString.swift */; };
 		115559C51D0C353B0055042C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115559C41D0C353B0055042C /* SearchViewController.swift */; };
 		115559C71D0C37E70055042C /* TMDbSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115559C61D0C37E70055042C /* TMDbSearchManager.swift */; };
@@ -41,6 +42,7 @@
 		115559CD1D0C434B0055042C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115559CC1D0C434B0055042C /* SearchView.swift */; };
 		115559CF1D0C4C290055042C /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115559CE1D0C4C290055042C /* SearchResultsController.swift */; };
 		1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */; };
+		119A1F3E1D415B0D00AC61C7 /* TMDbCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */; };
 		11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */; };
 		11DECAA91D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */; };
 		11DECAAB1D04CEC200FFEAB4 /* TMDbDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAAA1D04CEC200FFEAB4 /* TMDbDataManager.swift */; };
@@ -74,7 +76,7 @@
 		EA6487E61CE5B50D00452DD0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */; };
 		EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */; };
 		EA6487F41CE61E1700452DD0 /* UIWebImage+CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487F31CE61E1700452DD0 /* UIWebImage+CachedImage.swift */; };
-		EA782B7B1CE097B500DC38AD /* TMDbTopListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */; };
+		EA782B7B1CE097B500DC38AD /* TMDbTopLisdtManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7A1CE097B500DC38AD /* TMDbTopLisdtManager.swift */; };
 		EA782B7D1CE0B5F100DC38AD /* TMDbSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */; };
 		EA782B7F1CE0C50000DC38AD /* TMDbAccountListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7E1CE0C50000DC38AD /* TMDbAccountListDataManager.swift */; };
 		EA782B871CE0CA4500DC38AD /* TMDbReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B861CE0CA4500DC38AD /* TMDbReviewManager.swift */; };
@@ -191,6 +193,7 @@
 		1119430B1CCB8EEB001CF39B /* String+ToNSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToNSDate.swift"; sourceTree = "<group>"; };
 		1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbImageRouter.swift; sourceTree = "<group>"; };
 		111943311CCB8FCE001CF39B /* MenuButtonPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButtonPresentable.swift; sourceTree = "<group>"; };
+		1135DC181D4176D60011110E /* TMDbTopListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopListManager.swift; sourceTree = "<group>"; };
 		113946311CCBBA80001CFAEA /* NSDate+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ToString.swift"; sourceTree = "<group>"; };
 		115559C41D0C353B0055042C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		115559C61D0C37E70055042C /* TMDbSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSearchManager.swift; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 		115559CC1D0C434B0055042C /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		115559CE1D0C4C290055042C /* SearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
 		1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = "DiscoverMovies/UserInterface/6. Detail Movie/DetailViewController.xib"; sourceTree = SOURCE_ROOT; };
+		119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCachedData.swift; sourceTree = "<group>"; };
 		11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+defaultIdentifier.swift"; sourceTree = "<group>"; };
 		11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+DefaultIdentifier.swift"; sourceTree = "<group>"; };
 		11DECAAA1D04CEC200FFEAB4 /* TMDbDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbDataManager.swift; sourceTree = "<group>"; };
@@ -237,7 +241,7 @@
 		EA6487E51CE5B50D00452DD0 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
 		EA6487F31CE61E1700452DD0 /* UIWebImage+CachedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWebImage+CachedImage.swift"; sourceTree = "<group>"; };
-		EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopListManager.swift; sourceTree = "<group>"; };
+		EA782B7A1CE097B500DC38AD /* TMDbTopLisdtManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopLisdtManager.swift; sourceTree = "<group>"; };
 		EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInManager.swift; sourceTree = "<group>"; };
 		EA782B7E1CE0C50000DC38AD /* TMDbAccountListDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbAccountListDataManager.swift; sourceTree = "<group>"; };
 		EA782B861CE0CA4500DC38AD /* TMDbReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbReviewManager.swift; sourceTree = "<group>"; };
@@ -508,9 +512,11 @@
 		EA08B7F31CF7588800EC804B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */,
 				EA782B7C1CE0B5F100DC38AD /* TMDbSignInManager.swift */,
+				1135DC181D4176D60011110E /* TMDbTopListManager.swift */,
 				11DECAAA1D04CEC200FFEAB4 /* TMDbDataManager.swift */,
-				EA782B7A1CE097B500DC38AD /* TMDbTopListManager.swift */,
+				EA782B7A1CE097B500DC38AD /* TMDbTopLisdtManager.swift */,
 				EA782B7E1CE0C50000DC38AD /* TMDbAccountListDataManager.swift */,
 				EA782B861CE0CA4500DC38AD /* TMDbReviewManager.swift */,
 				115559C61D0C37E70055042C /* TMDbSearchManager.swift */,
@@ -1290,8 +1296,9 @@
 			files = (
 				EA6487B61CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift in Sources */,
 				EA288F1B1CF4401E004FAEEF /* TMDbMovie.swift in Sources */,
-				EA782B7B1CE097B500DC38AD /* TMDbTopListManager.swift in Sources */,
+				EA782B7B1CE097B500DC38AD /* TMDbTopLisdtManager.swift in Sources */,
 				111943081CCB8EE4001CF39B /* TMDbReview.swift in Sources */,
+				1135DC191D4176D60011110E /* TMDbTopListManager.swift in Sources */,
 				EA6487B81CE4BC9D00452DD0 /* TMDbMovieCredit.swift in Sources */,
 				1119430C1CCB8EEB001CF39B /* String+ToNSDate.swift in Sources */,
 				EA782B7F1CE0C50000DC38AD /* TMDbAccountListDataManager.swift in Sources */,
@@ -1310,6 +1317,7 @@
 				EA782B871CE0CA4500DC38AD /* TMDbReviewManager.swift in Sources */,
 				EA288F2E1CF59057004FAEEF /* TMDbAPIRouter.swift in Sources */,
 				EA288F211CF4EE99004FAEEF /* TMDbMovieInfo.swift in Sources */,
+				119A1F3E1D415B0D00AC61C7 /* TMDbCachedData.swift in Sources */,
 				EAE605C81CEA72C500D904EB /* TMDbSessionInfoStore.swift in Sources */,
 				EADA5A6C1CE8A53700C2FAE8 /* TMDbCastMember.swift in Sources */,
 				111943091CCB8EE4001CF39B /* TMDbUser.swift in Sources */,

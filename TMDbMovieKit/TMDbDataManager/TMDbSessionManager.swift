@@ -15,6 +15,8 @@ public enum TMDBSigInStatus {
     case NotAvailable
 }
 
+// Use principles of launch mode manager
+
 public class TMDbSessionManager {
     
     // MARK: Properties

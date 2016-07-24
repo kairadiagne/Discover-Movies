@@ -30,16 +30,15 @@ public class TMDbTopListManager: TMDbListDataManager<TMDbMovie> {
         super.loadOnline(page)
         
         movieClient.fetchToplist(movieList, page: page) { (list, error) in
+            self.stopLoading()  
             
             guard error == nil else {
                 self.handleError(error!)
-                self.stopLoading()
                 return
             }
             
             if let data = list {
                 self.update(withData: data)
-                self.stopLoading()
             }
         }
     }

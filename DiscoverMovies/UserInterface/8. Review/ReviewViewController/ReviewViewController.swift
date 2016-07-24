@@ -20,7 +20,7 @@ class ReviewViewController: ListViewController {
     // MARK: Properties
     
     private let movie: TMDbMovie
-//    private let reviewManager = TMDbReviewManager()
+
     private let reviewDataProvider = ReviewDataProvider()
     
     // MARK: Initializers
@@ -46,54 +46,52 @@ class ReviewViewController: ListViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         title = "Reviews" // NSLocalizedString
+        
+        TMDbReviewManager.shared.failureDelegate = self // Is this neccesarry
+        TMDbReviewManager.shared.movieID = movie.movieID
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        reviewManager.addChangeObserver(self, selector: #selector(ReviewViewController.dataDidChangeNotification(_:)))
-//        reviewManager.loadReviews(movie.movieID)
+        
+        let loadingSelector = #selector(ReviewViewController.dataDidStartLoadingNotification(_:))
+        let didLoadSelector = #selector(ReviewViewController.dataDidLoadTopNotification(_:))
+        let didUpdateSelctor = #selector(ReviewViewController.dataDidUpdateNotification(_:))
+        TMDbReviewManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelctor)
+    
+        TMDbReviewManager.shared.reloadTopIfNeeded(false)
     }
     
     override func viewWillDisappear(animated: Bool) {
-//        reviewManager.removeObserver(self)
-    }
-    
-    // MARK: Fetching
-    
-    func loadmore() {
-//        reviewManager.loadMore()
+        TMDbReviewManager.shared.removeObserver(self)
     }
     
     // MARK: Notifications
-
-//    override func dataDidChangeNotification(notification: NSNotification) {
-//        super.dataDidChangeNotification(notification)
-//        
-//        switch reviewManager.state {
-//        case .Loading:
-//            showProgressHUD()
-//        case .DataDidLoad:
-//            updateTableView()
-//        case .DataDidUpdate:
-//            updateTableView()
-//            tableView.scrollToTop()
-//        case .NoData:
-//            tableView.showMessage("There are no reviews for this movie yet") // NSLocalizedString
-//        case .Error:
-//            handleErrorState(reviewManager.lastError)
-//        }
-//    }
+    
+    override func dataDidLoadTopNotification(notification: NSNotification) {
+        super.dataDidLoadTopNotification(notification)
+        updateTableView()
+    }
+    
+    
+    override func dataDidUpdateNotification(notification: NSNotification) {
+        super.dataDidUpdateNotification(notification)
+        updateTableView()
+    }
     
     private func updateTableView() {
-//        reviewDataProvider.updateWithItems(reviewManager.reviews)
+        reviewDataProvider.updateWithItems(TMDbReviewManager.shared.itemsInList)
         tableView.reloadData()
     }
+    
+    // Note: - What about authorization errors in this screen
+    // Probably we should only show them when we are signed in
     
     // MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if reviewDataProvider.itemCount - 5 == indexPath.row {
-            loadmore()
+            TMDbReviewManager.shared.loadMore()
         }
     }
     

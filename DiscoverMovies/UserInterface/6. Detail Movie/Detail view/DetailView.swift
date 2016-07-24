@@ -116,10 +116,13 @@ class DetailView: BackgroundView {
 
     }
     
-    func configure(withDirector director: TMDbCrewMember?, inFavorites: Bool, inWatchList: Bool) {
-        directorValueLabel.text = director?.name ?? "Unknown"
+    func configureWithState(inFavorites: Bool, inWatchList: Bool) {
         favouriteControl.setSelectedState(inFavorites)
         watchListControl.setSelectedState(inWatchList)
+    }
+    
+    func configure(withDirector director: TMDbCrewMember?) {
+        directorValueLabel.text = director?.name ?? "Unknown"
     }
     
     func reloadCollectionViews() {

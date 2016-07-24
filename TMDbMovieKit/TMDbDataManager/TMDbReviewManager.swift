@@ -28,11 +28,13 @@ public class TMDbReviewManager: TMDbListDataManager<TMDbReview> {
     // MARK: API Calls
     
     override func loadOnline(page: Int) {
-        self.startLoading()
+        super.loadOnline()
         
         guard let movieID = movieID else { return }
         
         movieClient.fetchReviews(movieID, page: page) { (list, error) in
+            self.stopLoading()
+            
             guard error == nil else {
                 self.handleError(error!)
                 return

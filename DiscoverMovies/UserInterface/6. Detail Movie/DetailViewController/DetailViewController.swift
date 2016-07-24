@@ -16,14 +16,20 @@ class DetailViewController: BaseViewController {
     @IBOutlet var detailView: DetailView!
     @IBOutlet var castDataProvider: CastDataProvider!
     @IBOutlet var similarMoviesDataProvider: SimilarMovieDataProvider!
-
-//    private let movieInfoManager: TMDbMovieInfoManager!
+    
+    private let movieInfoManager: TMDbMovieInfoManager
+    
+    private var movie: TMDbMovie
+    
     private var image: UIImage?
+    
+    private var trailer: TMDbVideo?
     
     // MARK: Initializers
     
     init(movie: TMDbMovie, image: UIImage? = nil) {
-//        self.movieInfoManager = TMDbMovieInfoManager(withMovie: movie)
+        movieInfoManager = TMDbMovieInfoManager(movieID: movie.movieID)
+        self.movie = movie
         self.image = image
         super.init(nibName: "DetailViewController", bundle: nil)
     }
@@ -32,7 +38,7 @@ class DetailViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
    
-    // MARK: View Controller Life Cycle
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +53,18 @@ class DetailViewController: BaseViewController {
         detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
         detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
         
-//        detailView.configure(withMovie: movieInfoManager.movie, image: image)
+        // Request information
+        movieInfoManager.delegate = self
+        movieInfoManager.loadInfo()
+        movieInfoManager.loadAccountState()
+        
+        // Configure view
+        detailView.configure(withMovie: movie, image: image)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.setAsTransparent()
-//        movieInfoManager.addChangeObserver(self, selector: #selector(DetailViewController.dataDidChangeNotification(_:)))
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -64,59 +75,25 @@ class DetailViewController: BaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.setAsUnclear()
-//        movieInfoManager.removeObserver(self)
     }
     
     // MARK: Actions
     
-//    @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
-//       movieInfoManager.toggleStatusOfMovieInList(.Favorites, status: sender.selected)
-//    }
-//    
-//    @IBAction func watchListDidGetTapped(sender: WatchListButton) {
-//       movieInfoManager.toggleStatusOfMovieInList(.Watchlist, status: sender.selected)
-//    }
-//
-//    @IBAction func reviewsButtonGotTapped(sender: UIButton) {
-//        showReviews(movieInfoManager.movie)
-//    }
-//    
-//    @IBAction func playButtonTapped(sender: UIButton) {
-//        showTrailer()
-//    }
+    @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
+       movieInfoManager.toggleStatusOfMovieInList(.Favorites, status: sender.selected)
+    }
     
-    // MARK: Notifications
+    @IBAction func watchListDidGetTapped(sender: WatchListButton) {
+       movieInfoManager.toggleStatusOfMovieInList(.Watchlist, status: sender.selected)
+    }
+
+    @IBAction func reviewsButtonGotTapped(sender: UIButton) {
+        showReviews(movie)
+    }
     
-//    override func dataDidChangeNotification(notification: NSNotification) {
-//        super.dataDidChangeNotification(notification)
-//        
-//        switch movieInfoManager.state {
-//        case .DataDidLoad:
-//            update()
-//        case .Error:
-//            handleErrorState(movieInfoManager.lastError, authorizationRequired: signedIn )
-//        default:
-//            return
-//        }
-//    }
-    
-//    private func update() {
-////        if let similarMovies = movieInfoManager.similarMovies {
-//            detailView.similarMovieCollectionView.hideMessage()
-//            similarMoviesDataProvider.updateWithMovies(similarMovies)
-//            detailView.reloadCollectionViews()
-//        }
-//        
-//        if let cast = movieInfoManager.cast {
-//            detailView.castCollectionView.hideMessage()
-//            castDataProvider.updateWithCast(cast)
-//            detailView.reloadCollectionViews()
-//        }
-//        let director = movieInfoManager.director
-//        let inFavorites = movieInfoManager.inFavorites
-//        let inWatchList = movieInfoManager.inWatchList
-//        detailView.configure(withDirector: director, inFavorites: inFavorites, inWatchList: inWatchList)
-//    }
+    @IBAction func playButtonTapped(sender: UIButton) {
+        showTrailer()
+    }
 
     // MARK: Navigation
     
@@ -126,9 +103,9 @@ class DetailViewController: BaseViewController {
     }
     
     private func showTrailer() {
-//        guard let video = movieInfoManager.trailers?.first else { return }
-//        let videoController = VideoViewController(video: video)
-//        navigationController?.pushViewController(videoController, animated: true)
+        guard let trailer = trailer else { return } // Display alert that trailer is unavailable
+        let videoController = VideoViewController(video: trailer)
+        navigationController?.pushViewController(videoController, animated: true)
     }
     
     private func showReviews(movie: TMDbMovie) {
@@ -136,6 +113,34 @@ class DetailViewController: BaseViewController {
         navigationController?.pushViewController(reviewViewController, animated: true)
     }
 
+}
+
+// MARK: - TMDbMovieInfoManagerDelegate
+
+extension DetailViewController: TMDbMovieInfoManagerDelegate {
+    
+    func movieInfomManagerDidLoadInfoForMovieWithID(movieID: Int, info: TMDbMovieInfo) {
+        // hide message in collection view
+        similarMoviesDataProvider.updateWithMovies(info.similarMovies())
+        castDataProvider.updateWithCast(info.cast())
+        detailView.reloadCollectionViews()
+        
+        if let director = info.director() {
+           detailView.configure(withDirector: director)
+        }
+        
+        trailer = info.trailer()
+    }
+    
+    func movieInfoManagerDidLoadAccoutnStateForMovieWithID(movieID: Int, inFavorites: Bool, inWatchList: Bool) {
+        detailView.configureWithState(inFavorites, inWatchList: inWatchList)
+    }
+    
+    func movieInfoManagerDidReceiverError(error: TMDbAPIError) {
+       // What if the user is not signed in what sould we do in this case with the authorization error
+       handleError(error)
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate

@@ -16,7 +16,9 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
     // MARK: Properties
     
     var progressHUD: MBProgressHUD?
+    
     let youtubeView = YTPlayerView()
+    
     var video: TMDbVideo!
     
     // MARK: Initialization
@@ -24,7 +26,6 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
     required init(video: TMDbVideo) {
         super.init(nibName: nil, bundle: nil)
         self.video = video
-        
         self.youtubeView.translatesAutoresizingMaskIntoConstraints = false
         self.youtubeView.delegate = self
     }

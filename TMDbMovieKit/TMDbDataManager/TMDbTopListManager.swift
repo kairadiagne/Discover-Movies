@@ -27,18 +27,19 @@ public class TMDbTopListManager: TMDbListDataManager<TMDbMovie> {
     // MARK: API Calls
     
     override func loadOnline(page: Int) {
-        self.startLoading()
+        super.loadOnline(page)
         
         movieClient.fetchToplist(movieList, page: page) { (list, error) in
-            self.stopLoading()
             
             guard error == nil else {
                 self.handleError(error!)
+                self.stopLoading()
                 return
             }
             
             if let data = list {
                 self.update(withData: data)
+                self.stopLoading()
             }
         }
     }

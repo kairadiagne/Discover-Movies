@@ -48,8 +48,8 @@ public class TMDbListDataManager<ModelType: Mappable> {
     }
     
     public func loadMore() {
-        guard let nextPage = cache.data?.nextPage else { return }
         guard isLoading != true else { return }
+        guard let nextPage = cache.data?.nextPage else { return }
         loadOnline(nextPage)
     }
     
@@ -58,8 +58,10 @@ public class TMDbListDataManager<ModelType: Mappable> {
     // Every subclass needs to implement this method.
     // here you make the request to the API.
     
-    func loadOnline(page: Int = 1) { }
-    
+    func loadOnline(page: Int = 1) {
+        self.startLoading()
+    }
+
     // MARK: Update List
     
     // We need to do more checks to check if the data is valid or not 
@@ -82,7 +84,6 @@ public class TMDbListDataManager<ModelType: Mappable> {
             cache.addData(data)
             postDidLoadNotification()
         }
-        
         // Persist to disk of a backgroundqueue
     }
      
@@ -139,7 +140,7 @@ public class TMDbListDataManager<ModelType: Mappable> {
     }
     
     func postLoadingNotification() {
-        notificationCenter.postNotificationName(TMDbListDataManagerNotification.DataDidLoadTop.name, object: self)
+        notificationCenter.postNotificationName(TMDbListDataManagerNotification.DataDidStartLoading.name, object: self)
     }
     
     func postDidLoadNotification() {

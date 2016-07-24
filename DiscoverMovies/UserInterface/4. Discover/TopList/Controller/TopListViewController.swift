@@ -18,6 +18,8 @@ class TopListViewController: DiscoverListViewController {
     
     private var currentList: TMDbToplist = .Popular
     
+    private var currentManager: TMDbTopListManager?
+    
     // MARK: View Controller Life Cycle
 
     override func viewDidLoad() {
@@ -61,27 +63,26 @@ class TopListViewController: DiscoverListViewController {
         switch switchListControl.selectedSegmentIndex {
         case 0:
             currentList = .Popular
-            TMDbPopularListManager.shared.reloadTopIfNeeded(false)
+            currentManager = TMDbPopularListManager.shared
         case 1:
             currentList = .TopRated
-//            TMDbTopRatedListManager.shared.reloadTopIfNeeded(false)
+            currentManager = TMDbTopRatedListManager.shared
         case 2:
             currentList = .Upcoming
-//            TMDbUpcomingListManager.shared.reloadTopIfNeeded(false)
+            currentManager = TMDbUpcomingListManager.shared
         default:
             return
         }
+        
+        currentManager?.reloadTopIfNeeded(false)
     }
     
     // MARK: Notifications
     
     override func dataDidLoadTopNotification(notification: NSNotification) {
         super.dataDidLoadTopNotification(notification)
-        updateTableView()
+        updateTableView(true)
     }
-    
-    // Do we really need the didUpdateNotification 
-    // What if dataprovider checks if the size of items increased or not
     
     override func dataDidUpdateNotification(notification: NSNotification) {
         super.dataDidUpdateNotification(notification)
@@ -89,9 +90,13 @@ class TopListViewController: DiscoverListViewController {
     }
     
     private func updateTableView(scrollToTop: Bool = false) {
-//        let manager = managerForCurrentList()
-        tableViewDataProvider.updateWithItems(TMDbPopularListManager.shared.itemsInList)
+        guard let items = currentManager?.itemsInList else { return }
+        tableViewDataProvider.updateWithItems(items)
         tableView.reloadData()
+        
+        if scrollToTop {
+            tableView.scrollToTop()
+        }
     }
     
     // MARK: UITableViewDelegate
@@ -102,27 +107,9 @@ class TopListViewController: DiscoverListViewController {
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if tableViewDataProvider.itemCount - 5 == indexPath.row {
-//            let manager = managerForCurrentList()
-            TMDbPopularListManager.shared.loadMore()
+        if tableViewDataProvider.itemCount - 10 == indexPath.row {
+            currentManager?.loadMore()
         }
     }
-    
-    // MARK: Helpers 
-    
-//    func managerForCurrentList() -> TMDbTopListManager {
-//        switch currentList {
-//        case .Popular:
-////            return TMDbPopularListManager.shared
-//        case .TopRated:
-////            return TMDbTopRatedListManager.shared
-//        case .Upcoming:
-////            return TMDbUpcomingListManager.shared
-//        case .NowPlaying:
-////            return TMDbNowPlayingListManager.shared
-//        }
-//    }
 
 }
-
-

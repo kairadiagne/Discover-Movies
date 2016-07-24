@@ -34,9 +34,10 @@ public class TMDbSessionManager {
     
     public init() {
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
-        let freshInstall = NSUserDefaults.standardUserDefaults().stringForKey(Constants.FreshInstallKey) == nil
+        let freshInstall = NSUserDefaults.standardUserDefaults().boolForKey(Constants.FreshInstallKey) == false
         
         if freshInstall {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.FreshInstallKey)
             sessionInfoStore.deleteSessionIDFromStore()
         }
         

@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Theme.applyGlobalTheme() 
         
-        TMDbSessionManager().registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
+        TMDbSessionManager.shared.registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
         
         let rearViewController =  MenuViewController.instantiatefromStoryboard()
         let topListViewController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
@@ -34,8 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = revealViewController
         window?.makeKeyAndVisible()
-        
-        // TODO: - Make sure there is no sessionID stored in the keychain from previous installs
  
         return true
     }
@@ -72,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // - Localization
 // - Pull to refresh (Account list controller)
-// - Clear Keychain on first lauch
 // - UserInfoStore Multihreading keyed archiver ??
 
 

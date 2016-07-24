@@ -15,7 +15,8 @@ class TopListViewController: DiscoverListViewController {
     // MARK: Properties
     
     var switchListControl: UISegmentedControl!
-    private let topListDataManager = TMDbTopListManager()
+    
+    private var currentList: TMDbToplist = .Popular
     
     // MARK: View Controller Life Cycle
 
@@ -27,17 +28,31 @@ class TopListViewController: DiscoverListViewController {
         switchListControl.addTarget(self, action: switchListSelector, forControlEvents: .ValueChanged)
         switchListControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = switchListControl
+        
+        TMDbPopularListManager.shared.failureDelegate = self
+        TMDbTopRatedListManager.shared.failureDelegate = self
+        TMDbUpcomingListManager.shared.failureDelegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        topListDataManager.addChangeObserver(self, selector: #selector(TopListViewController.dataDidChangeNotification(_:)))
+     
+        let loadingSelector = #selector(TopListViewController.dataDidStartLoadingNotification(_:))
+        let didLoadSelector = #selector(TopListViewController.dataDidLoadTopNotification(_:))
+        let didUpdateSelector = #selector(TopListViewController.dataDidUpdateNotification(_:))
+        TMDbPopularListManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
+        TMDbTopRatedListManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
+        TMDbUpcomingListManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
+
         switchTopList(switchListControl)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        topListDataManager.removeObserver(self)
+        
+        TMDbPopularListManager.shared.removeObserver(self)
+        TMDbTopRatedListManager.shared.removeObserver(self)
+        TMDbUpcomingListManager.shared.removeObserver(self)
     }
     
     // MARK: Fetching
@@ -45,11 +60,14 @@ class TopListViewController: DiscoverListViewController {
     func switchTopList(control: UISegmentedControl) {
         switch switchListControl.selectedSegmentIndex {
         case 0:
-            topListDataManager.loadTop(.Popular)
+            currentList = .Popular
+            TMDbPopularListManager.shared.reloadTopIfNeeded(false)
         case 1:
-            topListDataManager.loadTop(.TopRated)
+            currentList = .TopRated
+//            TMDbTopRatedListManager.shared.reloadTopIfNeeded(false)
         case 2:
-            topListDataManager.loadTop(.Upcoming)
+            currentList = .Upcoming
+//            TMDbUpcomingListManager.shared.reloadTopIfNeeded(false)
         default:
             return
         }
@@ -57,26 +75,22 @@ class TopListViewController: DiscoverListViewController {
     
     // MARK: Notifications
     
-    override func dataDidChangeNotification(notification: NSNotification) {
-        super.dataDidChangeNotification(notification)
-        
-        switch topListDataManager.state {
-        case .Loading:
-            showProgressHUD()
-        case .DataDidLoad:
-            updateTableView()
-            tableView.scrollToTop()
-        case .DataDidUpdate:
-            updateTableView()
-        case .NoData:
-            tableView.showMessage("No Data")
-        case .Error:
-            handleErrorState(topListDataManager.lastError)
-        }
+    override func dataDidLoadTopNotification(notification: NSNotification) {
+        super.dataDidLoadTopNotification(notification)
+        updateTableView()
     }
     
-    private func updateTableView() {
-        tableViewDataProvider.updateWithItems(topListDataManager.movies)
+    // Do we really need the didUpdateNotification 
+    // What if dataprovider checks if the size of items increased or not
+    
+    override func dataDidUpdateNotification(notification: NSNotification) {
+        super.dataDidUpdateNotification(notification)
+        updateTableView()
+    }
+    
+    private func updateTableView(scrollToTop: Bool = false) {
+//        let manager = managerForCurrentList()
+        tableViewDataProvider.updateWithItems(TMDbPopularListManager.shared.itemsInList)
         tableView.reloadData()
     }
     
@@ -89,9 +103,25 @@ class TopListViewController: DiscoverListViewController {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if tableViewDataProvider.itemCount - 5 == indexPath.row {
-            topListDataManager.loadMore()
+//            let manager = managerForCurrentList()
+            TMDbPopularListManager.shared.loadMore()
         }
     }
+    
+    // MARK: Helpers 
+    
+//    func managerForCurrentList() -> TMDbTopListManager {
+//        switch currentList {
+//        case .Popular:
+////            return TMDbPopularListManager.shared
+//        case .TopRated:
+////            return TMDbTopRatedListManager.shared
+//        case .Upcoming:
+////            return TMDbUpcomingListManager.shared
+//        case .NowPlaying:
+////            return TMDbNowPlayingListManager.shared
+//        }
+//    }
 
 }
 

@@ -14,7 +14,7 @@ class SignInViewController: BaseViewController {
     
     // MARK: Properties
 
-    private let userManager = TMDbUserManager()
+//    private let userManager = TMDbUserManager()
     private let signInManager = TMDbSignInManager()
     private var safariViewController: SFSafariViewController!
     
@@ -83,7 +83,7 @@ extension SignInViewController: TMDbSignInDelegate {
     
     func signInDelegateSigninDidComplete() {
         hideProgressHUD()
-        userManager.loadUserInfo()
+//        userManager.loadUserInfo()
         dismissSignInViewController()
     }
     

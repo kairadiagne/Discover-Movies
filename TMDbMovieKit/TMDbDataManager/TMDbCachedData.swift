@@ -12,52 +12,39 @@ class TMDbCachedData<ModelType> {
     
     // MARK: Properties
     
-    private(set) var data: ModelType? {
-        didSet {
-            self.lastUpdate = NSDate()
-        }
-    }
+    private(set) var data: ModelType?
     
-    var needsRefresh = false {
-        if let lastUpdate = lastUpdate {
-            return true
-        }
-        
-        return abs(lastUpdate.timeIntervalSinceNow) > refreshTimout ? true : false
-    }
+    var needsRefresh: Bool = true 
+    
+//    {
+//        if let lastUpdate = lastUpdate {
+//            return true
+//        }
+//        return true
+////        return abs(lastUpdate.timeIntervalSinceNow) > refreshTimout ? true : false
+//    }
     
     private var lastUpdate: NSDate?
     
-    // Specifies a time interval in seconds
-    private var refreshTimout: NSTimeInterval = 300
+    private var refreshTimeOut: NSTimeInterval! // Specifies a time interval in seconds
     
     // MARK: Initializers
     
-    init(refreshTimeout: NSTimeInterval = nil) {
-        self.refreshTimout = refreshTimout
+    init(refreshTimeOut timeOut: NSTimeInterval = 300) {
+        self.refreshTimeOut = timeOut
     }
     
-    // MARK: Add Remove Data
+    // MARK: Clear Cache
     
-    func update(withData data: ModelType) {
-        data = data
-        lastUpdate = NSDate()
+    func addData(data: ModelType) {
+        self.data = data
+        self.lastUpdate = NSDate()
     }
     
     func clear() {
         self.data = nil
         self.lastUpdate = nil
     }
-    
-    // MARK: Disk Cache
-    
-//    func saveToDisk() {
-//        
-//    }
-//    
-//    func loadFromDisk() {
-//        
-//    }
 
 }
 

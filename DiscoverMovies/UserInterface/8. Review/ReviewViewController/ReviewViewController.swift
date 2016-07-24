@@ -20,7 +20,7 @@ class ReviewViewController: ListViewController {
     // MARK: Properties
     
     private let movie: TMDbMovie
-    private let reviewManager = TMDbReviewManager()
+//    private let reviewManager = TMDbReviewManager()
     private let reviewDataProvider = ReviewDataProvider()
     
     // MARK: Initializers
@@ -50,42 +50,42 @@ class ReviewViewController: ListViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        reviewManager.addChangeObserver(self, selector: #selector(ReviewViewController.dataDidChangeNotification(_:)))
-        reviewManager.loadReviews(movie.movieID)
+//        reviewManager.addChangeObserver(self, selector: #selector(ReviewViewController.dataDidChangeNotification(_:)))
+//        reviewManager.loadReviews(movie.movieID)
     }
     
     override func viewWillDisappear(animated: Bool) {
-        reviewManager.removeObserver(self)
+//        reviewManager.removeObserver(self)
     }
     
     // MARK: Fetching
     
     func loadmore() {
-        reviewManager.loadMore()
+//        reviewManager.loadMore()
     }
     
     // MARK: Notifications
 
-    override func dataDidChangeNotification(notification: NSNotification) {
-        super.dataDidChangeNotification(notification)
-        
-        switch reviewManager.state {
-        case .Loading:
-            showProgressHUD()
-        case .DataDidLoad:
-            updateTableView()
-        case .DataDidUpdate:
-            updateTableView()
-            tableView.scrollToTop()
-        case .NoData:
-            tableView.showMessage("There are no reviews for this movie yet") // NSLocalizedString
-        case .Error:
-            handleErrorState(reviewManager.lastError)
-        }
-    }
+//    override func dataDidChangeNotification(notification: NSNotification) {
+//        super.dataDidChangeNotification(notification)
+//        
+//        switch reviewManager.state {
+//        case .Loading:
+//            showProgressHUD()
+//        case .DataDidLoad:
+//            updateTableView()
+//        case .DataDidUpdate:
+//            updateTableView()
+//            tableView.scrollToTop()
+//        case .NoData:
+//            tableView.showMessage("There are no reviews for this movie yet") // NSLocalizedString
+//        case .Error:
+//            handleErrorState(reviewManager.lastError)
+//        }
+//    }
     
     private func updateTableView() {
-        reviewDataProvider.updateWithItems(reviewManager.reviews)
+//        reviewDataProvider.updateWithItems(reviewManager.reviews)
         tableView.reloadData()
     }
     

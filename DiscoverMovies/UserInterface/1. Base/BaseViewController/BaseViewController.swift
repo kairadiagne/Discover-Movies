@@ -11,7 +11,7 @@ import TMDbMovieKit
 import BRYXBanner
 import MBProgressHUD
 
-class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresentable {
+class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresentable, DataManagerFailureDelegate {
     
     // MARK: Types
     
@@ -22,8 +22,12 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     // MARK: Properties
     
     var banner: Banner?
+    
     var progressHUD: MBProgressHUD?
+    
     var sessionManager = TMDbSessionManager()
+    
+    var authorizationRequired: Bool = false
 
     var shouldShowSignInViewController: Bool {
         switch sessionManager.signInStatus {
@@ -38,22 +42,46 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         return sessionManager.signInStatus == .Signedin ? true: false 
     }
     
-    // MARK: View Controller LifeCycle
+    // MARK: LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
         progressHUD?.userInteractionEnabled = false
         view.addSubview(progressHUD!)
+    
     }
     
+    // MARK: Error Handling
+    
+    func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError) {
+        switch error {
+        case .Generic:
+            presentAlertGenericError()
+        case .NoInternetConnection:
+            presentBannerOnInternetError()
+        case .NotAuthorized:
+            if authorizationRequired {
+                presentAlertOnAuthorizationError()
+            }
+        }
+    }
+
     // MARK: Notifications
     
-    func dataDidChangeNotification(notification: NSNotification) {
+    func dataDidStartLoadingNotification(notification: NSNotification) {
+        showProgressHUD()
+    }
+    
+    func dataDidLoadTopNotification(notification: NSNotification) {
         hideProgressHUD()
     }
     
-    //MARK: Communicate State 
+    func dataDidUpdateNotification(notification: NSNotification) {
+        hideProgressHUD()
+    }
+    
+    // MARK: Communicate State 
     
     func presentBannerOnInternetError() {
         let title = "No, Internet Connection" // NSLocalized String
@@ -66,26 +94,11 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         let message = "This feature requires you to sign in with a TMDb account" // NSLocalized String
     }
     
-    func presentAlertOnUnknownError() {
+    func presentAlertGenericError() {
         let title = "Unknown Error" // NSLocalized String
         let message = "An unknown error occurred" // NSLocalized String
     }
     
-    func handleErrorState(error: TMDbError?, authorizationRequired: Bool = false) {
-        guard let error = error else { return }
-        
-        switch error {
-        case .Network:
-            presentBannerOnInternetError()
-        case .Authorization:
-            if authorizationRequired {
-                presentAlertOnAuthorizationError()
-            }
-        case .Unknown:
-            presentAlertOnUnknownError()
-        }
-    }
-
     // MARK: Navigation
     
     func showSignInViewController() {
@@ -94,4 +107,6 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     }
 
 }
+
+
 

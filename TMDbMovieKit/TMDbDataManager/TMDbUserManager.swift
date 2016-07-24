@@ -7,27 +7,39 @@
 //
 
 import Foundation
-// Use principles of launch mode manager 
-public class TMDbUserManager: TMDbBaseDataManager {
+
+public class TMDbUserManager {
     
     // MARK: Properties
     
-    public var user: TMDbUser? {
-        return sessionInfoStore.user
-    }
+    public var failureDelegate: DataManagerFailureDelegate?
+    
+    public static var shared = TMDbUserManager()
+    
+    public private(set) var user: TMDbUser?
+    
+    public private(set) var isLoading = false
     
     private let userClient = TMDbUserClient()
     
     private let sessionInfoStore = TMDbSessionInfoStore()
     
+    // MARK: Initialization
+    
+    init() {
+        // Load user from cache
+        self.user = sessionInfoStore.user
+    }
+
     // MARK: - Fetching
     
     public func loadUserInfo() {
-        state = .Loading
+        isLoading = true
         
         userClient.fetchUserInfo { (user, error) in
             guard error == nil else {
-                self.handleError(error!)
+                // Check for errors 
+                // Call delegate with error 
                 return
             }
             
@@ -35,8 +47,8 @@ public class TMDbUserManager: TMDbBaseDataManager {
                 if let user = user {
                     self.sessionInfoStore.persistUserInStore(user)
                     
-                    dispatch_async(dispatch_get_main_queue(), { 
-                        self.state = .DataDidLoad
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
                     })
                     
                 }

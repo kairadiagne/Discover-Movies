@@ -15,17 +15,32 @@ public enum TMDBSigInStatus {
     case NotAvailable
 }
 
-// Use principles of launch mode manager
-
 public class TMDbSessionManager {
     
+    // MARK: Types 
+    
+    private struct Constants {
+        static let FreshInstallKey = "FreshInstallKey"
+        
+    }
+    
     // MARK: Properties
+    
+    public static let shared = TMDbSessionManager()
     
     let sessionInfoStore = TMDbSessionInfoStore()
     
     // MARK: Initializers
     
-    public init() { }
+    public init() {
+        // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
+        let freshInstall = NSUserDefaults.standardUserDefaults().stringForKey(Constants.FreshInstallKey) == nil
+        
+        if freshInstall {
+            sessionInfoStore.deleteSessionIDFromStore()
+        }
+        
+    }
     
     // MARK: - API Key
     

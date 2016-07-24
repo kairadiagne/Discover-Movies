@@ -1,5 +1,5 @@
 //
-//  TMDbDataManager.swift
+//  TMDbListDataManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 05-06-16.
@@ -9,26 +9,23 @@
 import Foundation
 import ObjectMapper
 
-protocol ListDataManagerFailureDelegate: class {
-    func listDataManager(manager: DataManager, didFailWithError: TMDbAPIError)
+public protocol DataManagerFailureDelegate: class {
+    func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError)
 }
 
 public class TMDbListDataManager<ModelType: Mappable> {
     
-    // MARK: Properties 
+    // MARK: Properties
     
-    public weak var failureDelegate: ListDataManagerFailureDelegate?
+    public weak var failureDelegate: DataManagerFailureDelegate?
     
     public var itemsInList: [ModelType] {
-        return cachedData?.data?.items ?? []
+        return cache.data?.items ?? []
     }
-    private(set) var isLoading = false
     
-    private(set) var cachedData =  TMDbCachedData<TMDbList<ModelType>> {
-        didSet {
-            // Write to cache
-        }
-    }
+    public var isLoading = false
+    
+    private(set) var cache = TMDbCachedData<TMDbList<ModelType>>()
     
     private var cacheIdentifier = ""
     
@@ -36,7 +33,9 @@ public class TMDbListDataManager<ModelType: Mappable> {
     
     // MARK: Initializers
     
-    public init(cacheIdentifier: String) {
+    init() { }
+    
+    init(cacheIdentifier: String) {
         self.cacheIdentifier = cacheIdentifier
         // Try to load data from the disk cache and put it into memory cache
     }
@@ -44,69 +43,87 @@ public class TMDbListDataManager<ModelType: Mappable> {
     // MARK: Public Data Calls
     
     public func reloadTopIfNeeded(forceOnline: Bool) {
-        guard cachedData?.needsUpdate || forceOnline else { return }
+        guard cache.needsRefresh || forceOnline else { return }
         loadOnline()
     }
     
-    public func loadMore(page: Int? = nil) {
-        guard let nextPage = cachedData.data?.items else { return }
-        guard let isLoading != true else { return }
-        
-        loadOnline(page: nextPage)
+    public func loadMore() {
+        guard let nextPage = cache.data?.nextPage else { return }
+        guard isLoading != true else { return }
+        loadOnline(nextPage)
     }
     
     // MARK: API Calls
     
-    /**
-        Every subclass needs to implement this method.
-        This is where the actual request to the WEBAPI is being made.
-     */
+    // Every subclass needs to implement this method.
+    // here you make the request to the API.
+    
     func loadOnline(page: Int = 1) { }
     
     // MARK: Update List
     
-    func update(list: TMDbList<ModelType>, withData data: TMDbList<ModelType>) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { 
-            list.update(data)
-            // Save to disk 
+    // We need to do more checks to check if the data is valid or not 
+    
+    func update(withData data: TMDbList<ModelType>) {
+        // If the cache is not empty
+        if let list = cache.data {
+            list.page = data.page
+            list.pageCount = data.pageCount
+            list.resultCount = data.resultCount
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.cachedData.data = list
-                
-                // Post Notifications
-                let page = cachedData.data.page
-                
-                if page == 1 {
-                
-                } else if page > 1 {
-                    
-                }
+            if data.page == 1 {
+               cache.data?.items = data.items
+                postDidLoadNotification()
+            } else {
+                cache.data?.items.appendContentsOf(data.items)
+                postDidUpdateNotification()
             }
+        } else {
+            cache.addData(data)
+            postDidLoadNotification()
         }
+        
+        // Persist to disk of a backgroundqueue
+    }
+     
+    // MARK: Loading
+    
+    func startLoading() {
+        isLoading = true
+        postLoadingNotification()
+    }
+    
+    func stopLoading() {
+        isLoading = false
     }
     
     // MARK: Error Handeling
     
     func handleError(error: NSError) {
-        var error: TMDbAPIError
+        var newError: TMDbAPIError
         
         // Determine which kind of error where dealing with
         if error.code == NSURLErrorNotConnectedToInternet {
-            error = .NoInternetConnection
+            newError = .NoInternetConnection
         } else if error.domain == NSURLErrorDomain && error.code == NSURLErrorUserAuthenticationRequired {
-            error = .NotAuthorized
+            newError = .NotAuthorized
         } else {
-            error = .Generic
+            newError = .Generic
         }
         
-        // Call delegate method to communicate the error to UI Level
-        failureDelegate?.dataManager(manager: self, didFailWithError: error)
+        failureDelegate?.listDataManager(self, didFailWithError: newError)
     }
     
     // MARK: Notifications
     
+    public func addObserver(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector, didUpdateSelector: Selector) {
+        notificationCenter.addObserver(observer, selector: loadingSelector, name: TMDbListDataManagerNotification.DataDidStartLoading.name, object: self)
+        notificationCenter.addObserver(observer, selector: didLoadSelector, name: TMDbListDataManagerNotification.DataDidLoadTop.name, object: self)
+        notificationCenter.addObserver(observer, selector: didUpdateSelector, name: TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
+    }
+    
     public func addLoadingObserver(observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: Selector, name: TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
+        notificationCenter.addObserver(observer, selector: selector, name: TMDbListDataManagerNotification.DataDidStartLoading.name, object: self)
     }
     
     public func addDataDidLoadTopObserver(observer: AnyObject, selector: Selector) {
@@ -115,6 +132,10 @@ public class TMDbListDataManager<ModelType: Mappable> {
     
     public func addDataDidUpdateObserver(observer: AnyObject, selector: Selector) {
         notificationCenter.addObserver(observer, selector: selector, name: TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
+    }
+    
+    public func removeObserver(observer: AnyObject) {
+        notificationCenter.removeObserver(observer)
     }
     
     func postLoadingNotification() {
@@ -141,28 +162,6 @@ public class TMDbListDataManager<ModelType: Mappable> {
 
 }
 
-enum TMDbAPIError: ErrorType {
-    case Generic
-    case NoInternetConnection
-    case NotAuthorized
-}
-
-
-// MARK: - List 
-
-public enum TMDbAccountList: String {
-    case Favorites = "favorite"
-    case Watchlist = "watchlist"
-}
-
-public enum TMDbToplist: String {
-    case Popular = "popular"
-    case TopRated = "top_rated"
-    case Upcoming = "upcoming"
-    case NowPlaying = "now_playing"
-}
-
-
 
 // MARK: TMDbDataManagerNotification 
 
@@ -173,7 +172,7 @@ public enum TMDbListDataManagerNotification {
     
     public var name: String {
         switch self {
-        case DataIsLoading:
+        case DataDidStartLoading:
             return "TMDbListDataManagerDidStartLoading"
         case .DataDidLoadTop:
             return "TMDbListDataManagerDidLoadTop"

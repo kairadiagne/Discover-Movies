@@ -20,8 +20,10 @@ class MenuViewController: UITableViewController {
 
     @IBOutlet weak var menuTableview: MenuTableView!
     
-    private let userManager = TMDbUserManager()
+//    private let userManager = TMDbUserManager()
+    
     private let signInmanager = TMDbSignInManager()
+    
     private let sessionManager = TMDbSessionManager()
 
     private var signedIn: Bool {
@@ -46,8 +48,8 @@ class MenuViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if signedIn {
-            userManager.loadUserInfo()
-            menuTableview.updateMenu(true, user: userManager.user)
+//            userManager.loadUserInfo()
+//            menuTableview.updateMenu(true, user: userManager.user)
         } else {
             menuTableview.updateMenu(false, user: nil)
         }
@@ -60,7 +62,7 @@ class MenuViewController: UITableViewController {
     // MARK: Notifications
     
     func dataDidUpdateNotification(notification: NSNotification) {
-        menuTableview.updateMenu(true, user: userManager.user)
+//        menuTableview.updateMenu(true, user: userManager.user) 
     }
 
     // MARK: Navigation

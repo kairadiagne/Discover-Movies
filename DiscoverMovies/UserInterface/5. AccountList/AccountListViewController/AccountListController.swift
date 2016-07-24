@@ -20,7 +20,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     // MARK: Properties
     
-    private let accountListDataManager = TMDbAccountListDataManager()
+//    private let accountListDataManager = TMDbAccountListDataManager()
     private let dataProvider = AccountListDataProvider()
     private let accountList: TMDbAccountList
     
@@ -52,45 +52,45 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        accountListDataManager.addChangeObserver(self, selector: #selector(AccountListController.dataDidChangeNotification(_:)))
+//        accountListDataManager.addChangeObserver(self, selector: #selector(AccountListController.dataDidChangeNotification(_:)))
         loadList()
     }
     
     private func loadList() {
-        accountListDataManager.loadTop(accountList)
+//        accountListDataManager.loadTop(accountList)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        accountListDataManager.removeObserver(self)
+//        accountListDataManager.removeObserver(self)
     }
     
     // MARK: Refresh
     
     func refresh(sender: UIRefreshControl) {
-        accountListDataManager.loadTop(accountList)
+//        accountListDataManager.loadTop(accountList)
     }
     
-    override func dataDidChangeNotification(notification: NSNotification) {
-        super.dataDidChangeNotification(notification)
-        
-        switch accountListDataManager.state {
-        case .Loading:
-            showProgressHUD()
-        case .DataDidLoad:
-            updateTableView()
-        case .DataDidUpdate:
-            updateTableView()
-            tableView.scrollToTop()
-        case .NoData:
-            tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
-        case .Error:
-            handleErrorState(accountListDataManager.lastError, authorizationRequired: true)
-        }
-    }
+//    override func dataDidChangeNotification(notification: NSNotification) {
+//        super.dataDidChangeNotification(notification)
+//        
+//        switch accountListDataManager.state {
+//        case .Loading:
+//            showProgressHUD()
+//        case .DataDidLoad:
+//            updateTableView()
+//        case .DataDidUpdate:
+//            updateTableView()
+//            tableView.scrollToTop()
+//        case .NoData:
+//            tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
+//        case .Error:
+//            handleErrorState(accountListDataManager.lastError, authorizationRequired: true)
+//        }
+//    }
     
     func updateTableView() {
-        dataProvider.updateWithItems(accountListDataManager.movies)
+//        dataProvider.updateWithItems(accountListDataManager.movies)
         tableView.reloadData()
     }
 
@@ -103,7 +103,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if dataProvider.itemCount - 5 == indexPath.row {
-            accountListDataManager.loadMore()
+//            accountListDataManager.loadMore()
         }
     }
     

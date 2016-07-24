@@ -17,13 +17,13 @@ class DetailViewController: BaseViewController {
     @IBOutlet var castDataProvider: CastDataProvider!
     @IBOutlet var similarMoviesDataProvider: SimilarMovieDataProvider!
 
-    private let movieInfoManager: TMDbMovieInfoManager!
+//    private let movieInfoManager: TMDbMovieInfoManager!
     private var image: UIImage?
     
     // MARK: Initializers
     
     init(movie: TMDbMovie, image: UIImage? = nil) {
-        self.movieInfoManager = TMDbMovieInfoManager(withMovie: movie)
+//        self.movieInfoManager = TMDbMovieInfoManager(withMovie: movie)
         self.image = image
         super.init(nibName: "DetailViewController", bundle: nil)
     }
@@ -47,13 +47,13 @@ class DetailViewController: BaseViewController {
         detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
         detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
         
-        detailView.configure(withMovie: movieInfoManager.movie, image: image)
+//        detailView.configure(withMovie: movieInfoManager.movie, image: image)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.setAsTransparent()
-        movieInfoManager.addChangeObserver(self, selector: #selector(DetailViewController.dataDidChangeNotification(_:)))
+//        movieInfoManager.addChangeObserver(self, selector: #selector(DetailViewController.dataDidChangeNotification(_:)))
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -64,59 +64,59 @@ class DetailViewController: BaseViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.setAsUnclear()
-        movieInfoManager.removeObserver(self)
+//        movieInfoManager.removeObserver(self)
     }
     
     // MARK: Actions
     
-    @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
-       movieInfoManager.toggleStatusOfMovieInList(.Favorites, status: sender.selected)
-    }
-    
-    @IBAction func watchListDidGetTapped(sender: WatchListButton) {
-       movieInfoManager.toggleStatusOfMovieInList(.Watchlist, status: sender.selected)
-    }
-
-    @IBAction func reviewsButtonGotTapped(sender: UIButton) {
-        showReviews(movieInfoManager.movie)
-    }
-    
-    @IBAction func playButtonTapped(sender: UIButton) {
-        showTrailer()
-    }
+//    @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
+//       movieInfoManager.toggleStatusOfMovieInList(.Favorites, status: sender.selected)
+//    }
+//    
+//    @IBAction func watchListDidGetTapped(sender: WatchListButton) {
+//       movieInfoManager.toggleStatusOfMovieInList(.Watchlist, status: sender.selected)
+//    }
+//
+//    @IBAction func reviewsButtonGotTapped(sender: UIButton) {
+//        showReviews(movieInfoManager.movie)
+//    }
+//    
+//    @IBAction func playButtonTapped(sender: UIButton) {
+//        showTrailer()
+//    }
     
     // MARK: Notifications
     
-    override func dataDidChangeNotification(notification: NSNotification) {
-        super.dataDidChangeNotification(notification)
-        
-        switch movieInfoManager.state {
-        case .DataDidLoad:
-            update()
-        case .Error:
-            handleErrorState(movieInfoManager.lastError, authorizationRequired: signedIn )
-        default:
-            return
-        }
-    }
+//    override func dataDidChangeNotification(notification: NSNotification) {
+//        super.dataDidChangeNotification(notification)
+//        
+//        switch movieInfoManager.state {
+//        case .DataDidLoad:
+//            update()
+//        case .Error:
+//            handleErrorState(movieInfoManager.lastError, authorizationRequired: signedIn )
+//        default:
+//            return
+//        }
+//    }
     
-    private func update() {
-        if let similarMovies = movieInfoManager.similarMovies {
-            detailView.similarMovieCollectionView.hideMessage()
-            similarMoviesDataProvider.updateWithMovies(similarMovies)
-            detailView.reloadCollectionViews()
-        }
-        
-        if let cast = movieInfoManager.cast {
-            detailView.castCollectionView.hideMessage()
-            castDataProvider.updateWithCast(cast)
-            detailView.reloadCollectionViews()
-        }
-        let director = movieInfoManager.director
-        let inFavorites = movieInfoManager.inFavorites
-        let inWatchList = movieInfoManager.inWatchList
-        detailView.configure(withDirector: director, inFavorites: inFavorites, inWatchList: inWatchList)
-    }
+//    private func update() {
+////        if let similarMovies = movieInfoManager.similarMovies {
+//            detailView.similarMovieCollectionView.hideMessage()
+//            similarMoviesDataProvider.updateWithMovies(similarMovies)
+//            detailView.reloadCollectionViews()
+//        }
+//        
+//        if let cast = movieInfoManager.cast {
+//            detailView.castCollectionView.hideMessage()
+//            castDataProvider.updateWithCast(cast)
+//            detailView.reloadCollectionViews()
+//        }
+//        let director = movieInfoManager.director
+//        let inFavorites = movieInfoManager.inFavorites
+//        let inWatchList = movieInfoManager.inWatchList
+//        detailView.configure(withDirector: director, inFavorites: inFavorites, inWatchList: inWatchList)
+//    }
 
     // MARK: Navigation
     
@@ -126,9 +126,9 @@ class DetailViewController: BaseViewController {
     }
     
     private func showTrailer() {
-        guard let video = movieInfoManager.trailers?.first else { return }
-        let videoController = VideoViewController(video: video)
-        navigationController?.pushViewController(videoController, animated: true)
+//        guard let video = movieInfoManager.trailers?.first else { return }
+//        let videoController = VideoViewController(video: video)
+//        navigationController?.pushViewController(videoController, animated: true)
     }
     
     private func showReviews(movie: TMDbMovie) {

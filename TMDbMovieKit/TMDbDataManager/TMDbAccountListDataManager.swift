@@ -8,53 +8,36 @@
 
 import Foundation
 
-public class TMDbAccountListDataManager: TMDbBaseDataManager {
+public class TMDbAccountListDataManager: TMDbListDataManager<TMDbMovie> {
     
     // MARK: Properties
     
-    public var movies: [TMDbMovie] {
-        return list.items
-    }
-    
     private let movieClient = TMDbMovieClient()
     
-    private var currentList: TMDbAccountList?
+    private let list: TMDbAccountList
     
-    private var list = TMDbList<TMDbMovie>()
+    // MARK: Intialization 
     
-    // MARK: request Data
-    
-    public func loadTop(list: TMDbAccountList) {
-        currentList = list
-        fetchList(list, page: 1)
+    init(cacheIdentifier: String, list: TMDbAccountList) {
+        self.list = list
+        super.init(cacheIdentifier: cacheIdentifier)
     }
     
-    public func loadMore() {
-        guard state != .Loading else { return }
-        guard let currentList = currentList else { return }
-        guard let nextPage = list.nextPage else { return }
-        fetchList(currentList, page: nextPage)
-    }
+    // MARK: API Calls
     
-    // MARK: API Calls 
-    
-    private func fetchList(list: TMDbAccountList, page: Int) {
-        guard let _ = currentList else { return }
-        
-        state = .Loading
+    override func loadOnline(page: Int) {
+        startLoading()
         
         movieClient.fetchAccountList(list, page: page) { (list, error) in
-            
             guard error == nil else {
                 self.handleError(error!)
                 return
             }
             
-            if let results = list {
-                self.updateList(self.list, withData: results)
+            if let data = list {
+                self.update(withData: data)
             }
         }
-
     }
     
 }

@@ -19,6 +19,8 @@ private struct Keys {
 
 class TMDbList<Item: Mappable>: NSObject, Mappable {
     
+    // MARK: Properties
+    
     var page: Int = 0
     var pageCount: Int = 0
     var resultCount: Int = 0
@@ -27,6 +29,8 @@ class TMDbList<Item: Mappable>: NSObject, Mappable {
     var nextPage: Int? {
         return page < pageCount ? page + 1 : nil
     }
+    
+    // MARK: Initialization
 
     override init() {
         super.init()
@@ -39,26 +43,6 @@ class TMDbList<Item: Mappable>: NSObject, Mappable {
         self.pageCount    <- map[Keys.PageCount]
         self.resultCount  <- map[Keys.ResultCount]
         self.items        <- map[Keys.Items]
-    }
-    
-    // MARK: Update
-
-    func update(data: TMDbList<Item>) -> Bool {
-        // Check equality of data 
-        guard data != self else { return false }
-        
-        // Handle results
-        page = data.page
-        pageCount = data.pageCount
-        resultCount = data.resultCount
-        
-        if self.page > 1 {
-            items.appendContentsOf(data.items)
-        } else {
-            items = data.items
-        }
-        
-        return true 
     }
     
 }

@@ -7,13 +7,13 @@
 */
 
 /* No Internet connection banner */
-noConnectionTitle = "No internet connection"
-noConnectionMessage = "Couldn't load any information, please check your connection and try again later"
-
-/* Authorization error alert */
-authorizationErrorTitle = "Authorization error"
-authorizationErrorMessage = "This feauture requires you to sign in with a TMDb account"
-
-/* Generic error alert */
-genericErrorTitle = "Unknown error"
-genericErrorMessage = "An unknown error occurred"
+//noConnectionTitle = "No internet connection"
+//noConnectionMessage = "Couldn't load any information, please check your connection and try again later"
+//
+///* Authorization error alert */
+//authorizationErrorTitle = "Authorization error"
+//authorizationErrorMessage = "This feauture requires you to sign in with a TMDb account"
+//
+///* Generic error alert */
+//genericErrorTitle = "Unknown error"
+//genericErrorMessage = "An unknown error occurred"

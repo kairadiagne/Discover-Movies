@@ -46,6 +46,8 @@
 		118B1C411D439C5D0026857C /* TMDbTopRatedListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B1C401D439C5D0026857C /* TMDbTopRatedListManager.swift */; };
 		118B1C431D439C740026857C /* TMDbUpcomingListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B1C421D439C740026857C /* TMDbUpcomingListManager.swift */; };
 		118B1C451D43A6900026857C /* TMDbNowPlayingListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B1C441D43A6900026857C /* TMDbNowPlayingListManager.swift */; };
+		118B1C761D4CB0200026857C /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B1C751D4CB0200026857C /* Animator.swift */; };
+		118B1C781D4CB0390026857C /* NavControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118B1C771D4CB0390026857C /* NavControllerDelegate.swift */; };
 		1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */; };
 		119A1F3E1D415B0D00AC61C7 /* TMDbCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */; };
 		11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */; };
@@ -210,6 +212,8 @@
 		118B1C401D439C5D0026857C /* TMDbTopRatedListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopRatedListManager.swift; sourceTree = "<group>"; };
 		118B1C421D439C740026857C /* TMDbUpcomingListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbUpcomingListManager.swift; sourceTree = "<group>"; };
 		118B1C441D43A6900026857C /* TMDbNowPlayingListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbNowPlayingListManager.swift; sourceTree = "<group>"; };
+		118B1C751D4CB0200026857C /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		118B1C771D4CB0390026857C /* NavControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavControllerDelegate.swift; sourceTree = "<group>"; };
 		1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = "DiscoverMovies/UserInterface/6. Detail Movie/DetailViewController.xib"; sourceTree = SOURCE_ROOT; };
 		119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCachedData.swift; sourceTree = "<group>"; };
 		11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+defaultIdentifier.swift"; sourceTree = "<group>"; };
@@ -496,6 +500,15 @@
 				111942661CCB8CBE001CF39B /* TMDbMovieKit.h */,
 			);
 			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		118B1C741D4CAFF30026857C /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				118B1C751D4CB0200026857C /* Animator.swift */,
+				118B1C771D4CB0390026857C /* NavControllerDelegate.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 		2693F16C0142D84C17AC1C7B /* Frameworks */ = {
@@ -822,6 +835,7 @@
 				EAD2A8311CDC9ECC0005264B /* Video */,
 				EAD2A8321CDC9EDE0005264B /* Review */,
 				EA870C631D12B790009C71D5 /* Generic */,
+				118B1C741D4CAFF30026857C /* Transitions */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -1283,9 +1297,11 @@
 				EA6487711CE21E2300452DD0 /* ListViewController.swift in Sources */,
 				EAA862081CEDDD7500C76D4D /* DiscoverListViewController.swift in Sources */,
 				EA870C3B1D1177C7009C71D5 /* AccountListDataProvider.swift in Sources */,
+				118B1C761D4CB0200026857C /* Animator.swift in Sources */,
 				115559CD1D0C434B0055042C /* SearchView.swift in Sources */,
 				EA6487A21CE356C300452DD0 /* DetailView.swift in Sources */,
 				111942A11CCB8DD4001CF39B /* UIImage+Defaults.swift in Sources */,
+				118B1C781D4CB0390026857C /* NavControllerDelegate.swift in Sources */,
 				1119429E1CCB8DD4001CF39B /* NSDate+Year.swift in Sources */,
 				113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */,
 				EA64879F1CE3569700452DD0 /* DetailViewController.swift in Sources */,

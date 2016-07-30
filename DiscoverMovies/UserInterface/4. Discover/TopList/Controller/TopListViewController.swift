@@ -74,7 +74,7 @@ class TopListViewController: DiscoverListViewController {
             return
         }
         
-        currentManager?.reloadTopIfNeeded(false)
+        currentManager?.reloadTopIfNeeded(true)
     }
     
     // MARK: Notifications
@@ -103,7 +103,13 @@ class TopListViewController: DiscoverListViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         guard let movie = tableViewDataProvider.itemAtIndex(indexPath.row) else { return }
-        showDetailViewControllerForMovie(movie)
+        let navDelegate = NavDelegate()
+        self.navigationController?.delegate = navDelegate
+
+        let image = SDWebImageManager.sharedManager().getImageFromCache(movie)
+        let detailViewController = DetailViewController(movie: movie, image: image)
+        navigationController?.pushViewController(detailViewController, animated: true)
+//        showDetailViewControllerForMovie(movie)
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -113,3 +119,26 @@ class TopListViewController: DiscoverListViewController {
     }
 
 }
+
+//
+//func hideElementsForPushTransition() {
+//    // hero view appears with slight delay (not in sync)
+//    // so need to hide it explicitly from container view
+//    view.alpha = 0.0
+//    heroView.alpha = 0.0
+//    
+//    // hide all visible cells
+//    for cell in visibleCellViews { cell.alpha = 0.0 }
+//    
+//    // move back button arrow beyond screen
+//    backButtonHorizontalSpacer.constant = -70.0
+//}
+//
+//func prepareToCompletePushTransition() {
+//    backButtonHorizontalSpacer.constant = 0.0
+//    disableTransparencyAnimatedForViews(visibleCellViews)
+//}
+//
+//private var visibleCellViews: [UIView] {
+//    return (tableView.visibleCells() as! [UITableViewCell]).map { $0.contentView }
+//}

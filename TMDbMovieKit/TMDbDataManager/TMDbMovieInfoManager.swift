@@ -14,9 +14,11 @@ public protocol TMDbMovieInfoManagerDelegate: class {
     func movieInfoManagerDidReceiverError(error: TMDbAPIError)
 }
 
-public class TMDbMovieInfoManager: TMDbMovieService {
+public class TMDbMovieInfoManager {
     
     // MARK: Properties
+    
+    public var delegate: TMDbMovieInfoManagerDelegate?
     
     public private(set) var movieID: Int
     
@@ -66,6 +68,23 @@ public class TMDbMovieInfoManager: TMDbMovieService {
             }
     
         }
+    }
+    
+    // MARK: Handle Errro
+    
+    func handleError(error: NSError) {
+        var newError: TMDbAPIError
+        
+        // Determine which kind of error where dealing with
+        if error.code == NSURLErrorNotConnectedToInternet {
+            newError = .NoInternetConnection
+        } else if error.domain == NSURLErrorDomain && error.code == NSURLErrorUserAuthenticationRequired {
+            newError = .NotAuthorized
+        } else {
+            newError = .Generic
+        }
+        
+        delegate?.movieInfoManagerDidReceiverError(newError)
     }
     
 }

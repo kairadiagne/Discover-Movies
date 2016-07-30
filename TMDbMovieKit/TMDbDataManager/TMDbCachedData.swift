@@ -14,16 +14,10 @@ class TMDbCachedData<ModelType> {
     
     private(set) var data: ModelType?
     
-    var needsRefresh: Bool = true 
-    
-//    {
-//        if let lastUpdate = lastUpdate {
-//            return true
-//        }
-//        return true
-////        return abs(lastUpdate.timeIntervalSinceNow) > refreshTimout ? true : false
-//    }
-    
+    var needsRefresh: Bool {
+        guard let lastUpdate = lastUpdate else { return true }
+        return lastUpdate.timeIntervalSinceNow > refreshTimeOut
+    }
     private var lastUpdate: NSDate?
     
     private var refreshTimeOut: NSTimeInterval! // Specifies a time interval in seconds

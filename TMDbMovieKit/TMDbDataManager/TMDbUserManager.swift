@@ -8,17 +8,20 @@
 
 import Foundation
 
+public protocol TMDbUserManagerDelegate: class {
+    func userManagerDidLoadUser(user: TMDbUser)
+    func userManagerDidReceiveError(error: TMDbAPIError)
+}
+
 public class TMDbUserManager {
     
     // MARK: Properties
     
-    public var failureDelegate: DataManagerFailureDelegate?
+    public weak var delegate: TMDbUserManagerDelegate?
     
     public static var shared = TMDbUserManager()
     
-    public private(set) var user: TMDbUser?
-    
-    public private(set) var isLoading = false
+    private(set) var user: TMDbUser?
     
     private let userClient = TMDbUserClient()
     
@@ -34,26 +37,35 @@ public class TMDbUserManager {
     // MARK: - Fetching
     
     public func loadUserInfo() {
-        isLoading = true
-        
+
         userClient.fetchUserInfo { (user, error) in
             guard error == nil else {
-                // Check for errors 
-                // Call delegate with error 
+                self.handleError(error!)
                 return
             }
             
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
-                if let user = user {
-                    self.sessionInfoStore.persistUserInStore(user)
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
-                    })
-                    
-                }
-            })
-            
+            if let user = user {
+                self.sessionInfoStore.persistUserInStore(user)
+                self.delegate?.userManagerDidLoadUser(user)
+            }
         }
     }
+    
+    // MARK: Error Handling
+    
+    func handleError(error: NSError) {
+        var newError: TMDbAPIError
+        
+        // Determine which kind of error where dealing with
+        if error.code == NSURLErrorNotConnectedToInternet {
+            newError = .NoInternetConnection
+        } else if error.domain == NSURLErrorDomain && error.code == NSURLErrorUserAuthenticationRequired {
+            newError = .NotAuthorized
+        } else {
+            newError = .Generic
+        }
+        
+        delegate?.userManagerDidReceiveError(newError)
+    }
+    
 }

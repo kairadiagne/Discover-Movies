@@ -50,7 +50,7 @@ class MenuTableView: UITableView {
     
     // MARK: Configure
     
-    func updateMenu(signedIn: Bool, user: TMDbUser?) {
+    func updateMenu(signedIn: Bool, user: TMDbUser? = nil) {
         usernameLabel.text = user?.name ?? "Guest"
         signoutlabel.text = signedIn ? "Sign out" : "Sign in" 
         watchListLabel.enabled = signedIn

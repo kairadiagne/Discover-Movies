@@ -27,7 +27,7 @@ public class TMDbListDataManager<ModelType: Mappable> {
     
     private(set) var cache = TMDbCachedData<TMDbList<ModelType>>()
     
-    private var cacheIdentifier = ""
+    var cacheIdentifier = ""
     
     private let notificationCenter = NSNotificationCenter.defaultCenter()
     

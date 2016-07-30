@@ -88,19 +88,19 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     // MARK: Communicate State 
     
     func presentBannerOnInternetError() {
-        let title = "No, Internet Connection" // NSLocalized String
-        let message = "Couldn't load any information, please check your connection and try again later" // NSLocalized String
+        let title = NSLocalizedString("noConnectionTitle", comment: "Title of no internet connection banner")
+        let message = NSLocalizedString("noConnectionMessage", comment: "Message of no internet connection bannner")
         showBanner(title, message: message, color: UIColor.flatOrangeColor())
     }
     
     func presentAlertOnAuthorizationError() {
-        let title = "Authorization Error" // NSLocalized String
-        let message = "This feature requires you to sign in with a TMDb account" // NSLocalized String
+        let title = NSLocalizedString("authorizationErrorTitle", comment: "Title of authorization error alert")
+        let message = NSLocalizedString("authorizationErrorMessage", comment: "Message of authorization error alert")
     }
     
     func presentAlertGenericError() {
-        let title = "Unknown Error" // NSLocalized String
-        let message = "An unknown error occurred" // NSLocalized String
+        let title = NSLocalizedString("genericErrorTitle", comment: "Title of generic error alert")
+        let message = NSLocalizedString("genericErrorMessage", comment: "Message of generic error alert")
     }
     
     // MARK: Navigation
@@ -111,6 +111,3 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     }
 
 }
-
-
-

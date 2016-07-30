@@ -20,8 +20,8 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     // MARK: Properties
     
-//    private let accountListDataManager = TMDbAccountListDataManager()
     private let dataProvider = AccountListDataProvider()
+    
     private let accountList: TMDbAccountList
     
     // MARK: Initializers
@@ -52,45 +52,44 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        accountListDataManager.addChangeObserver(self, selector: #selector(AccountListController.dataDidChangeNotification(_:)))
-        loadList()
-    }
-    
-    private func loadList() {
-//        accountListDataManager.loadTop(accountList)
+        
+        let loadingSelector = #selector(AccountListController.dataDidStartLoadingNotification(_:))
+        let didLoadSelector = #selector(AccountListController.dataDidLoadTopNotification(_:))
+        let didUpdateSelector = #selector(AccountListController.dataDidUpdateNotification(_:))
+        TMDbAccountListDataManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
+        TMDbAccountListDataManager.shared.failureDelegate = self
+        TMDbAccountListDataManager.shared.list = accountList
+        TMDbAccountListDataManager.shared.reloadTopIfNeeded(false)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-//        accountListDataManager.removeObserver(self)
+        TMDbAccountListDataManager.shared.removeObserver(self)
     }
     
     // MARK: Refresh
     
     func refresh(sender: UIRefreshControl) {
-//        accountListDataManager.loadTop(accountList)
+        TMDbAccountListDataManager.shared.reloadTopIfNeeded(true)
     }
     
-//    override func dataDidChangeNotification(notification: NSNotification) {
-//        super.dataDidChangeNotification(notification)
-//        
-//        switch accountListDataManager.state {
-//        case .Loading:
-//            showProgressHUD()
-//        case .DataDidLoad:
-//            updateTableView()
-//        case .DataDidUpdate:
-//            updateTableView()
-//            tableView.scrollToTop()
-//        case .NoData:
-//            tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
-//        case .Error:
-//            handleErrorState(accountListDataManager.lastError, authorizationRequired: true)
-//        }
-//    }
+    // MARK: Notifications 
+    
+    override func dataDidLoadTopNotification(notification: NSNotification) {
+        super.dataDidLoadTopNotification(notification)
+        updateTableView()
+    }
+    
+    override func dataDidUpdateNotification(notification: NSNotification) {
+        super.dataDidUpdateNotification(notification)
+        updateTableView()
+    }
     
     func updateTableView() {
-//        dataProvider.updateWithItems(accountListDataManager.movies)
+        dataProvider.updateWithItems(TMDbAccountListDataManager.shared.itemsInList)
+        if TMDbAccountListDataManager.shared.itemsInList.count == 0 {
+            tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
+        }
         tableView.reloadData()
     }
 
@@ -103,7 +102,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if dataProvider.itemCount - 5 == indexPath.row {
-//            accountListDataManager.loadMore()
+            TMDbAccountListDataManager.shared.loadMore()
         }
     }
     

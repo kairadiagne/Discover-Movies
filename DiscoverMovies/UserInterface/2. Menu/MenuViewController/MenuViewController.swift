@@ -17,10 +17,10 @@ class MenuViewController: UITableViewController {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
         return storyboard.instantiateViewControllerWithIdentifier(String(MenuViewController)) as! MenuViewController
     }
+    
+    // MARK: Properties
 
     @IBOutlet weak var menuTableview: MenuTableView!
-    
-//    private let userManager = TMDbUserManager()
     
     private let signInmanager = TMDbSignInManager()
     
@@ -37,21 +37,19 @@ class MenuViewController: UITableViewController {
     
     private var presentedRow = 1
     
-    // MARK: View Controller Life Cycle
+    // MARK: LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        userManager.addUpdateObserver(self, selector: #selector(MenuViewController.dataDidUpdateNotification(_:)))
+        TMDbUserManager.shared.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         if signedIn {
-//            userManager.loadUserInfo()
-//            menuTableview.updateMenu(true, user: userManager.user)
+            TMDbUserManager.shared.loadUserInfo()
         } else {
-            menuTableview.updateMenu(false, user: nil)
+            menuTableview.updateMenu(signedIn)
         }
     }
    
@@ -59,12 +57,6 @@ class MenuViewController: UITableViewController {
         return .LightContent
     }
     
-    // MARK: Notifications
-    
-    func dataDidUpdateNotification(notification: NSNotification) {
-//        menuTableview.updateMenu(true, user: userManager.user) 
-    }
-
     // MARK: Navigation
     
     func showTopListViewController() {
@@ -130,4 +122,18 @@ class MenuViewController: UITableViewController {
         presentedRow = indexPath.row
     }
     
+}
+
+// MARK: - UserManagerDelegate 
+
+extension MenuViewController: TMDbUserManagerDelegate {
+    
+    func userManagerDidLoadUser(user: TMDbUser) {
+        menuTableview.updateMenu(signedIn, user: user)
+    }
+    
+    func userManagerDidReceiveError(error: TMDbAPIError) {
+        // What to do with this error
+    }
+
 }

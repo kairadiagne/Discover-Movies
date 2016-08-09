@@ -12,7 +12,7 @@ import UIKit
 
 class NavDelegate: NSObject, UINavigationControllerDelegate {
     
-    private let animator = Animator(animationDuration: 4)
+    private let animator = Animator(animationDuration: 2)
     
     func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return animator

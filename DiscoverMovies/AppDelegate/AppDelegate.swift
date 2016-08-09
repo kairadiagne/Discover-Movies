@@ -13,23 +13,22 @@ import SWRevealViewController
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    private struct Constants {
-        static let RootViewControllerNibName = "ListViewController"
-    }
-
+    
     var window: UIWindow?
     
     var revealViewController: SWRevealViewController!
+    
+    var menuViewController: MenuViewController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Theme.applyGlobalTheme() 
         
         TMDbSessionManager.shared.registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
         
-        let rearViewController =  MenuViewController.instantiatefromStoryboard()
-        let topListViewController = TopListViewController(nibName: Constants.RootViewControllerNibName, bundle: nil)
+        let menuViewController =  MenuViewController.instantiatefromStoryboard() // RearViewController
+        let topListViewController = TopListViewController(nibName: String(ListViewController), bundle: nil)
         let frontViewController = UINavigationController(rootViewController: topListViewController)
-        revealViewController = SWRevealViewController(rearViewController: rearViewController, frontViewController: frontViewController)
+        revealViewController = SWRevealViewController(rearViewController: menuViewController, frontViewController: frontViewController)
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = revealViewController
@@ -64,7 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // TODO: 
-// - Authorization Error Check: Account list Controller, DetailController
 // - Error Messages (No trailer, No Reviews, Not authorized)
 // - SearchView SearchViewController, SearchListViewController
 

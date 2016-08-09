@@ -58,7 +58,6 @@ class DetailViewController: BaseViewController {
         movieInfoManager.loadInfo()
         movieInfoManager.loadAccountState()
         
-        // Configure view
         detailView.configure(withMovie: movie, image: image)
     }
     
@@ -137,7 +136,6 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     }
     
     func movieInfoManagerDidReceiverError(error: TMDbAPIError) {
-       // What if the user is not signed in what sould we do in this case with the authorization error
        handleError(error)
     }
     

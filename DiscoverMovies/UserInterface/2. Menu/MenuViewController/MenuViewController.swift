@@ -71,15 +71,26 @@ class MenuViewController: UITableViewController {
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
-    func showFavoritesViewControlelr() {
+    func showFavoritesViewController() {
         let favoritesController = AccountListController(list: .Watchlist)
         let navigationController = UINavigationController(rootViewController: favoritesController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
-    func toggleSignIn() {
+    // MARK: Sign in / Sign out
+    
+    func signIn() {
+        showTopListViewController()
+    }
+    
+    func signOut() {
+        signInmanager.signOut()
+        showTopListViewController()
+    }
+    
+    private func toggleSignIn() {
         if signedIn {
-            signInmanager.signOut()
+            signOut()
         } else {
             signInmanager.deactivatePublicMode()
         }
@@ -110,7 +121,7 @@ class MenuViewController: UITableViewController {
         case 1:
             showTopListViewController()
         case 2:
-            showFavoritesViewControlelr()
+            showFavoritesViewController()
         case 3:
             showWatchListViewController()
         case 4:

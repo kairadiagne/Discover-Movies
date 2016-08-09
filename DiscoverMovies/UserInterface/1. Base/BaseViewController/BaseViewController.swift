@@ -27,18 +27,13 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     var sessionManager = TMDbSessionManager()
     
-    var authorizationRequired: Bool = false
-
+    var signInManager = TMDbSignInManager()
+    
     var shouldShowSignInViewController: Bool {
-        switch sessionManager.signInStatus {
-        case .NotAvailable:
-            return true
-        default:
-            return false
-        }
+        return sessionManager.signInStatus == .NotAvailable ? true : false 
     }
     
-    var signedIn: Bool {
+    private var signedIn: Bool {
         return sessionManager.signInStatus == .Signedin ? true: false 
     }
     
@@ -49,26 +44,6 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
         progressHUD?.userInteractionEnabled = false
         view.addSubview(progressHUD!)
-    
-    }
-    
-    // MARK: Error Handling
-    
-    func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError) {
-       handleError(error)
-    }
-    
-    func handleError(error: TMDbAPIError) {
-        switch error {
-        case .Generic:
-            presentAlertGenericError()
-        case .NoInternetConnection:
-            presentBannerOnInternetError()
-        case .NotAuthorized:
-            if authorizationRequired {
-                presentAlertOnAuthorizationError()
-            }
-        }
     }
 
     // MARK: Notifications
@@ -85,7 +60,28 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         hideProgressHUD()
     }
     
-    // MARK: Communicate State 
+    // MARK: Error Handeling
+    
+    func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError) {
+        handleError(error)
+    }
+    
+    func handleError(error: TMDbAPIError) {
+        switch error {
+        case .Generic:
+            presentAlertGenericError()
+        case .NoInternetConnection:
+            presentBannerOnInternetError()
+        case .NotAuthorized where sessionManager.signInStatus == .Signedin:
+            presentAlertOnAuthorizationError()
+        case .NotAuthorized where sessionManager.signInStatus == .NotAvailable:
+            presentAlertOnAuthorizationError()
+        case .NotAuthorized where sessionManager.signInStatus == .PublicMode:
+            return
+        default:
+            return
+        }
+    }
     
     func presentBannerOnInternetError() {
         let title = NSLocalizedString("noConnectionTitle", comment: "Title of no internet connection banner")
@@ -96,11 +92,34 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     func presentAlertOnAuthorizationError() {
         let title = NSLocalizedString("authorizationErrorTitle", comment: "Title of authorization error alert")
         let message = NSLocalizedString("authorizationErrorMessage", comment: "Message of authorization error alert")
+        
+        let completionHandler = {
+            self.signInManager.signOut()
+            
+            if let menuViewController = (UIApplication.sharedApplication().delegate as? AppDelegate)?.menuViewController {
+                menuViewController.signOut()
+            }
+        }
+    
+        presentAlertWithTitle(title, message: message, completionhandler: completionHandler)
     }
     
     func presentAlertGenericError() {
         let title = NSLocalizedString("genericErrorTitle", comment: "Title of generic error alert")
         let message = NSLocalizedString("genericErrorMessage", comment: "Message of generic error alert")
+        presentAlertWithTitle(title, message: message, completionhandler: nil)
+    }
+    
+    private func presentAlertWithTitle(title: String, message: String, completionhandler: (() -> Void)?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        let dismiss = UIAlertAction(title: "dismiss", style: .Default) { action  in
+            completionhandler?()
+        }
+        
+        alertController.addAction(dismiss)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: Navigation

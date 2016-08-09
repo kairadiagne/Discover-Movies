@@ -20,7 +20,6 @@
 		111942A11CCB8DD4001CF39B /* UIImage+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942941CCB8DD4001CF39B /* UIImage+Defaults.swift */; };
 		111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */; };
 		111942A31CCB8DD4001CF39B /* UINavigationController+StatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942961CCB8DD4001CF39B /* UINavigationController+StatusBarStyle.swift */; };
-		111942A51CCB8DD4001CF39B /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942981CCB8DD4001CF39B /* UIViewController+Alert.swift */; };
 		111942BA1CCB8DE5001CF39B /* DiscoverListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */; };
 		111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */; };
 		111942D61CCB8E47001CF39B /* PullToRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D21CCB8E47001CF39B /* PullToRefreshable.swift */; };
@@ -186,7 +185,6 @@
 		111942941CCB8DD4001CF39B /* UIImage+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Defaults.swift"; sourceTree = "<group>"; };
 		111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Transparent.swift"; sourceTree = "<group>"; };
 		111942961CCB8DD4001CF39B /* UINavigationController+StatusBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+StatusBarStyle.swift"; sourceTree = "<group>"; };
-		111942981CCB8DD4001CF39B /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverListCell.swift; sourceTree = "<group>"; };
 		111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverListCell.xib; sourceTree = "<group>"; };
 		111942D21CCB8E47001CF39B /* PullToRefreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshable.swift; sourceTree = "<group>"; };
@@ -406,7 +404,6 @@
 				113946311CCBBA80001CFAEA /* NSDate+ToString.swift */,
 				111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */,
 				111942961CCB8DD4001CF39B /* UINavigationController+StatusBarStyle.swift */,
-				111942981CCB8DD4001CF39B /* UIViewController+Alert.swift */,
 				EA6487F31CE61E1700452DD0 /* UIWebImage+CachedImage.swift */,
 				11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */,
 				11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */,
@@ -576,6 +573,7 @@
 		EA6487C91CE5134000452DD0 /* DetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */,
 				EA64879D1CE3569700452DD0 /* DetailViewController.swift */,
 			);
 			path = DetailViewController;
@@ -947,7 +945,6 @@
 			isa = PBXGroup;
 			children = (
 				EA6487A11CE356C300452DD0 /* DetailView.swift */,
-				1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */,
 			);
 			name = DetailView;
 			path = "Detail view";
@@ -1308,7 +1305,6 @@
 				EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */,
 				EAD2A8421CDCDF100005264B /* DiscoverDataProvider.swift in Sources */,
 				EA6487BF1CE4E50100452DD0 /* SignInViewController.swift in Sources */,
-				111942A51CCB8DD4001CF39B /* UIViewController+Alert.swift in Sources */,
 				EA6487F41CE61E1700452DD0 /* UIWebImage+CachedImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

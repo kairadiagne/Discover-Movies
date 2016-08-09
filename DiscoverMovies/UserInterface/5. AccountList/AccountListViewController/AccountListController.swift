@@ -41,6 +41,8 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         super.viewDidLoad()
         addMenuButton()
         
+        TMDbAccountListDataManager.shared.failureDelegate = self
+        
         let nib = UINib(nibName: AccountListTableViewCell.nibName(), bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
         tableView.estimatedRowHeight = Constants.DefaultRowHeight

@@ -166,5 +166,3 @@ extension DetailView: UIScrollViewDelegate {
     }
     
 }
-
-

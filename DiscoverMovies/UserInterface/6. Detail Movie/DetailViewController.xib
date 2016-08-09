@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -15,14 +15,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DetailView" customModule="DiscoverMovies" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40P-gH-Zt8">
-                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRx-Rx-qhX" customClass="BackgroundView" customModule="DiscoverMovies" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="973"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="973"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0s-VM-Ai3">
                                     <rect key="frame" x="20" y="308" width="88" height="21"/>
@@ -73,7 +73,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wuB-LI-u1z" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="554" width="560" height="130"/>
+                                    <rect key="frame" x="20" y="554" width="335" height="130"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="130" id="FUx-NG-SN1"/>
                                     </constraints>
@@ -88,7 +88,7 @@
                                     </connections>
                                 </collectionView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EM4-an-m11" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="755" width="560" height="130"/>
+                                    <rect key="frame" x="20" y="755" width="335" height="130"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="130" id="Q0t-Bx-P99"/>
                                     </constraints>
@@ -104,31 +104,31 @@
                                     </connections>
                                 </collectionView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCt-Xe-mbS">
-                                    <rect key="frame" x="538" y="442" width="42" height="21"/>
+                                    <rect key="frame" x="313" y="442" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07M-il-PEq">
-                                    <rect key="frame" x="538" y="471" width="42" height="21"/>
+                                    <rect key="frame" x="313" y="471" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nx5-sK-CGB">
-                                    <rect key="frame" x="538" y="384" width="42" height="21"/>
+                                    <rect key="frame" x="313" y="384" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OW2-WD-d6e">
-                                    <rect key="frame" x="538" y="413" width="42" height="21"/>
+                                    <rect key="frame" x="313" y="413" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqT-rY-QL6" customClass="FavouriteButton" customModule="DiscoverMovies" customModuleProvider="target">
-                                    <rect key="frame" x="512" y="243" width="30" height="30"/>
+                                    <rect key="frame" x="287" y="243" width="30" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="YUT-CR-lgM"/>
@@ -139,7 +139,7 @@
                                     </connections>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ar-Q4-HbC">
-                                    <rect key="frame" x="239" y="916" width="122" height="30"/>
+                                    <rect key="frame" x="127" y="916" width="122" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="122" id="xDJ-zN-OKf"/>
                                     </constraints>
@@ -149,7 +149,7 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRE-II-MfP" customClass="WatchListButton" customModule="DiscoverMovies" customModuleProvider="target">
-                                    <rect key="frame" x="550" y="243" width="30" height="30"/>
+                                    <rect key="frame" x="325" y="243" width="30" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <action selector="watchListDidGetTapped:" destination="-1" eventType="valueChanged" id="joX-As-ww1"/>
@@ -213,10 +213,10 @@
                     </constraints>
                 </scrollView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-G5-ykT" customClass="GradientImageView" customModule="DiscoverMovies" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="240"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5P8-XF-IXi">
-                    <rect key="frame" x="263" y="83" width="75" height="75"/>
+                    <rect key="frame" x="150" y="96" width="75" height="75"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="75" id="V2G-It-1eA"/>
                         <constraint firstAttribute="height" constant="75" id="lf9-rx-mMb"/>
@@ -242,6 +242,7 @@
                 <constraint firstAttribute="trailing" secondItem="40P-gH-Zt8" secondAttribute="trailing" id="gfk-dq-0vK"/>
                 <constraint firstItem="gTk-G5-ykT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sOB-d8-Gnv"/>
             </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
                 <outlet property="animationConstraint" destination="I7b-Th-kUF" id="ctB-Xr-7SZ"/>
                 <outlet property="castCollectionView" destination="wuB-LI-u1z" id="rGS-w0-bnc"/>

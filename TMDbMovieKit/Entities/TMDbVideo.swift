@@ -7,6 +7,49 @@
 //
 
 import Foundation
+
+public struct Video: DictionaryRepresentable {
+    
+    public let name: String
+    public let source: String
+    public let size: String
+    public let type: String
+    
+    init?(dictionary dict: [String : AnyObject]) {
+        guard let source = dict["source"] as? String,
+            name = dict["name"] as? String,
+            size = dict["size"] as? String,
+            type = dict["type"] as? String else {
+                return nil
+        }
+        
+        self.name = name
+        self.source = source
+        self.size = size
+        self.type = type
+        
+    }
+    
+    func dictionaryRepresentation() -> [String : AnyObject] {
+        var dictionary = [String: AnyObject]()
+        dictionary["name"] = name
+        dictionary["source"] = source
+        dictionary["size"] = size
+        dictionary["type"] = type
+        return dictionary
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
 import ObjectMapper
 
 private struct Keys {

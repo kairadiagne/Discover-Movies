@@ -19,7 +19,7 @@ public class TMDbMovieInfo: Mappable {
     
     // MARK: Properties
     
-    var list: TMDbList<TMDbMovie>?
+//    var list: TMDbList<TMDbMovie>?
     public var credits: TMDbMovieCredit?
     public var trailers: [TMDbVideo]?
     
@@ -28,7 +28,7 @@ public class TMDbMovieInfo: Mappable {
     public required init?(_ map: Map) { }
     
     public func mapping(map: Map) {
-        self.list       <- map[Keys.Similar]
+//        self.list       <- map[Keys.Similar]
         self.credits    <- map[Keys.Credits]
         self.trailers   <- map[Keys.trailers]
     }
@@ -36,7 +36,8 @@ public class TMDbMovieInfo: Mappable {
     // MARK: Utils 
     
     public func similarMovies() -> [TMDbMovie] {
-        return list?.items ?? []
+//        return list?.items ?? []
+        return []
     }
     
     public func cast() -> [TMDbCastMember] {

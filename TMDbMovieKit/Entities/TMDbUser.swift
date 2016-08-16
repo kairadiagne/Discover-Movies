@@ -7,6 +7,58 @@
 //
 
 import Foundation
+
+public struct User: DictionaryRepresentable {
+    
+    public let id: Int
+    public let userName: String
+    public var name: String?
+    public var profileHash: String?
+    
+    init?(dictionary dict: [String : AnyObject]) {
+        guard let id = dict["id"] as? Int, userName = dict["username"] as? String else { return nil }
+        
+        self.id = id
+        self.userName = userName
+        self.name = dict["name"] as? String
+        
+        if let avatar = dict["avatar"], gravatar = avatar["gravatar"], hash = gravatar?["hash"] as? String {
+            self.profileHash = hash
+        }
+        
+    }
+    
+    func dictionaryRepresentation() -> [String : AnyObject] {
+        var dictionary = [String: AnyObject]()
+        dictionary["id"] = id
+        dictionary["username"] = userName
+        dictionary["name"] = name
+        
+        var hashDict = [String: String?]()
+        hashDict["hash"] = profileHash
+        
+        
+        
+        
+        let gravatarDict = [String]
+        dictionary["avatar"] = ["gravatar": hashDict]
+        return dictionary
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 import ObjectMapper
 
 private struct Keys {

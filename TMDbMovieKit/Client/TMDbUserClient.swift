@@ -9,35 +9,36 @@
 import Foundation
 import Alamofire
 
-class TMDbUserClient: TMDbAPIClient {
+class TMDbUserClient {
     
     // Get information about the user
     
-    func fetchUserInfo(completionHandler: (user: TMDbUser?, error: NSError?) -> Void) {
-        guard let sessionID = sessionID else {
-            completionHandler(user: nil, error: authorizationError)
-            return
-        }
-        
-        let paramaters: [String: AnyObject] = ["session_id": sessionID]
-        
-        let endpoint = "account"
-        
-        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: paramaters)).validate()
-            .responseObject { (response: Response<TMDbUser, NSError>) in
-                
-                guard response.result.error == nil else {
-                    completionHandler(user: nil, error: response.result.error)
-                    return
-                }
-                
-                if let user = response.result.value {
-                    completionHandler(user: user, error: nil)
-                    return
-                }
-        }
+    func fetchUserInfo(completionHandler: (user: User?, error: NSError?) -> Void) {
+//        guard let sessionID = sessionID else {
+//            completionHandler(user: nil, error: authorizationError)
+//            return
+//        }
+//        
+//        let paramaters: [String: AnyObject] = ["session_id": sessionID]
+//        
+//        let endpoint = "account"
+//        
+//        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: paramaters)).validate()
+//            .responseObject { (response: Response<User, NSError>) in
+//                
+//                guard response.result.error == nil else {
+//                    completionHandler(user: nil, error: response.result.error)
+//                    return
+//                }
+//                
+//                if let user = response.result.value {
+//                    completionHandler(user: user, error: nil)
+//                    return
+//                }
+//        }
         
     }
     
 }
+
 

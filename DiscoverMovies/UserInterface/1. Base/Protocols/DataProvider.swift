@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import ObjectMapper
+import TMDbMovieKit
 
 // MARK: DataProvider
 
 protocol DataProvider: class {
-    associatedtype Item: Mappable
+    associatedtype Item: DictionaryRepresentable
     associatedtype Cell: UITableViewCell
     var cellIdentifier: String { get }
     var itemCount: Int { get }

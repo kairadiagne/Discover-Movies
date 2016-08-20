@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DictionaryRepresentable {
+public protocol DictionaryRepresentable {
     init?(dictionary dict: [String: AnyObject])
     func dictionaryRepresentation() -> [String: AnyObject]
 }

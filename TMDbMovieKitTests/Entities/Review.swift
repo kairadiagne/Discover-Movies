@@ -18,16 +18,16 @@ class Review: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
-    
-    func test_InitializesFromDictionary() {
-        let reviewDict = ["id": "50",
-                          "author": "Chris",
-                          "content": "Test Content",
-                          "url": "http://j.mp/P18dg1"]
-        
-//        let review = Review(
-       
-    }
+//    
+//    func test_InitializesFromDictionary() {
+//        let reviewDict = ["id": "50",
+//                          "author": "Chris",
+//                          "content": "Test Content",
+//                          "url": "http://j.mp/P18dg1"]
+//        
+////        let review = Review(
+//       
+//    }
     
 //    func test_InstancesAreNotEqual() {
 //        let movieDict = [ "id": 1,

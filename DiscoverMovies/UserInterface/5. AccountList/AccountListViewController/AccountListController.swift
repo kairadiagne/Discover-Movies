@@ -41,7 +41,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         super.viewDidLoad()
         addMenuButton()
         
-        TMDbAccountListDataManager.shared.failureDelegate = self
+//        TMDbAccountListDataManager.shared.failureDelegate = self
         
         let nib = UINib(nibName: AccountListTableViewCell.nibName(), bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
@@ -49,7 +49,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = dataProvider
         
-        title = accountList.rawValue
+//        title = accountList.rawValue
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -58,21 +58,21 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         let loadingSelector = #selector(AccountListController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(AccountListController.dataDidLoadTopNotification(_:))
         let didUpdateSelector = #selector(AccountListController.dataDidUpdateNotification(_:))
-        TMDbAccountListDataManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
-        TMDbAccountListDataManager.shared.failureDelegate = self
-        TMDbAccountListDataManager.shared.list = accountList
-        TMDbAccountListDataManager.shared.reloadTopIfNeeded(false)
+//        TMDbAccountListDataManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
+//        TMDbAccountListDataManager.shared.failureDelegate = self
+//        TMDbAccountListDataManager.shared.list = accountList
+//        TMDbAccountListDataManager.shared.reloadTopIfNeeded(false)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        TMDbAccountListDataManager.shared.removeObserver(self)
+//        TMDbAccountListDataManager.shared.removeObserver(self)
     }
     
     // MARK: Refresh
     
     func refresh(sender: UIRefreshControl) {
-        TMDbAccountListDataManager.shared.reloadTopIfNeeded(true)
+//        TMDbAccountListDataManager.shared.reloadTopIfNeeded(true)
     }
     
     // MARK: Notifications 
@@ -88,10 +88,10 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     }
     
     func updateTableView() {
-        dataProvider.updateWithItems(TMDbAccountListDataManager.shared.itemsInList)
-        if TMDbAccountListDataManager.shared.itemsInList.count == 0 {
-            tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
-        }
+//        dataProvider.updateWithItems(TMDbAccountListDataManager.shared.itemsInList)
+//        if TMDbAccountListDataManager.shared.itemsInList.count == 0 {
+//            tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
+//        }
         tableView.reloadData()
     }
 
@@ -104,13 +104,13 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if dataProvider.itemCount - 5 == indexPath.row {
-            TMDbAccountListDataManager.shared.loadMore()
+//            TMDbAccountListDataManager.shared.loadMore()
         }
     }
     
     // MARK: Navigation 
     
-    func showDetailViewControllerForMovie(movie: TMDbMovie) {
+    func showDetailViewControllerForMovie(movie: Movie) {
         let detailViewController = DetailViewController(movie: movie)
         navigationController?.pushViewController(detailViewController, animated: false)
     }

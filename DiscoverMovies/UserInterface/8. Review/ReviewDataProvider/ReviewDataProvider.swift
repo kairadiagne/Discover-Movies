@@ -13,7 +13,7 @@ class ReviewDataProvider: NSObject, DataProvider, UITableViewDataSource {
     
     // MARK: Properties
     
-    typealias Item = TMDbReview
+    typealias Item = Review
     typealias Cell = ReviewTableViewCell
     var items: [Item] = []
     

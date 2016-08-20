@@ -29,9 +29,9 @@ class AccountListTableViewCell: UITableViewCell {
     
     // MARK: Configur
     
-    func configure(movie: TMDbMovie, imageURL: NSURL?) {
+    func configure(movie: Movie, imageURL: NSURL?) {
         titleLabel.text = movie.title
-        overViewLabel.text = movie.overview ?? ""
+        overViewLabel.text = movie.overview
         posterView.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
     }
     

@@ -98,22 +98,19 @@ class DetailView: BackgroundView {
 
     // MARK: Configure
     
-    func configure(withMovie movie: TMDbMovie, image: UIImage?) {
+    func configure(withMovie movie: Movie, image: UIImage?) {
         titleLabel.text = movie.title
-        descriptionLabel.text = movie.overview ?? "N/A"
-        genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
-        ratingValueLabel.text = movie.rating != nil ? "\(movie.rating!)\\10.0" : "0.0\\10.0"
-        releaseValueLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())" : "Unknown"
+        descriptionLabel.text = movie.overview
+        // genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
+        ratingValueLabel.text =  "\(movie.rating)\\10.0"
+//        releaseValueLabel.text = "\(movie.releaseDate.year())"
         
         if let image = image {
             header.image = image
         }
         
-        if let path = movie.backDropPath {
-            let imageURL = TMDbImageRouter.BackDropMedium(path: path).url ?? NSURL()
-            header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
-        }
-
+        let imageURL = TMDbImageRouter.BackDropMedium(path: movie.posterPath).url ?? NSURL()
+        header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
     }
     
     func configureWithState(inFavorites: Bool, inWatchList: Bool) {
@@ -121,9 +118,9 @@ class DetailView: BackgroundView {
         watchListControl.setSelectedState(inWatchList)
     }
     
-    func configure(withDirector director: TMDbCrewMember?) {
-        directorValueLabel.text = director?.name ?? "Unknown"
-    }
+//    func configure(withDirector director: TMDbCrewMember?) {
+//        directorValueLabel.text = director?.name ?? "Unknown"
+//    }
     
     func reloadCollectionViews() {
         castCollectionView.reloadData()

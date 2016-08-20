@@ -41,13 +41,13 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        TMDbUserManager.shared.delegate = self
+//        TMDbUserManager.shared.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if signedIn {
-            TMDbUserManager.shared.loadUserInfo()
+//            TMDbUserManager.shared.loadUserInfo()
         } else {
             menuTableview.updateMenu(signedIn)
         }
@@ -66,7 +66,7 @@ class MenuViewController: UITableViewController {
     }
     
     func showWatchListViewController() {
-        let watchListController = AccountListController(list: .Favorites)
+        let watchListController = AccountListController(list: .Favorite)
         let navigationController = UINavigationController(rootViewController: watchListController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
@@ -137,14 +137,14 @@ class MenuViewController: UITableViewController {
 
 // MARK: - UserManagerDelegate 
 
-extension MenuViewController: TMDbUserManagerDelegate {
-    
-    func userManagerDidLoadUser(user: TMDbUser) {
-        menuTableview.updateMenu(signedIn, user: user)
-    }
-    
-    func userManagerDidReceiveError(error: TMDbAPIError) {
-        // What to do with this error
-    }
-
-}
+//extension MenuViewController: TMDbUserManagerDelegate {
+//    
+//    func userManagerDidLoadUser(user: TMDbUser) {
+//        menuTableview.updateMenu(signedIn, user: user)
+//    }
+//    
+//    func userManagerDidReceiveError(error: TMDbAPIError) {
+//        // What to do with this error
+//    }
+//
+//}

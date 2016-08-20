@@ -13,7 +13,7 @@ class AccountListDataProvider: NSObject, DataProvider, UITableViewDataSource {
     
     // MARK: Properties
     
-    typealias Item = TMDbMovie
+    typealias Item = Movie
     
     typealias Cell = AccountListTableViewCell
     
@@ -28,7 +28,7 @@ class AccountListDataProvider: NSObject, DataProvider, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! Cell
         let movie = items[indexPath.row]
-        let imageURL = movie.posterPath != nil ? TMDbImageRouter.PosterSmall(path: movie.posterPath!).url: nil 
+        let imageURL = TMDbImageRouter.PosterSmall(path: movie.posterPath).url ?? NSURL()
         cell.configure(movie, imageURL: imageURL)
         return cell
     }

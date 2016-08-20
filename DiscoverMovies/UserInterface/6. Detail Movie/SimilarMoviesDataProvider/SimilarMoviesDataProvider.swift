@@ -15,7 +15,7 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
 
     var cellIdentifier: String = MovieCollectionViewCell.defaultIdentfier()
     
-    private var movies = [TMDbMovie]()
+    private var movies = [Movie]()
     
     // MARK: - UICollectionViewDataSource
     
@@ -32,11 +32,11 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
     
     // MARk: - Update
     
-    func updateWithMovies(movies: [TMDbMovie]) {
+    func updateWithMovies(movies: [Movie]) {
         self.movies = movies
     }
     
-    func movieAtIndex(index: Int) -> TMDbMovie?{
+    func movieAtIndex(index: Int) -> Movie?{
         guard index >= 0 || index <= movies.count else { return nil }
         return movies[index]
     }

@@ -19,7 +19,7 @@ class CastDataProvider: NSObject, UICollectionViewDataSource {
     
     var cellIdentifier: String = PersonCollectionViewCell.defaultIdentfier()
     
-    private var castMembers: [TMDbCastMember]?
+    private var castMembers: [CastMember]?
     
     // MARK: UICollectionViewDataSource
     
@@ -36,7 +36,7 @@ class CastDataProvider: NSObject, UICollectionViewDataSource {
     
     // MARK: Update
     
-    func updateWithCast(castMembers: [TMDbCastMember]) {
+    func updateWithCast(castMembers: [CastMember]) {
         self.castMembers = castMembers
     }
     

@@ -28,9 +28,9 @@ import AlamofireObjectMapper
  
  */
 
-class TMDbSignInClient: TMDbAPIClient {
+class TMDbSignInClient {
     
-    private var requestToken: TMDbRequestToken?
+    private var requestToken: RequestToken?
     
     // Generates a valid request token for user based authentication
     
@@ -40,7 +40,7 @@ class TMDbSignInClient: TMDbAPIClient {
         let endpoint = "authentication/token/new"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: parameters)).validate()
-            .responseObject { (response: Response<TMDbRequestToken, NSError>) in
+            .responseObject { (response: Response<RequestToken, NSError>) in
                 
                 guard response.result.error == nil else {
                     completionHandler(url: nil, error: response.result.error!)

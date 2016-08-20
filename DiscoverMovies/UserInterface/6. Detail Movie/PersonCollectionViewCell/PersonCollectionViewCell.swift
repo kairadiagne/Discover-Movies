@@ -26,7 +26,7 @@ class PersonCollectionViewCell: UICollectionViewCell {
     
     // MARK: Configure 
     
-    func configureWithCastMember(member: TMDbCastMember) {
+    func configureWithCastMember(member: CastMember) {
         guard let path = member.profilePath else { return }
         nameLabel.text = member.name
         

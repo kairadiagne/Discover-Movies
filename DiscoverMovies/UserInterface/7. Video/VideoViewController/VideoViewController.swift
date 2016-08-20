@@ -19,11 +19,11 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
     
     let youtubeView = YTPlayerView()
     
-    var video: TMDbVideo!
+    var video: Video!
     
     // MARK: Initialization
   
-    required init(video: TMDbVideo) {
+    required init(video: Video) {
         super.init(nibName: nil, bundle: nil)
         self.video = video
         self.youtubeView.translatesAutoresizingMaskIntoConstraints = false

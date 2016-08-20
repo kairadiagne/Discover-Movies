@@ -8,14 +8,41 @@
 
 import Foundation
 
-public enum TMDbAccountList: String {
-    case Favorites = "favorite"
-    case Watchlist = "watchlist"
+public protocol TMDbListType {
+    var name: String { get }
 }
 
-public enum TMDbToplist: String {
-    case Popular = "popular"
-    case TopRated = "top_rated"
-    case Upcoming = "upcoming"
-    case NowPlaying = "now_playing"
+public enum TMDbTopList: TMDbListType {
+    case Popular
+    case TopRated
+    case Upcoming
+    case NowPlaying
+    
+    public var name: String {
+        switch self {
+        case Popular:
+            return "popular"
+        case TopRated:
+            return "top_rated"
+        case Upcoming:
+            return "upcoming"
+        case NowPlaying:
+            return "now_playing"
+        }
+    }
+}
+
+public enum TMDbAccountList: TMDbListType {
+    case Favorite
+    case Watchlist
+    
+    public var name: String {
+        switch self {
+        case Favorite:
+            return "favorite"
+        case Watchlist:
+            return "watchlist"
+        }
+    }
+    
 }

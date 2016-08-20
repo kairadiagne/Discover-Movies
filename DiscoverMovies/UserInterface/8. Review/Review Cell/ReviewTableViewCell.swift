@@ -26,9 +26,9 @@ class ReviewTableViewCell: UITableViewCell {
     
     // MARK: - Configuration 
     
-    func configure(review: TMDbReview) {
-        authorLabel?.text = review.author != nil ? "A movie review by \(review.author!)" : "A movie review by ..."
-        contentLabel?.text = review.content != nil  ? review.content! : ""
+    func configure(review: Review) {
+        authorLabel?.text = "A movie review by \(review.author)"
+        contentLabel?.text = review.content
     }
     
 }

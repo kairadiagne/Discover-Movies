@@ -50,7 +50,7 @@ class MenuTableView: UITableView {
     
     // MARK: Configure
     
-    func updateMenu(signedIn: Bool, user: TMDbUser? = nil) {
+    func updateMenu(signedIn: Bool, user: User? = nil) {
         usernameLabel.text = user?.name ?? "Guest"
         signoutlabel.text = signedIn ? "Sign out" : "Sign in" 
         watchListLabel.enabled = signedIn
@@ -58,11 +58,11 @@ class MenuTableView: UITableView {
         favoritesLabel.enabled = signedIn
         favoriteCell.userInteractionEnabled = signedIn
         
-        if let path = user?.profilePath, url = TMDbImageRouter.ProfileSmall(path: path).url {
-            profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
-        } else {
-            profileImageView.image = nil
-        }
+//        if let path = user.profilePath, url = TMDbImageRouter.ProfileSmall(path: path).url {
+//            profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+//        } else {
+//            profileImageView.image = nil
+//        }
     }
     
 }

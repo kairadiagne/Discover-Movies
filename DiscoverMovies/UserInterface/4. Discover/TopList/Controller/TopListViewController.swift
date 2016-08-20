@@ -16,9 +16,9 @@ class TopListViewController: DiscoverListViewController {
     
     var switchListControl: UISegmentedControl!
     
-    private var currentList: TMDbToplist = .Popular
+    private var currentList: TMDbTopList = .Popular
     
-    private var currentManager: TMDbTopListManager?
+    private var currentManager: TMDbTopListDataManager?
     
     // MARK: View Controller Life Cycle
 

@@ -36,16 +36,17 @@ class TMDbSessionInfoStore {
     
     // MARK: - UserInfo
     
-    var user: TMDbUser? {
+    var user: User? {
         let defaults = NSUserDefaults.standardUserDefaults()
         guard let data = defaults.objectForKey("user") as? NSData else  { return nil }
-        return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? TMDbUser
+//        return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
+        return User(dictionary: [:])
     }
     
-    func persistUserInStore(user: TMDbUser) {
+    func persistUserInStore(user: User) {
         let defaults = NSUserDefaults.standardUserDefaults()
-        let data = NSKeyedArchiver.archivedDataWithRootObject(user)
-        defaults.setObject(data, forKey: "user")
+//        let data = NSKeyedArchiver.archivedDataWithRootObject(user)
+//        defaults.setObject(data, forKey: "user")
     }
     
     func deleteUserFromStore() {

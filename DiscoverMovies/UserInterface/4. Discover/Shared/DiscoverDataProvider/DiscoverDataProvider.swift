@@ -13,7 +13,7 @@ class DiscoverDataProvider: NSObject, DataProvider, UITableViewDataSource {
     
     // MARK: Properties
     
-    typealias Item = TMDbMovie
+    typealias Item = Movie
     
     typealias Cell = DiscoverListCell
     
@@ -28,7 +28,7 @@ class DiscoverDataProvider: NSObject, DataProvider, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! Cell
         let movie = items[indexPath.row]
-        let imageURL = movie.backDropPath != nil ? TMDbImageRouter.BackDropMedium(path: movie.backDropPath!).url: nil 
+        let imageURL = TMDbImageRouter.BackDropMedium(path: movie.backDropPath).url ?? nil
         cell.configure(movie, imageURL: imageURL)
         return cell
     }

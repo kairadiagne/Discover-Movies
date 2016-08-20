@@ -18,17 +18,16 @@ class DetailViewController: BaseViewController {
     @IBOutlet var similarMoviesDataProvider: SimilarMovieDataProvider!
     
     private let movieInfoManager: TMDbMovieInfoManager
-    
-    private var movie: TMDbMovie
+    private var movie: Movie
     
     private var image: UIImage?
     
-    private var trailer: TMDbVideo?
+    private var trailer: Video?
     
     // MARK: Initializers
     
-    init(movie: TMDbMovie, image: UIImage? = nil) {
-        movieInfoManager = TMDbMovieInfoManager(movieID: movie.movieID)
+    init(movie: Movie, image: UIImage? = nil) {
+        movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
         self.movie = movie
         self.image = image
         super.init(nibName: "DetailViewController", bundle: nil)
@@ -79,7 +78,7 @@ class DetailViewController: BaseViewController {
     // MARK: Actions
     
     @IBAction func favoriteButtonDidGetTapped(sender: FavouriteButton) {
-       movieInfoManager.toggleStatusOfMovieInList(.Favorites, status: sender.selected)
+       movieInfoManager.toggleStatusOfMovieInList(.Favorite, status: sender.selected)
     }
     
     @IBAction func watchListDidGetTapped(sender: WatchListButton) {
@@ -96,7 +95,7 @@ class DetailViewController: BaseViewController {
 
     // MARK: Navigation
     
-    private func showDetail(forMovie movie: TMDbMovie) {
+    private func showDetail(forMovie movie: Movie) {
         let detailViewController = DetailViewController(movie: movie)
         navigationController?.pushViewController(detailViewController, animated: false)
     }
@@ -107,7 +106,7 @@ class DetailViewController: BaseViewController {
         navigationController?.pushViewController(videoController, animated: true)
     }
     
-    private func showReviews(movie: TMDbMovie) {
+    private func showReviews(movie: Movie) {
         let reviewViewController = ReviewViewController(movie: movie)
         navigationController?.pushViewController(reviewViewController, animated: true)
     }
@@ -118,14 +117,14 @@ class DetailViewController: BaseViewController {
 
 extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
-    func movieInfomManagerDidLoadInfoForMovieWithID(movieID: Int, info: TMDbMovieInfo) {
+    func movieInfomManagerDidLoadInfoForMovieWithID(movieID: Int, info: MovieInfo) {
         // hide message in collection view
         similarMoviesDataProvider.updateWithMovies(info.similarMovies())
         castDataProvider.updateWithCast(info.cast())
         detailView.reloadCollectionViews()
         
         if let director = info.director() {
-           detailView.configure(withDirector: director)
+//           detailView.configure(withDirector: director)
         }
         
         trailer = info.trailer()

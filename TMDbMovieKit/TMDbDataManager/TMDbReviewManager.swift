@@ -7,44 +7,47 @@
 //
 
 import Foundation
-import Alamofire
 
-public class TMDbReviewManager: TMDbListDataManager<TMDbReview> {
+public class TMDbReviewManager: TMDbDataManager<List<Review>> {
     
     // MARK: Properties
     
-    public static let shared = TMDbReviewManager()
+    let movieID: Int
     
-    public var movieID: Int?
-    
-    private let movieClient = TMDbMovieClient()
-    
-    // MARK: Initializers
-    
-    override init() {
-        super.init()
+    override var endpoint: String {
+        return "movie/\(movieID)/reviews"
     }
     
-    // MARK: API Calls
+    // MARK: Initialization
     
-    override func loadOnline(page: Int) {
-        super.loadOnline()
-        
-        guard let movieID = movieID else { return }
-        
-        movieClient.fetchReviews(movieID, page: page) { (list, error) in
-            self.stopLoading()
-            
-            guard error == nil else {
-                self.handleError(error!)
-                return
-            }
-            
-            if let data = list {
-                self.update(withData: data)
-            }
-            
-        }
+    init(movieID: Int, cacheIdentifier: String = "") {
+        self.movieID = movieID
+        super.init(cacheIdentifier: cacheIdentifier)
+    }
+    
+    // MARK: Calls
+    
+    override public func loadMore() {
+        super.loadMore()
+        guard cache.data?.nextPage != nil else { return }
+        let paramaters = getParameters()
+        loadOnline(paramaters, endpoint: endpoint)
+    }
+    
+    // MARK: Paramaters
+    
+    override func getParameters() -> [String : AnyObject] {
+        guard let nextPage = cache.data?.nextPage else { return [:] }
+        return ["page": nextPage]
+    }
+    
+    // MARK: Handle Response
+    
+    override func handleData(data: List<Review>) {
+//        data.update(data.page, pageCount: data.pageCount, resultCount: data.resultCount, items: data.items)
+        cache.addData(data)
+        saveToDisk()
     }
     
 }
+

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TMDbCachedData<ModelType> {
+class TMDbCachedData<ModelType: DictionaryRepresentable> {
     
     // MARK: Properties
     
@@ -20,7 +20,7 @@ class TMDbCachedData<ModelType> {
     }
     private var lastUpdate: NSDate?
     
-    private var refreshTimeOut: NSTimeInterval! // Specifies a time interval in seconds
+    private var refreshTimeOut: NSTimeInterval!
     
     // MARK: Initializers
     

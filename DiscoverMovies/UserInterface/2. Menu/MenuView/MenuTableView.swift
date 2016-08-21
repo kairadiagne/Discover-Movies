@@ -19,7 +19,7 @@ class MenuTableView: UITableView {
     @IBOutlet weak var watchListLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
     @IBOutlet weak var signoutlabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: ProfileImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var watchlistCell: UITableViewCell!
     @IBOutlet weak var favoriteCell: UITableViewCell!
@@ -33,12 +33,6 @@ class MenuTableView: UITableView {
         watchListLabel.font = UIFont.H3()
         favoritesLabel.font = UIFont.H3()
         signoutlabel.font = UIFont.H3()
-        
-        profileImageView.layer.borderWidth = 2
-        profileImageView.layer.backgroundColor = UIColor.clearColor().CGColor
-        profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
-        profileImageView.layer.masksToBounds = true
     }
     
     // MARK: - Life Cycle 
@@ -58,11 +52,11 @@ class MenuTableView: UITableView {
         favoritesLabel.enabled = signedIn
         favoriteCell.userInteractionEnabled = signedIn
         
-//        if let path = user.profilePath, url = TMDbImageRouter.ProfileSmall(path: path).url {
-//            profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
-//        } else {
-//            profileImageView.image = nil
-//        }
+        if let path = user?.profileHash, url = TMDbImageRouter.ProfileSmall(path: path).url {
+            profileImageView.imageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+        } else {
+            profileImageView.imageView.image = nil
+        }
     }
     
 }

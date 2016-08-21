@@ -7,9 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="DiscoverMovies" customModuleProvider="target">
             <connections>
-                <outlet property="castDataProvider" destination="GQy-4t-zRc" id="zSb-i5-OUP"/>
+                <outlet property="castDataProvider" destination="GQy-4t-zRc" id="oxp-5B-aqz"/>
                 <outlet property="detailView" destination="iN0-l3-epB" id="bpc-SX-SFV"/>
-                <outlet property="similarMoviesDataProvider" destination="2IX-ki-SCy" id="Bh0-fe-Ja1"/>
+                <outlet property="similarMoviesDataprovider" destination="2IX-ki-SCy" id="UVl-b9-UoB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="hXj-uh-mNs"/>
             </connections>
         </placeholder>
@@ -84,7 +84,7 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                     <connections>
-                                        <outlet property="dataSource" destination="GQy-4t-zRc" id="tfe-6f-F15"/>
+                                        <outlet property="dataSource" destination="GQy-4t-zRc" id="CMQ-BT-e21"/>
                                     </connections>
                                 </collectionView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EM4-an-m11" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">

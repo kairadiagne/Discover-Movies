@@ -61,6 +61,12 @@ public struct Movie: DictionaryRepresentable, Equatable {
         dictionary["backdrop_path"] = backDropPath
         return dictionary
     }
+    
+    // MARK: Utils
+    
+    public func mainGenre() -> TMDbGenre? {
+        return TMDbGenre(rawValue: genres[0])
+    }
 
 }
 

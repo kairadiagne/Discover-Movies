@@ -85,13 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Locksmith/Locksmith.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Locksmith/Locksmith.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
 fi

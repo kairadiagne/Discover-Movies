@@ -16,11 +16,15 @@ class SignInViewController: BaseViewController {
 
     private var safariViewController: SFSafariViewController!
     
+    private let signInService = TMDbSignInService()
+    
+    private let userService = TMDbUserService()
+    
     // MARK: View Controller Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        signInManager.delegate = self
+        signInService.delegate = self
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -34,7 +38,7 @@ class SignInViewController: BaseViewController {
     }
     
     @IBAction func activatePublicMode(sender: UIButton) {
-        signInManager.activatePublicMode()
+        sessionManager.activatePublicMode()
         dismissSignInViewController()
     }
     
@@ -42,12 +46,12 @@ class SignInViewController: BaseViewController {
     
     func activateSignInFlow() {
         showProgressHUD()
-        signInManager.requestToken()
+        signInService.requestToken()
     }
     
     func requestSessionID() {
         showProgressHUD()
-        signInManager.requestSessionID()
+        signInService.requestSessionID()
     }
     
     func requestAuthorization(url: NSURL) {
@@ -74,20 +78,19 @@ class SignInViewController: BaseViewController {
 
 extension SignInViewController: TMDbSignInDelegate {
     
-    func signInDelegateShouldRequestAuthorization(url: NSURL) {
+    func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: NSURL) {
         hideProgressHUD()
-        requestAuthorization(url)
-    }
+        requestAuthorization(url)    }
     
-    func signInDelegateSigninDidComplete() {
-        hideProgressHUD()
-//        userManager.loadUserInfo()
-        dismissSignInViewController()
-    }
-    
-    func signInDelegateSigninDidFail(error: NSError) {
+    func signIn(service: TMDbSignInService, didFailWithError error: NSError) {
         hideProgressHUD()
         self.handleError(error)
+    }
+    
+    func signInServiceDidSignIn(service: TMDbSignInService) {
+        hideProgressHUD()
+        userService.getUserInfo()
+        dismissSignInViewController()
     }
     
 }

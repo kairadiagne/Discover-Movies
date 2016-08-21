@@ -42,4 +42,21 @@ public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
     
 }
 
+// MARK: TMDbFavoritesListDataManager
+
+public class TMDbFavoritesListDataManager: TMDbAccountListDataManager {
+    
+    public static let shared = TMDbFavoritesListDataManager(list: TMDbAccountList.Favorite, cacheIdentifier: TMDbAccountList.Favorite.name)
+    
+}
+
+// MARK: TMDbWatchListDataManager
+
+public class TMDbWatchListDataManager: TMDbAccountListDataManager {
+    
+    public static let shared = TMDbWatchListDataManager(list: TMDbAccountList.Watchlist, cacheIdentifier: TMDbAccountList.Watchlist.name)
+    
+}
+
+
 

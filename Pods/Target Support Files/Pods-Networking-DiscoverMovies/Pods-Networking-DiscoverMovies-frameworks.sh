@@ -85,26 +85,20 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BRYXBanner/BRYXBanner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChameleonFramework/ChameleonFramework.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/IQDropDownTextField/IQDropDownTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Locksmith/Locksmith.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/youtube-ios-player-helper/youtube_ios_player_helper.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BRYXBanner/BRYXBanner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChameleonFramework/ChameleonFramework.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/IQDropDownTextField/IQDropDownTextField.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Locksmith/Locksmith.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/youtube-ios-player-helper/youtube_ios_player_helper.framework"

@@ -42,6 +42,7 @@ public struct CastMember: DictionaryRepresentable, Equatable {
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
+        // No need to archive a Castmember
         return [:]
     }
     

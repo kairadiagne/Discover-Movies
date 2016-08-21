@@ -17,7 +17,7 @@ class PersonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    // MARK: Initializers
+    // MARK: Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,13 +27,10 @@ class PersonCollectionViewCell: UICollectionViewCell {
     // MARK: Configure 
     
     func configureWithCastMember(member: CastMember) {
-        guard let path = member.profilePath else { return }
         nameLabel.text = member.name
-        
-        if let url = TMDbImageRouter.PosterMedium(path: path).url {
-             profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
-        }
-       
+        let profilePath = member.profilePath ?? ""
+        let url = TMDbImageRouter.PosterMedium(path: profilePath).url ?? NSURL()
+        profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
     }
     
 }

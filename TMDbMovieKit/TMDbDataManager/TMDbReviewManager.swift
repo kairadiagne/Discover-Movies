@@ -12,16 +12,21 @@ public class TMDbReviewManager: TMDbDataManager<List<Review>> {
     
     // MARK: Properties
     
-    let movieID: Int
+    static public let shared = TMDbReviewManager(cacheIdentifier: "Reviews")
+    
+    public var movieID: Int = 0
+    
+    public var itemsInList: [Review] {
+        return cache.data?.items ?? []
+    }
     
     override var endpoint: String {
         return "movie/\(movieID)/reviews"
     }
+
+    // MARK: Initialize
     
-    // MARK: Initialization
-    
-    init(movieID: Int, cacheIdentifier: String = "") {
-        self.movieID = movieID
+    override init(cacheIdentifier: String = "") {
         super.init(cacheIdentifier: cacheIdentifier)
     }
     
@@ -44,9 +49,21 @@ public class TMDbReviewManager: TMDbDataManager<List<Review>> {
     // MARK: Handle Response
     
     override func handleData(data: List<Review>) {
-//        data.update(data.page, pageCount: data.pageCount, resultCount: data.resultCount, items: data.items)
-        cache.addData(data)
-        saveToDisk()
+        if cache.data == nil {
+            cache.addData(List<Review>())
+        }
+        
+        cache.data?.page = data.page
+        cache.data?.pageCount = data.pageCount
+        cache.data?.resultCount = data.resultCount
+        
+        if data.page == 1 {
+            cache.data?.items = data.items
+            postDidLoadNotification()
+        } else {
+            cache.data?.items.appendContentsOf(data.items)
+            postDidUpdateNotification()
+        }
     }
     
 }

@@ -21,16 +21,19 @@ public class TMDbSessionManager {
     
     private struct Constants {
         static let FreshInstallKey = "FreshInstallKey"
-        
     }
     
     // MARK: Properties
     
     public static let shared = TMDbSessionManager()
     
-    let sessionInfoStore = TMDbSessionInfoStore()
+    public var user: User? {
+        return sessionInfoStore.user
+    }
     
-    // MARK: Initializers
+    private let sessionInfoStore = TMDbSessionInfoStore()
+    
+    // MARK: Initialize
     
     public init() {
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
@@ -61,7 +64,26 @@ public class TMDbSessionManager {
         return NSUserDefaults.standardUserDefaults().boolForKey("userIsInpublicMode")
     }
     
+    // MARK: - Public Mode
+    
+    public func activatePublicMode() {
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "userIsInpublicMode")
+    }
+    
+    public func deactivatePublicMode() {
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "userIsInpublicMode")
+    }
+    
+    // MARK: - Sign Out
+    
+    public func signOut() {
+        sessionInfoStore.deleteSessionIDFromStore()
+        sessionInfoStore.deleteUserFromStore()
+    }
+    
 }
+
+
 
 
 

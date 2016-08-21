@@ -27,8 +27,6 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     var sessionManager = TMDbSessionManager()
     
-    var signInManager = TMDbSignInManager()
-    
     var shouldShowSignInViewController: Bool {
         return sessionManager.signInStatus == .NotAvailable ? true : false 
     }
@@ -41,6 +39,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
         progressHUD?.userInteractionEnabled = false
         view.addSubview(progressHUD!)
@@ -94,7 +93,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         let message = NSLocalizedString("authorizationErrorMessage", comment: "Message of authorization error alert")
         
         let completionHandler = {
-            self.signInManager.signOut()
+            self.sessionManager.signOut()
             
             if let menuViewController = (UIApplication.sharedApplication().delegate as? AppDelegate)?.menuViewController {
                 menuViewController.signOut()

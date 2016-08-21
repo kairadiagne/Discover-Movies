@@ -4,13 +4,11 @@ use_frameworks!
 
 abstract_target 'Networking' do
     pod 'Alamofire'
-    pod 'AlamofireObjectMapper'
     pod 'Locksmith'
     
     target 'DiscoverMovies' do
         pod 'SDWebImage'
         pod 'ChameleonFramework'
-        pod 'IQDropDownTextField'
         pod 'youtube-ios-player-helper'
         pod 'SWRevealViewController'
         pod 'BRYXBanner'

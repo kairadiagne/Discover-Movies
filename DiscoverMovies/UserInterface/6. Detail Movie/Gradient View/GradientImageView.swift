@@ -12,12 +12,12 @@ class GradientImageView: UIImageView {
     
     // MARK: Properties
 
-    var gradientLayer = CAGradientLayer()
+    private(set) var gradientLayer = CAGradientLayer()
     var colors: [CGColor] = [UIColor.backgroundColor().CGColor, UIColor.clearColor().CGColor]
     var startPoint = CGPoint(x: 0, y: 1)
     var endPoint = CGPoint(x: 0, y: 0.1)
     
-    // MARK: Initializers
+    // MARK: Initialize
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

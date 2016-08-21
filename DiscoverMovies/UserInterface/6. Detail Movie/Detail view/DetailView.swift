@@ -101,16 +101,21 @@ class DetailView: BackgroundView {
     func configure(withMovie movie: Movie, image: UIImage?) {
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
-        // genreValueLabel.text = movie.genres.first?.name ?? "Unknown"
+        genreValueLabel.text = movie.mainGenre()?.name ?? "Unknown"
         ratingValueLabel.text =  "\(movie.rating)\\10.0"
-//        releaseValueLabel.text = "\(movie.releaseDate.year())"
+        
+        if let releaseYear = movie.releaseDate.toDate()?.year() {
+            releaseValueLabel.text = "\(releaseYear)"
+        } else {
+            releaseValueLabel.text = "Unknown"
+        }
         
         if let image = image {
             header.image = image
+        } else {
+            let imageURL = TMDbImageRouter.BackDropMedium(path: movie.backDropPath).url ?? NSURL()
+            header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
         }
-        
-        let imageURL = TMDbImageRouter.BackDropMedium(path: movie.posterPath).url ?? NSURL()
-        header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
     }
     
     func configureWithState(inFavorites: Bool, inWatchList: Bool) {
@@ -118,9 +123,9 @@ class DetailView: BackgroundView {
         watchListControl.setSelectedState(inWatchList)
     }
     
-//    func configure(withDirector director: TMDbCrewMember?) {
-//        directorValueLabel.text = director?.name ?? "Unknown"
-//    }
+    func configure(withDirector director: CrewMember?) {
+        directorValueLabel.text = director?.name ?? "Unknown"
+    }
     
     func reloadCollectionViews() {
         castCollectionView.reloadData()

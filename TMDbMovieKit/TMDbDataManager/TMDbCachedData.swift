@@ -22,7 +22,7 @@ class TMDbCachedData<ModelType: DictionaryRepresentable> {
     
     private var refreshTimeOut: NSTimeInterval!
     
-    // MARK: Initializers
+    // MARK: Initialize
     
     init(refreshTimeOut timeOut: NSTimeInterval = 300) {
         self.refreshTimeOut = timeOut

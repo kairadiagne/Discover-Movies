@@ -13,7 +13,7 @@ class TMDbSessionInfoStore {
     
     private let writeQueue = dispatch_queue_create("com.discoverMovies.app.write", DISPATCH_QUEUE_SERIAL)
     
-    // MARK: - SessionID
+    // MARK: SessionID
     
     var sessionID: String? {
         let dict = Locksmith.loadDataForUserAccount("User")
@@ -34,19 +34,25 @@ class TMDbSessionInfoStore {
         }
     }
     
-    // MARK: - UserInfo
+    // MARK: UserInfo
     
     var user: User? {
+        // This should be done of the main thread
+        assert(NSThread.isMainThread())
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         guard let data = defaults.objectForKey("user") as? NSData else  { return nil }
-//        return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
-        return User(dictionary: [:])
+        guard let userDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: AnyObject] else { return nil }
+        return User(dictionary: userDict)
     }
     
     func persistUserInStore(user: User) {
+        // This should be done of the main thread
+        assert(NSThread.isMainThread())
+        
         let defaults = NSUserDefaults.standardUserDefaults()
-//        let data = NSKeyedArchiver.archivedDataWithRootObject(user)
-//        defaults.setObject(data, forKey: "user")
+        let data = NSKeyedArchiver.archivedDataWithRootObject(user.dictionaryRepresentation())
+        defaults.setObject(data, forKey: "user")
     }
     
     func deleteUserFromStore() {
@@ -54,7 +60,7 @@ class TMDbSessionInfoStore {
         defaults.removeObjectForKey("user")
     }
     
-    // MARK: - APIKey
+    // MARK: APIKey
     
     var APIKey: String {
         set {

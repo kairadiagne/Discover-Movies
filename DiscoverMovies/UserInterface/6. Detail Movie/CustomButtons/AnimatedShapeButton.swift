@@ -40,7 +40,7 @@ class AnimatedShapeButton: UIControl {
         }
     }
     
-    // MARK: Initializers
+    // MARK: Initialize
     
     override init(frame: CGRect) {
         super.init(frame: frame)

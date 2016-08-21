@@ -16,7 +16,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var movieImageView: UIImageView!
     
-    // MARK: Configure Cell
+    // MARK: Configure
     
     func configureWithMovie(movie: Movie) {
         guard let url = TMDbImageRouter.PosterMedium(path: movie.posterPath).url else { return }

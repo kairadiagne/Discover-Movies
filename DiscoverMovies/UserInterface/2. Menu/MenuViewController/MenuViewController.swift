@@ -22,17 +22,12 @@ class MenuViewController: UITableViewController {
 
     @IBOutlet weak var menuTableview: MenuTableView!
     
-    private let signInmanager = TMDbSignInManager()
+    private let userService = TMDbUserService()
     
     private let sessionManager = TMDbSessionManager()
 
     private var signedIn: Bool {
-        switch sessionManager.signInStatus {
-        case .Signedin:
-            return true
-        default:
-            return false
-        }
+        return (sessionManager.signInStatus == .Signedin) ?? false
     }
     
     private var presentedRow = 1
@@ -41,16 +36,22 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        TMDbUserManager.shared.delegate = self
+        userService.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if signedIn {
-//            TMDbUserManager.shared.loadUserInfo()
-        } else {
+        
+        if signedIn && (sessionManager.user == nil) {
             menuTableview.updateMenu(signedIn)
+            userService.getUserInfo() // Get latest
+        } else if signedIn && (sessionManager.user != nil) {
+            menuTableview.updateMenu(signedIn, user: sessionManager.user!)
+            userService.getUserInfo() // Get latest
+        } else {
+             menuTableview.updateMenu(signedIn)
         }
+      
     }
    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -84,7 +85,7 @@ class MenuViewController: UITableViewController {
     }
     
     func signOut() {
-        signInmanager.signOut()
+        sessionManager.signOut()
         showTopListViewController()
     }
     
@@ -92,7 +93,7 @@ class MenuViewController: UITableViewController {
         if signedIn {
             signOut()
         } else {
-            signInmanager.deactivatePublicMode()
+            sessionManager.deactivatePublicMode()
         }
         
         showTopListViewController()
@@ -135,16 +136,16 @@ class MenuViewController: UITableViewController {
     
 }
 
-// MARK: - UserManagerDelegate 
+// MARK: - TMDbUserServiceDelegate
 
-//extension MenuViewController: TMDbUserManagerDelegate {
-//    
-//    func userManagerDidLoadUser(user: TMDbUser) {
-//        menuTableview.updateMenu(signedIn, user: user)
-//    }
-//    
-//    func userManagerDidReceiveError(error: TMDbAPIError) {
-//        // What to do with this error
-//    }
-//
-//}
+extension MenuViewController: TMDbUserServiceDelegate {
+    
+    func user(service: TMDbUserService, didLoadUserInfo user: User) {
+        menuTableview.updateMenu(signedIn, user: user)
+    }
+    
+    func user(service: TMDbUserService, didReceiveError error: TMDbAPIError) {
+        // What to do with this error
+    }
+}
+

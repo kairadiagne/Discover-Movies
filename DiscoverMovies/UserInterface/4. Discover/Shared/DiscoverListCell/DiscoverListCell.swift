@@ -12,9 +12,13 @@ import SDWebImage
 
 class DiscoverListCell: UITableViewCell {
     
+    // MARK: Properties
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
+    
+    // MARK: Awake
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,13 +26,17 @@ class DiscoverListCell: UITableViewCell {
         yearLabel.font = UIFont.H3()
     }
     
-}
-
-extension DiscoverListCell {
+    // MARK: Configure
     
     func configure(movie: Movie, imageURL: NSURL?) {
-        titleLabel.text = movie.title 
-//        yearLabel.text = movie.releaseDate != nil ? "\(movie.releaseDate!.year())": "Unknonwn"
+        titleLabel.text = movie.title
+        
+        if let releaseYear = movie.releaseDate.toDate()?.year() {
+            yearLabel.text = "\(releaseYear)"
+        } else {
+            yearLabel.text = "Unknown"
+        }
+        
         movieImageView.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
     }
     

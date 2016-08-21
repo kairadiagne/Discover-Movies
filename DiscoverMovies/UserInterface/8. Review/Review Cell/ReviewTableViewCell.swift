@@ -16,7 +16,7 @@ class ReviewTableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
-    // MARK: - Initializers
+    // MARK: Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +24,7 @@ class ReviewTableViewCell: UITableViewCell {
         contentLabel.font = UIFont.Body()
     }
     
-    // MARK: - Configuration 
+    // MARK: Awake
     
     func configure(review: Review) {
         authorLabel?.text = "A movie review by \(review.author)"

@@ -28,6 +28,7 @@ public struct AccountState: DictionaryRepresentable {
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
+        // No need to archive an AccountState
         return [:]
     }
 }

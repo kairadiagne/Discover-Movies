@@ -19,19 +19,26 @@ public struct MovieInfo: DictionaryRepresentable {
     // MARK: Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
-        self.similar = dict["similar"] as? List<Movie>
-        self.credits = dict["credits"] as? MovieCredit
-       
+        if let similarMovieDict = dict["similar"] as? [String: AnyObject] {
+            self.similar = List<Movie>(dictionary: similarMovieDict)
+        }
+        if let creditDict = dict["credits"] as? [String: AnyObject] {
+            self.credits = MovieCredit(dictionary: creditDict)
+        }
+    
         if let videoDicts = dict["trailers"]?["youtube"] as? [[String: AnyObject]] {
+            var trailers = [Video]()
             for dict in videoDicts {
                 if let video = Video(dictionary: dict) {
-                    self.trailers?.append(video)
+                    trailers.append(video)
+                    self.trailers = trailers
                 }
             }
         }
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
+        // No need to archive MovieIfo
         return [:]
     }
     
@@ -46,7 +53,7 @@ public struct MovieInfo: DictionaryRepresentable {
     }
 
     public func director() -> CrewMember? {
-        return credits?.director
+        return credits?.crew.filter { return $0.job == "Director" }.first ?? nil
     }
 
     public func trailer() -> Video? {

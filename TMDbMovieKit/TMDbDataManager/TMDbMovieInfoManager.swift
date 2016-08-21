@@ -19,7 +19,7 @@ public class TMDbMovieInfoManager {
     
     // MARK: Properties
     
-    public var delegate: TMDbMovieInfoManagerDelegate?
+    public weak var delegate: TMDbMovieInfoManagerDelegate?
     
     public private(set) var movieID: Int
     
@@ -49,8 +49,6 @@ public class TMDbMovieInfoManager {
                 }
         }
     }
-
-    
 
     public func toggleStatusOfMovieInList(list: TMDbAccountList, status: Bool) {
         guard let sessionID = TMDbSessionInfoStore().sessionID, userID = TMDbSessionInfoStore().user?.id else {

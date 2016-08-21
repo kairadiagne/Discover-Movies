@@ -13,18 +13,19 @@ class DetailViewController: BaseViewController {
     
     // MARK: Properties
     
-    @IBOutlet var detailView: DetailView!
+    @IBOutlet weak var detailView: DetailView!
     @IBOutlet var castDataProvider: CastDataProvider!
-    @IBOutlet var similarMoviesDataProvider: SimilarMovieDataProvider!
+    @IBOutlet var similarMoviesDataprovider: SimilarMovieDataProvider!
     
     private let movieInfoManager: TMDbMovieInfoManager
+    
     private var movie: Movie
     
     private var image: UIImage?
     
     private var trailer: Video?
     
-    // MARK: Initializers
+    // MARK: Initialize
     
     init(movie: Movie, image: UIImage? = nil) {
         movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
@@ -45,14 +46,12 @@ class DetailViewController: BaseViewController {
         
         let movieCellNib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
         let personCellNib = UINib(nibName: PersonCollectionViewCell.nibName(), bundle: nil)
-        
         detailView.similarMovieCollectionView.registerNib(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
         detailView.castCollectionView.registerNib(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
         
         detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
         detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
         
-        // Request information
         movieInfoManager.delegate = self
         movieInfoManager.loadInfo()
         movieInfoManager.loadAccountState()
@@ -119,12 +118,12 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
     func movieInfomManagerDidLoadInfoForMovieWithID(movieID: Int, info: MovieInfo) {
         // hide message in collection view
-        similarMoviesDataProvider.updateWithMovies(info.similarMovies())
+        similarMoviesDataprovider.updateWithMovies(info.similarMovies())
         castDataProvider.updateWithCast(info.cast())
         detailView.reloadCollectionViews()
         
         if let director = info.director() {
-//           detailView.configure(withDirector: director)
+           detailView.configure(withDirector: director)
         }
         
         trailer = info.trailer()
@@ -145,7 +144,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
 extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let movie = similarMoviesDataProvider.movieAtIndex(indexPath.row) else { return }
+        guard let movie = similarMoviesDataprovider.movieAtIndex(indexPath.row) else { return }
         showDetail(forMovie: movie)
     }
     

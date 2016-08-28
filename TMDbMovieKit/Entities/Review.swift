@@ -10,7 +10,7 @@ import Foundation
 
 public struct Review: DictionaryRepresentable, Equatable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public let id: String
     public let author: String
@@ -32,7 +32,7 @@ public struct Review: DictionaryRepresentable, Equatable {
         self.url = url
     }
     
-    // MARK: Initialize 
+    // MARK: - Initialize 
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
         var dictionary = [String: AnyObject]()

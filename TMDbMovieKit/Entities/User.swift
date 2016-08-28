@@ -10,14 +10,14 @@ import Foundation
 
 public struct User: DictionaryRepresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public let id: Int
     public let userName: String
     public private(set) var name: String?
     public private(set) var profileHash: String?
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int, userName = dict["username"] as? String else { return nil }

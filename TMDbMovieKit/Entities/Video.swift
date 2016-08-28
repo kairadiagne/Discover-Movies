@@ -10,14 +10,14 @@ import Foundation
 
 public struct Video: DictionaryRepresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public let name: String
     public let source: String
     public let size: String
     public let type: String
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let source = dict["source"] as? String,

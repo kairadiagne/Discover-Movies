@@ -10,7 +10,7 @@ import Foundation
 
 class TMDbCachedData<ModelType: DictionaryRepresentable> {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     private(set) var data: ModelType?
     
@@ -22,13 +22,13 @@ class TMDbCachedData<ModelType: DictionaryRepresentable> {
     
     private var refreshTimeOut: NSTimeInterval!
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     init(refreshTimeOut timeOut: NSTimeInterval = 300) {
         self.refreshTimeOut = timeOut
     }
     
-    // MARK: Clear Cache
+    // MARK: - Clear Cache
     
     func addData(data: ModelType) {
         self.data = data

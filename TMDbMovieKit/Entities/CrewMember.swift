@@ -10,7 +10,7 @@ import Foundation
 
 public struct CrewMember: DictionaryRepresentable, Equatable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public let creditID: String
     public let personID: Int
@@ -19,7 +19,7 @@ public struct CrewMember: DictionaryRepresentable, Equatable {
     public let job: String?
     public private(set) var profilePath: String?
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let creditID = dict["credit_id"] as? String,

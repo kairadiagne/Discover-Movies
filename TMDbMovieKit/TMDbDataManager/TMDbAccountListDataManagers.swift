@@ -12,13 +12,13 @@ import Foundation
 
 public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var userID: Int? {
        return TMDbSessionInfoStore().user?.id
     }
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     override init(list: TMDbListType, cacheIdentifier: String) {
         super.init(list: list, cacheIdentifier: cacheIdentifier)
@@ -39,7 +39,7 @@ public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
     
 }
 
-// MARK: TMDbFavoritesListDataManager
+// MARK: - TMDbFavoritesListDataManager
 
 public class TMDbFavoritesListDataManager: TMDbAccountListDataManager {
     
@@ -47,7 +47,7 @@ public class TMDbFavoritesListDataManager: TMDbAccountListDataManager {
     
 }
 
-// MARK: TMDbWatchListDataManager
+// MARK: - TMDbWatchListDataManager
 
 public class TMDbWatchListDataManager: TMDbAccountListDataManager {
     

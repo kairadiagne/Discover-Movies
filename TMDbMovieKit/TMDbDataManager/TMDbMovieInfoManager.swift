@@ -17,19 +17,19 @@ public protocol TMDbMovieInfoManagerDelegate: class {
 
 public class TMDbMovieInfoManager {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public weak var delegate: TMDbMovieInfoManagerDelegate?
     
     public private(set) var movieID: Int
     
-    // MARK: Initialization 
+    // MARK: - Initialization
     
     public init(movieID: Int) {
         self.movieID = movieID
     }
     
-    // MARK: API Calls 
+    // MARK: - API Calls
     
     public func loadInfo() {
         let parameters: [String: AnyObject] = ["append_to_response": "similar,credits,trailers"]
@@ -98,7 +98,7 @@ public class TMDbMovieInfoManager {
 
     }
     
-    // MARK: Handle Error
+    // MARK: - Handle Error
     
     func handleError(error: NSError) {
         var newError: TMDbAPIError

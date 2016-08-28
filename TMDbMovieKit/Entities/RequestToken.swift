@@ -10,11 +10,11 @@ import Foundation
 
 struct RequestToken: DictionaryRepresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     let token: String
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     init?(dictionary dict: [String : AnyObject]) {
         guard let token = dict["request_token"] as? String else { return nil }

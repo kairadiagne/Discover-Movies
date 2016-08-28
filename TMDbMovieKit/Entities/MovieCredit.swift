@@ -10,12 +10,12 @@ import Foundation
 
 public struct MovieCredit: DictionaryRepresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public private(set) var cast: [CastMember] = []
     public private(set) var crew: [CrewMember] = []
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let castDicts = dict["cast"] as? [[String: AnyObject]],

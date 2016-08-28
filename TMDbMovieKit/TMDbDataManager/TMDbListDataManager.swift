@@ -10,7 +10,7 @@ import Foundation
 
 public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataManager<List<ItemType>> {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var itemsInList: [ItemType] {
         return cache.data?.items ?? []
@@ -18,14 +18,14 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
     
     let list: TMDbListType
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     init(list: TMDbListType, cacheIdentifier: String) {
         self.list = list
         super.init(cacheIdentifier: cacheIdentifier)
     }
     
-    // MARK: Calls 
+    // MARK: - Calls
     
     override public func loadMore() {
         super.loadMore()
@@ -33,7 +33,7 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
         loadOnline(paramaters, page: nextpage)
     }
 
-    // MARK: Handle Response
+    // MARK: - Handle Response
     
     override func handleData(data: List<ItemType>) {
         if cache.data == nil {

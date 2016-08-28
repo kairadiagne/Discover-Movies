@@ -10,7 +10,7 @@ import Foundation
 
 public class List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var page: Int
     var pageCount: Int
@@ -21,7 +21,7 @@ public class List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
         return page < pageCount ? page + 1 : nil
     }
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     init() {
         self.page = 0

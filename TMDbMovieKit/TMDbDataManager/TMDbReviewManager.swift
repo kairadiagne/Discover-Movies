@@ -10,7 +10,7 @@ import Foundation
 
 public class TMDbReviewManager: TMDbListDataManager<Review> {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     static public let shared = TMDbReviewManager(list: TMDbOtherList.Reviews, cacheIdentifier: "Reviews")
 

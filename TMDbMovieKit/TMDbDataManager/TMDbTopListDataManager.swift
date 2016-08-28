@@ -26,7 +26,7 @@ public class TMDbTopListDataManager: TMDbListDataManager<Movie> {
     
 }
 
-// MARK: Popular movies
+// MARK: - Popular movies
 
 public class TMDbPopularListManager: TMDbTopListDataManager {
     
@@ -34,7 +34,7 @@ public class TMDbPopularListManager: TMDbTopListDataManager {
     
 }
 
-// MARK: Toprated movies
+// MARK: - Toprated movies
 
 
 public class TMDbTopRatedListManager: TMDbTopListDataManager {
@@ -43,7 +43,7 @@ public class TMDbTopRatedListManager: TMDbTopListDataManager {
     
 }
 
-// MARK: Upcoming movies
+// MARK: - Upcoming movies
 
 public class TMDbUpcomingListManager: TMDbTopListDataManager {
     
@@ -51,7 +51,7 @@ public class TMDbUpcomingListManager: TMDbTopListDataManager {
     
 }
 
-// MARK: Movies now playing
+// MARK: - Movies now playing
 
 public class TMDbNowPlayingListManager: TMDbTopListDataManager {
     

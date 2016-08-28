@@ -10,12 +10,12 @@ import Foundation
 
 public struct AccountState: DictionaryRepresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public let favoriteStatus: Bool
     public let watchlistStatus: Bool
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let favoriteStatus = dict["favorite"] as? Bool,

@@ -10,13 +10,13 @@ import Foundation
 
 public struct MovieInfo: DictionaryRepresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public private(set) var similar: List<Movie>?
     public private(set) var credits: MovieCredit?
     public private(set) var trailers: [Video]?
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         if let similarMovieDict = dict["similar"] as? [String: AnyObject] {
@@ -42,7 +42,7 @@ public struct MovieInfo: DictionaryRepresentable {
         return [:]
     }
     
-    // MARK: Utils
+    // MARK: - Utils
     
     public func similarMovies() -> [Movie] {
         return similar?.items ?? []

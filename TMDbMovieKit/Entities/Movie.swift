@@ -10,7 +10,7 @@ import Foundation
 
 public struct Movie: DictionaryRepresentable, Equatable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public let id: Int
     public let title: String
@@ -22,7 +22,7 @@ public struct Movie: DictionaryRepresentable, Equatable {
     public let posterPath: String
     public let backDropPath: String
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int,
@@ -62,7 +62,7 @@ public struct Movie: DictionaryRepresentable, Equatable {
         return dictionary
     }
     
-    // MARK: Utils
+    // MARK: - Utils
     
     public func mainGenre() -> TMDbGenre? {
         return TMDbGenre(rawValue: genres[0])

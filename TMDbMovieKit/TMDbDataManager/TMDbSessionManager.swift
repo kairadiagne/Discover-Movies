@@ -28,34 +28,38 @@ public class TMDbSessionManager {
     public static let shared = TMDbSessionManager()
     
     public var user: User? {
-        return sessionInfoStore.user
+        return sessionInfoProvider.user
     }
     
-    private let sessionInfoStore = TMDbSessionInfoStore()
+    private let sessionInfoProvider: SessionInfoContaining
     
     // MARK: Initialize
     
-    public init() {
+    public convenience init() {
+        self.init(sessionInfo: TMDbSessionInfoStore())
+    }
+    
+    init(sessionInfo: SessionInfoContaining) {
+        self.sessionInfoProvider = sessionInfo
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
         let freshInstall = NSUserDefaults.standardUserDefaults().boolForKey(Constants.FreshInstallKey) == false
         
         if freshInstall {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.FreshInstallKey)
-            sessionInfoStore.deleteSessionIDFromStore()
+            sessionInfoProvider.clearUserData()
         }
-        
     }
     
     // MARK: - API Key
     
-    public func registerAPIKey(APIKey key: String) {
-        sessionInfoStore.APIKey = key
+    public func registerAPIKey(key: String) {
+        sessionInfoProvider.saveAPIKey(key)
     }
     
     // MARK: - Signin Status
     
     public var signInStatus: TMDBSigInStatus {
-        if sessionInfoStore.sessionID != nil { return .Signedin }
+        if sessionInfoProvider.sessionID != nil { return .Signedin }
         if publicModeActivated { return .PublicMode }
         return .NotAvailable
     }
@@ -77,8 +81,7 @@ public class TMDbSessionManager {
     // MARK: - Sign Out
     
     public func signOut() {
-        sessionInfoStore.deleteSessionIDFromStore()
-        sessionInfoStore.deleteUserFromStore()
+        sessionInfoProvider.clearUserData()
     }
     
 }

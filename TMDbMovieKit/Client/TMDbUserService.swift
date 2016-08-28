@@ -20,16 +20,18 @@ public class TMDbUserService {
     
     public weak var delegate: TMDbUserServiceDelegate?
     
-    private let sessionInfoStore = TMDbSessionInfoStore()
+    private let sessionInfoProvider: SessionInfoContaining
     
     // MARK: Initialize
     
-    public init() { }
+    public init() {
+        self.sessionInfoProvider = TMDbSessionInfoStore()
+    }
     
     // MARK: API Calls 
     
     public func getUserInfo() {
-        guard let sessionID = sessionInfoStore.sessionID else {
+        guard let sessionID = sessionInfoProvider.sessionID else {
             self.delegate?.user(self, didReceiveError: .NotAuthorized)
             return 
         }
@@ -46,7 +48,7 @@ public class TMDbUserService {
                 }
                 
                 if let user = response.result.value {
-                    self.sessionInfoStore.persistUserInStore(user)
+                    self.sessionInfoProvider.saveUser(user)
                     self.delegate?.user(self, didLoadUserInfo: user)
                 }
         }

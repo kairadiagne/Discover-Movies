@@ -12,10 +12,11 @@ import Locksmith
 protocol SessionInfoContaining {
     var sessionID: String? { get }
     var user: User? { get }
-    var APIKey: String { get set }
+    var APIKey: String { get }
     func saveSessionID(sessionID: String)
     func saveUser(user: User)
     func clearUserData()
+    func saveAPIKey(key: String)
 }
 
 class TMDbSessionInfoStore: SessionInfoContaining {
@@ -39,7 +40,11 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         return User(dictionary: userDict)
     }
     
-    var APIKey = ""
+    var APIKey: String {
+        return apiKey
+    }
+    
+    private(set) var apiKey = ""
     
     private let writeQueue = dispatch_queue_create("com.discoverMovies.app.write", DISPATCH_QUEUE_SERIAL)
     
@@ -61,6 +66,10 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         } catch {
             print("Error saving user to keychain")
         }
+    }
+    
+    func saveAPIKey(key: String) {
+        apiKey = key
     }
     
     // MARK: Clear

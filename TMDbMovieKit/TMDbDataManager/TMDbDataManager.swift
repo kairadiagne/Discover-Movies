@@ -19,7 +19,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
     public weak var failureDelegate: DataManagerFailureDelegate?
     
-    let sessionInfo: SessionInfoContaining
+    let sessionInfoProvider: SessionInfoContaining
     
     let cacheIdentifier: String
     
@@ -37,9 +37,9 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: Initialize
     
-    init(cacheIdentifier: String = "", sessionInfo: SessionInfoContaining = TMDbSessionInfoStore()) {
+    init(cacheIdentifier: String = "", sessionInfoProvider: SessionInfoContaining = TMDbSessionInfoStore()) {
         self.cacheIdentifier = cacheIdentifier
-        self.sessionInfo = sessionInfo
+        self.sessionInfoProvider = sessionInfoProvider
         self.loadFromDisk()
     }
     

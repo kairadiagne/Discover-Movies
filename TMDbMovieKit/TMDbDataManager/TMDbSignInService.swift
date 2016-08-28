@@ -41,13 +41,15 @@ public class TMDbSignInService {
     
     private var isLoading = false
     
-    private let sessionInfoStore = TMDbSessionInfoStore()
+    private let sessionInfoProvider: SessionInfoContaining
     
     private var token: RequestToken?
     
-    // MARK: Initialization 
+    // MARK: Initialize
     
-    public init() { }
+    public init() {
+        self.sessionInfoProvider = TMDbSessionInfoStore()
+    }
     
     // MARK: Sign In 
     
@@ -95,7 +97,7 @@ public class TMDbSignInService {
                 }
                 
                 if let sessionID = response.result.value?["session_id"] as? String {
-                    self.sessionInfoStore.persistSessionIDinStore(sessionID)
+                    self.sessionInfoProvider.saveSessionID(sessionID)
                     self.delegate?.signInServiceDidSignIn(self)
                 }
         }

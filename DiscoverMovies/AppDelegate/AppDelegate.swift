@@ -23,8 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Theme.applyGlobalTheme() 
         
-        TMDbSessionManager.shared.registerAPIKey(APIKey: "b23b0ad7a6c11640e4e232527f2e6d67")
+        // Register APIKey
+        if let path = NSBundle.mainBundle().pathForResource("Keys", ofType: "plist"),
+            keys = NSDictionary(contentsOfFile: path), APIKey = keys["APIKey"] as? String {
+            TMDbSessionManager.shared.registerAPIKey(APIKey: APIKey)
+        }
         
+        // Set up revealcontroller
         let menuViewController =  MenuViewController.instantiatefromStoryboard() // RearViewController
         let topListViewController = TopListViewController(nibName: String(ListViewController), bundle: nil)
         let frontViewController = UINavigationController(rootViewController: topListViewController)

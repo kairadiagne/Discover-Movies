@@ -11,67 +11,58 @@ import Locksmith
 
 class TMDbSessionInfoStore {
     
-    private let writeQueue = dispatch_queue_create("com.discoverMovies.app.write", DISPATCH_QUEUE_SERIAL)
+    // MARK: - Types
     
-    // MARK: SessionID
+    struct Keys {
+        static let UserAccount = "User"
+        static let SessionID = "sessionID"
+        static let User = "user"
+    }
+    
+    // MARK: - Properties
     
     var sessionID: String? {
-        let dict = Locksmith.loadDataForUserAccount("User")
-        return dict?["sessionID"] as? String ?? nil
+        return Locksmith.loadDataForUserAccount(Keys.UserAccount)?[Keys.SessionID] as? String
     }
-    
-    func persistSessionIDinStore(sessionID: String) {
-        do { try Locksmith.updateData(["sessionID": sessionID], forUserAccount: "User") }
-        catch { deleteSessionIDFromStore() }
-    }
-    
-    func deleteSessionIDFromStore() {
-        do {
-            try Locksmith.deleteDataForUserAccount("User")
-        }
-        catch {
-            print("Error deleting sessionID from store")
-        }
-    }
-    
-    // MARK: UserInfo
     
     var user: User? {
-        // This should be done of the main thread
-        assert(NSThread.isMainThread())
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        guard let data = defaults.objectForKey("user") as? NSData else  { return nil }
-        guard let userDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String: AnyObject] else { return nil }
+        guard let userDict = Locksmith.loadDataForUserAccount(Keys.UserAccount)?[Keys.User] as? [String: AnyObject] else { return nil }
         return User(dictionary: userDict)
     }
     
-    func persistUserInStore(user: User) {
-        // This should be done of the main thread
-        assert(NSThread.isMainThread())
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let data = NSKeyedArchiver.archivedDataWithRootObject(user.dictionaryRepresentation())
-        defaults.setObject(data, forKey: "user")
-    }
+    var APIKey = ""
     
-    func deleteUserFromStore() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey("user")
-    }
+    private let writeQueue = dispatch_queue_create("com.discoverMovies.app.write", DISPATCH_QUEUE_SERIAL)
     
-    // MARK: APIKey
+    // MARK: - Persistence
     
-    var APIKey: String {
-        set {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(newValue, forKey: "APIKey")
+    func saveSessionID(sessionID: String) {
+        do {
+            try Locksmith.updateData([Keys.SessionID: sessionID], forUserAccount: "User")
         }
-        get {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            guard let key = defaults.stringForKey("APIKey") else { fatalError() }
-            return key
+        catch {
+            print("Error saving sessionID from keychain")
+
+        }
+    }
+    
+    func saveUser(user: User) {
+        do {
+            try Locksmith.updateData([Keys.User: user.dictionaryRepresentation()], forUserAccount: Keys.UserAccount)
+        } catch {
+            print("Error saving user to keychain")
+        }
+    }
+    
+    // MARK: Clear
+    
+    func clearUserData() {
+        do {
+            try Locksmith.deleteDataForUserAccount(Keys.UserAccount)
+        } catch {
+            print("Error deleteing user data from store")
         }
     }
     
 }
+

@@ -44,6 +44,7 @@
 		11924C871D6901CC00B1022E /* TMDbDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C861D6901CC00B1022E /* TMDbDataManagerTests.swift */; };
 		11924C8A1D69D7C400B1022E /* String+ToNSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C891D69D7C400B1022E /* String+ToNSDate.swift */; };
 		11924C8C1D69E33700B1022E /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C8B1D69E33700B1022E /* ProfileImageView.swift */; };
+		11924C901D72F1D600B1022E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11924C8F1D72F1D600B1022E /* Keys.plist */; };
 		1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */; };
 		119A1F3E1D415B0D00AC61C7 /* TMDbCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */; };
 		11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */; };
@@ -203,6 +204,7 @@
 		11924C861D6901CC00B1022E /* TMDbDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbDataManagerTests.swift; sourceTree = "<group>"; };
 		11924C891D69D7C400B1022E /* String+ToNSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToNSDate.swift"; sourceTree = "<group>"; };
 		11924C8B1D69E33700B1022E /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		11924C8F1D72F1D600B1022E /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = "DiscoverMovies/UserInterface/6. Detail Movie/DetailViewController.xib"; sourceTree = SOURCE_ROOT; };
 		119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCachedData.swift; sourceTree = "<group>"; };
 		11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+defaultIdentifier.swift"; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				111942891CCB8DBF001CF39B /* DiscoverMovies-Bridging-Header.h */,
 				111942461CCB8CA0001CF39B /* Assets.xcassets */,
 				1119424B1CCB8CA0001CF39B /* Info.plist */,
+				11924C8F1D72F1D600B1022E /* Keys.plist */,
 			);
 			name = "Supporting files";
 			sourceTree = "<group>";
@@ -1069,6 +1072,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11924C901D72F1D600B1022E /* Keys.plist in Resources */,
 				EA870C671D12CC98009C71D5 /* Menu.storyboard in Resources */,
 				EA6487721CE21E2300452DD0 /* ListViewController.xib in Resources */,
 				111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */,

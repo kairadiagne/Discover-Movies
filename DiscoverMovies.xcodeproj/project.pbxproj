@@ -520,8 +520,8 @@
 		11924C881D69C82500B1022E /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				EAE605C71CEA72C500D904EB /* TMDbSessionInfoStore.swift */,
 				EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */,
+				EAE605C71CEA72C500D904EB /* TMDbSessionInfoStore.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";

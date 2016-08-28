@@ -19,6 +19,8 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
     public weak var failureDelegate: DataManagerFailureDelegate?
     
+    let sessionInfo: SessionInfoContaining
+    
     let cacheIdentifier: String
     
     var endpoint: String {
@@ -35,8 +37,9 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: Initialize
     
-    init(cacheIdentifier: String = "") {
+    init(cacheIdentifier: String = "", sessionInfo: SessionInfoContaining = TMDbSessionInfoStore()) {
         self.cacheIdentifier = cacheIdentifier
+        self.sessionInfo = sessionInfo
         self.loadFromDisk()
     }
     
@@ -58,8 +61,10 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: Paramaters
     
-    /// Override this subclass to create a dictionary of paramaters for the request
-
+    /** 
+     Override this subclass to create a dictionary of paramaters for the request
+    */
+    
     func getParameters() -> [String: AnyObject] {
         return [String: AnyObject]()
     }
@@ -89,9 +94,12 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: Response 
     
-    /// Override this method for custom data handeling
-    /// Needs to send DataDidLoadNotification once the data is handled
-    /// Needs to cache the data once the data is handled
+    /**
+     Is reponsible for handling incoming data.
+     - Needs to send DataDidLoadNotification once the data is handled
+     - Needs to cache the data once the data is handled
+    */
+
     func handleData(data: ModelType) {
         cache.addData(data)
         self.postDidLoadNotification()

@@ -29,11 +29,11 @@ import Alamofire
 
 public protocol TMDbSignInDelegate: class {
     func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: NSURL)
-    func signIn(service: TMDbSignInService, didFailWithError error: NSError)
+    func signIn(service: TMDbSignInService, didFailWithError error: TMDbAPIError)
     func signInServiceDidSignIn(service: TMDbSignInService)
 }
 
-public class TMDbSignInService {
+public class TMDbSignInService: ErrorHandling {
     
     // MARK: - Properties
     
@@ -60,7 +60,8 @@ public class TMDbSignInService {
             .validate().responseObject { (response: Response<RequestToken, NSError>) in
                 
                 guard response.result.error == nil else {
-                    self.delegate?.signIn(self, didFailWithError: response.result.error!)
+                    let error = self.categorizeError(response.result.error!)
+                    self.delegate?.signIn(self, didFailWithError: error)
                     return
                 }
                 
@@ -72,7 +73,7 @@ public class TMDbSignInService {
                     if let url = NSURL(string: path) {
                         self.delegate?.signIn(self, didReceiveAuthorizationURL: url)
                     } else {
-//                        delegate?.signIn(self, didFailWithError: )
+                        self.delegate?.signIn(self, didFailWithError: .Generic)
                     }
                 }
         }
@@ -80,8 +81,7 @@ public class TMDbSignInService {
     
     public func requestSessionID() {
         guard let token = token?.token else {
-            // Return // Error
-//            delegate?.signIn(self, didFailWithError: )
+            delegate?.signIn(self, didFailWithError: .Generic)
             return
         }
         
@@ -92,7 +92,8 @@ public class TMDbSignInService {
             .validate().responseJSON { response in
                 
                 guard response.result.error == nil else {
-                    self.delegate?.signIn(self, didFailWithError: response.result.error!)
+                    let error = self.categorizeError(response.result.error!)
+                    self.delegate?.signIn(self, didFailWithError: error)
                     return
                 }
                 

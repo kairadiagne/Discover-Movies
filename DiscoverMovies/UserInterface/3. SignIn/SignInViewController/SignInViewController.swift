@@ -60,12 +60,6 @@ class SignInViewController: BaseViewController {
         presentViewController(safariViewController, animated: true, completion: nil)
     }
     
-    // MARK: Handle Errors
-    
-    func handleError(error: NSError) {
-        // Rewrite 
-    }
-    
     // MARK: Navigation
     
     func dismissSignInViewController() {
@@ -82,7 +76,7 @@ extension SignInViewController: TMDbSignInDelegate {
         hideProgressHUD()
         requestAuthorization(url)    }
     
-    func signIn(service: TMDbSignInService, didFailWithError error: NSError) {
+    func signIn(service: TMDbSignInService, didFailWithError error: TMDbAPIError) {
         hideProgressHUD()
         self.handleError(error)
     }

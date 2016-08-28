@@ -11,10 +11,10 @@ import Alamofire
 
 public protocol TMDbUserServiceDelegate: class {
     func user(service: TMDbUserService, didLoadUserInfo user: User)
-    func user(service: TMDbUserService, didReceiveError error: TMDbAPIError)
+    func user(service: TMDbUserService, didFailWithError error: TMDbAPIError)
 }
 
-public class TMDbUserService {
+public class TMDbUserService: ErrorHandling {
     
     // MARK: - Properties
     
@@ -32,7 +32,7 @@ public class TMDbUserService {
     
     public func getUserInfo() {
         guard let sessionID = sessionInfoProvider.sessionID else {
-            self.delegate?.user(self, didReceiveError: .NotAuthorized)
+            self.delegate?.user(self, didFailWithError: .NotAuthorized)
             return 
         }
         
@@ -43,7 +43,8 @@ public class TMDbUserService {
             .validate().responseObject { (response: Response<User, NSError>) in
                 
                 guard response.result.error == nil else {
-                    self.handleError(response.result.error!)
+                    let error = self.categorizeError(response.result.error!)
+                    self.delegate?.user(self, didFailWithError: error)
                     return
                 }
                 
@@ -52,22 +53,6 @@ public class TMDbUserService {
                     self.delegate?.user(self, didLoadUserInfo: user)
                 }
         }
-    }
-    
-    // MARK: - Error Handling
-        
-    func handleError(error: NSError) {
-        var newError: TMDbAPIError
-        
-        if error.code == NSURLErrorNotConnectedToInternet {
-            newError = .NoInternetConnection
-        } else if error.code == NSURLErrorUserAuthenticationRequired {
-            newError = .NotAuthorized
-        } else {
-            newError = .Generic
-        }
-        
-        delegate?.user(self, didReceiveError: newError)
     }
         
 }

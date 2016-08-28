@@ -13,7 +13,7 @@ public protocol DataManagerFailureDelegate: class {
     func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError)
 }
 
-public class TMDbDataManager<ModelType: DictionaryRepresentable> {
+public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling {
     
     // MARK: - Properties
     
@@ -99,7 +99,8 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
                 self.stopLoading()
                 
                 guard response.result.error == nil else {
-                    self.handle(error: response.result.error!)
+                    let error = self.categorizeError(response.result.error!)
+                    self.failureDelegate?.listDataManager(self, didFailWithError: error)
                     return
                 }
                 
@@ -132,22 +133,6 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
     func stopLoading() {
         isLoading = false
-    }
-    
-    // MARK: - Error Handeling
-
-    func handle(error error: NSError) {
-        var newError: TMDbAPIError
-        
-        if error.code == NSURLErrorNotConnectedToInternet {
-            newError = .NoInternetConnection
-        } else if error.code == NSURLErrorUserAuthenticationRequired {
-            newError = .NotAuthorized
-        } else {
-            newError = .Generic
-        }
-        
-        failureDelegate?.listDataManager(self, didFailWithError: newError)
     }
     
     // MARK: - Notifications

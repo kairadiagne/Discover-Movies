@@ -12,12 +12,16 @@ import Foundation
 
 public class TMDbTopListDataManager: TMDbListDataManager<Movie> {
     
-    override var endpoint: String {
-        return "movie/\(list.name)"
-    }
+    // MARK: - Initialize
     
     override init(list: TMDbListType, cacheIdentifier: String) {
         super.init(list: list, cacheIdentifier: cacheIdentifier)
+    }
+    
+    // MARK: - Endpoint
+    
+    override func endpoint() -> String {
+        return "movie/\(list.name)"
     }
     
 }

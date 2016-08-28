@@ -74,7 +74,7 @@ class TopListViewController: DiscoverListViewController {
             return
         }
         
-        currentManager?.reloadTopIfNeeded(true)
+        currentManager?.loadTopIfNeeded(true)
     }
     
     // MARK: Notifications

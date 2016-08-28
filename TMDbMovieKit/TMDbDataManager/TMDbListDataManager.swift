@@ -18,9 +18,9 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
     
     let list: TMDbListType
     
-    // MARK: Initialization 
+    // MARK: Initialize
     
-    init(list: TMDbListType, cacheIdentifier: String = "") {
+    init(list: TMDbListType, cacheIdentifier: String) {
         self.list = list
         super.init(cacheIdentifier: cacheIdentifier)
     }
@@ -29,16 +29,8 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
     
     override public func loadMore() {
         super.loadMore()
-        guard cache.data?.nextPage != nil else { return }
-        let paramaters = getParameters()
-        loadOnline(paramaters, endpoint: endpoint)
-    }
-    
-    // MARK: Paramaters 
-    
-    override func getParameters() -> [String : AnyObject] {
-        guard let nextPage = cache.data?.nextPage else { return [:] }
-        return ["page": nextPage]
+        guard let nextpage = cache.data?.nextPage else { return }
+        loadOnline(paramaters, page: nextpage)
     }
 
     // MARK: Handle Response

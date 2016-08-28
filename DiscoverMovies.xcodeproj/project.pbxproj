@@ -45,6 +45,7 @@
 		11924C8A1D69D7C400B1022E /* String+ToNSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C891D69D7C400B1022E /* String+ToNSDate.swift */; };
 		11924C8C1D69E33700B1022E /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C8B1D69E33700B1022E /* ProfileImageView.swift */; };
 		11924C901D72F1D600B1022E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11924C8F1D72F1D600B1022E /* Keys.plist */; };
+		11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C911D73037500B1022E /* Dictionary+merge.swift */; };
 		1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */; };
 		119A1F3E1D415B0D00AC61C7 /* TMDbCachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */; };
 		11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */; };
@@ -205,6 +206,7 @@
 		11924C891D69D7C400B1022E /* String+ToNSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToNSDate.swift"; sourceTree = "<group>"; };
 		11924C8B1D69E33700B1022E /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		11924C8F1D72F1D600B1022E /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		11924C911D73037500B1022E /* Dictionary+merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+merge.swift"; path = "DiscoverMovies/Dictionary+merge.swift"; sourceTree = SOURCE_ROOT; };
 		1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = "DiscoverMovies/UserInterface/6. Detail Movie/DetailViewController.xib"; sourceTree = SOURCE_ROOT; };
 		119A1F3D1D415B0D00AC61C7 /* TMDbCachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbCachedData.swift; sourceTree = "<group>"; };
 		11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+defaultIdentifier.swift"; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				11924C801D68B38A00B1022E /* AlamofireRequest+DictionaryRepresentable.swift */,
+				11924C911D73037500B1022E /* Dictionary+merge.swift */,
 			);
 			name = Extensions;
 			path = Utilities;
@@ -1273,6 +1276,7 @@
 				11924C831D68CA8800B1022E /* TMDbTopListDataManager.swift in Sources */,
 				1119430A1CCB8EE4001CF39B /* Video.swift in Sources */,
 				EA782B931CE1D28800DC38AD /* TMDbSessionManager.swift in Sources */,
+				11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */,
 				111942F71CCB8EDE001CF39B /* Constants.swift in Sources */,
 				EA782B7D1CE0B5F100DC38AD /* TMDbSignInService.swift in Sources */,
 				112CDE2E1D5A62B80028BE33 /* DictionaryRepresentable.swift in Sources */,

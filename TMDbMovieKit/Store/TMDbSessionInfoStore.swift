@@ -27,6 +27,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         static let UserAccount = "User"
         static let SessionID = "sessionID"
         static let User = "user"
+        static let APIKey = "APIKey"
     }
     
     // MARK: - Properties
@@ -41,10 +42,8 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     }
     
     var APIKey: String {
-        return apiKey
+        return  NSUserDefaults.standardUserDefaults().stringForKey(Keys.APIKey) ?? ""
     }
-    
-    private(set) var apiKey = ""
     
     private let writeQueue = dispatch_queue_create("com.discoverMovies.app.write", DISPATCH_QUEUE_SERIAL)
     
@@ -52,9 +51,8 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     
     func saveSessionID(sessionID: String) {
         do {
-            try Locksmith.updateData([Keys.SessionID: sessionID], forUserAccount: "User")
-        }
-        catch {
+            try Locksmith.updateData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
+        } catch {
             print("Error saving sessionID from keychain")
 
         }
@@ -69,7 +67,8 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     }
     
     func saveAPIKey(key: String) {
-        apiKey = key
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(key, forKey: Keys.APIKey)
     }
     
     // MARK: Clear

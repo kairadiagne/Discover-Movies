@@ -46,3 +46,14 @@ public enum TMDbAccountList: TMDbListType {
     }
     
 }
+
+public enum TMDbOtherList: TMDbListType {
+    case Reviews
+    
+    public var name: String {
+        switch self {
+        case .Reviews:
+            return "reviews"
+        }
+    }
+}

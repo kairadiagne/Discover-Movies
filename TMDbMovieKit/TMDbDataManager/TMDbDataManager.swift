@@ -15,27 +15,25 @@ public protocol DataManagerFailureDelegate: class {
 
 public class TMDbDataManager<ModelType: DictionaryRepresentable> {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public weak var failureDelegate: DataManagerFailureDelegate?
     
     let sessionInfoProvider: SessionInfoContaining
     
-    let cacheIdentifier: String
+    var paramaters = [String: AnyObject]()
     
-    var endpoint: String {
-        return ""
-    }
+    let cacheIdentifier: String 
     
     private(set) var cache = TMDbCachedData<ModelType>()
+    
+    private let cacheQueue = dispatch_queue_create("com.discoverMovies.app.cache", DISPATCH_QUEUE_SERIAL)
     
     private(set) var isLoading = false
     
     private let notificationCenter = NSNotificationCenter.defaultCenter()
     
-    private let cacheQueue = dispatch_queue_create("com.discoverMovies.app.cache", DISPATCH_QUEUE_SERIAL)
-    
-    // MARK: Initialize
+    // MARK: - Initialize
     
     init(cacheIdentifier: String = "", sessionInfoProvider: SessionInfoContaining = TMDbSessionInfoStore()) {
         self.cacheIdentifier = cacheIdentifier
@@ -47,52 +45,71 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
         saveToDisk()
     }
     
-    // MARK: Public API
+    // MARK: - Public API
     
-    public func reloadTopIfNeeded(forceOnline: Bool) {
-        guard cache.needsRefresh || forceOnline else { return }
-        let paramaters = getParameters()
-        loadOnline(paramaters, endpoint: endpoint)
+    public func loadTopIfNeeded(forceOnline: Bool, paramaters params: [String: AnyObject]? = nil) {
+        guard cache.needsRefresh || forceOnline || params != nil else { return }
+        
+        // Merge params into defaultParamaters
+        if let params = params {
+           paramaters = defaultParamaters().merge(params)
+        }
+
+        loadOnline(paramaters)
     }
     
     public func loadMore() {
         guard isLoading == false else { return }
     }
     
-    // MARK: Paramaters
+    // MARK: - Paramaters
     
-    /** 
-     Override this subclass to create a dictionary of paramaters for the request
+    /**
+     Subclasses should override this method to specify a set of default paramaters needed for every request.
     */
     
-    func getParameters() -> [String: AnyObject] {
-        return [String: AnyObject]()
+    func defaultParamaters() -> [String: AnyObject] {
+        return [:]
     }
     
-    // MARK: API Calls
+    // MARK: - Endpoint
     
-    func loadOnline(paramaters: [String: AnyObject], endpoint: String, page: Int = 1) {
+    /** 
+     Subclasses need to override this method to set the endpoint for the GET call
+    */
+    
+    func endpoint() -> String {
+        return ""
+    }
+
+    // MARK: - API Calls
+    
+    func loadOnline(paramaters: [String: AnyObject], page: Int = 1) {
         startLoading()
         
-        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: paramaters))
+        // Add page key to paramaters
+        var params = paramaters
+        params["page"] = page
+        
+        let endpoint = self.endpoint()
+        
+        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: params))
             .validate().responseObject { (response: Response<ModelType, NSError>) in
-                // Stop Loading
+            
                 self.stopLoading()
                 
-                // Check for Errors
                 guard response.result.error == nil else {
                     self.handle(error: response.result.error!)
                     return
                 }
                 
-                // Unwrap data
                 if let data = response.result.value {
                     self.handleData(data)
                 }
         }
     }
     
-    // MARK: Response 
+    // MARK: - Response
     
     /**
      Is reponsible for handling incoming data.
@@ -106,7 +123,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
         self.saveToDisk()
     }
     
-    // MARK: Loading
+    // MARK: - Loading
     
     func startLoading() {
         isLoading = true
@@ -117,7 +134,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
         isLoading = false
     }
     
-    // MARK: Error Handeling
+    // MARK: - Error Handeling
 
     func handle(error error: NSError) {
         var newError: TMDbAPIError
@@ -133,7 +150,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
         failureDelegate?.listDataManager(self, didFailWithError: newError)
     }
     
-    // MARK: Notifications
+    // MARK: - Notifications
     
     public func addObserver(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector, didUpdateSelector: Selector) {
         notificationCenter.addObserver(observer, selector: loadingSelector, name: TMDbListDataManagerNotification.DataDidStartLoading.name, object: self)
@@ -169,7 +186,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
         notificationCenter.postNotificationName(TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
     }
     
-    // MARK: Disk Cache 
+    // MARK: - Disk Cache
     
     func saveToDisk() {
         dispatch_async(cacheQueue) { // Retain Cycle??
@@ -202,7 +219,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable> {
 
 }
 
-// MARK: TMDbDataManagerNotification 
+// MARK: - TMDbDataManagerNotification 
 
 public enum TMDbListDataManagerNotification {
     case DataDidStartLoading
@@ -220,4 +237,3 @@ public enum TMDbListDataManagerNotification {
         }
     }
 }
-

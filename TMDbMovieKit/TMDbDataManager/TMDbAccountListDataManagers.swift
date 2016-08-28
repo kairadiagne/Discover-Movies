@@ -18,26 +18,23 @@ public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
        return TMDbSessionInfoStore().user?.id
     }
     
-    var sessionID: String? {
-        return TMDbSessionInfoStore().sessionID
-    }
-    
-    override var endpoint: String {
-        return "account/\(userID)/\(list.name)/movies"
-    }
-    
     // MARK: Initialize
     
     override init(list: TMDbListType, cacheIdentifier: String) {
         super.init(list: list, cacheIdentifier: cacheIdentifier)
     }
-
-    // MARK: Paramaters
     
-    override func getParameters() -> [String : AnyObject] {
-        var paramaters = super.getParameters()
-        paramaters["session_id"] = sessionID
-        return paramaters
+    // MARK: - Endpoint
+    
+    override func endpoint() -> String {
+        return "account/\(userID)/\(list.name)/movies"
+    }
+
+    // MARK: - Paramaters
+    
+    override func defaultParamaters() -> [String : AnyObject] {
+        guard let sessionID = sessionInfoProvider.sessionID else { return [:] } 
+        return ["session_id": sessionID]
     }
     
 }

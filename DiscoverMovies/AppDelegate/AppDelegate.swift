@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Register APIKey
         if let path = NSBundle.mainBundle().pathForResource("Keys", ofType: "plist"),
             keys = NSDictionary(contentsOfFile: path), APIKey = keys["APIKey"] as? String {
-            TMDbSessionManager.shared.registerAPIKey(APIKey: APIKey)
+            TMDbSessionManager.shared.registerAPIKey(APIKey)
         }
         
         // Set up revealcontroller

@@ -63,7 +63,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         let didUpdateSelector = #selector(AccountListController.dataDidUpdateNotification(_:))
         accountListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
         accountListManager.failureDelegate = self
-        accountListManager.reloadTopIfNeeded(false)
+        accountListManager.loadTopIfNeeded(false)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -74,7 +74,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     // MARK: Refresh
     
     func refresh(sender: UIRefreshControl) {
-        accountListManager.reloadTopIfNeeded(true)
+        accountListManager.loadTopIfNeeded(true)
     }
     
     // MARK: Notifications 

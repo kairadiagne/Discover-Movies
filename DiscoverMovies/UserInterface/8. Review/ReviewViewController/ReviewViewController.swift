@@ -59,7 +59,7 @@ class ReviewViewController: ListViewController {
         let didUpdateSelctor = #selector(ReviewViewController.dataDidUpdateNotification(_:))
         TMDbReviewManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelctor)
 //
-        TMDbReviewManager.shared.reloadTopIfNeeded(false)
+        TMDbReviewManager.shared.loadTopIfNeeded(false)
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -23,30 +23,8 @@ public struct MovieCredit: DictionaryRepresentable {
                 return nil
         }
         
-        var castMembers = [CastMember]()
-        
-        for castDict in castDicts {
-            
-            if let castMember = CastMember(dictionary: castDict) {
-                castMembers.append(castMember)
-            }
-            
-        }
-        
-        self.cast = castMembers
-        
-        var crewMembers = [CrewMember]()
-        
-        for crewDict in crewDicts {
-            
-            if let crewMember = CrewMember(dictionary: crewDict) {
-                crewMembers.append(crewMember)
-            }
-            
-        }
-        
-        self.crew = crewMembers
-        
+        self.cast = castDicts.map { return CastMember(dictionary: $0) }.flatMap { $0 }
+        self.crew = crewDicts.map { return CrewMember(dictionary: $0) }.flatMap { $0 }
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {

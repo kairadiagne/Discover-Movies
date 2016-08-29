@@ -31,17 +31,12 @@ public class List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
     }
     
     required public init?(dictionary dict: [String : AnyObject]) {
-    
         self.page = dict["page"] as? Int ?? 0
         self.pageCount = dict["total_pages"] as? Int ?? 0
         self.resultCount = dict["total_results"] as? Int ?? 0
         
         if let itemDicts = dict["results"] as? [[String: AnyObject]] {
-            for item in itemDicts {
-                if let parsedItem = ModelType(dictionary: item) {
-                    self.items.append(parsedItem)
-                }
-            }
+            self.items = itemDicts.map { return ModelType(dictionary: $0) }.flatMap { $0 }
         }
     }
     

@@ -22,18 +22,13 @@ public struct MovieInfo: DictionaryRepresentable {
         if let similarMovieDict = dict["similar"] as? [String: AnyObject] {
             self.similar = List<Movie>(dictionary: similarMovieDict)
         }
+        
         if let creditDict = dict["credits"] as? [String: AnyObject] {
             self.credits = MovieCredit(dictionary: creditDict)
         }
-    
+        
         if let videoDicts = dict["trailers"]?["youtube"] as? [[String: AnyObject]] {
-            var trailers = [Video]()
-            for dict in videoDicts {
-                if let video = Video(dictionary: dict) {
-                    trailers.append(video)
-                    self.trailers = trailers
-                }
-            }
+            self.trailers = videoDicts.map { return Video(dictionary: $0) }.flatMap { $0 }
         }
     }
     

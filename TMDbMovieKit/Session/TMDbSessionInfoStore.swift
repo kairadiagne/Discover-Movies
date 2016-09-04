@@ -37,7 +37,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     }
     
     var user: User? {
-        guard let userDict = Locksmith.loadDataForUserAccount(Keys.UserAccount)?[Keys.User] as? [String: AnyObject] else { return nil }
+        guard let userDict = NSUserDefaults.standardUserDefaults().objectForKey(Keys.User) as? [String: AnyObject] else { return nil }
         return User(dictionary: userDict)
     }
     
@@ -45,13 +45,11 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         return  NSUserDefaults.standardUserDefaults().stringForKey(Keys.APIKey) ?? ""
     }
     
-    private let writeQueue = dispatch_queue_create("com.discoverMovies.app.write", DISPATCH_QUEUE_SERIAL)
-    
     // MARK: - Persistence
     
     func saveSessionID(sessionID: String) {
         do {
-            try Locksmith.updateData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
+            try Locksmith.saveData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
             print("Error saving sessionID from keychain")
 
@@ -59,11 +57,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     }
     
     func saveUser(user: User) {
-        do {
-            try Locksmith.updateData([Keys.User: user.dictionaryRepresentation()], forUserAccount: Keys.UserAccount)
-        } catch {
-            print("Error saving user to keychain")
-        }
+        NSUserDefaults.standardUserDefaults().setObject(user.dictionaryRepresentation(), forKey: Keys.User)
     }
     
     func saveAPIKey(key: String) {

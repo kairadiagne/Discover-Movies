@@ -16,21 +16,21 @@ class TMDbCachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     
     var needsRefresh: Bool {
         guard let lastUpdate = lastUpdate else { return true }
-        return lastUpdate.timeIntervalSinceNow > refreshTimeOut
+        return NSDate().timeIntervalSinceDate(lastUpdate) > refreshTimeOut
     }
+    
+    private let refreshTimeOut: NSTimeInterval
     
     private var lastUpdate: NSDate?
     
-    private var refreshTimeOut: NSTimeInterval = 300
-    
     // MARK: - Initialize
     
-    init(refreshTimeOut timeOut: NSTimeInterval = 300) {
+    required init(refreshTimeOut timeOut: NSTimeInterval) {
         self.refreshTimeOut = timeOut
         super.init()
     }
     
-    // MARK: - Clear Cache
+    // MARK: - Utils
     
     func addData(data: ModelType) {
         self.data = data
@@ -40,6 +40,10 @@ class TMDbCachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     func clear() {
         self.data = nil
         self.lastUpdate = nil
+    }
+    
+    func setLastUpdate() {
+        self.lastUpdate = NSDate()
     }
     
     // MARK: - NSCoding
@@ -58,4 +62,6 @@ class TMDbCachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     }
 
 }
+
+
 

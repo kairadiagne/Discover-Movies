@@ -19,7 +19,7 @@ public class TMDbReviewManager: TMDbListDataManager<Review> {
     // MARK: - Initialize
     
     private init(list: TMDbListType, cacheIdentifier: String) {
-        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: false)
+        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: false, refreshTimeOut: 300)
     }
     
     // MARK: - Endpoint

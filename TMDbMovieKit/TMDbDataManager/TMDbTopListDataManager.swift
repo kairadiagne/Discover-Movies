@@ -15,7 +15,7 @@ public class TMDbTopListDataManager: TMDbListDataManager<Movie> {
     // MARK: - Initialize
     
     private init(list: TMDbListType, cacheIdentifier: String) {
-        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: true)
+        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: true, refreshTimeOut: 3600)
     }
     
     // MARK: - Endpoint

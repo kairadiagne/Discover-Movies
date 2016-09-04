@@ -21,7 +21,7 @@ public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
     // MARK: - Initialize
     
     private init(list: TMDbListType, cacheIdentifier: String) {
-        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: true)
+        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: true, refreshTimeOut: 300)
     }
 
     // MARK: - Endpoint

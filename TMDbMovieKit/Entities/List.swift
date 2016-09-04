@@ -44,7 +44,7 @@ public class List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
         var dictionary = [String: AnyObject]()
         dictionary["page"] = page
         dictionary["total_pages"] = pageCount
-        dictionary["resultCount"] = resultCount
+        dictionary["total_results"] = resultCount
         dictionary["results"] = items.map { return $0.dictionaryRepresentation() }
         return dictionary
     }

@@ -20,15 +20,15 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
     
     // MARK: - Initialize
     
-    init(list: TMDbListType, cacheIdentifier: String, writesDataToDisk: Bool) {
+    init(list: TMDbListType, cacheIdentifier: String, writesDataToDisk: Bool, refreshTimeOut: NSTimeInterval) {
         self.list = list
-        super.init(cacheIdentifier: cacheIdentifier, writesDataToDisk: writesDataToDisk)
+        super.init(cacheIdentifier: cacheIdentifier, writesDataToDisk: writesDataToDisk, refreshTimeOut: refreshTimeOut)
     }
     
     // MARK: - Calls
     
-    override public func loadMore() {
-        super.loadMore()
+    public func loadMore() {
+        guard isLoading == false else { return }
         guard let nextpage = cache.data?.nextPage else { return }
         loadOnline(paramaters, page: nextpage)
     }
@@ -46,6 +46,7 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
         
         if data.page == 1 {
             cache.data?.items = data.items
+            cache.setLastUpdate()
             postDidLoadNotification()
         } else {
             cache.data?.items.appendContentsOf(data.items)

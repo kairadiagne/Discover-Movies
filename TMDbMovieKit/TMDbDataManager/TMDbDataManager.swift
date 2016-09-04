@@ -23,13 +23,15 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     
     let cacheIdentifier: String
     
-    var paramaters = [String: AnyObject]()
-    
     var writesDataToDisk: Bool
     
-    private(set) var cache = TMDbCachedData<ModelType>()
+    var paramaters = [String: AnyObject]()
+    
+    var cache: TMDbCachedData<ModelType>
     
     private(set) var isLoading = false
+    
+    private var firstLoad = true
     
     private let cacheQueue = dispatch_queue_create("com.discoverMovies.app.cache", DISPATCH_QUEUE_SERIAL)
     
@@ -37,12 +39,14 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     
     // MARK: - Initialize
     
-    init(cacheIdentifier: String, sessionInfoProvider: SessionInfoContaining = TMDbSessionInfoStore(), writesDataToDisk: Bool = true) {
+    init(cacheIdentifier: String, sessionInfoProvider: SessionInfoContaining = TMDbSessionInfoStore(), writesDataToDisk: Bool = true, refreshTimeOut: NSTimeInterval = 300) {
         self.cacheIdentifier = cacheIdentifier
         self.sessionInfoProvider = sessionInfoProvider
         self.writesDataToDisk = writesDataToDisk
+        self.cache = TMDbCachedData<ModelType>(refreshTimeOut: refreshTimeOut)
         
         if writesDataToDisk {
+            self.startLoading()
             self.loadDataFromDisk()
         }
     }
@@ -50,7 +54,14 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     // MARK: - Public API
     
     public func loadTopIfNeeded(forceOnline: Bool, paramaters params: [String: AnyObject]? = nil) {
-        guard cache.needsRefresh || forceOnline || params != nil else { return }
+        guard cache.needsRefresh || forceOnline || params != nil else {
+            if firstLoad {
+                // If the cache loaded at initialization is still valid post a loading notification 
+                firstLoad = false 
+                postDidLoadNotification()
+            }
+            return
+        }
     
         // Add params to default params
         if let params = params {
@@ -58,10 +69,6 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
         }
 
         loadOnline(paramaters)
-    }
-    
-    public func loadMore() {
-        guard isLoading == false else { return }
     }
     
     // MARK: - Paramaters
@@ -178,6 +185,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     // MARK: - Caching
     
     func writeDataToDisk() {
+        // Submit write for asycnhronous execution and return immediately
         dispatch_async(cacheQueue) { [weak self] in
             guard let strongSelf = self else { return }
             let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.cacheIdentifier)
@@ -186,11 +194,13 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     }
     
     func loadDataFromDisk() {
-        dispatch_async(cacheQueue) { [weak self] in
+        // Wait until read completes
+        dispatch_sync(cacheQueue) { [weak self] in
             guard let strongSelf = self else { return }
             let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.cacheIdentifier)
             guard let cachedData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? TMDbCachedData<ModelType> else { return }
             strongSelf.cache = cachedData
+            self?.stopLoading()
         }
     }
     

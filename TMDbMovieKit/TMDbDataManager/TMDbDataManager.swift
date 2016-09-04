@@ -63,9 +63,10 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
             return
         }
     
-        // Add params to default params
         if let params = params {
            paramaters = defaultParamaters().merge(params)
+        } else {
+            paramaters = defaultParamaters()
         }
 
         loadOnline(paramaters)

@@ -27,6 +27,7 @@ public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
     // MARK: - Endpoint
     
     override func endpoint() -> String {
+        guard let userID = userID else { return "" }
         return "account/\(userID)/\(list.name)/movies"
     }
 

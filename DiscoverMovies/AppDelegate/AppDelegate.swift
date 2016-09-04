@@ -74,8 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // - Localization
 // - Pull to refresh (Account list controller)
 // - UserInfoStore Multihreading keyed archiver ??
-// - Map, Filter, flatMap, reduce revisit and use in models  // Probably map or flatMap for transforming data in an array of dicts
-// - filter https://www.weheartswift.com/higher-order-functions-map-filter-reduce-and-more/
 // - Change ProfileImageView
 // - Color and Design changes
 

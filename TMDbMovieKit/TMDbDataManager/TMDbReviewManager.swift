@@ -18,8 +18,8 @@ public class TMDbReviewManager: TMDbListDataManager<Review> {
     
     // MARK: - Initialize
     
-    override init(list: TMDbListType, cacheIdentifier: String) {
-        super.init(list: list, cacheIdentifier: cacheIdentifier)
+    private init(list: TMDbListType, cacheIdentifier: String) {
+        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: false)
     }
     
     // MARK: - Endpoint

@@ -25,14 +25,12 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     var progressHUD: MBProgressHUD?
     
-    var sessionManager = TMDbSessionManager()
-    
     var shouldShowSignInViewController: Bool {
-        return sessionManager.signInStatus == .NotAvailable ? true : false 
+        return TMDbSessionManager.shared.signInStatus == .NotAvailable ? true : false
     }
     
     private var signedIn: Bool {
-        return sessionManager.signInStatus == .Signedin ? true: false 
+        return TMDbSessionManager.shared.signInStatus == .Signedin ? true: false
     }
     
     // MARK: LifeCycle
@@ -71,11 +69,11 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
             presentAlertGenericError()
         case .NoInternetConnection:
             presentBannerOnInternetError()
-        case .NotAuthorized where sessionManager.signInStatus == .Signedin:
+        case .NotAuthorized where TMDbSessionManager.shared.signInStatus == .Signedin:
             presentAlertOnAuthorizationError()
-        case .NotAuthorized where sessionManager.signInStatus == .NotAvailable:
+        case .NotAuthorized where TMDbSessionManager.shared.signInStatus == .NotAvailable:
             presentAlertOnAuthorizationError()
-        case .NotAuthorized where sessionManager.signInStatus == .PublicMode:
+        case .NotAuthorized where TMDbSessionManager.shared.signInStatus == .PublicMode:
             return
         default:
             return
@@ -93,7 +91,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         let message = NSLocalizedString("authorizationErrorMessage", comment: "Message of authorization error alert")
         
         let completionHandler = {
-            self.sessionManager.signOut()
+            TMDbSessionManager.shared.signOut()
             
             if let menuViewController = (UIApplication.sharedApplication().delegate as? AppDelegate)?.menuViewController {
                 menuViewController.signOut()

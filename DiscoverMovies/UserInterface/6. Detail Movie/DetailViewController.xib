@@ -270,7 +270,7 @@
                 <outlet property="titleLabel" destination="X0s-VM-Ai3" id="G1t-6Z-PNn"/>
                 <outlet property="watchListControl" destination="WRE-II-MfP" id="fYn-rb-aZs"/>
             </connections>
-            <point key="canvasLocation" x="497" y="486"/>
+            <point key="canvasLocation" x="451.5" y="563.5"/>
         </view>
         <customObject id="GQy-4t-zRc" customClass="CastDataProvider" customModule="DiscoverMovies" customModuleProvider="target"/>
         <customObject id="2IX-ki-SCy" customClass="SimilarMovieDataProvider" customModule="DiscoverMovies" customModuleProvider="target"/>

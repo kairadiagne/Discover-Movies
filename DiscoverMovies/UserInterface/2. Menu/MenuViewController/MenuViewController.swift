@@ -23,11 +23,9 @@ class MenuViewController: UITableViewController {
     @IBOutlet weak var menuTableview: MenuTableView!
     
     private let userService = TMDbUserService()
-    
-    private let sessionManager = TMDbSessionManager()
 
     private var signedIn: Bool {
-        return (sessionManager.signInStatus == .Signedin) ?? false
+        return (TMDbSessionManager.shared.signInStatus == .Signedin) ?? false
     }
     
     private var presentedRow = 1
@@ -42,11 +40,11 @@ class MenuViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if signedIn && (sessionManager.user == nil) {
+        if signedIn && (TMDbSessionManager.shared.user == nil) {
             menuTableview.updateMenu(signedIn)
             userService.getUserInfo() // Get latest
-        } else if signedIn && (sessionManager.user != nil) {
-            menuTableview.updateMenu(signedIn, user: sessionManager.user!)
+        } else if signedIn && (TMDbSessionManager.shared.user != nil) {
+            menuTableview.updateMenu(signedIn, user: TMDbSessionManager.shared.user!)
             userService.getUserInfo() // Get latest
         } else {
              menuTableview.updateMenu(signedIn)
@@ -85,7 +83,7 @@ class MenuViewController: UITableViewController {
     }
     
     func signOut() {
-        sessionManager.signOut()
+        TMDbSessionManager.shared.signOut()
         showTopListViewController()
     }
     
@@ -93,7 +91,7 @@ class MenuViewController: UITableViewController {
         if signedIn {
             signOut()
         } else {
-            sessionManager.deactivatePublicMode()
+            TMDbSessionManager.shared.deactivatePublicMode()
         }
         
         showTopListViewController()

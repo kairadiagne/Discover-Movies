@@ -21,36 +21,38 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     
     let sessionInfoProvider: SessionInfoContaining
     
+    let cacheIdentifier: String
+    
     var paramaters = [String: AnyObject]()
     
-    let cacheIdentifier: String 
+    var writesDataToDisk: Bool
     
     private(set) var cache = TMDbCachedData<ModelType>()
     
-    private let cacheQueue = dispatch_queue_create("com.discoverMovies.app.cache", DISPATCH_QUEUE_SERIAL)
-    
     private(set) var isLoading = false
+    
+    private let cacheQueue = dispatch_queue_create("com.discoverMovies.app.cache", DISPATCH_QUEUE_SERIAL)
     
     private let notificationCenter = NSNotificationCenter.defaultCenter()
     
     // MARK: - Initialize
     
-    init(cacheIdentifier: String = "", sessionInfoProvider: SessionInfoContaining = TMDbSessionInfoStore()) {
+    init(cacheIdentifier: String, sessionInfoProvider: SessionInfoContaining = TMDbSessionInfoStore(), writesDataToDisk: Bool = true) {
         self.cacheIdentifier = cacheIdentifier
         self.sessionInfoProvider = sessionInfoProvider
-        self.loadFromDisk()
-    }
-    
-    deinit {
-        saveToDisk()
+        self.writesDataToDisk = writesDataToDisk
+        
+        if writesDataToDisk {
+            self.loadDataFromDisk()
+        }
     }
     
     // MARK: - Public API
     
     public func loadTopIfNeeded(forceOnline: Bool, paramaters params: [String: AnyObject]? = nil) {
         guard cache.needsRefresh || forceOnline || params != nil else { return }
-        
-        // Merge params into defaultParamaters
+    
+        // Add params to default params
         if let params = params {
            paramaters = defaultParamaters().merge(params)
         }
@@ -87,7 +89,6 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     func loadOnline(paramaters: [String: AnyObject], page: Int = 1) {
         startLoading()
         
-        // Add page key to paramaters
         var params = paramaters
         params["page"] = page
         
@@ -121,7 +122,10 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     func handleData(data: ModelType) {
         cache.addData(data)
         self.postDidLoadNotification()
-        self.saveToDisk()
+        
+        if writesDataToDisk {
+            writeDataToDisk()
+        }
     }
     
     // MARK: - Loading
@@ -171,28 +175,22 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
         notificationCenter.postNotificationName(TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
     }
     
-    // MARK: - Disk Cache
+    // MARK: - Caching
     
-    func saveToDisk() {
-        dispatch_async(cacheQueue) { // Retain Cycle??
-            guard let data = self.cache.data else { return }
-            let fileName = self.getCachesDirectory().stringByAppendingString(self.cacheIdentifier)
-            NSKeyedArchiver.archiveRootObject(data.dictionaryRepresentation(), toFile: fileName)
+    func writeDataToDisk() {
+        dispatch_async(cacheQueue) { [weak self] in
+            guard let strongSelf = self else { return }
+            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.cacheIdentifier)
+            NSKeyedArchiver.archiveRootObject(strongSelf.cache, toFile: path)
         }
-        
     }
     
-    func loadFromDisk() {
-        dispatch_async(cacheQueue) {
-            let fileName = self.getCachesDirectory().stringByAppendingString(self.cacheIdentifier)
-            
-            guard let dict = NSKeyedUnarchiver.unarchiveObjectWithFile(fileName) as? [String: AnyObject],
-                object = ModelType(dictionary: dict) else {
-                    print("Reading data from disk failed")
-                    return
-            }
-            
-            self.cache.addData(object)
+    func loadDataFromDisk() {
+        dispatch_async(cacheQueue) { [weak self] in
+            guard let strongSelf = self else { return }
+            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.cacheIdentifier)
+            guard let cachedData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? TMDbCachedData<ModelType> else { return }
+            strongSelf.cache = cachedData
         }
     }
     

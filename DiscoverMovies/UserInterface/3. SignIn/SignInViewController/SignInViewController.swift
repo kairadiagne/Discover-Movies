@@ -38,7 +38,7 @@ class SignInViewController: BaseViewController {
     }
     
     @IBAction func activatePublicMode(sender: UIButton) {
-        sessionManager.activatePublicMode()
+        TMDbSessionManager.shared.activatePublicMode()
         dismissSignInViewController()
     }
     

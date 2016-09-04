@@ -20,9 +20,9 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
     
     // MARK: - Initialize
     
-    init(list: TMDbListType, cacheIdentifier: String) {
+    init(list: TMDbListType, cacheIdentifier: String, writesDataToDisk: Bool) {
         self.list = list
-        super.init(cacheIdentifier: cacheIdentifier)
+        super.init(cacheIdentifier: cacheIdentifier, writesDataToDisk: writesDataToDisk)
     }
     
     // MARK: - Calls
@@ -50,6 +50,11 @@ public class TMDbListDataManager<ItemType: DictionaryRepresentable>: TMDbDataMan
         } else {
             cache.data?.items.appendContentsOf(data.items)
             postDidUpdateNotification()
+        }
+        
+        // Cache data 
+        if writesDataToDisk {
+            writeDataToDisk()
         }
     }
     

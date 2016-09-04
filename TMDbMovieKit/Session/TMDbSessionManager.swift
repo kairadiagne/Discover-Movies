@@ -35,11 +35,7 @@ public class TMDbSessionManager {
     
     // MARK: - Initialize
     
-    public convenience init() {
-        self.init(sessionInfo: TMDbSessionInfoStore())
-    }
-    
-    init(sessionInfo: SessionInfoContaining) {
+    init(sessionInfo: SessionInfoContaining = TMDbSessionInfoStore()) {
         self.sessionInfoProvider = sessionInfo
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
         let freshInstall = NSUserDefaults.standardUserDefaults().boolForKey(Constants.FreshInstallKey) == false

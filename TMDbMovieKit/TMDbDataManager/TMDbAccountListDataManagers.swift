@@ -20,10 +20,10 @@ public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
     
     // MARK: - Initialize
     
-    override init(list: TMDbListType, cacheIdentifier: String) {
-        super.init(list: list, cacheIdentifier: cacheIdentifier)
+    private init(list: TMDbListType, cacheIdentifier: String) {
+        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: true)
     }
-    
+
     // MARK: - Endpoint
     
     override func endpoint() -> String {

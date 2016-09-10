@@ -59,11 +59,11 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     // MARK: Error Handeling
     
-    func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError) {
+    func listDataManager(manager: AnyObject, didFailWithError error: APIError) {
         handleError(error)
     }
     
-    func handleError(error: TMDbAPIError) {
+    func handleError(error: APIError) {
         switch error {
         case .Generic:
             presentAlertGenericError()

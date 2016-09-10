@@ -41,7 +41,7 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
 
     // MARK: - Items 
     
-    func itemsInList() -> [ItemType] {
+    public func itemsInList() -> [ItemType] {
         return pages.reduce([], combine: { $0 + $1.items })
     }
     

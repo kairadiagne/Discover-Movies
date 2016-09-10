@@ -24,14 +24,14 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     private let accountList: TMDbAccountList
     
-    private var accountListManager: TMDbAccountListDataManager!
+    private let accountListManager: TMDbAccountListDataManager
     
     // MARK: Initialize
     
     init(list aList: TMDbAccountList) {
         self.accountList = aList
+        self.accountListManager = TMDbAccountListDataManager(list: aList)
         super.init(nibName: "ListViewController", bundle: nil)
-        self.setManager(aList)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,10 +60,9 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         
         let loadingSelector = #selector(AccountListController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(AccountListController.dataDidLoadTopNotification(_:))
-        let didUpdateSelector = #selector(AccountListController.dataDidUpdateNotification(_:))
-        accountListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
+        accountListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
         accountListManager.failureDelegate = self
-        accountListManager.loadTopIfNeeded(false)
+        accountListManager.reloadIfNeeded(false)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -74,7 +73,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     // MARK: Refresh
     
     func refresh(sender: UIRefreshControl) {
-        accountListManager.loadTopIfNeeded(true)
+        accountListManager.reloadIfNeeded(true)
     }
     
     // MARK: Notifications 
@@ -90,10 +89,14 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     }
     
     func updateTableView() {
-        dataProvider.updateWithItems(accountListManager.itemsInList)
-        if accountListManager.itemsInList.count == 0 {
+        let items = accountListManager.itemsInList()
+        
+        if items.count == 0 {
             tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString
+        } else {
+            dataProvider.updateWithItems(items)
         }
+        
         tableView.reloadData()
     }
 
@@ -116,17 +119,6 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     func showDetailViewControllerForMovie(movie: Movie) {
         let detailViewController = DetailViewController(movie: movie)
         navigationController?.pushViewController(detailViewController, animated: true)
-    }
-    
-    // MARK: Utils
-    
-    private func setManager(list: TMDbAccountList) {
-        switch list {
-        case .Favorite:
-            accountListManager = TMDbFavoritesListDataManager.shared
-        case .Watchlist:
-            accountListManager = TMDbWatchListDataManager.shared
-        }
     }
     
 }

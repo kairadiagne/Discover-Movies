@@ -142,7 +142,7 @@ extension MenuViewController: TMDbUserServiceDelegate {
         menuTableview.updateMenu(signedIn, user: user)
     }
     
-    func user(service: TMDbUserService, didFailWithError error: TMDbAPIError) {
+    func user(service: TMDbUserService, didFailWithError error: APIError) {
         // What to do with this error
     }
 }

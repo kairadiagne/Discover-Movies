@@ -16,7 +16,7 @@ public class TMDbTopListDataManager: PagingDataManager<Movie> {
     
     // MARK: - Initialize
     
-    init(list: TMDbListType) {
+    public init(list: TMDbTopList) {
         self.list = list
         super.init(identifier: list.name, sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 3600)
     }

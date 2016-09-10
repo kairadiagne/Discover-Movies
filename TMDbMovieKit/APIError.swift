@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TMDbAPIError: ErrorType {
+public enum APIError: ErrorType {
     case Generic
     case NoInternetConnection
     case NotAuthorized

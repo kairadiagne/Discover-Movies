@@ -29,7 +29,7 @@ import Alamofire
 
 public protocol TMDbSignInDelegate: class {
     func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: NSURL)
-    func signIn(service: TMDbSignInService, didFailWithError error: TMDbAPIError)
+    func signIn(service: TMDbSignInService, didFailWithError error: APIError)
     func signInServiceDidSignIn(service: TMDbSignInService)
 }
 

@@ -133,7 +133,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
         detailView.configureWithState(inFavorites, inWatchList: inWatchList)
     }
     
-    func movieInfoManagerDidReceiverError(error: TMDbAPIError) {
+    func movieInfoManagerDidReceiverError(error: APIError) {
        handleError(error)
     }
     

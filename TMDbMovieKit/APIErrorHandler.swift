@@ -9,12 +9,12 @@
 import Foundation
 
 protocol ErrorHandling {
-    func categorize(error error: NSError) -> TMDbAPIError
+    func categorize(error error: NSError) -> APIError
 }
 
 class APIErrorHandler: ErrorHandling {
     
-    func categorize(error error: NSError) -> TMDbAPIError {
+    func categorize(error error: NSError) -> APIError {
         guard let error = error as? NSURLError else { return .Generic }
         
         switch error {

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 public protocol DataManagerFailureDelegate: class {
-    func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError)
+    func listDataManager(manager: AnyObject, didFailWithError error: APIError)
 }
 
 public class DataManager<ModelType: DictionaryRepresentable> {
@@ -56,7 +56,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Public API
     
-    public func reloadIfNeeded(forceOnline: Bool, paramaters params: [String: AnyObject]? = nil) {
+    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
         guard cachedData.needsRefresh || forceOnline || params != nil else {
             
             if firstLoad {
@@ -147,7 +147,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Notifications
     
-    public func addObserver(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector, didUpdateSelector: Selector) {
+    public func addObserver(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
         notificationCenter.addObserver(observer, selector: loadingSelector, name: DataManagerNotification.DidStartLoading, object: self)
         notificationCenter.addObserver(observer, selector: didLoadSelector, name: DataManagerNotification.DidLoad, object: self)
     }

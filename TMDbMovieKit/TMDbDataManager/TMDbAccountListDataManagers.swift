@@ -16,7 +16,7 @@ public class TMDbAccountListDataManager: PagingDataManager<Movie> {
     
     // MARK: - Initialize
     
-    private init(list: TMDbAccountList, cacheIdentifier: String) {
+    public init(list: TMDbAccountList) {
         self.list = list
         super.init(identifier: list.name, sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 300)
     }

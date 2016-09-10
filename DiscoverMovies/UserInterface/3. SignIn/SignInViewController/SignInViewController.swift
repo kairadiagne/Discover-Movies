@@ -76,7 +76,7 @@ extension SignInViewController: TMDbSignInDelegate {
         hideProgressHUD()
         requestAuthorization(url)    }
     
-    func signIn(service: TMDbSignInService, didFailWithError error: TMDbAPIError) {
+    func signIn(service: TMDbSignInService, didFailWithError error: APIError) {
         hideProgressHUD()
         self.handleError(error)
     }

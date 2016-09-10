@@ -16,7 +16,7 @@ public class TMDbReviewManager: PagingDataManager<Review> {
     
     // MARK: - Initialize
     
-    private init(movieID: Int) {
+    public init(movieID: Int) {
         self.movieID = movieID
         super.init(identifier: "", sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 300)
     }

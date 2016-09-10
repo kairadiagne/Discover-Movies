@@ -18,7 +18,11 @@ class TopListViewController: DiscoverListViewController {
     
     private var currentList: TMDbTopList = .Popular
     
-    private var currentManager: TMDbTopListDataManager?
+    private let popularListManager = TMDbTopListDataManager(list: .Popular)
+    
+    private let topRatedListManager = TMDbTopListDataManager(list: .TopRated)
+    
+    private let upcomingListManager = TMDbTopListDataManager(list: .Upcoming)
     
     // MARK: View Controller Life Cycle
 
@@ -31,9 +35,9 @@ class TopListViewController: DiscoverListViewController {
         switchListControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = switchListControl
         
-        TMDbPopularListManager.shared.failureDelegate = self
-        TMDbTopRatedListManager.shared.failureDelegate = self
-        TMDbUpcomingListManager.shared.failureDelegate = self
+        popularListManager.failureDelegate = self
+        topRatedListManager.failureDelegate = self
+        upcomingListManager.failureDelegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -41,20 +45,19 @@ class TopListViewController: DiscoverListViewController {
      
         let loadingSelector = #selector(TopListViewController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(TopListViewController.dataDidLoadTopNotification(_:))
-        let didUpdateSelector = #selector(TopListViewController.dataDidUpdateNotification(_:))
-        TMDbPopularListManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
-        TMDbTopRatedListManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
-        TMDbUpcomingListManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelector)
-
-        switchTopList(switchListControl)
+        popularListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        topRatedListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        upcomingListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        TMDbPopularListManager.shared.removeObserver(self)
-        TMDbTopRatedListManager.shared.removeObserver(self)
-        TMDbUpcomingListManager.shared.removeObserver(self)
+        popularListManager.removeObserver(self)
+        topRatedListManager.removeObserver(self)
+        upcomingListManager.removeObserver(self)
+        
+        loadData(currentList, force: false)
     }
     
     // MARK: Fetching
@@ -63,19 +66,34 @@ class TopListViewController: DiscoverListViewController {
         switch switchListControl.selectedSegmentIndex {
         case 0:
             currentList = .Popular
-            currentManager = TMDbPopularListManager.shared
         case 1:
             currentList = .TopRated
-            currentManager = TMDbTopRatedListManager.shared
         case 2:
             currentList = .Upcoming
-            currentManager = TMDbUpcomingListManager.shared
         default:
             return
         }
         
-        currentManager?.loadTopIfNeeded(true)
+        loadData(currentList, force: false)
     }
+    
+    func loadData(list: TMDbTopList, force: Bool) {
+        managerForList(list)?.reloadIfNeeded(force)
+    }
+    
+    func managerForList(list: TMDbTopList) -> TMDbTopListDataManager? {
+        switch list {
+        case .Popular:
+            return popularListManager
+        case .TopRated:
+            return topRatedListManager
+        case .Upcoming:
+            return upcomingListManager
+        default:
+            return nil
+        }
+    }
+    
     
     // MARK: Notifications
     
@@ -90,7 +108,7 @@ class TopListViewController: DiscoverListViewController {
     }
     
     private func updateTableView(scrollToTop: Bool = false) {
-        guard let items = currentManager?.itemsInList else { return }
+        guard let items = managerForList(currentList)?.itemsInList() else { return }
         tableViewDataProvider.updateWithItems(items)
         tableView.reloadData()
         
@@ -108,7 +126,7 @@ class TopListViewController: DiscoverListViewController {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if tableViewDataProvider.itemCount - 10 == indexPath.row {
-            currentManager?.loadMore()
+            managerForList(currentList)?.loadMore()
         }
     }
 

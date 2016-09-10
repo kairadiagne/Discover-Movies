@@ -12,7 +12,7 @@ import Alamofire
 public protocol TMDbMovieInfoManagerDelegate: class {
     func movieInfomManagerDidLoadInfoForMovieWithID(movieID: Int, info: MovieInfo)
     func movieInfoManagerDidLoadAccoutnStateForMovieWithID(movieID: Int, inFavorites: Bool, inWatchList: Bool)
-    func movieInfoManagerDidReceiverError(error: TMDbAPIError)
+    func movieInfoManagerDidReceiverError(error: APIError)
 }
 
 public class TMDbMovieInfoManager {
@@ -52,7 +52,7 @@ public class TMDbMovieInfoManager {
 
     public func toggleStatusOfMovieInList(list: TMDbAccountList, status: Bool) {
         guard let sessionID = TMDbSessionInfoStore().sessionID, userID = TMDbSessionInfoStore().user?.id else {
-            delegate?.movieInfoManagerDidReceiverError(TMDbAPIError.NotAuthorized)
+            delegate?.movieInfoManagerDidReceiverError(.NotAuthorized)
             return
         }
         
@@ -75,7 +75,7 @@ public class TMDbMovieInfoManager {
     
     public func loadAccountState() {
         guard let sessionID = TMDbSessionInfoStore().sessionID else {
-            delegate?.movieInfoManagerDidReceiverError(TMDbAPIError.NotAuthorized)
+            delegate?.movieInfoManagerDidReceiverError(.NotAuthorized)
             return
         }
         
@@ -101,7 +101,7 @@ public class TMDbMovieInfoManager {
     // MARK: - Handle Error
     
     func handleError(error: NSError) {
-        var newError: TMDbAPIError
+        var newError: APIError
         
         if error.code == NSURLErrorNotConnectedToInternet {
             newError = .NoInternetConnection

@@ -23,10 +23,13 @@ class ReviewViewController: ListViewController {
 
     private let reviewDataProvider = ReviewDataProvider()
     
+    private let reviewManager: TMDbReviewManager
+    
     // MARK: Initialize
     
     init(movie: Movie) {
         self.movie = movie
+        self.reviewManager = TMDbReviewManager(movieID: movie.id)
         super.init(nibName: "ListViewController", bundle: nil)
     }
     
@@ -47,8 +50,7 @@ class ReviewViewController: ListViewController {
         
         title = "Reviews" // NSLocalizedString
         
-        TMDbReviewManager.shared.failureDelegate = self
-        TMDbReviewManager.shared.movieID = movie.id
+        reviewManager.failureDelegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -56,14 +58,13 @@ class ReviewViewController: ListViewController {
         
         let loadingSelector = #selector(ReviewViewController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(ReviewViewController.dataDidLoadTopNotification(_:))
-        let didUpdateSelctor = #selector(ReviewViewController.dataDidUpdateNotification(_:))
-        TMDbReviewManager.shared.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector, didUpdateSelector: didUpdateSelctor)
+        reviewManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
 //
-        TMDbReviewManager.shared.loadTopIfNeeded(false)
+        reviewManager.reloadIfNeeded(false)
     }
     
     override func viewWillDisappear(animated: Bool) {
-        TMDbReviewManager.shared.removeObserver(self)
+        reviewManager.removeObserver(self)
     }
     
     // MARK: Notifications
@@ -80,7 +81,7 @@ class ReviewViewController: ListViewController {
     }
     
     private func updateTableView() {
-        reviewDataProvider.updateWithItems(TMDbReviewManager.shared.itemsInList)
+        reviewDataProvider.updateWithItems(reviewManager.itemsInList())
         tableView.reloadData()
     }
     
@@ -91,7 +92,7 @@ class ReviewViewController: ListViewController {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if reviewDataProvider.itemCount - 5 == indexPath.row {
-            TMDbReviewManager.shared.loadMore()
+            reviewManager.loadMore()
         }
     }
     

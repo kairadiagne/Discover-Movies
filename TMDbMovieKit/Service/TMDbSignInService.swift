@@ -33,7 +33,7 @@ public protocol TMDbSignInDelegate: class {
     func signInServiceDidSignIn(service: TMDbSignInService)
 }
 
-public class TMDbSignInService: ErrorHandling {
+public class TMDbSignInService {
     
     // MARK: - Properties
     
@@ -45,9 +45,12 @@ public class TMDbSignInService: ErrorHandling {
     
     private var token: RequestToken?
     
+    private let errorHandler: ErrorHandling
+    
     // MARK: Initialize
     
     public init() {
+        self.errorHandler = APIErrorHandler()
         self.sessionInfoProvider = TMDbSessionInfoStore()
     }
     
@@ -60,7 +63,7 @@ public class TMDbSignInService: ErrorHandling {
             .validate().responseObject { (response: Response<RequestToken, NSError>) in
                 
                 guard response.result.error == nil else {
-                    let error = self.categorizeError(response.result.error!)
+                    let error = self.errorHandler.categorize(error: response.result.error!)
                     self.delegate?.signIn(self, didFailWithError: error)
                     return
                 }
@@ -92,7 +95,7 @@ public class TMDbSignInService: ErrorHandling {
             .validate().responseJSON { response in
                 
                 guard response.result.error == nil else {
-                    let error = self.categorizeError(response.result.error!)
+                    let error = self.errorHandler.categorize(error: response.result.error!)
                     self.delegate?.signIn(self, didFailWithError: error)
                     return
                 }

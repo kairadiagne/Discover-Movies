@@ -1,5 +1,5 @@
 //
-//  TMDbListDataManager.swift
+//  DataManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 05-06-16.
@@ -13,7 +13,7 @@ public protocol DataManagerFailureDelegate: class {
     func listDataManager(manager: AnyObject, didFailWithError error: TMDbAPIError)
 }
 
-public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling {
+public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Properties
     
@@ -21,15 +21,17 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     
     let sessionInfoProvider: SessionInfoContaining
     
-    let cacheIdentifier: String
+    let errorHandler: ErrorHandling
     
-    var writesDataToDisk: Bool
+    let writesDataToDisk: Bool
+    
+    let identifier: String
+    
+    var cachedData: CachedData<ModelType>
     
     var paramaters = [String: AnyObject]()
     
-    var cache: TMDbCachedData<ModelType>
-    
-    private(set) var isLoading = false
+    var isLoading = false
     
     private var firstLoad = true
     
@@ -39,11 +41,12 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     
     // MARK: - Initialize
     
-    init(cacheIdentifier: String, sessionInfoProvider: SessionInfoContaining = TMDbSessionInfoStore(), writesDataToDisk: Bool = true, refreshTimeOut: NSTimeInterval = 300) {
-        self.cacheIdentifier = cacheIdentifier
+    init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool = true, refreshTimeOut: NSTimeInterval = 3000) {
+        self.identifier = identifier
+        self.errorHandler = errorHandler
         self.sessionInfoProvider = sessionInfoProvider
-        self.writesDataToDisk = writesDataToDisk
-        self.cache = TMDbCachedData<ModelType>(refreshTimeOut: refreshTimeOut)
+        self.writesDataToDisk = writesToDisk
+        self.cachedData = CachedData<ModelType>(refreshTimeOut: refreshTimeOut)
         
         if writesDataToDisk {
             self.startLoading()
@@ -53,13 +56,14 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     
     // MARK: - Public API
     
-    public func loadTopIfNeeded(forceOnline: Bool, paramaters params: [String: AnyObject]? = nil) {
-        guard cache.needsRefresh || forceOnline || params != nil else {
+    public func reloadIfNeeded(forceOnline: Bool, paramaters params: [String: AnyObject]? = nil) {
+        guard cachedData.needsRefresh || forceOnline || params != nil else {
+            
             if firstLoad {
-                // If the cache loaded at initialization is still valid post a loading notification 
-                firstLoad = false 
+                firstLoad = false
                 postDidLoadNotification()
             }
+            
             return
         }
     
@@ -69,7 +73,7 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
             paramaters = defaultParamaters()
         }
 
-        loadOnline(paramaters)
+        loadOnline(paramaters: paramaters)
     }
     
     // MARK: - Paramaters
@@ -94,10 +98,10 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
 
     // MARK: - API Calls
     
-    func loadOnline(paramaters: [String: AnyObject], page: Int = 1) {
+    func loadOnline(paramaters params: [String: AnyObject], page: Int = 1) {
         startLoading()
         
-        var params = paramaters
+        var params = params
         params["page"] = page
         
         let endpoint = self.endpoint()
@@ -108,32 +112,26 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
                 self.stopLoading()
                 
                 guard response.result.error == nil else {
-                    let error = self.categorizeError(response.result.error!)
+                    let error = self.errorHandler.categorize(error: response.result.error!)
                     self.failureDelegate?.listDataManager(self, didFailWithError: error)
                     return
                 }
                 
                 if let data = response.result.value {
                     self.handleData(data)
+                    
+                    if self.writesDataToDisk {
+                        self.writeDataToDisk()
+                    }
                 }
         }
     }
     
-    // MARK: - Response
-    
-    /**
-     Is reponsible for handling incoming data.
-     - Needs to send DataDidLoadNotification once the data is handled
-     - Needs to cache the data once the data is handled
-    */
+    // MARK: - ResponseHandling
 
     func handleData(data: ModelType) {
-        cache.addData(data)
-        self.postDidLoadNotification()
-        
-        if writesDataToDisk {
-            writeDataToDisk()
-        }
+        cachedData.add(data)
+        postDidLoadNotification()
     }
     
     // MARK: - Loading
@@ -150,21 +148,16 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     // MARK: - Notifications
     
     public func addObserver(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector, didUpdateSelector: Selector) {
-        notificationCenter.addObserver(observer, selector: loadingSelector, name: TMDbListDataManagerNotification.DataDidStartLoading.name, object: self)
-        notificationCenter.addObserver(observer, selector: didLoadSelector, name: TMDbListDataManagerNotification.DataDidLoadTop.name, object: self)
-        notificationCenter.addObserver(observer, selector: didUpdateSelector, name: TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
+        notificationCenter.addObserver(observer, selector: loadingSelector, name: DataManagerNotification.DidStartLoading, object: self)
+        notificationCenter.addObserver(observer, selector: didLoadSelector, name: DataManagerNotification.DidLoad, object: self)
     }
     
     public func addLoadingObserver(observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: TMDbListDataManagerNotification.DataDidStartLoading.name, object: self)
+        notificationCenter.addObserver(observer, selector: selector, name: DataManagerNotification.DidStartLoading, object: self)
     }
     
     public func addDataDidLoadTopObserver(observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: TMDbListDataManagerNotification.DataDidLoadTop.name, object: self)
-    }
-    
-    public func addDataDidUpdateObserver(observer: AnyObject, selector: Selector) { // Finally should be able to be removed
-        notificationCenter.addObserver(observer, selector: selector, name: TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
+        notificationCenter.addObserver(observer, selector: selector, name: DataManagerNotification.DidLoad, object: self)
     }
     
     public func removeObserver(observer: AnyObject) {
@@ -172,15 +165,11 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
     }
     
     func postLoadingNotification() {
-        notificationCenter.postNotificationName(TMDbListDataManagerNotification.DataDidStartLoading.name, object: self)
+        notificationCenter.postNotificationName(DataManagerNotification.DidStartLoading, object: self)
     }
     
     func postDidLoadNotification() {
-        notificationCenter.postNotificationName(TMDbListDataManagerNotification.DataDidLoadTop.name, object: self)
-    }
-    
-    func postDidUpdateNotification() {
-        notificationCenter.postNotificationName(TMDbListDataManagerNotification.DataDidUpdate.name, object: self)
+        notificationCenter.postNotificationName(DataManagerNotification.DidLoad, object: self)
     }
     
     // MARK: - Caching
@@ -189,18 +178,20 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
         // Submit write for asycnhronous execution and return immediately
         dispatch_async(cacheQueue) { [weak self] in
             guard let strongSelf = self else { return }
-            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.cacheIdentifier)
-            NSKeyedArchiver.archiveRootObject(strongSelf.cache, toFile: path)
+            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.identifier)
+            NSKeyedArchiver.archiveRootObject(strongSelf.cachedData, toFile: path)
         }
     }
     
     func loadDataFromDisk() {
+        self.startLoading()
+        
         // Wait until read completes
         dispatch_sync(cacheQueue) { [weak self] in
             guard let strongSelf = self else { return }
-            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.cacheIdentifier)
-            guard let cachedData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? TMDbCachedData<ModelType> else { return }
-            strongSelf.cache = cachedData
+            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.identifier)
+            guard let cachedData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? CachedData<ModelType> else { return }
+            strongSelf.cachedData = cachedData
             self?.stopLoading()
         }
     }
@@ -215,19 +206,13 @@ public class TMDbDataManager<ModelType: DictionaryRepresentable>: ErrorHandling 
 
 // MARK: - TMDbDataManagerNotification 
 
-public enum TMDbListDataManagerNotification {
-    case DataDidStartLoading
-    case DataDidLoadTop
-    case DataDidUpdate
-    
-    public var name: String {
-        switch self {
-        case DataDidStartLoading:
-            return "TMDbListDataManagerDidStartLoading"
-        case .DataDidLoadTop:
-            return "TMDbListDataManagerDidLoadTop"
-        case .DataDidUpdate:
-            return "TMDbListDataManagerDidUpdate"
-        }
-    }
+public struct DataManagerNotification {
+    static let DidStartLoading = "DataManagerDidStartLoadingNotification"
+    static let DidLoad = "DataManagerDidLoadNotification"
 }
+
+
+
+
+
+

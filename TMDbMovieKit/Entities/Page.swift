@@ -1,5 +1,5 @@
 //
-//  List.swift
+//  Page.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 09/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
+public struct Page<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
     
     // MARK: - Properties
     
@@ -30,7 +30,7 @@ public class List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
         self.items = []
     }
     
-    required public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String : AnyObject]) {
         self.page = dict["page"] as? Int ?? 0
         self.pageCount = dict["total_pages"] as? Int ?? 0
         self.resultCount = dict["total_results"] as? Int ?? 0

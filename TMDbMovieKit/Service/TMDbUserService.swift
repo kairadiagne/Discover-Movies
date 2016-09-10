@@ -14,7 +14,7 @@ public protocol TMDbUserServiceDelegate: class {
     func user(service: TMDbUserService, didFailWithError error: TMDbAPIError)
 }
 
-public class TMDbUserService: ErrorHandling {
+public class TMDbUserService {
     
     // MARK: - Properties
     
@@ -22,10 +22,13 @@ public class TMDbUserService: ErrorHandling {
     
     private let sessionInfoProvider: SessionInfoContaining
     
+    private let errorHandler: ErrorHandling
+    
     // MARK: - Initialize
     
     public init() {
         self.sessionInfoProvider = TMDbSessionInfoStore()
+        self.errorHandler = APIErrorHandler()
     }
     
     // MARK: - API Calls
@@ -43,7 +46,7 @@ public class TMDbUserService: ErrorHandling {
             .validate().responseObject { (response: Response<User, NSError>) in
                 
                 guard response.result.error == nil else {
-                    let error = self.categorizeError(response.result.error!)
+                    let error = self.errorHandler.categorize(error: response.result.error!)
                     self.delegate?.user(self, didFailWithError: error)
                     return
                 }

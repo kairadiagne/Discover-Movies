@@ -1,5 +1,5 @@
 //
-//  TMDbCachedData.swift
+//  CachedData.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 21-07-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TMDbCachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
+class CachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     
     // MARK: - Properties
     
@@ -19,7 +19,11 @@ class TMDbCachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
         return NSDate().timeIntervalSinceDate(lastUpdate) > refreshTimeOut
     }
     
-    private let refreshTimeOut: NSTimeInterval
+    var dateLastUpdated: NSDate? {
+        return lastUpdate
+    }
+    
+    let refreshTimeOut: NSTimeInterval
     
     private var lastUpdate: NSDate?
     
@@ -32,7 +36,7 @@ class TMDbCachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     
     // MARK: - Utils
     
-    func addData(data: ModelType) {
+    func add(data: ModelType) {
         self.data = data
         self.lastUpdate = NSDate()
     }

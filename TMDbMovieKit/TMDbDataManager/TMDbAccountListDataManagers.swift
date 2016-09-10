@@ -8,26 +8,23 @@
 
 import Foundation
 
-// MARK: TMDbAccountListDataManager
-
-public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
+public class TMDbAccountListDataManager: PagingDataManager<Movie> {
     
-    // MARK: - Properties
+    // MARK: - Properties 
     
-    var userID: Int? {
-       return TMDbSessionInfoStore().user?.id
-    }
+    let list: TMDbAccountList
     
     // MARK: - Initialize
     
-    private init(list: TMDbListType, cacheIdentifier: String) {
-        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: true, refreshTimeOut: 300)
+    private init(list: TMDbAccountList, cacheIdentifier: String) {
+        self.list = list
+        super.init(identifier: list.name, sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 300)
     }
 
     // MARK: - Endpoint
     
     override func endpoint() -> String {
-        guard let userID = userID else { return "" }
+        guard let userID = sessionInfoProvider.sessionID else { return "" }
         return "account/\(userID)/\(list.name)/movies"
     }
 
@@ -39,22 +36,5 @@ public class TMDbAccountListDataManager: TMDbListDataManager<Movie> {
     }
     
 }
-
-// MARK: - TMDbFavoritesListDataManager
-
-public class TMDbFavoritesListDataManager: TMDbAccountListDataManager {
-    
-    public static let shared = TMDbFavoritesListDataManager(list: TMDbAccountList.Favorite, cacheIdentifier: TMDbAccountList.Favorite.name)
-    
-}
-
-// MARK: - TMDbWatchListDataManager
-
-public class TMDbWatchListDataManager: TMDbAccountListDataManager {
-    
-    public static let shared = TMDbWatchListDataManager(list: TMDbAccountList.Watchlist, cacheIdentifier: TMDbAccountList.Watchlist.name)
-    
-}
-
 
 

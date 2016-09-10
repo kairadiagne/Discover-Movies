@@ -12,4 +12,5 @@ public enum TMDbAPIError: ErrorType {
     case Generic
     case NoInternetConnection
     case NotAuthorized
+    case TimedOut
 }

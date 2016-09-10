@@ -8,18 +8,17 @@
 
 import Foundation
 
-public class TMDbReviewManager: TMDbListDataManager<Review> {
+public class TMDbReviewManager: PagingDataManager<Review> {
     
     // MARK: - Properties
-    
-    static public let shared = TMDbReviewManager(list: TMDbOtherList.Reviews, cacheIdentifier: "Reviews")
 
-    public var movieID: Int = 0
+    let movieID: Int
     
     // MARK: - Initialize
     
-    private init(list: TMDbListType, cacheIdentifier: String) {
-        super.init(list: list, cacheIdentifier: cacheIdentifier, writesDataToDisk: false, refreshTimeOut: 300)
+    private init(movieID: Int) {
+        self.movieID = movieID
+        super.init(identifier: "", sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 300)
     }
     
     // MARK: - Endpoint

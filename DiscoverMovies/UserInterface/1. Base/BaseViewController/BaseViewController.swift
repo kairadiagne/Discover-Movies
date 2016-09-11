@@ -8,7 +8,6 @@
 
 import UIKit
 import TMDbMovieKit
-import BRYXBanner
 import MBProgressHUD
 
 class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresentable, DataManagerFailureDelegate {
@@ -20,8 +19,6 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     }
     
     // MARK: Properties
-    
-    var banner: Banner?
     
     var progressHUD: MBProgressHUD?
     
@@ -79,7 +76,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     func presentBannerOnInternetError() {
         let title = NSLocalizedString("noConnectionTitle", comment: "Title of no internet connection banner")
         let message = NSLocalizedString("noConnectionMessage", comment: "Message of no internet connection bannner")
-        showBanner(title, message: message, color: UIColor.flatOrangeColor())
+        //        showBanner(title, message: message, color: UIColor.flatOrangeColor())
     }
     
     func presentAlertOnAuthorizationError() {

@@ -8,7 +8,6 @@
 
 import UIKit
 import TMDbMovieKit
-import BRYXBanner
 import MBProgressHUD
 
 

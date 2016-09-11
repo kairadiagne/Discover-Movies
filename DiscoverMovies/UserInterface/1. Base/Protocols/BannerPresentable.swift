@@ -6,14 +6,13 @@
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
-import Foundation
-import BRYXBanner
+import UIKit
 
 // MARK: - Protocol BannerPresentable
 
 protocol BannerPresentable: class {
-    var banner: Banner? { get set }
-    func showBanner(title: String, message: String, color: UIColor)
+    //    var banner: Banner? { get set }
+    //    func showBanner(title: String, message: String, color: UIColor)
 }
 
 // MARK: - Default Implementation BannerPresentable 
@@ -25,16 +24,16 @@ extension BannerPresentable where Self: UIViewController {
     // and it needs to be dismissed before another banner gets displayed.
     
     func showBanner(title: String, message: String, color: UIColor) {
-        // Hide previous banner if there is one
-        banner?.dismiss()
-        
-        // Create and show new banner
-        banner = Banner()
-        banner?.titleLabel.text = title
-        banner?.detailLabel.text = message
-        banner?.backgroundColor = color
-        banner?.dismissesOnSwipe
-        
-        banner?.show()
+    //        // Hide previous banner if there is one
+    //        banner?.dismiss()
+    //        
+    //        // Create and show new banner
+    //        banner = Banner()
+    //        banner?.titleLabel.text = title
+    //        banner?.detailLabel.text = message
+    //        banner?.backgroundColor = color
+    //        banner?.dismissesOnSwipe
+    //        
+    //        banner?.show()
     }
 }

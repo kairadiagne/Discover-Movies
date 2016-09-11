@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Locksmith
 
 public enum TMDBSigInStatus {
     case Signedin

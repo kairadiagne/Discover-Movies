@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Locksmith
+//import Locksmith
 
 protocol SessionInfoContaining {
     var sessionID: String? { get }
@@ -33,7 +33,8 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     // MARK: - Properties
     
     var sessionID: String? {
-        return Locksmith.loadDataForUserAccount(Keys.UserAccount)?[Keys.SessionID] as? String
+        //        return Locksmith.loadDataForUserAccount(Keys.UserAccount)?[Keys.SessionID] as? String
+        return ""
     }
     
     var user: User? {
@@ -49,7 +50,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     
     func saveSessionID(sessionID: String) {
         do {
-            try Locksmith.saveData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
+            //            try Locksmith.saveData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
             print("Error saving sessionID from keychain")
 
@@ -69,7 +70,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     
     func clearUserData() {
         do {
-            try Locksmith.deleteDataForUserAccount(Keys.UserAccount)
+            //            try Locksmith.deleteDataForUserAccount(Keys.UserAccount)
         } catch {
             print("Error deleteing user data from store")
         }

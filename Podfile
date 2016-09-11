@@ -4,14 +4,14 @@ use_frameworks!
 
 abstract_target 'Networking' do
     pod 'Alamofire'
-    pod 'Locksmith'
+    # Does not yet support Swift 3.0
+    # pod 'Locksmith'
     
     target 'DiscoverMovies' do
         pod 'SDWebImage'
         pod 'ChameleonFramework'
         pod 'youtube-ios-player-helper'
         pod 'SWRevealViewController'
-        pod 'BRYXBanner'
         pod 'MBProgressHUD'
     end
     

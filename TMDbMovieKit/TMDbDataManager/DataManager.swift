@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 public protocol DataManagerFailureDelegate: class {
-    func listDataManager(_ manager: AnyObject, didFailWithError error: APIError)
+    func dataManager(_ manager: AnyObject, didFailWithError error: APIError)
 }
 
 public class DataManager<ModelType: DictionaryRepresentable> {
@@ -35,13 +35,13 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     fileprivate var firstLoad = true
     
-    fileprivate let cacheQueue = DispatchQueue(label: "com.discoverMovies.app.cache", attributes: [])
+    fileprivate let cacheQueue = DispatchQueue(label: "com.discoverMovies.app.cache") // Check if this is Serial by default
     
     fileprivate let notificationCenter = NotificationCenter.default
     
     // MARK: - Initialize
     
-    init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool = true, refreshTimeOut: TimeInterval = 3000) {
+    init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool = true, refreshTimeOut: TimeInterval) {
         self.identifier = identifier
         self.errorHandler = errorHandler
         self.sessionInfoProvider = sessionInfoProvider
@@ -52,6 +52,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
             self.startLoading()
             self.loadDataFromDisk()
         }
+        reloadIfNeeded(<#T##forceOnline: Bool##Bool#>, paramaters: <#T##[String : AnyObject]?#>)
     }
     
     // MARK: - Public API
@@ -113,7 +114,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
                 
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.failureDelegate?.listDataManager(self, didFailWithError: error)
+                    self.failureDelegate?.dataManager(self, didFailWithError: error)
                     return
                 }
                 
@@ -129,7 +130,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - ResponseHandling
 
-    func handleData(_ data: ModelType) {
+    func handle(data: ModelType) {
         cachedData.add(data)
         postDidLoadNotification()
     }
@@ -147,29 +148,29 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Notifications
     
-    public func addObserver(_ observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
-        notificationCenter.addObserver(observer, selector: loadingSelector, name: NSNotification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
-        notificationCenter.addObserver(observer, selector: didLoadSelector, name: NSNotification.Name(rawValue: DataManagerNotification.DidLoad), object: self)
+    public func add(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
+        add(loadingObserver: observer, selector: loadingSelector)
+        add(didLoadObserver: observer, selector: didLoadSelector)
     }
     
-    public func addLoadingObserver(_ observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
+    public func add(loadingObserver observer: AnyObject, selector: Selector) {
+        notificationCenter.addObserver(observer, selector: selector, name: .dataManagerDidStartLoading, object: self)
     }
     
-    open func addDataDidLoadTopObserver(_ observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: DataManagerNotification.DidLoad), object: self)
+    public func add(didLoadObserver observer: AnyObject, selector: Selector) {
+        notificationCenter.addObserver(observer, selector: selector, name: .dataManagerDidLoad, object: self)
     }
     
-    open func removeObserver(_ observer: AnyObject) {
+    public func remove(observer: AnyObject) {
         notificationCenter.removeObserver(observer)
     }
     
     func postLoadingNotification() {
-        notificationCenter.post(name: Notification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
+        notificationCenter.post(name: .dataManagerDidStartLoading, object: self)
     }
     
     func postDidLoadNotification() {
-        notificationCenter.post(name: Notification.Name(rawValue: DataManagerNotification.DidLoad), object: self)
+        notificationCenter.post(name: .dataManagerDidLoad, object: self)
     }
     
     // MARK: - Caching
@@ -206,13 +207,12 @@ public class DataManager<ModelType: DictionaryRepresentable> {
 
 // MARK: - TMDbDataManagerNotification 
 
-public struct DataManagerNotification {
-    static let DidStartLoading = "DataManagerDidStartLoadingNotification"
-    static let DidLoad = "DataManagerDidLoadNotification"
+extension Notification.Name {
+    
+    static let dataManagerDidLoad = Notification.Name("DataManagerDidLoadNotification")
+    static let dataManagerDidStartLoading = Notification.Name("DataManagerDidStartLoadingNotification")
+    
 }
-
-
-
 
 
 

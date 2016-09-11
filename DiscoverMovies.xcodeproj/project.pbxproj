@@ -51,6 +51,8 @@
 		11DECAA91D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */; };
 		11DECAAB1D04CEC200FFEAB4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */; };
 		11F779D51D326C540008B5D0 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F779D41D326C540008B5D0 /* BackgroundView.swift */; };
+		26335D1F5C80BB4756F0D64C /* Pods_Networking_DiscoverMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12419D287B65C09B4B83DFB1 /* Pods_Networking_DiscoverMovies.framework */; };
+		76FB819F173EB5DF2E3EACEA /* Pods_Networking_TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFAFACC735EBC8B9C981DEC /* Pods_Networking_TMDbMovieKit.framework */; };
 		EA288F1B1CF4401E004FAEEF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1A1CF4401E004FAEEF /* Movie.swift */; };
 		EA288F1F1CF4EE8C004FAEEF /* AccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1E1CF4EE8C004FAEEF /* AccountState.swift */; };
 		EA288F211CF4EE99004FAEEF /* MovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F201CF4EE99004FAEEF /* MovieInfo.swift */; };
@@ -210,7 +212,12 @@
 		11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+DefaultIdentifier.swift"; sourceTree = "<group>"; };
 		11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		11F779D41D326C540008B5D0 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		12419D287B65C09B4B83DFB1 /* Pods_Networking_DiscoverMovies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking_DiscoverMovies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3577EF4B02D7FBFAC03A4ADB /* Pods-Networking-DiscoverMovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-DiscoverMovies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-DiscoverMovies/Pods-Networking-DiscoverMovies.debug.xcconfig"; sourceTree = "<group>"; };
+		9EFAFACC735EBC8B9C981DEC /* Pods_Networking_TMDbMovieKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking_TMDbMovieKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B61AB3FE69720A091DEF23E8 /* Pods-Networking-TMDbMovieKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-TMDbMovieKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-TMDbMovieKit/Pods-Networking-TMDbMovieKit.release.xcconfig"; sourceTree = "<group>"; };
+		C0E9C98076F0BFB6C3152C71 /* Pods-Networking-TMDbMovieKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-TMDbMovieKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-TMDbMovieKit/Pods-Networking-TMDbMovieKit.debug.xcconfig"; sourceTree = "<group>"; };
 		EA288F1A1CF4401E004FAEEF /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		EA288F1E1CF4EE8C004FAEEF /* AccountState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountState.swift; sourceTree = "<group>"; };
 		EA288F201CF4EE99004FAEEF /* MovieInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieInfo.swift; sourceTree = "<group>"; };
@@ -270,6 +277,7 @@
 		EADA5AA71CEA6B3700C2FAE8 /* FontStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontStack.swift; sourceTree = "<group>"; };
 		EADA5AA91CEA6B6A00C2FAE8 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EAE605C71CEA72C500D904EB /* TMDbSessionInfoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSessionInfoStore.swift; sourceTree = "<group>"; };
+		F89DEAF99B4F460E0BB24DD1 /* Pods-Networking-DiscoverMovies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-DiscoverMovies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-DiscoverMovies/Pods-Networking-DiscoverMovies.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26335D1F5C80BB4756F0D64C /* Pods_Networking_DiscoverMovies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +300,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76FB819F173EB5DF2E3EACEA /* Pods_Networking_TMDbMovieKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +324,7 @@
 				111942731CCB8CBF001CF39B /* TMDbMovieKitTests */,
 				1119423D1CCB8CA0001CF39B /* Products */,
 				2693F16C0142D84C17AC1C7B /* Frameworks */,
+				675A8A167F795523F3514FD8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -513,8 +524,21 @@
 			isa = PBXGroup;
 			children = (
 				25EF27C2B6BF80FF7BEB7179 /* Pods.framework */,
+				12419D287B65C09B4B83DFB1 /* Pods_Networking_DiscoverMovies.framework */,
+				9EFAFACC735EBC8B9C981DEC /* Pods_Networking_TMDbMovieKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		675A8A167F795523F3514FD8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3577EF4B02D7FBFAC03A4ADB /* Pods-Networking-DiscoverMovies.debug.xcconfig */,
+				F89DEAF99B4F460E0BB24DD1 /* Pods-Networking-DiscoverMovies.release.xcconfig */,
+				C0E9C98076F0BFB6C3152C71 /* Pods-Networking-TMDbMovieKit.debug.xcconfig */,
+				B61AB3FE69720A091DEF23E8 /* Pods-Networking-TMDbMovieKit.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		EA08B7F31CF7588800EC804B /* DataManager */ = {
@@ -908,10 +932,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMovies" */;
 			buildPhases = (
+				E70F973D79FBEC13017D9812 /* [CP] Check Pods Manifest.lock */,
 				111942381CCB8CA0001CF39B /* Sources */,
 				1119427E1CCB8CBF001CF39B /* Embed Frameworks */,
 				111942391CCB8CA0001CF39B /* Frameworks */,
 				1119423A1CCB8CA0001CF39B /* Resources */,
+				4BFEC1AC927BE252A14DB681 /* [CP] Embed Pods Frameworks */,
+				6AACED42336CAD0CBC7A2B72 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -945,10 +972,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1119427B1CCB8CBF001CF39B /* Build configuration list for PBXNativeTarget "TMDbMovieKit" */;
 			buildPhases = (
+				BC0603965A051258B49491DB /* [CP] Check Pods Manifest.lock */,
 				1119425F1CCB8CBE001CF39B /* Sources */,
 				111942601CCB8CBE001CF39B /* Frameworks */,
 				111942611CCB8CBE001CF39B /* Headers */,
 				111942621CCB8CBE001CF39B /* Resources */,
+				7672539B6D4053F1E2C7CCBF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1076,6 +1105,84 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4BFEC1AC927BE252A14DB681 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Networking-DiscoverMovies/Pods-Networking-DiscoverMovies-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6AACED42336CAD0CBC7A2B72 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Networking-DiscoverMovies/Pods-Networking-DiscoverMovies-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7672539B6D4053F1E2C7CCBF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Networking-TMDbMovieKit/Pods-Networking-TMDbMovieKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC0603965A051258B49491DB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E70F973D79FBEC13017D9812 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		111942381CCB8CA0001CF39B /* Sources */ = {
@@ -1317,6 +1424,7 @@
 		};
 		1119425A1CCB8CA0001CF39B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3577EF4B02D7FBFAC03A4ADB /* Pods-Networking-DiscoverMovies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1336,6 +1444,7 @@
 		};
 		1119425B1CCB8CA0001CF39B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F89DEAF99B4F460E0BB24DD1 /* Pods-Networking-DiscoverMovies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1380,6 +1489,7 @@
 		};
 		1119427C1CCB8CBF001CF39B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0E9C98076F0BFB6C3152C71 /* Pods-Networking-TMDbMovieKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1406,6 +1516,7 @@
 		};
 		1119427D1CCB8CBF001CF39B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B61AB3FE69720A091DEF23E8 /* Pods-Networking-TMDbMovieKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

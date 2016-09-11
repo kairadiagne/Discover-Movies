@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: Protocol BackgroundMessagePresentable
 
-protocol BackgroundMessagePresentable: class {
+protocol BackgroundMessagePresentable: class { //Just create a background view which has a loading indicator than we can also get rid of MDprogressHUD
     var messageLabel: UILabel? { get set }
     func setUpMessageLabel()
     func showMessage(_ message: String)

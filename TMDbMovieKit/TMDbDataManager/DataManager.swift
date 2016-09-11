@@ -51,8 +51,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     // MARK: - Public API
     
     public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
-        guard cachedData.needsRefresh || forceOnline || params != nil else { return }
-    
+        guard cachedData.needsRefresh || forceOnline || params != nil else { return } // On First load send loadingnotification when data is still valid
         if let params = params {
            paramaters = defaultParamaters().merge(params)
         } else {

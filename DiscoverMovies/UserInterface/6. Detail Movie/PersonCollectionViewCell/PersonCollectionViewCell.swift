@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class PersonCollectionViewCell: UICollectionViewCell {
+class PersonCollectionViewCell: UICollectionViewCell { // Could be on cell with generic view model and protocol 
     
     // MARK: Properties
 
@@ -28,9 +28,8 @@ class PersonCollectionViewCell: UICollectionViewCell {
     
     func configureWithCastMember(_ member: CastMember) {
         nameLabel.text = member.name
-        let profilePath = member.profilePath ?? ""
-        // let url = TMDbImageRouter.posterMedium(path: profilePath).url ?? URL()
-        // profileImageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+        guard let profilePath = member.profilePath, let url = TMDbImageRouter.posterMedium(path: profilePath).url else { return } // Error in loading double images
+        profileImageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
     }
     
 }

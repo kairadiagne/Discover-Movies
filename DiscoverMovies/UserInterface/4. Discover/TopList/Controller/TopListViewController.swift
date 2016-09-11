@@ -48,6 +48,9 @@ class TopListViewController: DiscoverListViewController {
         popularListManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
         topRatedListManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
         upcomingListManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        
+        updateTableView()
+        loadData(currentList, force: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,8 +59,6 @@ class TopListViewController: DiscoverListViewController {
         popularListManager.remove(observer: self)
         topRatedListManager.remove(observer: self)
         upcomingListManager.remove(observer: self)
-        
-        loadData(currentList, force: true)
     }
     
     // MARK: Fetching
@@ -99,7 +100,7 @@ class TopListViewController: DiscoverListViewController {
     
     override func dataDidLoadTopNotification(_ notification: Notification) {
         super.dataDidLoadTopNotification(notification)
-        updateTableView(true)
+        updateTableView()
     }
     
     fileprivate func updateTableView(_ scrollToTop: Bool = false) {
@@ -108,7 +109,7 @@ class TopListViewController: DiscoverListViewController {
         tableView.reloadData()
         
         if scrollToTop {
-            tableView.scrollToTop()
+            tableView.scrollToTop() // Now data never scrolls to top 
         }
     }
     

@@ -25,7 +25,7 @@ class MenuViewController: UITableViewController {
     fileprivate let userService = TMDbUserService()
 
     fileprivate var signedIn: Bool {
-        return (TMDbSessionManager.shared.signInStatus == .signedin) ?? false
+        return TMDbSessionManager.shared.signInStatus == .signedin
     }
     
     fileprivate var presentedRow = 1

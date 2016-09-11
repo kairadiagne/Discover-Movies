@@ -22,12 +22,12 @@ extension DataRequest {
             
             // Create model objects
             guard case let .success(jsonObject) = result else {
-                let error = NSError() //Error
+                let error = NSError() //Custom Error
                 return .failure(error)
             }
             
             guard let responseDict = jsonObject as? [String: AnyObject], let responseObject = T(dictionary: responseDict) else {
-                let error = NSError() // Error
+                let error = NSError() //Custom Error
                 return .failure(error)
             }
             

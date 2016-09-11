@@ -130,7 +130,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     }
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
-        handleError(error)
+        // handleError(error)
     }
     
     

@@ -29,11 +29,11 @@ extension ProgressHUDPresentable where Self: UIViewController {
     }
     
     func showProgressHUD() {
-        progressHUD?.show(true)
+        progressHUD?.show(animated: true)
     }
     
     func hideProgressHUD() {
-        progressHUD?.hide(true)
+        progressHUD?.hide(animated: true)
     }
     
 }

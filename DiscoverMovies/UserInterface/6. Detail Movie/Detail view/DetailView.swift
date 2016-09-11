@@ -112,10 +112,10 @@ class DetailView: BackgroundView {
         
         if let image = image {
             header.image = image
-        } else {
-           // let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url ?? URL()
-           //  header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
+        } else if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
+            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
         }
+
     }
     
     func configureWithState(_ inFavorites: Bool, inWatchList: Bool) {

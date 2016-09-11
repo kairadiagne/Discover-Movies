@@ -24,7 +24,7 @@ class ListViewController: BaseViewController, UITableViewDelegate {
         tableView.delegate = self
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if shouldShowSignInViewController {

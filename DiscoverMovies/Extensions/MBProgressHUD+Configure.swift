@@ -11,7 +11,7 @@ import MBProgressHUD
 
 extension MBProgressHUD {
     
-    static func hudWithSize(size: CGSize, forFrame frame: CGRect) -> MBProgressHUD {
+    static func hudWithSize(_ size: CGSize, forFrame frame: CGRect) -> MBProgressHUD {
         let point = CGPoint(x: (frame.width / 2) - (size.width / 2), y: (frame.height / 2) - (size.height / 2))
         let hud = MBProgressHUD(frame: CGRect(origin: point, size: size))
         return hud

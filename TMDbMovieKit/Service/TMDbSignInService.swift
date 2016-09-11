@@ -28,24 +28,24 @@ import Alamofire
  */
 
 public protocol TMDbSignInDelegate: class {
-    func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: NSURL)
-    func signIn(service: TMDbSignInService, didFailWithError error: APIError)
-    func signInServiceDidSignIn(service: TMDbSignInService)
+    func signIn(_ service: TMDbSignInService, didReceiveAuthorizationURL url: URL)
+    func signIn(_ service: TMDbSignInService, didFailWithError error: APIError)
+    func signInServiceDidSignIn(_ service: TMDbSignInService)
 }
 
-public class TMDbSignInService {
+open class TMDbSignInService {
     
     // MARK: - Properties
     
-    public weak var delegate: TMDbSignInDelegate?
+    open weak var delegate: TMDbSignInDelegate?
     
-    private var isLoading = false
+    fileprivate var isLoading = false
     
-    private let sessionInfoProvider: SessionInfoContaining
+    fileprivate let sessionInfoProvider: SessionInfoContaining
     
-    private var token: RequestToken?
+    fileprivate var token: RequestToken?
     
-    private let errorHandler: ErrorHandling
+    fileprivate let errorHandler: ErrorHandling
     
     // MARK: Initialize
     
@@ -56,7 +56,7 @@ public class TMDbSignInService {
     
     // MARK: - Sign In 
     
-    public func requestToken() {
+    open func requestToken() {
         let endPoint = "authentication/token/new"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endPoint, parameters: [:]))
@@ -82,13 +82,13 @@ public class TMDbSignInService {
         }
     }
     
-    public func requestSessionID() {
+    open func requestSessionID() {
         guard let token = token?.token else {
-            delegate?.signIn(self, didFailWithError: .Generic)
+            delegate?.signIn(self, didFailWithError: .generic)
             return
         }
         
-        let paramaters: [String: AnyObject] = ["request_token": token]
+        let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
         let endPoint = "authentication/session/new"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endPoint, parameters: paramaters))

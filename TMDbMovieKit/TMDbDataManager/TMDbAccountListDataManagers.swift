@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbAccountListDataManager: PagingDataManager<Movie> {
+open class TMDbAccountListDataManager: PagingDataManager<Movie> {
     
     // MARK: - Properties 
     
@@ -32,7 +32,7 @@ public class TMDbAccountListDataManager: PagingDataManager<Movie> {
     
     override func defaultParamaters() -> [String : AnyObject] {
         guard let sessionID = sessionInfoProvider.sessionID else { return [:] } 
-        return ["session_id": sessionID]
+        return ["session_id": sessionID as AnyObject]
     }
     
 }

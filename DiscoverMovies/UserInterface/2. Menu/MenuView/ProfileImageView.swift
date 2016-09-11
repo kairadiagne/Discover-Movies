@@ -28,14 +28,14 @@ class ProfileImageView: UIView {
     }
     
     func commonInit() {
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.layer.cornerRadius = self.frame.size.width / 2
 
-        self.imageView.contentMode = .ScaleAspectFill
+        self.imageView.contentMode = .scaleAspectFill
         self.imageView.frame = self.bounds
         self.imageView.layer.borderWidth = 2
-        self.imageView.layer.backgroundColor = UIColor.clearColor().CGColor
-        self.imageView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.imageView.layer.backgroundColor = UIColor.clear.cgColor
+        self.imageView.layer.borderColor = UIColor.white.cgColor
         self.imageView.layer.cornerRadius = imageView.frame.size.width / 2
         self.imageView.layer.masksToBounds = true
         

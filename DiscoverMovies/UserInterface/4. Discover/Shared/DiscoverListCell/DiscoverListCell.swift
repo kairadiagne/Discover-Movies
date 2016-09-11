@@ -28,7 +28,7 @@ class DiscoverListCell: UITableViewCell {
     
     // MARK: Configure
     
-    func configure(movie: Movie, imageURL: NSURL?) {
+    func configure(_ movie: Movie, imageURL: URL?) {
         titleLabel.text = movie.title
         
         if let releaseYear = movie.releaseDate.toDate()?.year() {
@@ -37,7 +37,7 @@ class DiscoverListCell: UITableViewCell {
             yearLabel.text = "Unknown"
         }
         
-        movieImageView.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
+        movieImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
     }
     
 }

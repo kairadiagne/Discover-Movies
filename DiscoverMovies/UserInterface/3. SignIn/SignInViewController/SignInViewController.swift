@@ -14,11 +14,11 @@ class SignInViewController: BaseViewController {
     
     // MARK: Properties
 
-    private var safariViewController: SFSafariViewController!
+    fileprivate var safariViewController: SFSafariViewController!
     
-    private let signInService = TMDbSignInService()
+    fileprivate let signInService = TMDbSignInService()
     
-    private let userService = TMDbUserService()
+    fileprivate let userService = TMDbUserService()
     
     // MARK: View Controller Life Cycle
 
@@ -27,17 +27,17 @@ class SignInViewController: BaseViewController {
         signInService.delegate = self
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: Actions
     
-    @IBAction func signIn(sender: UIButton) {
+    @IBAction func signIn(_ sender: UIButton) {
         activateSignInFlow()
     }
     
-    @IBAction func activatePublicMode(sender: UIButton) {
+    @IBAction func activatePublicMode(_ sender: UIButton) {
         TMDbSessionManager.shared.activatePublicMode()
         dismissSignInViewController()
     }
@@ -54,16 +54,16 @@ class SignInViewController: BaseViewController {
         signInService.requestSessionID()
     }
     
-    func requestAuthorization(url: NSURL) {
-        safariViewController = SFSafariViewController(URL: url)
+    func requestAuthorization(_ url: URL) {
+        safariViewController = SFSafariViewController(url: url)
         safariViewController.delegate = self
-        presentViewController(safariViewController, animated: true, completion: nil)
+        present(safariViewController, animated: true, completion: nil)
     }
     
     // MARK: Navigation
     
     func dismissSignInViewController() {
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
 }
@@ -72,16 +72,16 @@ class SignInViewController: BaseViewController {
 
 extension SignInViewController: TMDbSignInDelegate {
     
-    func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: NSURL) {
+    func signIn(_ service: TMDbSignInService, didReceiveAuthorizationURL url: URL) {
         hideProgressHUD()
         requestAuthorization(url)    }
     
-    func signIn(service: TMDbSignInService, didFailWithError error: APIError) {
+    func signIn(_ service: TMDbSignInService, didFailWithError error: APIError) {
         hideProgressHUD()
         self.handleError(error)
     }
     
-    func signInServiceDidSignIn(service: TMDbSignInService) {
+    func signInServiceDidSignIn(_ service: TMDbSignInService) {
         hideProgressHUD()
         userService.getUserInfo()
         dismissSignInViewController()
@@ -93,13 +93,13 @@ extension SignInViewController: TMDbSignInDelegate {
 
 extension SignInViewController: SFSafariViewControllerDelegate {
     
-    func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         if !didLoadSuccessfully {
-            controller.dismissViewControllerAnimated(true, completion: nil)
+            controller.dismiss(animated: true, completion: nil)
         }
     }
     
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         requestSessionID()
     }
 }

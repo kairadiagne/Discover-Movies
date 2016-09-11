@@ -11,11 +11,11 @@ import UIKit
 extension UICollectionViewCell {
     
     public class func defaultIdentfier() -> String {
-        return String(self)
+        return String(describing: self)
     }
     
     public class func nibName() -> String {
-        return String(self)
+        return String(describing: self)
     }
     
 }

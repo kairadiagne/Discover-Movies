@@ -44,15 +44,15 @@ class MenuTableView: UITableView {
     
     // MARK: Configure
     
-    func updateMenu(signedIn: Bool, user: User? = nil) {
+    func updateMenu(_ signedIn: Bool, user: User? = nil) {
         usernameLabel.text = user?.name ?? "Guest"
         signoutlabel.text = signedIn ? "Sign out" : "Sign in" 
-        watchListLabel.enabled = signedIn
-        watchlistCell.userInteractionEnabled = signedIn
-        favoritesLabel.enabled = signedIn
-        favoriteCell.userInteractionEnabled = signedIn
+        watchListLabel.isEnabled = signedIn
+        watchlistCell.isUserInteractionEnabled = signedIn
+        favoritesLabel.isEnabled = signedIn
+        favoriteCell.isUserInteractionEnabled = signedIn
         
-        if let path = user?.profileHash, url = TMDbImageRouter.ProfileSmall(path: path).url {
+        if let path = user?.profileHash, let url = TMDbImageRouter.ProfileSmall(path: path).url {
             profileImageView.imageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
         } else {
             profileImageView.imageView.image = nil

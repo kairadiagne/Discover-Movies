@@ -29,10 +29,10 @@ class Theme {
     
     class func styleNavBar() {
         UINavigationBar.appearance().barTintColor = UIColor.navbarColor()
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        UINavigationBar.appearance().translucent = false
-        UINavigationBar.appearance().opaque = false
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().isOpaque = false
     }
     
     class func styleViews() {
@@ -43,9 +43,9 @@ class Theme {
     
     class func styleTabBar() {
         UITabBar.appearance().barTintColor = UIColor.navbarColor()
-        UITabBar.appearance().opaque = false
-        UITabBar.appearance().translucent = false
-        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBar.appearance().isOpaque = false
+        UITabBar.appearance().isTranslucent = false
+        UITabBar.appearance().tintColor = UIColor.white
     }
     
     class func styleTableViews() {
@@ -59,13 +59,13 @@ class Theme {
     }
     
     class func styleTextFields() {
-        UITextField.appearance().backgroundColor = UIColor.flatGrayColor()
+        UITextField.appearance().backgroundColor = UIColor.flatGray()
         UITextField.appearance().font = UIFont.Body()
     }
     
     class func styleLabels() {
-        UILabel.appearance().textColor = UIColor.whiteColor()
-        UILabel.appearance().backgroundColor = UIColor.clearColor()
+        UILabel.appearance().textColor = UIColor.white
+        UILabel.appearance().backgroundColor = UIColor.clear
     }
     
 }

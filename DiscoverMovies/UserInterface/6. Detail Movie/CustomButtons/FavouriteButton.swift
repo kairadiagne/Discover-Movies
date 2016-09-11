@@ -12,7 +12,7 @@ class FavouriteButton: AnimatedShapeButton {
     
     // MARK: Properties
 
-    private let lineWidth: CGFloat = 1.0
+    fileprivate let lineWidth: CGFloat = 1.0
     
     // MARK: Generate Shape
     
@@ -22,10 +22,10 @@ class FavouriteButton: AnimatedShapeButton {
         shapeLayer = CAShapeLayer()
         
         shapeLayer.frame = bounds
-        shapeLayer.path = starPath.CGPath
+        shapeLayer.path = starPath.cgPath
         shapeLayer.lineWidth = lineWidth
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
-        shapeLayer.strokeColor = lineColor.CGColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = lineColor.cgColor
         shapeLayer.lineJoin = kCALineCapRound
         
         // Generate the fill layer which will animate the filling
@@ -34,13 +34,13 @@ class FavouriteButton: AnimatedShapeButton {
         
         // Generate the mask layer
         fillLayer.frame = bounds
-        fillLayer.path = fillPath.CGPath
-        fillLayer.fillColor = fillColor.CGColor
+        fillLayer.path = fillPath.cgPath
+        fillLayer.fillColor = fillColor.cgColor
         fillLayer.lineJoin = kCALineCapRound
         
         // Create masklayer
         maskLayer = CAShapeLayer()
-        maskLayer.path = generateStarPath(bounds.width, height: bounds.height).CGPath
+        maskLayer.path = generateStarPath(bounds.width, height: bounds.height).cgPath
         maskLayer.frame = self.bounds
         maskLayer.lineJoin = kCALineJoinRound
         
@@ -51,33 +51,33 @@ class FavouriteButton: AnimatedShapeButton {
     
     // Generates a path shaped like a star
     
-    private func generateStarPath(width: CGFloat, height: CGFloat) -> UIBezierPath {
+    fileprivate func generateStarPath(_ width: CGFloat, height: CGFloat) -> UIBezierPath {
         // Calulate start position
         let startX: CGFloat = width / 2
         let startY: CGFloat = 0
         
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: startX, y: startY))
-        path.addLineToPoint(CGPoint(x: width * 0.35, y: height * 0.4))
-        path.addLineToPoint(CGPoint(x: width * 0, y: path.currentPoint.y))
-        path.addLineToPoint(CGPoint(x: width * 0.3, y: height * 0.6))
-        path.addLineToPoint(CGPoint(x: width * 0.2, y: height))
-        path.addLineToPoint(CGPoint(x: width * 0.5, y: height * 0.75))
-        path.addLineToPoint(CGPoint(x: width * 0.8, y: height))
-        path.addLineToPoint(CGPoint(x: width * 0.7, y: height * 0.6))
-        path.addLineToPoint(CGPoint(x: width, y: height * 0.4))
-        path.addLineToPoint(CGPoint(x: width * 0.65, y: path.currentPoint.y))
-        path.closePath()
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.addLine(to: CGPoint(x: width * 0.35, y: height * 0.4))
+        path.addLine(to: CGPoint(x: width * 0, y: path.currentPoint.y))
+        path.addLine(to: CGPoint(x: width * 0.3, y: height * 0.6))
+        path.addLine(to: CGPoint(x: width * 0.2, y: height))
+        path.addLine(to: CGPoint(x: width * 0.5, y: height * 0.75))
+        path.addLine(to: CGPoint(x: width * 0.8, y: height))
+        path.addLine(to: CGPoint(x: width * 0.7, y: height * 0.6))
+        path.addLine(to: CGPoint(x: width, y: height * 0.4))
+        path.addLine(to: CGPoint(x: width * 0.65, y: path.currentPoint.y))
+        path.close()
         
         return path
     }
     
     // Generates the path that will be used for the filling animation
     
-    private func generateFillPath(wdith: CGFloat, height: CGFloat) -> UIBezierPath {
-        let centerPoint = CGPoint(x: CGRectGetMidX(bounds), y: CGRectGetMidY(bounds))
+    fileprivate func generateFillPath(_ wdith: CGFloat, height: CGFloat) -> UIBezierPath {
+        let centerPoint = CGPoint(x: bounds.midX, y: bounds.midY)
         let fillRect = CGRect(origin: centerPoint, size: CGSize(width: 0, height: 0)) // Before CGPoint.Zero
-        return UIBezierPath(ovalInRect: fillRect)
+        return UIBezierPath(ovalIn: fillRect)
     }
     
 }

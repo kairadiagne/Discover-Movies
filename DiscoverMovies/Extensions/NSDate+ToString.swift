@@ -8,13 +8,13 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
     
     func toString() -> String {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .LongStyle
-        formatter.timeStyle = .NoStyle
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
-        return formatter.stringFromDate(self)
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter.string(from: self)
     }
 }

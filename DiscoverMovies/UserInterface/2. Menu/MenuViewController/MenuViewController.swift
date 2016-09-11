@@ -15,20 +15,20 @@ class MenuViewController: UITableViewController {
     
     class func instantiatefromStoryboard() -> MenuViewController {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        return storyboard.instantiateViewControllerWithIdentifier(String(MenuViewController)) as! MenuViewController
+        return storyboard.instantiateViewController(withIdentifier: String(describing: MenuViewController)) as! MenuViewController
     }
     
     // MARK: Properties
 
     @IBOutlet weak var menuTableview: MenuTableView!
     
-    private let userService = TMDbUserService()
+    fileprivate let userService = TMDbUserService()
 
-    private var signedIn: Bool {
+    fileprivate var signedIn: Bool {
         return (TMDbSessionManager.shared.signInStatus == .Signedin) ?? false
     }
     
-    private var presentedRow = 1
+    fileprivate var presentedRow = 1
     
     // MARK: LifeCycle
     
@@ -37,7 +37,7 @@ class MenuViewController: UITableViewController {
         userService.delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if signedIn && (TMDbSessionManager.shared.user == nil) {
@@ -52,26 +52,26 @@ class MenuViewController: UITableViewController {
       
     }
    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: Navigation
     
     func showTopListViewController() {
-        let topListVieWController = TopListViewController(nibName: String(ListViewController), bundle: nil)
+        let topListVieWController = TopListViewController(nibName: String(describing: ListViewController), bundle: nil)
         let navigationController = UINavigationController(rootViewController: topListVieWController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showWatchListViewController() {
-        let watchListController = AccountListController(list: .Favorite)
+        let watchListController = AccountListController(coder: .Favorite)
         let navigationController = UINavigationController(rootViewController: watchListController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showFavoritesViewController() {
-        let favoritesController = AccountListController(list: .Watchlist)
+        let favoritesController = AccountListController(coder: .Watchlist)
         let navigationController = UINavigationController(rootViewController: favoritesController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
@@ -87,7 +87,7 @@ class MenuViewController: UITableViewController {
         showTopListViewController()
     }
     
-    private func toggleSignIn() {
+    fileprivate func toggleSignIn() {
         if signedIn {
             signOut()
         } else {
@@ -99,8 +99,8 @@ class MenuViewController: UITableViewController {
     
     // MARK: UITableViewDelegate
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        switch indexPath.row {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        switch (indexPath as NSIndexPath).row {
         case 0:
             return false
         default:
@@ -108,15 +108,15 @@ class MenuViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
    
         // If we are trying to push the same row we change the position of the front view controller
-        if indexPath.row == presentedRow && indexPath.row != 4 {
-            self.revealViewController()?.setFrontViewPosition(.LeftSide, animated: true)
+        if (indexPath as NSIndexPath).row == presentedRow && (indexPath as NSIndexPath).row != 4 {
+            self.revealViewController()?.setFrontViewPosition(.leftSide, animated: true)
             return
         }
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 1:
             showTopListViewController()
         case 2:
@@ -129,7 +129,7 @@ class MenuViewController: UITableViewController {
             break
         }
         
-        presentedRow = indexPath.row
+        presentedRow = (indexPath as NSIndexPath).row
     }
     
 }
@@ -138,11 +138,11 @@ class MenuViewController: UITableViewController {
 
 extension MenuViewController: TMDbUserServiceDelegate {
     
-    func user(service: TMDbUserService, didLoadUserInfo user: User) {
+    func user(_ service: TMDbUserService, didLoadUserInfo user: User) {
         menuTableview.updateMenu(signedIn, user: user)
     }
     
-    func user(service: TMDbUserService, didFailWithError error: APIError) {
+    func user(_ service: TMDbUserService, didFailWithError error: APIError) {
         // What to do with this error
     }
 }

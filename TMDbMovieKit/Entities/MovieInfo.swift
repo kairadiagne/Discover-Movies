@@ -12,9 +12,9 @@ public struct MovieInfo: DictionaryRepresentable {
     
     // MARK: - Properties
     
-    public private(set) var similar: Page<Movie>?
-    public private(set) var credits: MovieCredit?
-    public private(set) var trailers: [Video]?
+    public fileprivate(set) var similar: Page<Movie>?
+    public fileprivate(set) var credits: MovieCredit?
+    public fileprivate(set) var trailers: [Video]?
     
     // MARK: - Initialize
     

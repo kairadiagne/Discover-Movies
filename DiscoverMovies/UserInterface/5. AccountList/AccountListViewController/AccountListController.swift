@@ -14,17 +14,17 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     
     // MARK: Types
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let DefaultRowHeight: CGFloat = 100
     }
     
     // MARK: Properties
     
-    private let dataProvider = AccountListDataProvider()
+    fileprivate let dataProvider = AccountListDataProvider()
     
-    private let accountList: TMDbAccountList
+    fileprivate let accountList: TMDbAccountList
     
-    private let accountListManager: TMDbAccountListDataManager
+    fileprivate let accountListManager: TMDbAccountListDataManager
     
     // MARK: Initialize
     
@@ -47,7 +47,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         accountListManager.failureDelegate = self
         
         let nib = UINib(nibName: AccountListTableViewCell.nibName(), bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
+        tableView.register(nib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
         tableView.estimatedRowHeight = Constants.DefaultRowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = dataProvider
@@ -55,7 +55,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         title = accountList.name
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let loadingSelector = #selector(AccountListController.dataDidStartLoadingNotification(_:))
@@ -65,20 +65,20 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         accountListManager.reloadIfNeeded(false)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         accountListManager.removeObserver(self)
     }
     
     // MARK: Refresh
     
-    func refresh(sender: UIRefreshControl) {
+    func refresh(_ sender: UIRefreshControl) {
         accountListManager.reloadIfNeeded(true)
     }
     
     // MARK: Notifications 
     
-    override func dataDidLoadTopNotification(notification: NSNotification) {
+    override func dataDidLoadTopNotification(_ notification: Notification) {
         super.dataDidLoadTopNotification(notification)
         updateTableView()
     }
@@ -97,21 +97,21 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
 
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         guard let movie = dataProvider.itemAtIndex(indexPath.row) else { return }
         showDetailViewControllerForMovie(movie)
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if dataProvider.itemCount - 5 == indexPath.row {
+    func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+        if dataProvider.itemCount - 5 == (indexPath as NSIndexPath).row {
             accountListManager.loadMore()
         }
     }
     
     // MARK: Navigation 
     
-    func showDetailViewControllerForMovie(movie: Movie) {
+    func showDetailViewControllerForMovie(_ movie: Movie) {
         let detailViewController = DetailViewController(movie: movie)
         navigationController?.pushViewController(detailViewController, animated: true)
     }

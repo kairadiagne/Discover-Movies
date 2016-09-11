@@ -15,16 +15,16 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
 
     var cellIdentifier: String = MovieCollectionViewCell.defaultIdentfier()
     
-    private var movies = [Movie]()
+    fileprivate var movies = [Movie]()
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return movies.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! MovieCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MovieCollectionViewCell
         let movie = movies[indexPath.row]
         cell.configureWithMovie(movie)
         return cell
@@ -32,11 +32,11 @@ class SimilarMovieDataProvider: NSObject, UICollectionViewDataSource {
     
     // MARk: - Update
     
-    func updateWithMovies(movies: [Movie]) {
+    func updateWithMovies(_ movies: [Movie]) {
         self.movies = movies
     }
     
-    func movieAtIndex(index: Int) -> Movie?{
+    func movieAtIndex(_ index: Int) -> Movie?{
         guard index >= 0 || index <= movies.count else { return nil }
         return movies[index]
     }

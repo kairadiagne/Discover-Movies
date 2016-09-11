@@ -9,66 +9,66 @@
 import Foundation
 
 public enum TMDbImageRouter {
-    case BackDropSmall(path: String)
-    case BackDropMedium(path: String)
-    case BackdropLarge(path: String)
-    case BackdropOriginal(path: String)
-    case PosterSmall(path: String)
-    case PosterMedium(path: String)
-    case PosterLarge(path: String)
-    case PosterOriginal(path: String)
-    case ProfileSmall(path: String)
-    case ProfileMedium(path: String)
-    case ProfileLarge(path: String)
-    case ProfileOriginal(path: String)
+    case backDropSmall(path: String)
+    case backDropMedium(path: String)
+    case backdropLarge(path: String)
+    case backdropOriginal(path: String)
+    case posterSmall(path: String)
+    case posterMedium(path: String)
+    case posterLarge(path: String)
+    case posterOriginal(path: String)
+    case profileSmall(path: String)
+    case profileMedium(path: String)
+    case profileLarge(path: String)
+    case profileOriginal(path: String)
     
-    public var url: NSURL? {
+    public var url: URL? {
         switch self {
-        case BackDropSmall(let path):
+        case .backDropSmall(let path):
             return imageURL(path, size: "w300")
-        case BackDropMedium(let path):
+        case .backDropMedium(let path):
             return imageURL(path, size: "w780")
-        case BackdropLarge(let path):
+        case .backdropLarge(let path):
             return imageURL(path, size: "w1280")
-        case BackdropOriginal(let path):
+        case .backdropOriginal(let path):
             return imageURL(path, size: "original")
-        case PosterSmall(let path):
+        case .posterSmall(let path):
             return imageURL(path, size: "w185")
-        case PosterMedium(let path):
+        case .posterMedium(let path):
             return imageURL(path, size: "w342")
-        case PosterLarge(let path):
+        case .posterLarge(let path):
             return imageURL(path, size: "w500")
-        case PosterOriginal(let path):
+        case .posterOriginal(let path):
             return imageURL(path, size: "original")
-        case ProfileSmall(let path):
+        case .profileSmall(let path):
             return imageURL(path, size: "w45")
-        case ProfileMedium(let path):
+        case .profileMedium(let path):
             return imageURL(path, size: "w185")
-        case ProfileLarge(let path):
+        case .profileLarge(let path):
             return imageURL(path, size: "h632")
-        case ProfileOriginal(let path):
+        case .profileOriginal(let path):
             return imageURL(path, size: "original")
         }
     }
     
-    private func imageURL(path: String, size: String) -> NSURL? {
+    fileprivate func imageURL(_ path: String, size: String) -> URL? {
         var urlString = ""
         
         switch self {
-        case .ProfileSmall(let path):
+        case .profileSmall(let path):
              urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
-        case .ProfileMedium(let path):
+        case .profileMedium(let path):
              urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
-        case .ProfileLarge(let path):
+        case .profileLarge(let path):
              urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
-        case .ProfileOriginal(let path):
+        case .profileOriginal(let path):
              urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
         default:
              urlString = "\(TMDbAPI.ImageBaseURL)\(size)/\(path)"
            
         }
         
-        return NSURL(string: urlString) ?? nil
+        return URL(string: urlString) ?? nil
     }
 
 }

@@ -13,34 +13,34 @@ public protocol TMDbListType {
 }
 
 public enum TMDbTopList: TMDbListType {
-    case Popular
-    case TopRated
-    case Upcoming
-    case NowPlaying
+    case popular
+    case topRated
+    case upcoming
+    case nowPlaying
     
     public var name: String {
         switch self {
-        case Popular:
+        case .popular:
             return "popular"
-        case TopRated:
+        case .topRated:
             return "top_rated"
-        case Upcoming:
+        case .upcoming:
             return "upcoming"
-        case NowPlaying:
+        case .nowPlaying:
             return "now_playing"
         }
     }
 }
 
 public enum TMDbAccountList: TMDbListType {
-    case Favorite
-    case Watchlist
+    case favorite
+    case watchlist
     
     public var name: String {
         switch self {
-        case Favorite:
+        case .favorite:
             return "favorite"
-        case Watchlist:
+        case .watchlist:
             return "watchlist"
         }
     }

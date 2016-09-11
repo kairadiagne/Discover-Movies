@@ -26,14 +26,14 @@ public struct Movie: DictionaryRepresentable, Equatable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int,
-            title = dict["title"] as? String,
-            overView = dict["overview"] as? String,
-            releaseDate = dict["release_date"] as? String,
-            genres = dict["genre_ids"] as? [Int],
-            rating = dict["vote_average"] as? Double,
-            adult = dict["adult"] as? Bool,
-            posterPath = dict["poster_path"] as? String,
-            backDropPath = dict["backdrop_path"] as? String else {
+            let title = dict["title"] as? String,
+            let overView = dict["overview"] as? String,
+            let releaseDate = dict["release_date"] as? String,
+            let genres = dict["genre_ids"] as? [Int],
+            let rating = dict["vote_average"] as? Double,
+            let adult = dict["adult"] as? Bool,
+            let posterPath = dict["poster_path"] as? String,
+            let backDropPath = dict["backdrop_path"] as? String else {
                 return nil
         }
         
@@ -50,15 +50,15 @@ public struct Movie: DictionaryRepresentable, Equatable {
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
         var dictionary = [String: AnyObject]()
-        dictionary["id"] = id
-        dictionary["title"] = title
-        dictionary["overview"] = overview
-        dictionary["release_date"] = releaseDate
-        dictionary["genre_ids"] = genres
-        dictionary["vote_average"] = rating
-        dictionary["adult"] = adult
-        dictionary["poster_path"] = posterPath
-        dictionary["backdrop_path"] = backDropPath
+        dictionary["id"] = id as AnyObject?
+        dictionary["title"] = title as AnyObject?
+        dictionary["overview"] = overview as AnyObject?
+        dictionary["release_date"] = releaseDate as AnyObject?
+        dictionary["genre_ids"] = genres as AnyObject?
+        dictionary["vote_average"] = rating as AnyObject?
+        dictionary["adult"] = adult as AnyObject?
+        dictionary["poster_path"] = posterPath as AnyObject?
+        dictionary["backdrop_path"] = backDropPath as AnyObject?
         return dictionary
     }
     

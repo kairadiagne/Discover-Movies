@@ -8,9 +8,9 @@
 
 import Foundation
 
-public enum APIError: ErrorType {
-    case Generic
-    case NoInternetConnection
-    case NotAuthorized
-    case TimedOut
+public enum APIError: Error {
+    case generic
+    case noInternetConnection
+    case notAuthorized
+    case timedOut
 }

@@ -14,19 +14,19 @@ public struct User: DictionaryRepresentable {
     
     public let id: Int
     public let userName: String
-    public private(set) var name: String?
-    public private(set) var profileHash: String?
+    public fileprivate(set) var name: String?
+    public fileprivate(set) var profileHash: String?
     
     // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
-        guard let id = dict["id"] as? Int, userName = dict["username"] as? String else { return nil }
+        guard let id = dict["id"] as? Int, let userName = dict["username"] as? String else { return nil }
         
         self.id = id
         self.userName = userName
         self.name = dict["name"] as? String
         
-        if let avatar = dict["avatar"], gravatar = avatar["gravatar"], hash = gravatar?["hash"] as? String {
+        if let avatar = dict["avatar"], let gravatar = avatar["gravatar"], let hash = gravatar?["hash"] as? String {
             self.profileHash = hash
         }
         
@@ -34,9 +34,9 @@ public struct User: DictionaryRepresentable {
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
         var dictionary = [String: AnyObject]()
-        dictionary["id"] = id
-        dictionary["username"] = userName
-        dictionary["name"] = name
+        dictionary["id"] = id as AnyObject?
+        dictionary["username"] = userName as AnyObject?
+        dictionary["name"] = name as AnyObject?
 //        dictionary["avatar"] = ["gravatar": ["hash": profileHash]]
         // TODO: Look at profile hash dictionary conversion
         return dictionary

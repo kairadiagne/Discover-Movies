@@ -10,10 +10,10 @@ import Foundation
 
 extension String {
     
-    func toDate() -> NSDate? {
-        let formatter = NSDateFormatter()
+    func toDate() -> Date? {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyy-MM-DD"
-        return formatter.dateFromString(self)
+        return formatter.date(from: self)
     }
     
 }

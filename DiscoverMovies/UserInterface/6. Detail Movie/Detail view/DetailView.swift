@@ -42,13 +42,13 @@ class DetailView: BackgroundView {
     
     // MARK: Other Properties
     
-    private var didAnimate = false
+    fileprivate var didAnimate = false
     
-    private var topInset: CGFloat {
+    fileprivate var topInset: CGFloat {
         return header.frame.height - scrollTop.constant
     }
     
-    private var openHeader: CGFloat {
+    fileprivate var openHeader: CGFloat {
         let contentInsetY = detailScrollView.contentInset.top
         let contentOffSetY = detailScrollView.contentOffset.y
         let position = (contentInsetY + contentOffSetY) / contentInsetY
@@ -79,7 +79,7 @@ class DetailView: BackgroundView {
         
         self.readReviewsButton.tintColor = UIColor.buttonColor()
         self.readReviewsButton.layer.borderWidth = 1.5
-        self.readReviewsButton.layer.borderColor = UIColor.buttonColor().CGColor
+        self.readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
         
         detailScrollView.delegate = self
         detailScrollView.bounces = false
@@ -113,12 +113,12 @@ class DetailView: BackgroundView {
         if let image = image {
             header.image = image
         } else {
-            let imageURL = TMDbImageRouter.BackDropMedium(path: movie.backDropPath).url ?? NSURL()
+            let imageURL = TMDbImageRouter.BackDropMedium(path: movie.backDropPath).url ?? URL()
             header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
         }
     }
     
-    func configureWithState(inFavorites: Bool, inWatchList: Bool) {
+    func configureWithState(_ inFavorites: Bool, inWatchList: Bool) {
         favouriteControl.setSelectedState(inFavorites)
         watchListControl.setSelectedState(inWatchList)
     }
@@ -140,16 +140,16 @@ class DetailView: BackgroundView {
             
             self.layoutIfNeeded()
             
-            UIView.animateWithDuration(0.5, delay: 0.0, options: [.CurveEaseInOut], animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions(), animations: {
                 self.animationConstraint.priority -= 2
                 self.layoutIfNeeded()
                 }, completion: nil)
             
-            UIView.animateWithDuration(0.5, delay: 0.3, options: [.CurveEaseInOut], animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.3, options: UIViewAnimationOptions(), animations: {
                 self.header.alpha = 1.0
                 }, completion: nil)
             
-            UIView.animateWithDuration(0.2, delay: 0.6, options: [.CurveEaseInOut], animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.6, options: UIViewAnimationOptions(), animations: {
                 self.playButton.alpha = 1.0
                 }, completion: nil)
         }
@@ -161,7 +161,7 @@ class DetailView: BackgroundView {
 
 extension DetailView: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerTop.constant = openHeader * -header.frame.height * 0.8
         playButton.alpha = -openHeader + 1
         detailScrollView.bounces = detailScrollView.contentOffset.y > topInset

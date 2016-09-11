@@ -19,9 +19,9 @@ class BaseTableView: UITableView, BackgroundMessagePresentable {
     }
     
     func scrollToTop() {
-        if numberOfRowsInSection(0) > 0 {
-            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-            scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+        if numberOfRows(inSection: 0) > 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            scrollToRow(at: indexPath, at: .top, animated: false)
         }
     }
 

@@ -21,9 +21,9 @@ public struct Video: DictionaryRepresentable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let source = dict["source"] as? String,
-            name = dict["name"] as? String,
-            size = dict["size"] as? String,
-            type = dict["type"] as? String else {
+            let name = dict["name"] as? String,
+            let size = dict["size"] as? String,
+            let type = dict["type"] as? String else {
                 return nil
         }
         
@@ -36,10 +36,10 @@ public struct Video: DictionaryRepresentable {
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
         var dictionary = [String: AnyObject]()
-        dictionary["name"] = name
-        dictionary["source"] = source
-        dictionary["size"] = size
-        dictionary["type"] = type
+        dictionary["name"] = name as AnyObject?
+        dictionary["source"] = source as AnyObject?
+        dictionary["size"] = size as AnyObject?
+        dictionary["type"] = type as AnyObject?
         return dictionary
     }
     

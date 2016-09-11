@@ -8,28 +8,28 @@
 
 import Foundation
 
-public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<Page<ItemType>> {
+open class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<Page<ItemType>> {
     
     // MARK: - Properties
     
-    private var pages: [Page<ItemType>] = []
+    fileprivate var pages: [Page<ItemType>] = []
     
     // MARK: - Initialize
     
-    override init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool, refreshTimeOut: NSTimeInterval) {
+    override init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool, refreshTimeOut: TimeInterval) {
         super.init(identifier: identifier, errorHandler: errorHandler, sessionInfoProvider: sessionInfoProvider, writesToDisk: writesToDisk, refreshTimeOut: refreshTimeOut)
     }
     
     // MARK: - Calls 
     
-    public func loadMore() {
+    open func loadMore() {
         guard isLoading == false, let lastFetchedPage = pages.last, let nextPage = lastFetchedPage.nextPage else { return }
         loadOnline(paramaters: paramaters, page: nextPage)
     }
     
     // MARK: - ResponseHandling
     
-    override func handleData(data: Page<ItemType>) {
+    override func handleData(_ data: Page<ItemType>) {
         if data.page == 1 {
             pages = []
         }
@@ -41,8 +41,8 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
 
     // MARK: - Items 
     
-    public func itemsInList() -> [ItemType] {
-        return pages.reduce([], combine: { $0 + $1.items })
+    open func itemsInList() -> [ItemType] {
+        return pages.reduce([], { $0 + $1.items })
     }
     
 }

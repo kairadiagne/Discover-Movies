@@ -19,16 +19,16 @@ class CastDataProvider: NSObject, UICollectionViewDataSource {
     
     var cellIdentifier: String = PersonCollectionViewCell.defaultIdentfier()
     
-    private var castMembers: [CastMember]?
+    fileprivate var castMembers: [CastMember]?
     
     // MARK: UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return castMembers?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! PersonCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! PersonCollectionViewCell
         guard let castMember = castMembers?[indexPath.row] else { return cell }
         cell.configureWithCastMember(castMember)
         return cell
@@ -36,7 +36,7 @@ class CastDataProvider: NSObject, UICollectionViewDataSource {
     
     // MARK: Update
     
-    func updateWithCast(castMembers: [CastMember]) {
+    func updateWithCast(_ castMembers: [CastMember]) {
         self.castMembers = castMembers
     }
     

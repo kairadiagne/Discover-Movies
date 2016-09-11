@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 enum TMDbAPIRouter: URLRequestConvertible {
-    case GET(endpoint: String, parameters: [String: AnyObject])
-    case POST(endpoint: String, parameters: [String: AnyObject], body: [String: AnyObject])
+    case get(endpoint: String, parameters: [String: AnyObject])
+    case post(endpoint: String, parameters: [String: AnyObject], body: [String: AnyObject])
     
     var APIKey: String {
         return TMDbSessionInfoStore().APIKey
@@ -21,9 +21,9 @@ enum TMDbAPIRouter: URLRequestConvertible {
         
         var method: Alamofire.Method {
             switch self {
-            case .GET:
+            case .get:
                 return .GET
-            case .POST:
+            case .post:
                 return .POST
             }
         }
@@ -31,11 +31,11 @@ enum TMDbAPIRouter: URLRequestConvertible {
         let result: (path: String, parameters: [String: AnyObject]?) = {
             
             switch self {
-            case GET(let endpoint , var parameters):
-                parameters["api_key"] = APIKey
+            case .get(let endpoint , var parameters):
+                parameters["api_key"] = APIKey as AnyObject?
                 return (endpoint, parameters)
-            case POST(let endpoint, var parameters, _):
-                parameters["api_key"] = APIKey
+            case .post(let endpoint, var parameters, _):
+                parameters["api_key"] = APIKey as AnyObject?
                 return (endpoint, parameters)
             }
             
@@ -44,15 +44,15 @@ enum TMDbAPIRouter: URLRequestConvertible {
         
         let body: [String: AnyObject]? = {
             switch self {
-            case .POST(_, _, let body):
+            case .post(_, _, let body):
                 return body
             default: return nil
             }
         }()
     
-        var URL = NSURL(string: TMDbAPI.BaseURL)!
-        URL = URL.URLByAppendingPathComponent(result.path)
-        let URLRequest = NSURLRequest(URL: URL)
+        var URL = Foundation.URL(string: TMDbAPI.BaseURL)!
+        URL = URL.appendingPathComponent(result.path)
+        let URLRequest = Foundation.URLRequest(url: URL)
         
         let QueryEncoding = Alamofire.ParameterEncoding.URLEncodedInURL
         let JSONEncoding = Alamofire.ParameterEncoding.JSON

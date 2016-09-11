@@ -22,6 +22,6 @@ struct RequestToken: DictionaryRepresentable {
     }
     
     func dictionaryRepresentation() -> [String : AnyObject] {
-        return ["request_token": token]
+        return ["request_token": token as AnyObject]
     }
 }

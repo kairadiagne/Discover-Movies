@@ -12,14 +12,14 @@ public struct MovieCredit: DictionaryRepresentable {
     
     // MARK: - Properties
     
-    public private(set) var cast: [CastMember] = []
-    public private(set) var crew: [CrewMember] = []
+    public fileprivate(set) var cast: [CastMember] = []
+    public fileprivate(set) var crew: [CrewMember] = []
     
     // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let castDicts = dict["cast"] as? [[String: AnyObject]],
-            crewDicts = dict["crew"] as? [[String: AnyObject]] else {
+            let crewDicts = dict["crew"] as? [[String: AnyObject]] else {
                 return nil
         }
         

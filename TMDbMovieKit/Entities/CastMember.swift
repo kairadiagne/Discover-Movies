@@ -18,17 +18,17 @@ public struct CastMember: DictionaryRepresentable, Equatable {
     public let name: String
     public let character: String
     public let order: Int
-    public private(set) var profilePath: String?
+    public fileprivate(set) var profilePath: String?
     
     // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let creditID = dict["credit_id"] as? String,
-            personID = dict["id"] as? Int,
-            castID = dict["cast_id"] as? Int,
-            name = dict["name"] as? String,
-            character = dict["character"] as? String,
-            order = dict["order"] as? Int else {
+            let personID = dict["id"] as? Int,
+            let castID = dict["cast_id"] as? Int,
+            let name = dict["name"] as? String,
+            let character = dict["character"] as? String,
+            let order = dict["order"] as? Int else {
                 return nil
         }
         

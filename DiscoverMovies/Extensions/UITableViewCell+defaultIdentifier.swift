@@ -11,11 +11,11 @@ import UIKit
 extension UITableViewCell {
     
     public class func defaultIdentifier() -> String {
-        return String(self)
+        return String(describing: self)
     }
     
     public class func nibName() -> String {
-        return String(self)
+        return String(describing: self)
     }
     
 }

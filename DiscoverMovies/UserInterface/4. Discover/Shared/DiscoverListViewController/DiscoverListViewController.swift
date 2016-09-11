@@ -14,7 +14,7 @@ class DiscoverListViewController: ListViewController, MenuButtonPresentable {
     
     // MARK: Constants
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let DiscoverCellRowHeight: CGFloat = 250
     }
     
@@ -29,14 +29,14 @@ class DiscoverListViewController: ListViewController, MenuButtonPresentable {
         addMenuButton()
         
         let nib = UINib(nibName: DiscoverListCell.nibName(), bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: DiscoverListCell.defaultIdentifier())
+        tableView.register(nib, forCellReuseIdentifier: DiscoverListCell.defaultIdentifier())
         tableView.rowHeight = Constants.DiscoverCellRowHeight
         tableView.dataSource = tableViewDataProvider
     }
     
     // MARK: Navigation
     
-    func showDetailViewControllerForMovie(movie: Movie) { 
+    func showDetailViewControllerForMovie(_ movie: Movie) { 
         let image = SDWebImageManager.sharedManager().getImageFromCache(movie)
         let detailViewController = DetailViewController(movie: movie, image: image)
         navigationController?.pushViewController(detailViewController, animated: false)

@@ -10,14 +10,14 @@ import Foundation
 import Alamofire
 
 public protocol DataManagerFailureDelegate: class {
-    func listDataManager(manager: AnyObject, didFailWithError error: APIError)
+    func listDataManager(_ manager: AnyObject, didFailWithError error: APIError)
 }
 
-public class DataManager<ModelType: DictionaryRepresentable> {
+open class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Properties
     
-    public weak var failureDelegate: DataManagerFailureDelegate?
+    open weak var failureDelegate: DataManagerFailureDelegate?
     
     let sessionInfoProvider: SessionInfoContaining
     
@@ -33,20 +33,20 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     var isLoading = false
     
-    private var firstLoad = true
+    fileprivate var firstLoad = true
     
-    private let cacheQueue = dispatch_queue_create("com.discoverMovies.app.cache", DISPATCH_QUEUE_SERIAL)
+    fileprivate let cacheQueue = DispatchQueue(label: "com.discoverMovies.app.cache", attributes: [])
     
-    private let notificationCenter = NSNotificationCenter.defaultCenter()
+    fileprivate let notificationCenter = NotificationCenter.default
     
     // MARK: - Initialize
     
-    init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool = true, refreshTimeOut: NSTimeInterval = 3000) {
+    init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool = true, refreshTimeOut: TimeInterval = 3000) {
         self.identifier = identifier
         self.errorHandler = errorHandler
         self.sessionInfoProvider = sessionInfoProvider
         self.writesDataToDisk = writesToDisk
-        self.cachedData = CachedData<ModelType>(refreshTimeOut: refreshTimeOut)
+        self.cachedData = CachedData<ModelType>(coder: refreshTimeOut)
         
         if writesDataToDisk {
             self.startLoading()
@@ -56,7 +56,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Public API
     
-    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
+    open func reloadIfNeeded(_ forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
         guard cachedData.needsRefresh || forceOnline || params != nil else {
             
             if firstLoad { /// Bug on first load it should always post this notification
@@ -102,7 +102,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         startLoading()
         
         var params = params
-        params["page"] = page
+        params["page"] = page as AnyObject?
         
         let endpoint = self.endpoint()
         
@@ -129,7 +129,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - ResponseHandling
 
-    func handleData(data: ModelType) {
+    func handleData(_ data: ModelType) {
         cachedData.add(data)
         postDidLoadNotification()
     }
@@ -147,38 +147,38 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Notifications
     
-    public func addObserver(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
-        notificationCenter.addObserver(observer, selector: loadingSelector, name: DataManagerNotification.DidStartLoading, object: self)
-        notificationCenter.addObserver(observer, selector: didLoadSelector, name: DataManagerNotification.DidLoad, object: self)
+    open func addObserver(_ observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
+        notificationCenter.addObserver(observer, selector: loadingSelector, name: NSNotification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
+        notificationCenter.addObserver(observer, selector: didLoadSelector, name: NSNotification.Name(rawValue: DataManagerNotification.DidLoad), object: self)
     }
     
-    public func addLoadingObserver(observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: DataManagerNotification.DidStartLoading, object: self)
+    open func addLoadingObserver(_ observer: AnyObject, selector: Selector) {
+        notificationCenter.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
     }
     
-    public func addDataDidLoadTopObserver(observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: DataManagerNotification.DidLoad, object: self)
+    open func addDataDidLoadTopObserver(_ observer: AnyObject, selector: Selector) {
+        notificationCenter.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: DataManagerNotification.DidLoad), object: self)
     }
     
-    public func removeObserver(observer: AnyObject) {
+    open func removeObserver(_ observer: AnyObject) {
         notificationCenter.removeObserver(observer)
     }
     
     func postLoadingNotification() {
-        notificationCenter.postNotificationName(DataManagerNotification.DidStartLoading, object: self)
+        notificationCenter.post(name: Notification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
     }
     
     func postDidLoadNotification() {
-        notificationCenter.postNotificationName(DataManagerNotification.DidLoad, object: self)
+        notificationCenter.post(name: Notification.Name(rawValue: DataManagerNotification.DidLoad), object: self)
     }
     
     // MARK: - Caching
     
     func writeDataToDisk() {
         // Submit write for asycnhronous execution and return immediately
-        dispatch_async(cacheQueue) { [weak self] in
+        cacheQueue.async { [weak self] in
             guard let strongSelf = self else { return }
-            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.identifier)
+            let path = strongSelf.getCachesDirectory() + strongSelf.identifier
             NSKeyedArchiver.archiveRootObject(strongSelf.cachedData, toFile: path)
         }
     }
@@ -187,17 +187,17 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         self.startLoading()
         
         // Wait until read completes
-        dispatch_sync(cacheQueue) { [weak self] in
+        cacheQueue.sync { [weak self] in
             guard let strongSelf = self else { return }
-            let path = strongSelf.getCachesDirectory().stringByAppendingString(strongSelf.identifier)
-            guard let cachedData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? CachedData<ModelType> else { return }
+            let path = strongSelf.getCachesDirectory() + strongSelf.identifier
+            guard let cachedData = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? CachedData<ModelType> else { return }
             strongSelf.cachedData = cachedData
             self?.stopLoading()
         }
     }
     
     func getCachesDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
         let cachesDirectory = paths[0]
         return cachesDirectory
     }

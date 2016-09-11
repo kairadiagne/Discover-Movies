@@ -17,8 +17,8 @@ protocol DataProvider: class {
     var cellIdentifier: String { get }
     var itemCount: Int { get }
     var items: [Item] { get set }
-    func itemAtIndex(index: Int) -> Item?
-    func updateWithItems(items: [Item])
+    func itemAtIndex(_ index: Int) -> Item?
+    func updateWithItems(_ items: [Item])
 }
 
 // MARK: Default Implementation DataProvider
@@ -33,12 +33,12 @@ extension DataProvider {
         return items.count
     }
     
-    func itemAtIndex(index: Int) -> Item? {
+    func itemAtIndex(_ index: Int) -> Item? {
         guard index >= 0 && index <= itemCount else { return nil }
         return items[index]
     }
     
-    func updateWithItems(items: [Item]) {
+    func updateWithItems(_ items: [Item]) {
         self.items = items
     }
     

@@ -14,7 +14,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     // MARK: Types
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let UserInfoKey = "error"
     }
     
@@ -26,7 +26,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         return TMDbSessionManager.shared.signInStatus == .NotAvailable ? true : false
     }
     
-    private var signedIn: Bool {
+    fileprivate var signedIn: Bool {
         return TMDbSessionManager.shared.signInStatus == .Signedin ? true: false
     }
     
@@ -36,27 +36,27 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         super.viewDidLoad()
         
         progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
-        progressHUD?.userInteractionEnabled = false
+        progressHUD?.isUserInteractionEnabled = false
         view.addSubview(progressHUD!)
     }
 
     // MARK: Notifications
     
-    func dataDidStartLoadingNotification(notification: NSNotification) {
+    func dataDidStartLoadingNotification(_ notification: Notification) {
         showProgressHUD()
     }
     
-    func dataDidLoadTopNotification(notification: NSNotification) {
+    func dataDidLoadTopNotification(_ notification: Notification) {
         hideProgressHUD()
     }
     
     // MARK: Error Handeling
     
-    func listDataManager(manager: AnyObject, didFailWithError error: APIError) {
+    func listDataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         handleError(error)
     }
     
-    func handleError(error: APIError) {
+    func handleError(_ error: APIError) {
         switch error {
         case .Generic:
             presentAlertGenericError()
@@ -86,7 +86,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         let completionHandler = {
             TMDbSessionManager.shared.signOut()
             
-            if let menuViewController = (UIApplication.sharedApplication().delegate as? AppDelegate)?.menuViewController {
+            if let menuViewController = (UIApplication.shared.delegate as? AppDelegate)?.menuViewController {
                 menuViewController.signOut()
             }
         }
@@ -100,23 +100,23 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         presentAlertWithTitle(title, message: message, completionhandler: nil)
     }
     
-    private func presentAlertWithTitle(title: String, message: String, completionhandler: (() -> Void)?) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+    fileprivate func presentAlertWithTitle(_ title: String, message: String, completionhandler: (() -> Void)?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let dismiss = UIAlertAction(title: "dismiss", style: .Default) { action  in
+        let dismiss = UIAlertAction(title: "dismiss", style: .default) { action  in
             completionhandler?()
         }
         
         alertController.addAction(dismiss)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: Navigation
     
     func showSignInViewController() {
         let signInViewController = SignInViewController()
-        presentViewController(signInViewController, animated: true, completion: nil)
+        present(signInViewController, animated: true, completion: nil)
     }
 
 }

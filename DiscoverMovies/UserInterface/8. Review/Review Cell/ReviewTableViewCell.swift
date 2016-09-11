@@ -26,7 +26,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     // MARK: Awake
     
-    func configure(review: Review) {
+    func configure(_ review: Review) {
         authorLabel?.text = "A movie review by \(review.author)"
         contentLabel?.text = review.content
     }

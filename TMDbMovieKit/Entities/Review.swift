@@ -15,14 +15,14 @@ public struct Review: DictionaryRepresentable, Equatable {
     public let id: String
     public let author: String
     public let content: String
-    public let url: NSURL
+    public let url: URL
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? String,
-            author = dict["author"] as? String,
-            content = dict["content"] as? String,
-            urlString = dict["url"] as? String,
-            url = NSURL(string: urlString) else {
+            let author = dict["author"] as? String,
+            let content = dict["content"] as? String,
+            let urlString = dict["url"] as? String,
+            let url = URL(string: urlString) else {
             return nil
         }
         
@@ -36,10 +36,10 @@ public struct Review: DictionaryRepresentable, Equatable {
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
         var dictionary = [String: AnyObject]()
-        dictionary["id"] = id
-        dictionary["author"] = author
-        dictionary["content"] = content
-        dictionary["url"] = url
+        dictionary["id"] = id as AnyObject?
+        dictionary["author"] = author as AnyObject?
+        dictionary["content"] = content as AnyObject?
+        dictionary["url"] = url as AnyObject?
         return dictionary
     }
     

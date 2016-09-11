@@ -27,16 +27,16 @@ class AnimatedShapeButton: UIControl {
     
     var maskLayer = CAShapeLayer()
     
-    var lineColor = UIColor.blueColor() {
+    var lineColor = UIColor.blue {
         didSet {
-            shapeLayer.strokeColor = lineColor.CGColor
-            fillLayer.strokeColor = lineColor.CGColor
+            shapeLayer.strokeColor = lineColor.cgColor
+            fillLayer.strokeColor = lineColor.cgColor
         }
     }
     
-    var fillColor = UIColor.blueColor() {
+    var fillColor = UIColor.blue {
         didSet {
-            fillLayer.fillColor = lineColor.CGColor
+            fillLayer.fillColor = lineColor.cgColor
         }
     }
     
@@ -58,8 +58,8 @@ class AnimatedShapeButton: UIControl {
         self.lineColor = strokeColor
     }
     
-    private func commonInit() {
-        self.backgroundColor = UIColor.clearColor()
+    fileprivate func commonInit() {
+        self.backgroundColor = UIColor.clear
         self.setupLayers()
     }
     
@@ -69,24 +69,24 @@ class AnimatedShapeButton: UIControl {
     
     // MARK: Touch events
 
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         return true
     }
     
-    override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         return true
     }
     
-    override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-        super.endTrackingWithTouch(touch, withEvent: event)
-        setSelectedState(!selected)
-        sendActionsForControlEvents(.ValueChanged)
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        super.endTracking(touch, with: event)
+        setSelectedState(!isSelected)
+        sendActions(for: .valueChanged)
     }
     
     // MARK: Change State
 
-    func setSelectedState(shouldBeSelected: Bool) {
-        guard self.selected != shouldBeSelected else { return }
+    func setSelectedState(_ shouldBeSelected: Bool) {
+        guard self.isSelected != shouldBeSelected else { return }
         
         if shouldBeSelected {
             changeFillAnimated(true, duration: 0.3, key: Constants.FillAnimationKey)
@@ -94,46 +94,46 @@ class AnimatedShapeButton: UIControl {
             changeFillAnimated(false, duration: 0.3, key: Constants.UnfillAnimationkey)
         }
         
-        self.selected = !self.selected
+        self.isSelected = !self.isSelected
     }
     
     // MARK: Animation
 
-    func changeFillAnimated(fill: Bool, duration: Double, key: String) {
+    func changeFillAnimated(_ fill: Bool, duration: Double, key: String) {
         let unfilledRect = CGRect(x: bounds.width / 2, y: bounds.height / 2, width: 0, height: 0)
         let filledRect = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.width)
         
-        let unfilledPath = UIBezierPath(ovalInRect: unfilledRect)
-        let filledPath = UIBezierPath(ovalInRect: filledRect)
+        let unfilledPath = UIBezierPath(ovalIn: unfilledRect)
+        let filledPath = UIBezierPath(ovalIn: filledRect)
         
         let fillAnimation = CABasicAnimation(keyPath: "path")
         fillAnimation.delegate = self
-        fillAnimation.fromValue = fill ? unfilledPath.CGPath : filledPath.CGPath
-        fillAnimation.toValue = fill ? filledPath.CGPath : unfilledPath.CGPath
+        fillAnimation.fromValue = fill ? unfilledPath.cgPath : filledPath.cgPath
+        fillAnimation.toValue = fill ? filledPath.cgPath : unfilledPath.cgPath
         fillAnimation.duration = duration
         fillAnimation.fillMode = kCAFillModeForwards
-        fillAnimation.removedOnCompletion = false
-        fillLayer.addAnimation(fillAnimation, forKey: Constants.FillAnimationKey)
+        fillAnimation.isRemovedOnCompletion = false
+        fillLayer.add(fillAnimation, forKey: Constants.FillAnimationKey)
     }
     
-    func changeScaleAnimated(fromValue: CGFloat, toValue: CGFloat, duration: Double, key: String) {
+    func changeScaleAnimated(_ fromValue: CGFloat, toValue: CGFloat, duration: Double, key: String) {
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
         scaleAnimation.delegate = self
         scaleAnimation.fromValue = fromValue
         scaleAnimation.toValue = toValue
         scaleAnimation.duration = duration
         scaleAnimation.fillMode = kCAFillModeForwards
-        scaleAnimation.removedOnCompletion = false
-        self.layer.addAnimation(scaleAnimation, forKey: key)
+        scaleAnimation.isRemovedOnCompletion = false
+        self.layer.add(scaleAnimation, forKey: key)
     }
     
     // MARK: CABasicAnimation Delegate
     
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+    override func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         
-        if anim == fillLayer.animationForKey(Constants.FillAnimationKey) {
+        if anim == fillLayer.animation(forKey: Constants.FillAnimationKey) {
             changeScaleAnimated(1, toValue: 1.45, duration: 0.10, key: Constants.GrowAnimationKey)
-        } else if anim == layer.animationForKey(Constants.GrowAnimationKey) {
+        } else if anim == layer.animation(forKey: Constants.GrowAnimationKey) {
             changeScaleAnimated(1.45, toValue: 1, duration: 0.10, key: Constants.ShrinkAnimationKey)
         }
     }

@@ -25,18 +25,18 @@ class SignInView: BackgroundView {
         titleLabel.font = UIFont.H1()
         orLabel.font = UIFont.Body()
     
-        logoImage.tintColor = UIColor.whiteColor()
-        logoImage.userInteractionEnabled = false
+        logoImage.tintColor = UIColor.white
+        logoImage.isUserInteractionEnabled = false
     
-        signInButton.tintColor = UIColor.whiteColor()
+        signInButton.tintColor = UIColor.white
         signInButton.layer.borderWidth = 1.0
-        signInButton.layer.borderColor = UIColor.whiteColor().CGColor
-        signInButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).CGColor
+        signInButton.layer.borderColor = UIColor.white.cgColor
+        signInButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor
         
-        publicModeButton.tintColor = UIColor.whiteColor()
+        publicModeButton.tintColor = UIColor.white
         publicModeButton.layer.borderWidth = 1.0
-        publicModeButton.layer.borderColor = UIColor.whiteColor().CGColor
-        publicModeButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).CGColor
+        publicModeButton.layer.borderColor = UIColor.white.cgColor
+        publicModeButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor
     }
     
 }

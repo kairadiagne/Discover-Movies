@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
     
     func year() -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Year], fromDate: self)
-        return components.year
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.year], from: self)
+        return components.year!
     }
     
 }

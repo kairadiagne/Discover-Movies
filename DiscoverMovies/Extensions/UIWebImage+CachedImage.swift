@@ -12,7 +12,7 @@ import SDWebImage
 
 public extension SDWebImageManager {
     
-    public func getImageFromCache(movie: Movie) ->UIImage? {
+    public func getImageFromCache(_ movie: Movie) ->UIImage? {
         guard let url = TMDbImageRouter.BackDropMedium(path: movie.backDropPath).url else { return nil}
         guard let key = SDWebImageManager.sharedManager().cacheKeyForURL(url) else { return nil }
         return SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key) ?? nil

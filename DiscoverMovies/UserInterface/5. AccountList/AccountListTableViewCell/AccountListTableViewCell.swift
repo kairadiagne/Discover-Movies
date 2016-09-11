@@ -29,10 +29,10 @@ class AccountListTableViewCell: UITableViewCell {
     
     // MARK: Configur
     
-    func configure(movie: Movie, imageURL: NSURL?) {
+    func configure(_ movie: Movie, imageURL: URL?) {
         titleLabel.text = movie.title
         overViewLabel.text = movie.overview
-        posterView.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
+        posterView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
     }
     
 }

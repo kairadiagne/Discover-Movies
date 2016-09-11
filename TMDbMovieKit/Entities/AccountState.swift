@@ -19,7 +19,7 @@ public struct AccountState: DictionaryRepresentable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let favoriteStatus = dict["favorite"] as? Bool,
-            watchlistStatus =  dict["watchlist"] as? Bool else {
+            let watchlistStatus =  dict["watchlist"] as? Bool else {
                 return nil
         }
         

@@ -21,14 +21,14 @@ class AccountListDataProvider: NSObject, DataProvider, UITableViewDataSource {
     
     // MARK: UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! Cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! Cell
         let movie = items[indexPath.row]
-        let imageURL = TMDbImageRouter.PosterSmall(path: movie.posterPath).url ?? NSURL()
+        let imageURL = TMDbImageRouter.PosterSmall(path: movie.posterPath).url ?? URL()
         cell.configure(movie, imageURL: imageURL)
         return cell
     }

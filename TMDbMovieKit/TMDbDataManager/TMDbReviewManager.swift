@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbReviewManager: PagingDataManager<Review> {
+open class TMDbReviewManager: PagingDataManager<Review> {
     
     // MARK: - Properties
 

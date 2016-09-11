@@ -13,17 +13,17 @@ class ReviewViewController: ListViewController {
     
     // MARK: Types
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let DefaultRowHeight: CGFloat = 200
     }
     
     // MARK: Properties
     
-    private let movie: Movie
+    fileprivate let movie: Movie
 
-    private let reviewDataProvider = ReviewDataProvider()
+    fileprivate let reviewDataProvider = ReviewDataProvider()
     
-    private let reviewManager: TMDbReviewManager
+    fileprivate let reviewManager: TMDbReviewManager
     
     // MARK: Initialize
     
@@ -43,7 +43,7 @@ class ReviewViewController: ListViewController {
         super.viewDidLoad()
         
         let reviewCellNib = UINib(nibName: ReviewTableViewCell.nibName(), bundle: nil)
-        tableView.registerNib(reviewCellNib, forCellReuseIdentifier: ReviewTableViewCell.defaultIdentifier())
+        tableView.register(reviewCellNib, forCellReuseIdentifier: ReviewTableViewCell.defaultIdentifier())
         tableView.dataSource = reviewDataProvider
         tableView.estimatedRowHeight = Constants.DefaultRowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -53,7 +53,7 @@ class ReviewViewController: ListViewController {
         reviewManager.failureDelegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let loadingSelector = #selector(ReviewViewController.dataDidStartLoadingNotification(_:))
@@ -63,18 +63,18 @@ class ReviewViewController: ListViewController {
         reviewManager.reloadIfNeeded(false)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         reviewManager.removeObserver(self)
     }
     
     // MARK: Notifications
     
-    override func dataDidLoadTopNotification(notification: NSNotification) {
+    override func dataDidLoadTopNotification(_ notification: Notification) {
         super.dataDidLoadTopNotification(notification)
         updateTableView()
     }
     
-    private func updateTableView() {
+    fileprivate func updateTableView() {
         reviewDataProvider.updateWithItems(reviewManager.itemsInList())
         tableView.reloadData()
     }
@@ -84,13 +84,13 @@ class ReviewViewController: ListViewController {
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if reviewDataProvider.itemCount - 5 == indexPath.row {
+    func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+        if reviewDataProvider.itemCount - 5 == (indexPath as NSIndexPath).row {
             reviewManager.loadMore()
         }
     }
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
 

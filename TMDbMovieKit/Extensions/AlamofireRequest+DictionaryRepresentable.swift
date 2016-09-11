@@ -11,7 +11,7 @@ import Alamofire
 
 public extension Alamofire.Request {
     
-    public func responseObject<T: DictionaryRepresentable>(completionHandler: Response<T, NSError> -> Void) -> Self {
+    public func responseObject<T: DictionaryRepresentable>(_ completionHandler: (Response<T, NSError>) -> Void) -> Self {
         let serializer = ResponseSerializer<T, NSError> { request, response, data, error in
             
             // Return in case of error
@@ -33,7 +33,7 @@ public extension Alamofire.Request {
             // Convert JSON into object
             switch result {
             case .Success(let value):
-                if let dict = value as? [String: AnyObject], object = T(dictionary: dict) {
+                if let dict = value as? [String: AnyObject], let object = T(dictionary: dict) {
                     return .Success(object)
                 } else {
                     let failureReason = "Object could not be created from JSON."

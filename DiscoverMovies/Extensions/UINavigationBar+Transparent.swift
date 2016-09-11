@@ -11,12 +11,12 @@ import UIKit
 extension UINavigationBar {
     
     func setAsTransparent() {
-        setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         shadowImage = UIImage()
-        translucent = true
+        isTranslucent = true
     }
     
     func setAsUnclear() {
-        translucent = false
+        isTranslucent = false
     }
 }

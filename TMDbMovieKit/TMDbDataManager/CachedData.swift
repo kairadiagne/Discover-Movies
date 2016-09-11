@@ -12,33 +12,33 @@ class CachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     
     // MARK: - Properties
     
-    private(set) var data: ModelType?
+    fileprivate(set) var data: ModelType?
     
     var needsRefresh: Bool {
         guard let lastUpdate = lastUpdate else { return true }
-        return NSDate().timeIntervalSinceDate(lastUpdate) > refreshTimeOut
+        return Date().timeIntervalSince(lastUpdate) > refreshTimeOut
     }
     
-    var dateLastUpdated: NSDate? {
+    var dateLastUpdated: Date? {
         return lastUpdate
     }
     
-    let refreshTimeOut: NSTimeInterval
+    let refreshTimeOut: TimeInterval
     
-    private var lastUpdate: NSDate?
+    fileprivate var lastUpdate: Date?
     
     // MARK: - Initialize
     
-    required init(refreshTimeOut timeOut: NSTimeInterval) {
+    required init(refreshTimeOut timeOut: TimeInterval) {
         self.refreshTimeOut = timeOut
         super.init()
     }
     
     // MARK: - Utils
     
-    func add(data: ModelType) {
+    func add(_ data: ModelType) {
         self.data = data
-        self.lastUpdate = NSDate()
+        self.lastUpdate = Date()
     }
     
     func clear() {
@@ -47,22 +47,22 @@ class CachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     }
     
     func setLastUpdate() {
-        self.lastUpdate = NSDate()
+        self.lastUpdate = Date()
     }
     
     // MARK: - NSCoding
     
     required init?(coder aDecoder: NSCoder) {
-        guard let dataDict = aDecoder.decodeObjectForKey("data") as? [String: AnyObject] else { return nil }
+        guard let dataDict = aDecoder.decodeObject(forKey: "data") as? [String: AnyObject] else { return nil }
         self.data = ModelType(dictionary: dataDict)
-        self.lastUpdate = aDecoder.decodeObjectForKey("lastUpdate") as? NSDate
-        self.refreshTimeOut = aDecoder.decodeObjectForKey("timeOut") as? NSTimeInterval ?? 300
+        self.lastUpdate = aDecoder.decodeObject(forKey: "lastUpdate") as? Date
+        self.refreshTimeOut = aDecoder.decodeObject(forKey: "timeOut") as? TimeInterval ?? 300
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(data?.dictionaryRepresentation(), forKey: "data")
-        aCoder.encodeObject(lastUpdate, forKey: "lastUpdate")
-        aCoder.encodeObject(refreshTimeOut, forKey: "timeOut")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(data?.dictionaryRepresentation(), forKey: "data")
+        aCoder.encode(lastUpdate, forKey: "lastUpdate")
+        aCoder.encode(refreshTimeOut, forKey: "timeOut")
     }
 
 }

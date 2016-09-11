@@ -40,17 +40,17 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
         super.viewDidLoad()
         
         self.view.addSubview(youtubeView)
-        youtubeView.leadingAnchor.constraintEqualToAnchor(self.view.leadingAnchor, constant: 0).active = true
-        youtubeView.topAnchor.constraintEqualToAnchor(self.view.topAnchor, constant: 0).active = true
-        youtubeView.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: 0).active = true
-        youtubeView.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor, constant: 0).active = true
+        youtubeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        youtubeView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        youtubeView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        youtubeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         
         setupProgressHUD()
         
         youtubeView.loadWithVideoId(video.source)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.setAsUnclear()
     }
@@ -61,7 +61,7 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
 
 extension VideoViewController: YTPlayerViewDelegate {
     
-    func playerViewPreferredInitialLoadingView(playerView: YTPlayerView) -> UIView? {
+    func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
         let view = UIView()
         view.frame = self.view.bounds
         view.backgroundColor = UIColor.backgroundColor()
@@ -69,15 +69,15 @@ extension VideoViewController: YTPlayerViewDelegate {
         return view
     }
     
-    func playerViewPreferredWebViewBackgroundColor(playerView: YTPlayerView) -> UIColor {
+    func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
         return UIColor.backgroundColor()
     }
     
-    func playerViewDidBecomeReady(playerView: YTPlayerView) {
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         hideProgressHUD()
     }
     
-    func playerView(playerView: YTPlayerView, receivedError error: YTPlayerError) {
+    func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
         print(error)
         // Communicate to the user that an error has occured.
     }

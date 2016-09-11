@@ -10,18 +10,18 @@ import Foundation
 import Alamofire
 
 public protocol TMDbMovieInfoManagerDelegate: class {
-    func movieInfomManagerDidLoadInfoForMovieWithID(movieID: Int, info: MovieInfo)
-    func movieInfoManagerDidLoadAccoutnStateForMovieWithID(movieID: Int, inFavorites: Bool, inWatchList: Bool)
-    func movieInfoManagerDidReceiverError(error: APIError)
+    func movieInfomManagerDidLoadInfoForMovieWithID(_ movieID: Int, info: MovieInfo)
+    func movieInfoManagerDidLoadAccoutnStateForMovieWithID(_ movieID: Int, inFavorites: Bool, inWatchList: Bool)
+    func movieInfoManagerDidReceiverError(_ error: APIError)
 }
 
-public class TMDbMovieInfoManager {
+open class TMDbMovieInfoManager {
     
     // MARK: - Properties
     
-    public weak var delegate: TMDbMovieInfoManagerDelegate?
+    open weak var delegate: TMDbMovieInfoManagerDelegate?
     
-    public private(set) var movieID: Int
+    open fileprivate(set) var movieID: Int
     
     // MARK: - Initialization
     
@@ -31,8 +31,8 @@ public class TMDbMovieInfoManager {
     
     // MARK: - API Calls
     
-    public func loadInfo() {
-        let parameters: [String: AnyObject] = ["append_to_response": "similar,credits,trailers"]
+    open func loadInfo() {
+        let parameters: [String: AnyObject] = ["append_to_response": "similar,credits,trailers" as AnyObject]
         
         let endpoint = "movie/\(movieID)"
         
@@ -50,15 +50,15 @@ public class TMDbMovieInfoManager {
         }
     }
 
-    public func toggleStatusOfMovieInList(list: TMDbAccountList, status: Bool) {
-        guard let sessionID = TMDbSessionInfoStore().sessionID, userID = TMDbSessionInfoStore().user?.id else {
-            delegate?.movieInfoManagerDidReceiverError(.NotAuthorized)
+    open func toggleStatusOfMovieInList(_ list: TMDbAccountList, status: Bool) {
+        guard let sessionID = TMDbSessionInfoStore().sessionID, let userID = TMDbSessionInfoStore().user?.id else {
+            delegate?.movieInfoManagerDidReceiverError(.notAuthorized)
             return
         }
         
-        let parameters: [String: AnyObject] = ["session_id": sessionID]
+        let parameters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         
-        let body: [String: AnyObject] = ["media_type": "movie", "media_id": movieID, list.name: status]
+        let body: [String: AnyObject] = ["media_type": "movie" as AnyObject, "media_id": movieID as AnyObject, list.name: status as AnyObject]
         
         let endpoint = "account/\(userID)/\(list.name)"
         
@@ -73,13 +73,13 @@ public class TMDbMovieInfoManager {
         }
     }
     
-    public func loadAccountState() {
+    open func loadAccountState() {
         guard let sessionID = TMDbSessionInfoStore().sessionID else {
-            delegate?.movieInfoManagerDidReceiverError(.NotAuthorized)
+            delegate?.movieInfoManagerDidReceiverError(.notAuthorized)
             return
         }
         
-        let parameters: [String: AnyObject] = ["session_id": sessionID]
+        let parameters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         
         let endpoint = "movie/\(movieID)/account_states"
         
@@ -100,15 +100,15 @@ public class TMDbMovieInfoManager {
     
     // MARK: - Handle Error
     
-    func handleError(error: NSError) {
+    func handleError(_ error: NSError) {
         var newError: APIError
         
         if error.code == NSURLErrorNotConnectedToInternet {
-            newError = .NoInternetConnection
+            newError = .noInternetConnection
         } else if error.code == NSURLErrorUserAuthenticationRequired {
-            newError = .NotAuthorized
+            newError = .notAuthorized
         } else {
-            newError = .Generic
+            newError = .generic
         }
         
         delegate?.movieInfoManagerDidReceiverError(newError)

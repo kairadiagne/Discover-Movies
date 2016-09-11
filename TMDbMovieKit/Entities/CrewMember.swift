@@ -17,16 +17,16 @@ public struct CrewMember: DictionaryRepresentable, Equatable {
     public let name: String
     public let department: String?
     public let job: String?
-    public private(set) var profilePath: String?
+    public fileprivate(set) var profilePath: String?
     
     // MARK: - Initialize
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let creditID = dict["credit_id"] as? String,
-            personID = dict["id"] as? Int,
-            name = dict["name"] as? String,
-            department = dict["department"] as? String,
-            job = dict["job"] as? String else {
+            let personID = dict["id"] as? Int,
+            let name = dict["name"] as? String,
+            let department = dict["department"] as? String,
+            let job = dict["job"] as? String else {
                 return nil
         }
         

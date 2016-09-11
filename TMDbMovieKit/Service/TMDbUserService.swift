@@ -10,19 +10,19 @@ import Foundation
 import Alamofire
 
 public protocol TMDbUserServiceDelegate: class {
-    func user(service: TMDbUserService, didLoadUserInfo user: User)
-    func user(service: TMDbUserService, didFailWithError error: APIError)
+    func user(_ service: TMDbUserService, didLoadUserInfo user: User)
+    func user(_ service: TMDbUserService, didFailWithError error: APIError)
 }
 
-public class TMDbUserService {
+open class TMDbUserService {
     
     // MARK: - Properties
     
-    public weak var delegate: TMDbUserServiceDelegate?
+    open weak var delegate: TMDbUserServiceDelegate?
     
-    private let sessionInfoProvider: SessionInfoContaining
+    fileprivate let sessionInfoProvider: SessionInfoContaining
     
-    private let errorHandler: ErrorHandling
+    fileprivate let errorHandler: ErrorHandling
     
     // MARK: - Initialize
     
@@ -33,13 +33,13 @@ public class TMDbUserService {
     
     // MARK: - API Calls
     
-    public func getUserInfo() {
+    open func getUserInfo() {
         guard let sessionID = sessionInfoProvider.sessionID else {
-            self.delegate?.user(self, didFailWithError: .NotAuthorized)
+            self.delegate?.user(self, didFailWithError: .notAuthorized)
             return 
         }
         
-        let paramaters: [String: AnyObject] = ["session_id": sessionID]
+        let paramaters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         let endpoint = "account"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: paramaters))

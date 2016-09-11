@@ -13,10 +13,10 @@ protocol SessionInfoContaining {
     var sessionID: String? { get }
     var user: User? { get }
     var APIKey: String { get }
-    func saveSessionID(sessionID: String)
-    func saveUser(user: User)
+    func saveSessionID(_ sessionID: String)
+    func saveUser(_ user: User)
     func clearUserData()
-    func saveAPIKey(key: String)
+    func saveAPIKey(_ key: String)
 }
 
 class TMDbSessionInfoStore: SessionInfoContaining {
@@ -38,17 +38,17 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     }
     
     var user: User? {
-        guard let userDict = NSUserDefaults.standardUserDefaults().objectForKey(Keys.User) as? [String: AnyObject] else { return nil }
+        guard let userDict = UserDefaults.standard.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
         return User(dictionary: userDict)
     }
     
     var APIKey: String {
-        return  NSUserDefaults.standardUserDefaults().stringForKey(Keys.APIKey) ?? ""
+        return  UserDefaults.standard.string(forKey: Keys.APIKey) ?? ""
     }
     
     // MARK: - Persistence
     
-    func saveSessionID(sessionID: String) {
+    func saveSessionID(_ sessionID: String) {
         do {
             //            try Locksmith.saveData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
@@ -57,13 +57,13 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         }
     }
     
-    func saveUser(user: User) {
-        NSUserDefaults.standardUserDefaults().setObject(user.dictionaryRepresentation(), forKey: Keys.User)
+    func saveUser(_ user: User) {
+        UserDefaults.standard.set(user.dictionaryRepresentation(), forKey: Keys.User)
     }
     
-    func saveAPIKey(key: String) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(key, forKey: Keys.APIKey)
+    func saveAPIKey(_ key: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(key, forKey: Keys.APIKey)
     }
     
     // MARK: - Clear

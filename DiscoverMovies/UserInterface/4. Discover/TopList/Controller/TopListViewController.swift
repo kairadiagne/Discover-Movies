@@ -16,13 +16,13 @@ class TopListViewController: DiscoverListViewController {
     
     var switchListControl: UISegmentedControl!
     
-    private var currentList: TMDbTopList = .Popular
+    fileprivate var currentList: TMDbTopList = .Popular
     
-    private let popularListManager = TMDbTopListDataManager(list: .Popular)
+    fileprivate let popularListManager = TMDbTopListDataManager(list: .Popular)
     
-    private let topRatedListManager = TMDbTopListDataManager(list: .TopRated)
+    fileprivate let topRatedListManager = TMDbTopListDataManager(list: .TopRated)
     
-    private let upcomingListManager = TMDbTopListDataManager(list: .Upcoming)
+    fileprivate let upcomingListManager = TMDbTopListDataManager(list: .Upcoming)
     
     // MARK: View Controller Life Cycle
 
@@ -31,7 +31,7 @@ class TopListViewController: DiscoverListViewController {
         
         let switchListSelector = #selector(TopListViewController.switchTopList(_:))
         switchListControl = UISegmentedControl(items: ["Popular", "Top Rated", "Upcoming"])
-        switchListControl.addTarget(self, action: switchListSelector, forControlEvents: .ValueChanged)
+        switchListControl.addTarget(self, action: switchListSelector, for: .valueChanged)
         switchListControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = switchListControl
         
@@ -40,7 +40,7 @@ class TopListViewController: DiscoverListViewController {
         upcomingListManager.failureDelegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
      
         let loadingSelector = #selector(TopListViewController.dataDidStartLoadingNotification(_:))
@@ -50,7 +50,7 @@ class TopListViewController: DiscoverListViewController {
         upcomingListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         popularListManager.removeObserver(self)
@@ -62,7 +62,7 @@ class TopListViewController: DiscoverListViewController {
     
     // MARK: Fetching
     
-    func switchTopList(control: UISegmentedControl) {
+    func switchTopList(_ control: UISegmentedControl) {
         switch switchListControl.selectedSegmentIndex {
         case 0:
             currentList = .Popular
@@ -77,11 +77,11 @@ class TopListViewController: DiscoverListViewController {
         loadData(currentList, force: false)
     }
     
-    func loadData(list: TMDbTopList, force: Bool) {
+    func loadData(_ list: TMDbTopList, force: Bool) {
         managerForList(list)?.reloadIfNeeded(force)
     }
     
-    func managerForList(list: TMDbTopList) -> TMDbTopListDataManager? {
+    func managerForList(_ list: TMDbTopList) -> TMDbTopListDataManager? {
         switch list {
         case .Popular:
             return popularListManager
@@ -97,12 +97,12 @@ class TopListViewController: DiscoverListViewController {
     
     // MARK: Notifications
     
-    override func dataDidLoadTopNotification(notification: NSNotification) {
+    override func dataDidLoadTopNotification(_ notification: Notification) {
         super.dataDidLoadTopNotification(notification)
         updateTableView(true)
     }
     
-    private func updateTableView(scrollToTop: Bool = false) {
+    fileprivate func updateTableView(_ scrollToTop: Bool = false) {
         guard let items = managerForList(currentList)?.itemsInList() else { return }
         tableViewDataProvider.updateWithItems(items)
         tableView.reloadData()
@@ -114,13 +114,13 @@ class TopListViewController: DiscoverListViewController {
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         guard let movie = tableViewDataProvider.itemAtIndex(indexPath.row) else { return }
         showDetailViewControllerForMovie(movie)
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if tableViewDataProvider.itemCount - 10 == indexPath.row {
+    func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+        if tableViewDataProvider.itemCount - 10 == (indexPath as NSIndexPath).row {
             managerForList(currentList)?.loadMore()
         }
     }

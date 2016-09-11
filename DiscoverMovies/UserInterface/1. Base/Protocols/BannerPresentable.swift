@@ -23,7 +23,7 @@ extension BannerPresentable where Self: UIViewController {
     // at the top of the window. When the banenr is not nil it means it is currently being presented on screen
     // and it needs to be dismissed before another banner gets displayed.
     
-    func showBanner(title: String, message: String, color: UIColor) {
+    func showBanner(_ title: String, message: String, color: UIColor) {
     //        // Hide previous banner if there is one
     //        banner?.dismiss()
     //        

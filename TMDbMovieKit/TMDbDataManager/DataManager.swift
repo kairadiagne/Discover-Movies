@@ -19,8 +19,6 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     public weak var failureDelegate: DataManagerFailureDelegate?
     
-    let sessionInfoProvider: SessionInfoContaining
-    
     let errorHandler: ErrorHandling
     
     let writesDataToDisk: Bool
@@ -41,23 +39,21 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Initialize
     
-    init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool = true, refreshTimeOut: TimeInterval) {
+    init(identifier: String, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandler(), writesToDisk: Bool = true) {
         self.identifier = identifier
         self.errorHandler = errorHandler
-        self.sessionInfoProvider = sessionInfoProvider
         self.writesDataToDisk = writesToDisk
-        self.cachedData = CachedData<ModelType>(coder: refreshTimeOut)
+        self.cachedData = CachedData<ModelType>(refreshTimeOut: refreshTimeOut)
         
         if writesDataToDisk {
             self.startLoading()
             self.loadDataFromDisk()
         }
-        reloadIfNeeded(<#T##forceOnline: Bool##Bool#>, paramaters: <#T##[String : AnyObject]?#>)
     }
     
     // MARK: - Public API
     
-    public func reloadIfNeeded(_ forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
+    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
         guard cachedData.needsRefresh || forceOnline || params != nil else {
             
             if firstLoad { /// Bug on first load it should always post this notification
@@ -154,11 +150,11 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     }
     
     public func add(loadingObserver observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: .dataManagerDidStartLoading, object: self)
+        notificationCenter.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didStartLoading, object: self)
     }
     
     public func add(didLoadObserver observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: .dataManagerDidLoad, object: self)
+        notificationCenter.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didLoad, object: self)
     }
     
     public func remove(observer: AnyObject) {
@@ -166,11 +162,11 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     }
     
     func postLoadingNotification() {
-        notificationCenter.post(name: .dataManagerDidStartLoading, object: self)
+        notificationCenter.post(name: Notification.Name.DataManager.didStartLoading, object: self)
     }
     
     func postDidLoadNotification() {
-        notificationCenter.post(name: .dataManagerDidLoad, object: self)
+        notificationCenter.post(name: Notification.Name.DataManager.didLoad, object: self)
     }
     
     // MARK: - Caching
@@ -205,13 +201,15 @@ public class DataManager<ModelType: DictionaryRepresentable> {
 
 }
 
-// MARK: - TMDbDataManagerNotification 
+// MARK: - DataManagerNotification 
 
 extension Notification.Name {
     
-    static let dataManagerDidLoad = Notification.Name("DataManagerDidLoadNotification")
-    static let dataManagerDidStartLoading = Notification.Name("DataManagerDidStartLoadingNotification")
-    
+    public struct DataManager {
+        public static let didLoad = Notification.Name("DataManagerDidLoadNotification")
+        public static let didStartLoading = Notification.Name("DataManagerDidStartLoadingNotification")
+    }
+
 }
 
 

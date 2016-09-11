@@ -12,13 +12,17 @@ public class TMDbTopListDataManager: PagingDataManager<Movie> {
     
     // MARK: - Properties
     
+    let sessionInfoProvider: SessionInfoContaining
+    
     let list: TMDbListType
     
     // MARK: - Initialize
     
     public init(list: TMDbTopList) {
         self.list = list
-        super.init(identifier: list.name, sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 3600)
+        self.sessionInfoProvider = TMDbSessionInfoStore()
+        super.init(identifier: list.name, writesToDisk: true, refreshTimeOut: 3600)
+
     }
     
     // MARK: - Endpoint

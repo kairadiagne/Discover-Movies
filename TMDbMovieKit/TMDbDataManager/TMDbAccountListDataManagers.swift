@@ -14,11 +14,15 @@ public class TMDbAccountListDataManager: PagingDataManager<Movie> {
     
     let list: TMDbAccountList
     
+    let sessionInfoProvider: SessionInfoContaining
+
+    
     // MARK: - Initialize
     
     public init(list: TMDbAccountList) {
         self.list = list
-        super.init(identifier: list.name, sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 300)
+        self.sessionInfoProvider = TMDbSessionInfoStore()
+        super.init(identifier: list.name, writesToDisk: true, refreshTimeOut: 300)
     }
 
     // MARK: - Endpoint

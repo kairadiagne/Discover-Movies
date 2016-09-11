@@ -16,8 +16,8 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
     
     // MARK: - Initialize
     
-    override init(identifier: String, errorHandler: ErrorHandling = APIErrorHandler(), sessionInfoProvider: SessionInfoContaining, writesToDisk: Bool, refreshTimeOut: TimeInterval) {
-        super.init(identifier: identifier, errorHandler: errorHandler, sessionInfoProvider: sessionInfoProvider, writesToDisk: writesToDisk, refreshTimeOut: refreshTimeOut)
+    public init(identifier: String, writesToDisk: Bool, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandling()) {
+        super.init(identifier: identifier, refreshTimeOut: refreshTimeOut , errorHandler: errorHandler, writesToDisk: writesToDisk)
     }
     
     // MARK: - Calls 
@@ -29,7 +29,7 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
     
     // MARK: - ResponseHandling
     
-    override func handleData(_ data: Page<ItemType>) {
+    override func handle(data: Page<ItemType>) {
         if data.page == 1 {
             pages = []
         }

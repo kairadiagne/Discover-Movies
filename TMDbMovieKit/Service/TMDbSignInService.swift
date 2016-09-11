@@ -28,16 +28,16 @@ import Alamofire
  */
 
 public protocol TMDbSignInDelegate: class {
-    func signIn(_ service: TMDbSignInService, didReceiveAuthorizationURL url: URL)
-    func signIn(_ service: TMDbSignInService, didFailWithError error: APIError)
-    func signInServiceDidSignIn(_ service: TMDbSignInService)
+    func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: URL)
+    func signIn(service: TMDbSignInService, didFailWithError error: APIError)
+    func signInServiceDidSignIn(_service: TMDbSignInService)
 }
 
 public class TMDbSignInService {
     
     // MARK: - Properties
     
-    open weak var delegate: TMDbSignInDelegate?
+    public weak var delegate: TMDbSignInDelegate?
     
     fileprivate var isLoading = false
     
@@ -64,7 +64,7 @@ public class TMDbSignInService {
                 
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.signIn(self, didFailWithError: error)
+                    self.delegate?.signIn(service: self, didFailWithError: error)
                     return
                 }
                 
@@ -74,9 +74,9 @@ public class TMDbSignInService {
                     let path: String = "\(TMDbAPI.AuthenticateURL)\(requestToken.token)"
                     
                     if let url = NSURL(string: path) {
-                        self.delegate?.signIn(self, didReceiveAuthorizationURL: url)
+                        self.delegate?.signIn(service: self, didReceiveAuthorizationURL: url)
                     } else {
-                        self.delegate?.signIn(self, didFailWithError: .Generic)
+                        self.delegate?.signIn(service: self, didFailWithError: .generic)
                     }
                 }
         }
@@ -84,7 +84,7 @@ public class TMDbSignInService {
     
     public func requestSessionID() {
         guard let token = token?.token else {
-            delegate?.signIn(self, didFailWithError: .generic)
+            delegate?.signIn(service: self, didFailWithError: .generic)
             return
         }
         
@@ -96,13 +96,13 @@ public class TMDbSignInService {
                 
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.signIn(self, didFailWithError: error)
+                    self.delegate?.signIn(service: self, didFailWithError: .generic)
                     return
                 }
                 
                 if let sessionID = response.result.value?["session_id"] as? String {
                     self.sessionInfoProvider.saveSessionID(sessionID)
-                    self.delegate?.signInServiceDidSignIn(self)
+                    self.delegate?.signInServiceDidSignIn(_service: self)
                 }
         }
     }

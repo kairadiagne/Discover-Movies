@@ -14,11 +14,14 @@ public class TMDbReviewManager: PagingDataManager<Review> {
 
     let movieID: Int
     
+    let sessionInfoProvider: SessionInfoContaining
+    
     // MARK: - Initialize
     
     public init(movieID: Int) {
         self.movieID = movieID
-        super.init(identifier: "", sessionInfoProvider: TMDbSessionInfoStore(), writesToDisk: true, refreshTimeOut: 300)
+        self.sessionInfoProvider = TMDbSessionInfoStore()
+        super.init(identifier: "", writesToDisk: true, refreshTimeOut: 300)
     }
     
     // MARK: - Endpoint

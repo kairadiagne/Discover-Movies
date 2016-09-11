@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 public protocol TMDbUserServiceDelegate: class {
-    func user(_ service: TMDbUserService, didLoadUserInfo user: User)
-    func user(_ service: TMDbUserService, didFailWithError error: APIError)
+    func user(service: TMDbUserService, didLoadUserInfo user: User)
+    func user(service: TMDbUserService, didFailWithError error: APIError)
 }
 
 public class TMDbUserService {
@@ -35,7 +35,7 @@ public class TMDbUserService {
     
     public func getUserInfo() {
         guard let sessionID = sessionInfoProvider.sessionID else {
-            self.delegate?.user(self, didFailWithError: .notAuthorized)
+            self.delegate?.user(service: self, didFailWithError: .notAuthorized)
             return 
         }
         
@@ -47,13 +47,13 @@ public class TMDbUserService {
                 
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.user(self, didFailWithError: error)
+                    self.delegate?.user(service: self, didFailWithError: error)
                     return
                 }
                 
                 if let user = response.result.value {
                     self.sessionInfoProvider.saveUser(user)
-                    self.delegate?.user(self, didLoadUserInfo: user)
+                    self.delegate?.user(service: self, didLoadUserInfo: user)
                 }
         }
     }

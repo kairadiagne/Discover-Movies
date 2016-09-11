@@ -1,6 +1,0 @@
-framework module Pods_Networking_TMDbMovieKit {
-  umbrella header "Pods-Networking-TMDbMovieKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -33,7 +33,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     // MARK: - Properties
     
     var sessionID: String? {
-        //        return Locksmith.loadDataForUserAccount(Keys.UserAccount)?[Keys.SessionID] as? String
+        // return Locksmith.loadDataForUserAccount(Keys.UserAccount)?[Keys.SessionID] as? String
         return ""
     }
     
@@ -50,7 +50,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     
     func saveSessionID(_ sessionID: String) {
         do {
-            //            try Locksmith.saveData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
+            // try Locksmith.saveData([Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
             print("Error saving sessionID from keychain")
 
@@ -62,19 +62,17 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     }
     
     func saveAPIKey(_ key: String) {
-        let defaults = UserDefaults.standard
-        defaults.set(key, forKey: Keys.APIKey)
+        UserDefaults.standard.set(key, forKey: Keys.APIKey)
     }
     
     // MARK: - Clear
     
     func clearUserData() {
         do {
-            //            try Locksmith.deleteDataForUserAccount(Keys.UserAccount)
+            // try Locksmith.deleteDataForUserAccount(Keys.UserAccount)
         } catch {
             print("Error deleteing user data from store")
         }
     }
     
 }
-

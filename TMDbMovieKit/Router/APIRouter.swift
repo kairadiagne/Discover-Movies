@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 enum APIRouter: URLRequestConvertible {
-    case get(endPoint: String, queryParams: [String: AnyObject])
-    case post(endPoint: String, queryParams: [String: AnyObject], bodyParams: [String: AnyObject])
+    case get(endpoint: String, queryParams: [String: AnyObject])
+    case post(endpoint: String, queryParams: [String: AnyObject], bodyParams: [String: AnyObject])
     
     var APIKey: String {
         return TMDbSessionInfoStore().APIKey
@@ -36,7 +36,6 @@ enum APIRouter: URLRequestConvertible {
     }
     
     func asURLRequest() throws -> URLRequest {
-        // Create url 
         let url = try TMDbAPI.BaseURL.asURL()
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))

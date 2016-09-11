@@ -35,26 +35,25 @@ public class TMDbUserService {
     
     public func getUserInfo() {
         guard let sessionID = sessionInfoProvider.sessionID else {
-            self.delegate?.user(service: self, didFailWithError: .notAuthorized)
+            self.delegate?.user(service: self, didFailWithError: .unAuthorized)
             return 
         }
         
         let paramaters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         let endpoint = "account"
         
-        Alamofire.request(APIRouter.get(endPoint: endpoint, queryParams: paramaters))
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: paramaters))
             .validate().responseObject { (response: DataResponse<User>) in
                 
-                guard response.result.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.user(service: self, didFailWithError: error)
-                    return
-                }
-                
-                if let user = response.result.value {
+                switch response.result {
+                case .success(let user):
                     self.sessionInfoProvider.saveUser(user)
                     self.delegate?.user(service: self, didLoadUserInfo: user)
+                case .failure(let error):
+                    let error = self.errorHandler.categorize(error: error)
+                    self.delegate?.user(service: self, didFailWithError: error)
                 }
+
         }
     }
         

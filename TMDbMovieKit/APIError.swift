@@ -11,6 +11,6 @@ import Foundation
 public enum APIError: Error {
     case generic
     case noInternetConnection
-    case notAuthorized
+    case unAuthorized
     case timedOut
 }

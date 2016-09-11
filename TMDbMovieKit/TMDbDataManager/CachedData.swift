@@ -29,7 +29,7 @@ class CachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     
     // MARK: - Initialize
     
-    required init(refreshTimeOut timeOut: TimeInterval) { // Check NSCoding 
+    required init(refreshTimeOut timeOut: TimeInterval) {
         self.refreshTimeOut = timeOut
         super.init()
     }

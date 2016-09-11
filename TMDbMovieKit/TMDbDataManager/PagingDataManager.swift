@@ -17,7 +17,7 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
     // MARK: - Initialize
     
     init(identifier: String, writesToDisk: Bool, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandler()) {
-        super.init(identifier: identifier, refreshTimeOut: refreshTimeOut , errorHandler: errorHandler, writesToDisk: writesToDisk)
+        super.init(identifier: identifier, errorHandler: errorHandler , writesToDisk: writesToDisk, refreshTimeOut: refreshTimeOut)
     }
     
     // MARK: - Calls 
@@ -35,13 +35,12 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
         }
         
         pages.append(data)
-        
         postDidLoadNotification()
     }
 
     // MARK: - Items 
     
-    open func itemsInList() -> [ItemType] {
+    open func allItems() -> [ItemType] {
         return pages.reduce([], { $0 + $1.items })
     }
     

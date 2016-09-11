@@ -84,7 +84,7 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
     }
     
     func updateTableView() {
-        let items = accountListManager.itemsInList()
+        let items = accountListManager.allItems()
         
         if items.count == 0 {
             tableView.showMessage("This list doesn't contain any movies yet") // NSLocalizedString

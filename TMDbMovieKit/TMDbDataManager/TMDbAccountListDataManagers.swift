@@ -16,7 +16,6 @@ public class TMDbAccountListDataManager: PagingDataManager<Movie> {
     
     let sessionInfoProvider: SessionInfoContaining
 
-    
     // MARK: - Initialize
     
     public init(list: TMDbAccountList) {

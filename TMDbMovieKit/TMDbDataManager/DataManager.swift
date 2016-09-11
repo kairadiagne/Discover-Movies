@@ -31,38 +31,27 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     var isLoading = false
     
-    fileprivate var firstLoad = true
-    
-    fileprivate let cacheQueue = DispatchQueue(label: "com.discoverMovies.app.cache") // Check if this is Serial by default
+    fileprivate let cacheQueue = DispatchQueue(label: "com.discoverMovies.app.cache")
     
     fileprivate let notificationCenter = NotificationCenter.default
     
     // MARK: - Initialize
     
-    init(identifier: String, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandler(), writesToDisk: Bool = true) {
+    init(identifier: String, errorHandler: ErrorHandling, writesToDisk: Bool, refreshTimeOut: TimeInterval) {
         self.identifier = identifier
         self.errorHandler = errorHandler
         self.writesDataToDisk = writesToDisk
         self.cachedData = CachedData<ModelType>(refreshTimeOut: refreshTimeOut)
         
-        if writesDataToDisk {
-            self.startLoading()
-            self.loadDataFromDisk()
-        }
+        guard writesToDisk else { return }
+        self.startLoading()
+        self.loadDataFromDisk()
     }
     
     // MARK: - Public API
     
     public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
-        guard cachedData.needsRefresh || forceOnline || params != nil else {
-            
-            if firstLoad { /// Bug on first load it should always post this notification
-                firstLoad = false
-                postDidLoadNotification()
-            }
-            
-            return
-        }
+        guard cachedData.needsRefresh || forceOnline || params != nil else { return }
     
         if let params = params {
            paramaters = defaultParamaters().merge(params)
@@ -76,7 +65,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     // MARK: - Paramaters
     
     /**
-     Subclasses should override this method to specify a set of default paramaters needed for every request.
+     Overrride this method to specify a set of default paramaters needed with every request
     */
     
     func defaultParamaters() -> [String: AnyObject] {
@@ -86,7 +75,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     // MARK: - Endpoint
     
     /** 
-     Subclasses need to override this method to set the endpoint for the GET call
+     Override this method to set the endpoint for the GET call
     */
     
     func endpoint() -> String {
@@ -103,35 +92,20 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         
         let endpoint = self.endpoint()
         
-        let utilityQueue = DispatchQueue.global(qos: .utility)
-        
-        Alamofire.request(APIRouter.get(endPoint: endpoint, queryParams: params))
-            .validate().responseObject(queue: nil) { (response: DataResponse<ModelType>) in
-                
-                switch response.result {
-                case .success(let data):
-                    print(data)
-                case .failure(let error):
-                    print(error)
-                }
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: params))
+            .validate().responseObject { (response: DataResponse<ModelType>) in
                 
                 self.stopLoading()
                 
-                // Error
-                guard response.result.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.failureDelegate?.dataManager(self, didFailWithError: error)
-                    return
-                }
-                
-                // Success
-                if let data = response.result.value {
+                switch response.result {
+                case .success(let data):
                     self.handle(data: data)
-                    
-                    if self.writesDataToDisk {
-                        self.writeDataToDisk()
-                    }
+                    self.cacheData()
+                case .failure(let error):
+                    let error = self.errorHandler.categorize(error: error)
+                    self.failureDelegate?.dataManager(self, didFailWithError: error)
                 }
+        
         }
         
     }
@@ -142,6 +116,12 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     func handle(data: ModelType) {
         cachedData.add(data)
         postDidLoadNotification()
+    }
+    
+    func cacheData() {
+        if self.writesDataToDisk {
+            self.writeDataToDisk()
+        }
     }
     
     // MARK: - Loading
@@ -183,6 +163,8 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     }
     
     // MARK: - Caching
+    
+    // Caching does not seem to be working after Swift 3 Update
     
     func writeDataToDisk() {
         // Submit write for asycnhronous execution and return immediately

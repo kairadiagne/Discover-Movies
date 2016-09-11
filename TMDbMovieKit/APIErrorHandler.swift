@@ -22,7 +22,7 @@ class APIErrorHandler: ErrorHandling {
         } else if error.code == .networkConnectionLost {
             return .noInternetConnection
         } else if error.code == .userAuthenticationRequired {
-            return .notAuthorized
+            return .unAuthorized
         } else if error.code == .timedOut {
             return .timedOut
         } else {

@@ -23,7 +23,7 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     var progressHUD: MBProgressHUD?
     
     var shouldShowSignInViewController: Bool {
-        return TMDbSessionManager.shared.signInStatus == .notAvailable ? true : false
+        return TMDbSessionManager.shared.signInStatus == .unkown ? true : false
     }
     
     fileprivate var signedIn: Bool {
@@ -62,11 +62,11 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
             presentAlertGenericError()
         case .noInternetConnection:
             presentBannerOnInternetError()
-        case .notAuthorized where TMDbSessionManager.shared.signInStatus == .signedin:
+        case .unAuthorized where TMDbSessionManager.shared.signInStatus == .signedin:
             presentAlertOnAuthorizationError()
-        case .notAuthorized where TMDbSessionManager.shared.signInStatus == .notAvailable:
+        case .unAuthorized where TMDbSessionManager.shared.signInStatus == .unkown:
             presentAlertOnAuthorizationError()
-        case .notAuthorized where TMDbSessionManager.shared.signInStatus == .publicMode:
+        case .unAuthorized where TMDbSessionManager.shared.signInStatus == .publicMode:
             return
         default:
             return

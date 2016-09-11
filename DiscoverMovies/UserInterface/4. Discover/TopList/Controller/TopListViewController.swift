@@ -103,7 +103,7 @@ class TopListViewController: DiscoverListViewController {
     }
     
     fileprivate func updateTableView(_ scrollToTop: Bool = false) {
-        guard let items = managerForList(currentList)?.itemsInList() else { return }
+        guard let items = managerForList(currentList)?.allItems() else { return }
         tableViewDataProvider.updateWithItems(items)
         tableView.reloadData()
         

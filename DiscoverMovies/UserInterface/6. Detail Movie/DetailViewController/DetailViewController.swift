@@ -116,25 +116,26 @@ class DetailViewController: BaseViewController {
 
 extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
-    func movieInfomManagerDidLoadInfoForMovieWithID(_ movieID: Int, info: MovieInfo) {
+    func movieInfoManager(_ manager: TMDbMovieInfoManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
         // hide message in collection view
         similarMoviesDataprovider.updateWithMovies(info.similarMovies())
         castDataProvider.updateWithCast(info.cast())
         detailView.reloadCollectionViews()
         
         if let director = info.director() {
-           detailView.configure(withDirector: director)
+            detailView.configure(withDirector: director)
         }
         
         trailer = info.trailer()
     }
     
-    func movieInfoManagerDidLoadAccoutnStateForMovieWithID(_ movieID: Int, inFavorites: Bool, inWatchList: Bool) {
-        detailView.configureWithState(inFavorites, inWatchList: inWatchList)
+    func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
+        handleError(error)
     }
     
-    func movieInfoManagerDidReceiverError(_ error: APIError) {
-       handleError(error)
+    
+    func movieInfoManager(_ manager: TMDbMovieInfoManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
+        detailView.configureWithState(inFavorites, inWatchList: inWatchList)
     }
     
 }

@@ -43,11 +43,11 @@ public class TMDbSignInService {
     
     fileprivate let sessionInfoProvider: SessionInfoContaining
     
-    fileprivate var token: RequestToken?
-    
     fileprivate let errorHandler: ErrorHandling
     
-    // MARK: Initialize
+    fileprivate var token: RequestToken?
+    
+    // MARK: - Initialize
     
     public init() {
         self.errorHandler = APIErrorHandler()
@@ -57,9 +57,9 @@ public class TMDbSignInService {
     // MARK: - Sign In 
     
     public func requestToken() {
-        let endPoint = "authentication/token/new"
+        let endpoint = "authentication/token/new"
         
-        Alamofire.request(APIRouter.get(endPoint: endPoint, queryParams: [:])) //endPoint lowercase
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: [:])) 
             .validate().responseObject { (response: DataResponse<RequestToken>) in
                 
                 guard response.result.error == nil else {
@@ -89,21 +89,23 @@ public class TMDbSignInService {
         }
         
         let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
-        let endPoint = "authentication/session/new"
+        let endpoint = "authentication/session/new"
         
-        Alamofire.request(APIRouter.get(endPoint: endPoint, queryParams: paramaters))
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: paramaters))
             .validate().responseJSON { response in
                 
-                guard response.result.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.signIn(service: self, didFailWithError: .generic)
-                    return
+                switch response.result {
+                case .success(let json):
+                    guard let resultDict = json as? [String: AnyObject] else { return }
+                    guard let sessionID = resultDict["session_id"] as? String else { return }
+                    
+                    self.sessionInfoProvider.saveSessionID(sessionID)
+                    self.delegate?.signInServiceDidSignIn(_service: self)
+    
+                case .failure(let error):
+                    let error = self.errorHandler.categorize(error: error)
+                    self.delegate?.signIn(service: self, didFailWithError: error)
                 }
-                
-                // if let sessionID = response.result.value?["session_id"] as? String {
-                    // self.sessionInfoProvider.saveSessionID(sessionID)
-                    //self.delegate?.signInServiceDidSignIn(_service: self)
-                //}
         }
     }
 

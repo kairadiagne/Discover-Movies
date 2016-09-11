@@ -11,7 +11,7 @@ import Foundation
 public enum TMDBSigInStatus {
     case signedin
     case publicMode
-    case notAvailable
+    case unkown
 }
 
 public class TMDbSessionManager {
@@ -56,7 +56,7 @@ public class TMDbSessionManager {
     public var signInStatus: TMDBSigInStatus {
         if sessionInfoProvider.sessionID != nil { return .signedin }
         if publicModeActivated { return .publicMode }
-        return .notAvailable
+        return .unkown
     }
     
     fileprivate var publicModeActivated: Bool {
@@ -80,13 +80,3 @@ public class TMDbSessionManager {
     }
     
 }
-
-
-
-
-
-
-
-
-
-

@@ -10,24 +10,22 @@ import Foundation
 import Alamofire
 
 public protocol TMDbMovieInfoManagerDelegate: class {
-    func movieInfomManagerDidLoadInfoForMovieWithID(_ movieID: Int, info: MovieInfo)
-    func movieInfoManagerDidLoadAccoutnStateForMovieWithID(_ movieID: Int, inFavorites: Bool, inWatchList: Bool)
-    func movieInfoManagerDidReceiverError(_ error: APIError) // Did fail with error
+    func movieInfoManager(_ manager: TMDbMovieInfoManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int)
+    func movieInfoManager(_ manager: TMDbMovieInfoManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool)
+    func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError)
 }
 
-public class TMDbMovieInfoManager { // Change open to public
+public class TMDbMovieInfoManager {
     
     // MARK: - Properties
     
     public weak var delegate: TMDbMovieInfoManagerDelegate?
     
-    public fileprivate(set) var movieID: Int
-    
-    fileprivate let utilityQueue = DispatchQueue.global(qos: .utility)
+    public let movieID: Int
     
     fileprivate let errorHandler: ErrorHandling
     
-    // MARK: - Initialization
+    // MARK: - Initialize
     
     public init(movieID: Int) {
         self.errorHandler = APIErrorHandler()
@@ -41,24 +39,23 @@ public class TMDbMovieInfoManager { // Change open to public
         
         let endpoint = "movie/\(movieID)"
         
-        Alamofire.request(APIRouter.get(endPoint: endpoint, queryParams: parameters)).validate()
-            .responseObject(queue: utilityQueue) { (response: DataResponse<MovieInfo>) in
-            
-                guard response.result.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.movieInfoManagerDidReceiverError(error)
-                    return
-                }
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate()
+            .responseObject { (response: DataResponse<MovieInfo>) in
                 
-                if let movieInfo = response.result.value {
-                    self.delegate?.movieInfomManagerDidLoadInfoForMovieWithID(self.movieID, info: movieInfo)
+                switch response.result {
+                case .success(let data):
+                    self.delegate?.movieInfoManager(self, didLoadInfo: data, forMovieWIthID: self.movieID)
+                case .failure(let error):
+                    let error = self.errorHandler.categorize(error: error)
+                    self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                 }
+            
         }
     }
 
     public func toggleStatusOfMovieInList(_ list: TMDbAccountList, status: Bool) {
         guard let sessionID = TMDbSessionInfoStore().sessionID, let userID = TMDbSessionInfoStore().user?.id else {
-            delegate?.movieInfoManagerDidReceiverError(.notAuthorized)
+            delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }
         
@@ -68,12 +65,12 @@ public class TMDbMovieInfoManager { // Change open to public
         
         let endpoint = "account/\(userID)/\(list.name)"
         
-        Alamofire.request(APIRouter.post(endPoint: endpoint, queryParams: parameters, bodyParams: body)).validate()
+        Alamofire.request(APIRouter.post(endpoint: endpoint, queryParams: parameters, bodyParams: body)).validate()
             .response { (response) in
                 
                 guard response.error == nil else {
                     let error = self.errorHandler.categorize(error: response.error!)
-                    self.delegate?.movieInfoManagerDidReceiverError(error)
+                    self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                     return
                 }
         }
@@ -82,7 +79,7 @@ public class TMDbMovieInfoManager { // Change open to public
     
     public func loadAccountState() {
         guard let sessionID = TMDbSessionInfoStore().sessionID else {
-            delegate?.movieInfoManagerDidReceiverError(.notAuthorized)
+            delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }
         
@@ -90,17 +87,15 @@ public class TMDbMovieInfoManager { // Change open to public
         
         let endpoint = "movie/\(movieID)/account_states"
         
-        Alamofire.request(APIRouter.get(endPoint: endpoint, queryParams: parameters)).validate()
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate()
             .responseObject { (response: DataResponse<AccountState>) in
                 
-                guard response.result.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.movieInfoManagerDidReceiverError(error)
-                    return
-                }
-                
-                if let accountState = response.result.value {
-                    self.delegate?.movieInfoManagerDidLoadAccoutnStateForMovieWithID(self.movieID, inFavorites: accountState.favoriteStatus, inWatchList: accountState.watchlistStatus)
+                switch response.result {
+                case .success(let data):
+                    self.delegate?.movieInfoManager(self, movieWithID: self.movieID, inFavorites: data.favoriteStatus, inWatchList: data.watchlistStatus)
+                case .failure(let error):
+                    let error = self.errorHandler.categorize(error: error)
+                    self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                 }
         }
 

@@ -59,7 +59,7 @@ class ReviewViewController: ListViewController {
         let loadingSelector = #selector(ReviewViewController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(ReviewViewController.dataDidLoadTopNotification(_:))
         reviewManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
-//
+
         reviewManager.reloadIfNeeded(false)
     }
     
@@ -71,12 +71,6 @@ class ReviewViewController: ListViewController {
     
     override func dataDidLoadTopNotification(notification: NSNotification) {
         super.dataDidLoadTopNotification(notification)
-        updateTableView()
-    }
-    
-    
-    override func dataDidUpdateNotification(notification: NSNotification) {
-        super.dataDidUpdateNotification(notification)
         updateTableView()
     }
     

@@ -53,10 +53,6 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
         hideProgressHUD()
     }
     
-    func dataDidUpdateNotification(notification: NSNotification) {
-        hideProgressHUD()
-    }
-    
     // MARK: Error Handeling
     
     func listDataManager(manager: AnyObject, didFailWithError error: APIError) {

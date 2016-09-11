@@ -57,7 +57,7 @@ class TopListViewController: DiscoverListViewController {
         topRatedListManager.removeObserver(self)
         upcomingListManager.removeObserver(self)
         
-        loadData(currentList, force: false)
+        loadData(currentList, force: true)
     }
     
     // MARK: Fetching
@@ -100,11 +100,6 @@ class TopListViewController: DiscoverListViewController {
     override func dataDidLoadTopNotification(notification: NSNotification) {
         super.dataDidLoadTopNotification(notification)
         updateTableView(true)
-    }
-    
-    override func dataDidUpdateNotification(notification: NSNotification) {
-        super.dataDidUpdateNotification(notification)
-        updateTableView()
     }
     
     private func updateTableView(scrollToTop: Bool = false) {

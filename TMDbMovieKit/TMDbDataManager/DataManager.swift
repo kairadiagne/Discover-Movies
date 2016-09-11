@@ -59,7 +59,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
         guard cachedData.needsRefresh || forceOnline || params != nil else {
             
-            if firstLoad {
+            if firstLoad { /// Bug on first load it should always post this notification
                 firstLoad = false
                 postDidLoadNotification()
             }

@@ -83,11 +83,6 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         updateTableView()
     }
     
-    override func dataDidUpdateNotification(notification: NSNotification) {
-        super.dataDidUpdateNotification(notification)
-        updateTableView()
-    }
-    
     func updateTableView() {
         let items = accountListManager.itemsInList()
         

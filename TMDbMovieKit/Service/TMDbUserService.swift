@@ -42,8 +42,8 @@ public class TMDbUserService {
         let paramaters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         let endpoint = "account"
         
-        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: paramaters))
-            .validate().responseObject { (response: Response<User, NSError>) in
+        Alamofire.request(APIRouter.get(endPoint: endpoint, queryParams: paramaters))
+            .validate().responseObject { (response: DataResponse<User>) in
                 
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)

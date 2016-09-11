@@ -9,24 +9,23 @@
 import Foundation
 
 protocol ErrorHandling {
-    func categorize(error: NSError) -> APIError
+    func categorize(error: Error) -> APIError
 }
 
 class APIErrorHandler: ErrorHandling {
     
-    func categorize(error: NSError) -> APIError {
+    func categorize(error: Error) -> APIError {
         guard let error = error as? URLError else { return .generic }
         
-        switch error {
-        case NSURLError.NoInternetConnection:
+        if error.code == .notConnectedToInternet {
             return .noInternetConnection
-        case .networkConnectionLost:
+        } else if error.code == .networkConnectionLost {
             return .noInternetConnection
-        case .userAuthenticationRequired:
+        } else if error.code == .userAuthenticationRequired {
             return .notAuthorized
-        case .timedOut:
+        } else if error.code == .timedOut {
             return .timedOut
-        default:
+        } else {
             return .generic
         }
     }

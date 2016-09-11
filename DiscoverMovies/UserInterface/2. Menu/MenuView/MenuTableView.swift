@@ -52,8 +52,8 @@ class MenuTableView: UITableView {
         favoritesLabel.isEnabled = signedIn
         favoriteCell.isUserInteractionEnabled = signedIn
         
-        if let path = user?.profileHash, let url = TMDbImageRouter.ProfileSmall(path: path).url {
-            profileImageView.imageView.sd_setImageWithURL(url, placeholderImage: UIImage.placeholderImage())
+        if let path = user?.profileHash, let url = TMDbImageRouter.profileSmall(path: path).url {
+            profileImageView.imageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
         } else {
             profileImageView.imageView.image = nil
         }

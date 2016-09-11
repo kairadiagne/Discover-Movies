@@ -9,46 +9,34 @@
 import Foundation
 import Alamofire
 
-public extension Alamofire.Request {
+extension DataRequest {
     
-    public func responseObject<T: DictionaryRepresentable>(_ completionHandler: (Response<T, NSError>) -> Void) -> Self {
-        let serializer = ResponseSerializer<T, NSError> { request, response, data, error in
+    func responseObject<T: DictionaryRepresentable>(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
+        let responseSerializer = DataResponseSerializer<T> { request, response, data, error in
+            // When there is an error immediately return
+            guard error == nil else { return .failure(error!) }
             
-            // Return in case of error
-            guard error == nil else {
-                return .Failure(error!)
+            // Parse respone as JSON
+            let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
+            let result = jsonResponseSerializer.serializeResponse(request, response, data, nil)
+            
+            // Create model objects
+            guard case let .success(jsonObject) = result else {
+                let error = NSError() //Error
+                return .failure(error)
             }
             
-            // Unwrap the responsedata
-            guard let responseData = data else {
-                let failureReason = "Object could not be serialized because input data was nil."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
-                return .Failure(error)
+            guard let responseDict = jsonObject as? [String: AnyObject], let responseObject = T(dictionary: responseDict) else {
+                let error = NSError() // Error
+                return .failure(error)
             }
             
-            // Parse as JSON
-            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let result = JSONResponseSerializer.serializeResponse(request, response, responseData, error)
-            
-            // Convert JSON into object
-            switch result {
-            case .Success(let value):
-                if let dict = value as? [String: AnyObject], let object = T(dictionary: dict) {
-                    return .Success(object)
-                } else {
-                    let failureReason = "Object could not be created from JSON."
-                    let error = Error.errorWithCode(.JSONSerializationFailed, failureReason: failureReason)
-                    return .Failure(error)
-                }
-            case .Failure(let error):
-                return .Failure(error)
-            }
+            return .success(responseObject)
         }
-        return response(responseSerializer: serializer, completionHandler: completionHandler)
+        
+        return response(queue: queue, responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
-    
+
 }
-
-
 
 

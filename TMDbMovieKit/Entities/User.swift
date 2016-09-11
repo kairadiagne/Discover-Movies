@@ -26,9 +26,9 @@ public struct User: DictionaryRepresentable {
         self.userName = userName
         self.name = dict["name"] as? String
         
-        if let avatar = dict["avatar"], let gravatar = avatar["gravatar"], let hash = gravatar?["hash"] as? String {
-            self.profileHash = hash
-        }
+        // if let avatar = dict["avatar"], let gravatar = avatar["gravatar"], let hash = gravatar?["hash"] as? String {
+            // self.profileHash = hash
+        // }
         
     }
     

@@ -16,7 +16,7 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
     
     // MARK: - Initialize
     
-    public init(identifier: String, writesToDisk: Bool, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandling()) {
+    init(identifier: String, writesToDisk: Bool, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandler()) {
         super.init(identifier: identifier, refreshTimeOut: refreshTimeOut , errorHandler: errorHandler, writesToDisk: writesToDisk)
     }
     

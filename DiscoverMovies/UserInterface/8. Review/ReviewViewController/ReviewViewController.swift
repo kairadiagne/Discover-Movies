@@ -58,13 +58,13 @@ class ReviewViewController: ListViewController {
         
         let loadingSelector = #selector(ReviewViewController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(ReviewViewController.dataDidLoadTopNotification(_:))
-        reviewManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        reviewManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
 
-        reviewManager.reloadIfNeeded(false)
+        reviewManager.reloadIfNeeded(forceOnline: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        reviewManager.removeObserver(self)
+        reviewManager.remove(observer: self)
     }
     
     // MARK: Notifications

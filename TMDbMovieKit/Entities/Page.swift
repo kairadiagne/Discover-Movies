@@ -45,7 +45,7 @@ public struct Page<ModelType: DictionaryRepresentable>: DictionaryRepresentable 
         dictionary["page"] = page as AnyObject?
         dictionary["total_pages"] = pageCount as AnyObject?
         dictionary["total_results"] = resultCount as AnyObject?
-        dictionary["results"] = items.map { return $0.dictionaryRepresentation() as AnyObject }
+        // dictionary["results"] = items.map { return $0.dictionaryRepresentation() as AnyObject }
         return dictionary
     }
     

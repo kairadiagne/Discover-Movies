@@ -47,7 +47,7 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
         
         setupProgressHUD()
         
-        youtubeView.loadWithVideoId(video.source)
+        youtubeView.load(withVideoId: video.source)
     }
     
     override func viewWillAppear(_ animated: Bool) {

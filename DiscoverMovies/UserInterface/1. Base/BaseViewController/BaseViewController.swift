@@ -23,11 +23,11 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     var progressHUD: MBProgressHUD?
     
     var shouldShowSignInViewController: Bool {
-        return TMDbSessionManager.shared.signInStatus == .NotAvailable ? true : false
+        return TMDbSessionManager.shared.signInStatus == .notAvailable ? true : false
     }
     
     fileprivate var signedIn: Bool {
-        return TMDbSessionManager.shared.signInStatus == .Signedin ? true: false
+        return TMDbSessionManager.shared.signInStatus == .signedin ? true: false
     }
     
     // MARK: LifeCycle
@@ -58,15 +58,15 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     
     func handleError(_ error: APIError) {
         switch error {
-        case .Generic:
+        case .generic:
             presentAlertGenericError()
-        case .NoInternetConnection:
+        case .noInternetConnection:
             presentBannerOnInternetError()
-        case .NotAuthorized where TMDbSessionManager.shared.signInStatus == .Signedin:
+        case .notAuthorized where TMDbSessionManager.shared.signInStatus == .signedin:
             presentAlertOnAuthorizationError()
-        case .NotAuthorized where TMDbSessionManager.shared.signInStatus == .NotAvailable:
+        case .notAuthorized where TMDbSessionManager.shared.signInStatus == .notAvailable:
             presentAlertOnAuthorizationError()
-        case .NotAuthorized where TMDbSessionManager.shared.signInStatus == .PublicMode:
+        case .notAuthorized where TMDbSessionManager.shared.signInStatus == .publicMode:
             return
         default:
             return
@@ -117,6 +117,12 @@ class BaseViewController: UIViewController, BannerPresentable, ProgressHUDPresen
     func showSignInViewController() {
         let signInViewController = SignInViewController()
         present(signInViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: - DataManagerFailureDelegate
+    
+    func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+        
     }
 
 }

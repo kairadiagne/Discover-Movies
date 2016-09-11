@@ -84,7 +84,7 @@ class WatchListButton: AnimatedShapeButton {
         let filledPath = UIBezierPath(rect: filledRect)
         
         let fillAnimation = CABasicAnimation(keyPath: "path")
-        fillAnimation.delegate = self
+        // fillAnimation.delegate = self
         fillAnimation.fromValue = fill ? unfilledPath.cgPath : filledPath.cgPath
         fillAnimation.toValue = fill ? filledPath.cgPath : unfilledPath.cgPath
         fillAnimation.duration = duration

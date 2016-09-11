@@ -113,8 +113,8 @@ class DetailView: BackgroundView {
         if let image = image {
             header.image = image
         } else {
-            let imageURL = TMDbImageRouter.BackDropMedium(path: movie.backDropPath).url ?? URL()
-            header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
+           // let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url ?? URL()
+           //  header.sd_setImageWithURL(imageURL, placeholderImage: UIImage.placeholderImage())
         }
     }
     

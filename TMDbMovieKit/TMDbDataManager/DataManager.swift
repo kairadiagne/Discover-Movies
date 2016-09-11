@@ -93,7 +93,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         return ""
     }
 
-    // MARK: - API Calls
+    // MARK: - Networking
     
     func loadOnline(paramaters params: [String: AnyObject], page: Int = 1) {
         startLoading()
@@ -103,26 +103,39 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         
         let endpoint = self.endpoint()
         
-        Alamofire.request(TMDbAPIRouter.GET(endpoint: endpoint, parameters: params))
-            .validate().responseObject { (response: Response<ModelType, NSError>) in
-            
+        let utilityQueue = DispatchQueue.global(qos: .utility)
+        
+        Alamofire.request(APIRouter.get(endPoint: endpoint, queryParams: params))
+            .validate().responseObject(queue: nil) { (response: DataResponse<ModelType>) in
+                
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
+                
                 self.stopLoading()
                 
+                // Error
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)
                     self.failureDelegate?.dataManager(self, didFailWithError: error)
                     return
                 }
                 
+                // Success
                 if let data = response.result.value {
-                    self.handleData(data)
+                    self.handle(data: data)
                     
                     if self.writesDataToDisk {
                         self.writeDataToDisk()
                     }
                 }
         }
+        
     }
+
     
     // MARK: - ResponseHandling
 
@@ -211,6 +224,3 @@ extension Notification.Name {
     }
 
 }
-
-
-

@@ -107,7 +107,7 @@ class AnimatedShapeButton: UIControl {
         let filledPath = UIBezierPath(ovalIn: filledRect)
         
         let fillAnimation = CABasicAnimation(keyPath: "path")
-        fillAnimation.delegate = self
+        // fillAnimation.delegate = self
         fillAnimation.fromValue = fill ? unfilledPath.cgPath : filledPath.cgPath
         fillAnimation.toValue = fill ? filledPath.cgPath : unfilledPath.cgPath
         fillAnimation.duration = duration
@@ -118,7 +118,7 @@ class AnimatedShapeButton: UIControl {
     
     func changeScaleAnimated(_ fromValue: CGFloat, toValue: CGFloat, duration: Double, key: String) {
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-        scaleAnimation.delegate = self
+        // scaleAnimation.delegate = self
         scaleAnimation.fromValue = fromValue
         scaleAnimation.toValue = toValue
         scaleAnimation.duration = duration
@@ -129,13 +129,13 @@ class AnimatedShapeButton: UIControl {
     
     // MARK: CABasicAnimation Delegate
     
-    override func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+    // override func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         
-        if anim == fillLayer.animation(forKey: Constants.FillAnimationKey) {
-            changeScaleAnimated(1, toValue: 1.45, duration: 0.10, key: Constants.GrowAnimationKey)
-        } else if anim == layer.animation(forKey: Constants.GrowAnimationKey) {
-            changeScaleAnimated(1.45, toValue: 1, duration: 0.10, key: Constants.ShrinkAnimationKey)
-        }
-    }
+        // if anim == fillLayer.animation(forKey: Constants.FillAnimationKey) {
+            // changeScaleAnimated(1, toValue: 1.45, duration: 0.10, key: Constants.GrowAnimationKey)
+        // } else if anim == layer.animation(forKey: Constants.GrowAnimationKey) {
+            //changeScaleAnimated(1.45, toValue: 1, duration: 0.10, key: Constants.ShrinkAnimationKey)
+        // }
+    //}
 
 }

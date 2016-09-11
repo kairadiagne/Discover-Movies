@@ -28,7 +28,7 @@ class DiscoverDataProvider: NSObject, DataProvider, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! Cell
         let movie = items[indexPath.row]
-        let imageURL = TMDbImageRouter.BackDropMedium(path: movie.backDropPath).url ?? nil
+        let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url ?? nil
         cell.configure(movie, imageURL: imageURL)
         return cell
     }

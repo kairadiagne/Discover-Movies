@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Set up revealcontroller
         let menuViewController =  MenuViewController.instantiatefromStoryboard() // RearViewController
-        let topListViewController = TopListViewController(nibName: String(describing: ListViewController), bundle: nil)
+        let topListViewController = TopListViewController(nibName: String(describing: ListViewController.self), bundle: nil)
         let frontViewController = UINavigationController(rootViewController: topListViewController)
         revealViewController = SWRevealViewController(rearViewController: menuViewController, frontViewController: frontViewController)
         

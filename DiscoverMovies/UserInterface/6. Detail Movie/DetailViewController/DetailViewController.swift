@@ -77,11 +77,11 @@ class DetailViewController: BaseViewController {
     // MARK: Actions
     
     @IBAction func favoriteButtonDidGetTapped(_ sender: FavouriteButton) {
-       movieInfoManager.toggleStatusOfMovieInList(.Favorite, status: sender.selected)
+       movieInfoManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
     }
     
     @IBAction func watchListDidGetTapped(_ sender: WatchListButton) {
-       movieInfoManager.toggleStatusOfMovieInList(.Watchlist, status: sender.selected)
+       movieInfoManager.toggleStatusOfMovieInList(.watchlist, status: sender.isSelected)
     }
 
     @IBAction func reviewsButtonGotTapped(_ sender: UIButton) {

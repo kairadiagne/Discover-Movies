@@ -15,7 +15,7 @@ class MenuViewController: UITableViewController {
     
     class func instantiatefromStoryboard() -> MenuViewController {
         let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: MenuViewController)) as! MenuViewController
+        return storyboard.instantiateViewController(withIdentifier: String(describing: MenuViewController.self)) as! MenuViewController
     }
     
     // MARK: Properties
@@ -25,7 +25,7 @@ class MenuViewController: UITableViewController {
     fileprivate let userService = TMDbUserService()
 
     fileprivate var signedIn: Bool {
-        return (TMDbSessionManager.shared.signInStatus == .Signedin) ?? false
+        return (TMDbSessionManager.shared.signInStatus == .signedin) ?? false
     }
     
     fileprivate var presentedRow = 1
@@ -59,19 +59,19 @@ class MenuViewController: UITableViewController {
     // MARK: Navigation
     
     func showTopListViewController() {
-        let topListVieWController = TopListViewController(nibName: String(describing: ListViewController), bundle: nil)
+        let topListVieWController = TopListViewController(nibName: String(describing: ListViewController.self), bundle: nil)
         let navigationController = UINavigationController(rootViewController: topListVieWController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showWatchListViewController() {
-        let watchListController = AccountListController(coder: .Favorite)
+        let watchListController = AccountListController(list: .favorite)
         let navigationController = UINavigationController(rootViewController: watchListController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showFavoritesViewController() {
-        let favoritesController = AccountListController(coder: .Watchlist)
+        let favoritesController = AccountListController(list: .watchlist)
         let navigationController = UINavigationController(rootViewController: favoritesController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
@@ -138,11 +138,11 @@ class MenuViewController: UITableViewController {
 
 extension MenuViewController: TMDbUserServiceDelegate {
     
-    func user(_ service: TMDbUserService, didLoadUserInfo user: User) {
+    func user(service: TMDbUserService, didLoadUserInfo user: User) {
         menuTableview.updateMenu(signedIn, user: user)
     }
     
-    func user(_ service: TMDbUserService, didFailWithError error: APIError) {
+    func user(service: TMDbUserService, didFailWithError error: APIError) {
         // What to do with this error
     }
 }

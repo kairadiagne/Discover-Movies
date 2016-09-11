@@ -1,5 +1,5 @@
 //
-//  TMDbAPIRouter.swift
+//  APIRouter.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 25/05/16.
@@ -9,57 +9,63 @@
 import Foundation
 import Alamofire
 
-enum TMDbAPIRouter: URLRequestConvertible {
-    case get(endpoint: String, parameters: [String: AnyObject])
-    case post(endpoint: String, parameters: [String: AnyObject], body: [String: AnyObject])
+enum APIRouter: URLRequestConvertible {
+    case get(endPoint: String, queryParams: [String: AnyObject])
+    case post(endPoint: String, queryParams: [String: AnyObject], bodyParams: [String: AnyObject])
     
     var APIKey: String {
         return TMDbSessionInfoStore().APIKey
     }
     
-    var URLRequest: NSMutableURLRequest {
+    var method: HTTPMethod {
+        switch self {
+        case .get:
+            return .get
+        case .post:
+            return .post
+        }
+    }
+    
+    var path: String {
+        switch self {
+        case .get(let endpoint, _):
+            return endpoint
+        case .post(let endpoint, _, _):
+            return endpoint
+        }
+    }
+    
+    func asURLRequest() throws -> URLRequest {
+        // Create url 
+        let url = try TMDbAPI.BaseURL.asURL()
         
-        var method: Alamofire.Method {
-            switch self {
-            case .get:
-                return .GET
-            case .post:
-                return .POST
-            }
+        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        urlRequest.httpMethod = method.rawValue
+        
+        switch self {
+        case .get(_, var queryParams):
+            queryParams["api_key"] = APIKey as AnyObject?
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: queryParams)
+        case .post(_, var queryParams, let bodyParams):
+            queryParams["api_key"] = APIKey as AnyObject?
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: queryParams)
+            urlRequest = try URLEncoding.httpBody.encode(urlRequest, with: bodyParams)
         }
         
-        let result: (path: String, parameters: [String: AnyObject]?) = {
-            
-            switch self {
-            case .get(let endpoint , var parameters):
-                parameters["api_key"] = APIKey as AnyObject?
-                return (endpoint, parameters)
-            case .post(let endpoint, var parameters, _):
-                parameters["api_key"] = APIKey as AnyObject?
-                return (endpoint, parameters)
-            }
-            
-        }()
-    
-        
-        let body: [String: AnyObject]? = {
-            switch self {
-            case .post(_, _, let body):
-                return body
-            default: return nil
-            }
-        }()
-    
-        var URL = Foundation.URL(string: TMDbAPI.BaseURL)!
-        URL = URL.appendingPathComponent(result.path)
-        let URLRequest = Foundation.URLRequest(url: URL)
-        
-        let QueryEncoding = Alamofire.ParameterEncoding.URLEncodedInURL
-        let JSONEncoding = Alamofire.ParameterEncoding.JSON
-        let (encodeRequest, _) = QueryEncoding.encode(URLRequest, parameters: result.parameters)
-        let (finalRequest, _) = JSONEncoding.encode(encodeRequest.URLRequest, parameters: body)
-        finalRequest.HTTPMethod = method.rawValue
-        
-        return finalRequest
+        return urlRequest
     }
+    
 }
+    
+
+
+
+
+
+    
+    
+    
+    
+
+
+

@@ -16,13 +16,13 @@ class TopListViewController: DiscoverListViewController {
     
     var switchListControl: UISegmentedControl!
     
-    fileprivate var currentList: TMDbTopList = .Popular
+    fileprivate var currentList: TMDbTopList = .popular
     
-    fileprivate let popularListManager = TMDbTopListDataManager(list: .Popular)
+    fileprivate let popularListManager = TMDbTopListDataManager(list: .popular)
     
-    fileprivate let topRatedListManager = TMDbTopListDataManager(list: .TopRated)
+    fileprivate let topRatedListManager = TMDbTopListDataManager(list: .topRated)
     
-    fileprivate let upcomingListManager = TMDbTopListDataManager(list: .Upcoming)
+    fileprivate let upcomingListManager = TMDbTopListDataManager(list: .upcoming)
     
     // MARK: View Controller Life Cycle
 
@@ -45,17 +45,17 @@ class TopListViewController: DiscoverListViewController {
      
         let loadingSelector = #selector(TopListViewController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(TopListViewController.dataDidLoadTopNotification(_:))
-        popularListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
-        topRatedListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
-        upcomingListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        popularListManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        topRatedListManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        upcomingListManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        popularListManager.removeObserver(self)
-        topRatedListManager.removeObserver(self)
-        upcomingListManager.removeObserver(self)
+        popularListManager.remove(observer: self)
+        topRatedListManager.remove(observer: self)
+        upcomingListManager.remove(observer: self)
         
         loadData(currentList, force: true)
     }
@@ -65,11 +65,11 @@ class TopListViewController: DiscoverListViewController {
     func switchTopList(_ control: UISegmentedControl) {
         switch switchListControl.selectedSegmentIndex {
         case 0:
-            currentList = .Popular
+            currentList = .popular
         case 1:
-            currentList = .TopRated
+            currentList = .topRated
         case 2:
-            currentList = .Upcoming
+            currentList = .upcoming
         default:
             return
         }
@@ -78,16 +78,16 @@ class TopListViewController: DiscoverListViewController {
     }
     
     func loadData(_ list: TMDbTopList, force: Bool) {
-        managerForList(list)?.reloadIfNeeded(force)
+        managerForList(list)?.reloadIfNeeded(forceOnline: force)
     }
     
     func managerForList(_ list: TMDbTopList) -> TMDbTopListDataManager? {
         switch list {
-        case .Popular:
+        case .popular:
             return popularListManager
-        case .TopRated:
+        case .topRated:
             return topRatedListManager
-        case .Upcoming:
+        case .upcoming:
             return upcomingListManager
         default:
             return nil

@@ -59,8 +59,8 @@ public class TMDbSignInService {
     public func requestToken() {
         let endPoint = "authentication/token/new"
         
-        Alamofire.request(TMDbAPIRouter.GET(endpoint: endPoint, parameters: [:]))
-            .validate().responseObject { (response: Response<RequestToken, NSError>) in
+        Alamofire.request(APIRouter.get(endPoint: endPoint, queryParams: [:])) //endPoint lowercase
+            .validate().responseObject { (response: DataResponse<RequestToken>) in
                 
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)
@@ -73,7 +73,7 @@ public class TMDbSignInService {
                     
                     let path: String = "\(TMDbAPI.AuthenticateURL)\(requestToken.token)"
                     
-                    if let url = NSURL(string: path) {
+                    if let url = URL(string: path) {
                         self.delegate?.signIn(service: self, didReceiveAuthorizationURL: url)
                     } else {
                         self.delegate?.signIn(service: self, didFailWithError: .generic)
@@ -91,7 +91,7 @@ public class TMDbSignInService {
         let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
         let endPoint = "authentication/session/new"
         
-        Alamofire.request(TMDbAPIRouter.GET(endpoint: endPoint, parameters: paramaters))
+        Alamofire.request(APIRouter.get(endPoint: endPoint, queryParams: paramaters))
             .validate().responseJSON { response in
                 
                 guard response.result.error == nil else {
@@ -100,10 +100,10 @@ public class TMDbSignInService {
                     return
                 }
                 
-                if let sessionID = response.result.value?["session_id"] as? String {
-                    self.sessionInfoProvider.saveSessionID(sessionID)
-                    self.delegate?.signInServiceDidSignIn(_service: self)
-                }
+                // if let sessionID = response.result.value?["session_id"] as? String {
+                    // self.sessionInfoProvider.saveSessionID(sessionID)
+                    //self.delegate?.signInServiceDidSignIn(_service: self)
+                //}
         }
     }
 

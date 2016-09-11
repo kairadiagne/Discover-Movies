@@ -28,8 +28,8 @@ class AccountListDataProvider: NSObject, DataProvider, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! Cell
         let movie = items[indexPath.row]
-        let imageURL = TMDbImageRouter.PosterSmall(path: movie.posterPath).url ?? URL()
-        cell.configure(movie, imageURL: imageURL)
+        // let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url ?? URL()
+        // cell.configure(movie, imageURL: imageURL)
         return cell
     }
     

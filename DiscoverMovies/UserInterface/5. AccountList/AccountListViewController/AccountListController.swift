@@ -60,20 +60,20 @@ class AccountListController: ListViewController, MenuButtonPresentable, PullToRe
         
         let loadingSelector = #selector(AccountListController.dataDidStartLoadingNotification(_:))
         let didLoadSelector = #selector(AccountListController.dataDidLoadTopNotification(_:))
-        accountListManager.addObserver(self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
+        accountListManager.add(observer: self, loadingSelector: loadingSelector, didLoadSelector: didLoadSelector)
         accountListManager.failureDelegate = self
-        accountListManager.reloadIfNeeded(false)
+        accountListManager.reloadIfNeeded(forceOnline: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        accountListManager.removeObserver(self)
+        accountListManager.remove(observer: self)
     }
     
     // MARK: Refresh
     
     func refresh(_ sender: UIRefreshControl) {
-        accountListManager.reloadIfNeeded(true)
+        accountListManager.reloadIfNeeded(forceOnline: true)
     }
     
     // MARK: Notifications 

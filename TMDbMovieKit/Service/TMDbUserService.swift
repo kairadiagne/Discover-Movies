@@ -14,11 +14,11 @@ public protocol TMDbUserServiceDelegate: class {
     func user(_ service: TMDbUserService, didFailWithError error: APIError)
 }
 
-open class TMDbUserService {
+public class TMDbUserService {
     
     // MARK: - Properties
     
-    open weak var delegate: TMDbUserServiceDelegate?
+    public weak var delegate: TMDbUserServiceDelegate?
     
     fileprivate let sessionInfoProvider: SessionInfoContaining
     
@@ -33,7 +33,7 @@ open class TMDbUserService {
     
     // MARK: - API Calls
     
-    open func getUserInfo() {
+    public func getUserInfo() {
         guard let sessionID = sessionInfoProvider.sessionID else {
             self.delegate?.user(self, didFailWithError: .notAuthorized)
             return 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<Page<ItemType>> {
+public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<Page<ItemType>> {
     
     // MARK: - Properties
     
@@ -22,7 +22,7 @@ open class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<Pag
     
     // MARK: - Calls 
     
-    open func loadMore() {
+    public func loadMore() {
         guard isLoading == false, let lastFetchedPage = pages.last, let nextPage = lastFetchedPage.nextPage else { return }
         loadOnline(paramaters: paramaters, page: nextPage)
     }

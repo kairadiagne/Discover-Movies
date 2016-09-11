@@ -13,11 +13,11 @@ public protocol DataManagerFailureDelegate: class {
     func listDataManager(_ manager: AnyObject, didFailWithError error: APIError)
 }
 
-open class DataManager<ModelType: DictionaryRepresentable> {
+public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Properties
     
-    open weak var failureDelegate: DataManagerFailureDelegate?
+    public weak var failureDelegate: DataManagerFailureDelegate?
     
     let sessionInfoProvider: SessionInfoContaining
     
@@ -56,7 +56,7 @@ open class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Public API
     
-    open func reloadIfNeeded(_ forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
+    public func reloadIfNeeded(_ forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
         guard cachedData.needsRefresh || forceOnline || params != nil else {
             
             if firstLoad { /// Bug on first load it should always post this notification
@@ -147,12 +147,12 @@ open class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Notifications
     
-    open func addObserver(_ observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
+    public func addObserver(_ observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
         notificationCenter.addObserver(observer, selector: loadingSelector, name: NSNotification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
         notificationCenter.addObserver(observer, selector: didLoadSelector, name: NSNotification.Name(rawValue: DataManagerNotification.DidLoad), object: self)
     }
     
-    open func addLoadingObserver(_ observer: AnyObject, selector: Selector) {
+    public func addLoadingObserver(_ observer: AnyObject, selector: Selector) {
         notificationCenter.addObserver(observer, selector: selector, name: NSNotification.Name(rawValue: DataManagerNotification.DidStartLoading), object: self)
     }
     

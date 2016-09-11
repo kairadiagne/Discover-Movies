@@ -14,7 +14,7 @@ public enum TMDBSigInStatus {
     case notAvailable
 }
 
-open class TMDbSessionManager {
+public class TMDbSessionManager {
     
     // MARK: - Types
     
@@ -24,9 +24,9 @@ open class TMDbSessionManager {
     
     // MARK: - Properties
     
-    open static let shared = TMDbSessionManager()
+    public static let shared = TMDbSessionManager()
     
-    open var user: User? {
+    public var user: User? {
         return sessionInfoProvider.user
     }
     
@@ -47,13 +47,13 @@ open class TMDbSessionManager {
     
     // MARK: - API Key
     
-    open func registerAPIKey(_ key: String) {
+    public func registerAPIKey(_ key: String) {
         sessionInfoProvider.saveAPIKey(key)
     }
     
     // MARK: - Signin Status
     
-    open var signInStatus: TMDBSigInStatus {
+    public var signInStatus: TMDBSigInStatus {
         if sessionInfoProvider.sessionID != nil { return .signedin }
         if publicModeActivated { return .publicMode }
         return .notAvailable
@@ -65,17 +65,17 @@ open class TMDbSessionManager {
     
     // MARK: - Public Mode
     
-    open func activatePublicMode() {
+    public func activatePublicMode() {
         UserDefaults.standard.set(true, forKey: "userIsInpublicMode")
     }
     
-    open func deactivatePublicMode() {
+    public func deactivatePublicMode() {
         UserDefaults.standard.set(false, forKey: "userIsInpublicMode")
     }
     
     // MARK: - Sign Out
     
-    open func signOut() {
+    public func signOut() {
         sessionInfoProvider.clearUserData()
     }
     

@@ -15,7 +15,7 @@ public protocol TMDbMovieInfoManagerDelegate: class {
     func movieInfoManagerDidReceiverError(_ error: APIError)
 }
 
-open class TMDbMovieInfoManager {
+public class TMDbMovieInfoManager { // Change open to public
     
     // MARK: - Properties
     

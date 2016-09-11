@@ -18,7 +18,7 @@ class APIErrorHandler: ErrorHandling {
         guard let error = error as? URLError else { return .generic }
         
         switch error {
-        case .notConnectedToInternet:
+        case NSURLError.NoInternetConnection:
             return .noInternetConnection
         case .networkConnectionLost:
             return .noInternetConnection

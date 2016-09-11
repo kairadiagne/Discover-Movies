@@ -33,7 +33,7 @@ public protocol TMDbSignInDelegate: class {
     func signInServiceDidSignIn(_ service: TMDbSignInService)
 }
 
-open class TMDbSignInService {
+public class TMDbSignInService {
     
     // MARK: - Properties
     
@@ -56,7 +56,7 @@ open class TMDbSignInService {
     
     // MARK: - Sign In 
     
-    open func requestToken() {
+    public func requestToken() {
         let endPoint = "authentication/token/new"
         
         Alamofire.request(TMDbAPIRouter.GET(endpoint: endPoint, parameters: [:]))
@@ -82,7 +82,7 @@ open class TMDbSignInService {
         }
     }
     
-    open func requestSessionID() {
+    public func requestSessionID() {
         guard let token = token?.token else {
             delegate?.signIn(self, didFailWithError: .generic)
             return

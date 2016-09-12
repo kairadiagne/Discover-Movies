@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111837101D8748B200C58DF3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118370F1D8748B200C58DF3 /* Repository.swift */; };
 		111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 111942461CCB8CA0001CF39B /* Assets.xcassets */; };
 		111942551CCB8CA0001CF39B /* DiscoverMoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942541CCB8CA0001CF39B /* DiscoverMoviesTests.swift */; };
 		111942671CCB8CBE001CF39B /* TMDbMovieKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 111942661CCB8CBE001CF39B /* TMDbMovieKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -160,6 +161,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1118370F1D8748B200C58DF3 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		111942461CCB8CA0001CF39B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1119424B1CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 		EA08B7F31CF7588800EC804B /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				1118370F1D8748B200C58DF3 /* Repository.swift */,
 				119A1F3D1D415B0D00AC61C7 /* CachedData.swift */,
 				11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */,
 				11B350801D848B90001B6A87 /* PagingDataManager.swift */,
@@ -1268,6 +1271,7 @@
 				111943081CCB8EE4001CF39B /* Review.swift in Sources */,
 				11924C811D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift in Sources */,
 				EA6487B81CE4BC9D00452DD0 /* MovieCredit.swift in Sources */,
+				111837101D8748B200C58DF3 /* Repository.swift in Sources */,
 				EA782B7F1CE0C50000DC38AD /* TMDbAccountListDataManagers.swift in Sources */,
 				EA782B8F1CE0E26C00DC38AD /* Page.swift in Sources */,
 				1119430A1CCB8EE4001CF39B /* Video.swift in Sources */,

@@ -21,36 +21,27 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     let errorHandler: ErrorHandling
     
-    let writesDataToDisk: Bool
-    
-    let identifier: String
+    let cacheIdentifier: String?
     
     var cachedData: CachedData<ModelType>
+    
+    let cacheRepository = Repository.cache
     
     var paramaters = [String: AnyObject]()
     
     var isLoading = false
     
-    fileprivate let cacheQueue = DispatchQueue(label: "com.discoverMovies.app.cache")
-    
-    fileprivate let notificationCenter = NotificationCenter.default
-    
     // MARK: - Initialize
     
-    init(identifier: String, errorHandler: ErrorHandling, writesToDisk: Bool, refreshTimeOut: TimeInterval) {
-        self.identifier = identifier
+    init( errorHandler: ErrorHandling, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
         self.errorHandler = errorHandler
-        self.writesDataToDisk = writesToDisk
         self.cachedData = CachedData<ModelType>(refreshTimeOut: refreshTimeOut)
-        
-        guard writesToDisk else { return }
-        self.startLoading()
-        self.loadDataFromDisk()
+        self.cacheIdentifier = cacheIdentifier
     }
     
     // MARK: - Public API
     
-    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
+    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) { // return bool if loaded or not Zie intergamma 
         guard cachedData.needsRefresh || forceOnline || params != nil else { return } // On First load send loadingnotification when data is still valid
         if let params = params {
            paramaters = defaultParamaters().merge(params)
@@ -99,16 +90,13 @@ public class DataManager<ModelType: DictionaryRepresentable> {
                 switch response.result {
                 case .success(let data):
                     self.handle(data: data)
-                    self.cacheData()
+                    self.persistDataIfNeeded()
                 case .failure(let error):
                     let error = self.errorHandler.categorize(error: error)
                     self.failureDelegate?.dataManager(self, didFailWithError: error)
                 }
-        
         }
-        
     }
-
     
     // MARK: - ResponseHandling
 
@@ -117,9 +105,20 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         postDidLoadNotification()
     }
     
-    func cacheData() {
-        if self.writesDataToDisk {
-            self.writeDataToDisk()
+    // MARK: - Caching
+    
+    func persistDataIfNeeded() {
+        guard let cacheIdentifier = self.cacheIdentifier else { return }
+        guard cachedData.data != nil else { return }
+        cacheRepository.persistData(data: cachedData, withIdentifier: cacheIdentifier)
+    }
+    
+    func loadData() {
+        guard let cacheIdentifier = cacheIdentifier else { return }
+        self.startLoading()
+        if let cachedData = cacheRepository.restoreData(forIdentifier: cacheIdentifier) as? CachedData<ModelType> {
+            print(cachedData)
+            self.postLoadingNotification()
         }
     }
     
@@ -142,57 +141,25 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     }
     
     public func add(loadingObserver observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didStartLoading, object: self)
+        NotificationCenter.default.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didStartLoading, object: self)
     }
     
     public func add(didLoadObserver observer: AnyObject, selector: Selector) {
-        notificationCenter.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didLoad, object: self)
+        NotificationCenter.default.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didLoad, object: self)
     }
     
     public func remove(observer: AnyObject) {
-        notificationCenter.removeObserver(observer)
+        NotificationCenter.default.removeObserver(observer)
     }
     
     func postLoadingNotification() {
-        notificationCenter.post(name: Notification.Name.DataManager.didStartLoading, object: self)
+        NotificationCenter.default.post(name: Notification.Name.DataManager.didStartLoading, object: self)
     }
     
     func postDidLoadNotification() {
-        notificationCenter.post(name: Notification.Name.DataManager.didLoad, object: self)
+        NotificationCenter.default.post(name: Notification.Name.DataManager.didLoad, object: self)
     }
     
-    // MARK: - Caching
-    
-    // Caching does not seem to be working after Swift 3 Update
-    
-    func writeDataToDisk() {
-        // Submit write for asycnhronous execution and return immediately
-        cacheQueue.async { [weak self] in
-            guard let strongSelf = self else { return }
-            let path = strongSelf.getCachesDirectory() + strongSelf.identifier
-            NSKeyedArchiver.archiveRootObject(strongSelf.cachedData, toFile: path)
-        }
-    }
-    
-    func loadDataFromDisk() {
-        self.startLoading()
-        
-        // Wait until read completes
-        cacheQueue.sync { [weak self] in
-            guard let strongSelf = self else { return }
-            let path = strongSelf.getCachesDirectory() + strongSelf.identifier
-            guard let cachedData = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? CachedData<ModelType> else { return }
-            strongSelf.cachedData = cachedData
-            self?.stopLoading()
-        }
-    }
-    
-    func getCachesDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
-        let cachesDirectory = paths[0]
-        return cachesDirectory
-    }
-
 }
 
 // MARK: - DataManagerNotification 

@@ -21,7 +21,7 @@ public class TMDbAccountListDataManager: PagingDataManager<Movie> {
     public init(list: TMDbAccountList) {
         self.list = list
         self.sessionInfoProvider = TMDbSessionInfoStore()
-        super.init(identifier: list.name, writesToDisk: true, refreshTimeOut: 300)
+        super.init(refreshTimeOut: 300, cacheIdentifier: list.name)
     }
 
     // MARK: - Endpoint

@@ -16,8 +16,8 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
     
     // MARK: - Initialize
     
-    init(identifier: String, writesToDisk: Bool, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandler()) {
-        super.init(identifier: identifier, errorHandler: errorHandler , writesToDisk: writesToDisk, refreshTimeOut: refreshTimeOut)
+    init(refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil, errorHandler: ErrorHandling = APIErrorHandler()) {
+        super.init(errorHandler: errorHandler, refreshTimeOut: refreshTimeOut, cacheIdentifier: cacheIdentifier)
     }
     
     // MARK: - Calls 
@@ -35,6 +35,9 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
         }
         
         pages.append(data)
+        // NOTE: - Here lies the error (Because cachedData.data is not set everytime we try to cache nil which fails)
+        // For testing
+        cachedData.add(data)
         postDidLoadNotification()
     }
 

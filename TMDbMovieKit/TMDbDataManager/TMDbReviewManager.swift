@@ -21,7 +21,7 @@ public class TMDbReviewManager: PagingDataManager<Review> {
     public init(movieID: Int) {
         self.movieID = movieID
         self.sessionInfoProvider = TMDbSessionInfoStore()
-        super.init(identifier: "", writesToDisk: true, refreshTimeOut: 300)
+        super.init(refreshTimeOut: 300)
     }
     
     // MARK: - Endpoint

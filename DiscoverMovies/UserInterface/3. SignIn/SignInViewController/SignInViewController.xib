@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController" customModule="DiscoverMovies" customModuleProvider="target">
@@ -12,20 +13,18 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="SignInView" customModule="DiscoverMovies" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-or-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yf-KF-CKh">
-                    <rect key="frame" x="172" y="394" width="31" height="11"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="11" id="PvS-H8-iSI"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1s-LN-CSv">
-                    <rect key="frame" x="20" y="422" width="335" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="zys-fz-3Po"/>
                     </constraints>
@@ -35,13 +34,11 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover movies" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6c-me-zhm">
-                    <rect key="frame" x="125" y="226" width="126" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-vG-QgW">
-                    <rect key="frame" x="156" y="116" width="64" height="102"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-vG-QgW">
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="102" id="UCZ-Yf-Bro"/>
                         <constraint firstAttribute="height" constant="102" id="p86-LH-3IE"/>
@@ -49,7 +46,6 @@
                     <state key="normal" image="Movie"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-ks-LmZ">
-                    <rect key="frame" x="20" y="329" width="335" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="XVW-ni-xiJ"/>
                     </constraints>
@@ -59,7 +55,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ixj-ks-LmZ" secondAttribute="trailing" constant="20" symbolic="YES" id="4H4-WK-Dn6"/>
                 <constraint firstItem="ixj-ks-LmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="7Ym-IK-fzl"/>
@@ -75,7 +71,6 @@
                 <constraint firstItem="5Yf-KF-CKh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jHh-Wd-C7a"/>
                 <constraint firstAttribute="trailing" secondItem="V1s-LN-CSv" secondAttribute="trailing" constant="20" symbolic="YES" id="zhN-T9-f7B"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
                 <outlet property="logoImage" destination="tRY-vG-QgW" id="PqY-HU-aCq"/>
                 <outlet property="orLabel" destination="5Yf-KF-CKh" id="o2o-3K-A0o"/>
@@ -83,7 +78,7 @@
                 <outlet property="signInButton" destination="ixj-ks-LmZ" id="DoF-GH-CqH"/>
                 <outlet property="titleLabel" destination="s6c-me-zhm" id="2hv-ic-Iuc"/>
             </connections>
-            <point key="canvasLocation" x="286.5" y="378.5"/>
+            <point key="canvasLocation" x="-114" y="23"/>
         </view>
     </objects>
     <resources>

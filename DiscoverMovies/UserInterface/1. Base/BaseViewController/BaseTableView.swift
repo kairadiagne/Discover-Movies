@@ -18,7 +18,7 @@ class BaseTableView: UITableView, BackgroundMessagePresentable {
         self.tableFooterView = UIView()
     }
     
-    func scrollToTop() {
+    func scrollToTop() { // Extension 
         if numberOfRows(inSection: 0) > 0 {
             let indexPath = IndexPath(row: 0, section: 0)
             scrollToRow(at: indexPath, at: .top, animated: false)

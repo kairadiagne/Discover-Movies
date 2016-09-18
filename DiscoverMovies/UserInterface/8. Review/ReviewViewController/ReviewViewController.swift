@@ -75,7 +75,7 @@ class ReviewViewController: ListViewController {
     }
     
     fileprivate func updateTableView() {
-        reviewDataProvider.updateWithItems(reviewManager.allItems())
+        reviewDataProvider.updateWithItems(reviewManager.allItems)
         tableView.reloadData()
     }
     

@@ -1,5 +1,5 @@
 //
-//  Page.swift
+//  List.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 09/05/16.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct Page<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
+public struct List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
     
     // MARK: - Properties
     
-    var page: Int
-    var pageCount: Int
-    var resultCount: Int
-    var items: [ModelType] = []
+    fileprivate(set) var page: Int
+    fileprivate(set) var pageCount: Int
+    fileprivate(set) var resultCount: Int
+    fileprivate(set) var items: [ModelType] = []
     
     var nextPage: Int? {
         return page < pageCount ? page + 1 : nil
@@ -36,7 +36,7 @@ public struct Page<ModelType: DictionaryRepresentable>: DictionaryRepresentable 
         self.resultCount = dict["total_results"] as? Int ?? 0
         
         if let itemDicts = dict["results"] as? [[String: AnyObject]] {
-            self.items = itemDicts.map { return ModelType(dictionary: $0) }.flatMap { $0 }
+            self.items = itemDicts.flatMap { return ModelType(dictionary: $0) }
         }
     }
     
@@ -47,6 +47,15 @@ public struct Page<ModelType: DictionaryRepresentable>: DictionaryRepresentable 
         dictionary["total_results"] = resultCount as AnyObject?
         dictionary["results"] = items.map { return $0.dictionaryRepresentation() } as AnyObject
         return dictionary
+    }
+    
+    // MARK: - Update
+    
+    mutating func update(withNetxPage page: Int, pageCount: Int, resultCount: Int, items: [ModelType]) {
+        self.page = page
+        self.pageCount = pageCount
+        self.resultCount = resultCount
+        self.items.append(contentsOf: items)
     }
     
 }

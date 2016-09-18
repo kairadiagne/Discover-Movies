@@ -104,7 +104,7 @@ class TopListViewController: DiscoverListViewController {
     }
     
     fileprivate func updateTableView(_ scrollToTop: Bool = false) {
-        guard let items = managerForList(currentList)?.allItems() else { return }
+        guard let items = managerForList(currentList)?.allItems else { return }
         tableViewDataProvider.updateWithItems(items)
         tableView.reloadData()
         
@@ -121,7 +121,7 @@ class TopListViewController: DiscoverListViewController {
     }
     
     func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
-        if tableViewDataProvider.itemCount - 10 == (indexPath as NSIndexPath).row {
+        if tableViewDataProvider.itemCount - 10 == indexPath.row {
             managerForList(currentList)?.loadMore()
         }
     }

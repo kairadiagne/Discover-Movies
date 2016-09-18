@@ -33,16 +33,18 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Initialize
     
-    init( errorHandler: ErrorHandling, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
+    init(errorHandler: ErrorHandling, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
         self.errorHandler = errorHandler
-        self.cachedData = CachedData<ModelType>(refreshTimeOut: refreshTimeOut)
         self.cacheIdentifier = cacheIdentifier
+        self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
+        self.loadData()
     }
     
     // MARK: - Public API
     
-    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) { // return bool if loaded or not Zie intergamma 
-        guard cachedData.needsRefresh || forceOnline || params != nil else { return } // On First load send loadingnotification when data is still valid
+    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
+        guard cachedData.needsRefresh || forceOnline || params != nil else { return }
+        
         if let params = params {
            paramaters = defaultParamaters().merge(params)
         } else {
@@ -55,7 +57,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     // MARK: - Paramaters
     
     /**
-     Overrride this method to specify a set of default paramaters needed with every request
+     Designated for subclass: Specifies a set of default paramaters that are required for every request
     */
     
     func defaultParamaters() -> [String: AnyObject] {
@@ -65,7 +67,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     // MARK: - Endpoint
     
     /** 
-     Override this method to set the endpoint for the GET call
+     Designated for subclass: Specfies the endpoint for the GET call
     */
     
     func endpoint() -> String {
@@ -117,7 +119,8 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         guard let cacheIdentifier = cacheIdentifier else { return }
         self.startLoading()
         if let cachedData = cacheRepository.restoreData(forIdentifier: cacheIdentifier) as? CachedData<ModelType> {
-            print(cachedData)
+            self.stopLoading()
+            self.cachedData = cachedData
             self.postLoadingNotification()
         }
     }
@@ -152,7 +155,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         NotificationCenter.default.removeObserver(observer)
     }
     
-    func postLoadingNotification() {
+    func postLoadingNotification() { // Handle from the UI Level
         NotificationCenter.default.post(name: Notification.Name.DataManager.didStartLoading, object: self)
     }
     

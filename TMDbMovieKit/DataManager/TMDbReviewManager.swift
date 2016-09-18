@@ -1,33 +1,33 @@
 //
-//  TMDbTopListDataManagers.swift
+//  TMDbReviewManager.swift
 //  DiscoverMovies
 //
-//  Created by Kaira Diagne on 10-09-16.
+//  Created by Kaira Diagne on 09/05/16.
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
 import Foundation
 
-public class TMDbTopListDataManager: PagingDataManager<Movie> {
+public class TMDbReviewManager: ListDataManager<Review> {
     
     // MARK: - Properties
+
+    let movieID: Int
     
     let sessionInfoProvider: SessionInfoContaining
     
-    let list: TMDbListType
-    
     // MARK: - Initialize
     
-    public init(list: TMDbTopList) {
-        self.list = list
+    public init(movieID: Int) {
+        self.movieID = movieID
         self.sessionInfoProvider = TMDbSessionInfoStore()
-        super.init(refreshTimeOut: 3600, cacheIdentifier: list.name)
+        super.init(refreshTimeOut: 300)
     }
     
     // MARK: - Endpoint
     
     override func endpoint() -> String {
-        return "movie/\(list.name)"
+        return "movie/\(movieID)/reviews"
     }
-    
+
 }

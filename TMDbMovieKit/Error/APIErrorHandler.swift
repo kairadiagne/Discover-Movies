@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol ErrorHandling {
-    func categorize(error: Error) -> APIError
-}
-
 class APIErrorHandler: ErrorHandling {
     
     func categorize(error: Error) -> APIError {

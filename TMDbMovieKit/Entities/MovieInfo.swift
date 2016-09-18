@@ -12,7 +12,7 @@ public struct MovieInfo: DictionaryRepresentable {
     
     // MARK: - Properties
     
-    public fileprivate(set) var similar: Page<Movie>?
+    public fileprivate(set) var similar: List<Movie>?
     public fileprivate(set) var credits: MovieCredit?
     public fileprivate(set) var trailers: [Video]?
     
@@ -20,7 +20,7 @@ public struct MovieInfo: DictionaryRepresentable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         if let similarMovieDict = dict["similar"] as? [String: AnyObject] {
-            self.similar = Page<Movie>(dictionary: similarMovieDict)
+            self.similar = List<Movie>(dictionary: similarMovieDict)
         }
         
         if let creditDict = dict["credits"] as? [String: AnyObject] {
@@ -52,7 +52,8 @@ public struct MovieInfo: DictionaryRepresentable {
     }
 
     public func trailer() -> Video? {
-        return trailers?.first
+        return trailers?.filter { $0.type == "Trailer" }.first
     }
     
 }
+

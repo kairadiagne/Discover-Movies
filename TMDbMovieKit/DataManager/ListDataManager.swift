@@ -1,5 +1,5 @@
 //
-//  PagingDataManager.swift
+//  ListDataManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10-09-16.
@@ -8,11 +8,13 @@
 
 import Foundation
 
-public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<Page<ItemType>> {
+public class ListDataManager<ItemType: DictionaryRepresentable>: DataManager<List<ItemType>> {
     
     // MARK: - Properties
     
-    fileprivate var pages: [Page<ItemType>] = []
+    public var allItems: [ItemType] {
+        return cachedData.data?.items ?? []
+    }
     
     // MARK: - Initialize
     
@@ -23,30 +25,24 @@ public class PagingDataManager<ItemType: DictionaryRepresentable>: DataManager<P
     // MARK: - Calls 
     
     public func loadMore() {
-        guard isLoading == false, let lastFetchedPage = pages.last, let nextPage = lastFetchedPage.nextPage else { return }
+        guard isLoading == false else { return }
+        guard let nextPage = cachedData.data?.nextPage else { return }
         loadOnline(paramaters: paramaters, page: nextPage)
     }
     
     // MARK: - ResponseHandling
     
-    override func handle(data: Page<ItemType>) {
+    override func handle(data: List<ItemType>) {
         if data.page == 1 {
-            pages = []
+            cachedData.clear()
+            cachedData.add(data)
+        } else {
+            cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount , items: data.items)
         }
         
-        pages.append(data)
-        // NOTE: - Here lies the error (Because cachedData.data is not set everytime we try to cache nil which fails)
-        // For testing
-        cachedData.add(data)
         postDidLoadNotification()
     }
 
-    // MARK: - Items 
-    
-    open func allItems() -> [ItemType] {
-        return pages.reduce([], { $0 + $1.items })
-    }
-    
 }
 
 

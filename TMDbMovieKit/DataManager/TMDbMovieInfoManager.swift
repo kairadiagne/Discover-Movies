@@ -39,7 +39,7 @@ public class TMDbMovieInfoManager {
         
         let endpoint = "movie/\(movieID)"
         
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate()
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate() // Chain calls
             .responseObject { (response: DataResponse<MovieInfo>) in
                 
                 switch response.result {

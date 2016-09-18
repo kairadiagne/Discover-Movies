@@ -10,16 +10,18 @@ import Foundation
 
 class CachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
     
+    typealias DataType = ModelType
+    
     // MARK: - Properties
     
-    fileprivate(set) var data: ModelType?
+    var data: ModelType?
     
     var needsRefresh: Bool {
         guard let lastUpdate = lastUpdate else { return true }
         return Date().timeIntervalSince(lastUpdate) > refreshTimeOut
     }
     
-    var dateLastUpdated: Date? {
+    var timeLastUpdated: Date? {
         return lastUpdate
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbAccountListDataManager: PagingDataManager<Movie> {
+public class TMDbAccountListDataManager: ListDataManager<Movie> {
     
     // MARK: - Properties 
     

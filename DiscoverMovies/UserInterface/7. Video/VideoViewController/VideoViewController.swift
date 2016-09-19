@@ -13,7 +13,7 @@ import MBProgressHUD
 
 class VideoViewController: UIViewController, ProgressHUDPresentable {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var progressHUD: MBProgressHUD?
     
@@ -21,7 +21,7 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
     
     var video: Video!
     
-    // MARK: Initialization
+    // MARK: - Initialize
   
     required init(video: Video) {
         super.init(nibName: nil, bundle: nil)
@@ -34,7 +34,7 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: View Controller Life Cycle
+    // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class VideoViewController: UIViewController, ProgressHUDPresentable {
     
 }
 
-// MARK: YTPlayerViewDelegate
+// MARK: - YTPlayerViewDelegate
 
 extension VideoViewController: YTPlayerViewDelegate {
     
@@ -79,7 +79,6 @@ extension VideoViewController: YTPlayerViewDelegate {
     
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
         print(error)
-        // Communicate to the user that an error has occured.
     }
     
 }

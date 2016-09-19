@@ -11,7 +11,7 @@ import TMDbMovieKit
 
 class DetailViewController: BaseViewController {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     @IBOutlet weak var detailView: DetailView!
     @IBOutlet var castDataProvider: CastDataProvider!
@@ -25,7 +25,7 @@ class DetailViewController: BaseViewController {
     
     fileprivate var trailer: Video?
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     init(movie: Movie, image: UIImage? = nil) {
         movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
@@ -38,7 +38,7 @@ class DetailViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
    
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +51,8 @@ class DetailViewController: BaseViewController {
         
         detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
         detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
+        
+        detailView.ScrollView.delegate = self
         
         movieInfoManager.delegate = self
         movieInfoManager.loadInfo()
@@ -74,7 +76,7 @@ class DetailViewController: BaseViewController {
         navigationController?.navigationBar.setAsUnclear()
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @IBAction func favoriteButtonDidGetTapped(_ sender: FavouriteButton) {
        movieInfoManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
@@ -92,7 +94,7 @@ class DetailViewController: BaseViewController {
         showTrailer()
     }
 
-    // MARK: Navigation
+    // MARK: - Navigation
     
     fileprivate func showDetail(forMovie movie: Movie) {
         let detailViewController = DetailViewController(movie: movie)
@@ -100,7 +102,7 @@ class DetailViewController: BaseViewController {
     }
     
     fileprivate func showTrailer() {
-        guard let trailer = trailer else { return } // Display alert that trailer is unavailable
+        guard let trailer = trailer else { return } // Display alert that trailer is unavailable 
         let videoController = VideoViewController(video: trailer)
         navigationController?.pushViewController(videoController, animated: true)
     }
@@ -110,6 +112,14 @@ class DetailViewController: BaseViewController {
         navigationController?.pushViewController(reviewViewController, animated: true)
     }
 
+}
+
+extension DetailViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        detailView.moveHeaderOnScroll()
+    }
+    
 }
 
 // MARK: - TMDbMovieInfoManagerDelegate

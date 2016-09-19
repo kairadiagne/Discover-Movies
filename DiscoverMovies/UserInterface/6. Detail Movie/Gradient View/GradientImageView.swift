@@ -10,14 +10,14 @@ import UIKit
 
 class GradientImageView: UIImageView {
     
-    // MARK: Properties
+    // MARK: - Properties
 
     fileprivate(set) var gradientLayer = CAGradientLayer()
     var colors: [CGColor] = [UIColor.backgroundColor().cgColor, UIColor.clear.cgColor]
     var startPoint = CGPoint(x: 0, y: 1)
     var endPoint = CGPoint(x: 0, y: 0.1)
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,7 +27,7 @@ class GradientImageView: UIImageView {
         self.layer.addSublayer(self.gradientLayer)
     }
     
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
     
     override func layoutSubviews() {
         super.layoutSubviews()

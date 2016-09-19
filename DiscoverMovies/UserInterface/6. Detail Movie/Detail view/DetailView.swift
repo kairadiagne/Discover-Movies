@@ -12,9 +12,9 @@ import SDWebImage
 
 class DetailView: BackgroundView {
     
-    // MARK: Outlet Properties
+    // MARK: -  Properties
     
-    @IBOutlet weak var detailScrollView: UIScrollView!
+    @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var contentView: BackgroundView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -39,9 +39,7 @@ class DetailView: BackgroundView {
     @IBOutlet weak var scrollTop: NSLayoutConstraint!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerTop: NSLayoutConstraint!
-    
-    // MARK: Other Properties
-    
+
     fileprivate var didAnimate = false
     
     fileprivate var topInset: CGFloat {
@@ -49,13 +47,13 @@ class DetailView: BackgroundView {
     }
     
     fileprivate var openHeader: CGFloat {
-        let contentInsetY = detailScrollView.contentInset.top
-        let contentOffSetY = detailScrollView.contentOffset.y
+        let contentInsetY = ScrollView.contentInset.top
+        let contentOffSetY = ScrollView.contentOffset.y
         let position = (contentInsetY + contentOffSetY) / contentInsetY
         return min(1, max(0, position))
     }
     
-    // MARK: Setup UI
+    // MARK: - Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -81,22 +79,21 @@ class DetailView: BackgroundView {
         self.readReviewsButton.layer.borderWidth = 1.5
         self.readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
         
-        detailScrollView.delegate = self
-        detailScrollView.bounces = false
+        ScrollView.bounces = false
         
-        // Change for animation
+        // For animation
         self.header.alpha = 0.3
         self.playButton.alpha = 0.3
     }
     
-    // MARK: LifeCycle 
+    // MARK: - LifeCycle
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.detailScrollView.contentInset.top = topInset
+        self.ScrollView.contentInset.top = topInset
     }
 
-    // MARK: Configure
+    // MARK: - Configure
     
     func configure(withMovie movie: Movie, image: UIImage?) {
         titleLabel.text = movie.title
@@ -155,16 +152,12 @@ class DetailView: BackgroundView {
         }
     }
     
-}
-
-// MARK: - UIScrollViewDelegate
-
-extension DetailView: UIScrollViewDelegate {
+    // MARK: - Header
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func moveHeaderOnScroll() {
         headerTop.constant = openHeader * -header.frame.height * 0.8
         playButton.alpha = -openHeader + 1
-        detailScrollView.bounces = detailScrollView.contentOffset.y > topInset
+        ScrollView.bounces = ScrollView.contentOffset.y > topInset
     }
     
 }

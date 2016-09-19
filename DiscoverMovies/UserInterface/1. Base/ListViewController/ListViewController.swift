@@ -10,7 +10,6 @@ import UIKit
 import TMDbMovieKit
 import MBProgressHUD
 
-
 class ListViewController: BaseViewController, UITableViewDelegate {
     
     // MARK: Properties

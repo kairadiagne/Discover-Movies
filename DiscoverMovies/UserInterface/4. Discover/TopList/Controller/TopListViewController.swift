@@ -75,7 +75,7 @@ class TopListViewController: DiscoverListViewController {
             return
         }
         
-        loadData(currentList, force: false)
+        loadData(currentList, force: true)
     }
     
     func loadData(_ list: TMDbTopList, force: Bool) {

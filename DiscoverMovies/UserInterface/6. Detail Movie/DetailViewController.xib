@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="DiscoverMovies" customModuleProvider="target">
             <connections>
-                <outlet property="castDataProvider" destination="GQy-4t-zRc" id="oxp-5B-aqz"/>
                 <outlet property="detailView" destination="iN0-l3-epB" id="bpc-SX-SFV"/>
-                <outlet property="similarMoviesDataprovider" destination="2IX-ki-SCy" id="UVl-b9-UoB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="hXj-uh-mNs"/>
             </connections>
         </placeholder>
@@ -73,9 +72,6 @@
                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
-                                    <connections>
-                                        <outlet property="dataSource" destination="GQy-4t-zRc" id="CMQ-BT-e21"/>
-                                    </connections>
                                 </collectionView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EM4-an-m11" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">
                                     <constraints>
@@ -88,7 +84,6 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                     <connections>
-                                        <outlet property="dataSource" destination="2IX-ki-SCy" id="Db7-mB-5iC"/>
                                         <outlet property="delegate" destination="-1" id="8WL-Se-Aci"/>
                                     </connections>
                                 </collectionView>
@@ -115,8 +110,9 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqT-rY-QL6" customClass="FavouriteButton" customModule="DiscoverMovies" customModuleProvider="target">
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="YUT-CR-lgM"/>
-                                        <constraint firstAttribute="height" constant="30" id="j9W-Jn-bdr"/>
+                                        <constraint firstAttribute="width" constant="44" id="Dtd-pk-HXY"/>
+                                        <constraint firstAttribute="width" secondItem="xqT-rY-QL6" secondAttribute="height" multiplier="1:1" id="f8a-Wi-14D"/>
+                                        <constraint firstAttribute="height" constant="44" id="y01-va-h3P"/>
                                     </constraints>
                                     <connections>
                                         <action selector="favoriteButtonDidGetTapped:" destination="-1" eventType="valueChanged" id="9qG-HA-Vzb"/>
@@ -133,6 +129,10 @@
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRE-II-MfP" customClass="WatchListButton" customModule="DiscoverMovies" customModuleProvider="target">
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="MpZ-gw-KE3"/>
+                                        <constraint firstAttribute="width" constant="44" id="VZG-8k-1Fg"/>
+                                    </constraints>
                                     <connections>
                                         <action selector="watchListDidGetTapped:" destination="-1" eventType="valueChanged" id="joX-As-ww1"/>
                                     </connections>
@@ -145,13 +145,14 @@
                                 <constraint firstItem="07M-il-PEq" firstAttribute="trailing" secondItem="Nx5-sK-CGB" secondAttribute="trailing" id="2Fz-Hj-IOc"/>
                                 <constraint firstItem="jZO-Pb-czM" firstAttribute="top" secondItem="FI1-wg-CPS" secondAttribute="bottom" multiplier="1.05" constant="8" symbolic="YES" id="4uc-NW-Bz5"/>
                                 <constraint firstItem="wuB-LI-u1z" firstAttribute="leading" secondItem="YRx-Rx-qhX" secondAttribute="leading" constant="20" symbolic="YES" id="5Uc-pd-9bb"/>
-                                <constraint firstItem="xqT-rY-QL6" firstAttribute="width" secondItem="WRE-II-MfP" secondAttribute="width" id="7lY-Dh-QWR"/>
+                                <constraint firstItem="K27-uc-4Sg" firstAttribute="baseline" secondItem="OW2-WD-d6e" secondAttribute="baseline" id="8Hb-ba-4m0"/>
                                 <constraint firstAttribute="bottom" secondItem="4ar-Q4-HbC" secondAttribute="bottom" constant="27" id="8Nl-ax-oUB"/>
                                 <constraint firstItem="Rii-51-mJt" firstAttribute="baseline" secondItem="Nx5-sK-CGB" secondAttribute="baseline" id="9to-Oa-nD9"/>
                                 <constraint firstItem="xqT-rY-QL6" firstAttribute="top" secondItem="YRx-Rx-qhX" secondAttribute="top" priority="749" constant="20" symbolic="YES" id="BcW-Fb-gSx"/>
                                 <constraint firstItem="K27-uc-4Sg" firstAttribute="top" secondItem="Rii-51-mJt" secondAttribute="bottom" constant="8" symbolic="YES" id="C9L-fh-gjc"/>
                                 <constraint firstItem="Rii-51-mJt" firstAttribute="leading" secondItem="X0s-VM-Ai3" secondAttribute="leading" id="EgS-G7-V7r"/>
                                 <constraint firstItem="FI1-wg-CPS" firstAttribute="top" secondItem="Tv8-fH-mOs" secondAttribute="bottom" constant="8" symbolic="YES" id="F0E-Ho-3Q5"/>
+                                <constraint firstItem="FI1-wg-CPS" firstAttribute="baseline" secondItem="07M-il-PEq" secondAttribute="baseline" id="G6U-6m-3LG"/>
                                 <constraint firstItem="xqT-rY-QL6" firstAttribute="top" secondItem="YRx-Rx-qhX" secondAttribute="bottom" multiplier="0.25" priority="750" id="I7b-Th-kUF"/>
                                 <constraint firstItem="X0s-VM-Ai3" firstAttribute="top" secondItem="xqT-rY-QL6" secondAttribute="bottom" multiplier="1.1" constant="8" symbolic="YES" id="JbA-7B-kke"/>
                                 <constraint firstAttribute="trailing" secondItem="WRE-II-MfP" secondAttribute="trailing" constant="20" symbolic="YES" id="K8g-hd-Ht3"/>
@@ -173,13 +174,13 @@
                                 <constraint firstItem="dCt-Xe-mbS" firstAttribute="trailing" secondItem="Nx5-sK-CGB" secondAttribute="trailing" id="bwB-Af-CoO"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X0s-VM-Ai3" secondAttribute="trailing" constant="20" symbolic="YES" id="dXt-UZ-kM8"/>
                                 <constraint firstItem="Tv8-fH-mOs" firstAttribute="top" secondItem="K27-uc-4Sg" secondAttribute="bottom" constant="8" id="dsz-Uj-oH7"/>
+                                <constraint firstItem="Tv8-fH-mOs" firstAttribute="baseline" secondItem="dCt-Xe-mbS" secondAttribute="baseline" id="eCk-iS-dZd"/>
                                 <constraint firstItem="xqT-rY-QL6" firstAttribute="baseline" secondItem="WRE-II-MfP" secondAttribute="baseline" id="hdO-P3-6Bw"/>
                                 <constraint firstItem="4F0-d8-XOb" firstAttribute="leading" secondItem="X0s-VM-Ai3" secondAttribute="leading" id="knl-HF-eUf"/>
                                 <constraint firstItem="Rii-51-mJt" firstAttribute="top" secondItem="4F0-d8-XOb" secondAttribute="bottom" multiplier="1.05" constant="8" symbolic="YES" id="obk-MW-dcj"/>
                                 <constraint firstItem="Tv8-fH-mOs" firstAttribute="leading" secondItem="X0s-VM-Ai3" secondAttribute="leading" id="ofC-JC-iCI"/>
                                 <constraint firstItem="EM4-an-m11" firstAttribute="leading" secondItem="wuB-LI-u1z" secondAttribute="leading" id="owG-Kh-maR"/>
                                 <constraint firstItem="dCt-Xe-mbS" firstAttribute="top" secondItem="OW2-WD-d6e" secondAttribute="bottom" constant="8" symbolic="YES" id="pie-cy-F6y"/>
-                                <constraint firstItem="xqT-rY-QL6" firstAttribute="height" secondItem="WRE-II-MfP" secondAttribute="height" id="rAf-eY-l5E"/>
                                 <constraint firstItem="X0s-VM-Ai3" firstAttribute="leading" secondItem="YRx-Rx-qhX" secondAttribute="leading" constant="20" symbolic="YES" id="uib-6B-REG"/>
                                 <constraint firstItem="4ar-Q4-HbC" firstAttribute="centerX" secondItem="YRx-Rx-qhX" secondAttribute="centerX" id="wSj-YW-gaG"/>
                             </constraints>
@@ -227,7 +228,6 @@
                 <outlet property="castLabel" destination="jZO-Pb-czM" id="kXp-HT-wv8"/>
                 <outlet property="contentView" destination="YRx-Rx-qhX" id="shY-Zf-7rf"/>
                 <outlet property="descriptionLabel" destination="4F0-d8-XOb" id="nrB-wN-VZJ"/>
-                <outlet property="detailScrollView" destination="40P-gH-Zt8" id="ffx-tt-XkF"/>
                 <outlet property="directorLabel" destination="Rii-51-mJt" id="coZ-I5-IJM"/>
                 <outlet property="directorValueLabel" destination="Nx5-sK-CGB" id="49J-cs-c4f"/>
                 <outlet property="favouriteControl" destination="xqT-rY-QL6" id="rfB-Oi-ZVw"/>
@@ -243,15 +243,14 @@
                 <outlet property="releaseLabel" destination="Tv8-fH-mOs" id="eNw-sJ-Qs7"/>
                 <outlet property="releaseValueLabel" destination="dCt-Xe-mbS" id="7pR-Sl-YPh"/>
                 <outlet property="scrollTop" destination="eSk-4Q-75Y" id="mwg-mf-D5t"/>
+                <outlet property="scrollView" destination="40P-gH-Zt8" id="aFZ-fN-NDr"/>
                 <outlet property="similarLabel" destination="EpK-0L-n1T" id="oi3-fe-Y2q"/>
                 <outlet property="similarMovieCollectionView" destination="EM4-an-m11" id="E1t-0q-ppc"/>
                 <outlet property="titleLabel" destination="X0s-VM-Ai3" id="G1t-6Z-PNn"/>
                 <outlet property="watchListControl" destination="WRE-II-MfP" id="fYn-rb-aZs"/>
             </connections>
-            <point key="canvasLocation" x="-205" y="-10"/>
+            <point key="canvasLocation" x="-213" y="-331"/>
         </view>
-        <customObject id="GQy-4t-zRc" customClass="CastDataProvider" customModule="DiscoverMovies" customModuleProvider="target"/>
-        <customObject id="2IX-ki-SCy" customClass="SimilarMovieDataProvider" customModule="DiscoverMovies" customModuleProvider="target"/>
     </objects>
     <resources>
         <image name="Play" width="60" height="60"/>

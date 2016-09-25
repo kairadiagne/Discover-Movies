@@ -10,7 +10,7 @@ import UIKit
 
 class AnimatedShapeButton: UIControl, CAAnimationDelegate {
     
-    // MARK: Types
+    // MARK: - Types
     
     struct Constants {
         static let FillAnimationKey = "fillAnimation"
@@ -19,7 +19,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         static let UnfillAnimationkey = "UnfillAnimation"
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var shapeLayer = CAShapeLayer()
     
@@ -40,7 +40,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         }
     }
     
-    // MARK: Initialize
+    // MARK: - Initialize
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,13 +49,8 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        print(self.frame)
         commonInit()
-    }
-    
-    convenience init(frame: CGRect, strokeColor: UIColor, fillColor: UIColor) {
-        self.init(frame: frame)
-        self.fillColor = fillColor
-        self.lineColor = strokeColor
     }
     
     fileprivate func commonInit() {
@@ -63,11 +58,11 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         self.setupLayers()
     }
     
-    // MARK: Drawing
+    // MARK: - Drawing
     
-    func setupLayers() { } // Required for subclass
+    func setupLayers() { }
     
-    // MARK: Touch events
+    // MARK: - Touch events
 
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         return true
@@ -83,7 +78,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         sendActions(for: .valueChanged)
     }
     
-    // MARK: Change State
+    // MARK: - State
 
     func setSelectedState(_ shouldBeSelected: Bool) {
         guard self.isSelected != shouldBeSelected else { return }
@@ -97,7 +92,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         self.isSelected = !self.isSelected
     }
     
-    // MARK: Animation
+    // MARK: - Animations
 
     func changeFillAnimated(_ fill: Bool, duration: Double, key: String) {
         let unfilledRect = CGRect(x: bounds.width / 2, y: bounds.height / 2, width: 0, height: 0)
@@ -127,7 +122,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         self.layer.add(scaleAnimation, forKey: key)
     }
     
-    // MARK: CABasicAnimation Delegate
+    // MARK: - CABasicAnimation Delegate
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         

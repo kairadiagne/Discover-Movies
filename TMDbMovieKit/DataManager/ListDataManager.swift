@@ -40,7 +40,7 @@ public class ListDataManager<ItemType: DictionaryRepresentable>: DataManager<Lis
             cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount , items: data.items)
         }
         
-        postDidLoadNotification()
+        postUpdateNofitication()
     }
 
 }

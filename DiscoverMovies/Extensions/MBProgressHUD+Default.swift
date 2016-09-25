@@ -1,5 +1,5 @@
 //
-//  MBProgressHUD+Configure.swift
+//  MBProgressHUD+Default.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 23-03-16.

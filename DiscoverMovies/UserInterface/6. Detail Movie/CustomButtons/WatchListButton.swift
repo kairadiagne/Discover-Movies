@@ -10,11 +10,11 @@ import UIKit
 
 class WatchListButton: AnimatedShapeButton {
     
-    // MARK: Properties
+    // MARK: - Properties
 
     fileprivate let lineWidth: CGFloat = 1
     
-    // MARK: Generate Shape
+    // MARK: - Generate Shape
     
     override func setupLayers() {
         shapeLayer.frame = bounds
@@ -66,7 +66,6 @@ class WatchListButton: AnimatedShapeButton {
         plusPath.addLine(to: CGPoint(x: plusPath.currentPoint.x, y: height * 0.65))
         plusPath.addLine(to: CGPoint(x: width * 0.7, y: plusPath.currentPoint.y))
         
-        // Join paths into one shape
         rectanglePath.append(rectanglePath2)
         rectanglePath.append(rectanglePath3)
         rectanglePath.append(plusPath)
@@ -74,7 +73,7 @@ class WatchListButton: AnimatedShapeButton {
         return rectanglePath
     }
     
-    // MARK: Animation
+    // MARK: - Animation
     
     override func changeFillAnimated(_ fill: Bool, duration: Double, key: String) {
         let unfilledRect = CGRect(x: bounds.width / 2, y: bounds.height / 2, width: 0, height: 0)
@@ -84,7 +83,7 @@ class WatchListButton: AnimatedShapeButton {
         let filledPath = UIBezierPath(rect: filledRect)
         
         let fillAnimation = CABasicAnimation(keyPath: "path")
-        // fillAnimation.delegate = self
+        fillAnimation.delegate = self
         fillAnimation.fromValue = fill ? unfilledPath.cgPath : filledPath.cgPath
         fillAnimation.toValue = fill ? filledPath.cgPath : unfilledPath.cgPath
         fillAnimation.duration = duration

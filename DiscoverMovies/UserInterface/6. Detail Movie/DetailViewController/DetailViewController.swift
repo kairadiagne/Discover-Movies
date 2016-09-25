@@ -5,7 +5,7 @@
 //  Created by Kaira Diagne on 11/05/16.
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
-
+//
 import UIKit
 import TMDbMovieKit
 
@@ -14,30 +14,31 @@ class DetailViewController: BaseViewController {
     // MARK: - Properties
     
     @IBOutlet weak var detailView: DetailView!
-    @IBOutlet var castDataProvider: CastDataProvider!
-    @IBOutlet var similarMoviesDataprovider: SimilarMovieDataProvider!
     
+    fileprivate var similarMoviesDataSource = SimilarMovieDataSource()
+    
+    fileprivate var castDataSource = CastDataSource()
+  
     fileprivate let movieInfoManager: TMDbMovieInfoManager
     
     fileprivate var movie: Movie
     
-    fileprivate var image: UIImage?
-    
     fileprivate var trailer: Video?
+    
+    fileprivate var firstLaunch: Bool = true
     
     // MARK: - Initialize
     
-    init(movie: Movie, image: UIImage? = nil) {
+    init(movie: Movie) {
         movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
         self.movie = movie
-        self.image = image
         super.init(nibName: "DetailViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-   
+
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -49,16 +50,16 @@ class DetailViewController: BaseViewController {
         detailView.similarMovieCollectionView.register(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
         detailView.castCollectionView.register(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
         
-        detailView.castCollectionView.showMessage("Cast unavailable") // NSLocalizedString
-        detailView.similarMovieCollectionView.showMessage("No Movies similar to this movie") // NSLocalizedString
-        
-        detailView.ScrollView.delegate = self
+        detailView.castCollectionView.dataSource = castDataSource
+        detailView.similarMovieCollectionView.dataSource = similarMoviesDataSource
+     
+        detailView.scrollView.delegate = self
         
         movieInfoManager.delegate = self
         movieInfoManager.loadInfo()
         movieInfoManager.loadAccountState()
         
-        detailView.configure(withMovie: movie, image: image)
+        detailView.configure(withMovie: movie)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +69,12 @@ class DetailViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        detailView.animateOnScreen()
+        
+        if firstLaunch {
+            firstLaunch = false
+            detailView.animateOnScreen()
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,19 +84,19 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Actions
     
-    @IBAction func favoriteButtonDidGetTapped(_ sender: FavouriteButton) {
+    @IBAction func favoriteButtonDidGetTapped(_ sender: FavouriteButton) { //FavoriteButtonTap
        movieInfoManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
     }
     
-    @IBAction func watchListDidGetTapped(_ sender: WatchListButton) {
+    @IBAction func watchListDidGetTapped(_ sender: WatchListButton) { // WatchListButtonTap
        movieInfoManager.toggleStatusOfMovieInList(.watchlist, status: sender.isSelected)
     }
 
-    @IBAction func reviewsButtonGotTapped(_ sender: UIButton) {
+    @IBAction func reviewsButtonGotTapped(_ sender: UIButton) { // reviewButtonTap
         showReviews(movie)
     }
     
-    @IBAction func playButtonTapped(_ sender: UIButton) {
+    @IBAction func playButtonTapped(_ sender: UIButton) { // playButtonTap
         showTrailer()
     }
 
@@ -103,13 +109,13 @@ class DetailViewController: BaseViewController {
     
     fileprivate func showTrailer() {
         guard let trailer = trailer else { return } // Display alert that trailer is unavailable 
-        let videoController = VideoViewController(video: trailer)
-        navigationController?.pushViewController(videoController, animated: true)
+//        let videoController = VideoViewController(video: trailer)
+//        navigationController?.pushViewController(videoController, animated: true)
     }
     
     fileprivate func showReviews(_ movie: Movie) {
-        let reviewViewController = ReviewViewController(movie: movie)
-        navigationController?.pushViewController(reviewViewController, animated: true)
+//        let reviewViewController = ReviewViewController(movie: movie)
+//        navigationController?.pushViewController(reviewViewController, animated: true)
     }
 
 }
@@ -127,25 +133,22 @@ extension DetailViewController: UIScrollViewDelegate {
 extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
-        // hide message in collection view
-        similarMoviesDataprovider.updateWithMovies(info.similarMovies())
-        castDataProvider.updateWithCast(info.cast())
-        detailView.reloadCollectionViews()
+        similarMoviesDataSource.update(withItems: info.similarMovies)
+        castDataSource.update(withItems: info.cast)
         
-        if let director = info.director() {
-            detailView.configure(withDirector: director)
-        }
+        detailView.similarMovieCollectionView.reloadData()
+        detailView.castCollectionView.reloadData()
         
-        trailer = info.trailer()
+        detailView.configure(withDirector: info.director)
+        
+        trailer = info.trailer
     }
-    
-    func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
-        // handleError(error)
-    }
-    
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
         detailView.configureWithState(inFavorites, inWatchList: inWatchList)
+    }
+    
+    func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
     }
     
 }
@@ -155,7 +158,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
 extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = similarMoviesDataprovider.movieAtIndex(indexPath.row) else { return }
+        guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
         showDetail(forMovie: movie)
     }
     

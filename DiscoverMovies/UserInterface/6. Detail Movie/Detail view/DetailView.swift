@@ -14,7 +14,7 @@ class DetailView: BackgroundView {
     
     // MARK: -  Properties
     
-    @IBOutlet weak var ScrollView: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: BackgroundView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -47,8 +47,8 @@ class DetailView: BackgroundView {
     }
     
     fileprivate var openHeader: CGFloat {
-        let contentInsetY = ScrollView.contentInset.top
-        let contentOffSetY = ScrollView.contentOffset.y
+        let contentInsetY = scrollView.contentInset.top
+        let contentOffSetY = scrollView.contentOffset.y
         let position = (contentInsetY + contentOffSetY) / contentInsetY
         return min(1, max(0, position))
     }
@@ -79,7 +79,7 @@ class DetailView: BackgroundView {
         self.readReviewsButton.layer.borderWidth = 1.5
         self.readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
         
-        ScrollView.bounces = false
+        scrollView.bounces = false
         
         // For animation
         self.header.alpha = 0.3
@@ -90,29 +90,26 @@ class DetailView: BackgroundView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.ScrollView.contentInset.top = topInset
+        self.scrollView.contentInset.top = topInset
     }
 
     // MARK: - Configure
     
-    func configure(withMovie movie: Movie, image: UIImage?) {
+    func configure(withMovie movie: Movie) {
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
         genreValueLabel.text = movie.mainGenre()?.name ?? "Unknown"
         ratingValueLabel.text =  "\(movie.rating)\\10.0"
+        
+        if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
+            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+        }
         
         if let releaseYear = movie.releaseDate.toDate()?.year() {
             releaseValueLabel.text = "\(releaseYear)"
         } else {
             releaseValueLabel.text = "Unknown"
         }
-        
-        if let image = image {
-            header.image = image
-        } else if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
-            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
-        }
-
     }
     
     func configureWithState(_ inFavorites: Bool, inWatchList: Bool) {
@@ -124,32 +121,23 @@ class DetailView: BackgroundView {
         directorValueLabel.text = director?.name ?? "Unknown"
     }
     
-    func reloadCollectionViews() {
-        castCollectionView.reloadData()
-        similarMovieCollectionView.reloadData()
-    }
-    
     // MARK: Animation
     
     func animateOnScreen() {
-        if !didAnimate {
-            didAnimate = true
+        self.layoutIfNeeded()
             
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions(), animations: {
+            self.animationConstraint.priority -= 2
             self.layoutIfNeeded()
+        }, completion: nil)
             
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions(), animations: {
-                self.animationConstraint.priority -= 2
-                self.layoutIfNeeded()
-                }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: UIViewAnimationOptions(), animations: {
+            self.header.alpha = 1.0
+        }, completion: nil)
             
-            UIView.animate(withDuration: 0.5, delay: 0.3, options: UIViewAnimationOptions(), animations: {
-                self.header.alpha = 1.0
-                }, completion: nil)
-            
-            UIView.animate(withDuration: 0.2, delay: 0.6, options: UIViewAnimationOptions(), animations: {
-                self.playButton.alpha = 1.0
-                }, completion: nil)
-        }
+        UIView.animate(withDuration: 0.2, delay: 0.6, options: UIViewAnimationOptions(), animations: {
+            self.playButton.alpha = 1.0
+        }, completion: nil)
     }
     
     // MARK: - Header
@@ -157,7 +145,7 @@ class DetailView: BackgroundView {
     func moveHeaderOnScroll() {
         headerTop.constant = openHeader * -header.frame.height * 0.8
         playButton.alpha = -openHeader + 1
-        ScrollView.bounces = ScrollView.contentOffset.y > topInset
+        scrollView.bounces = scrollView.contentOffset.y > topInset
     }
     
 }

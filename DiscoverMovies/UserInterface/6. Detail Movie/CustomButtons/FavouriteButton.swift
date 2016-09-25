@@ -10,14 +10,14 @@ import UIKit
 
 class FavouriteButton: AnimatedShapeButton {
     
-    // MARK: Properties
+    // MARK: - Properties
 
     fileprivate let lineWidth: CGFloat = 1.0
     
-    // MARK: Generate Shape
+    // MARK: - Generate Shape
     
     override func setupLayers() {
-        // Generate the layer that shows the unfilled star. (This layer is always on screen)
+        // Generate the layer that shows the unfilled star (Stays on screen)
         let starPath = generateStarPath(bounds.width, height: bounds.height)
         shapeLayer = CAShapeLayer()
         
@@ -28,17 +28,15 @@ class FavouriteButton: AnimatedShapeButton {
         shapeLayer.strokeColor = lineColor.cgColor
         shapeLayer.lineJoin = kCALineCapRound
         
-        // Generate the fill layer which will animate the filling
+        // Fill layer animates the filling
         let fillPath = generateFillPath(bounds.width, height: bounds.height)
         fillLayer = CAShapeLayer()
         
-        // Generate the mask layer
         fillLayer.frame = bounds
         fillLayer.path = fillPath.cgPath
         fillLayer.fillColor = fillColor.cgColor
         fillLayer.lineJoin = kCALineCapRound
         
-        // Create masklayer
         maskLayer = CAShapeLayer()
         maskLayer.path = generateStarPath(bounds.width, height: bounds.height).cgPath
         maskLayer.frame = self.bounds
@@ -50,7 +48,6 @@ class FavouriteButton: AnimatedShapeButton {
     }
     
     // Generates a path shaped like a star
-    
     fileprivate func generateStarPath(_ width: CGFloat, height: CGFloat) -> UIBezierPath {
         // Calulate start position
         let startX: CGFloat = width / 2
@@ -76,7 +73,7 @@ class FavouriteButton: AnimatedShapeButton {
     
     fileprivate func generateFillPath(_ wdith: CGFloat, height: CGFloat) -> UIBezierPath {
         let centerPoint = CGPoint(x: bounds.midX, y: bounds.midY)
-        let fillRect = CGRect(origin: centerPoint, size: CGSize(width: 0, height: 0)) // Before CGPoint.Zero
+        let fillRect = CGRect(origin: centerPoint, size: .zero)
         return UIBezierPath(ovalIn: fillRect)
     }
     

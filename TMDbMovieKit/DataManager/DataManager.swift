@@ -104,7 +104,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
 
     func handle(data: ModelType) {
         cachedData.add(data)
-        postDidLoadNotification()
+        postUpdateNofitication()
     }
     
     // MARK: - Caching
@@ -121,7 +121,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         if let cachedData = cacheRepository.restoreData(forIdentifier: cacheIdentifier) as? CachedData<ModelType> {
             self.stopLoading()
             self.cachedData = cachedData
-            self.postLoadingNotification()
+            self.postUpdateNofitication()
         }
     }
     
@@ -138,29 +138,21 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Notifications
     
-    public func add(observer: AnyObject, loadingSelector: Selector, didLoadSelector: Selector) {
-        add(loadingObserver: observer, selector: loadingSelector)
-        add(didLoadObserver: observer, selector: didLoadSelector)
-    }
-    
-    public func add(loadingObserver observer: AnyObject, selector: Selector) {
-        NotificationCenter.default.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didStartLoading, object: self)
-    }
-    
-    public func add(didLoadObserver observer: AnyObject, selector: Selector) {
-        NotificationCenter.default.addObserver(observer, selector: selector, name: Notification.Name.DataManager.didLoad, object: self)
+    public func add(updateObserver observer: AnyObject, loadingSelector: Selector, updateSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: loadingSelector, name: Notification.Name.DataManager.didStartLoading, object: self)
+        NotificationCenter.default.addObserver(observer, selector: updateSelector, name: Notification.Name.DataManager.update, object: self)
     }
     
     public func remove(observer: AnyObject) {
         NotificationCenter.default.removeObserver(observer)
     }
     
-    func postLoadingNotification() { // Handle from the UI Level
-        NotificationCenter.default.post(name: Notification.Name.DataManager.didStartLoading, object: self)
+    func postUpdateNofitication() {
+        NotificationCenter.default.post(name: Notification.Name.DataManager.update, object: self)
     }
     
-    func postDidLoadNotification() {
-        NotificationCenter.default.post(name: Notification.Name.DataManager.didLoad, object: self)
+    func postLoadingNotification() {
+        NotificationCenter.default.post(name: Notification.Name.DataManager.didStartLoading, object: self)
     }
     
 }
@@ -170,8 +162,8 @@ public class DataManager<ModelType: DictionaryRepresentable> {
 extension Notification.Name {
     
     public struct DataManager {
-        public static let didLoad = Notification.Name("DataManagerDidLoadNotification")
-        public static let didStartLoading = Notification.Name("DataManagerDidStartLoadingNotification")
+        public static let update = Notification.Name("DataManagerDidUpdateNotification")
+        public static let didStartLoading = Notification.Name("DataManagerDidStartLoading")
     }
 
 }

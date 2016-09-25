@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="DiscoverMovies" customModuleProvider="target">
+            <connections>
+                <outlet property="homeView" destination="i5M-Pr-FkT" id="BVs-aM-ds4"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="HomeView" customModule="DiscoverMovies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Pp-Vl-W8E">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOu-92-Lig">
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AjH-88-AA1">
+                            <segments>
+                                <segment title="Popular"/>
+                                <segment title="Now Playing"/>
+                                <segment title="Top Rated"/>
+                                <segment title="Upcoming"/>
+                            </segments>
+                            <connections>
+                                <action selector="switchList:" destination="-1" eventType="valueChanged" id="D2G-1T-sQa"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="AjH-88-AA1" firstAttribute="top" secondItem="tOu-92-Lig" secondAttribute="top" id="IlO-zX-4TO"/>
+                        <constraint firstItem="AjH-88-AA1" firstAttribute="leading" secondItem="tOu-92-Lig" secondAttribute="leading" id="Izf-9Q-huB"/>
+                        <constraint firstAttribute="trailing" secondItem="AjH-88-AA1" secondAttribute="trailing" id="MMM-9D-Pbw"/>
+                        <constraint firstAttribute="bottom" secondItem="AjH-88-AA1" secondAttribute="bottom" id="SLO-49-F1F"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="7Pp-Vl-W8E" firstAttribute="top" secondItem="tOu-92-Lig" secondAttribute="bottom" id="7Ms-wC-0a9"/>
+                <constraint firstAttribute="trailing" secondItem="tOu-92-Lig" secondAttribute="trailing" id="9PY-8H-pak"/>
+                <constraint firstItem="7Pp-Vl-W8E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ao7-8a-JQo"/>
+                <constraint firstAttribute="bottom" secondItem="7Pp-Vl-W8E" secondAttribute="bottom" id="Ihc-nC-kSA"/>
+                <constraint firstItem="tOu-92-Lig" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="e7Q-0n-Bgv"/>
+                <constraint firstItem="tOu-92-Lig" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gg6-Hd-tGZ"/>
+                <constraint firstAttribute="trailing" secondItem="7Pp-Vl-W8E" secondAttribute="trailing" id="hxg-G3-oOP"/>
+            </constraints>
+            <connections>
+                <outlet property="switchListControl" destination="AjH-88-AA1" id="brH-XM-b4P"/>
+                <outlet property="tableView" destination="7Pp-Vl-W8E" id="8Ka-Iy-G37"/>
+            </connections>
+            <point key="canvasLocation" x="-207.5" y="-388.5"/>
+        </view>
+    </objects>
+</document>

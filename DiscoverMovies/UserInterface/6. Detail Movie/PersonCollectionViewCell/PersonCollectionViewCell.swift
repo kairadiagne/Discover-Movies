@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class PersonCollectionViewCell: UICollectionViewCell { // Could be on cell with generic view model and protocol 
+class PersonCollectionViewCell: UICollectionViewCell {
     
     // MARK: Properties
 

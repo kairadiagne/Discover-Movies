@@ -29,14 +29,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             TMDbSessionManager.shared.registerAPIKey(APIKey)
         }
         
+        
+        
         // Set up revealcontroller
         let menuViewController =  MenuViewController.instantiatefromStoryboard() // RearViewController
-        let topListViewController = TopListViewController(nibName: String(describing: ListViewController.self), bundle: nil)
-        let frontViewController = UINavigationController(rootViewController: topListViewController)
-        revealViewController = SWRevealViewController(rearViewController: menuViewController, frontViewController: frontViewController)
+        
+        let homeViewController = HomeViewController()
+        
+        let navigationController = UINavigationController(rootViewController: homeViewController)
+
+        
+        
+//        let topListViewController = TopListViewController(nibName: String(describing: ListViewController.self), bundle: nil)
+//        let frontViewController = UINavigationController(rootViewController: homeViewController)
+//        revealViewController = SWRevealViewController(rearViewController: menuViewController, frontViewController: frontViewController)
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = revealViewController
+//        window?.rootViewController = revealViewController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
  
         return true

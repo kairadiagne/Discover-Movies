@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 import ChameleonFramework
 import youtube_ios_player_helper
 

@@ -59,21 +59,21 @@ class MenuViewController: UITableViewController {
     // MARK: Navigation
     
     func showTopListViewController() {
-        let topListVieWController = TopListViewController(nibName: String(describing: ListViewController.self), bundle: nil)
-        let navigationController = UINavigationController(rootViewController: topListVieWController)
-        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+//        let topListVieWController = TopListViewController(nibName: String(describing: ListViewController.self), bundle: nil)
+//        let navigationController = UINavigationController(rootViewController: topListVieWController)
+//        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showWatchListViewController() {
-        let watchListController = AccountListController(list: .favorite)
-        let navigationController = UINavigationController(rootViewController: watchListController)
-        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+//        let watchListController = AccountListController(list: .favorite)
+//        let navigationController = UINavigationController(rootViewController: watchListController)
+//        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showFavoritesViewController() {
-        let favoritesController = AccountListController(list: .watchlist)
-        let navigationController = UINavigationController(rootViewController: favoritesController)
-        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+//        let favoritesController = AccountListController(list: .watchlist)
+//        let navigationController = UINavigationController(rootViewController: favoritesController)
+//        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     // MARK: Sign in / Sign out

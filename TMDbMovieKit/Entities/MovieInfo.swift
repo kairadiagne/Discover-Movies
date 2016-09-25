@@ -12,9 +12,25 @@ public struct MovieInfo: DictionaryRepresentable {
     
     // MARK: - Properties
     
-    public fileprivate(set) var similar: List<Movie>?
-    public fileprivate(set) var credits: MovieCredit?
-    public fileprivate(set) var trailers: [Video]?
+    fileprivate var similar: List<Movie>?
+    fileprivate var credits: MovieCredit?
+    fileprivate var trailers: [Video]?
+    
+    public var similarMovies: [Movie] {
+        return similar?.items ?? []
+    }
+    
+    public var cast: [CastMember] {
+       return credits?.cast ?? []
+    }
+    
+    public var director: CrewMember? {
+        return credits?.crew.filter { return $0.job == "Director" }.first ?? nil
+    }
+    
+    public var trailer: Video? {
+        return trailers?.filter { $0.type == "Trailer" }.first
+    }
     
     // MARK: - Initialize
     
@@ -35,24 +51,6 @@ public struct MovieInfo: DictionaryRepresentable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         // No need to archive MovieIfo
         return [:]
-    }
-    
-    // MARK: - Utils
-    
-    public func similarMovies() -> [Movie] {
-        return similar?.items ?? []
-    }
-   
-    public func cast() -> [CastMember] {
-        return credits?.cast ?? []
-    }
-
-    public func director() -> CrewMember? {
-        return credits?.crew.filter { return $0.job == "Director" }.first ?? nil
-    }
-
-    public func trailer() -> Video? {
-        return trailers?.filter { $0.type == "Trailer" }.first
     }
     
 }

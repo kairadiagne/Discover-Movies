@@ -4,8 +4,7 @@ use_frameworks!
 
 abstract_target 'Networking' do
     pod 'Alamofire'
-    # Does not yet support Swift 3.0
-    # pod 'Locksmith'
+    pod 'Locksmith'
     
     target 'DiscoverMovies' do
         pod 'SDWebImage'

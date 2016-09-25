@@ -3,6 +3,7 @@ PODS:
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
+  - Locksmith (3.0.0)
   - MBProgressHUD (1.0.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
@@ -13,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - ChameleonFramework
+  - Locksmith
   - MBProgressHUD
   - SDWebImage
   - SWRevealViewController
@@ -21,11 +23,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: b3ddc768c7e48fe93411ac15a455eb77398457a4
+PODFILE CHECKSUM: 4ebf1a5277ac823b489ba96879449116bd17f1db
 
 COCOAPODS: 1.1.0.rc.1

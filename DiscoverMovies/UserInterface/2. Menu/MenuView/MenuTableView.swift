@@ -13,7 +13,7 @@ import SWRevealViewController
 
 class MenuTableView: UITableView {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     @IBOutlet weak var discoverLabel: UILabel!
     @IBOutlet weak var watchListLabel: UILabel!
@@ -24,7 +24,7 @@ class MenuTableView: UITableView {
     @IBOutlet weak var watchlistCell: UITableViewCell!
     @IBOutlet weak var favoriteCell: UITableViewCell!
     
-    // MARK: Awake From Nib
+    // MARK: - Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +42,7 @@ class MenuTableView: UITableView {
         usernameLabel.center.x = profileImageView.center.x
     }
     
-    // MARK: Configure
+    // MARK: - Configure
     
     func updateMenu(_ signedIn: Bool, user: User? = nil) {
         usernameLabel.text = user?.name ?? "Guest"

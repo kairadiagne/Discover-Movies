@@ -49,18 +49,28 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        print(self.frame)
         commonInit()
     }
     
     fileprivate func commonInit() {
         self.backgroundColor = UIColor.clear
-        self.setupLayers()
+    }
+
+    // MARK: - Layoutcycle
+    
+    fileprivate var didAddLayers = false
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if !didAddLayers {
+            didAddLayers = true
+            setupLayers()
+        }
     }
     
-    // MARK: - Drawing
-    
-    func setupLayers() { }
+    func setupLayers() {
+    }
     
     // MARK: - Touch events
 

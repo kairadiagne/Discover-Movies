@@ -25,7 +25,7 @@ class DetailViewController: BaseViewController {
     
     fileprivate var trailer: Video?
     
-    fileprivate var firstLaunch: Bool = true
+    fileprivate var didAnimate = false
     
     // MARK: - Initialize
     
@@ -70,11 +70,10 @@ class DetailViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if firstLaunch {
-            firstLaunch = false
+        if !didAnimate {
+            didAnimate = true
             detailView.animateOnScreen()
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,19 +83,19 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Actions
     
-    @IBAction func favoriteButtonDidGetTapped(_ sender: FavouriteButton) { //FavoriteButtonTap
+    @IBAction func favoriteButtontap(_ sender: FavouriteButton) {
        movieInfoManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
     }
     
-    @IBAction func watchListDidGetTapped(_ sender: WatchListButton) { // WatchListButtonTap
+    @IBAction func watchListButtonTap(_ sender: WatchListButton) {
        movieInfoManager.toggleStatusOfMovieInList(.watchlist, status: sender.isSelected)
     }
 
-    @IBAction func reviewsButtonGotTapped(_ sender: UIButton) { // reviewButtonTap
+    @IBAction func reviewsButtonTap(_ sender: UIButton) {
         showReviews(movie)
     }
     
-    @IBAction func playButtonTapped(_ sender: UIButton) { // playButtonTap
+    @IBAction func playButtonTap(_ sender: UIButton) {
         showTrailer()
     }
 
@@ -109,13 +108,13 @@ class DetailViewController: BaseViewController {
     
     fileprivate func showTrailer() {
         guard let trailer = trailer else { return } // Display alert that trailer is unavailable 
-//        let videoController = VideoViewController(video: trailer)
-//        navigationController?.pushViewController(videoController, animated: true)
+        let videoController = VideoViewController(video: trailer)
+        navigationController?.pushViewController(videoController, animated: true)
     }
     
     fileprivate func showReviews(_ movie: Movie) {
-//        let reviewViewController = ReviewViewController(movie: movie)
-//        navigationController?.pushViewController(reviewViewController, animated: true)
+        let reviewViewController = ReviewViewController(movie: movie)
+        navigationController?.pushViewController(reviewViewController, animated: true)
     }
 
 }

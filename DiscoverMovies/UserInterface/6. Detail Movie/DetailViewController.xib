@@ -62,7 +62,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wuB-LI-u1z" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wuB-LI-u1z">
                                     <constraints>
                                         <constraint firstAttribute="height" constant="130" id="FUx-NG-SN1"/>
                                     </constraints>
@@ -73,7 +73,7 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                 </collectionView>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EM4-an-m11" customClass="BaseCollectionView" customModule="DiscoverMovies" customModuleProvider="target">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EM4-an-m11">
                                     <constraints>
                                         <constraint firstAttribute="height" constant="130" id="Q0t-Bx-P99"/>
                                     </constraints>
@@ -115,7 +115,7 @@
                                         <constraint firstAttribute="height" constant="44" id="y01-va-h3P"/>
                                     </constraints>
                                     <connections>
-                                        <action selector="favoriteButtonDidGetTapped:" destination="-1" eventType="valueChanged" id="9qG-HA-Vzb"/>
+                                        <action selector="favoriteButtontap:" destination="-1" eventType="valueChanged" id="X2F-od-N6J"/>
                                     </connections>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ar-Q4-HbC">
@@ -124,7 +124,7 @@
                                     </constraints>
                                     <state key="normal" title="Reviews"/>
                                     <connections>
-                                        <action selector="reviewsButtonGotTapped:" destination="-1" eventType="touchUpInside" id="q9C-nU-PDK"/>
+                                        <action selector="reviewsButtonTap:" destination="-1" eventType="touchUpInside" id="bRt-02-9pS"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRE-II-MfP" customClass="WatchListButton" customModule="DiscoverMovies" customModuleProvider="target">
@@ -134,7 +134,7 @@
                                         <constraint firstAttribute="width" constant="44" id="VZG-8k-1Fg"/>
                                     </constraints>
                                     <connections>
-                                        <action selector="watchListDidGetTapped:" destination="-1" eventType="valueChanged" id="joX-As-ww1"/>
+                                        <action selector="watchListButtonTap:" destination="-1" eventType="valueChanged" id="hT3-iq-xTM"/>
                                     </connections>
                                 </view>
                             </subviews>
@@ -203,7 +203,7 @@
                     </constraints>
                     <state key="normal" image="Play"/>
                     <connections>
-                        <action selector="playButtonTapped:" destination="-1" eventType="touchUpInside" id="2nb-ds-GnL"/>
+                        <action selector="playButtonTap:" destination="-1" eventType="touchUpInside" id="xbQ-vR-sYm"/>
                     </connections>
                 </button>
             </subviews>

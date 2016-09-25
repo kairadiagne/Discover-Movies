@@ -45,7 +45,9 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "TopLists"
+        title = "TopLists"
+        
+        addMenuButton()
         
         homeView.tableView.delegate = self
         
@@ -185,7 +187,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = datasource(forList: currentList).item(atIndex: indexPath.row) else { return }
         let detailViewController = DetailViewController(movie: movie)
-        navigationController?.pushViewController(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: false)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

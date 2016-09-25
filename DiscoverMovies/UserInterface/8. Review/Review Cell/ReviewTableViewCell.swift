@@ -11,12 +11,12 @@ import TMDbMovieKit
 
 class ReviewTableViewCell: UITableViewCell {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
-    // MARK: Awake
+    // MARK: - Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +24,7 @@ class ReviewTableViewCell: UITableViewCell {
         contentLabel.font = UIFont.Body()
     }
     
-    // MARK: Awake
+    // MARK: - Awake
     
     func configure(_ review: Review) {
         authorLabel?.text = "A movie review by \(review.author)"

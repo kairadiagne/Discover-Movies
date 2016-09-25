@@ -27,9 +27,9 @@ class DetailView: BackgroundView {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var ratingValueLabel: UILabel!
     @IBOutlet weak var castLabel: UILabel!
-    @IBOutlet weak var castCollectionView: BaseCollectionView!
+    @IBOutlet weak var castCollectionView: UICollectionView!
     @IBOutlet weak var similarLabel: UILabel!
-    @IBOutlet weak var similarMovieCollectionView: BaseCollectionView!
+    @IBOutlet weak var similarMovieCollectionView: UICollectionView!
     @IBOutlet weak var readReviewsButton: UIButton!
     @IBOutlet weak var favouriteControl: FavouriteButton!
     @IBOutlet weak var watchListControl: WatchListButton!

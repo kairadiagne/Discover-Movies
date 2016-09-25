@@ -10,12 +10,11 @@ import UIKit
 
 class ProfileImageView: UIView {
 
-    // MARK: Properties
+    // MARK: - Properties
     
     let imageView = UIImageView()
     
-    
-    // MARK: Initialize
+    // MARK: - Initialize
     
     override init(frame: CGRect) {
         super.init(frame: frame)

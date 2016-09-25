@@ -8,10 +8,32 @@
 
 import UIKit
 
-class BaseView: UIView {
-
-    // MARK: - Properties
+class BaseView: UIView, ProgressHUDPresentable {
     
+    // MARK: - Types
     
-
+    enum State {
+        case idle
+        case loading
+    }
+    
+    // MARK: - Awake
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        backgroundColor = UIColor.backgroundColor()
+    }
+    
+    // MARK: - Manage State
+    
+    func set(state: State) {
+        switch state {
+        case .idle:
+            hideProgressHUD()
+        case .loading:
+            showProgressHUD()
+        }
+    }
+    
 }

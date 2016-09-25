@@ -31,12 +31,12 @@ class SignInView: BackgroundView {
         signInButton.tintColor = UIColor.white
         signInButton.layer.borderWidth = 1.0
         signInButton.layer.borderColor = UIColor.white.cgColor
-        signInButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor
+        signInButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor // Stylesheet
         
         publicModeButton.tintColor = UIColor.white
         publicModeButton.layer.borderWidth = 1.0
         publicModeButton.layer.borderColor = UIColor.white.cgColor
-        publicModeButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor
+        publicModeButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor // Stylesheet
     }
     
 }

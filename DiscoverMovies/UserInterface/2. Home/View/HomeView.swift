@@ -9,14 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class HomeView: UIView, ProgressHUDPresentable {
-    
-    // MARK: - Types 
-    
-    enum State {
-        case idle
-        case loading
-    }
+class HomeView: BaseView {
     
     // MARK: - Properties
     
@@ -39,17 +32,6 @@ class HomeView: UIView, ProgressHUDPresentable {
         switchListControl.tintColor = UIColor.white
         
         tableView.addSubview(refreshControl)
-    }
-    
-    // MARK: - Lifecycle
-    
-    func set(state: State) {
-        switch state {
-        case .idle:
-            hideProgressHUD()
-        case .loading:
-            showProgressHUD()
-        }
     }
     
 }

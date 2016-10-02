@@ -16,12 +16,6 @@ class HomeView: BaseView {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var switchListControl: UISegmentedControl!
     
-    let refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl(frame: .zero)
-        refreshControl.tintColor = UIColor.white
-        return refreshControl
-    }()
-    
     // MARK: - Awake
     
     override func awakeFromNib() {
@@ -31,7 +25,11 @@ class HomeView: BaseView {
         
         switchListControl.tintColor = UIColor.white
         
-        tableView.addSubview(refreshControl)
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
     }
     
 }

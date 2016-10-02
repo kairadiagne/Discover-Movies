@@ -52,6 +52,8 @@ class ReviewViewController: BaseViewController {
         
         reviewView.tableView.dataSource = reviewDataSource
         reviewView.tableView.delegate = self
+        
+        reviewView.refreshControl.addTarget(self, action: #selector(ReviewViewController.refresh), for: .valueChanged)
     
         title = "Reviews" // NSLocalizedString
         
@@ -70,6 +72,10 @@ class ReviewViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         reviewManager.remove(observer: self)
+    }
+    
+    @objc fileprivate func refresh() {
+        reviewManager.reloadIfNeeded(forceOnline: true)
     }
     
     // MARK: - DataManagerNotifications

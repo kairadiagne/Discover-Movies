@@ -56,6 +56,8 @@ class AccountListController: BaseViewController {
         
         accountListView.tableView.delegate = self
         accountListView.tableView.dataSource = dataSource
+        
+        accountListView.refreshControl.addTarget(self, action: #selector(AccountListController.refresh(_:)), for: .valueChanged)
 
         title = accountList.name
     }

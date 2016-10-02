@@ -15,10 +15,6 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     // MARK: - Properties
     
     // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

@@ -21,7 +21,6 @@
 		111942A31CCB8DD4001CF39B /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942961CCB8DD4001CF39B /* UINavigationController+Extension.swift */; };
 		111942BA1CCB8DE5001CF39B /* DiscoverListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */; };
 		111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */; };
-		111942D61CCB8E47001CF39B /* PullToRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942D21CCB8E47001CF39B /* PullToRefreshable.swift */; };
 		111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */; };
 		111942F21CCB8EB8001CF39B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F11CCB8EB8001CF39B /* Theme.swift */; };
 		111942F71CCB8EDE001CF39B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942F41CCB8EDE001CF39B /* Constants.swift */; };
@@ -188,7 +187,6 @@
 		111942961CCB8DD4001CF39B /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverListCell.swift; path = "../4. Discover/Shared/DiscoverListCell/DiscoverListCell.swift"; sourceTree = "<group>"; };
 		111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DiscoverListCell.xib; path = "../4. Discover/Shared/DiscoverListCell/DiscoverListCell.xib"; sourceTree = "<group>"; };
-		111942D21CCB8E47001CF39B /* PullToRefreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshable.swift; sourceTree = "<group>"; };
 		111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../LaunchScreen.storyboard; sourceTree = "<group>"; };
 		111942F11CCB8EB8001CF39B /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		111942F41CCB8EDE001CF39B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -727,7 +725,6 @@
 			isa = PBXGroup;
 			children = (
 				EA6487CD1CE5166A00452DD0 /* BannerPresentable.swift */,
-				111942D21CCB8E47001CF39B /* PullToRefreshable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1255,7 +1252,6 @@
 				11D099FA1D907AC500FEDB21 /* UIButton+BackgroundColor.swift in Sources */,
 				11A4FDAB1D906C8500CA7F07 /* HomeViewController.swift in Sources */,
 				1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */,
-				111942D61CCB8E47001CF39B /* PullToRefreshable.swift in Sources */,
 				EA6487CE1CE5166A00452DD0 /* BannerPresentable.swift in Sources */,
 				EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */,
 				EA6487C61CE503BD00452DD0 /* ReviewViewController.swift in Sources */,

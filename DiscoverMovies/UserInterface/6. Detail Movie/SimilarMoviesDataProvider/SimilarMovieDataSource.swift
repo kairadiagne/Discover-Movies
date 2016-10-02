@@ -28,7 +28,6 @@ class SimilarMovieDataSource: NSObject, DataContaining, UICollectionViewDataSour
         let movie = items[indexPath.row]
         cell.configureWithMovie(movie)
         return cell
-        
         // Show empty background message
     }
     

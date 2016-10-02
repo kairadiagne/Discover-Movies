@@ -21,6 +21,12 @@ class BaseView: UIView, ProgressHUDPresentable {
     
     fileprivate(set) var state: State = .idle
     
+    let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl(frame: .zero)
+        refreshControl.tintColor = UIColor.white
+        return refreshControl
+    }()
+    
     // MARK: - Awake
     
     override func awakeFromNib() {
@@ -35,10 +41,18 @@ class BaseView: UIView, ProgressHUDPresentable {
         switch state {
         case .idle:
             self.state = .idle
-            hideProgressHUD()
+            
+            if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+            } else {
+                hideProgressHUD()
+            }
         case .loading:
             self.state = .loading
-            showProgressHUD()
+            
+            if !refreshControl.isRefreshing {
+                showProgressHUD()
+            }
         }
     }
 

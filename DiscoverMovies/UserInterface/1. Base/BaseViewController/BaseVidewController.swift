@@ -1,60 +1,4 @@
-////
-////  BaseViewController.swift
-////  DiscoverMovies
-////
-////  Created by Kaira Diagne on 13/05/16.
-////  Copyright © 2016 Kaira Diagne. All rights reserved.
-////
-//
-//import UIKit
-//import TMDbMovieKit
-//import MBProgressHUD
-//
-//class BaseViewCondddddddtroller: UIViewController, BannerPresentable, ProgressHUDPresentable, DataManagerFailureDelegate {
-//    
-//    // MARK: Types
-//    
-//    fileprivate struct Constants {
-//        static let UserInfoKey = "error"
-//    }
-//    
-//    // MARK: Properties
-//    
-//    var progressHUD: MBProgressHUD?
-//    
-//    var shouldShowSignInViewController: Bool {
-//        return TMDbSessionManager.shared.signInStatus == .unkown ? true : false
-//    }
-//    
-//    fileprivate var signedIn: Bool {
-//        return TMDbSessionManager.shared.signInStatus == .signedin ? true: false
-//    }
-//    
-//    // MARK: LifeCycle
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        progressHUD = MBProgressHUD.hudWithSize(CGSize(width: 40, height: 40), forFrame: view.bounds)
-//        progressHUD?.isUserInteractionEnabled = false
-//        view.addSubview(progressHUD!)
-//    }
-//
-//    // MARK: Notifications
-//    
-//    func dataDidStartLoadingNotification(_ notification: Notification) {
-//        showProgressHUD()
-//    }
-//    
-//    func dataDidLoadTopNotification(_ notification: Notification) {
-//        hideProgressHUD()
-//    }
-//    
-//    // MARK: Error Handeling
-//    
-//    func listDataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-//        handleError(error)
-//    }
+
 //    
 //    func handleError(_ error: APIError) {
 //        switch error {
@@ -111,18 +55,4 @@
 //        
 //        present(alertController, animated: true, completion: nil)
 //    }
-//    
-//    // MARK: Navigation
-//    
-//    func showSignInViewController() {
-//        let signInViewController = SignInViewController()
-//        present(signInViewController, animated: true, completion: nil)
-//    }
-//    
-//    // MARK: - DataManagerFailureDelegate
-//    
-//    func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-//        
-//    }
-//
-//}
+

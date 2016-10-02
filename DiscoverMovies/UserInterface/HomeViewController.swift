@@ -15,7 +15,7 @@ class HomeViewController: BaseViewController {
     // MARK: - Types
     
     fileprivate struct Constants {
-        static let CellHeightRatio: CGFloat = 0.37
+        static let CellHeight: CGFloat = 250
     }
     
     // MARK: - Properties
@@ -182,12 +182,8 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return homeView.frame.size.height * Constants.CellHeightRatio
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return !datasource(forList: currentList).isEmpty ? UITableViewAutomaticDimension : tableView.bounds.height
+        return !datasource(forList: currentList).isEmpty ? Constants.CellHeight : tableView.bounds.height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

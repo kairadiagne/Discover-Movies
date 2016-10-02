@@ -169,7 +169,7 @@
 /* Begin PBXFileReference section */
 		1118370F1D8748B200C58DF3 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		111942461CCB8CA0001CF39B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		111942461CCB8CA0001CF39B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		1119424B1CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		111942541CCB8CA0001CF39B /* DiscoverMoviesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverMoviesTests.swift; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		111942AD1CCB8DE5001CF39B /* DiscoverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverListCell.swift; path = "../4. Discover/Shared/DiscoverListCell/DiscoverListCell.swift"; sourceTree = "<group>"; };
 		111942AE1CCB8DE5001CF39B /* DiscoverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DiscoverListCell.xib; path = "../4. Discover/Shared/DiscoverListCell/DiscoverListCell.xib"; sourceTree = "<group>"; };
 		111942D21CCB8E47001CF39B /* PullToRefreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshable.swift; sourceTree = "<group>"; };
-		111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../LaunchScreen.storyboard; sourceTree = "<group>"; };
 		111942F11CCB8EB8001CF39B /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		111942F41CCB8EDE001CF39B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		111942FB1CCB8EE4001CF39B /* Genres.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
@@ -358,9 +358,10 @@
 			children = (
 				1119428A1CCB8DBF001CF39B /* AppDelegate.swift */,
 				EAD2A8211CDC9D000005264B /* UserInterface */,
-				EA870C6A1D12D642009C71D5 /* Localization */,
 				111942881CCB8D6F001CF39B /* Theme */,
 				111942841CCB8D13001CF39B /* Extensions */,
+				EA870C6A1D12D642009C71D5 /* Localization */,
+				1179FC6D1DA1167B00CA1E6D /* Resources */,
 				111942861CCB8D2B001CF39B /* Supporting files */,
 			);
 			path = DiscoverMovies;
@@ -424,9 +425,7 @@
 		111942861CCB8D2B001CF39B /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */,
 				111942891CCB8DBF001CF39B /* DiscoverMovies-Bridging-Header.h */,
-				111942461CCB8CA0001CF39B /* Assets.xcassets */,
 				1119424B1CCB8CA0001CF39B /* Info.plist */,
 				11924C8F1D72F1D600B1022E /* Keys.plist */,
 			);
@@ -575,6 +574,22 @@
 			);
 			name = AccountListView;
 			path = View;
+			sourceTree = "<group>";
+		};
+		1179FC6C1DA1165D00CA1E6D /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				111942EB1CCB8EAE001CF39B /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		1179FC6D1DA1167B00CA1E6D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				111942461CCB8CA0001CF39B /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		11924C841D68D3EF00B1022E /* Service */ = {
@@ -829,6 +844,7 @@
 			isa = PBXGroup;
 			children = (
 				11D099FE1D966B2500FEDB21 /* Common */,
+				1179FC6C1DA1165D00CA1E6D /* Launch */,
 				EAD2A8341CDC9EF30005264B /* Menu */,
 				EAD2A8331CDC9EEB0005264B /* Sign in */,
 				11A4FDAD1D906C9E00CA7F07 /* Home */,

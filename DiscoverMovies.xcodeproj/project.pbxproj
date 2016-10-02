@@ -47,6 +47,7 @@
 		1179FC691DA0FFEF00CA1E6D /* AccountListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC681DA0FFEF00CA1E6D /* AccountListView.swift */; };
 		1179FC6B1DA1002900CA1E6D /* AccountListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1179FC6A1DA1002900CA1E6D /* AccountListController.xib */; };
 		1179FC6F1DA11FE400CA1E6D /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC6E1DA11FE400CA1E6D /* ErrorHandler.swift */; };
+		1179FC711DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */; };
 		11924C811D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C801D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift */; };
 		11924C871D6901CC00B1022E /* TMDbDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C861D6901CC00B1022E /* TMDbDataManagerTests.swift */; };
 		11924C8A1D69D7C400B1022E /* String+ToNSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C891D69D7C400B1022E /* String+ToNSDate.swift */; };
@@ -211,6 +212,7 @@
 		1179FC681DA0FFEF00CA1E6D /* AccountListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountListView.swift; sourceTree = "<group>"; };
 		1179FC6A1DA1002900CA1E6D /* AccountListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountListController.xib; sourceTree = "<group>"; };
 		1179FC6E1DA11FE400CA1E6D /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+HideEmptyRows.swift"; sourceTree = "<group>"; };
 		11924C801D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireDataRequest+DictionaryRepresentable.swift"; sourceTree = "<group>"; };
 		11924C861D6901CC00B1022E /* TMDbDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbDataManagerTests.swift; sourceTree = "<group>"; };
 		11924C891D69D7C400B1022E /* String+ToNSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToNSDate.swift"; sourceTree = "<group>"; };
@@ -352,7 +354,6 @@
 				EAD2A8211CDC9D000005264B /* UserInterface */,
 				111942881CCB8D6F001CF39B /* Theme */,
 				111942841CCB8D13001CF39B /* Extensions */,
-				EA870C6A1D12D642009C71D5 /* Localization */,
 				1179FC6D1DA1167B00CA1E6D /* Resources */,
 				111942861CCB8D2B001CF39B /* Supporting files */,
 			);
@@ -410,6 +411,7 @@
 				11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */,
 				11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */,
 				11D099F91D907AC500FEDB21 /* UIButton+BackgroundColor.swift */,
+				1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -579,6 +581,7 @@
 		1179FC6D1DA1167B00CA1E6D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA870C6A1D12D642009C71D5 /* Localization */,
 				111942461CCB8CA0001CF39B /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -794,7 +797,8 @@
 			children = (
 				EA870C6F1D12D68D009C71D5 /* Localizable.strings */,
 			);
-			path = Localization;
+			name = Localization;
+			path = ../Localization;
 			sourceTree = "<group>";
 		};
 		EAD2A8211CDC9D000005264B /* UserInterface */ = {
@@ -1231,6 +1235,7 @@
 				EADA5AAA1CEA6B6A00C2FAE8 /* Colors.swift in Sources */,
 				EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */,
 				11D09A021D966E1C00FEDB21 /* TopListDataSource.swift in Sources */,
+				1179FC711DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift in Sources */,
 				111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */,
 				EA870C3B1D1177C7009C71D5 /* AccountListDataSource.swift in Sources */,
 				EA6487A21CE356C300452DD0 /* DetailView.swift in Sources */,

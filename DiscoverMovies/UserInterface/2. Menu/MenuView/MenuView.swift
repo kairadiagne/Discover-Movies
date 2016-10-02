@@ -26,6 +26,8 @@ class MenuView: UIView {
         backgroundColor = UIColor.backgroundColor()
         profileView.backgroundColor = UIColor.clear
         nameLabel.textAlignment = .center
+        
+        tableView.hideEmptyRows()
     }
     
     // MARK: - Configure

@@ -23,6 +23,8 @@ class HomeView: BaseView {
         
         switchListControl.tintColor = UIColor.white
         
+        tableView.hideEmptyRows()
+        
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {

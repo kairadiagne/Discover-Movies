@@ -9,24 +9,29 @@
 import UIKit
 import TMDbMovieKit
 import youtube_ios_player_helper
-import MBProgressHUD
 
 class VideoViewController: UIViewController {
     
     // MARK: - Properties
     
-//    var progressHUD: MBProgressHUD?
+    fileprivate let youtubeView = YTPlayerView()
     
-    let youtubeView = YTPlayerView()
-    
-    var video: Video!
+    fileprivate let video: Video
     
     // MARK: - Initialize
   
     required init(video: Video) {
-        super.init(nibName: nil, bundle: nil)
         self.video = video
+        
+        super.init(nibName: nil, bundle: nil)
+    
+        self.view.addSubview(youtubeView)
         self.youtubeView.translatesAutoresizingMaskIntoConstraints = false
+        self.youtubeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        self.youtubeView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        self.youtubeView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        self.youtubeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        
         self.youtubeView.delegate = self
     }
     
@@ -34,52 +39,57 @@ class VideoViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View Controller Life Cycle
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.addSubview(youtubeView)
-        youtubeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        youtubeView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        youtubeView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-        youtubeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        
-//        setupProgressHUD()
-        
+    
         youtubeView.load(withVideoId: video.source)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.setAsUnclear()
+        
+        let doneSelector = #selector(VideoViewController.doneButtonClick(notification:))
+        NotificationCenter.default.addObserver(self, selector: doneSelector , name: NSNotification.Name.UIWindowDidBecomeHidden, object: view.window)
     }
     
-}
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        youtubeView.playVideo()
+    }
 
-// MARK: - YTPlayerViewDelegate
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIWindowDidBecomeHidden, object: view.window)
+    }
+    
+    @objc fileprivate func doneButtonClick(notification: Notification) {
+        youtubeView.stopVideo()
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Rotation
+
+}
 
 extension VideoViewController: YTPlayerViewDelegate {
     
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
         let view = UIView()
         view.frame = self.view.bounds
-        view.backgroundColor = UIColor.backgroundColor()
-//        showProgressHUD()
+        view.backgroundColor = UIColor.black
         return view
     }
-    
+
     func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
-        return UIColor.backgroundColor()
-    }
-    
-    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-//        hideProgressHUD()
+        return UIColor.black
     }
     
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
-        print(error)
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
 }
-

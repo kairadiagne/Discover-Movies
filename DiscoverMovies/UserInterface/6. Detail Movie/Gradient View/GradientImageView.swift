@@ -12,10 +12,25 @@ class GradientImageView: UIImageView {
     
     // MARK: - Properties
 
-    fileprivate(set) var gradientLayer = CAGradientLayer()
-    var colors: [CGColor] = [UIColor.backgroundColor().cgColor, UIColor.clear.cgColor]
-    var startPoint = CGPoint(x: 0, y: 1)
-    var endPoint = CGPoint(x: 0, y: 0.1)
+    fileprivate var gradientLayer = CAGradientLayer()
+    
+    var colors: [CGColor] = [UIColor.backgroundColor().cgColor, UIColor.clear.cgColor] {
+        didSet {
+            self.gradientLayer.colors = colors
+        }
+    }
+    
+    var startPoint = CGPoint(x: 0, y: 1) {
+        didSet {
+            self.gradientLayer.startPoint = startPoint
+        }
+    }
+    
+    var endPoint = CGPoint(x: 0, y: 0.1) {
+        didSet {
+            self.gradientLayer.endPoint = endPoint
+        }
+    }
     
     // MARK: - Initialize
     

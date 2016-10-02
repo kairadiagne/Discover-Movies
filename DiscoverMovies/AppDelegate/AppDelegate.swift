@@ -31,14 +31,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let homeViewController = HomeViewController()
         let frontViewController = UINavigationController(rootViewController: homeViewController)
-        let rearViewController =  MenuViewController.instantiatefromStoryboard()
-        let revealViewController = SWRevealViewController(rearViewController: rearViewController, frontViewController: frontViewController)
+        let rearViewController =  MenuViewController()
+        revealViewController = SWRevealViewController(rearViewController: rearViewController, frontViewController: frontViewController)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = revealViewController
         window?.makeKeyAndVisible()
  
         return true
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        
+        if let navigationController = revealViewController?.frontViewController as? UINavigationController, let vc = navigationController.visibleViewController as? VideoViewController {
+            return [.portrait, .landscapeLeft, .landscapeRight]
+            
+            // Bug when popping videovc rotation should change
+        }
+        
+        return .portrait
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -58,16 +69,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
-// TODO: 
-// - Error Messages (No trailer, No Reviews, Not authorized)
-// - SearchView SearchViewController, SearchListViewController
-
-// - Localization
-// - Pull to refresh (Account list controller)
-// - UserInfoStore Multihreading keyed archiver ??
-// - Change ProfileImageView
-// - Color and Design changes
-
-
 

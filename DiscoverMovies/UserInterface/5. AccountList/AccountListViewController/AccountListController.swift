@@ -10,7 +10,7 @@
 //import TMDbMovieKit
 //import SDWebImage
 //
-//class AccountListController: ListViewController, MenuButtonPresentable, PullToRefreshable {
+//class AccountListController: BaseViewController {
 //    
 //    // MARK: Types
 //    
@@ -19,8 +19,8 @@
 //    }
 //    
 //    // MARK: Properties
-//    
-//    fileprivate let dataProvider = AccountListDataProvider()
+//
+//    fileprivate let dataSource = AccountListDataSource()
 //    
 //    fileprivate let accountList: TMDbAccountList
 //    

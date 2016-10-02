@@ -35,5 +35,5 @@ class BaseView: UIView, ProgressHUDPresentable {
             showProgressHUD()
         }
     }
-    
+
 }

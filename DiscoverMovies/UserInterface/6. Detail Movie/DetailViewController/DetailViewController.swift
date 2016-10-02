@@ -15,15 +15,15 @@ class DetailViewController: BaseViewController {
     
     @IBOutlet weak var detailView: DetailView!
     
-    fileprivate var similarMoviesDataSource = SimilarMovieDataSource()
+    fileprivate let similarMoviesDataSource = SimilarMovieDataSource()
     
-    fileprivate var castDataSource = CastDataSource()
+    fileprivate let castDataSource = CastDataSource()
   
     fileprivate let movieInfoManager: TMDbMovieInfoManager
     
-    fileprivate var movie: Movie
+    fileprivate let movie: Movie
     
-    fileprivate var trailer: Video?
+    fileprivate var videoController: VideoViewController?
     
     fileprivate var didAnimate = false
     
@@ -72,7 +72,7 @@ class DetailViewController: BaseViewController {
         
         if !didAnimate {
             didAnimate = true
-            detailView.animateOnScreen()
+            detailView.animatePresentation()
         }
     }
     
@@ -107,9 +107,8 @@ class DetailViewController: BaseViewController {
     }
     
     fileprivate func showTrailer() {
-        guard let trailer = trailer else { return } // Display alert that trailer is unavailable 
-        let videoController = VideoViewController(video: trailer)
-        navigationController?.pushViewController(videoController, animated: true)
+        guard let videoController = videoController else { return }
+        present(videoController, animated: true, completion: nil)
     }
     
     fileprivate func showReviews(_ movie: Movie) {
@@ -132,15 +131,17 @@ extension DetailViewController: UIScrollViewDelegate {
 extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
+        detailView.configure(withDirector: info.director)
+        
+        if let trailer = info.trailer {
+            videoController = VideoViewController(video: trailer)
+        }
+        
         similarMoviesDataSource.update(withItems: info.similarMovies)
         castDataSource.update(withItems: info.cast)
         
         detailView.similarMovieCollectionView.reloadData()
         detailView.castCollectionView.reloadData()
-        
-        detailView.configure(withDirector: info.director)
-        
-        trailer = info.trailer
     }
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
@@ -148,6 +149,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     }
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
+        
     }
     
 }

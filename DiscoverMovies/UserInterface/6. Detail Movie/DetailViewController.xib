@@ -195,7 +195,7 @@
                         <constraint firstItem="YRx-Rx-qhX" firstAttribute="bottom" secondItem="40P-gH-Zt8" secondAttribute="bottom" id="tHA-Tl-L2o"/>
                     </constraints>
                 </scrollView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-G5-ykT" customClass="GradientImageView" customModule="DiscoverMovies" customModuleProvider="target"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-G5-ykT" customClass="GradientImageView" customModule="DiscoverMovies" customModuleProvider="target"/>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5P8-XF-IXi">
                     <constraints>
                         <constraint firstAttribute="width" constant="75" id="V2G-It-1eA"/>
@@ -210,7 +210,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="5P8-XF-IXi" firstAttribute="centerX" secondItem="gTk-G5-ykT" secondAttribute="centerX" id="1hv-BL-pDU"/>
-                <constraint firstItem="gTk-G5-ykT" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.4" id="4Zx-uf-Gqd"/>
+                <constraint firstItem="gTk-G5-ykT" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.4" priority="750" id="4Zx-uf-Gqd"/>
                 <constraint firstItem="5P8-XF-IXi" firstAttribute="centerY" secondItem="gTk-G5-ykT" secondAttribute="centerY" id="BLW-TW-wjE"/>
                 <constraint firstItem="40P-gH-Zt8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DFQ-Yw-edb"/>
                 <constraint firstItem="40P-gH-Zt8" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="Gqp-JK-GFW"/>
@@ -234,7 +234,7 @@
                 <outlet property="genreLabel" destination="K27-uc-4Sg" id="jWa-fn-gb6"/>
                 <outlet property="genreValueLabel" destination="OW2-WD-d6e" id="dry-iS-ef1"/>
                 <outlet property="header" destination="gTk-G5-ykT" id="yhV-aU-a4r"/>
-                <outlet property="headerHeightConstraint" destination="4Zx-uf-Gqd" id="WpV-8b-nGA"/>
+                <outlet property="headerHeightConstraint" destination="4Zx-uf-Gqd" id="zVZ-UE-8a1"/>
                 <outlet property="headerTop" destination="sOB-d8-Gnv" id="hh2-xt-KnP"/>
                 <outlet property="playButton" destination="5P8-XF-IXi" id="Aye-CQ-ScB"/>
                 <outlet property="ratingLabel" destination="FI1-wg-CPS" id="YX4-Dc-6R2"/>

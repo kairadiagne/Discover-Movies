@@ -20,7 +20,7 @@ class TopListDataSource: NSObject, DataContaining, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemCount
+        return itemCount // No Data Cel // Error message cell
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,6 +30,7 @@ class TopListDataSource: NSObject, DataContaining, UITableViewDataSource {
         let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url ?? nil
         cell.configure(movie, imageURL: imageURL)
         return cell
+        // No Data Cel // Error message cell
     }
 
 }

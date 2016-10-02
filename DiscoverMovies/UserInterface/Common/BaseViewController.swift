@@ -18,6 +18,7 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
     }
     
     // MARK: - DataManagerNotifications

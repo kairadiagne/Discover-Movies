@@ -28,17 +28,26 @@ class ProfileImageView: UIView {
     
     func commonInit() {
         self.backgroundColor = UIColor.clear
-        self.layer.cornerRadius = self.frame.size.width / 2
-
+    
         self.imageView.contentMode = .scaleAspectFill
-        self.imageView.frame = self.bounds
         self.imageView.layer.borderWidth = 2
         self.imageView.layer.backgroundColor = UIColor.clear.cgColor
         self.imageView.layer.borderColor = UIColor.white.cgColor
-        self.imageView.layer.cornerRadius = imageView.frame.size.width / 2
         self.imageView.layer.masksToBounds = true
         
         self.addSubview(imageView)
     }
+    
+    // MARK: - Layout
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        imageView.frame = bounds
+        layer.cornerRadius = bounds.size.width / 2
+        imageView.layer.cornerRadius = imageView.bounds.size.width / 2
+    }
+    
+    
 
 }

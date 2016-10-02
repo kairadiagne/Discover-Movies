@@ -26,7 +26,7 @@ class ReviewDataSource: NSObject, DataContaining, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isEmpty {
             let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCell.defaultIdentifier(), for: indexPath) as! NoDataCell
-            cell.messageLabel.text = "No Reviews to show"
+            cell.messageLabel.text = "No Reviews to show" // LocalizedString
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.defaultIdentifier(), for: indexPath) as! ReviewTableViewCell

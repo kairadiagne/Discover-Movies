@@ -10,8 +10,11 @@ import UIKit
 
 extension UINavigationController {
     
+    // MARK: - Statusbar style
+    
     open override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
-    
+
 }
+

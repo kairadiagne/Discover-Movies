@@ -35,26 +35,18 @@ class DetailView: BackgroundView {
     @IBOutlet weak var watchListControl: WatchListButton!
     @IBOutlet weak var header: GradientImageView!
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var animationConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var scrollTop: NSLayoutConstraint!
-    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerTop: NSLayoutConstraint!
-
-    fileprivate var didAnimate = false
+    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var animationConstraint: NSLayoutConstraint!
     
-    fileprivate var topInset: CGFloat {
-        return header.frame.height - scrollTop.constant
-    }
+    fileprivate var contentInsetTop: CGFloat = 0
     
-    fileprivate var openHeader: CGFloat {
-        let contentInsetY = scrollView.contentInset.top
-        let contentOffSetY = scrollView.contentOffset.y
-        let position = (contentInsetY + contentOffSetY) / contentInsetY
-        return min(1, max(0, position))
-    }
+    private var didSetContentInset = false
     
     // MARK: - Awake
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.H1()
@@ -79,8 +71,6 @@ class DetailView: BackgroundView {
         self.readReviewsButton.layer.borderWidth = 1.5
         self.readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
         
-        scrollView.bounces = false
-        
         // For animation
         self.header.alpha = 0.3
         self.playButton.alpha = 0.3
@@ -90,9 +80,15 @@ class DetailView: BackgroundView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.scrollView.contentInset.top = topInset
+        
+        if !didSetContentInset {
+            didSetContentInset = true
+            // Moves tableview content from under the header
+            contentInsetTop =  ceil(header.bounds.size.height - scrollTop.constant)
+            scrollView.contentInset.top = contentInsetTop
+        }
     }
-
+    
     // MARK: - Configure
     
     func configure(withMovie movie: Movie) {
@@ -121,9 +117,9 @@ class DetailView: BackgroundView {
         directorValueLabel.text = director?.name ?? "Unknown"
     }
     
-    // MARK: Animation
+    // MARK: - Animation
     
-    func animateOnScreen() {
+    func animatePresentation() {
         self.layoutIfNeeded()
             
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions(), animations: {
@@ -143,9 +139,28 @@ class DetailView: BackgroundView {
     // MARK: - Header
     
     func moveHeaderOnScroll() {
-        headerTop.constant = openHeader * -header.frame.height * 0.8
+        let contentOffSetY = scrollView.contentOffset.y
+        
+        // Calculate the position of the header 
+        // 1 means the header has collapsed
+        // 0 Means the header is fully expanded
+        let position = (contentInsetTop + contentOffSetY) / contentInsetTop
+        let openHeader = min(1, max(0, position))
+        
+        // Adjust the header position
+        headerTop.constant = openHeader * -header.bounds.height * 0.8
+        
+        // Adjust the alpha of the button
+        // When header is collapsed the playbutton should not be visible
         playButton.alpha = -openHeader + 1
-        scrollView.bounces = scrollView.contentOffset.y > topInset
+        
+        // Adjust height of header 
+        if contentOffSetY < -contentInsetTop {
+            headerHeightConstraint.constant = abs(contentOffSetY) - contentInsetTop
+        } else {
+            headerHeightConstraint.constant = 0
+        }
+        
     }
     
 }

@@ -56,7 +56,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         self.backgroundColor = UIColor.clear
     }
 
-    // MARK: - Layoutcycle
+    // MARK: - Layout
     
     fileprivate var didAddLayers = false
     

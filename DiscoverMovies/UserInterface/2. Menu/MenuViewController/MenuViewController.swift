@@ -9,23 +9,60 @@
 import UIKit
 import TMDbMovieKit
 
-class MenuViewController: UITableViewController {
-
-    // MARK: Storyboard
+class MenuViewController: UIViewController {
     
-    class func instantiatefromStoryboard() -> MenuViewController {
-        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: MenuViewController.self)) as! MenuViewController
+    // MARK: - Types
+    
+    enum MenuItem: Int {
+        case topList
+        case watchlist
+        case favorites
+        case signin
+        // case search
+        
+        private var signedIn: Bool {
+            return TMDbSessionManager.shared.signInStatus == .signedin
+        }
+        
+        var text: String {
+            switch self {
+            case .topList:
+                return "Discover top movies"
+            case .watchlist:
+                return "Movies I want to watch"
+            case .favorites:
+                return "My favorite movies"
+            case .signin:
+                return signedIn ? "Sign out" : "Sign in"
+            }
+        }
+        
+        var icon: UIImage? {
+            switch self {
+            case .topList:
+                return UIImage(named: "Discover")
+            case .watchlist:
+                return UIImage(named: "Watchlist")
+            case .favorites:
+                return UIImage(named: "Favorite")
+            case .signin:
+                return UIImage(named: "Logout")
+            }
+        }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
 
-    @IBOutlet weak var menuTableview: MenuTableView!
+    @IBOutlet var menuView: MenuView!
     
     fileprivate let userService = TMDbUserService()
 
     fileprivate var signedIn: Bool {
         return TMDbSessionManager.shared.signInStatus == .signedin
+    }
+    
+    fileprivate var user: User? {
+        return TMDbSessionManager.shared.user
     }
     
     fileprivate var presentedRow = 1
@@ -34,102 +71,128 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let menuCellNib = UINib(nibName: MenuTableViewCell.nibName(), bundle: nil)
+        menuView.tableView.register(menuCellNib, forCellReuseIdentifier: MenuTableViewCell.defaultIdentifier())
+        
+        menuView.tableView.dataSource = self
+        menuView.tableView.delegate = self
+        
         userService.delegate = self
+        
+        menuView.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if signedIn && (TMDbSessionManager.shared.user == nil) {
-            menuTableview.updateMenu(signedIn)
-            userService.getUserInfo() // Get latest
-        } else if signedIn && (TMDbSessionManager.shared.user != nil) {
-            menuTableview.updateMenu(signedIn, user: TMDbSessionManager.shared.user!)
-            userService.getUserInfo() // Get latest
-        } else {
-             menuTableview.updateMenu(signedIn)
+        if signedIn {
+            userService.getUserInfo()
         }
-      
+        
+        menuView.configure(withUser: user)
     }
    
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
+        return .lightContent // Is this needed
     }
     
     // MARK: Navigation
     
-    func showTopListViewController() {
-//        let topListVieWController = TopListViewController(nibName: String(describing: ListViewController.self), bundle: nil)
-//        let navigationController = UINavigationController(rootViewController: topListVieWController)
-//        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+    func showHomeViewController() {
+        let homeViewController = HomeViewController()
+        let navigationController = UINavigationController(rootViewController: homeViewController)
+        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showWatchListViewController() {
-//        let watchListController = AccountListController(list: .favorite)
-//        let navigationController = UINavigationController(rootViewController: watchListController)
-//        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+        //        let watchListController = AccountListController(list: .favorite)
+        //        let navigationController = UINavigationController(rootViewController: watchListController)
+        //        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showFavoritesViewController() {
-//        let favoritesController = AccountListController(list: .watchlist)
-//        let navigationController = UINavigationController(rootViewController: favoritesController)
-//        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+        //        let favoritesController = AccountListController(list: .watchlist)
+        //        let navigationController = UINavigationController(rootViewController: favoritesController)
+        //        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
-    // MARK: Sign in / Sign out
-    
-    func signIn() {
-        showTopListViewController()
-    }
-    
-    func signOut() {
-        TMDbSessionManager.shared.signOut()
-        showTopListViewController()
-    }
+    // MARK: - Toggle sign in
     
     fileprivate func toggleSignIn() {
         if signedIn {
-            signOut()
+            TMDbSessionManager.shared.signOut()
         } else {
             TMDbSessionManager.shared.deactivatePublicMode()
         }
         
-        showTopListViewController()
+        showHomeViewController()
     }
     
-    // MARK: UITableViewDelegate
+}
+
+// MARK: - UITableViewDataSource 
+
+extension MenuViewController: UITableViewDataSource {
     
-    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        switch (indexPath as NSIndexPath).row {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.defaultIdentifier()) as? MenuTableViewCell else { return MenuTableViewCell() }
+        guard let menuItem = MenuItem(rawValue: indexPath.row) else { return cell }
+        
+        switch menuItem {
+        case .topList:
+            cell.configure(title: menuItem.text, image: menuItem.icon)
+            return cell
+        case .watchlist:
+            cell.configure(title: menuItem.text, image: menuItem.icon, signedIn: signedIn)
+            return cell
+        case .favorites:
+            cell.configure(title: menuItem.text, image: menuItem.icon, signedIn: signedIn)
+            return cell
+        case .signin:
+            cell.configure(title: menuItem.text, image: menuItem.icon)
+            return cell
+        }
+    }
+
+}
+
+// MARK: - UITableViewDelegate
+
+extension MenuViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        switch indexPath.row {
         case 0:
             return false
         default:
-            return true 
+            return true
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-   
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If we are trying to push the same row we change the position of the front view controller
-        if (indexPath as NSIndexPath).row == presentedRow && (indexPath as NSIndexPath).row != 4 {
+        if indexPath.row == presentedRow && indexPath.row != 4 {
             self.revealViewController()?.setFrontViewPosition(.leftSide, animated: true)
             return
         }
         
-        switch (indexPath as NSIndexPath).row {
-        case 1:
-            showTopListViewController()
-        case 2:
-            showFavoritesViewController()
-        case 3:
-            showWatchListViewController()
-        case 4:
-            toggleSignIn()
-        default:
-            break
-        }
+        guard let menuItem = MenuItem(rawValue: indexPath.row) else { return }
         
-        presentedRow = (indexPath as NSIndexPath).row
+        switch menuItem {
+        case .topList:
+            showHomeViewController()
+        case .watchlist:
+            showWatchListViewController()
+        case .favorites:
+            showFavoritesViewController()
+        case .signin:
+            toggleSignIn()
+        }
     }
     
 }
@@ -139,11 +202,11 @@ class MenuViewController: UITableViewController {
 extension MenuViewController: TMDbUserServiceDelegate {
     
     func user(service: TMDbUserService, didLoadUserInfo user: User) {
-        menuTableview.updateMenu(signedIn, user: user)
+        menuView.configure(withUser: user)
     }
     
     func user(service: TMDbUserService, didFailWithError error: APIError) {
-        // What to do with this error
+        // Handle error 
     }
 }
 

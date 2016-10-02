@@ -35,6 +35,16 @@ class BaseView: UIView {
         super.awakeFromNib()
         
         backgroundColor = UIColor.backgroundColor()
+        
+        activityIndicator = UIActivityIndicatorView(frame: .zero)
+        activityIndicator?.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator?.color = UIColor.gray
+        
+        addSubview(activityIndicator!)
+        
+        activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator?.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor).isActive = true
+        activityIndicator?.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor).isActive = true
     }
 
     // MARK: - State
@@ -45,29 +55,13 @@ class BaseView: UIView {
             self.state = .idle
             refreshControl.endRefreshing()
             activityIndicator?.stopAnimating()
-            activityIndicator?.removeFromSuperview()
         case .loading:
             self.state = .loading
             
-            if !refreshControl.isRefreshing && activityIndicator == nil {
-                addRefreshControl()
+            if !refreshControl.isRefreshing {
                 activityIndicator?.startAnimating()
             } 
         }
-    }
-    
-    // MARK: - Utils
-    
-    func addRefreshControl() {
-        activityIndicator = UIActivityIndicatorView(frame: .zero)
-        activityIndicator?.activityIndicatorViewStyle = .whiteLarge
-        activityIndicator?.color = UIColor.gray
-        
-        addSubview(activityIndicator!)
-        
-        activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator?.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor).isActive = true
-        activityIndicator?.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor).isActive = true
     }
 
 }

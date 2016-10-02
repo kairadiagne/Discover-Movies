@@ -93,7 +93,7 @@ class ReviewViewController: BaseViewController {
     // MARK: - DataManagerFailureDelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
+        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
     
 }

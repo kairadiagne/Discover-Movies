@@ -150,7 +150,7 @@ class HomeViewController: BaseViewController {
     }
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
+        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
         homeView.set(state: .loading)
     }
     

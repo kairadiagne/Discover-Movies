@@ -66,16 +66,21 @@ public class TMDbMovieInfoManager {
         let endpoint = "account/\(userID)/\(list.name)"
         
         Alamofire.request(APIRouter.post(endpoint: endpoint, queryParams: parameters, bodyParams: body)).validate()
-            .response { (response) in
+            .responseJSON { (response) in
                 
-                guard response.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.error!)
+                guard response.result.error == nil else {
+                    let error = self.errorHandler.categorize(error: response.result.error!)
                     self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                     return
+                }
+                
+                if let status = response.result.value {
+                    print(status)
                 }
         }
         
     }
+
     
     public func loadAccountState() {
         guard let sessionID = TMDbSessionInfoStore().sessionID else {

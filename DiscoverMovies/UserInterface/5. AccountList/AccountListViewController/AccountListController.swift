@@ -106,14 +106,14 @@ class AccountListController: BaseViewController {
     // MARK: - Failuredelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
+        ErrorHandler.shared.handle(error: error, authorizationError: true)
     }
    
     // MARK: Navigation 
     
     func showDetailViewControllerForMovie(_ movie: Movie) {
         let detailViewController = DetailViewController(movie: movie)
-        navigationController?.pushViewController(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: false)
     }
     
 }

@@ -80,7 +80,7 @@ extension SignInViewController: TMDbSignInDelegate {
     
     func signIn(service: TMDbSignInService, didFailWithError error: APIError) {
         signInView.set(state: .idle)
-        // handleError(error)
+        ErrorHandler.shared.handle(error: error)
     }
     
     func signInServiceDidSignIn(_service service: TMDbSignInService) {

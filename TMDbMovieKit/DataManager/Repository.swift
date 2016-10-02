@@ -67,7 +67,7 @@ class Repository: NSObject {
     }
     
     fileprivate func file(forIdentifier identifier: String) -> String {
-        print("\(path)/data/\(identifier).plist")
+        // print("\(path)/data/\(identifier).plist")
         return "\(path)/data/\(identifier).plist"
     }
     

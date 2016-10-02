@@ -122,11 +122,16 @@ class MenuViewController: UIViewController {
     
     fileprivate func toggleSignIn() {
         if signedIn {
-            TMDbSessionManager.shared.signOut()
+            signout()
         } else {
             TMDbSessionManager.shared.deactivatePublicMode()
         }
         
+        showHomeViewController()
+    }
+    
+    func signout() {
+        TMDbSessionManager.shared.signOut()
         showHomeViewController()
     }
     
@@ -168,7 +173,7 @@ extension MenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If we are trying to push the same row we change the position of the front view controller
-        if indexPath.row == presentedRow && indexPath.row != 4 {
+        if indexPath.row == presentedRow && indexPath.row != 3 { // Except sign out 
             self.revealViewController()?.setFrontViewPosition(.leftSide, animated: true)
             return
         }
@@ -201,7 +206,7 @@ extension MenuViewController: TMDbUserServiceDelegate {
     }
     
     func user(service: TMDbUserService, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
+        ErrorHandler.shared.handle(error: error)
     }
     
 }

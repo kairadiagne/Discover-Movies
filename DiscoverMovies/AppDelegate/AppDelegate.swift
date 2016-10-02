@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let homeViewController = HomeViewController()
         let frontViewController = UINavigationController(rootViewController: homeViewController)
-        let rearViewController =  MenuViewController()
-        revealViewController = SWRevealViewController(rearViewController: rearViewController, frontViewController: frontViewController)
+        menuViewController =  MenuViewController() // Rear view controlelr
+        revealViewController = SWRevealViewController(rearViewController: menuViewController, frontViewController: frontViewController)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = revealViewController

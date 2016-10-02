@@ -14,7 +14,9 @@ extension DataRequest {
     @discardableResult
     func responseObject<T: DictionaryRepresentable>(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
         let responseSerializer = DataResponseSerializer<T> { request, response, data, error in
-            guard error == nil else { return .failure(error!) }
+            guard error == nil else {
+                return .failure(error!)
+            }
             
             // Parse respone as JSON
             let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
@@ -22,12 +24,12 @@ extension DataRequest {
             
             // Create model objects
             guard case let .success(jsonObject) = result else {
-                let error = NSError() //Custom Error
+                let error = NSError()
                 return .failure(error)
             }
             
             guard let responseDict = jsonObject as? [String: AnyObject], let responseObject = T(dictionary: responseDict) else {
-                let error = NSError() //Custom Error
+                let error = NSError()
                 return .failure(error)
             }
             

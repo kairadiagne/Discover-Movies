@@ -17,83 +17,55 @@ class ErrorHandler {
     
     static let shared = ErrorHandler()
     
-    fileprivate var banner: Banner?
-    
-    // MARK: - Init
-    
     // MARK: - Handle Errors 
     
-    func handle(error: APIError, isAuthorized: Bool = false) {
-        
-        // Conditional if signed in or not 
+    func handle(error: APIError, authorizationError: Bool = false) {
 
         switch error {
+        // Show banner for internet connection error
         case .noInternetConnection:
             let title = NSLocalizedString("noConnectionTitle", comment: "Title of no internet connection banner")
             let message = NSLocalizedString("noConnectionMessage", comment: "Message of no internet connection bannner")
             showbanner(with: title, message: message, color: UIColor.flatOrange())
+        // Show banner for connection timed out error
         case .timedOut:
             let title = NSLocalizedString("noConnectionTitle", comment: "Title of no internet connection banner")
             let message = NSLocalizedString("noConnectionMessage", comment: "Message of no internet connection bannner")
-            showbanner(with: title, message: message, color: UIColor.flatOrange()) // Timed out error
-        case .unAuthorized:
+            showbanner(with: title, message: message, color: UIColor.flatOrange())
+        // Show banner for unauthorized error and logout the user
+        case .unAuthorized where authorizationError:
             let title = NSLocalizedString("authorizationErrorTitle", comment: "Title of authorization error alert")
             let message = NSLocalizedString("authorizationErrorMessage", comment: "Message of authorization error alert")
-            showbanner(with: title, message: message, color: UIColor.flatRed())
+            
+            showbanner(with: title, message: message, color: UIColor.flatRed(), dismissBlock: {
+                let menuViewController = (UIApplication.shared.delegate as? AppDelegate)?.menuViewController
+                menuViewController?.signout()
+            })
+        // Show generic error banner
         case .generic:
             let title = NSLocalizedString("genericErrorTitle", comment: "Title of generic error alert")
             let message = NSLocalizedString("genericErrorMessage", comment: "Message of generic error alert")
             showbanner(with: title, message: message, color: UIColor.flatGray())
             return
+        default:
+            return
         }
-        
-        // Authorization where Signedin
-        // Authorization where Unknown
-        // Authorization where publicMode
     }
     
     // The banner will be displayed at the top of that view
     // When the banner is not nill it means it is currently being presented on screen
-    fileprivate func showbanner(with title: String, message: String, color: UIColor) {
-        // Hide previous banner if there is one
-        banner?.dismiss()
+    fileprivate func showbanner(with title: String, message: String, color: UIColor, dismissBlock: (() -> Void)? = nil) {
+        // Create and show banner
+        let banner = Banner()
+        banner.titleLabel.text = title
+        banner.detailLabel.text = message
+        banner.backgroundColor = color
+        banner.dismissesOnSwipe = true
+        banner.dismissesOnTap = true
+        banner.didTapBlock = dismissBlock
+        banner.didDismissBlock = dismissBlock
         
-        // Create and show new banner
-        banner = Banner()
-        banner?.titleLabel.text = title
-        banner?.detailLabel.text = message
-        banner?.backgroundColor = color
-        banner?.dismissesOnSwipe = true
-        
-        banner?.show()
+        banner.show(duration: 3.0)
     }
     
 }
-
-
-
-
-
-
-
-//
-//            if let menuViewController = (UIApplication.shared.delegate as? AppDelegate)?.menuViewController {
-//                menuViewController.signOut()
-//            }
-//        }
-//
-
-//
-//
-//
-//    fileprivate func presentAlertWithTitle(_ title: String, message: String, completionhandler: (() -> Void)?) {
-//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//
-//        let dismiss = UIAlertAction(title: "dismiss", style: .default) { action  in
-//            completionhandler?()
-//        }
-//
-//        alertController.addAction(dismiss)
-//
-//        present(alertController, animated: true, completion: nil)
-//    }

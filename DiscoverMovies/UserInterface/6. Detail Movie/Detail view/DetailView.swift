@@ -100,7 +100,7 @@ class DetailView: UIView {
     
     // MARK: - Configure
     
-    func configure(withMovie movie: Movie) {
+    func configure(withMovie movie: Movie, signedIn: Bool) {
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
         genreValueLabel.text = movie.mainGenre()?.name ?? NSLocalizedString("unknownGenreText", comment: "")
@@ -114,6 +114,11 @@ class DetailView: UIView {
             releaseValueLabel.text = "\(releaseYear)"
         } else {
             releaseValueLabel.text = NSLocalizedString("unknownReleaseText", comment: "")
+        }
+        
+        if !signedIn {
+            favouriteControl.isHidden = true
+            watchListControl.isHidden = true
         }
     }
     

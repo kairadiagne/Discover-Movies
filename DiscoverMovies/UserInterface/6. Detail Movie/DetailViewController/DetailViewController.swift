@@ -59,7 +59,7 @@ class DetailViewController: BaseViewController {
         movieInfoManager.loadInfo()
         movieInfoManager.loadAccountState()
         
-        detailView.configure(withMovie: movie)
+        detailView.configure(withMovie: movie, signedIn: signedIn)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,7 +149,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     }
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
-        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
+        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
     
 }

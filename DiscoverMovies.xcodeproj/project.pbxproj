@@ -490,11 +490,12 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
-		11290AF01D9824D500AC4231 /* View */ = {
+		11290AF01D9824D500AC4231 /* ReviewView */ = {
 			isa = PBXGroup;
 			children = (
 				11290AF11D98250400AC4231 /* ReviewView.swift */,
 			);
+			name = ReviewView;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -506,13 +507,13 @@
 			name = HomeView;
 			sourceTree = "<group>";
 		};
-		11290AF41D98275A00AC4231 /* Controller */ = {
+		11290AF41D98275A00AC4231 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
 				11A4FDA91D906C8500CA7F07 /* HomeViewController.swift */,
 				11A4FDAA1D906C8500CA7F07 /* HomeViewController.xib */,
 			);
-			name = Controller;
+			name = HomeViewController;
 			sourceTree = "<group>";
 		};
 		11290AF51D98276800AC4231 /* DataSource */ = {
@@ -567,11 +568,12 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		1179FC671DA0FFDC00CA1E6D /* View */ = {
+		1179FC671DA0FFDC00CA1E6D /* AccountListView */ = {
 			isa = PBXGroup;
 			children = (
 				1179FC681DA0FFEF00CA1E6D /* AccountListView.swift */,
 			);
+			name = AccountListView;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -612,8 +614,8 @@
 		11A4FDAD1D906C9E00CA7F07 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				11290AF41D98275A00AC4231 /* HomeViewController */,
 				11290AF31D98274C00AC4231 /* HomeView */,
-				11290AF41D98275A00AC4231 /* Controller */,
 				11290AF51D98276800AC4231 /* DataSource */,
 				11290AF61D98277600AC4231 /* Cell */,
 			);
@@ -715,13 +717,12 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		EA6487DE1CE5A4A100452DD0 /* ReviewViewControlelr */ = {
+		EA6487DE1CE5A4A100452DD0 /* ReviewViewController */ = {
 			isa = PBXGroup;
 			children = (
 				EA6487C41CE503BD00452DD0 /* ReviewViewController.swift */,
 				11290AEE1D98217E00AC4231 /* ReviewViewController.xib */,
 			);
-			name = ReviewViewControlelr;
 			path = ReviewViewController;
 			sourceTree = "<group>";
 		};
@@ -845,7 +846,7 @@
 			isa = PBXGroup;
 			children = (
 				EA870C3C1D1190A5009C71D5 /* AccountListController */,
-				1179FC671DA0FFDC00CA1E6D /* View */,
+				1179FC671DA0FFDC00CA1E6D /* AccountListView */,
 				EA870C3D1D1190A9009C71D5 /* DataSource */,
 				EA870C3E1D1190B2009C71D5 /* Cell */,
 			);
@@ -878,8 +879,8 @@
 		EAD2A8321CDC9EDE0005264B /* Review */ = {
 			isa = PBXGroup;
 			children = (
-				EA6487DE1CE5A4A100452DD0 /* ReviewViewControlelr */,
-				11290AF01D9824D500AC4231 /* View */,
+				EA6487DE1CE5A4A100452DD0 /* ReviewViewController */,
+				11290AF01D9824D500AC4231 /* ReviewView */,
 				EA6487E41CE5A5DE00452DD0 /* Cell */,
 				EA870C641D12C427009C71D5 /* DataSource */,
 			);

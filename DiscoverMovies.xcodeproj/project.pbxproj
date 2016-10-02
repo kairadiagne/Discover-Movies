@@ -14,7 +14,6 @@
 		1119426E1CCB8CBF001CF39B /* TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */; };
 		1119427A1CCB8CBF001CF39B /* TMDbMovieKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119428A1CCB8DBF001CF39B /* AppDelegate.swift */; };
-		1119429B1CCB8DD4001CF39B /* MBProgressHUD+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119428E1CCB8DD4001CF39B /* MBProgressHUD+Default.swift */; };
 		1119429E1CCB8DD4001CF39B /* NSDate+Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942911CCB8DD4001CF39B /* NSDate+Year.swift */; };
 		111942A11CCB8DD4001CF39B /* UIImage+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942941CCB8DD4001CF39B /* UIImage+Defaults.swift */; };
 		111942A21CCB8DD4001CF39B /* UINavigationBar+Transparent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */; };
@@ -178,7 +177,6 @@
 		111942761CCB8CBF001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		111942891CCB8DBF001CF39B /* DiscoverMovies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "DiscoverMovies-Bridging-Header.h"; path = "AppDelegate/DiscoverMovies-Bridging-Header.h"; sourceTree = "<group>"; };
 		1119428A1CCB8DBF001CF39B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppDelegate/AppDelegate.swift; sourceTree = "<group>"; };
-		1119428E1CCB8DD4001CF39B /* MBProgressHUD+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MBProgressHUD+Default.swift"; sourceTree = "<group>"; };
 		111942911CCB8DD4001CF39B /* NSDate+Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Year.swift"; sourceTree = "<group>"; };
 		111942941CCB8DD4001CF39B /* UIImage+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Defaults.swift"; sourceTree = "<group>"; };
 		111942951CCB8DD4001CF39B /* UINavigationBar+Transparent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Transparent.swift"; sourceTree = "<group>"; };
@@ -402,7 +400,6 @@
 		111942841CCB8D13001CF39B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1119428E1CCB8DD4001CF39B /* MBProgressHUD+Default.swift */,
 				111942911CCB8DD4001CF39B /* NSDate+Year.swift */,
 				113946311CCBBA80001CFAEA /* NSDate+ToString.swift */,
 				11924C891D69D7C400B1022E /* String+ToNSDate.swift */,
@@ -1230,7 +1227,6 @@
 				11290AF21D98250400AC4231 /* ReviewView.swift in Sources */,
 				11924C8A1D69D7C400B1022E /* String+ToNSDate.swift in Sources */,
 				111942F21CCB8EB8001CF39B /* Theme.swift in Sources */,
-				1119429B1CCB8DD4001CF39B /* MBProgressHUD+Default.swift in Sources */,
 				EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */,
 				EADA5AAA1CEA6B6A00C2FAE8 /* Colors.swift in Sources */,
 				EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */,
@@ -1453,6 +1449,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1473,6 +1470,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

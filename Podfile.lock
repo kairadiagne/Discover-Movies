@@ -5,7 +5,6 @@ PODS:
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
   - Locksmith (3.0.0)
-  - MBProgressHUD (1.0.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -17,7 +16,6 @@ DEPENDENCIES:
   - BRYXBanner
   - ChameleonFramework
   - Locksmith
-  - MBProgressHUD
   - SDWebImage
   - SWRevealViewController
   - youtube-ios-player-helper
@@ -27,11 +25,10 @@ SPEC CHECKSUMS:
   BRYXBanner: 34eabf9c6c009f187948ca78a4f3bba3767d0f04
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: c1f7fb83b98e43846e7483f07e64e500840b8a31
+PODFILE CHECKSUM: f2d5dcf53475cc2e4e87e95182f7ebd1635c00b8
 
 COCOAPODS: 1.1.0.rc.1

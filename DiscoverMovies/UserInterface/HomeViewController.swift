@@ -45,7 +45,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "TopLists"
+        title = NSLocalizedString("homevcTitle", comment: "")
         
         addMenuButton()
         

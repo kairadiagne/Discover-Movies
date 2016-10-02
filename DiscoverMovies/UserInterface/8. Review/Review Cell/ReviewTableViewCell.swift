@@ -27,7 +27,8 @@ class ReviewTableViewCell: UITableViewCell {
     // MARK: - Awake
     
     func configure(_ review: Review) {
-        authorLabel?.text = "A movie review by \(review.author)"
+        
+        authorLabel?.text = NSLocalizedString("authorLabelPrefixText", comment: "") + " \(review.author)"
         contentLabel?.text = review.content
     }
     

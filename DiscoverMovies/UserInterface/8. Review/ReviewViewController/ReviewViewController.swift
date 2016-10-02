@@ -55,7 +55,7 @@ class ReviewViewController: BaseViewController {
         
         reviewView.refreshControl.addTarget(self, action: #selector(ReviewViewController.refresh), for: .valueChanged)
     
-        title = "Reviews" // NSLocalizedString
+        title = NSLocalizedString("reviewvcTitle", comment: "")
         
         reviewManager.failureDelegate = self
     }

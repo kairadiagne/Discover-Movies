@@ -38,7 +38,8 @@ class SignInView: BaseView {
         publicModeButton.layer.borderColor = UIColor.white.cgColor
         publicModeButton.layer.backgroundColor = UIColor(white: 1.0, alpha: 0.05).cgColor
         
-        // Localized string title of buttons 
+        signInButton.titleLabel?.text = NSLocalizedString("signInButtonText", comment: "")
+        publicModeButton.titleLabel?.text = NSLocalizedString("continueWithSignInButtonText", comment: "")
     }
 
 }

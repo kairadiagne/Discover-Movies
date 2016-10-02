@@ -58,8 +58,12 @@ class AccountListController: BaseViewController {
         accountListView.tableView.dataSource = dataSource
         
         accountListView.refreshControl.addTarget(self, action: #selector(AccountListController.refresh(_:)), for: .valueChanged)
-
-        title = accountList.name
+        
+        if accountList == .favorite {
+            title = NSLocalizedString("favoriteVCTitle", comment: "")
+        } else {
+            title = NSLocalizedString("watchListVCTitle", comment: "")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

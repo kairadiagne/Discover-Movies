@@ -6,14 +6,47 @@
   Copyright © 2016 Kaira Diagne. All rights reserved.
 */
 
-/* No Internet connection banner */
+/* Error Handler */
 noConnectionTitle = "No internet connection";
 noConnectionMessage = "Couldn't load any information, please check your connection and try again later";
-
-/* Authorization error alert */
 authorizationErrorTitle = "Authorization error";
 authorizationErrorMessage = "This feauture requires you to sign in with a TMDb account";
-
-/* Generic error alert */
 genericErrorTitle = "Unknown error";
 genericErrorMessage = "An unknown error occurred";
+
+/* Menu */
+topListMenuItemText = "Discover top movies";
+watchListMenuItemText = "Movies I want to watch";
+favoritesMenuItemText = "My favorite movies";
+signInMenuItemText = "Sign in";
+signOutMenuItemText = "Sign out";
+nameLabelGuest = "Guest";
+
+/* Sign in */
+signInButtonText = "Sign in with TMDb";
+continueWithSignInButtonText = "Continue without signing in";
+
+/* Home */
+homevcTitle = "Toplists";
+homeNoDataCellText = "No movies to show";
+cellUnknownYearText = "Unknown";
+
+/* Detail */
+directorLabelText = "Director:";
+genreLabelText = "Genre:";
+releaseLabelText = "Released in:";
+ratingLabelText = "Rating:";
+unknownGenreText = "Unknown";
+unknownReleaseText = "Unknown";
+unknownDirectorText = "Unknown";
+
+/* Review */
+reviewvcTitle = "Reviews";
+authorLabelPrefixText = "A movie review by";
+noReviewMessage = "No Reviews to show";
+
+/* AccountList */
+noMoviesInListText = "List doesn't contain any movies yet";
+favoriteVCTitle = "Favorites";
+watchListVCTitle = "Watchlist";
+

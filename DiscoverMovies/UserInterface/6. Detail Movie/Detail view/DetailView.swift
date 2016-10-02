@@ -78,6 +78,11 @@ class DetailView: UIView {
         // For animation
         self.header.alpha = 0.3
         self.playButton.alpha = 0.3
+        
+        self.directorLabel.text = NSLocalizedString("directorLabelText", comment: "")
+        self.genreLabel.text = NSLocalizedString("genreLabelText", comment: "")
+        self.releaseLabel.text = NSLocalizedString("releaseLabelText", comment: "")
+        self.ratingLabel.text =  NSLocalizedString("ratingLabelText", comment: "")
     }
     
     // MARK: - LifeCycle
@@ -98,7 +103,7 @@ class DetailView: UIView {
     func configure(withMovie movie: Movie) {
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
-        genreValueLabel.text = movie.mainGenre()?.name ?? "Unknown"
+        genreValueLabel.text = movie.mainGenre()?.name ?? NSLocalizedString("unknownGenreText", comment: "")
         ratingValueLabel.text =  "\(movie.rating)\\10.0"
         
         if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
@@ -108,7 +113,7 @@ class DetailView: UIView {
         if let releaseYear = movie.releaseDate.toDate()?.year() {
             releaseValueLabel.text = "\(releaseYear)"
         } else {
-            releaseValueLabel.text = "Unknown"
+            releaseValueLabel.text = NSLocalizedString("unknownReleaseText", comment: "")
         }
     }
     
@@ -118,7 +123,7 @@ class DetailView: UIView {
     }
     
     func configure(withDirector director: CrewMember?) {
-        directorValueLabel.text = director?.name ?? "Unknown"
+        directorValueLabel.text = director?.name ?? NSLocalizedString("unknownDirectorText", comment: "")
     }
     
     // MARK: - Animation

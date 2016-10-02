@@ -27,13 +27,13 @@ class MenuViewController: UIViewController {
         var text: String {
             switch self {
             case .topList:
-                return "Discover top movies"
+                return NSLocalizedString("topListMenuItemText", comment: "")
             case .watchlist:
-                return "Movies I want to watch"
+                return NSLocalizedString("watchListMenuItemText", comment: "")
             case .favorites:
-                return "My favorite movies"
+                return NSLocalizedString("favoritesMenuItemText", comment: "")
             case .signin:
-                return signedIn ? "Sign out" : "Sign in"
+                return signedIn ? NSLocalizedString("signOutMenuItemText", comment: "") : NSLocalizedString("signInMenuItemText", comment: "")
             }
         }
         

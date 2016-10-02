@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseView: UIView, ProgressHUDPresentable {
+class BaseView: UIView {
     
     // MARK: - Types
     

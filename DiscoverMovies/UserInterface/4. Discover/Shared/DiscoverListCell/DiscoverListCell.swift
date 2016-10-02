@@ -34,7 +34,7 @@ class DiscoverListCell: UITableViewCell {
         if let releaseYear = movie.releaseDate.toDate()?.year() {
             yearLabel.text = "\(releaseYear)"
         } else {
-            yearLabel.text = "Unknown"
+            yearLabel.text = NSLocalizedString("cellUnknownYearText", comment: "")
         }
         
         movieImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())

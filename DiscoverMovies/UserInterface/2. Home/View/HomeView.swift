@@ -21,8 +21,6 @@ class HomeView: BaseView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        backgroundColor = UIColor.backgroundColor()
-        
         switchListControl.tintColor = UIColor.white
         
         if #available(iOS 10.0, *) {

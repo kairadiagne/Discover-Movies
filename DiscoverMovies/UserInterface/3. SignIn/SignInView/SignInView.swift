@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SignInView: BackgroundView {
+class SignInView: BaseView {
     
-    // MARK: Properties
+    // MARK: - Properties
 
     @IBOutlet weak var logoImage: UIButton!
     @IBOutlet weak var signInButton: UIButton!
@@ -18,7 +18,7 @@ class SignInView: BackgroundView {
     @IBOutlet weak var orLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
-    // MARK: Awake From Nib
+    // MARK: - Awake
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,13 +31,15 @@ class SignInView: BackgroundView {
         signInButton.tintColor = UIColor.white
         signInButton.layer.borderWidth = 1.0
         signInButton.layer.borderColor = UIColor.white.cgColor
-        signInButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor // Stylesheet
+        signInButton.layer.backgroundColor = UIColor(white: 1.0, alpha: 0.05).cgColor
         
         publicModeButton.tintColor = UIColor.white
         publicModeButton.layer.borderWidth = 1.0
         publicModeButton.layer.borderColor = UIColor.white.cgColor
-        publicModeButton.layer.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.05).cgColor // Stylesheet
+        publicModeButton.layer.backgroundColor = UIColor(white: 1.0, alpha: 0.05).cgColor
+        
+        // Localized string title of buttons 
     }
-    
+
 }
 

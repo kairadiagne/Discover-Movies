@@ -18,7 +18,15 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Determines if the signin view controller needs to be shown
+        if TMDbSessionManager.shared.signInStatus == .unkown {
+            showSignInViewController()
+        }
     }
     
     // MARK: - DataManagerNotifications
@@ -45,6 +53,13 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
         menuButton.target = revealViewController
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         navigationItem.leftBarButtonItem = menuButton
+    }
+    
+    // MARK: - Sign in 
+    
+    func showSignInViewController() {
+        let signInViewController = SignInViewController()
+        present(signInViewController, animated: true, completion: nil)
     }
 
 }

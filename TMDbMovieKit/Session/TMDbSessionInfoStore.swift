@@ -60,6 +60,10 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         UserDefaults.standard.set(user.dictionaryRepresentation(), forKey: Keys.User)
     }
     
+    func clearUser() {
+        UserDefaults.standard.removeObject(forKey: Keys.User)
+    }
+    
     func saveAPIKey(_ key: String) {
         UserDefaults.standard.set(key, forKey: Keys.APIKey)
     }
@@ -69,6 +73,7 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     func clearUserData() {
         do {
              try Locksmith.deleteDataForUserAccount(userAccount: Keys.UserAccount)
+             clearUser()
         } catch {
             print("Error deleteing user data from store")
         }

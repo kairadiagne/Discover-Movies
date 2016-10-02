@@ -1,5 +1,5 @@
 //
-//  AccountListDataProvider.swift
+//  AccountListdataSource.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 15/06/16.
@@ -26,8 +26,8 @@ class AccountListDataSource: NSObject, DataContaining, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AccountListTableViewCell.defaultIdentifier()) as! AccountListTableViewCell
         let movie = items[indexPath.row]
-//        let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url ?? URL()
-//        cell.configure(movie, imageURL: imageURL)
+        let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
+        cell.configure(movie, imageURL: imageURL)
         return cell
     }
     

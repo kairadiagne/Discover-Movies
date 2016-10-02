@@ -63,10 +63,10 @@ class HomeViewController: BaseViewController {
         let loadingSelector = #selector(HomeViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(HomeViewController.dataManagerDidUpdate(notification:))
         
-        popularListManager.add(updateObserver: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        topRatedListManager.add(updateObserver: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        upcomingListManager.add(updateObserver: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        nowPlayingListManager.add(updateObserver: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        popularListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        topRatedListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        upcomingListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        nowPlayingListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         // Reload data if needed
         load(list: currentList)
@@ -101,8 +101,6 @@ class HomeViewController: BaseViewController {
         homeView.tableView.setContentOffset(.zero, animated: false)
     
         load(list: currentList)
-        
-        homeView.tableView.reloadData()
     }
     
     // MARK: - Fetch 
@@ -115,6 +113,7 @@ class HomeViewController: BaseViewController {
         
         // Try to preload data from cache
         dataSource.update(withItems: manager.allItems)
+        homeView.tableView.reloadData()
         
         // Reload data if needed
         manager.reloadIfNeeded()

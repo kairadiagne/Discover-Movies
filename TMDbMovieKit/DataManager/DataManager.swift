@@ -138,7 +138,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     // MARK: - Notifications
     
-    public func add(updateObserver observer: AnyObject, loadingSelector: Selector, updateSelector: Selector) {
+    public func add(observer: AnyObject, loadingSelector: Selector, updateSelector: Selector) {
         NotificationCenter.default.addObserver(observer, selector: loadingSelector, name: Notification.Name.DataManager.didStartLoading, object: self)
         NotificationCenter.default.addObserver(observer, selector: updateSelector, name: Notification.Name.DataManager.update, object: self)
     }

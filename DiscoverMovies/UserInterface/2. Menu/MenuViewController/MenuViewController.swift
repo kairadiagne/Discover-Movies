@@ -65,7 +65,7 @@ class MenuViewController: UIViewController {
         return TMDbSessionManager.shared.user
     }
     
-    fileprivate var presentedRow = 1
+    fileprivate var presentedRow = 0
     
     // MARK: LifeCycle
     
@@ -91,10 +91,11 @@ class MenuViewController: UIViewController {
         }
         
         menuView.configure(withUser: user)
+        menuView.tableView.reloadData()
     }
    
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent // Is this needed
+        return .lightContent
     }
     
     // MARK: Navigation
@@ -106,15 +107,15 @@ class MenuViewController: UIViewController {
     }
     
     func showWatchListViewController() {
-        //        let watchListController = AccountListController(list: .favorite)
-        //        let navigationController = UINavigationController(rootViewController: watchListController)
-        //        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+        let watchListController = AccountListController(list: .watchlist)
+        let navigationController = UINavigationController(rootViewController: watchListController)
+        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     func showFavoritesViewController() {
-        //        let favoritesController = AccountListController(list: .watchlist)
-        //        let navigationController = UINavigationController(rootViewController: favoritesController)
-        //        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+        let favoritesController = AccountListController(list: .favorite)
+        let navigationController = UINavigationController(rootViewController: favoritesController)
+        revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
     // MARK: - Toggle sign in
@@ -165,15 +166,6 @@ extension MenuViewController: UITableViewDataSource {
 
 extension MenuViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        switch indexPath.row {
-        case 0:
-            return false
-        default:
-            return true
-        }
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If we are trying to push the same row we change the position of the front view controller
         if indexPath.row == presentedRow && indexPath.row != 4 {
@@ -193,6 +185,8 @@ extension MenuViewController: UITableViewDelegate {
         case .signin:
             toggleSignIn()
         }
+        
+        presentedRow = indexPath.row
     }
     
 }
@@ -203,10 +197,11 @@ extension MenuViewController: TMDbUserServiceDelegate {
     
     func user(service: TMDbUserService, didLoadUserInfo user: User) {
         menuView.configure(withUser: user)
+        menuView.tableView.reloadData()
     }
     
     func user(service: TMDbUserService, didFailWithError error: APIError) {
         // Handle error 
     }
+    
 }
-

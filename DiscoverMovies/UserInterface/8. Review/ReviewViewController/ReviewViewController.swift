@@ -92,8 +92,10 @@ class ReviewViewController: BaseViewController {
     
     // MARK: - DataManagerFailureDelegate
     
-    // Note: - What about authorization errors in this screen
-    // Probably we should only show them when we are signed in
+    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
+    }
+    
 }
 
 // MARK: UITableViewDelegate

@@ -201,7 +201,7 @@ extension MenuViewController: TMDbUserServiceDelegate {
     }
     
     func user(service: TMDbUserService, didFailWithError error: APIError) {
-        // Handle error 
+        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
     }
     
 }

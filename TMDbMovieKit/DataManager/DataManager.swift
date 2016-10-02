@@ -31,6 +31,12 @@ public class DataManager<ModelType: DictionaryRepresentable> {
     
     var isLoading = false
     
+    let sessionManager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.urlCache = nil
+        return SessionManager(configuration: configuration)
+    }()
+    
     // MARK: - Initialize
     
     init(errorHandler: ErrorHandling, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
@@ -84,7 +90,7 @@ public class DataManager<ModelType: DictionaryRepresentable> {
         
         let endpoint = self.endpoint()
         
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: params))
+        sessionManager.request(APIRouter.get(endpoint: endpoint, queryParams: params))
             .validate().responseObject { (response: DataResponse<ModelType>) in
                 
                 self.stopLoading()

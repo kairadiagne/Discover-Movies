@@ -27,6 +27,8 @@ class BaseView: UIView, ProgressHUDPresentable {
         return refreshControl
     }()
     
+    var activityIndicator: UIActivityIndicatorView?
+    
     // MARK: - Awake
     
     override func awakeFromNib() {
@@ -34,26 +36,38 @@ class BaseView: UIView, ProgressHUDPresentable {
         
         backgroundColor = UIColor.backgroundColor()
     }
-    
-    // MARK: - Manage State
+
+    // MARK: - State
     
     func set(state: State) {
         switch state {
         case .idle:
             self.state = .idle
-            
-            if refreshControl.isRefreshing {
-                refreshControl.endRefreshing()
-            } else {
-                hideProgressHUD()
-            }
+            refreshControl.endRefreshing()
+            activityIndicator?.stopAnimating()
+            activityIndicator?.removeFromSuperview()
         case .loading:
             self.state = .loading
             
-            if !refreshControl.isRefreshing {
-                showProgressHUD()
-            }
+            if !refreshControl.isRefreshing && activityIndicator == nil {
+                addRefreshControl()
+                activityIndicator?.startAnimating()
+            } 
         }
+    }
+    
+    // MARK: - Utils
+    
+    func addRefreshControl() {
+        activityIndicator = UIActivityIndicatorView(frame: .zero)
+        activityIndicator?.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator?.color = UIColor.gray
+        
+        addSubview(activityIndicator!)
+        
+        activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator?.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor).isActive = true
+        activityIndicator?.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor).isActive = true
     }
 
 }

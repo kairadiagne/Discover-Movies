@@ -57,7 +57,12 @@ class HomeViewController: BaseViewController {
         let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
         homeView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
         
-        homeView.refreshControl.addTarget(self, action: #selector(HomeViewController.refresh), for: .valueChanged)
+        homeView.refreshControl.addTarget(self, action: #selector(HomeViewController.refresh(control:)), for: .valueChanged)
+        
+        popularListManager.failureDelegate = self
+        topRatedListManager.failureDelegate = self
+        upcomingListManager.failureDelegate = self
+        nowPlayingListManager.failureDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,7 +129,7 @@ class HomeViewController: BaseViewController {
     
     // MARK: - Refresh
     
-    @objc private func refresh() {
+    @objc private func refresh(control: UIRefreshControl) {
         let manager = self.manager(forList: currentList)
         manager.reloadIfNeeded(forceOnline: true)
     }
@@ -144,10 +149,9 @@ class HomeViewController: BaseViewController {
          homeView.set(state: .loading)
     }
     
-    // MARK: - DataManagerFailureDelegate
-    
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        
+        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
+        homeView.set(state: .loading)
     }
     
     // MARK: - Utils

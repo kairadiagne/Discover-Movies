@@ -20,7 +20,7 @@
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40P-gH-Zt8">
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRx-Rx-qhX" customClass="BackgroundView" customModule="DiscoverMovies" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRx-Rx-qhX">
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0s-VM-Ai3">
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -216,6 +216,7 @@
                 <constraint firstItem="40P-gH-Zt8" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="Gqp-JK-GFW"/>
                 <constraint firstItem="YRx-Rx-qhX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" priority="250" id="Ka5-pc-Qve"/>
                 <constraint firstAttribute="trailing" secondItem="gTk-G5-ykT" secondAttribute="trailing" id="KqK-wm-9hb"/>
+                <constraint firstItem="gTk-G5-ykT" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="LNp-U1-r8U"/>
                 <constraint firstItem="gTk-G5-ykT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="N8H-Uo-Xiv"/>
                 <constraint firstItem="YRx-Rx-qhX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="U7e-pF-Kz1"/>
                 <constraint firstItem="40P-gH-Zt8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="eSk-4Q-75Y"/>

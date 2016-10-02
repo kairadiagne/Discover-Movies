@@ -14,6 +14,10 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
     // MARK: - Properties
     
+    var signedIn: Bool {
+        return TMDbSessionManager.shared.signInStatus == .signedin
+    }
+
     // MARK: - Lifecycle
     
     override func viewDidAppear(_ animated: Bool) {

@@ -86,7 +86,6 @@
 		EA6487C01CE4E50100452DD0 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487BE1CE4E50100452DD0 /* SignInViewController.xib */; };
 		EA6487C21CE4E55500452DD0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487C11CE4E55500452DD0 /* SignInView.swift */; };
 		EA6487C61CE503BD00452DD0 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487C41CE503BD00452DD0 /* ReviewViewController.swift */; };
-		EA6487CC1CE5163100452DD0 /* ProgressHUDPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */; };
 		EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */; };
 		EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */; };
 		EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */; };
@@ -255,7 +254,6 @@
 		EA6487BE1CE4E50100452DD0 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		EA6487C11CE4E55500452DD0 /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		EA6487C41CE503BD00452DD0 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
-		EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressHUDPresentable.swift; path = "../1. Base/Protocols/ProgressHUDPresentable.swift"; sourceTree = "<group>"; };
 		EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReviewTableViewCell.xib; path = "../Review Cell/ReviewTableViewCell.xib"; sourceTree = "<group>"; };
 		EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
@@ -635,7 +633,6 @@
 		11D099FE1D966B2500FEDB21 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				EA6487CB1CE5163100452DD0 /* ProgressHUDPresentable.swift */,
 				11D099FF1D966B4600FEDB21 /* DataContaining.swift */,
 				11D09A091D97C04300FEDB21 /* BaseViewController.swift */,
 				1179FC561D98777300CA1E6D /* BaseView.swift */,
@@ -1216,7 +1213,6 @@
 				EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */,
 				EA6487C61CE503BD00452DD0 /* ReviewViewController.swift in Sources */,
 				111942A31CCB8DD4001CF39B /* UINavigationController+Extension.swift in Sources */,
-				EA6487CC1CE5163100452DD0 /* ProgressHUDPresentable.swift in Sources */,
 				1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */,
 				11D09A0A1D97C04300FEDB21 /* BaseViewController.swift in Sources */,
 				11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */,

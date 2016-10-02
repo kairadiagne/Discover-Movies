@@ -102,7 +102,7 @@ class AccountListController: BaseViewController {
     // MARK: - Failuredelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        // Handle error
+        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
     }
    
     // MARK: Navigation 

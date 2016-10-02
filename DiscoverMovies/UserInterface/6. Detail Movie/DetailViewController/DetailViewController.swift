@@ -64,7 +64,7 @@ class DetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        navigationController?.navigationBar.setAsTransparent()
+        navigationController?.navigationBar.setAsTransparent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,7 +78,7 @@ class DetailViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        navigationController?.navigationBar.setAsUnclear()
+        navigationController?.navigationBar.setAsUnclear()
     }
     
     // MARK: - Actions
@@ -149,7 +149,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     }
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
-        
+        ErrorHandler.shared.handle(error: error, isAuthorized: signedIn)
     }
     
 }

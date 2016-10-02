@@ -46,6 +46,10 @@ class ReviewViewController: BaseViewController {
         
         let reviewCellNib = UINib(nibName: ReviewTableViewCell.nibName(), bundle: nil)
         reviewView.tableView.register(reviewCellNib, forCellReuseIdentifier: ReviewTableViewCell.defaultIdentifier())
+        
+        let NoDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
+        reviewView.tableView.register(NoDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
+        
         reviewView.tableView.dataSource = reviewDataSource
         reviewView.tableView.delegate = self
     
@@ -95,11 +99,13 @@ extension ReviewViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return reviewDataSource.isEmpty ? tableView.bounds.height : UITableViewAutomaticDimension
+        return !reviewDataSource.isEmpty ? UITableViewAutomaticDimension : tableView.bounds.height
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if reviewDataSource.itemCount - 5 == indexPath.row {
+        if reviewView.state == .loading && reviewDataSource.isEmpty {
+            cell.isHidden = true 
+        } else if reviewDataSource.itemCount - 5 == indexPath.row {
             reviewManager.loadMore()
         }
     }

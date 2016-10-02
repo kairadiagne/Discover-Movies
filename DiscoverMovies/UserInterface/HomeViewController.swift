@@ -51,8 +51,11 @@ class HomeViewController: BaseViewController {
         
         homeView.tableView.delegate = self
         
-        let nib = UINib(nibName: DiscoverListCell.nibName(), bundle: nil)
-        homeView.tableView.register(nib, forCellReuseIdentifier: DiscoverListCell.defaultIdentifier())
+        let movieCellnib = UINib(nibName: DiscoverListCell.nibName(), bundle: nil)
+        homeView.tableView.register(movieCellnib, forCellReuseIdentifier: DiscoverListCell.defaultIdentifier())
+        
+        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
+        homeView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
         
         homeView.refreshControl.addTarget(self, action: #selector(HomeViewController.refresh), for: .valueChanged)
     }
@@ -179,8 +182,12 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return homeView.frame.size.height * Constants.CellHeightRatio
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return !datasource(forList: currentList).isEmpty ? UITableViewAutomaticDimension : tableView.bounds.height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -190,7 +197,9 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if datasource(forList: currentList).itemCount - 10 == indexPath.row {
+        if homeView.state == .loading && datasource(forList: currentList).isEmpty {
+            cell.isHidden = true 
+        } else if datasource(forList: currentList).itemCount - 10 == indexPath.row {
             manager(forList: currentList).loadMore()
         }
     }

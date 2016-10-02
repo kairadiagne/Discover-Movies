@@ -17,6 +17,10 @@ class BaseView: UIView, ProgressHUDPresentable {
         case loading
     }
     
+    // MARK: - Properties
+    
+    fileprivate(set) var state: State = .idle
+    
     // MARK: - Awake
     
     override func awakeFromNib() {
@@ -30,8 +34,10 @@ class BaseView: UIView, ProgressHUDPresentable {
     func set(state: State) {
         switch state {
         case .idle:
+            self.state = .idle
             hideProgressHUD()
         case .loading:
+            self.state = .loading
             showProgressHUD()
         }
     }

@@ -48,15 +48,15 @@ class AccountListController: BaseViewController {
         
         accountListManager.failureDelegate = self
         
-        let nib = UINib(nibName: AccountListTableViewCell.nibName(), bundle: nil)
-        accountListView.tableView.register(nib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
+        let accountListCellNib = UINib(nibName: AccountListTableViewCell.nibName(), bundle: nil)
+        accountListView.tableView.register(accountListCellNib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
         
-        accountListView.tableView.dataSource = dataSource
+        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
+        accountListView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
+        
         accountListView.tableView.delegate = self
-        
-        accountListView.tableView.estimatedRowHeight = Constants.DefaultRowHeight
-        accountListView.tableView.rowHeight = UITableViewAutomaticDimension
-       
+        accountListView.tableView.dataSource = dataSource
+
         title = accountList.name
     }
     
@@ -123,9 +123,19 @@ extension AccountListController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if dataSource.itemCount - 5 == (indexPath as NSIndexPath).row {
+        if accountListView.state == .loading && dataSource.isEmpty {
+            cell.isHidden = true
+        } else if dataSource.itemCount - 5 == (indexPath as NSIndexPath).row {
             accountListManager.loadMore()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.DefaultRowHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return !dataSource.isEmpty ? UITableViewAutomaticDimension : tableView.bounds.height
     }
     
 }

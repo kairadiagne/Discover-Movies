@@ -20,6 +20,13 @@ class NoDataCell: UITableViewCell {
         super.awakeFromNib()
         
         messageLabel.font = UIFont.Body()
+        messageLabel.textColor = UIColor.white
+    }
+    
+    // MARK: - Configure
+    
+    func configure(with message: String) {
+        messageLabel.text = message
     }
     
 }

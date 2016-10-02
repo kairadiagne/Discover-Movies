@@ -12,6 +12,7 @@ abstract_target 'Networking' do
         pod 'youtube-ios-player-helper'
         pod 'SWRevealViewController'
         pod 'MBProgressHUD'
+        pod 'BRYXBanner'
     end
     
     target 'TMDbMovieKit' do

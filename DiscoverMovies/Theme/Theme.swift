@@ -17,7 +17,6 @@ class Theme {
     class func applyGlobalTheme() {
         styleNavBar()
         styleViews()
-        styleTabBar()
         styleTableViews()
         styleCollectionViews()
         styleTextFields()
@@ -35,16 +34,7 @@ class Theme {
     }
     
     class func styleViews() {
-        BackgroundView.appearance().backgroundColor = UIColor.backgroundColor()
         YTPlayerView.appearance().backgroundColor = UIColor.backgroundColor()
-        UIStackView.appearance().backgroundColor = UIColor.backgroundColor()
-    }
-    
-    class func styleTabBar() {
-        UITabBar.appearance().barTintColor = UIColor.navbarColor()
-        UITabBar.appearance().isOpaque = false
-        UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().tintColor = UIColor.white
     }
     
     class func styleTableViews() {
@@ -68,11 +58,3 @@ class Theme {
     }
     
 }
-
-
-
-
-
-
-
-

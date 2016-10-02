@@ -10,12 +10,12 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class DetailView: BackgroundView {
+class DetailView: UIView {
     
     // MARK: -  Properties
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: BackgroundView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var directorLabel: UILabel!
@@ -49,6 +49,10 @@ class DetailView: BackgroundView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.backgroundColor = UIColor.backgroundColor()
+        self.contentView.backgroundColor = UIColor.backgroundColor()
+        
         self.titleLabel.font = UIFont.H1()
         self.descriptionLabel.font = UIFont.Body()
         self.directorLabel.font = UIFont.H2()

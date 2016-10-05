@@ -21,6 +21,7 @@ favoritesMenuItemText = "My favorite movies";
 signInMenuItemText = "Sign in";
 signOutMenuItemText = "Sign out";
 nameLabelGuest = "Guest";
+searchMenuItemText = "Search";
 
 /* Sign in */
 signInButtonText = "Sign in with TMDb";
@@ -50,3 +51,4 @@ noMoviesInListText = "List doesn't contain any movies yet";
 favoriteVCTitle = "Favorites";
 watchListVCTitle = "Watchlist";
 
+/* Search */

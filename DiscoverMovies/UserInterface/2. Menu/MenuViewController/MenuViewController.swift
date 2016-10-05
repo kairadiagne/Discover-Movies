@@ -17,6 +17,7 @@ class MenuViewController: UIViewController {
         case topList
         case watchlist
         case favorites
+        case search
         case signin
         // case search
         
@@ -32,9 +33,12 @@ class MenuViewController: UIViewController {
                 return NSLocalizedString("watchListMenuItemText", comment: "")
             case .favorites:
                 return NSLocalizedString("favoritesMenuItemText", comment: "")
+            case .search:
+                return NSLocalizedString("searchMenuItemText", comment: "")
             case .signin:
                 return signedIn ? NSLocalizedString("signOutMenuItemText", comment: "") : NSLocalizedString("signInMenuItemText", comment: "")
             }
+            
         }
         
         var icon: UIImage? {
@@ -45,6 +49,8 @@ class MenuViewController: UIViewController {
                 return UIImage(named: "Watchlist")
             case .favorites:
                 return UIImage(named: "Favorite")
+            case .search:
+                return UIImage(named: "Search")
             case .signin:
                 return UIImage(named: "Logout")
             }
@@ -118,6 +124,12 @@ class MenuViewController: UIViewController {
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
+    func showSearchViewController() {
+        let searchViewController = SearchViewController()
+        let navigationController = UINavigationController(rootViewController: searchViewController)
+        revealViewController()?.pushFrontViewController(navigationController, animated: true)
+    }
+    
     // MARK: - Toggle sign in
     
     fileprivate func toggleSignIn() {
@@ -142,7 +154,7 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -158,6 +170,9 @@ extension MenuViewController: UITableViewDataSource {
             return cell
         case .favorites:
             cell.configure(title: menuItem.text, image: menuItem.icon, signedIn: signedIn)
+            return cell
+        case .search:
+            cell.configure(title: menuItem.text, image: menuItem.icon)
             return cell
         case .signin:
             cell.configure(title: menuItem.text, image: menuItem.icon)
@@ -187,6 +202,8 @@ extension MenuViewController: UITableViewDelegate {
             showWatchListViewController()
         case .favorites:
             showFavoritesViewController()
+        case .search:
+            showSearchViewController()
         case .signin:
             toggleSignIn()
         }

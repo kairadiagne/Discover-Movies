@@ -118,9 +118,9 @@
                                         <action selector="favoriteButtontap:" destination="-1" eventType="valueChanged" id="X2F-od-N6J"/>
                                     </connections>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ar-Q4-HbC">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ar-Q4-HbC">
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="122" id="xDJ-zN-OKf"/>
+                                        <constraint firstAttribute="width" secondItem="4ar-Q4-HbC" secondAttribute="height" multiplier="3:1" id="7Z1-3o-bZZ"/>
                                     </constraints>
                                     <state key="normal" title="Reviews"/>
                                     <connections>
@@ -140,13 +140,13 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="4ar-Q4-HbC" firstAttribute="top" secondItem="EM4-an-m11" secondAttribute="bottom" constant="31" id="0cu-le-fgn"/>
+                                <constraint firstItem="4ar-Q4-HbC" firstAttribute="top" secondItem="EM4-an-m11" secondAttribute="bottom" constant="40" id="0cu-le-fgn"/>
                                 <constraint firstAttribute="trailing" secondItem="Nx5-sK-CGB" secondAttribute="trailing" constant="20" symbolic="YES" id="133-Yh-HIn"/>
                                 <constraint firstItem="07M-il-PEq" firstAttribute="trailing" secondItem="Nx5-sK-CGB" secondAttribute="trailing" id="2Fz-Hj-IOc"/>
                                 <constraint firstItem="jZO-Pb-czM" firstAttribute="top" secondItem="FI1-wg-CPS" secondAttribute="bottom" multiplier="1.05" constant="8" symbolic="YES" id="4uc-NW-Bz5"/>
                                 <constraint firstItem="wuB-LI-u1z" firstAttribute="leading" secondItem="YRx-Rx-qhX" secondAttribute="leading" constant="20" symbolic="YES" id="5Uc-pd-9bb"/>
                                 <constraint firstItem="K27-uc-4Sg" firstAttribute="baseline" secondItem="OW2-WD-d6e" secondAttribute="baseline" id="8Hb-ba-4m0"/>
-                                <constraint firstAttribute="bottom" secondItem="4ar-Q4-HbC" secondAttribute="bottom" constant="27" id="8Nl-ax-oUB"/>
+                                <constraint firstAttribute="bottom" secondItem="4ar-Q4-HbC" secondAttribute="bottom" constant="40" id="8Nl-ax-oUB"/>
                                 <constraint firstItem="Rii-51-mJt" firstAttribute="baseline" secondItem="Nx5-sK-CGB" secondAttribute="baseline" id="9to-Oa-nD9"/>
                                 <constraint firstItem="xqT-rY-QL6" firstAttribute="top" secondItem="YRx-Rx-qhX" secondAttribute="top" priority="749" constant="20" symbolic="YES" id="BcW-Fb-gSx"/>
                                 <constraint firstItem="K27-uc-4Sg" firstAttribute="top" secondItem="Rii-51-mJt" secondAttribute="bottom" constant="8" symbolic="YES" id="C9L-fh-gjc"/>
@@ -158,6 +158,7 @@
                                 <constraint firstAttribute="trailing" secondItem="WRE-II-MfP" secondAttribute="trailing" constant="20" symbolic="YES" id="K8g-hd-Ht3"/>
                                 <constraint firstItem="07M-il-PEq" firstAttribute="top" secondItem="dCt-Xe-mbS" secondAttribute="bottom" constant="8" symbolic="YES" id="KIH-6C-Ejt"/>
                                 <constraint firstItem="EpK-0L-n1T" firstAttribute="leading" secondItem="jZO-Pb-czM" secondAttribute="leading" id="Lg2-iW-eSt"/>
+                                <constraint firstItem="4ar-Q4-HbC" firstAttribute="width" secondItem="YRx-Rx-qhX" secondAttribute="width" multiplier="0.4" id="MHX-oT-nIw"/>
                                 <constraint firstItem="K27-uc-4Sg" firstAttribute="leading" secondItem="X0s-VM-Ai3" secondAttribute="leading" id="NZ3-DJ-4hK"/>
                                 <constraint firstItem="EM4-an-m11" firstAttribute="top" secondItem="EpK-0L-n1T" secondAttribute="bottom" constant="8" symbolic="YES" id="OXN-Oq-wwO"/>
                                 <constraint firstItem="4F0-d8-XOb" firstAttribute="trailing" secondItem="X0s-VM-Ai3" secondAttribute="trailing" id="RcX-J2-JmV"/>
@@ -250,7 +251,7 @@
                 <outlet property="titleLabel" destination="X0s-VM-Ai3" id="G1t-6Z-PNn"/>
                 <outlet property="watchListControl" destination="WRE-II-MfP" id="fYn-rb-aZs"/>
             </connections>
-            <point key="canvasLocation" x="-213" y="-331"/>
+            <point key="canvasLocation" x="-202.5" y="-760.5"/>
         </view>
     </objects>
     <resources>

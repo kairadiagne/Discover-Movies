@@ -14,19 +14,26 @@ class GradientImageView: UIImageView {
 
     fileprivate var gradientLayer = CAGradientLayer()
     
-    var colors: [CGColor] = [UIColor.backgroundColor().cgColor, UIColor.clear.cgColor] {
+    
+    var colors: [CGColor] = [UIColor.clear.cgColor, UIColor.backgroundColor().cgColor] {
         didSet {
             self.gradientLayer.colors = colors
         }
     }
     
-    var startPoint = CGPoint(x: 0, y: 1) {
+    // The startPoint and endPoint properties of a CAGradientLayer are defines in the "Unit coordinate system".
+    
+    // (0,0) corresponds to the smallest coordinates of the layer's bounds rectangle, which on iOS is its upper-left
+    // corner unless the layer has been transformed
+    var startPoint = CGPoint.zero {
         didSet {
             self.gradientLayer.startPoint = startPoint
         }
     }
     
-    var endPoint = CGPoint(x: 0, y: 0.1) {
+    // (1,1) correspons to the largest coordinates of the layer's bounds rectangle, 
+    // which on iOS is its lower right corner unless the layer has been transformed.
+    var endPoint = CGPoint(x: 0, y: 1) {
         didSet {
             self.gradientLayer.endPoint = endPoint
         }

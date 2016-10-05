@@ -43,6 +43,7 @@ class DetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         automaticallyAdjustsScrollViewInsets = false
         
         let movieCellNib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
@@ -64,6 +65,7 @@ class DetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.navigationBar.setAsTransparent()
     }
     
@@ -78,6 +80,7 @@ class DetailViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         navigationController?.navigationBar.setAsUnclear()
     }
     

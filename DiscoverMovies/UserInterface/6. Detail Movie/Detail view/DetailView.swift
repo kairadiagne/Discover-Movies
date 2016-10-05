@@ -50,52 +50,56 @@ class DetailView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.backgroundColor()
-        self.contentView.backgroundColor = UIColor.backgroundColor()
+        backgroundColor = UIColor.backgroundColor()
+        contentView.backgroundColor = UIColor.backgroundColor()
         
-        self.titleLabel.font = UIFont.H1()
-        self.descriptionLabel.font = UIFont.Body()
-        self.directorLabel.font = UIFont.H2()
-        self.directorValueLabel.font = UIFont.Caption()
-        self.releaseLabel.font = UIFont.H2()
-        self.releaseValueLabel.font = UIFont.Caption()
-        self.genreLabel.font = UIFont.H2()
-        self.genreValueLabel.font = UIFont.Caption()
-        self.ratingLabel.font = UIFont.H2()
-        self.ratingValueLabel.font = UIFont.Caption()
-        self.castLabel.font = UIFont.H2()
-        self.similarLabel.font = UIFont.H2()
+        titleLabel.font = UIFont.H1()
+        descriptionLabel.font = UIFont.Body()
+        directorLabel.font = UIFont.H2()
+        directorValueLabel.font = UIFont.Caption()
+        releaseLabel.font = UIFont.H2()
+        releaseValueLabel.font = UIFont.Caption()
+        genreLabel.font = UIFont.H2()
+        genreValueLabel.font = UIFont.Caption()
+        ratingLabel.font = UIFont.H2()
+        ratingValueLabel.font = UIFont.Caption()
+        castLabel.font = UIFont.H2()
+        similarLabel.font = UIFont.H2()
         
-        self.favouriteControl.lineColor = UIColor.buttonColor()
-        self.favouriteControl.fillColor = UIColor.buttonColor()
-        self.watchListControl.lineColor = UIColor.buttonColor()
-        self.watchListControl.fillColor = UIColor.buttonColor()
+        favouriteControl.lineColor = UIColor.buttonColor()
+        favouriteControl.fillColor = UIColor.buttonColor()
+        watchListControl.lineColor = UIColor.buttonColor()
+        watchListControl.fillColor = UIColor.buttonColor()
         
-        self.readReviewsButton.tintColor = UIColor.buttonColor()
-        self.readReviewsButton.layer.borderWidth = 1.5
-        self.readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
+        readReviewsButton.backgroundColor = UIColor.clear
+        readReviewsButton.setTitleColor(UIColor.buttonColor(), for: .normal)
+        readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
+        readReviewsButton.layer.borderWidth = 1.5
+        
+        directorLabel.text = NSLocalizedString("directorLabelText", comment: "")
+        genreLabel.text = NSLocalizedString("genreLabelText", comment: "")
+        releaseLabel.text = NSLocalizedString("releaseLabelText", comment: "")
+        ratingLabel.text =  NSLocalizedString("ratingLabelText", comment: "")
+        
+        header.clipsToBounds = true 
         
         // For animation
-        self.header.alpha = 0.3
-        self.playButton.alpha = 0.3
-        
-        self.directorLabel.text = NSLocalizedString("directorLabelText", comment: "")
-        self.genreLabel.text = NSLocalizedString("genreLabelText", comment: "")
-        self.releaseLabel.text = NSLocalizedString("releaseLabelText", comment: "")
-        self.ratingLabel.text =  NSLocalizedString("ratingLabelText", comment: "")
+        header.alpha = 0.3
+        playButton.alpha = 0.3
     }
     
     // MARK: - LifeCycle
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+    
         if !didSetContentInset {
             didSetContentInset = true
-            // Moves tableview content from under the header
             contentInsetTop =  ceil(header.bounds.size.height - scrollTop.constant)
             scrollView.contentInset.top = contentInsetTop
         }
+        
+        readReviewsButton.layer.cornerRadius = readReviewsButton.bounds.size.height / 2
     }
     
     // MARK: - Configure
@@ -174,7 +178,6 @@ class DetailView: UIView {
         } else {
             headerHeightConstraint.constant = 0
         }
-        
     }
     
 }

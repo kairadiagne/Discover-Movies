@@ -48,10 +48,10 @@ enum APIRouter: URLRequestConvertible {
         case .post(_, var queryParams, let bodyParams):
             queryParams["api_key"] = APIKey as AnyObject?
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: queryParams)
-            urlRequest = try URLEncoding.httpBody.encode(urlRequest, with: bodyParams)
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: bodyParams)
         }
         
-        return urlRequest
+     return urlRequest
     }
     
 }

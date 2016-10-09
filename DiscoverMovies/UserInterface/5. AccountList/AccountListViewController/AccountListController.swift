@@ -107,6 +107,7 @@ class AccountListController: BaseViewController {
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: true)
+        accountListView.set(state: .idle)
     }
    
     // MARK: Navigation 
@@ -137,7 +138,7 @@ extension AccountListController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Constants.DefaultRowHeight
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -66,7 +66,7 @@ class DetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.setAsTransparent()
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,7 +81,7 @@ class DetailViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.navigationBar.setAsUnclear()
+        navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Actions
@@ -100,6 +100,10 @@ class DetailViewController: BaseViewController {
     
     @IBAction func playButtonTap(_ sender: UIButton) {
         showTrailer()
+    }
+    
+    @IBAction func backButtonTap(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Navigation

@@ -35,6 +35,7 @@ class DetailView: UIView {
     @IBOutlet weak var watchListControl: WatchListButton!
     @IBOutlet weak var header: GradientImageView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var scrollTop: NSLayoutConstraint!
     @IBOutlet weak var headerTop: NSLayoutConstraint!
@@ -89,7 +90,7 @@ class DetailView: UIView {
     }
     
     // MARK: - LifeCycle
-    
+   
     override func layoutSubviews() {
         super.layoutSubviews()
     

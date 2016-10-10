@@ -40,6 +40,8 @@ ratingLabelText = "Rating:";
 unknownGenreText = "Unknown";
 unknownReleaseText = "Unknown";
 unknownDirectorText = "Unknown";
+noSimilarMoviesText = "No similar movies";
+noCastmembersTet = "No info about cast";
 
 /* Review */
 reviewvcTitle = "Reviews";

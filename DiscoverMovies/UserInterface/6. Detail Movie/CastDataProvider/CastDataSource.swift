@@ -20,16 +20,21 @@ class CastDataSource: NSObject, DataContaining, UICollectionViewDataSource {
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return !isEmpty ? itemCount : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCollectionViewCell.defaultIdentfier(), for: indexPath) as! PersonCollectionViewCell
-        let castMember = items[indexPath.row]
-        cell.configureWithCastMember(castMember)
-        return cell
-        
-        // Show empty background message
+        if isEmpty {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier(), for: indexPath) as! NoDataCollectionViewCell
+            let message = NSLocalizedString("noSimilarMoviesText", comment: "")
+            cell.configure(with: message)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCollectionViewCell.defaultIdentfier(), for: indexPath) as! PersonCollectionViewCell
+            let castMember = items[indexPath.row]
+            cell.configureWithCastMember(castMember)
+            return cell
+        }
     }
 
 }

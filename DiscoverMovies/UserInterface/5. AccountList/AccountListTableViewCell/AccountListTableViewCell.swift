@@ -23,6 +23,7 @@ class AccountListTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         self.titleLabel.font = UIFont.Body()
         self.overViewLabel.font = UIFont.Caption2()
     }

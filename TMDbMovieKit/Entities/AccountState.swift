@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AccountState: DictionaryRepresentable {
+public struct AccountState: DictionarySerializable {
     
     // MARK: - Properties
     

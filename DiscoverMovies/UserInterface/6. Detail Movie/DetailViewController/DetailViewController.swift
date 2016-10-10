@@ -48,8 +48,11 @@ class DetailViewController: BaseViewController {
         
         let movieCellNib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
         let personCellNib = UINib(nibName: PersonCollectionViewCell.nibName(), bundle: nil)
+        let noDataCellNib = UINib(nibName: NoDataCollectionViewCell.nibName(), bundle: nil)
         detailView.similarMovieCollectionView.register(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
+        detailView.similarMovieCollectionView.register(noDataCellNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
         detailView.castCollectionView.register(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
+        detailView.castCollectionView.register(noDataCellNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
         
         detailView.castCollectionView.dataSource = castDataSource
         detailView.similarMovieCollectionView.dataSource = similarMoviesDataSource
@@ -59,14 +62,14 @@ class DetailViewController: BaseViewController {
         movieInfoManager.delegate = self
         movieInfoManager.loadInfo()
         movieInfoManager.loadAccountState()
-        
-        detailView.configure(withMovie: movie, signedIn: signedIn)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = true
+        
+        detailView.configure(withMovie: movie, signedIn: signedIn)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,7 +113,7 @@ class DetailViewController: BaseViewController {
     
     fileprivate func showDetail(forMovie movie: Movie) {
         let detailViewController = DetailViewController(movie: movie)
-        navigationController?.pushViewController(detailViewController, animated: false)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     fileprivate func showTrailer() {
@@ -128,7 +131,9 @@ class DetailViewController: BaseViewController {
 extension DetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        detailView.moveHeaderOnScroll()
+        if didAnimate {
+           detailView.moveHeaderOnScroll()
+        }
     }
     
 }
@@ -168,6 +173,36 @@ extension DetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
         showDetail(forMovie: movie)
+    }
+    
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    // Asks the delegate for the size of the specified item’s cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView === detailView.similarMovieCollectionView {
+            return !similarMoviesDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.similarMovieCollectionView.bounds.size
+        } else {
+            return !castDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
+        }
+    }
+    
+    // Asks the delegate for the margins to apply to content in the specified section.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    // Asks the delegate for the spacing between successive rows or columns of a section.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    // Asks the delegate for the spacing between successive items in the rows or columns of a section.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
     }
     
 }

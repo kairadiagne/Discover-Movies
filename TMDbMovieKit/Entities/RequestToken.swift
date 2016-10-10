@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RequestToken: DictionaryRepresentable {
+struct RequestToken: DictionarySerializable {
     
     // MARK: - Properties
     

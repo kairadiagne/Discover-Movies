@@ -25,6 +25,8 @@ class SearchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addMenuButton()
     
         searchView.tableView.dataSource = dataSource
         
@@ -37,6 +39,9 @@ class SearchViewController: BaseViewController {
         
         searchViewController.searchBar.sizeToFit()
         searchView.tableView.tableHeaderView = searchViewController.searchBar
+        
+        let nib =  UINib(nibName: AccountListTableViewCell.defaultIdentifier(), bundle: nil)
+        searchView.tableView.register(nib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
         
         // Sets this view controller as presenting view controller for the search interface
         definesPresentationContext = true
@@ -72,7 +77,7 @@ class SearchViewController: BaseViewController {
     // MARK: - FailureDelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        // ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
 
 }
@@ -92,6 +97,9 @@ extension SearchViewController: UISearchResultsUpdating {
     }
     
 }
+
+
+
 
 //func updateSearchResultsForSearchController(searchController: UISearchController) {
 //    if let searchText = searchController.searchBar.text {

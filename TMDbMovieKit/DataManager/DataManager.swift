@@ -13,7 +13,7 @@ public protocol DataManagerFailureDelegate: class {
     func dataManager(_ manager: AnyObject, didFailWithError error: APIError)
 }
 
-public class DataManager<ModelType: DictionaryRepresentable> {
+public class DataManager<ModelType: DictionarySerializable> {
     
     // MARK: - Properties
     

@@ -77,8 +77,8 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="130" id="Q0t-Bx-P99"/>
                                     </constraints>
-                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="8J3-oh-qXi">
-                                        <size key="itemSize" width="78" height="130"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="4" minimumInteritemSpacing="0.0" id="8J3-oh-qXi">
+                                        <size key="itemSize" width="0.0" height="0.0"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -225,7 +225,6 @@
                 <constraint firstItem="APW-Xl-GfC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="JTX-OA-kk7"/>
                 <constraint firstItem="YRx-Rx-qhX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" priority="250" id="Ka5-pc-Qve"/>
                 <constraint firstAttribute="trailing" secondItem="gTk-G5-ykT" secondAttribute="trailing" id="KqK-wm-9hb"/>
-                <constraint firstItem="gTk-G5-ykT" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="LNp-U1-r8U"/>
                 <constraint firstItem="gTk-G5-ykT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="N8H-Uo-Xiv"/>
                 <constraint firstItem="YRx-Rx-qhX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="U7e-pF-Kz1"/>
                 <constraint firstItem="40P-gH-Zt8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="eSk-4Q-75Y"/>

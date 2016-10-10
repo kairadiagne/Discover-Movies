@@ -24,9 +24,10 @@ class SearchDataSource: NSObject, DataContaining, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: AccountListTableViewCell.defaultIdentifier(), for: indexPath) as! AccountListTableViewCell
         let movie = items[indexPath.row]
-        cell.textLabel?.text = movie.title
+        let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
+        cell.configure(movie, imageURL: imageURL)
         return cell
     }
     

@@ -73,10 +73,7 @@ public class TMDbMovieInfoManager {
                     self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                     return
                 }
-                
-                if let status = response.result.value {
-                    print(status)
-                }
+            
         }
         
     }

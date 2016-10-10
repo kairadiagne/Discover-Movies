@@ -70,3 +70,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// TODO: 
+// - Finish search
+// - Discover
+// - Find icons that are free to use
+// - Acknowlegmenet screen (pods and icons and tmdb)
+// - Test critical parts of app 
+// - CollectionView empty message (delegate)
+// - Fix rotation bug
+// - Final design refinements
+// - Final cleanup of code
+// - Reorder files in right folders
+// - Update github page 
+// - Get rid of Chameleon framework
+// - Fix gravatar profile image
+// - Placeholders

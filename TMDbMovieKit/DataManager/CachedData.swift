@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CachedData<ModelType: DictionaryRepresentable>: NSObject, NSCoding {
+class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
     
     typealias DataType = ModelType
     

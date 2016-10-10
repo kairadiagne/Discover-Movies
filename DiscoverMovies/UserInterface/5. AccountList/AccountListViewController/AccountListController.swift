@@ -132,7 +132,7 @@ extension AccountListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if accountListView.state == .loading && dataSource.isEmpty {
             cell.isHidden = true
-        } else if dataSource.itemCount - 5 == (indexPath as NSIndexPath).row {
+        } else if dataSource.itemCount - 5 == indexPath.row {
             accountListManager.loadMore()
         }
     }

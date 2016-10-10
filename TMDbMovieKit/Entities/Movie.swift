@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Movie: DictionaryRepresentable, Equatable {
+public struct Movie: DictionarySerializable, Equatable {
     
     // MARK: - Properties
     
@@ -65,7 +65,8 @@ public struct Movie: DictionaryRepresentable, Equatable {
     // MARK: - Utils
     
     public func mainGenre() -> TMDbGenre? {
-        return TMDbGenre(rawValue: genres[0])
+        let rawValue = genres[0]
+        return TMDbGenre(rawValue: rawValue)
     }
 
 }

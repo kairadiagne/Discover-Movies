@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Video: DictionaryRepresentable {
+public struct Video: DictionarySerializable {
     
     // MARK: - Properties
     

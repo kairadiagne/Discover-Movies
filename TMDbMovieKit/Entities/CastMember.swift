@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CastMember: DictionaryRepresentable, Equatable {
+public struct CastMember: DictionarySerializable, Equatable {
     
     // MARK: - Properties
     

@@ -44,7 +44,7 @@ class DetailView: UIView {
     
     fileprivate var contentInsetTop: CGFloat = 0
     
-    private var didSetContentInset = false
+    fileprivate var didSetContentInset = false
     
     // MARK: - Awake
 
@@ -153,6 +153,7 @@ class DetailView: UIView {
         UIView.animate(withDuration: 0.2, delay: 0.6, options: UIViewAnimationOptions(), animations: {
             self.playButton.alpha = 1.0
         }, completion: nil)
+        
     }
     
     // MARK: - Header

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Review: DictionaryRepresentable, Equatable {
+public struct Review: DictionarySerializable, Equatable {
     
     // MARK: - Properties
     

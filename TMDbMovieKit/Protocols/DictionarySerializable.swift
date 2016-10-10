@@ -1,5 +1,5 @@
 //
-//  DictionaryRepresentable.swift
+//  DictionarySerializable.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 09-08-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol DictionaryRepresentable {
+public protocol DictionarySerializable {
     init?(dictionary dict: [String: AnyObject])
     func dictionaryRepresentation() -> [String: AnyObject]
 }

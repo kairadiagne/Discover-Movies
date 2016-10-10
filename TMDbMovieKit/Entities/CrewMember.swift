@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CrewMember: DictionaryRepresentable, Equatable {
+public struct CrewMember: DictionarySerializable, Equatable {
     
     // MARK: - Properties
     

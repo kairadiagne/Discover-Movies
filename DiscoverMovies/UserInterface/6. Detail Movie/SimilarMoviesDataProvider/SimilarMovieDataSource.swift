@@ -20,15 +20,21 @@ class SimilarMovieDataSource: NSObject, DataContaining, UICollectionViewDataSour
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return !isEmpty ? itemCount : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.defaultIdentfier(), for: indexPath) as! MovieCollectionViewCell
-        let movie = items[indexPath.row]
-        cell.configureWithMovie(movie)
-        return cell
-        // Show empty background message
+        if isEmpty {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier(), for: indexPath) as! NoDataCollectionViewCell
+            let message = NSLocalizedString("noSimilarMoviesText", comment: "")
+            cell.configure(with: message)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.defaultIdentfier(), for: indexPath) as! MovieCollectionViewCell
+            let movie = items[indexPath.row]
+            cell.configureWithMovie(movie)
+            return cell
+        }
     }
     
 }

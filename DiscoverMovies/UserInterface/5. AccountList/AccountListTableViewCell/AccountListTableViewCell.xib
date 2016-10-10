@@ -3,24 +3,19 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccountListTableViewCell" rowHeight="161" id="KGk-i7-Jjw" customClass="AccountListTableViewCell" customModule="DiscoverMovies" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="343" height="161"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccountListTableViewCell" rowHeight="148" id="KGk-i7-Jjw" customClass="AccountListTableViewCell" customModule="DiscoverMovies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="343" height="160"/>
+                <frame key="frameInset" width="343" height="148"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jrp-st-4eA">
-                        <constraints>
-                            <constraint firstAttribute="width" constant="69" id="YdQ-xP-kP0"/>
-                            <constraint firstAttribute="width" secondItem="Jrp-st-4eA" secondAttribute="height" multiplier="17:24" id="t70-5C-GBQ"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXZ-SS-3jk">
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -31,16 +26,21 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jrp-st-4eA">
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Jrp-st-4eA" secondAttribute="height" multiplier="17:24" id="t70-5C-GBQ"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Jrp-st-4eA" secondAttribute="bottom" constant="20" symbolic="YES" id="4Of-9a-CIv"/>
-                    <constraint firstItem="jGt-YG-kQa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="8a9-KV-dRq"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RXZ-SS-3jk" secondAttribute="bottom" constant="20" symbolic="YES" id="PMf-QM-vgr"/>
+                    <constraint firstItem="Jrp-st-4eA" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.2" id="7bm-z8-lA5"/>
+                    <constraint firstItem="RXZ-SS-3jk" firstAttribute="top" secondItem="jGt-YG-kQa" secondAttribute="bottom" constant="8" symbolic="YES" id="UjU-ur-Oh6"/>
                     <constraint firstItem="RXZ-SS-3jk" firstAttribute="top" secondItem="jGt-YG-kQa" secondAttribute="bottom" constant="8" symbolic="YES" id="Xvo-H1-XrM"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Jrp-st-4eA" secondAttribute="bottom" constant="20" symbolic="YES" id="cNW-4L-UCB"/>
                     <constraint firstItem="RXZ-SS-3jk" firstAttribute="trailing" secondItem="jGt-YG-kQa" secondAttribute="trailing" id="cRA-bj-AVq"/>
-                    <constraint firstItem="Jrp-st-4eA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="hXQ-DR-LN8"/>
                     <constraint firstItem="jGt-YG-kQa" firstAttribute="leading" secondItem="Jrp-st-4eA" secondAttribute="trailing" constant="8" symbolic="YES" id="iWk-71-zLz"/>
-                    <constraint firstItem="Jrp-st-4eA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nR8-la-CAb"/>
+                    <constraint firstItem="Jrp-st-4eA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="orn-NO-pfm"/>
+                    <constraint firstItem="jGt-YG-kQa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="qFr-Ab-C2l"/>
                     <constraint firstItem="Jrp-st-4eA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="qoi-dV-Dp2"/>
                     <constraint firstItem="RXZ-SS-3jk" firstAttribute="leading" secondItem="jGt-YG-kQa" secondAttribute="leading" id="svB-Su-YAb"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jGt-YG-kQa" secondAttribute="trailing" constant="20" symbolic="YES" id="v5F-eX-grC"/>
@@ -51,7 +51,7 @@
                 <outlet property="posterView" destination="Jrp-st-4eA" id="RFa-Ob-Ni5"/>
                 <outlet property="titleLabel" destination="jGt-YG-kQa" id="CRG-B9-0Ls"/>
             </connections>
-            <point key="canvasLocation" x="565.5" y="611.5"/>
+            <point key="canvasLocation" x="565.5" y="595"/>
         </tableViewCell>
     </objects>
 </document>

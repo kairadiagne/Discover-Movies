@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct List<ModelType: DictionaryRepresentable>: DictionaryRepresentable {
+public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
     
     // MARK: - Properties
     

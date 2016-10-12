@@ -11,23 +11,24 @@ import TMDbMovieKit
 
 class SearchDataSource: NSObject, DataContaining, UITableViewDataSource {
     
-    typealias ItemType = Movie
+    typealias ItemType = String
     
     // MARK: - Properties 
     
-    var items: [Movie] = []
+    var items: [String] = []
     
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemCount // Later one more cell if empty that shows top search terms (popular searches cell)
+        return itemCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AccountListTableViewCell.defaultIdentifier(), for: indexPath) as! AccountListTableViewCell
-        let movie = items[indexPath.row]
-        let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
-        cell.configure(movie, imageURL: imageURL)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.defaultIdentifier(), for: indexPath)
+        let searchTerm = item(atIndex: indexPath.row)
+        cell.textLabel?.text = searchTerm
+        cell.textLabel?.tintColor = UIColor.white
+        cell.textLabel?.font = UIFont.Caption()
         return cell
     }
     

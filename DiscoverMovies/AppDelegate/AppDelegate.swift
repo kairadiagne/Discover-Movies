@@ -75,8 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // - Discover
 // - Find icons that are free to use
 // - Acknowlegmenet screen (pods and icons and tmdb)
-// - Test critical parts of app 
-// - CollectionView empty message (delegate)
+// - Test critical parts of app
 // - Fix rotation bug
 // - Final design refinements
 // - Final cleanup of code

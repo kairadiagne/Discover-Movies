@@ -15,11 +15,17 @@ class SearchViewController: BaseViewController {
     
     @IBOutlet var searchView: SearchView!
     
-    fileprivate var searchViewController: UISearchController!
+    fileprivate var searchController: UISearchController!
+    
+    fileprivate let recentSearchManager = RecentSearchManager()
+    
+    fileprivate let resultsTableController = SearchResultsController()
     
     fileprivate let searchManager = SearchDataManager()
     
     fileprivate let dataSource = SearchDataSource()
+    
+    fileprivate var searchQuery = ""
     
     // MARK: - Lifecycle
 
@@ -27,24 +33,23 @@ class SearchViewController: BaseViewController {
         super.viewDidLoad()
         
         addMenuButton()
-    
-        searchView.tableView.dataSource = dataSource
         
-        // Initializing with nil means that the searchController will use this view controller
-        // To display the results of the searches
-        searchViewController = UISearchController(searchResultsController: nil)
-        searchViewController.searchResultsUpdater = self
+        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.sizeToFit()
+        searchView.tableView.tableHeaderView = searchController.searchBar
         
-        searchViewController.dimsBackgroundDuringPresentation = false
+        // searchController.delegate = self
+        searchController.searchBar.delegate = self
         
-        searchViewController.searchBar.sizeToFit()
-        searchView.tableView.tableHeaderView = searchViewController.searchBar
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = false
         
-        let nib =  UINib(nibName: AccountListTableViewCell.defaultIdentifier(), bundle: nil)
-        searchView.tableView.register(nib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
-        
-        // Sets this view controller as presenting view controller for the search interface
+        // Set this view controller as presenting view controller for the search interface
         definesPresentationContext = true
+        
+        searchView.tableView.dataSource = dataSource
+        searchView.tableView.delegate = self
         
         searchManager.failureDelegate = self
     }
@@ -55,6 +60,8 @@ class SearchViewController: BaseViewController {
         let loadingSelector = #selector(SearchViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(SearchViewController.dataManagerDidUpdate(notification:))
         searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        
+        searchView.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,50 +72,81 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Notifications
     
-    override func dataManagerDidStartLoading(notification: Notification) {
-       // Not neccesary
-    }
-    
     override func dataManagerDidUpdate(notification: Notification) {
-        dataSource.update(withItems: searchManager.allItems)
-        searchView.tableView.reloadData()
+        resultsTableController.update(withItems: searchManager.allItems)
+        resultsTableController.tableView.reloadData()
     }
     
     // MARK: - FailureDelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        // ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
 
+}
+
+// MARK: - UITableViewDelegate
+
+extension SearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return searchView.tableView.rowHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+    }
+    
 }
 
 // MARK: - UISearchResultsUpdating
 
 extension SearchViewController: UISearchResultsUpdating {
     
-    // Called when the search bar becomes the first responder or when 
+    // Called when the search bar becomes the first responder or when
     // The user makes changes inside the search bar
     func updateSearchResults(for searchController: UISearchController) {
-        if let searchtext = searchController.searchBar.text {
-            searchManager.search(for: searchtext)
-            // If there is white space do not start a search 
-            // But do remember the text
+        if let searchFieldtext = searchController.searchBar.text {
+            // Update Search query
+            searchQuery = searchFieldtext
+            
+            // Check if query is empty
+            guard searchQuery.characters.count > 0 else {
+                // Make sure the results screen is cleared
+                if !resultsTableController.isEmpty {
+                    resultsTableController.clear()
+                    resultsTableController.tableView.reloadData()
+                }
+                
+                return
+            }
+
+            // Check if last character added was white space
+            guard searchQuery.characters.last != " " else { return }
+            
+            // Perform search
+            searchManager.search(for: searchQuery)
         }
     }
     
 }
 
+// MARK: - UISearchBarDelegate 
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        recentSearchManager.recentSearches.append(searchQuery)
+//        dataSource.update(withItems: recentSearchManager.recentSearches)
+        searchView.tableView.reloadData()
+        searchBar.resignFirstResponder()
+    }
+    
+}
 
 
-
-//func updateSearchResultsForSearchController(searchController: UISearchController) {
-//    if let searchText = searchController.searchBar.text {
-//        filteredData = searchText.isEmpty ? data : data.filter({(dataString: String) -> Bool in
-//            return dataString.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
-//        })
-//        
-//        tableView.reloadData()
-//    }
-//}
-//}
 

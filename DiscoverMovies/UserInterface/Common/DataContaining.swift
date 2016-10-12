@@ -15,6 +15,7 @@ protocol DataContaining: class {
     var isEmpty: Bool { get }
     func item(atIndex index: Int) -> ItemType?
     func update(withItems items: [ItemType])
+    func clear()
 }
 
 extension DataContaining {
@@ -34,6 +35,10 @@ extension DataContaining {
     
     func update(withItems items: [ItemType]) {
         self.items = items
+    }
+    
+    func clear() {
+        items.removeAll()
     }
     
 }

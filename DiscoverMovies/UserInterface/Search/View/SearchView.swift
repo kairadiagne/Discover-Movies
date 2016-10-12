@@ -18,8 +18,8 @@ class SearchView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        backgroundColor = UIColor.backgroundColor()
     }
-    
-    // MARK: - Lifecycle
     
 }

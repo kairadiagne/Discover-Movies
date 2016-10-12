@@ -67,7 +67,7 @@ class ReviewViewController: BaseViewController {
         let updateSelector = #selector(ReviewViewController.dataManagerDidUpdate(notification:))
         reviewManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
 
-         reviewManager.reloadIfNeeded()
+        reviewManager.reloadIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

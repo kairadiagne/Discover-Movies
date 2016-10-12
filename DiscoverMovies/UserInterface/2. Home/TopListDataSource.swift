@@ -34,7 +34,7 @@ class TopListDataSource: NSObject, DataContaining, UITableViewDataSource {
             let cellIdentifier = DiscoverListCell.defaultIdentifier()
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DiscoverListCell
             let movie = items[indexPath.row]
-            let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url ?? nil
+            let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url
             cell.configure(movie, imageURL: imageURL)
             return cell
         }

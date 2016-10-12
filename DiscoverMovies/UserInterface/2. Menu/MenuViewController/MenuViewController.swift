@@ -19,7 +19,7 @@ class MenuViewController: UIViewController {
         case favorites
         case search
         case signin
-        // case search
+        // case Acknowledgments
         
         private var signedIn: Bool {
             return TMDbSessionManager.shared.signInStatus == .signedin

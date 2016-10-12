@@ -106,7 +106,7 @@ class DetailViewController: BaseViewController {
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Navigation
@@ -181,7 +181,7 @@ extension DetailViewController: UICollectionViewDelegate {
 
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     
-    // Asks the delegate for the size of the specified item’s cell
+    // Size of the specified item's cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView === detailView.similarMovieCollectionView {
             return !similarMoviesDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.similarMovieCollectionView.bounds.size
@@ -189,18 +189,18 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             return !castDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
         }
     }
-    
-    // Asks the delegate for the margins to apply to content in the specified section.
+
+    // Margins to apply to content in the specified section
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .zero
     }
-    
-    // Asks the delegate for the spacing between successive rows or columns of a section.
+
+    // spacing between successive rows or columns of a section
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
     
-    // Asks the delegate for the spacing between successive items in the rows or columns of a section.
+    // Spacing between successive items in the rows or columns of a section
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }

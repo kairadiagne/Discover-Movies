@@ -12,21 +12,22 @@ import SDWebImage
 
 class DiscoverListCell: UITableViewCell {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     
-    // MARK: Awake
+    // MARK: - Awake
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         titleLabel.font = UIFont.H1()
         yearLabel.font = UIFont.H3()
     }
     
-    // MARK: Configure
+    // MARK: - Configure
     
     func configure(_ movie: Movie, imageURL: URL?) {
         titleLabel.text = movie.title

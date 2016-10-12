@@ -52,7 +52,7 @@ extension SearchResultsController { // delegate is searchcontroller
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = item(atIndex: indexPath.row) else { return }
-        let detailViewController = DetailViewController(movie: movie)
+        _ = DetailViewController(movie: movie)
 //        navigationController?.pushViewController(detailViewController, animated: false)
     }
 

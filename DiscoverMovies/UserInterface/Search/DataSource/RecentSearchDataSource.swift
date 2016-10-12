@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class SearchDataSource: NSObject, DataContaining, UITableViewDataSource {
+class RecentSearchDataSource: NSObject, DataContaining, UITableViewDataSource {
     
     typealias ItemType = String
     
@@ -24,7 +24,7 @@ class SearchDataSource: NSObject, DataContaining, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.defaultIdentifier(), for: indexPath)
+        let cell = UITableViewCell() // fIXME: - Dequeue specifi cell
         let searchTerm = item(atIndex: indexPath.row)
         cell.textLabel?.text = searchTerm
         cell.textLabel?.tintColor = UIColor.white

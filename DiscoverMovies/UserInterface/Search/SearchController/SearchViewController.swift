@@ -23,7 +23,7 @@ class SearchViewController: BaseViewController {
     
     fileprivate let searchManager = SearchDataManager()
     
-    fileprivate let dataSource = SearchDataSource()
+    fileprivate let recentSearchDatasource = RecentSearchDataSource()
     
     fileprivate var searchQuery = ""
     
@@ -48,10 +48,12 @@ class SearchViewController: BaseViewController {
         // Set this view controller as presenting view controller for the search interface
         definesPresentationContext = true
         
-        searchView.tableView.dataSource = dataSource
+        searchView.tableView.dataSource = recentSearchDatasource
         searchView.tableView.delegate = self
         
         searchManager.failureDelegate = self
+        
+        title = NSLocalizedString("searchVCTitle", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +143,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         recentSearchManager.recentSearches.append(searchQuery)
-//        dataSource.update(withItems: recentSearchManager.recentSearches)
+        recentSearchDatasource.update(withItems: recentSearchManager.recentSearches)
         searchView.tableView.reloadData()
         searchBar.resignFirstResponder()
     }

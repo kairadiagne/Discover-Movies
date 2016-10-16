@@ -14,7 +14,6 @@ class GradientImageView: UIImageView {
 
     fileprivate var gradientLayer = CAGradientLayer()
     
-    
     var colors: [CGColor] = [UIColor.clear.cgColor, UIColor.backgroundColor().cgColor] {
         didSet {
             self.gradientLayer.colors = colors
@@ -63,4 +62,3 @@ class GradientImageView: UIImageView {
     }
     
 }
-

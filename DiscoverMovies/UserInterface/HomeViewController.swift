@@ -193,7 +193,8 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = datasource(forList: currentList).item(atIndex: indexPath.row) else { return }
         let detailViewController = DetailViewController(movie: movie)
-        navigationController?.pushViewController(detailViewController, animated: false)
+        navigationController?.delegate = detailViewController // Use coordinator pattern 
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

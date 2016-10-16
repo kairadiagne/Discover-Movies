@@ -121,10 +121,8 @@ class DetailView: UIView {
             releaseValueLabel.text = NSLocalizedString("unknownReleaseText", comment: "")
         }
         
-        if !signedIn {
-            favouriteControl.isHidden = true
-            watchListControl.isHidden = true
-        }
+        favouriteControl.isHidden = !signedIn
+        watchListControl.isHidden = !signedIn
     }
     
     func configureWithState(_ inFavorites: Bool, inWatchList: Bool) {
@@ -134,26 +132,6 @@ class DetailView: UIView {
     
     func configure(withDirector director: CrewMember?) {
         directorValueLabel.text = director?.name ?? NSLocalizedString("unknownDirectorText", comment: "")
-    }
-    
-    // MARK: - Animation
-    
-    func animatePresentation() {
-        self.layoutIfNeeded()
-            
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions(), animations: {
-            self.animationConstraint.priority -= 2
-            self.layoutIfNeeded()
-        }, completion: nil)
-            
-        UIView.animate(withDuration: 0.5, delay: 0.3, options: UIViewAnimationOptions(), animations: {
-            self.header.alpha = 1.0
-        }, completion: nil)
-            
-        UIView.animate(withDuration: 0.2, delay: 0.6, options: UIViewAnimationOptions(), animations: {
-            self.playButton.alpha = 1.0
-        }, completion: nil)
-        
     }
     
     // MARK: - Header

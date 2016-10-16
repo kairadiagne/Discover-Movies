@@ -25,8 +25,6 @@ class DetailViewController: BaseViewController {
     
     fileprivate var videoController: VideoViewController?
     
-    fileprivate var didAnimate = false
-    
     // MARK: - Initialize
     
     init(movie: Movie) {
@@ -67,24 +65,25 @@ class DetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
-        detailView.configure(withMovie: movie, signedIn: signedIn)
+        automaticallyAdjustsScrollViewInsets = false
+    
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !didAnimate {
-            didAnimate = true
-            detailView.animatePresentation()
-        }
+        detailView.configure(withMovie: movie, signedIn: signedIn)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        navigationController?.delegate = nil
     }
     
     // MARK: - Actions
@@ -98,42 +97,70 @@ class DetailViewController: BaseViewController {
     }
 
     @IBAction func reviewsButtonTap(_ sender: UIButton) {
-        showReviews(movie)
+        let reviewViewController = ReviewViewController(movie: movie)
+        navigationController?.pushViewController(reviewViewController, animated: true)
     }
     
     @IBAction func playButtonTap(_ sender: UIButton) {
-        showTrailer()
+        guard let videoController = videoController else { return }
+        present(videoController, animated: true, completion: nil)
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {
         _ = navigationController?.popViewController(animated: true)
     }
 
-    // MARK: - Navigation
-    
-    fileprivate func showDetail(forMovie movie: Movie) {
-        let detailViewController = DetailViewController(movie: movie)
-        navigationController?.pushViewController(detailViewController, animated: true)
-    }
-    
-    fileprivate func showTrailer() {
-        guard let videoController = videoController else { return }
-        present(videoController, animated: true, completion: nil)
-    }
-    
-    fileprivate func showReviews(_ movie: Movie) {
-        let reviewViewController = ReviewViewController(movie: movie)
-        navigationController?.pushViewController(reviewViewController, animated: true)
-    }
-
 }
+
+// MARK: - UISCrollViewDelegate
 
 extension DetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if didAnimate {
-           detailView.moveHeaderOnScroll()
+        detailView.moveHeaderOnScroll()
+    }
+    
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension DetailViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
+        let detailViewController = DetailViewController(movie: movie)
+        navigationController?.delegate = detailViewController
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    // Size of the specified item's cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView === detailView.similarMovieCollectionView {
+            return !similarMoviesDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.similarMovieCollectionView.bounds.size
+        } else {
+            return !castDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
         }
+    }
+    
+    // Margins to apply to content in the specified section
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    // spacing between successive rows or columns of a section
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    // Spacing between successive items in the rows or columns of a section
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
     }
     
 }
@@ -166,43 +193,11 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
 }
 
-// MARK: - UICollectionViewDelegate
-
-extension DetailViewController: UICollectionViewDelegate {
+extension DetailViewController: UINavigationControllerDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
-        showDetail(forMovie: movie)
-    }
-    
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension DetailViewController: UICollectionViewDelegateFlowLayout {
-    
-    // Size of the specified item's cell
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView === detailView.similarMovieCollectionView {
-            return !similarMoviesDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.similarMovieCollectionView.bounds.size
-        } else {
-            return !castDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
-        }
-    }
-
-    // Margins to apply to content in the specified section
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
-    }
-
-    // spacing between successive rows or columns of a section
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
-    }
-    
-    // Spacing between successive items in the rows or columns of a section
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return toVC is DetailViewController ? DetailAnimatedTransitioning() : nil
     }
     
 }

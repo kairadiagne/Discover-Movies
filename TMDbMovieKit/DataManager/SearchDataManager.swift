@@ -24,8 +24,15 @@ public class SearchDataManager: ListDataManager<Movie> {
     
     // MARK: - Search
     
+    fileprivate var searchQuery: String = ""
+    
     public func search(for query: String) {
-        reloadIfNeeded(forceOnline: true, paramaters: ["query": query as AnyObject])
+        searchQuery = query
+        
+        let delay = DispatchTime.now() + 0.25
+        DispatchQueue.main.asyncAfter(deadline: delay) { 
+            self.reloadIfNeeded(forceOnline: true, paramaters: ["query": self.searchQuery as AnyObject])
+        }
     }
     
     // MARK: - Default Paramaters
@@ -35,4 +42,3 @@ public class SearchDataManager: ListDataManager<Movie> {
     }
     
 }
-

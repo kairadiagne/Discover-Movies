@@ -17,13 +17,9 @@ class SearchViewController: BaseViewController {
     
     fileprivate var searchController: UISearchController!
     
-    fileprivate let recentSearchManager = RecentSearchManager()
-    
-    fileprivate let resultsTableController = SearchResultsController()
-    
     fileprivate let searchManager = SearchDataManager()
     
-    fileprivate let recentSearchDatasource = RecentSearchDataSource()
+    fileprivate let dataSource = SearchDataSource()
     
     fileprivate var searchQuery = ""
     
@@ -34,22 +30,23 @@ class SearchViewController: BaseViewController {
         
         addMenuButton()
         
-        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
         searchView.tableView.tableHeaderView = searchController.searchBar
         
-        // searchController.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         
-        searchController.hidesNavigationBarDuringPresentation = true
-        searchController.dimsBackgroundDuringPresentation = false
-        
-        // Set this view controller as presenting view controller for the search interface
         definesPresentationContext = true
         
-        searchView.tableView.dataSource = recentSearchDatasource
+        let searchCellNib = UINib(nibName: SearchTableViewCell.nibName(), bundle: nil)
+        searchView.tableView.register(searchCellNib, forCellReuseIdentifier: SearchTableViewCell.defaultIdentifier())
+        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
+        searchView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
+        
         searchView.tableView.delegate = self
+        searchView.tableView.dataSource = dataSource
         
         searchManager.failureDelegate = self
         
@@ -75,8 +72,8 @@ class SearchViewController: BaseViewController {
     // MARK: - Notifications
     
     override func dataManagerDidUpdate(notification: Notification) {
-        resultsTableController.update(withItems: searchManager.allItems)
-        resultsTableController.tableView.reloadData()
+        dataSource.update(withItems: searchManager.allItems)
+        searchView.tableView.reloadData()
     }
     
     // MARK: - FailureDelegate
@@ -100,7 +97,9 @@ extension SearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
+        let detailViewController = DetailViewController(movie: movie)
+        self.navigationController?.pushViewController(detailViewController, animated: false)
     }
     
 }
@@ -119,9 +118,9 @@ extension SearchViewController: UISearchResultsUpdating {
             // Check if query is empty
             guard searchQuery.characters.count > 0 else {
                 // Make sure the results screen is cleared
-                if !resultsTableController.isEmpty {
-                    resultsTableController.clear()
-                    resultsTableController.tableView.reloadData()
+                if !dataSource.isEmpty {
+                    dataSource.clear()
+                    searchView.tableView.reloadData()
                 }
                 
                 return
@@ -142,13 +141,7 @@ extension SearchViewController: UISearchResultsUpdating {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        recentSearchManager.recentSearches.append(searchQuery)
-        recentSearchDatasource.update(withItems: recentSearchManager.recentSearches)
-        searchView.tableView.reloadData()
         searchBar.resignFirstResponder()
     }
     
 }
-
-
-

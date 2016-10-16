@@ -253,6 +253,7 @@
 		11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		11E8F5931DAD87AC00583840 /* RecentSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentSearchManager.swift; sourceTree = "<group>"; };
 		11E8F5961DAD890E00583840 /* SearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
+		11E8F59C1DB260EB00583840 /* DiscoverMovies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiscoverMovies.entitlements; sourceTree = "<group>"; };
 		12419D287B65C09B4B83DFB1 /* Pods_Networking_DiscoverMovies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking_DiscoverMovies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3577EF4B02D7FBFAC03A4ADB /* Pods-Networking-DiscoverMovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-DiscoverMovies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-DiscoverMovies/Pods-Networking-DiscoverMovies.debug.xcconfig"; sourceTree = "<group>"; };
@@ -447,6 +448,7 @@
 				111942891CCB8DBF001CF39B /* DiscoverMovies-Bridging-Header.h */,
 				1119424B1CCB8CA0001CF39B /* Info.plist */,
 				11924C8F1D72F1D600B1022E /* Keys.plist */,
+				11E8F59C1DB260EB00583840 /* DiscoverMovies.entitlements */,
 			);
 			name = "Supporting files";
 			sourceTree = "<group>";
@@ -1100,6 +1102,11 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = S4F83VS4FR;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1119424F1CCB8CA0001CF39B = {
 						CreatedOnToolsVersion = 7.3;
@@ -1526,8 +1533,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = DiscoverMovies/DiscoverMovies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = S4F83VS4FR;
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1548,8 +1557,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = DiscoverMovies/DiscoverMovies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = S4F83VS4FR;
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

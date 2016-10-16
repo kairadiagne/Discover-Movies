@@ -20,26 +20,14 @@ class SearchDataSource: NSObject, DataContaining, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return !isEmpty ? itemCount : 1
+        return itemCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isEmpty {
-            return noDataCell(withMessage: "Search Movies", forTableView: tableView, indexPath: indexPath)
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.defaultIdentifier(), for: indexPath) as! SearchTableViewCell
-            let movie = items[indexPath.row]
-            let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
-            cell.configure(withMovie: movie, imageURL: imageURL)
-            return cell
-        }
-    }
-    
-    // TODO: - Create basic datasource which configures a nodatacell
-    
-    func noDataCell(withMessage message: String, forTableView tableView: UITableView, indexPath: IndexPath) -> NoDataCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCell.defaultIdentifier(), for: indexPath) as! NoDataCell
-        cell.configure(with: message)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.defaultIdentifier(), for: indexPath) as! SearchTableViewCell
+        let movie = items[indexPath.row]
+        let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
+        cell.configure(withMovie: movie, imageURL: imageURL)
         return cell
     }
     

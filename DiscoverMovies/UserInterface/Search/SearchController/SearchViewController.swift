@@ -35,18 +35,22 @@ class SearchViewController: BaseViewController {
         searchController.searchBar.sizeToFit()
         searchView.tableView.tableHeaderView = searchController.searchBar
         
-        searchController.dimsBackgroundDuringPresentation = false
+        searchController.delegate = self
         searchController.searchBar.delegate = self
         
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         definesPresentationContext = true
         
         let searchCellNib = UINib(nibName: SearchTableViewCell.nibName(), bundle: nil)
         searchView.tableView.register(searchCellNib, forCellReuseIdentifier: SearchTableViewCell.defaultIdentifier())
-        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
-        searchView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
         
         searchView.tableView.delegate = self
         searchView.tableView.dataSource = dataSource
+        
+        extendedLayoutIncludesOpaqueBars = true
+        
+        searchView.tableView.keyboardDismissMode = .onDrag
         
         searchManager.failureDelegate = self
         
@@ -59,13 +63,18 @@ class SearchViewController: BaseViewController {
         let loadingSelector = #selector(SearchViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(SearchViewController.dataManagerDidUpdate(notification:))
         searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        searchView.tableView.reloadData()
+        if !searchController.isActive {
+            searchController.isActive = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         searchManager.remove(observer: self)
     }
     
@@ -79,7 +88,7 @@ class SearchViewController: BaseViewController {
     // MARK: - FailureDelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
 
 }
@@ -99,7 +108,8 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
         let detailViewController = DetailViewController(movie: movie)
-        self.navigationController?.pushViewController(detailViewController, animated: false)
+        navigationController?.delegate = detailViewController
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
 }
@@ -134,6 +144,16 @@ extension SearchViewController: UISearchResultsUpdating {
         }
     }
     
+}
+
+// MARK: - UISearchControllerDelegate
+
+extension SearchViewController: UISearchControllerDelegate {
+    
+    func presentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.becomeFirstResponder()
+    }
+
 }
 
 // MARK: - UISearchBarDelegate 

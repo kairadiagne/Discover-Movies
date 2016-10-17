@@ -65,8 +65,11 @@ public struct Movie: DictionarySerializable, Equatable {
     // MARK: - Utils
     
     public func mainGenre() -> TMDbGenre? {
-        let rawValue = genres[0]
-        return TMDbGenre(rawValue: rawValue)
+        if let rawValue = genres.first {
+            return TMDbGenre(rawValue: rawValue)
+        }
+        
+        return nil
     }
 
 }

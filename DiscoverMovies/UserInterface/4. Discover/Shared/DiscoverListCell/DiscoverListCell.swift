@@ -41,5 +41,13 @@ class DiscoverListCell: UITableViewCell {
         movieImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
     }
     
+    // MARK: - Reuse
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        movieImageView.image = nil 
+    }
+    
 }
 

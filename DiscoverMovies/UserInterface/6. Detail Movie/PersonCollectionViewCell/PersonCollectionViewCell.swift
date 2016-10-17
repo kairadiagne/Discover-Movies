@@ -12,24 +12,33 @@ import SDWebImage
 
 class PersonCollectionViewCell: UICollectionViewCell {
     
-    // MARK: Properties
+    // MARK: - Properties
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    // MARK: Awake
+    // MARK: - Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
         nameLabel.font = UIFont.Caption2()
     }
     
-    // MARK: Configure 
+    // MARK: - Configure 
     
     func configureWithCastMember(_ member: CastMember) {
+        
         nameLabel.text = member.name
-        guard let profilePath = member.profilePath, let url = TMDbImageRouter.posterMedium(path: profilePath).url else { return } // Error in loading double images
+        guard let profilePath = member.profilePath, let url = TMDbImageRouter.posterMedium(path: profilePath).url else { return }
         profileImageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
+    }
+    
+    // MARK: - Reuse
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        profileImageView.image = nil
     }
     
 }

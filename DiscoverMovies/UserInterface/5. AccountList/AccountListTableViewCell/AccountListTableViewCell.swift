@@ -14,9 +14,7 @@ class AccountListTableViewCell: UITableViewCell {
     // MARK: Properties
     
     @IBOutlet weak var posterView: UIImageView!
-    
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var overViewLabel: UILabel!
     
     // MARK: Awake From Nib
@@ -34,6 +32,14 @@ class AccountListTableViewCell: UITableViewCell {
         titleLabel.text = movie.title
         overViewLabel.text = movie.overview
         posterView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+    }
+    
+    // MARK: - Reuse
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        posterView.image = nil
     }
     
 }

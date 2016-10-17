@@ -71,7 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // TODO: 
-// - Finish search
 // - Discover
 // - Find icons that are free to use
 // - Acknowlegmenet screen (pods and icons and tmdb)
@@ -80,7 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // - Final design refinements
 // - Final cleanup of code
 // - Reorder files in right folders
-// - Update github page 
-// - Get rid of Chameleon framework
+// - Update github page
 // - Fix gravatar profile image
 // - Placeholders

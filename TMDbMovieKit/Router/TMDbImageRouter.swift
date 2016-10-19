@@ -17,8 +17,6 @@ public enum TMDbImageRouter {
     case posterMedium(path: String)
     case posterLarge(path: String)
     case posterOriginal(path: String)
-    case profileSmall(path: String)
-    case profileMedium(path: String)
     case profileLarge(path: String)
     case profileOriginal(path: String)
     
@@ -40,12 +38,8 @@ public enum TMDbImageRouter {
             return imageURL(path, size: "w500")
         case .posterOriginal(let path):
             return imageURL(path, size: "original")
-        case .profileSmall(let path):
-            return imageURL(path, size: "w45")
-        case .profileMedium(let path):
-            return imageURL(path, size: "w185")
         case .profileLarge(let path):
-            return imageURL(path, size: "h632")
+            return imageURL(path, size: "500")
         case .profileOriginal(let path):
             return imageURL(path, size: "original")
         }
@@ -55,17 +49,10 @@ public enum TMDbImageRouter {
         var urlString = ""
         
         switch self {
-        case .profileSmall(let path):
-             urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
-        case .profileMedium(let path):
-             urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
-        case .profileLarge(let path):
-             urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
-        case .profileOriginal(let path):
-             urlString = "\(TMDbAPI.GravatarBaseURLString)\(size)/\(path)"
+        case .profileLarge, .profileOriginal:
+             urlString = TMDbAPI.GravatarBaseURLString + "\(path)?s=\(size)"
         default:
-             urlString = "\(TMDbAPI.ImageBaseURL)\(size)/\(path)"
-           
+             urlString = TMDbAPI.ImageBaseURL + "\(size)/\(path)"
         }
         
         return URL(string: urlString) ?? nil

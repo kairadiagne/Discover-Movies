@@ -15,4 +15,3 @@ struct TMDbAPI {
     static let SessionURL = "https://api.themoviedb.org/3/authentication/session/new/"
     static let GravatarBaseURLString = "http://www.gravatar.com/avatar/"
 }
-

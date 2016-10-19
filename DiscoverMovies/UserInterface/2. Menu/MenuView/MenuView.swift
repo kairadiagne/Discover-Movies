@@ -35,7 +35,7 @@ class MenuView: UIView {
     func configure(withUser user: User?) {
         nameLabel.text = user?.name ?? NSLocalizedString("nameLabelGuest", comment: "")
         
-        if let path = user?.profileHash, let url = TMDbImageRouter.profileOriginal(path: path).url {
+        if let path = user?.profileHash, let url = TMDbImageRouter.profileLarge(path: path).url {
             profileImageView.imageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
         } else {
             profileImageView.imageView.image = UIImage.placeholderImage()

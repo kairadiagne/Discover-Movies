@@ -107,9 +107,18 @@ extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
+        
         let detailViewController = DetailViewController(movie: movie)
         navigationController?.delegate = detailViewController
         navigationController?.pushViewController(detailViewController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if dataSource.itemCount - 10 == indexPath.row {
+            searchManager.loadMore()
+        }
     }
     
 }

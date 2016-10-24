@@ -71,11 +71,15 @@ class DetailView: UIView {
         favouriteControl.fillColor = UIColor.buttonColor()
         watchListControl.lineColor = UIColor.buttonColor()
         watchListControl.fillColor = UIColor.buttonColor()
-        
+
         readReviewsButton.backgroundColor = UIColor.clear
         readReviewsButton.setTitleColor(UIColor.buttonColor(), for: .normal)
+        readReviewsButton.setTitleColor(UIColor.backgroundColor(), for: .highlighted)
+        readReviewsButton.setBackground(color: UIColor.clear, forState: .normal)
+        readReviewsButton.setBackground(color: UIColor.buttonColor(), forState: .highlighted)
         readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
-        readReviewsButton.layer.borderWidth = 1.5
+        readReviewsButton.layer.borderWidth = 1
+        readReviewsButton.layer.masksToBounds = true
         
         directorLabel.text = NSLocalizedString("directorLabelText", comment: "")
         genreLabel.text = NSLocalizedString("genreLabelText", comment: "")

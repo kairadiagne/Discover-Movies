@@ -7,12 +7,10 @@
 //
 
 import UIKit
+import TMDbMovieKit
 
-class GenreDataSource: NSObject, DataContaining, UITableViewDataSource {
-    
-    typealias ItemType = Movie
+class GenreDataSource: NSObject, UITableViewDataSource {
 
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }

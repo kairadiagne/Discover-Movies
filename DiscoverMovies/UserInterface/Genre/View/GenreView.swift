@@ -12,13 +12,24 @@ class GenreView: BaseView {
 
     // MARK: - Properties
     
-    @IBOutlet weak var tableView: UITableView!
+    weak var tableView: UITableView!
     
     // MARK: - Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // Setup tableView
+        tableView = UITableView()
+        
+        addSubview(tableView)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
         tableView.hideEmptyRows()
         
         if #available(iOS 10.0, *) {

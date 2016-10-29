@@ -13,19 +13,23 @@ class GenreViewController: BaseViewController {
     
     // MARK: - Properties 
     
-    let dataManager = GenreManager()
+    var genreView: GenreView { return view as! GenreView }
     
-    let dataSource = GenreDataSource()
+    fileprivate let dataManager = GenreDataManager()
+    
+    fileprivate let dataSource = GenreDataSource()
     
     // MARK: - Life cyce
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }

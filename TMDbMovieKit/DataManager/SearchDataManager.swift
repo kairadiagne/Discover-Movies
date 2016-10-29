@@ -35,10 +35,4 @@ public class SearchDataManager: ListDataManager<Movie> {
         }
     }
     
-    // MARK: - Default Paramaters
-    
-    override func defaultParamaters() -> [String : AnyObject] {
-        return ["include_adult" : false as AnyObject]
-    }
-    
 }

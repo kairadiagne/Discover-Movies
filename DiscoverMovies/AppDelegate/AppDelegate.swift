@@ -67,18 +67,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
     }
 
-
 }
 
 // TODO: 
 // - Discover
 // - Find icons that are free to use
 // - Acknowlegmenet screen (pods and icons and tmdb)
-// - Test critical parts of app
 // - Fix rotation bug
 // - Final design refinements
-// - Final cleanup of code
 // - Reorder files in right folders
 // - Update github page
-// - Fix gravatar profile image
 // - Placeholders

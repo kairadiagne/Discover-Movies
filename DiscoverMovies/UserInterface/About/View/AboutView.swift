@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutView: UIView {
+class AboutView: BaseView {
     
     // MARK: - Properties
     
@@ -16,13 +16,24 @@ class AboutView: UIView {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tmdbLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var feadbackButton: UIButton!
+    @IBOutlet weak var feedbackButton: UIButton!
     
     // MARK: - Awake
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        titleLabel.textColor = UIColor.white
+        descriptionLabel.textColor = UIColor.white
+        tmdbLabel.textColor = UIColor.white
+        
+        titleLabel.font = UIFont.H1()
+        descriptionLabel.font = UIFont.Body()
+        tmdbLabel.font = UIFont.Caption()
+        
+        descriptionLabel.text = NSLocalizedString("description", comment: "")
+        tmdbLabel.text = NSLocalizedString("tmdbacknowledgement", comment: "")
+        feedbackButton.setTitle(NSLocalizedString("feedbackButtonTitle", comment: ""), for: .nomal)
         
     }
 

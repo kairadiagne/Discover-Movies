@@ -30,7 +30,7 @@ class DetailView: UIView {
     @IBOutlet weak var castCollectionView: UICollectionView!
     @IBOutlet weak var similarLabel: UILabel!
     @IBOutlet weak var similarMovieCollectionView: UICollectionView!
-    @IBOutlet weak var readReviewsButton: UIButton!
+    @IBOutlet weak var readReviewsButton: DiscoverButton!
     @IBOutlet weak var favouriteControl: FavouriteButton!
     @IBOutlet weak var watchListControl: WatchListButton!
     @IBOutlet weak var header: GradientImageView!
@@ -73,15 +73,6 @@ class DetailView: UIView {
         favouriteControl.fillColor = UIColor.buttonColor()
         watchListControl.lineColor = UIColor.buttonColor()
         watchListControl.fillColor = UIColor.buttonColor()
-
-        readReviewsButton.backgroundColor = UIColor.clear
-        readReviewsButton.setTitleColor(UIColor.buttonColor(), for: .normal)
-        readReviewsButton.setTitleColor(UIColor.backgroundColor(), for: .highlighted)
-        readReviewsButton.setBackground(color: UIColor.clear, forState: .normal)
-        readReviewsButton.setBackground(color: UIColor.buttonColor(), forState: .highlighted)
-        readReviewsButton.layer.borderColor = UIColor.buttonColor().cgColor
-        readReviewsButton.layer.borderWidth = 1
-        readReviewsButton.layer.masksToBounds = true
         
         directorLabel.text = NSLocalizedString("directorLabelText", comment: "")
         genreLabel.text = NSLocalizedString("genreLabelText", comment: "")
@@ -108,8 +99,6 @@ class DetailView: UIView {
             contentInsetTop = ceil(headerHeightConstraint.constant - scrollTop.constant)
             scrollView.contentInset.top = contentInsetTop
         }
-        
-        readReviewsButton.layer.cornerRadius = readReviewsButton.bounds.size.height / 2
     }
     
     // MARK: - Configure

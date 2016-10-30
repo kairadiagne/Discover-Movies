@@ -55,3 +55,9 @@ watchListVCTitle = "Watchlist";
 
 /* Search */
 searchVCTitle = "Search";
+
+/* About */
+description = "A convenient way to browse movies and keep track of your watchlist";
+tmdbacknowledgement = "This makes uses of the TMDB api";
+feedbackButtonTitle = "Feedback";
+

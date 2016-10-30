@@ -12,7 +12,7 @@ import SDWebImage
 
 class DetailView: UIView {
     
-    // MARK: -  Properties
+    // MARK: - Properties
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -41,8 +41,10 @@ class DetailView: UIView {
     @IBOutlet weak var headerTop: NSLayoutConstraint!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var animationConstraint: NSLayoutConstraint!
-    
+   
     fileprivate var contentInsetTop: CGFloat = 0
+    
+    fileprivate var defaultHeaderheight: CGFloat = 0
     
     fileprivate var didSetContentInset = false
     
@@ -91,16 +93,19 @@ class DetailView: UIView {
         // For animation
         header.alpha = 0.3
         playButton.alpha = 0.3
+        
+        scrollView.contentInset.top = contentInsetTop
     }
     
     // MARK: - LifeCycle
    
     override func layoutSubviews() {
         super.layoutSubviews()
-    
+        
         if !didSetContentInset {
             didSetContentInset = true
-            contentInsetTop =  ceil(header.bounds.size.height - scrollTop.constant)
+            defaultHeaderheight = headerHeightConstraint.constant
+            contentInsetTop = ceil(headerHeightConstraint.constant - scrollTop.constant)
             scrollView.contentInset.top = contentInsetTop
         }
         
@@ -150,18 +155,19 @@ class DetailView: UIView {
         let openHeader = min(1, max(0, position))
         
         // Adjust the header position
-        headerTop.constant = openHeader * -header.bounds.height * 0.8
+        headerTop.constant = openHeader * -defaultHeaderheight * 0.8
         
-        // Adjust the alpha of the button
-        // When header is collapsed the playbutton should not be visible
-        playButton.alpha = -openHeader + 1
-        
-        // Adjust height of header 
+        // Adjust header height
         if contentOffSetY < -contentInsetTop {
-            headerHeightConstraint.constant = abs(contentOffSetY) - contentInsetTop
+            let difference = (abs(contentOffSetY) - contentInsetTop)
+            print(difference)
+            headerHeightConstraint.constant = defaultHeaderheight + difference
         } else {
-            headerHeightConstraint.constant = 0
+            headerHeightConstraint.constant = defaultHeaderheight
         }
+        
+        // Adjust alpha play button
+        playButton.alpha = -openHeader + 1
     }
     
 }

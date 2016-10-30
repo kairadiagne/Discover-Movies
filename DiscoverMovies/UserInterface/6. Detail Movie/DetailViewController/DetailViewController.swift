@@ -68,10 +68,6 @@ class DetailViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = true
         
         automaticallyAdjustsScrollViewInsets = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         detailView.configure(withMovie: movie, signedIn: signedIn)
     }
@@ -83,7 +79,7 @@ class DetailViewController: BaseViewController {
         
         navigationController?.delegate = nil
     }
-    
+
     // MARK: - Actions
     
     @IBAction func favoriteButtontap(_ sender: FavouriteButton) {

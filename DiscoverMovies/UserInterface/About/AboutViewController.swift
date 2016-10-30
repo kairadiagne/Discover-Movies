@@ -8,6 +8,8 @@
 
 import UIKit
 import TMDbMovieKit
+import MessageUI
+import BRYXBanner
 
 class AboutViewController: BaseViewController {
     
@@ -29,12 +31,10 @@ class AboutViewController: BaseViewController {
         
         let aboutCellNib = UINib(nibName: AboutTableViewCell.nibName(), bundle: nil)
         aboutView.tableView.register(aboutCellNib, forCellReuseIdentifier: AboutTableViewCell.defaultIdentifier())
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        loadAcknowledgements() // Only needs to be loaded once / For testing purposes / later move to viewWillAppear
+        loadAcknowledgements()
+        
+        title = NSLocalizedString("aboutTitle", comment: "")
     }
     
     func loadAcknowledgements() {
@@ -58,12 +58,30 @@ class AboutViewController: BaseViewController {
     // MARK: - Actions 
 
     @IBAction func tmdbButtonClick(_ sender: UIButton) {
+        let urlString = "https://www.themoviedb.org"
+        
+        if let url = URL(string: urlString) {
+            UIApplication.shared.openURL(url)
+        } else {
+            print("Could not open themoviedb.org")
+        }
     }
     
     @IBAction func feedbackButtonClick(_ sender: DiscoverButton) {
+        guard MFMailComposeViewController.canSendMail() else { return }
+        
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+            
+        composeVC.setToRecipients(["diagekaira@yahoo.com"]) // TODO: - Change email address
+        composeVC.setSubject("Hello!")
+            
+        present(composeVC, animated: true, completion: nil)
     }
-
+    
 }
+
+// MARK: - UITableViewDelegate
 
 extension AboutViewController: UITableViewDelegate {
     
@@ -78,8 +96,12 @@ extension AboutViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString("acknowledgementsTitle", comment: "")
     }
+    
+    // TODO: - Change appearance of header
 
 }
+
+// MARK: - UITableViewDataSource
 
 extension AboutViewController: UITableViewDataSource {
     
@@ -93,33 +115,25 @@ extension AboutViewController: UITableViewDataSource {
         cell.configure(with: acknowledgement)
         return cell
     }
-    
-    
-    
+
 }
 
-struct Acknowledgement: DictionarySerializable {
+// MARK: - MFMailComposDelegate
+
+extension AboutViewController: MFMailComposeViewControllerDelegate {
     
-    // MARK: - Properties
-    
-    let title: String
-    var license: String?
-    let footer: String
-    
-    // MARK: - Initialize
-    
-    init?(dictionary dict: [String: AnyObject]) {
-        guard let title = dict["Title"] as? String, let footer = dict["FooterText"] as? String else {
-            return nil
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .saved, .sent:
+            let message = NSLocalizedString("thanks", comment: "")
+            let banner = Banner(title: "", subtitle: message,  backgroundColor: UIColor.flatGray())
+            banner.show(duration: 3.0)
+        default:
+            return
         }
         
-        self.title = title
-        self.license = dict["License"] as? String
-        self.footer = footer
+        dismiss(animated: true, completion: nil)
     }
-    
-    func dictionaryRepresentation() -> [String: AnyObject] {
-        return [:]
-    }
-    
 }
+
+

@@ -33,26 +33,26 @@ class Theme {
         UINavigationBar.appearance().isOpaque = false
     }
     
-    class func styleViews() {
-        YTPlayerView.appearance().backgroundColor = UIColor.backgroundColor()
+    class func styleViews() { // Can be removed
+        YTPlayerView.appearance().backgroundColor = UIColor.backgroundColor() // Can
     }
     
-    class func styleTableViews() {
+    class func styleTableViews() { // Can be removed
         UITableView.appearance().backgroundColor = UIColor.backgroundColor()
         UITableViewCell.appearance().backgroundColor = UIColor.backgroundColor()
         UITableView.appearance().separatorColor = UIColor(red: 60.0/255.0, green: 60.0/255.0, blue: 60.0/255.0, alpha: 60.0/255.0)
     }
     
-    class func styleCollectionViews() {
+    class func styleCollectionViews() { // Can be removed
         UICollectionView.appearance().backgroundColor = UIColor.backgroundColor()
     }
     
-    class func styleTextFields() {
+    class func styleTextFields() { // Can be removed
         UITextField.appearance().backgroundColor = UIColor.flatGray()
         UITextField.appearance().font = UIFont.Body()
     }
     
-    class func styleLabels() {
+    class func styleLabels() { // Can be removed 
         UILabel.appearance().textColor = UIColor.white
         UILabel.appearance().backgroundColor = UIColor.clear
     }

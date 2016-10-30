@@ -21,11 +21,6 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="efb-4O-cJu">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsF-z5-JZD">
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A convenient way to browse movies and keep track of your watchlist" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSw-or-t7u">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -62,25 +57,21 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="efb-4O-cJu" secondAttribute="bottom" id="0Ug-cn-KPD"/>
                 <constraint firstItem="efb-4O-cJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="65a-yX-kz1"/>
-                <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="nsF-z5-JZD" secondAttribute="bottom" constant="8" symbolic="YES" id="AsT-sx-Bal"/>
-                <constraint firstItem="nsF-z5-JZD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="DKv-JF-J3b"/>
                 <constraint firstItem="NSw-or-t7u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="F90-4H-Vh2"/>
                 <constraint firstItem="hTi-Ga-PG6" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="20" id="IIm-a4-xTK"/>
                 <constraint firstAttribute="trailing" secondItem="NSw-or-t7u" secondAttribute="trailing" constant="20" symbolic="YES" id="KLJ-Bt-0Cb"/>
                 <constraint firstAttribute="trailing" secondItem="efb-4O-cJu" secondAttribute="trailing" id="Okj-dw-Am1"/>
-                <constraint firstItem="ssY-8T-sgK" firstAttribute="width" secondItem="hTi-Ga-PG6" secondAttribute="width" id="Vtq-X0-Qg3"/>
                 <constraint firstItem="ssY-8T-sgK" firstAttribute="top" secondItem="hTi-Ga-PG6" secondAttribute="bottom" constant="20" id="cgB-KR-03G"/>
+                <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="drS-nl-bYh"/>
                 <constraint firstItem="hTi-Ga-PG6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h5W-g7-DOO"/>
                 <constraint firstItem="ssY-8T-sgK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="mxB-aP-ZdT"/>
-                <constraint firstItem="nsF-z5-JZD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oK0-cJ-Z9A"/>
-                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="ssY-8T-sgK" secondAttribute="bottom" constant="20" id="ulD-6Q-CaH"/>
+                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="ssY-8T-sgK" secondAttribute="bottom" constant="40" id="ulD-6Q-CaH"/>
                 <constraint firstItem="ssY-8T-sgK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yVl-HB-Qfo"/>
             </constraints>
             <connections>
                 <outlet property="descriptionLabel" destination="NSw-or-t7u" id="lRu-GJ-njh"/>
                 <outlet property="feedbackButton" destination="ssY-8T-sgK" id="fF7-Nv-A9S"/>
                 <outlet property="tableView" destination="efb-4O-cJu" id="0qb-F2-IbG"/>
-                <outlet property="titleLabel" destination="nsF-z5-JZD" id="Luo-Lu-TdH"/>
                 <outlet property="tmdbButton" destination="hTi-Ga-PG6" id="6Pw-Ut-Tu5"/>
             </connections>
             <point key="canvasLocation" x="-837" y="-86"/>

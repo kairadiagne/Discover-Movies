@@ -58,9 +58,11 @@ watchListVCTitle = "Watchlist";
 searchVCTitle = "Search";
 
 /* About */
+aboutTitle = "About Discover";
 description = "A convenient way to browse movies and keep track of your watchlist";
-tmdbacknowledgement = "This makes uses of the TMDB api";
+tmdbacknowledgement = "This app makes uses of the TMDB api";
 feedbackButtonTitle = "Feedback";
 acknowledgementsTitle = "Open-source Libraries";
 license = "License";
+thanks = "Thank you for your feedback";
 

@@ -23,6 +23,8 @@ class AboutView: BaseView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        tableView.hideEmptyRows()
+        
         titleLabel.textColor = UIColor.white
         descriptionLabel.textColor = UIColor.white
         tmdbLabel.textColor = UIColor.white
@@ -33,8 +35,7 @@ class AboutView: BaseView {
         
         descriptionLabel.text = NSLocalizedString("description", comment: "")
         tmdbLabel.text = NSLocalizedString("tmdbacknowledgement", comment: "")
-        feedbackButton.setTitle(NSLocalizedString("feedbackButtonTitle", comment: ""), for: .nomal)
-        
+        feedbackButton.setTitle(NSLocalizedString("feedbackButtonTitle", comment: ""), for: .normal)
     }
 
 }

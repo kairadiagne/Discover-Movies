@@ -48,6 +48,8 @@
 		1167E76D1DC648E6003400B7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1167E76B1DC648E6003400B7 /* AboutViewController.xib */; };
 		1167E7701DC64934003400B7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76F1DC64934003400B7 /* AboutView.swift */; };
 		1167E7731DC64F10003400B7 /* DiscoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E7721DC64F10003400B7 /* DiscoverButton.swift */; };
+		1167E7781DC65658003400B7 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E7761DC65658003400B7 /* AboutTableViewCell.swift */; };
+		1167E7791DC65658003400B7 /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1167E7771DC65658003400B7 /* AboutTableViewCell.xib */; };
 		1179FC571D98777300CA1E6D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC561D98777300CA1E6D /* BaseView.swift */; };
 		1179FC5B1DA0E17900CA1E6D /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */; };
 		1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */; };
@@ -227,6 +229,8 @@
 		1167E76B1DC648E6003400B7 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		1167E76F1DC64934003400B7 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		1167E7721DC64F10003400B7 /* DiscoverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverButton.swift; sourceTree = "<group>"; };
+		1167E7761DC65658003400B7 /* AboutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
+		1167E7771DC65658003400B7 /* AboutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutTableViewCell.xib; sourceTree = "<group>"; };
 		1179FC561D98777300CA1E6D /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -609,9 +613,9 @@
 		1167E7691DC648C7003400B7 /* About */ = {
 			isa = PBXGroup;
 			children = (
+				1167E7751DC6561C003400B7 /* AboutViewController */,
 				1167E76E1DC64918003400B7 /* View */,
-				1167E76A1DC648E6003400B7 /* AboutViewController.swift */,
-				1167E76B1DC648E6003400B7 /* AboutViewController.xib */,
+				1167E7741DC65607003400B7 /* Cell */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -630,6 +634,24 @@
 				1167E7721DC64F10003400B7 /* DiscoverButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		1167E7741DC65607003400B7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1167E7761DC65658003400B7 /* AboutTableViewCell.swift */,
+				1167E7771DC65658003400B7 /* AboutTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		1167E7751DC6561C003400B7 /* AboutViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1167E76A1DC648E6003400B7 /* AboutViewController.swift */,
+				1167E76B1DC648E6003400B7 /* AboutViewController.xib */,
+			);
+			name = AboutViewController;
 			sourceTree = "<group>";
 		};
 		1179FC5D1DA0E26400CA1E6D /* Cell */ = {
@@ -1214,6 +1236,7 @@
 				1179FC611DA0E2D100CA1E6D /* MenuTableViewCell.xib in Resources */,
 				111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */,
 				1167E76D1DC648E6003400B7 /* AboutViewController.xib in Resources */,
+				1167E7791DC65658003400B7 /* AboutTableViewCell.xib in Resources */,
 				EADA5A7B1CE8B44600C2FAE8 /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1375,6 +1398,7 @@
 				11027BC91DAC2CB4004223F6 /* NoDataCollectionViewCell.swift in Sources */,
 				111942A11CCB8DD4001CF39B /* UIImage+Defaults.swift in Sources */,
 				11C3CC051DB80B550009D6D7 /* GenreViewController.swift in Sources */,
+				1167E7781DC65658003400B7 /* AboutTableViewCell.swift in Sources */,
 				1119429E1CCB8DD4001CF39B /* NSDate+Year.swift in Sources */,
 				1136FBDC1DA2DE6D00CED407 /* SearchViewController.swift in Sources */,
 				11E8F59E1DB3A70900583840 /* DetailAnimatedTransitioning.swift in Sources */,

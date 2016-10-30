@@ -56,7 +56,7 @@ class MenuViewController: UIViewController {
             case .signin:
                 return UIImage(named: "Logout")
             case .about:
-                return nil // TODO: - Find icon
+                return UIImage(named: "About")
             }
         }
     }

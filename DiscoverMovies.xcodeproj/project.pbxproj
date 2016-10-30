@@ -44,6 +44,9 @@
 		113D8C661DA2E3C5002B4EF6 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */; };
 		113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */; };
 		1167E7661DC63FAC003400B7 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1167E7651DC63FAC003400B7 /* Acknowledgements.plist */; };
+		1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76A1DC648E6003400B7 /* AboutViewController.swift */; };
+		1167E76D1DC648E6003400B7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1167E76B1DC648E6003400B7 /* AboutViewController.xib */; };
+		1167E7701DC64934003400B7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76F1DC64934003400B7 /* AboutView.swift */; };
 		1179FC571D98777300CA1E6D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC561D98777300CA1E6D /* BaseView.swift */; };
 		1179FC5B1DA0E17900CA1E6D /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */; };
 		1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */; };
@@ -219,6 +222,9 @@
 		113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
 		1167E7651DC63FAC003400B7 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
+		1167E76A1DC648E6003400B7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		1167E76B1DC648E6003400B7 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		1167E76F1DC64934003400B7 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		1179FC561D98777300CA1E6D /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -598,6 +604,24 @@
 			path = DataSource;
 			sourceTree = "<group>";
 		};
+		1167E7691DC648C7003400B7 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				1167E76E1DC64918003400B7 /* View */,
+				1167E76A1DC648E6003400B7 /* AboutViewController.swift */,
+				1167E76B1DC648E6003400B7 /* AboutViewController.xib */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		1167E76E1DC64918003400B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1167E76F1DC64934003400B7 /* AboutView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1179FC5D1DA0E26400CA1E6D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +916,7 @@
 				EAD2A82F1CDC9E910005264B /* AccountList */,
 				11C3CC021DB80B130009D6D7 /* Genre */,
 				1136FBD91DA2D7A300CED407 /* Search */,
+				1167E7691DC648C7003400B7 /* About */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -1177,6 +1202,7 @@
 				1136FBDD1DA2DE6D00CED407 /* SearchViewController.xib in Resources */,
 				1179FC611DA0E2D100CA1E6D /* MenuTableViewCell.xib in Resources */,
 				111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */,
+				1167E76D1DC648E6003400B7 /* AboutViewController.xib in Resources */,
 				EADA5A7B1CE8B44600C2FAE8 /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1313,10 +1339,12 @@
 				113D8C661DA2E3C5002B4EF6 /* SearchDataSource.swift in Sources */,
 				EA6487C61CE503BD00452DD0 /* ReviewViewController.swift in Sources */,
 				1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */,
+				1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */,
 				11D09A0A1D97C04300FEDB21 /* BaseViewController.swift in Sources */,
 				11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */,
 				EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */,
 				11DECAA91D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift in Sources */,
+				1167E7701DC64934003400B7 /* AboutView.swift in Sources */,
 				EADA5A811CE9AA2200C2FAE8 /* ReviewDataSource.swift in Sources */,
 				EADA5A961CEA309800C2FAE8 /* MenuViewController.swift in Sources */,
 				11924C8C1D69E33700B1022E /* ProfileImageView.swift in Sources */,

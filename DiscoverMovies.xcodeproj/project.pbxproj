@@ -43,6 +43,7 @@
 		113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* NSDate+ToString.swift */; };
 		113D8C661DA2E3C5002B4EF6 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */; };
 		113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */; };
+		1167E7661DC63FAC003400B7 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1167E7651DC63FAC003400B7 /* Acknowledgements.plist */; };
 		1179FC571D98777300CA1E6D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC561D98777300CA1E6D /* BaseView.swift */; };
 		1179FC5B1DA0E17900CA1E6D /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */; };
 		1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */; };
@@ -217,6 +218,7 @@
 		113946311CCBBA80001CFAEA /* NSDate+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ToString.swift"; sourceTree = "<group>"; };
 		113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
+		1167E7651DC63FAC003400B7 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		1179FC561D98777300CA1E6D /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				111942891CCB8DBF001CF39B /* DiscoverMovies-Bridging-Header.h */,
 				1119424B1CCB8CA0001CF39B /* Info.plist */,
 				11924C8F1D72F1D600B1022E /* Keys.plist */,
+				1167E7651DC63FAC003400B7 /* Acknowledgements.plist */,
 				11E8F59C1DB260EB00583840 /* DiscoverMovies.entitlements */,
 			);
 			name = "Supporting files";
@@ -1154,6 +1157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1167E7661DC63FAC003400B7 /* Acknowledgements.plist in Resources */,
 				1179FC6B1DA1002900CA1E6D /* AccountListController.xib in Resources */,
 				11924C901D72F1D600B1022E /* Keys.plist in Resources */,
 				111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */,

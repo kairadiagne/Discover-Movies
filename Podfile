@@ -18,3 +18,9 @@ abstract_target 'Networking' do
     end
     
 end
+
+# Acknowledgement
+post_install do | installer |
+    require 'fileutils'
+    FileUtils.cp_r('Pods/Target Support Files/Pods-Networking-DiscoverMovies/Pods-Networking-DiscoverMovies-acknowledgements.plist', 'DiscoverMovies/Acknowledgements.plist', :remove_destination => true)
+end

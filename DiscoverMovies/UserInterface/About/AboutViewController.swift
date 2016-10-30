@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class AboutViewController: UIViewController {
+class AboutViewController: BaseViewController {
     
     // MARK: - Properties
     
@@ -22,6 +22,8 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addMenuButton()
+        
         aboutView.tableView.delegate = self
         aboutView.tableView.dataSource = self
         
@@ -29,21 +31,54 @@ class AboutViewController: UIViewController {
         aboutView.tableView.register(aboutCellNib, forCellReuseIdentifier: AboutTableViewCell.defaultIdentifier())
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadAcknowledgements() // Only needs to be loaded once / For testing purposes / later move to viewWillAppear
+    }
+    
     func loadAcknowledgements() {
         if let path = Bundle.main.path(forResource: "Acknowledgements", ofType: "plist"),
         let dicts = NSDictionary(contentsOfFile: path)?["PreferenceSpecifiers"] as? [[String: AnyObject]] {
-            acknowledgements = dicts.map { return Acknowledgement(dictionary: $0) }.flatMap { $0 }
+            
+            for dict in dicts {
+                if let acknowledgement = Acknowledgement(dictionary: dict) {
+                    acknowledgements.append(acknowledgement)
+                }
+            }
+            
+            // Filter out first and last entry related to cocoapods
+            let _ = acknowledgements.removeFirst()
+            let _ = acknowledgements.removeLast()
+            
+            aboutView.tableView.reloadData()
         }
+    }
+    
+    // MARK: - Actions 
+
+    @IBAction func tmdbButtonClick(_ sender: UIButton) {
+    }
+    
+    @IBAction func feedbackButtonClick(_ sender: DiscoverButton) {
     }
 
 }
 
 extension AboutViewController: UITableViewDelegate {
     
-    private func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("acknowledgementsTitle", comment: "")
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 118
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return NSLocalizedString("acknowledgementsTitle", comment: "")
+    }
+
 }
 
 extension AboutViewController: UITableViewDataSource {
@@ -59,6 +94,8 @@ extension AboutViewController: UITableViewDataSource {
         return cell
     }
     
+    
+    
 }
 
 struct Acknowledgement: DictionarySerializable {
@@ -70,7 +107,6 @@ struct Acknowledgement: DictionarySerializable {
     let footer: String
     
     // MARK: - Initialize
-    
     
     init?(dictionary dict: [String: AnyObject]) {
         guard let title = dict["Title"] as? String, let footer = dict["FooterText"] as? String else {

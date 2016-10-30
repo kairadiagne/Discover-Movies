@@ -14,22 +14,27 @@ class AboutTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var licenseLabel: UILabel!
-    @IBOutlet weak var footerLabel: UILabel!
  
     // MARK: - Awake
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        titleLabel.font = UIFont.H1()
+        licenseLabel.font = UIFont.Caption()
         
+        titleLabel.textColor = UIColor.white
+        licenseLabel.textColor = UIColor.white
     }
     
     // MARK: - Configure
     
     func configure(with acknowledgement: Acknowledgement) {
         titleLabel.text = acknowledgement.title
-        licenseLabel.text = acknowledgement.license
-        footerLabel.text = acknowledgement.footer
+        
+        if let license = acknowledgement.license {
+           licenseLabel.text = NSLocalizedString("license", comment: "") + " " + license
+        }
     }
     
 }

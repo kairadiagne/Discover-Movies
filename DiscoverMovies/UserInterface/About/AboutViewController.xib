@@ -38,37 +38,42 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app uses TMDB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evB-tf-Q4j">
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ib-le-8TT">
                     <frame key="frameInset" minX="96" minY="216" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssY-8T-sgK" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssY-8T-sgK" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ssY-8T-sgK" secondAttribute="height" multiplier="3:1" id="tJa-c8-s6d"/>
                     </constraints>
                     <state key="normal" title="Feedback"/>
+                    <connections>
+                        <action selector="feedbackButtonClick:" destination="-1" eventType="touchUpInside" id="M1R-jb-Mv0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTi-Ga-PG6">
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="tmdbButtonClick:" destination="-1" eventType="touchUpInside" id="NJp-SD-UGK"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="efb-4O-cJu" secondAttribute="bottom" id="0Ug-cn-KPD"/>
-                <constraint firstItem="evB-tf-Q4j" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4fi-d6-l7F"/>
                 <constraint firstItem="efb-4O-cJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="65a-yX-kz1"/>
                 <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="nsF-z5-JZD" secondAttribute="bottom" constant="8" symbolic="YES" id="AsT-sx-Bal"/>
                 <constraint firstItem="nsF-z5-JZD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="DKv-JF-J3b"/>
                 <constraint firstItem="NSw-or-t7u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="F90-4H-Vh2"/>
+                <constraint firstItem="hTi-Ga-PG6" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="20" id="IIm-a4-xTK"/>
                 <constraint firstAttribute="trailing" secondItem="NSw-or-t7u" secondAttribute="trailing" constant="20" symbolic="YES" id="KLJ-Bt-0Cb"/>
-                <constraint firstItem="evB-tf-Q4j" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="8" symbolic="YES" id="NA7-1R-u2D"/>
                 <constraint firstAttribute="trailing" secondItem="efb-4O-cJu" secondAttribute="trailing" id="Okj-dw-Am1"/>
-                <constraint firstItem="ssY-8T-sgK" firstAttribute="top" secondItem="evB-tf-Q4j" secondAttribute="bottom" constant="8" symbolic="YES" id="gYC-B9-DPp"/>
+                <constraint firstItem="ssY-8T-sgK" firstAttribute="width" secondItem="hTi-Ga-PG6" secondAttribute="width" id="Vtq-X0-Qg3"/>
+                <constraint firstItem="ssY-8T-sgK" firstAttribute="top" secondItem="hTi-Ga-PG6" secondAttribute="bottom" constant="20" id="cgB-KR-03G"/>
+                <constraint firstItem="hTi-Ga-PG6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h5W-g7-DOO"/>
                 <constraint firstItem="ssY-8T-sgK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="mxB-aP-ZdT"/>
                 <constraint firstItem="nsF-z5-JZD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oK0-cJ-Z9A"/>
-                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="ssY-8T-sgK" secondAttribute="bottom" constant="8" symbolic="YES" id="ulD-6Q-CaH"/>
+                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="ssY-8T-sgK" secondAttribute="bottom" constant="20" id="ulD-6Q-CaH"/>
                 <constraint firstItem="ssY-8T-sgK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yVl-HB-Qfo"/>
             </constraints>
             <connections>
@@ -76,9 +81,9 @@
                 <outlet property="feedbackButton" destination="ssY-8T-sgK" id="fF7-Nv-A9S"/>
                 <outlet property="tableView" destination="efb-4O-cJu" id="0qb-F2-IbG"/>
                 <outlet property="titleLabel" destination="nsF-z5-JZD" id="Luo-Lu-TdH"/>
-                <outlet property="tmdbLabel" destination="evB-tf-Q4j" id="MsR-LE-J4f"/>
+                <outlet property="tmdbButton" destination="hTi-Ga-PG6" id="6Pw-Ut-Tu5"/>
             </connections>
-            <point key="canvasLocation" x="-324" y="67"/>
+            <point key="canvasLocation" x="-837" y="-86"/>
         </view>
     </objects>
 </document>

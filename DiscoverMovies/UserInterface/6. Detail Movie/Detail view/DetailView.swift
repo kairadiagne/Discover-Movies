@@ -159,9 +159,7 @@ class DetailView: UIView {
         
         // Adjust header height
         if contentOffSetY < -contentInsetTop {
-            let difference = (abs(contentOffSetY) - contentInsetTop)
-            print(difference)
-            headerHeightConstraint.constant = defaultHeaderheight + difference
+            headerHeightConstraint.constant = defaultHeaderheight + (abs(contentOffSetY) - contentInsetTop)
         } else {
             headerHeightConstraint.constant = defaultHeaderheight
         }

@@ -14,47 +14,25 @@ class Theme {
     
     // MARK: - Apply Theme
     
-    class func applyGlobalTheme() {
-        styleNavBar()
-        styleViews()
-        styleTableViews()
-        styleCollectionViews()
-        styleTextFields()
-        styleLabels()
-    }
-    
-    // MARK: - Style Components
-    
-    class func styleNavBar() {
+    class func applyTheme() {
+        // Default style labels
+//        UILabel.appearance().backgroundColor = UIColor.clear
+        UILabel.appearance().textColor = UIColor.white
+        
+        // Default navbarstyle
         UINavigationBar.appearance().barTintColor = UIColor.navbarColor()
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().isOpaque = false
-    }
-    
-    class func styleViews() {
-        YTPlayerView.appearance().backgroundColor = UIColor.backgroundColor()
-    }
-    
-    class func styleTableViews() {
+        
+        // Default tableView style
         UITableView.appearance().backgroundColor = UIColor.backgroundColor()
         UITableViewCell.appearance().backgroundColor = UIColor.backgroundColor()
         UITableView.appearance().separatorColor = UIColor(red: 60.0/255.0, green: 60.0/255.0, blue: 60.0/255.0, alpha: 60.0/255.0)
-    }
-    
-    class func styleCollectionViews() {
+        
+        // Default UICollectionView style
         UICollectionView.appearance().backgroundColor = UIColor.backgroundColor()
-    }
-    
-    class func styleTextFields() {
-        UITextField.appearance().backgroundColor = UIColor.flatGray()
-        UITextField.appearance().font = UIFont.Body()
-    }
-    
-    class func styleLabels() {
-        UILabel.appearance().textColor = UIColor.white
-        UILabel.appearance().backgroundColor = UIColor.clear
     }
     
 }

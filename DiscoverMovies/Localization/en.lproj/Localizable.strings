@@ -28,9 +28,9 @@ aboutmenuItemText = "About";
 signInButtonText = "Sign in with TMDb";
 continueWithSignInButtonText = "Continue without signing in";
 
-/* Home */
-homevcTitle = "Toplists";
-homeNoDataCellText = "No movies to show";
+/* TopList */
+topListVCTitle= "Toplists";
+topListNoDataCellText = "No movies to show";
 cellUnknownYearText = "Unknown";
 
 /* Detail */

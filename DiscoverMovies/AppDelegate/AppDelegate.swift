@@ -21,16 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var menuViewController: MenuViewController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Theme.applyGlobalTheme() 
+        Theme.applyTheme()
         
-        // Register APIKey
         if let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
             let keys = NSDictionary(contentsOfFile: path), let APIKey = keys["APIKey"] as? String {
             TMDbSessionManager.shared.registerAPIKey(APIKey)
         }
         
-        let homeViewController = HomeViewController()
-        let frontViewController = UINavigationController(rootViewController: homeViewController)
+        let topListViewController = TopListViewController()
+        let frontViewController = UINavigationController(rootViewController: topListViewController)
         menuViewController =  MenuViewController() // Rear view controlelr
         revealViewController = SWRevealViewController(rearViewController: menuViewController, frontViewController: frontViewController)
         
@@ -45,36 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let navigationController = revealViewController?.frontViewController as? UINavigationController, let _ = navigationController.visibleViewController as? VideoViewController {
             return [.portrait, .landscapeLeft, .landscapeRight]
-            
-            // Bug when popping videovc rotation should change
         }
         
         return .portrait
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-    }
-
 }
 
-// TODO: 
-// - Discover
-// - Find icons that are free to use
-// - Acknowlegmenet screen (pods and icons and tmdb)
-// - Fix rotation bug
-// - Final design refinements
-// - Reorder files in right folders
-// - Update github page
-// - Placeholders

@@ -11,13 +11,13 @@ import TMDbMovieKit
 
 class AccountListTableViewCell: UITableViewCell {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overViewLabel: UILabel!
     
-    // MARK: Awake From Nib
+    // MARK: - Awake From Nib
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,12 +26,13 @@ class AccountListTableViewCell: UITableViewCell {
         self.overViewLabel.font = UIFont.Caption2()
     }
     
-    // MARK: Configur
+    // MARK: - Configure
     
     func configure(_ movie: Movie, imageURL: URL?) {
         titleLabel.text = movie.title
         overViewLabel.text = movie.overview
-        posterView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+        // posterView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage()) // TODO: - Add new placeholder
+        posterView.sd_setImage(with: imageURL)
     }
     
     // MARK: - Reuse

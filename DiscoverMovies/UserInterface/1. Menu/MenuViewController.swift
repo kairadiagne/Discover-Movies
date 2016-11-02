@@ -88,6 +88,8 @@ class MenuViewController: UIViewController {
         menuView.tableView.dataSource = self
         menuView.tableView.delegate = self
         
+        menuView.tableView.bounces = false
+        
         userService.delegate = self
         
         menuView.tableView.reloadData()

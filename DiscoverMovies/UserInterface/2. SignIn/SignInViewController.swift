@@ -33,7 +33,7 @@ class SignInViewController: UIViewController {
         return .lightContent
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @IBAction func signIn(_ sender: UIButton) {
         activateSignInFlow()
@@ -44,7 +44,7 @@ class SignInViewController: UIViewController {
         dismissSignInViewController()
     }
     
-    // MARK: SignIn
+    // MARK: - SignIn
     
     func activateSignInFlow() {
         signInView.set(state: .loading)
@@ -59,10 +59,17 @@ class SignInViewController: UIViewController {
     func requestAuthorization(_ url: URL) {
         safariViewController = SFSafariViewController(url: url)
         safariViewController.delegate = self
+        
+        if #available(iOS 10.0, *) {
+            safariViewController.preferredControlTintColor = UIColor.black
+        } else {
+            safariViewController.view.tintColor = UIColor.black
+        }
+        
         present(safariViewController, animated: true, completion: nil)
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     func dismissSignInViewController() {
         presentingViewController?.dismiss(animated: true, completion: nil)
@@ -70,7 +77,7 @@ class SignInViewController: UIViewController {
 
 }
 
-// MARK: TMDbSignInDelegate
+// MARK: - TMDbSignInDelegate
 
 extension SignInViewController: TMDbSignInDelegate {
     
@@ -92,7 +99,7 @@ extension SignInViewController: TMDbSignInDelegate {
     
 }
 
-// MARK: SFSafariViewControllerDelegate
+// MARK: - SFSafariViewControllerDelegate
 
 extension SignInViewController: SFSafariViewControllerDelegate {
     

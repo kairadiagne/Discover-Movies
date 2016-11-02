@@ -16,7 +16,7 @@ class Theme {
     
     class func applyTheme() {
         // Default style labels
-//        UILabel.appearance().backgroundColor = UIColor.clear
+        UILabel.appearance().backgroundColor = UIColor.clear
         UILabel.appearance().textColor = UIColor.white
         
         // Default navbarstyle

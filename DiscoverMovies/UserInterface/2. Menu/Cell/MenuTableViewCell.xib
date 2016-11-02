@@ -11,14 +11,13 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="KGk-i7-Jjw" customClass="MenuTableViewCell" customModule="DiscoverMovies" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="55"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AtK-mY-LsZ">
-                        <frame key="frameInset" width="1000" height="1000"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AtK-mY-LsZ">
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="TAG-0O-UmA"/>
+                            <constraint firstAttribute="height" constant="30.5" id="pYR-wG-XlV"/>
                             <constraint firstAttribute="width" constant="30" id="uAd-ft-g6G"/>
                         </constraints>
                     </imageView>
@@ -29,8 +28,8 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="7Jt-XY-I1R" firstAttribute="leading" secondItem="AtK-mY-LsZ" secondAttribute="trailing" constant="8" symbolic="YES" id="0M4-Ew-R6V"/>
-                    <constraint firstItem="7Jt-XY-I1R" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NkF-jD-5Zp"/>
+                    <constraint firstItem="7Jt-XY-I1R" firstAttribute="leading" secondItem="AtK-mY-LsZ" secondAttribute="trailing" constant="10" id="0M4-Ew-R6V"/>
+                    <constraint firstItem="7Jt-XY-I1R" firstAttribute="centerY" secondItem="AtK-mY-LsZ" secondAttribute="centerY" id="88w-kl-tLE"/>
                     <constraint firstItem="AtK-mY-LsZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="OvA-Fb-z7d"/>
                     <constraint firstAttribute="bottomMargin" secondItem="AtK-mY-LsZ" secondAttribute="bottom" constant="8" id="Tk4-3x-gKF"/>
                     <constraint firstItem="AtK-mY-LsZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jJn-dy-ChB"/>
@@ -41,7 +40,7 @@
                 <outlet property="iconImageView" destination="AtK-mY-LsZ" id="vFD-gN-2cB"/>
                 <outlet property="titleLabel" destination="7Jt-XY-I1R" id="bgP-zp-jmA"/>
             </connections>
-            <point key="canvasLocation" x="26" y="2.5"/>
+            <point key="canvasLocation" x="18" y="268.5"/>
         </tableViewCell>
     </objects>
 </document>

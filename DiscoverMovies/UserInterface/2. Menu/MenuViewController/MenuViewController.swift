@@ -52,7 +52,7 @@ class MenuViewController: UIViewController {
             case .search:
                 return UIImage(named: "Search")
             case .signin:
-                return UIImage(named: "Logout")
+                return signedIn ? UIImage(named: "Logout") : UIImage(named: "Login")
             }
         }
     }

@@ -19,7 +19,7 @@ class MenuViewController: UIViewController {
         case favorites
         case search
         case signin
-        // case Acknowledgments
+        case about
         
         private var signedIn: Bool {
             return TMDbSessionManager.shared.signInStatus == .signedin
@@ -37,6 +37,8 @@ class MenuViewController: UIViewController {
                 return NSLocalizedString("searchMenuItemText", comment: "")
             case .signin:
                 return signedIn ? NSLocalizedString("signOutMenuItemText", comment: "") : NSLocalizedString("signInMenuItemText", comment: "")
+            case .about:
+                return NSLocalizedString("aboutmenuItemText", comment: "")
             }
             
         }
@@ -52,7 +54,9 @@ class MenuViewController: UIViewController {
             case .search:
                 return UIImage(named: "Search")
             case .signin:
-                return signedIn ? UIImage(named: "Logout") : UIImage(named: "Login")
+                return UIImage(named: "Logout")
+            case .about:
+                return UIImage(named: "About")
             }
         }
     }
@@ -106,9 +110,9 @@ class MenuViewController: UIViewController {
     
     // MARK: Navigation
     
-    func showHomeViewController() {
-        let homeViewController = HomeViewController()
-        let navigationController = UINavigationController(rootViewController: homeViewController)
+    func showTopListViewController() {
+        let topListViewController = TopListViewController()
+        let navigationController = UINavigationController(rootViewController: topListViewController)
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
@@ -130,6 +134,12 @@ class MenuViewController: UIViewController {
         revealViewController()?.pushFrontViewController(navigationController, animated: true)
     }
     
+    func showAboutViewController() {
+        let aboutViewController = AboutViewController()
+        let navigationConttoller = UINavigationController(rootViewController: aboutViewController)
+        revealViewController()?.pushFrontViewController(navigationConttoller, animated: true)
+    }
+    
     // MARK: - Toggle sign in
     
     fileprivate func toggleSignIn() {
@@ -139,12 +149,12 @@ class MenuViewController: UIViewController {
             TMDbSessionManager.shared.deactivatePublicMode()
         }
         
-        showHomeViewController()
+        showTopListViewController()
     }
     
     func signout() {
         TMDbSessionManager.shared.signOut()
-        showHomeViewController()
+        showTopListViewController()
     }
     
 }
@@ -154,7 +164,7 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -162,19 +172,11 @@ extension MenuViewController: UITableViewDataSource {
         guard let menuItem = MenuItem(rawValue: indexPath.row) else { return cell }
         
         switch menuItem {
-        case .topList:
-            cell.configure(title: menuItem.text, image: menuItem.icon)
-            return cell
-        case .watchlist:
+       
+        case .watchlist, .favorites:
             cell.configure(title: menuItem.text, image: menuItem.icon, signedIn: signedIn)
             return cell
-        case .favorites:
-            cell.configure(title: menuItem.text, image: menuItem.icon, signedIn: signedIn)
-            return cell
-        case .search:
-            cell.configure(title: menuItem.text, image: menuItem.icon)
-            return cell
-        case .signin:
+        default:
             cell.configure(title: menuItem.text, image: menuItem.icon)
             return cell
         }
@@ -197,7 +199,7 @@ extension MenuViewController: UITableViewDelegate {
         
         switch menuItem {
         case .topList:
-            showHomeViewController()
+            showTopListViewController()
         case .watchlist:
             showWatchListViewController()
         case .favorites:
@@ -206,6 +208,8 @@ extension MenuViewController: UITableViewDelegate {
             showSearchViewController()
         case .signin:
             toggleSignIn()
+        case .about:
+            showAboutViewController()
         }
         
         presentedRow = indexPath.row

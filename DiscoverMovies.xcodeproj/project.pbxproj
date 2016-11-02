@@ -12,7 +12,6 @@
 		11027BCE1DAC338D004223F6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11027BCC1DAC338D004223F6 /* SearchTableViewCell.swift */; };
 		11027BCF1DAC338D004223F6 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11027BCD1DAC338D004223F6 /* SearchTableViewCell.xib */; };
 		111837101D8748B200C58DF3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118370F1D8748B200C58DF3 /* Repository.swift */; };
-		111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 111942461CCB8CA0001CF39B /* Assets.xcassets */; };
 		111942671CCB8CBE001CF39B /* TMDbMovieKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 111942661CCB8CBE001CF39B /* TMDbMovieKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1119426E1CCB8CBF001CF39B /* TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */; };
 		1119427A1CCB8CBF001CF39B /* TMDbMovieKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -75,6 +74,7 @@
 		11D09A001D966B4600FEDB21 /* DataContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D099FF1D966B4600FEDB21 /* DataContaining.swift */; };
 		11D09A021D966E1C00FEDB21 /* TopListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D09A011D966E1C00FEDB21 /* TopListDataSource.swift */; };
 		11D09A0A1D97C04300FEDB21 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D09A091D97C04300FEDB21 /* BaseViewController.swift */; };
+		11DCC2621DCA7A7A007C84BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DCC2611DCA7A7A007C84BC /* Assets.xcassets */; };
 		11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */; };
 		11DECAA91D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */; };
 		11DECAAB1D04CEC200FFEAB4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */; };
@@ -179,7 +179,6 @@
 		11027BCD1DAC338D004223F6 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		1118370F1D8748B200C58DF3 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		111942461CCB8CA0001CF39B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/kairaDiagne/Desktop/discover-movies/DiscoverMovies/Assets.xcassets"; sourceTree = "<absolute>"; };
 		1119424B1CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		111942561CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -249,6 +248,7 @@
 		11D099FF1D966B4600FEDB21 /* DataContaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContaining.swift; sourceTree = "<group>"; };
 		11D09A011D966E1C00FEDB21 /* TopListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListDataSource.swift; sourceTree = "<group>"; };
 		11D09A091D97C04300FEDB21 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		11DCC2611DCA7A7A007C84BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/kairaDiagne/Desktop/discover-movies/DiscoverMovies/Assets.xcassets"; sourceTree = "<absolute>"; };
 		11DECAA61D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+defaultIdentifier.swift"; sourceTree = "<group>"; };
 		11DECAA81D02D2D000FFEAB4 /* UICollectionViewCell+DefaultIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+DefaultIdentifier.swift"; sourceTree = "<group>"; };
 		11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -632,8 +632,8 @@
 		1179FC6D1DA1167B00CA1E6D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11DCC2611DCA7A7A007C84BC /* Assets.xcassets */,
 				EA870C6A1D12D642009C71D5 /* Localization */,
-				111942461CCB8CA0001CF39B /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1168,11 +1168,11 @@
 				EADA5A721CE8AD9A00C2FAE8 /* PersonCollectionViewCell.xib in Resources */,
 				1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */,
 				1179FC5B1DA0E17900CA1E6D /* MenuViewController.xib in Resources */,
+				11DCC2621DCA7A7A007C84BC /* Assets.xcassets in Resources */,
 				EA870C6D1D12D68D009C71D5 /* Localizable.strings in Resources */,
 				EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */,
 				1136FBDD1DA2DE6D00CED407 /* SearchViewController.xib in Resources */,
 				1179FC611DA0E2D100CA1E6D /* MenuTableViewCell.xib in Resources */,
-				111942471CCB8CA0001CF39B /* Assets.xcassets in Resources */,
 				EADA5A7B1CE8B44600C2FAE8 /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

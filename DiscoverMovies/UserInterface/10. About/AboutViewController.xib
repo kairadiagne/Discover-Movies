@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController" customModule="DiscoverMovies" customModuleProvider="target">
+            <connections>
+                <outlet property="aboutView" destination="i5M-Pr-FkT" id="oNZ-Be-KzI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="AboutView" customModule="DiscoverMovies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="efb-4O-cJu">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A convenient way to browse movies and keep track of your watchlist" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSw-or-t7u">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGd-Ij-XLQ">
+                    <frame key="frameInset" minX="20" minY="141"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ib-le-8TT">
+                    <frame key="frameInset" minX="96" minY="216" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssY-8T-sgK" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ssY-8T-sgK" secondAttribute="height" multiplier="3:1" id="tJa-c8-s6d"/>
+                    </constraints>
+                    <state key="normal" title="Feedback"/>
+                    <connections>
+                        <action selector="feedbackButtonClick:" destination="-1" eventType="touchUpInside" id="M1R-jb-Mv0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTi-Ga-PG6">
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="tmdbButtonClick:" destination="-1" eventType="touchUpInside" id="NJp-SD-UGK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="efb-4O-cJu" secondAttribute="bottom" id="0Ug-cn-KPD"/>
+                <constraint firstItem="efb-4O-cJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="65a-yX-kz1"/>
+                <constraint firstItem="NSw-or-t7u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="F90-4H-Vh2"/>
+                <constraint firstItem="hTi-Ga-PG6" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="20" id="IIm-a4-xTK"/>
+                <constraint firstAttribute="trailing" secondItem="NSw-or-t7u" secondAttribute="trailing" constant="20" symbolic="YES" id="KLJ-Bt-0Cb"/>
+                <constraint firstAttribute="trailing" secondItem="efb-4O-cJu" secondAttribute="trailing" id="Okj-dw-Am1"/>
+                <constraint firstItem="ssY-8T-sgK" firstAttribute="top" secondItem="hTi-Ga-PG6" secondAttribute="bottom" constant="20" id="cgB-KR-03G"/>
+                <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="drS-nl-bYh"/>
+                <constraint firstItem="hTi-Ga-PG6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h5W-g7-DOO"/>
+                <constraint firstItem="ssY-8T-sgK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="mxB-aP-ZdT"/>
+                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="ssY-8T-sgK" secondAttribute="bottom" constant="40" id="ulD-6Q-CaH"/>
+                <constraint firstItem="ssY-8T-sgK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yVl-HB-Qfo"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionLabel" destination="NSw-or-t7u" id="lRu-GJ-njh"/>
+                <outlet property="feedbackButton" destination="ssY-8T-sgK" id="fF7-Nv-A9S"/>
+                <outlet property="tableView" destination="efb-4O-cJu" id="0qb-F2-IbG"/>
+                <outlet property="tmdbButton" destination="hTi-Ga-PG6" id="6Pw-Ut-Tu5"/>
+            </connections>
+            <point key="canvasLocation" x="-837" y="-86"/>
+        </view>
+    </objects>
+</document>

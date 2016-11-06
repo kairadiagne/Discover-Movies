@@ -41,8 +41,8 @@ ratingLabelText = "Rating:";
 unknownGenreText = "Unknown";
 unknownReleaseText = "Unknown";
 unknownDirectorText = "Unknown";
-noSimilarMoviesText = "No similar movies";
-noCastmembersTet = "No info about cast";
+noSimilarMoviesText = "Similar movies unavailable";
+noCastmembersText = "Info about cast unavailable";
 
 /* Review */
 reviewvcTitle = "Reviews";
@@ -60,7 +60,8 @@ searchVCTitle = "Search";
 /* About */
 aboutTitle = "About Discover";
 description = "A convenient way to browse movies and keep track of your watchlist";
-tmdbacknowledgement = "This app makes uses of the TMDB api";
+icon8Acknowledgmenet = "Icons by icons8";
+tmdbacknowledgement = "Powered by TDMb";
 feedbackButtonTitle = "Feedback";
 acknowledgementsTitle = "Open-source Libraries";
 license = "License";

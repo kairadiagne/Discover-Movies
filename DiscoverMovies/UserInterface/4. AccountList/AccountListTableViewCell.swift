@@ -22,8 +22,11 @@ class AccountListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.titleLabel.font = UIFont.Body()
-        self.overViewLabel.font = UIFont.Caption2()
+        titleLabel.font = UIFont.Body()
+        titleLabel.textColor = UIColor.white
+        
+        overViewLabel.font = UIFont.Caption2()
+        overViewLabel.textColor = UIColor.white
     }
     
     // MARK: - Configure

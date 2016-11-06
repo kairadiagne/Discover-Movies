@@ -26,7 +26,7 @@ class CastDataSource: NSObject, DataContaining, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isEmpty {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier(), for: indexPath) as! NoDataCollectionViewCell
-            let message = NSLocalizedString("noSimilarMoviesText", comment: "")
+            let message = NSLocalizedString("noCastmembersText", comment: "")
             cell.configure(with: message)
             return cell
         } else {

@@ -24,7 +24,10 @@ class DiscoverListCell: UITableViewCell {
         super.awakeFromNib()
         
         titleLabel.font = UIFont.H1()
+        titleLabel.textColor = UIColor.white
+        
         yearLabel.font = UIFont.H3()
+        yearLabel.textColor = UIColor.white
     }
     
     // MARK: - Configure

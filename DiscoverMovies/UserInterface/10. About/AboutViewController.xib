@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -21,60 +21,80 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="efb-4O-cJu">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A convenient way to browse movies and keep track of your watchlist" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSw-or-t7u">
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGd-Ij-XLQ">
-                    <frame key="frameInset" minX="20" minY="141"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ib-le-8TT">
                     <frame key="frameInset" minX="96" minY="216" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssY-8T-sgK" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F5D-87-MmK">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A convenient way to browse movies and keep track of your watchlist" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSw-or-t7u">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bG2-Ue-7iK">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="PEx-oU-y9d"/>
+                            </constraints>
+                            <state key="normal" title="Powered by TMDb"/>
+                            <connections>
+                                <action selector="tmdbButtonCLick" destination="-1" eventType="touchUpInside" id="FOf-tG-gzm"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSM-8w-XBh" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="cSM-8w-XBh" secondAttribute="height" multiplier="3:1" id="RbF-oV-ByW"/>
+                            </constraints>
+                            <state key="normal" title="Feedback"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcE-pC-zee">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="4la-Ic-0nx"/>
+                            </constraints>
+                            <state key="normal" title="Icons by icon8"/>
+                            <connections>
+                                <action selector="icon8ButtonCLick" destination="-1" eventType="touchUpInside" id="Vpm-Js-tiL"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="ssY-8T-sgK" secondAttribute="height" multiplier="3:1" id="tJa-c8-s6d"/>
+                        <constraint firstItem="bG2-Ue-7iK" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="2F7-pe-Jkm"/>
+                        <constraint firstItem="NSw-or-t7u" firstAttribute="leading" secondItem="F5D-87-MmK" secondAttribute="leading" constant="20" id="98g-TB-STZ"/>
+                        <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="F5D-87-MmK" secondAttribute="top" constant="20" id="9Lt-he-9fD"/>
+                        <constraint firstAttribute="trailing" secondItem="NSw-or-t7u" secondAttribute="trailing" constant="20" id="Ati-S1-gW9"/>
+                        <constraint firstItem="cSM-8w-XBh" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="20" id="Ghg-iU-ZNE"/>
+                        <constraint firstItem="cSM-8w-XBh" firstAttribute="width" secondItem="F5D-87-MmK" secondAttribute="width" multiplier="0.4" id="QNK-pE-nQu"/>
+                        <constraint firstAttribute="bottom" secondItem="bG2-Ue-7iK" secondAttribute="bottom" constant="20" id="SIL-kp-yQL"/>
+                        <constraint firstItem="cSM-8w-XBh" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="XAT-oM-fbW"/>
+                        <constraint firstItem="bG2-Ue-7iK" firstAttribute="top" secondItem="qcE-pC-zee" secondAttribute="bottom" constant="8" id="ggZ-sh-UCJ"/>
+                        <constraint firstItem="qcE-pC-zee" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="tRv-cb-3tN"/>
+                        <constraint firstItem="qcE-pC-zee" firstAttribute="top" secondItem="cSM-8w-XBh" secondAttribute="bottom" constant="40" id="yqb-Xx-50e"/>
                     </constraints>
-                    <state key="normal" title="Feedback"/>
-                    <connections>
-                        <action selector="feedbackButtonClick:" destination="-1" eventType="touchUpInside" id="M1R-jb-Mv0"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTi-Ga-PG6">
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="tmdbButtonClick:" destination="-1" eventType="touchUpInside" id="NJp-SD-UGK"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="efb-4O-cJu" secondAttribute="bottom" id="0Ug-cn-KPD"/>
+                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="F5D-87-MmK" secondAttribute="bottom" id="3b1-Op-vzT"/>
+                <constraint firstItem="F5D-87-MmK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4cW-J2-8nM"/>
                 <constraint firstItem="efb-4O-cJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="65a-yX-kz1"/>
-                <constraint firstItem="NSw-or-t7u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="F90-4H-Vh2"/>
-                <constraint firstItem="hTi-Ga-PG6" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="20" id="IIm-a4-xTK"/>
-                <constraint firstAttribute="trailing" secondItem="NSw-or-t7u" secondAttribute="trailing" constant="20" symbolic="YES" id="KLJ-Bt-0Cb"/>
+                <constraint firstItem="F5D-87-MmK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BdL-Fk-J1W"/>
                 <constraint firstAttribute="trailing" secondItem="efb-4O-cJu" secondAttribute="trailing" id="Okj-dw-Am1"/>
-                <constraint firstItem="ssY-8T-sgK" firstAttribute="top" secondItem="hTi-Ga-PG6" secondAttribute="bottom" constant="20" id="cgB-KR-03G"/>
-                <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="drS-nl-bYh"/>
-                <constraint firstItem="hTi-Ga-PG6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h5W-g7-DOO"/>
-                <constraint firstItem="ssY-8T-sgK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="mxB-aP-ZdT"/>
-                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="ssY-8T-sgK" secondAttribute="bottom" constant="40" id="ulD-6Q-CaH"/>
-                <constraint firstItem="ssY-8T-sgK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yVl-HB-Qfo"/>
+                <constraint firstAttribute="trailing" secondItem="F5D-87-MmK" secondAttribute="trailing" id="UJc-lH-MJC"/>
+                <constraint firstAttribute="bottom" secondItem="efb-4O-cJu" secondAttribute="bottom" id="Vab-sg-fWn"/>
+                <constraint firstAttribute="trailing" secondItem="efb-4O-cJu" secondAttribute="trailing" id="fD8-Yf-H5W"/>
+                <constraint firstItem="efb-4O-cJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n6r-bL-TaI"/>
             </constraints>
             <connections>
+                <outlet property="containerView" destination="F5D-87-MmK" id="YkN-eq-uOE"/>
                 <outlet property="descriptionLabel" destination="NSw-or-t7u" id="lRu-GJ-njh"/>
-                <outlet property="feedbackButton" destination="ssY-8T-sgK" id="fF7-Nv-A9S"/>
+                <outlet property="feedbackButton" destination="cSM-8w-XBh" id="83c-1z-vRw"/>
+                <outlet property="icon8Button" destination="qcE-pC-zee" id="kDh-zt-mJp"/>
                 <outlet property="tableView" destination="efb-4O-cJu" id="0qb-F2-IbG"/>
-                <outlet property="tmdbButton" destination="hTi-Ga-PG6" id="6Pw-Ut-Tu5"/>
+                <outlet property="tmdbButton" destination="bG2-Ue-7iK" id="jhJ-TX-1O9"/>
             </connections>
-            <point key="canvasLocation" x="-837" y="-86"/>
+            <point key="canvasLocation" x="-1099" y="-120"/>
         </view>
     </objects>
 </document>

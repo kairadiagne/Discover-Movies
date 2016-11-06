@@ -25,6 +25,9 @@ class SignInView: BaseView {
         
         titleLabel.font = UIFont.H1()
         orLabel.font = UIFont.Body()
+        
+        orLabel.textColor = UIColor.white
+        titleLabel.textColor = UIColor.white
     
         logoImage.tintColor = UIColor.white
         logoImage.isUserInteractionEnabled = false

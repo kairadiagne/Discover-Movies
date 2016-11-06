@@ -20,8 +20,12 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         authorLabel.font = UIFont.H2()
+        authorLabel.textColor = UIColor.white
+    
         contentLabel.font = UIFont.Body()
+        authorLabel.textColor = UIColor.white
     }
     
     // MARK: - Awake

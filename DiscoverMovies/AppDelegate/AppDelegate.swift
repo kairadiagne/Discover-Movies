@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var menuViewController: MenuViewController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Theme.applyTheme()
         
         if let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
             let keys = NSDictionary(contentsOfFile: path), let APIKey = keys["APIKey"] as? String {
@@ -36,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = revealViewController
         window?.makeKeyAndVisible()
+        
+        Theme.apply()
  
         return true
     }

@@ -57,17 +57,40 @@ class DetailView: UIView {
         contentView.backgroundColor = UIColor.backgroundColor()
         
         titleLabel.font = UIFont.H1()
+        titleLabel.textColor = UIColor.white
+        
         descriptionLabel.font = UIFont.Body()
+        descriptionLabel.textColor = UIColor.white
+        
         directorLabel.font = UIFont.H2()
+        directorLabel.textColor = UIColor.white
+        
         directorValueLabel.font = UIFont.Caption()
+        directorValueLabel.textColor = UIColor.white
+
         releaseLabel.font = UIFont.H2()
+        releaseLabel.textColor = UIColor.white
+        
         releaseValueLabel.font = UIFont.Caption()
+        releaseValueLabel.textColor = UIColor.white
+        
         genreLabel.font = UIFont.H2()
+        genreLabel.textColor = UIColor.white
+        
         genreValueLabel.font = UIFont.Caption()
+        genreValueLabel.textColor = UIColor.white
+        
         ratingLabel.font = UIFont.H2()
+        ratingLabel.textColor = UIColor.white
+        
         ratingValueLabel.font = UIFont.Caption()
+        ratingValueLabel.textColor = UIColor.white
+        
         castLabel.font = UIFont.H2()
+        castLabel.textColor = UIColor.white
+        
         similarLabel.font = UIFont.H2()
+        similarLabel.textColor = UIColor.white
         
         favouriteControl.lineColor = UIColor.buttonColor()
         favouriteControl.fillColor = UIColor.buttonColor()

@@ -8,14 +8,17 @@
 
 import UIKit
 import TMDbMovieKit
-import MessageUI
 import BRYXBanner
+import MessageUI
+import SafariServices
 
 class AboutViewController: BaseViewController {
     
     // MARK: - Properties
     
     @IBOutlet var aboutView: AboutView!
+    
+    fileprivate var safariViewController: SFSafariViewController?
     
     fileprivate var acknowledgements: [Acknowledgement] = []
     
@@ -55,16 +58,25 @@ class AboutViewController: BaseViewController {
         }
     }
     
-    // MARK: - Actions 
-
-    @IBAction func tmdbButtonClick(_ sender: UIButton) {
-        let urlString = "https://www.themoviedb.org"
-        
+    // MARK: - Actions
+    
+    @IBAction func tmdbButtonCLick() {
+        openURL(urlString: "https://www.themoviedb.org")
+    }
+    
+    @IBAction func icon8ButtonCLick() {
+        openURL(urlString: "https://icons8.com/")
+    }
+    
+    func openURL(urlString: String) {
         if let url = URL(string: urlString) {
-            UIApplication.shared.openURL(url)
+            let safariViewController = SFSafariViewController(url: url)
+            safariViewController.delegate = self
+            present(safariViewController, animated: true, completion: nil)
         } else {
-            print("Could not open themoviedb.org")
+            print("Could not open url")
         }
+        
     }
     
     @IBAction func feedbackButtonClick(_ sender: DiscoverButton) {
@@ -73,7 +85,7 @@ class AboutViewController: BaseViewController {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
             
-        composeVC.setToRecipients(["diagekaira@yahoo.com"]) // TODO: - Change email address
+        composeVC.setToRecipients(["diagekaira@yahoo.com"])
         composeVC.setSubject("Hello!")
             
         present(composeVC, animated: true, completion: nil)
@@ -116,6 +128,15 @@ extension AboutViewController: UITableViewDataSource {
         return cell
     }
 
+}
+
+// MARK: _ SFSafariViewcController
+
+extension AboutViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - MFMailComposDelegate

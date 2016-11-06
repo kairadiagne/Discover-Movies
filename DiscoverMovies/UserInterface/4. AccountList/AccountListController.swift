@@ -26,7 +26,7 @@ class AccountListController: BaseViewController {
     
     fileprivate let accountList: TMDbAccountList
     
-    fileprivate let accountListManager: TMDbAccountListDataManager
+    fileprivate let accountListManager: TMDbAccountListDataManager // TODO: - Fix bug (on logut cach should be cleared)
     
     // MARK: - Initialize
     

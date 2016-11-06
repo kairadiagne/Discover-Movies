@@ -11,15 +11,11 @@ import UIKit
 extension UIColor {
     
     static func backgroundColor() -> UIColor {
-        return UIColor(red: 41.0/255, green: 47.0/255, blue: 51.0/255, alpha: 1.0)
-    }
-    
-    static func labelColor() -> UIColor {
-        return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        return UIColor(red: 41/255, green: 47/255, blue: 51/255, alpha: 1.0)
     }
     
     static func navbarColor() -> UIColor {
-        return UIColor(red: 46.0/255, green: 52.0/255, blue: 56.0/255, alpha: 1.0)
+        return UIColor(red: 46/255, green: 52/255, blue: 56/255, alpha: 1.0)
     }
     
     static func progressHUDColor() -> UIColor {
@@ -31,3 +27,4 @@ extension UIColor {
     }
     
 }
+

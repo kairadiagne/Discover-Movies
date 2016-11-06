@@ -14,24 +14,27 @@ class Theme {
     
     // MARK: - Apply Theme
     
-    class func applyTheme() {
-        // Default style labels
-        UILabel.appearance().backgroundColor = UIColor.clear
-        UILabel.appearance().textColor = UIColor.white
-        
-        // Default navbarstyle
+    class func apply() {
+        styleNavigationBar()
+        styleTableView()
+        styleCollectionView()
+    }
+    
+    class func styleNavigationBar() {
         UINavigationBar.appearance().barTintColor = UIColor.navbarColor()
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().isOpaque = false
-        
-        // Default tableView style
+    }
+    
+    class func styleTableView() {
         UITableView.appearance().backgroundColor = UIColor.backgroundColor()
         UITableViewCell.appearance().backgroundColor = UIColor.backgroundColor()
         UITableView.appearance().separatorColor = UIColor(red: 60.0/255.0, green: 60.0/255.0, blue: 60.0/255.0, alpha: 60.0/255.0)
-        
-        // Default UICollectionView style
+    }
+    
+    class func styleCollectionView() {
         UICollectionView.appearance().backgroundColor = UIColor.backgroundColor()
     }
     

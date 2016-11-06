@@ -24,10 +24,13 @@ class DiscoverButton: UIButton {
     
     func commonInit() {
         backgroundColor = UIColor.clear
+        
         setTitleColor(UIColor.buttonColor(), for: .normal)
         setTitleColor(UIColor.backgroundColor(), for: .highlighted)
+        
         setBackground(color: UIColor.clear, forState: .normal)
         setBackground(color: UIColor.buttonColor(), forState: .highlighted)
+        
         layer.borderColor = UIColor.buttonColor().cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true

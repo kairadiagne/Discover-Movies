@@ -21,7 +21,9 @@ class PersonCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         nameLabel.font = UIFont.Caption2()
+        nameLabel.textColor = UIColor.white
     }
     
     // MARK: - Configure 

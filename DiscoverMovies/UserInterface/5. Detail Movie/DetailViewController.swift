@@ -53,7 +53,10 @@ class DetailViewController: BaseViewController {
         detailView.castCollectionView.register(noDataCellNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
         
         detailView.castCollectionView.dataSource = castDataSource
+        detailView.castCollectionView.delegate = self
+        
         detailView.similarMovieCollectionView.dataSource = similarMoviesDataSource
+        detailView.similarMovieCollectionView.delegate = self
      
         detailView.scrollView.delegate = self
         

@@ -113,7 +113,7 @@
 		EA782B931CE1D28800DC38AD /* TMDbSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */; };
 		EA870C361D1170C4009C71D5 /* AccountListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C351D1170C4009C71D5 /* AccountListController.swift */; };
 		EA870C3B1D1177C7009C71D5 /* AccountListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C3A1D1177C7009C71D5 /* AccountListDataSource.swift */; };
-		EA870C4A1D11980C009C71D5 /* AccountListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C481D11980C009C71D5 /* AccountListDataSource.swift */; };
+		EA870C4A1D11980C009C71D5 /* AccountListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C481D11980C009C71D5 /* AccountListTableViewCell.swift */; };
 		EA870C691D12CE5F009C71D5 /* AccountListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA870C681D12CE5F009C71D5 /* AccountListTableViewCell.xib */; };
 		EA870C6D1D12D68D009C71D5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA870C6F1D12D68D009C71D5 /* Localizable.strings */; };
 		EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */; };
@@ -197,7 +197,7 @@
 		111942681CCB8CBE001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1119426D1CCB8CBF001CF39B /* TMDbMovieKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMDbMovieKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		111942761CCB8CBF001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		111942891CCB8DBF001CF39B /* DiscoverMovies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DiscoverMovies-Bridging-Header.h"; sourceTree = "<group>"; };
+		111942891CCB8DBF001CF39B /* Discover-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Discover-Bridging-Header.h"; sourceTree = "<group>"; };
 		1119428A1CCB8DBF001CF39B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		111942911CCB8DD4001CF39B /* NSDate+Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Year.swift"; sourceTree = "<group>"; };
 		111942941CCB8DD4001CF39B /* UIImage+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Defaults.swift"; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 		EA782B921CE1D28800DC38AD /* TMDbSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSessionManager.swift; sourceTree = "<group>"; };
 		EA870C351D1170C4009C71D5 /* AccountListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListController.swift; path = "Discover/UserInterface/4. AccountList/AccountListController.swift"; sourceTree = SOURCE_ROOT; };
 		EA870C3A1D1177C7009C71D5 /* AccountListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListDataSource.swift; path = "Discover/UserInterface/4. AccountList/AccountListDataSource.swift"; sourceTree = SOURCE_ROOT; };
-		EA870C481D11980C009C71D5 /* AccountListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListDataSource.swift; path = "Discover/UserInterface/4. AccountList/AccountListDataSource.swift"; sourceTree = SOURCE_ROOT; };
+		EA870C481D11980C009C71D5 /* AccountListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListTableViewCell.swift; path = "Discover/UserInterface/4. AccountList/AccountListTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		EA870C681D12CE5F009C71D5 /* AccountListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountListTableViewCell.xib; sourceTree = "<group>"; };
 		EA870C6E1D12D68D009C71D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EAA862051CEDBDE300C76D4D /* FavouriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteButton.swift; sourceTree = "<group>"; };
@@ -449,7 +449,7 @@
 		111942861CCB8D2B001CF39B /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				111942891CCB8DBF001CF39B /* DiscoverMovies-Bridging-Header.h */,
+				111942891CCB8DBF001CF39B /* Discover-Bridging-Header.h */,
 				1119424B1CCB8CA0001CF39B /* Info.plist */,
 				11924C8F1D72F1D600B1022E /* Keys.plist */,
 				1167E7651DC63FAC003400B7 /* Acknowledgements.plist */,
@@ -763,7 +763,7 @@
 				1179FC6A1DA1002900CA1E6D /* AccountListController.xib */,
 				1179FC681DA0FFEF00CA1E6D /* AccountListView.swift */,
 				EA870C3A1D1177C7009C71D5 /* AccountListDataSource.swift */,
-				EA870C481D11980C009C71D5 /* AccountListDataSource.swift */,
+				EA870C481D11980C009C71D5 /* AccountListTableViewCell.swift */,
 				EA870C681D12CE5F009C71D5 /* AccountListTableViewCell.xib */,
 			);
 			name = AccountList;
@@ -1139,7 +1139,7 @@
 				11F7A1691DC6A6F600296259 /* Acknowledgement.swift in Sources */,
 				11957B4C1DBEABB1007DFD02 /* GenreDataSource.swift in Sources */,
 				EADA5AA61CEA664300C2FAE8 /* SimilarMovieDataSource.swift in Sources */,
-				EA870C4A1D11980C009C71D5 /* AccountListDataSource.swift in Sources */,
+				EA870C4A1D11980C009C71D5 /* AccountListTableViewCell.swift in Sources */,
 				11027BCE1DAC338D004223F6 /* SearchTableViewCell.swift in Sources */,
 				1179FC691DA0FFEF00CA1E6D /* AccountListView.swift in Sources */,
 				EADA5AA81CEA6B3700C2FAE8 /* FontStack.swift in Sources */,
@@ -1396,7 +1396,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Discover/Discover-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1421,7 +1421,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Discover/Discover-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

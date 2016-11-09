@@ -8,15 +8,15 @@
 
 /* Error Handler */
 noConnectionTitle = "No internet connection";
-noConnectionMessage = "Couldn't load any information, please check your connection and try again later";
+noConnectionMessage = "Please check your connection and try again later";
 authorizationErrorTitle = "Authorization error";
-authorizationErrorMessage = "This feauture requires you to sign in with a TMDb account";
-genericErrorTitle = "Unknown error";
-genericErrorMessage = "An unknown error occurred";
+authorizationErrorMessage = "This feauture requires you to sign in with your TMDb account";
+genericErrorTitle = "Unexpected error";
+genericErrorMessage = "Oops! something went wrong!";
 
 /* Menu */
-topListMenuItemText = "Discover top movies";
-watchListMenuItemText = "Movies I want to watch";
+topListMenuItemText = "Browse toplists";
+watchListMenuItemText = "My watchlist";
 favoritesMenuItemText = "My favorite movies";
 signInMenuItemText = "Sign in";
 signOutMenuItemText = "Sign out";
@@ -25,7 +25,14 @@ searchMenuItemText = "Search";
 aboutmenuItemText = "About";
 
 /* Sign in */
-signInButtonText = "Sign in with TMDb";
+signInAction = "Sign in now to like and add movies to your personal watchlist";
+// Sign in now to browse movies and add like them or add them to your personal watchlist.
+
+signInDescription = "CLick sign in if you want to sign in with your account from themoviedb.org, If you do not have an account yet and wish to create one click the sign up button. If you wish to continue without signin in then click the continue without signing in button"; // Excape characters for quotes
+
+// Sign in with your existing TMDb account,
+ntsignInButtonText = "Sign in";
+signUpButtonText = "Sign up";
 continueWithSignInButtonText = "Continue without signing in";
 
 /* TopList */
@@ -61,9 +68,10 @@ searchVCTitle = "Search";
 aboutTitle = "About Discover";
 description = "A convenient way to browse movies and keep track of your watchlist";
 icon8Acknowledgmenet = "Icons by icons8";
-tmdbacknowledgement = "Powered by TDMb";
+tmdbacknowledgement = "This product uses the TMDb API but is not endorsed or certified by TMDb.";
 feedbackButtonTitle = "Feedback";
 acknowledgementsTitle = "Open-source Libraries";
 license = "License";
 thanks = "Thank you for your feedback";
+
 

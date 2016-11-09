@@ -20,8 +20,8 @@ class AboutTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        titleLabel.font = UIFont.H1()
-        licenseLabel.font = UIFont.Caption()
+        titleLabel.font = UIFont.Caption()
+        licenseLabel.font = UIFont.Caption2()
         
         titleLabel.textColor = UIColor.white
         licenseLabel.textColor = UIColor.white

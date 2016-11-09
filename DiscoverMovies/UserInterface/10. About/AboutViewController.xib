@@ -32,15 +32,6 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bG2-Ue-7iK">
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="PEx-oU-y9d"/>
-                            </constraints>
-                            <state key="normal" title="Powered by TMDb"/>
-                            <connections>
-                                <action selector="tmdbButtonCLick" destination="-1" eventType="touchUpInside" id="FOf-tG-gzm"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSM-8w-XBh" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="cSM-8w-XBh" secondAttribute="height" multiplier="3:1" id="RbF-oV-ByW"/>
@@ -56,18 +47,24 @@
                                 <action selector="icon8ButtonCLick" destination="-1" eventType="touchUpInside" id="Vpm-Js-tiL"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xea-L8-sld">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="bG2-Ue-7iK" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="2F7-pe-Jkm"/>
+                        <constraint firstItem="Xea-L8-sld" firstAttribute="top" secondItem="qcE-pC-zee" secondAttribute="bottom" constant="20" id="2GT-Ay-tkz"/>
                         <constraint firstItem="NSw-or-t7u" firstAttribute="leading" secondItem="F5D-87-MmK" secondAttribute="leading" constant="20" id="98g-TB-STZ"/>
                         <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="F5D-87-MmK" secondAttribute="top" constant="20" id="9Lt-he-9fD"/>
                         <constraint firstAttribute="trailing" secondItem="NSw-or-t7u" secondAttribute="trailing" constant="20" id="Ati-S1-gW9"/>
+                        <constraint firstAttribute="trailing" secondItem="Xea-L8-sld" secondAttribute="trailing" constant="20" id="Cf5-NJ-rB2"/>
                         <constraint firstItem="cSM-8w-XBh" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="20" id="Ghg-iU-ZNE"/>
                         <constraint firstItem="cSM-8w-XBh" firstAttribute="width" secondItem="F5D-87-MmK" secondAttribute="width" multiplier="0.4" id="QNK-pE-nQu"/>
-                        <constraint firstAttribute="bottom" secondItem="bG2-Ue-7iK" secondAttribute="bottom" constant="20" id="SIL-kp-yQL"/>
+                        <constraint firstAttribute="bottom" secondItem="Xea-L8-sld" secondAttribute="bottom" constant="20" id="Qkh-J5-kaK"/>
+                        <constraint firstItem="Xea-L8-sld" firstAttribute="leading" secondItem="F5D-87-MmK" secondAttribute="leading" constant="20" id="V3S-KF-Ave"/>
                         <constraint firstItem="cSM-8w-XBh" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="XAT-oM-fbW"/>
-                        <constraint firstItem="bG2-Ue-7iK" firstAttribute="top" secondItem="qcE-pC-zee" secondAttribute="bottom" constant="8" id="ggZ-sh-UCJ"/>
                         <constraint firstItem="qcE-pC-zee" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="tRv-cb-3tN"/>
                         <constraint firstItem="qcE-pC-zee" firstAttribute="top" secondItem="cSM-8w-XBh" secondAttribute="bottom" constant="40" id="yqb-Xx-50e"/>
                     </constraints>
@@ -76,7 +73,6 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="efb-4O-cJu" secondAttribute="bottom" id="0Ug-cn-KPD"/>
-                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="F5D-87-MmK" secondAttribute="bottom" id="3b1-Op-vzT"/>
                 <constraint firstItem="F5D-87-MmK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4cW-J2-8nM"/>
                 <constraint firstItem="efb-4O-cJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="65a-yX-kz1"/>
                 <constraint firstItem="F5D-87-MmK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BdL-Fk-J1W"/>
@@ -84,6 +80,7 @@
                 <constraint firstAttribute="trailing" secondItem="F5D-87-MmK" secondAttribute="trailing" id="UJc-lH-MJC"/>
                 <constraint firstAttribute="bottom" secondItem="efb-4O-cJu" secondAttribute="bottom" id="Vab-sg-fWn"/>
                 <constraint firstAttribute="trailing" secondItem="efb-4O-cJu" secondAttribute="trailing" id="fD8-Yf-H5W"/>
+                <constraint firstItem="efb-4O-cJu" firstAttribute="top" secondItem="F5D-87-MmK" secondAttribute="bottom" constant="100" id="kbr-6o-gzT"/>
                 <constraint firstItem="efb-4O-cJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n6r-bL-TaI"/>
             </constraints>
             <connections>
@@ -92,9 +89,9 @@
                 <outlet property="feedbackButton" destination="cSM-8w-XBh" id="83c-1z-vRw"/>
                 <outlet property="icon8Button" destination="qcE-pC-zee" id="kDh-zt-mJp"/>
                 <outlet property="tableView" destination="efb-4O-cJu" id="0qb-F2-IbG"/>
-                <outlet property="tmdbButton" destination="bG2-Ue-7iK" id="jhJ-TX-1O9"/>
+                <outlet property="tmdbLabel" destination="Xea-L8-sld" id="nf7-wJ-yBP"/>
             </connections>
-            <point key="canvasLocation" x="-1099" y="-120"/>
+            <point key="canvasLocation" x="-1450" y="-125"/>
         </view>
     </objects>
 </document>

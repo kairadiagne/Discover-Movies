@@ -26,7 +26,9 @@ class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         signInService.delegate = self
+
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -75,6 +77,15 @@ class SignInViewController: UIViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension SignInViewController: UIScrollViewDelegate {
+    
+
+    
+    
 }
 
 // MARK: - TMDbSignInDelegate

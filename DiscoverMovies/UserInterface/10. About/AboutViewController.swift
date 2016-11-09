@@ -105,11 +105,17 @@ extension AboutViewController: UITableViewDelegate {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("acknowledgementsTitle", comment: "")
+    @nonobjc func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+         return NSLocalizedString("acknowledgementsTitle", comment: "")
     }
     
-    // TODO: - Change appearance of header
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = view as? UITableViewHeaderFooterView
+        header?.contentView.backgroundColor = UIColor.backgroundColor()
+        header?.textLabel?.tintColor = UIColor.white
+        header?.textLabel?.font = UIFont.Body()
+        return header
+    }
 
 }
 

@@ -186,7 +186,7 @@
 		11027BCC1DAC338D004223F6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		11027BCD1DAC338D004223F6 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		1118370F1D8748B200C58DF3 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1119423C1CCB8CA0001CF39B /* Discover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1119424B1CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		111942561CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -374,7 +374,7 @@
 		1119423D1CCB8CA0001CF39B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */,
+				1119423C1CCB8CA0001CF39B /* Discover.app */,
 				111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */,
 				111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */,
 				1119426D1CCB8CBF001CF39B /* TMDbMovieKitTests.xctest */,
@@ -849,9 +849,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1119423B1CCB8CA0001CF39B /* DiscoverMovies */ = {
+		1119423B1CCB8CA0001CF39B /* Discover */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMovies" */;
+			buildConfigurationList = 111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "Discover" */;
 			buildPhases = (
 				E0D178B6EF3918BA0271428C /* [CP] Check Pods Manifest.lock */,
 				111942381CCB8CA0001CF39B /* Sources */,
@@ -866,9 +866,9 @@
 			dependencies = (
 				111942781CCB8CBF001CF39B /* PBXTargetDependency */,
 			);
-			name = DiscoverMovies;
+			name = Discover;
 			productName = DiscoverMovies;
-			productReference = 1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */;
+			productReference = 1119423C1CCB8CA0001CF39B /* Discover.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1119424F1CCB8CA0001CF39B /* DiscoverMoviesTests */ = {
@@ -940,7 +940,7 @@
 				TargetAttributes = {
 					1119423B1CCB8CA0001CF39B = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = S4F83VS4FR;
+						DevelopmentTeam = 85J9C69P9Z;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -981,7 +981,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1119423B1CCB8CA0001CF39B /* DiscoverMovies */,
+				1119423B1CCB8CA0001CF39B /* Discover */,
 				111942631CCB8CBE001CF39B /* TMDbMovieKit */,
 				1119424F1CCB8CA0001CF39B /* DiscoverMoviesTests */,
 				1119426C1CCB8CBF001CF39B /* TMDbMovieKitTests */,
@@ -1253,7 +1253,7 @@
 /* Begin PBXTargetDependency section */
 		111942521CCB8CA0001CF39B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1119423B1CCB8CA0001CF39B /* DiscoverMovies */;
+			target = 1119423B1CCB8CA0001CF39B /* Discover */;
 			targetProxy = 111942511CCB8CA0001CF39B /* PBXContainerItemProxy */;
 		};
 		111942701CCB8CBF001CF39B /* PBXTargetDependency */ = {
@@ -1263,7 +1263,7 @@
 		};
 		111942721CCB8CBF001CF39B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1119423B1CCB8CA0001CF39B /* DiscoverMovies */;
+			target = 1119423B1CCB8CA0001CF39B /* Discover */;
 			targetProxy = 111942711CCB8CBF001CF39B /* PBXContainerItemProxy */;
 		};
 		111942781CCB8CBF001CF39B /* PBXTargetDependency */ = {
@@ -1308,7 +1308,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1325,9 +1325,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = Automatic;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1367,8 +1368,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE_SPECIFIER = Automatic;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1386,13 +1388,14 @@
 				CODE_SIGN_ENTITLEMENTS = DiscoverMovies/DiscoverMovies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S4F83VS4FR;
+				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discoverMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1410,13 +1413,14 @@
 				CODE_SIGN_ENTITLEMENTS = DiscoverMovies/DiscoverMovies.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S4F83VS4FR;
+				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = DiscoverMovies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discoverMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/AppDelegate/DiscoverMovies-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1543,7 +1547,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMovies" */ = {
+		111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "Discover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1119425A1CCB8CA0001CF39B /* Debug */,

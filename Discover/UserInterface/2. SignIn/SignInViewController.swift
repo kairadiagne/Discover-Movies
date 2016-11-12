@@ -79,15 +79,6 @@ class SignInViewController: UIViewController {
 
 }
 
-// MARK: - UIScrollViewDelegate
-
-extension SignInViewController: UIScrollViewDelegate {
-    
-
-    
-    
-}
-
 // MARK: - TMDbSignInDelegate
 
 extension SignInViewController: TMDbSignInDelegate {

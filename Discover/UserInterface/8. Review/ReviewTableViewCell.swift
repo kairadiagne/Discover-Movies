@@ -22,10 +22,10 @@ class ReviewTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         authorLabel.font = UIFont.H2()
-        authorLabel.textColor = UIColor.white
+        authorLabel.textColor = UIColor.buttonColor()
     
         contentLabel.font = UIFont.Body()
-        authorLabel.textColor = UIColor.white
+        contentLabel.textColor = UIColor.white
     }
     
     // MARK: - Awake

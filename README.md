@@ -11,13 +11,5 @@ Has it ever happened to you that you feel like watching a movie but you don't kn
 
 #Screenshots
 
->!---
-<img src="Screenshots/LoginScreen.jpg" width="225" height="400"/>
-<img src="Screenshots/HomeScreen.jpg" width="225" height="400"/>
-<img src="Screenshots/SideMenu.jpg" width="225" height="400"/>
-<img src="Screenshots/FavoriteList.jpg" width="225" height="400"/>
-<img src="Screenshots/DetailScreen.jpg" width="225" height="400"/>
-<img src="Screenshots/DetailScreen2.jpg" width="225" height="400"/>
-<img src="Screenshots/TrailerScreen.jpg" width="400" height="225"/>
--->
+
 

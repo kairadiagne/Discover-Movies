@@ -12,34 +12,42 @@ class SignInView: BaseView {
     
     // MARK: - Properties
     
-    @IBOutlet weak var publicModeButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signInLaterButton: UIButton!
     @IBOutlet weak var signInDescription: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var orLabel: UILabel!
     
     // MARK: - Awake
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        titleLabel.textColor = UIColor.white
         signInDescription.textColor = UIColor.white
+        orLabel.textColor = UIColor.white
+    
+        titleLabel.font = UIFont.H1()
+        signInDescription.font = UIFont.H2()
+        orLabel.font = UIFont.H2()
+        
         signInButton.tintColor = UIColor.white
         signUpButton.tintColor = UIColor.white
-        publicModeButton.tintColor = UIColor.white
+        signInLaterButton.tintColor = UIColor.white
         
+        signInButton.titleLabel?.font = UIFont.H3()
+        signUpButton.titleLabel?.font = UIFont.H3()
+        signInLaterButton.titleLabel?.font = UIFont.H3()
     
-        // signInButton.tintColor = UIColor.white
-        // signInButton.layer.borderWidth = 1.0
-        // signInButton.layer.borderColor = UIColor.white.cgColor
-        // signInButton.layer.backgroundColor = UIColor(white: 1.0, alpha: 0.05).cgColor
+        let signInButtonText = NSLocalizedString("signInButtonText", comment: "")
+        signInButton.setTitle(signInButtonText, for: .normal)
         
-        // publicModeButton.tintColor = UIColor.white
-        // publicModeButton.layer.borderWidth = 1.0
-        // publicModeButton.layer.borderColor = UIColor.white.cgColor
-        // publicModeButton.layer.backgroundColor = UIColor(white: 1.0, alpha: 0.05).cgColor
+        let signInLaterButtonText = NSLocalizedString("signUpButtonText", comment: "")
+        signInLaterButton.setTitle(signInLaterButtonText, for: .normal)
         
-        // signInButton.titleLabel?.text = NSLocalizedString("signInButtonText", comment: "")
-        // publicModeButton.titleLabel?.text = NSLocalizedString("continueWithSignInButtonText", comment: "")
+        let signUpButtonText = NSLocalizedString("signUpButtonText", comment: "")
+        signUpButton.setTitle(signUpButtonText, for: .normal)
     }
 
 }

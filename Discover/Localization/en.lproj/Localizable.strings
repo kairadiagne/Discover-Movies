@@ -31,9 +31,9 @@ signInAction = "Sign in now to like and add movies to your personal watchlist";
 signInDescription = "CLick sign in if you want to sign in with your account from themoviedb.org, If you do not have an account yet and wish to create one click the sign up button. If you wish to continue without signin in then click the continue without signing in button"; // Excape characters for quotes
 
 // Sign in with your existing TMDb account,
-ntsignInButtonText = "Sign in";
+signInButtonText = "Sign in";
 signUpButtonText = "Sign up";
-continueWithSignInButtonText = "Continue without signing in";
+signInLaterButtonText = "Sign in later";
 
 /* TopList */
 topListVCTitle= "Toplists";

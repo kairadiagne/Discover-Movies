@@ -2,78 +2,99 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController" customModule="DiscoverMovies" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController" customModule="Discover" customModuleProvider="target">
             <connections>
                 <outlet property="signInView" destination="i5M-Pr-FkT" id="MBF-kL-TOQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="SignInView" customModule="DiscoverMovies" customModuleProvider="target">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="SignInView" customModule="Discover" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1s-LN-CSv">
                     <state key="normal" title="Sign in later"/>
                     <connections>
-                        <action selector="activatePublicMode:" destination="-1" eventType="touchUpInside" id="d2V-lI-vlk"/>
+                        <action selector="signInlaterButtonClick:" destination="-1" eventType="touchUpInside" id="SxY-PG-dxw"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-ks-LmZ">
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="188" id="LMp-Jm-2q9"/>
-                        <constraint firstAttribute="height" constant="46" id="MTy-3p-chw"/>
+                        <constraint firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="height" multiplier="143:46" id="s5L-MW-dT8"/>
                     </constraints>
                     <state key="normal" title="Sign In"/>
                     <connections>
-                        <action selector="signIn:" destination="-1" eventType="touchUpInside" id="cAb-8z-dzA"/>
+                        <action selector="signInButtonClick:" destination="-1" eventType="touchUpInside" id="pyy-r2-qdw"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in now to browse movies, like them or add them to your personal watchlist." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irF-9X-XWY">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgI-wI-Zp7">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="Sign Up"/>
+                    <connections>
+                        <action selector="signUpButtonClick:" destination="-1" eventType="touchUpInside" id="w8O-x4-FOe"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqu-6E-x1l">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in now to browse movies, like them or add them to your personal watchlist." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irF-9X-XWY">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKu-sR-UoA">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVi-sP-nGr">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgI-wI-Zp7">
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="163" id="1h7-WU-e2V"/>
-                        <constraint firstAttribute="height" constant="42" id="DpU-Pq-5Ae"/>
-                    </constraints>
-                    <state key="normal" title="Sign Up"/>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="EVi-sP-nGr" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" constant="3" id="5xw-vl-qiP"/>
-                <constraint firstItem="irF-9X-XWY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="8sv-Hi-D5f"/>
-                <constraint firstAttribute="bottom" secondItem="V1s-LN-CSv" secondAttribute="bottom" id="Hnt-Ky-vAV"/>
-                <constraint firstItem="EVi-sP-nGr" firstAttribute="top" secondItem="bgI-wI-Zp7" secondAttribute="bottom" constant="7" id="PdP-ZT-NZx"/>
-                <constraint firstAttribute="trailing" secondItem="bgI-wI-Zp7" secondAttribute="trailing" id="ZUp-mk-1Pp"/>
+                <constraint firstItem="bgI-wI-Zp7" firstAttribute="baseline" secondItem="ixj-ks-LmZ" secondAttribute="baseline" id="1pI-zK-y25"/>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="EVi-sP-nGr" secondAttribute="bottom" constant="8" symbolic="YES" id="D7d-uZ-8gz"/>
+                <constraint firstItem="EVi-sP-nGr" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" constant="14" id="GIV-9t-Zco"/>
+                <constraint firstItem="bgI-wI-Zp7" firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="width" id="IwZ-ow-gZ4"/>
+                <constraint firstItem="xqu-6E-x1l" firstAttribute="top" secondItem="rKu-sR-UoA" secondAttribute="bottom" id="J2j-ro-IHU"/>
+                <constraint firstItem="rKu-sR-UoA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Lny-kV-gaz"/>
+                <constraint firstItem="irF-9X-XWY" firstAttribute="top" secondItem="xqu-6E-x1l" secondAttribute="bottom" constant="4" id="QEA-NK-fLq"/>
+                <constraint firstItem="bgI-wI-Zp7" firstAttribute="leading" secondItem="ixj-ks-LmZ" secondAttribute="trailing" constant="20" id="Qtc-lT-7tw"/>
+                <constraint firstItem="rKu-sR-UoA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SaX-eu-fH5"/>
+                <constraint firstAttribute="trailing" secondItem="rKu-sR-UoA" secondAttribute="trailing" id="YEQ-0D-Sox"/>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="height" secondItem="ixj-ks-LmZ" secondAttribute="height" id="Ykc-LI-7sc"/>
+                <constraint firstAttribute="trailing" secondItem="bgI-wI-Zp7" secondAttribute="trailing" constant="20" id="ZUp-mk-1Pp"/>
                 <constraint firstItem="V1s-LN-CSv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bJr-Xs-QeI"/>
-                <constraint firstItem="irF-9X-XWY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dSg-7Y-K1v"/>
+                <constraint firstItem="rKu-sR-UoA" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.45" id="gAg-0N-2Zy"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="irF-9X-XWY" secondAttribute="trailing" constant="20" id="hyN-Zu-TwX"/>
                 <constraint firstItem="irF-9X-XWY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="inM-rj-Fg9"/>
-                <constraint firstItem="ixj-ks-LmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="txp-Q8-2eE"/>
-                <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="EVi-sP-nGr" secondAttribute="bottom" constant="-9" id="u3H-yt-L8G"/>
+                <constraint firstItem="bgI-wI-Zp7" firstAttribute="height" secondItem="ixj-ks-LmZ" secondAttribute="height" id="lMC-mJ-sbJ"/>
+                <constraint firstItem="xqu-6E-x1l" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="msU-FP-0G5"/>
+                <constraint firstItem="irF-9X-XWY" firstAttribute="leading" secondItem="xqu-6E-x1l" secondAttribute="leading" id="nzh-1Y-Awe"/>
+                <constraint firstAttribute="bottom" secondItem="V1s-LN-CSv" secondAttribute="bottom" constant="20" id="oQS-wG-emM"/>
+                <constraint firstItem="ixj-ks-LmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="txp-Q8-2eE"/>
                 <constraint firstItem="EVi-sP-nGr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uVk-yZ-twD"/>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="width" id="w7a-dh-kCF"/>
             </constraints>
             <connections>
-                <outlet property="publicModeButton" destination="V1s-LN-CSv" id="aYM-mV-C7k"/>
+                <outlet property="orLabel" destination="EVi-sP-nGr" id="eVl-qe-4VB"/>
                 <outlet property="signInButton" destination="ixj-ks-LmZ" id="DoF-GH-CqH"/>
                 <outlet property="signInDescription" destination="irF-9X-XWY" id="3mZ-Sf-hTi"/>
+                <outlet property="signInLaterButton" destination="V1s-LN-CSv" id="VSL-Cx-zRJ"/>
                 <outlet property="signUpButton" destination="bgI-wI-Zp7" id="kPR-eF-owh"/>
+                <outlet property="titleLabel" destination="xqu-6E-x1l" id="Ew1-v6-uBC"/>
             </connections>
-            <point key="canvasLocation" x="-385" y="-221"/>
+            <point key="canvasLocation" x="-275.5" y="-200.5"/>
         </view>
     </objects>
 </document>

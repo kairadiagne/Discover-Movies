@@ -92,7 +92,7 @@ class MenuViewController: UIViewController {
         
         userService.delegate = self
         
-        menuView.tableView.reloadData()
+        menuView.tableView.reloadData() // Load menu items
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,17 +100,16 @@ class MenuViewController: UIViewController {
         
         if signedIn {
             userService.getUserInfo()
+        } else {
+            menuView.tableView.reloadData()
         }
-        
-        menuView.configure(withUser: user)
-        menuView.tableView.reloadData()
     }
    
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     func showTopListViewController() {
         let topListViewController = TopListViewController()

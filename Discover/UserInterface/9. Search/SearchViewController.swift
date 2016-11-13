@@ -8,6 +8,7 @@
 
 import UIKit
 import TMDbMovieKit
+import SWRevealViewController
 
 class SearchViewController: BaseViewController {
     
@@ -63,6 +64,8 @@ class SearchViewController: BaseViewController {
         let loadingSelector = #selector(SearchViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(SearchViewController.dataManagerDidUpdate(notification:))
         searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        
+        revealViewController().delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,6 +79,8 @@ class SearchViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchManager.remove(observer: self)
+        
+        revealViewController().delegate = nil
     }
     
     // MARK: - Notifications
@@ -173,4 +178,16 @@ extension SearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
+}
+
+// MARK: - SWRevealControllerDelegate
+
+extension SearchViewController: SWRevealViewControllerDelegate {
+    
+    func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
+        if position.rawValue == 4 {
+            searchController.searchBar.resignFirstResponder()
+        }
+    }
+
 }

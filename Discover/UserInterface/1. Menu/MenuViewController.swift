@@ -147,11 +147,11 @@ class MenuViewController: UIViewController {
     fileprivate func toggleSignIn() {
         if signedIn {
             signout()
+            return
         } else {
             TMDbSessionManager.shared.deactivatePublicMode()
+            showTopListViewController()
         }
-        
-        showTopListViewController()
     }
     
     func signout() {
@@ -192,8 +192,8 @@ extension MenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // If we are trying to push the same row we change the position of the front view controller
-        if indexPath.row == presentedRow && indexPath.row != 3 { // Except sign out 
-            self.revealViewController()?.setFrontViewPosition(.leftSide, animated: true)
+        if indexPath.row == presentedRow && indexPath.row != 4 { // Except sign out
+            revealViewController()?.setFrontViewPosition(.leftSide, animated: true)
             return
         }
         

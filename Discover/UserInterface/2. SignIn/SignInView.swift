@@ -43,11 +43,11 @@ class SignInView: BaseView {
         let signInButtonText = NSLocalizedString("signInButtonText", comment: "")
         signInButton.setTitle(signInButtonText, for: .normal)
         
-        let signInLaterButtonText = NSLocalizedString("signUpButtonText", comment: "")
-        signInLaterButton.setTitle(signInLaterButtonText, for: .normal)
-        
         let signUpButtonText = NSLocalizedString("signUpButtonText", comment: "")
         signUpButton.setTitle(signUpButtonText, for: .normal)
+        
+        let signInLaterButtonText = NSLocalizedString("signInLaterButtonText", comment: "")
+        signInLaterButton.setTitle(signInLaterButtonText, for: .normal)
     }
 
 }

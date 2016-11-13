@@ -7,14 +7,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="DiscoverMovies" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="Discover" customModuleProvider="target">
             <connections>
                 <outlet property="detailView" destination="iN0-l3-epB" id="bpc-SX-SFV"/>
                 <outlet property="view" destination="iN0-l3-epB" id="hXj-uh-mNs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DetailView" customModule="DiscoverMovies" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DetailView" customModule="Discover" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -107,7 +107,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqT-rY-QL6" customClass="FavouriteButton" customModule="DiscoverMovies" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqT-rY-QL6" customClass="FavouriteButton" customModule="Discover" customModuleProvider="target">
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="Dtd-pk-HXY"/>
@@ -118,7 +118,7 @@
                                         <action selector="favoriteButtontap:" destination="-1" eventType="valueChanged" id="X2F-od-N6J"/>
                                     </connections>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ar-Q4-HbC" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ar-Q4-HbC" customClass="DiscoverButton" customModule="Discover" customModuleProvider="target">
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="4ar-Q4-HbC" secondAttribute="height" multiplier="3:1" id="7Z1-3o-bZZ"/>
                                     </constraints>
@@ -127,7 +127,7 @@
                                         <action selector="reviewsButtonTap:" destination="-1" eventType="touchUpInside" id="bRt-02-9pS"/>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRE-II-MfP" customClass="WatchListButton" customModule="DiscoverMovies" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRE-II-MfP" customClass="WatchListButton" customModule="Discover" customModuleProvider="target">
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="MpZ-gw-KE3"/>
@@ -137,6 +137,12 @@
                                         <action selector="watchListButtonTap:" destination="-1" eventType="valueChanged" id="hT3-iq-xTM"/>
                                     </connections>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OnF-7K-NjN">
+                                    <state key="normal" title="See all"/>
+                                    <connections>
+                                        <action selector="seeAllButtonClick:" destination="-1" eventType="touchUpInside" id="XMK-2a-Umg"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -171,6 +177,7 @@
                                 <constraint firstItem="4F0-d8-XOb" firstAttribute="top" secondItem="X0s-VM-Ai3" secondAttribute="bottom" constant="8" symbolic="YES" id="abW-bF-MVd"/>
                                 <constraint firstItem="OW2-WD-d6e" firstAttribute="top" secondItem="Nx5-sK-CGB" secondAttribute="bottom" constant="8" symbolic="YES" id="asU-eH-5eE"/>
                                 <constraint firstItem="WRE-II-MfP" firstAttribute="leading" secondItem="xqT-rY-QL6" secondAttribute="trailing" constant="8" symbolic="YES" id="bWP-u2-QUk"/>
+                                <constraint firstItem="OnF-7K-NjN" firstAttribute="trailing" secondItem="EM4-an-m11" secondAttribute="trailing" id="bcg-Z7-3uz"/>
                                 <constraint firstItem="OW2-WD-d6e" firstAttribute="trailing" secondItem="Nx5-sK-CGB" secondAttribute="trailing" id="blR-mg-YgV"/>
                                 <constraint firstItem="dCt-Xe-mbS" firstAttribute="trailing" secondItem="Nx5-sK-CGB" secondAttribute="trailing" id="bwB-Af-CoO"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X0s-VM-Ai3" secondAttribute="trailing" constant="20" symbolic="YES" id="dXt-UZ-kM8"/>
@@ -183,6 +190,7 @@
                                 <constraint firstItem="EM4-an-m11" firstAttribute="leading" secondItem="wuB-LI-u1z" secondAttribute="leading" id="owG-Kh-maR"/>
                                 <constraint firstItem="dCt-Xe-mbS" firstAttribute="top" secondItem="OW2-WD-d6e" secondAttribute="bottom" constant="8" symbolic="YES" id="pie-cy-F6y"/>
                                 <constraint firstItem="X0s-VM-Ai3" firstAttribute="leading" secondItem="YRx-Rx-qhX" secondAttribute="leading" constant="20" symbolic="YES" id="uib-6B-REG"/>
+                                <constraint firstItem="OnF-7K-NjN" firstAttribute="baseline" secondItem="EpK-0L-n1T" secondAttribute="baseline" id="vVc-bt-UGs"/>
                                 <constraint firstItem="4ar-Q4-HbC" firstAttribute="centerX" secondItem="YRx-Rx-qhX" secondAttribute="centerX" id="wSj-YW-gaG"/>
                             </constraints>
                         </view>
@@ -196,7 +204,7 @@
                         <constraint firstItem="YRx-Rx-qhX" firstAttribute="bottom" secondItem="40P-gH-Zt8" secondAttribute="bottom" id="tHA-Tl-L2o"/>
                     </constraints>
                 </scrollView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-G5-ykT" customClass="GradientImageView" customModule="DiscoverMovies" customModuleProvider="target">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-G5-ykT" customClass="GradientImageView" customModule="Discover" customModuleProvider="target">
                     <constraints>
                         <constraint firstAttribute="height" constant="267" id="9DN-Iv-2jU"/>
                     </constraints>
@@ -257,12 +265,13 @@
                 <outlet property="releaseValueLabel" destination="dCt-Xe-mbS" id="7pR-Sl-YPh"/>
                 <outlet property="scrollTop" destination="eSk-4Q-75Y" id="mwg-mf-D5t"/>
                 <outlet property="scrollView" destination="40P-gH-Zt8" id="aFZ-fN-NDr"/>
+                <outlet property="seeAllButton" destination="OnF-7K-NjN" id="7ZB-ID-3Wt"/>
                 <outlet property="similarLabel" destination="EpK-0L-n1T" id="oi3-fe-Y2q"/>
                 <outlet property="similarMovieCollectionView" destination="EM4-an-m11" id="E1t-0q-ppc"/>
                 <outlet property="titleLabel" destination="X0s-VM-Ai3" id="G1t-6Z-PNn"/>
                 <outlet property="watchListControl" destination="WRE-II-MfP" id="fYn-rb-aZs"/>
             </connections>
-            <point key="canvasLocation" x="-1010" y="-933"/>
+            <point key="canvasLocation" x="-1361" y="-826"/>
         </view>
     </objects>
     <resources>

@@ -46,6 +46,10 @@ unknownReleaseText = "Unknown";
 unknownDirectorText = "Unknown";
 noSimilarMoviesText = "Similar movies unavailable";
 noCastmembersText = "Info about cast unavailable";
+seeAllButtonText = "See all";
+
+/* SimilarMovies */
+similarMoviesVCTitle = "Similar Movies";
 
 /* Review */
 reviewvcTitle = "Reviews";

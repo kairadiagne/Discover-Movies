@@ -30,13 +30,13 @@ class TopListViewController: BaseViewController {
     
     fileprivate let nowPlayingListManager = TMDbTopListDataManager(list: .nowPlaying)
     
-    fileprivate let popularListDataSource = TopListDataSource()
+    fileprivate let popularListDataSource = MovieListDataSource()
     
-    fileprivate let topRatedListDataSource = TopListDataSource()
+    fileprivate let topRatedListDataSource = MovieListDataSource()
     
-    fileprivate let upcomingListDataSource = TopListDataSource()
+    fileprivate let upcomingListDataSource = MovieListDataSource()
     
-    fileprivate let nowplayingListDataSource = TopListDataSource()
+    fileprivate let nowplayingListDataSource = MovieListDataSource()
     
     fileprivate var currentList: TMDbTopList = .popular
     
@@ -150,8 +150,8 @@ class TopListViewController: BaseViewController {
     }
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
         topListView.set(state: .idle)
+        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
     
     // MARK: - Utils
@@ -169,7 +169,7 @@ class TopListViewController: BaseViewController {
         }
     }
     
-    fileprivate func datasource(forList list: TMDbTopList) -> TopListDataSource {
+    fileprivate func datasource(forList list: TMDbTopList) -> MovieListDataSource {
         switch list {
         case .popular:
             return popularListDataSource
@@ -204,5 +204,6 @@ extension TopListViewController: UITableViewDelegate {
             manager(forList: currentList).loadMore()
         }
     }
+    
     
 }

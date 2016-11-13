@@ -30,6 +30,7 @@ class DetailView: UIView {
     @IBOutlet weak var castCollectionView: UICollectionView!
     @IBOutlet weak var similarLabel: UILabel!
     @IBOutlet weak var similarMovieCollectionView: UICollectionView!
+    @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var readReviewsButton: DiscoverButton!
     @IBOutlet weak var favouriteControl: FavouriteButton!
     @IBOutlet weak var watchListControl: WatchListButton!
@@ -101,6 +102,10 @@ class DetailView: UIView {
         genreLabel.text = NSLocalizedString("genreLabelText", comment: "")
         releaseLabel.text = NSLocalizedString("releaseLabelText", comment: "")
         ratingLabel.text =  NSLocalizedString("ratingLabelText", comment: "")
+        
+        let seeAllButtontitle = NSLocalizedString("seeAllButtonText", comment: "")
+        seeAllButton.setTitle(seeAllButtontitle, for: .normal)
+        seeAllButton.setTitleColor(UIColor.white, for: .normal)
         
         header.clipsToBounds = true 
         

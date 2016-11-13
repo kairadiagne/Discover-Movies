@@ -16,10 +16,12 @@ class DetailViewController: BaseViewController {
     @IBOutlet weak var detailView: DetailView!
     
     fileprivate let similarMoviesDataSource = SimilarMovieDataSource()
-    
+
     fileprivate let castDataSource = CastDataSource()
   
     fileprivate let movieInfoManager: TMDbMovieInfoManager
+    
+    fileprivate let similarMoviesManager: TMDbSimilarMoviesDataManager
     
     fileprivate let movie: Movie
     
@@ -28,9 +30,10 @@ class DetailViewController: BaseViewController {
     // MARK: - Initialize
     
     init(movie: Movie) {
-        movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
+        self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
+        self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.id)
         self.movie = movie
-        super.init(nibName: "DetailViewController", bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,12 +64,21 @@ class DetailViewController: BaseViewController {
         detailView.scrollView.delegate = self
         
         movieInfoManager.delegate = self
+        similarMoviesManager.failureDelegate = self
+        
         movieInfoManager.loadInfo()
         movieInfoManager.loadAccountState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        similarMoviesManager.reloadIfNeeded()
+        
+        let loadingSelector = #selector(TopListViewController.dataManagerDidStartLoading(notification:))
+        let updateSelector = #selector(TopListViewController.dataManagerDidUpdate(notification:))
+        
+        similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         navigationController?.navigationBar.isHidden = true
         
@@ -81,6 +93,21 @@ class DetailViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = false
         
         navigationController?.delegate = nil
+        
+        similarMoviesManager.remove(observer: self)
+    }
+    
+    // MARK: - Notifications
+    
+    override func dataManagerDidUpdate(notification: Notification) {
+        similarMoviesDataSource.update(withItems: similarMoviesManager.allItems)
+        detailView.similarMovieCollectionView.reloadData()
+    }
+    
+    // MARK: - DataManagerFailureDelegate
+    
+    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
 
     // MARK: - Actions
@@ -105,6 +132,11 @@ class DetailViewController: BaseViewController {
     
     @IBAction func backButtonTap(_ sender: UIButton) {
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func seeAllButtonClick(_ sender: UIButton) {
+        let similarMovieListController = GenericViewController(dataManager: similarMoviesManager, titleString: NSLocalizedString("similarMoviesVCTitle", comment: ""))
+        navigationController?.pushViewController(similarMovieListController, animated: true)
     }
 
 }
@@ -173,10 +205,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
             videoController = VideoViewController(video: trailer)
         }
         
-        similarMoviesDataSource.update(withItems: info.similarMovies)
         castDataSource.update(withItems: info.cast)
-        
-        detailView.similarMovieCollectionView.reloadData()
         detailView.castCollectionView.reloadData()
     }
     
@@ -189,6 +218,8 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     }
     
 }
+
+// MARK: - UINavigationControllerDelegate 
 
 extension DetailViewController: UINavigationControllerDelegate {
     

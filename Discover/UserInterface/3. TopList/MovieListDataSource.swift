@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class TopListDataSource: NSObject, DataContaining, UITableViewDataSource {
+class MovieListDataSource: NSObject, DataContaining, UITableViewDataSource {
     
     typealias ItemType = Movie
     
@@ -27,7 +27,7 @@ class TopListDataSource: NSObject, DataContaining, UITableViewDataSource {
         if isEmpty {
             let cellIdentifier = NoDataCell.defaultIdentifier()
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NoDataCell
-            let message = NSLocalizedString("topListNoDataCellText", comment: "")
+            let message = NSLocalizedString("topListNoDataCellText", comment: "") // Change with init 
             cell.configure(with: message)
             return cell
         } else {

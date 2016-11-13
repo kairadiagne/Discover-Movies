@@ -35,11 +35,11 @@ public class TMDbMovieInfoManager {
     // MARK: - API Calls
     
     public func loadInfo() {
-        let parameters: [String: AnyObject] = ["append_to_response": "similar,credits,trailers" as AnyObject]
+        let parameters: [String: AnyObject] = ["append_to_response": "credits,trailers" as AnyObject]
         
         let endpoint = "movie/\(movieID)"
         
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate() // Chain calls
+        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate()
             .responseObject { (response: DataResponse<MovieInfo>) in
                 
                 switch response.result {

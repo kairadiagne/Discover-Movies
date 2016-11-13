@@ -32,7 +32,7 @@ class ReviewViewController: BaseViewController {
     init(movie: Movie) {
         self.movie = movie
         self.reviewManager = TMDbReviewManager(movieID: movie.id)
-        super.init(nibName: "ReviewViewController", bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

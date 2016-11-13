@@ -8,18 +8,25 @@
 
 import UIKit
 
-class GenreView: BaseView {
+class GenericView: BaseView {
 
     // MARK: - Properties
     
-    weak var tableView: UITableView!
+    var tableView: UITableView!
     
     // MARK: - Awake
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        // Setup tableView
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    fileprivate func commonInit() {
         tableView = UITableView()
         
         addSubview(tableView)
@@ -29,7 +36,7 @@ class GenreView: BaseView {
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-
+        
         tableView.hideEmptyRows()
         
         if #available(iOS 10.0, *) {
@@ -38,5 +45,5 @@ class GenreView: BaseView {
             tableView.addSubview(refreshControl)
         }
     }
-
+    
 }

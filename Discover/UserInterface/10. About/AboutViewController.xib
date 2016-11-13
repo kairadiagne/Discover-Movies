@@ -7,14 +7,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController" customModule="DiscoverMovies" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController" customModule="Discover" customModuleProvider="target">
             <connections>
                 <outlet property="aboutView" destination="i5M-Pr-FkT" id="oNZ-Be-KzI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="AboutView" customModule="DiscoverMovies" customModuleProvider="target">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="AboutView" customModule="Discover" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -32,7 +32,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSM-8w-XBh" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSM-8w-XBh" customClass="DiscoverButton" customModule="Discover" customModuleProvider="target">
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="cSM-8w-XBh" secondAttribute="height" multiplier="3:1" id="RbF-oV-ByW"/>
                             </constraints>
@@ -47,25 +47,25 @@
                                 <action selector="icon8ButtonCLick" destination="-1" eventType="touchUpInside" id="Vpm-Js-tiL"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xea-L8-sld">
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfz-ul-LeQ">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="nff-ed-9Fe"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="Xea-L8-sld" firstAttribute="top" secondItem="qcE-pC-zee" secondAttribute="bottom" constant="20" id="2GT-Ay-tkz"/>
                         <constraint firstItem="NSw-or-t7u" firstAttribute="leading" secondItem="F5D-87-MmK" secondAttribute="leading" constant="20" id="98g-TB-STZ"/>
                         <constraint firstItem="NSw-or-t7u" firstAttribute="top" secondItem="F5D-87-MmK" secondAttribute="top" constant="20" id="9Lt-he-9fD"/>
                         <constraint firstAttribute="trailing" secondItem="NSw-or-t7u" secondAttribute="trailing" constant="20" id="Ati-S1-gW9"/>
-                        <constraint firstAttribute="trailing" secondItem="Xea-L8-sld" secondAttribute="trailing" constant="20" id="Cf5-NJ-rB2"/>
                         <constraint firstItem="cSM-8w-XBh" firstAttribute="top" secondItem="NSw-or-t7u" secondAttribute="bottom" constant="20" id="Ghg-iU-ZNE"/>
                         <constraint firstItem="cSM-8w-XBh" firstAttribute="width" secondItem="F5D-87-MmK" secondAttribute="width" multiplier="0.4" id="QNK-pE-nQu"/>
-                        <constraint firstAttribute="bottom" secondItem="Xea-L8-sld" secondAttribute="bottom" constant="20" id="Qkh-J5-kaK"/>
-                        <constraint firstItem="Xea-L8-sld" firstAttribute="leading" secondItem="F5D-87-MmK" secondAttribute="leading" constant="20" id="V3S-KF-Ave"/>
                         <constraint firstItem="cSM-8w-XBh" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="XAT-oM-fbW"/>
+                        <constraint firstAttribute="bottom" secondItem="sfz-ul-LeQ" secondAttribute="bottom" constant="20" id="bMM-ZD-oBP"/>
+                        <constraint firstItem="sfz-ul-LeQ" firstAttribute="top" secondItem="qcE-pC-zee" secondAttribute="bottom" constant="20" id="p7s-Nv-kSO"/>
                         <constraint firstItem="qcE-pC-zee" firstAttribute="centerX" secondItem="F5D-87-MmK" secondAttribute="centerX" id="tRv-cb-3tN"/>
+                        <constraint firstItem="sfz-ul-LeQ" firstAttribute="centerX" secondItem="qcE-pC-zee" secondAttribute="centerX" id="uiZ-fF-99P"/>
                         <constraint firstItem="qcE-pC-zee" firstAttribute="top" secondItem="cSM-8w-XBh" secondAttribute="bottom" constant="40" id="yqb-Xx-50e"/>
                     </constraints>
                 </view>
@@ -89,7 +89,6 @@
                 <outlet property="feedbackButton" destination="cSM-8w-XBh" id="83c-1z-vRw"/>
                 <outlet property="icon8Button" destination="qcE-pC-zee" id="kDh-zt-mJp"/>
                 <outlet property="tableView" destination="efb-4O-cJu" id="0qb-F2-IbG"/>
-                <outlet property="tmdbLabel" destination="Xea-L8-sld" id="nf7-wJ-yBP"/>
             </connections>
             <point key="canvasLocation" x="-1450" y="-125"/>
         </view>

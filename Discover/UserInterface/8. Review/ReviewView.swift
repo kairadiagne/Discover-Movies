@@ -26,6 +26,8 @@ class ReviewView: BaseView {
         } else {
             tableView.addSubview(refreshControl)
         }
+        
+        tableView.separatorColor = UIColor.lightGray
     }
     
 }

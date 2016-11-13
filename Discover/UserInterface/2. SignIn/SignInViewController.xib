@@ -18,27 +18,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1s-LN-CSv">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1s-LN-CSv" customClass="DiscoverButton" customModule="Discover" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="V1s-LN-CSv" secondAttribute="height" multiplier="3:1" id="hgQ-yd-pgR"/>
+                    </constraints>
                     <state key="normal" title="Sign in later"/>
                     <connections>
                         <action selector="signInlaterButtonClick:" destination="-1" eventType="touchUpInside" id="SxY-PG-dxw"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-ks-LmZ">
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="height" multiplier="143:46" id="s5L-MW-dT8"/>
-                    </constraints>
-                    <state key="normal" title="Sign In"/>
-                    <connections>
-                        <action selector="signInButtonClick:" destination="-1" eventType="touchUpInside" id="pyy-r2-qdw"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgI-wI-Zp7">
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Sign Up"/>
-                    <connections>
-                        <action selector="signUpButtonClick:" destination="-1" eventType="touchUpInside" id="w8O-x4-FOe"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqu-6E-x1l">
@@ -46,15 +32,27 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in now to browse movies, like them or add them to your personal watchlist." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irF-9X-XWY">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in now to browse movies, like them or add them to your personal watchlist." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irF-9X-XWY">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKu-sR-UoA">
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVi-sP-nGr">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixj-ks-LmZ" customClass="DiscoverButton" customModule="Discover" customModuleProvider="target">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="height" multiplier="3:1" id="RmP-V1-Age"/>
+                    </constraints>
+                    <state key="normal" title="Sign In"/>
+                    <connections>
+                        <action selector="signInButtonClick:" destination="-1" eventType="touchUpInside" id="pyy-r2-qdw"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4N-ue-qRw">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -62,39 +60,34 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="bgI-wI-Zp7" firstAttribute="baseline" secondItem="ixj-ks-LmZ" secondAttribute="baseline" id="1pI-zK-y25"/>
-                <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="EVi-sP-nGr" secondAttribute="bottom" constant="8" symbolic="YES" id="D7d-uZ-8gz"/>
-                <constraint firstItem="EVi-sP-nGr" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" constant="14" id="GIV-9t-Zco"/>
-                <constraint firstItem="bgI-wI-Zp7" firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="width" id="IwZ-ow-gZ4"/>
-                <constraint firstItem="xqu-6E-x1l" firstAttribute="top" secondItem="rKu-sR-UoA" secondAttribute="bottom" id="J2j-ro-IHU"/>
-                <constraint firstItem="rKu-sR-UoA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Lny-kV-gaz"/>
-                <constraint firstItem="irF-9X-XWY" firstAttribute="top" secondItem="xqu-6E-x1l" secondAttribute="bottom" constant="4" id="QEA-NK-fLq"/>
-                <constraint firstItem="bgI-wI-Zp7" firstAttribute="leading" secondItem="ixj-ks-LmZ" secondAttribute="trailing" constant="20" id="Qtc-lT-7tw"/>
-                <constraint firstItem="rKu-sR-UoA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SaX-eu-fH5"/>
-                <constraint firstAttribute="trailing" secondItem="rKu-sR-UoA" secondAttribute="trailing" id="YEQ-0D-Sox"/>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="top" secondItem="EVi-sP-nGr" secondAttribute="bottom" constant="20" id="D7d-uZ-8gz"/>
+                <constraint firstItem="EVi-sP-nGr" firstAttribute="top" secondItem="ixj-ks-LmZ" secondAttribute="bottom" constant="20" id="GIV-9t-Zco"/>
+                <constraint firstItem="V1s-LN-CSv" firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="width" id="J5h-aF-RSP"/>
+                <constraint firstItem="xqu-6E-x1l" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="JjP-4M-AoJ"/>
+                <constraint firstItem="ixj-ks-LmZ" firstAttribute="centerX" secondItem="V1s-LN-CSv" secondAttribute="centerX" id="NGE-KL-TxK"/>
+                <constraint firstItem="irF-9X-XWY" firstAttribute="top" secondItem="xqu-6E-x1l" secondAttribute="bottom" constant="20" id="QEA-NK-fLq"/>
+                <constraint firstItem="ixj-ks-LmZ" firstAttribute="top" secondItem="s4N-ue-qRw" secondAttribute="bottom" constant="40" id="THS-9G-nv7"/>
                 <constraint firstItem="V1s-LN-CSv" firstAttribute="height" secondItem="ixj-ks-LmZ" secondAttribute="height" id="Ykc-LI-7sc"/>
-                <constraint firstAttribute="trailing" secondItem="bgI-wI-Zp7" secondAttribute="trailing" constant="20" id="ZUp-mk-1Pp"/>
                 <constraint firstItem="V1s-LN-CSv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bJr-Xs-QeI"/>
-                <constraint firstItem="rKu-sR-UoA" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.45" id="gAg-0N-2Zy"/>
+                <constraint firstItem="s4N-ue-qRw" firstAttribute="leading" secondItem="irF-9X-XWY" secondAttribute="leading" id="bWb-9g-HoK"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="irF-9X-XWY" secondAttribute="trailing" constant="20" id="hyN-Zu-TwX"/>
                 <constraint firstItem="irF-9X-XWY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="inM-rj-Fg9"/>
-                <constraint firstItem="bgI-wI-Zp7" firstAttribute="height" secondItem="ixj-ks-LmZ" secondAttribute="height" id="lMC-mJ-sbJ"/>
+                <constraint firstItem="s4N-ue-qRw" firstAttribute="trailing" secondItem="irF-9X-XWY" secondAttribute="trailing" id="jk1-rJ-Fh4"/>
                 <constraint firstItem="xqu-6E-x1l" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="msU-FP-0G5"/>
                 <constraint firstItem="irF-9X-XWY" firstAttribute="leading" secondItem="xqu-6E-x1l" secondAttribute="leading" id="nzh-1Y-Awe"/>
-                <constraint firstAttribute="bottom" secondItem="V1s-LN-CSv" secondAttribute="bottom" constant="20" id="oQS-wG-emM"/>
-                <constraint firstItem="ixj-ks-LmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="txp-Q8-2eE"/>
+                <constraint firstItem="s4N-ue-qRw" firstAttribute="top" secondItem="irF-9X-XWY" secondAttribute="bottom" constant="10" id="ooK-kM-P0j"/>
                 <constraint firstItem="EVi-sP-nGr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uVk-yZ-twD"/>
-                <constraint firstItem="V1s-LN-CSv" firstAttribute="width" secondItem="ixj-ks-LmZ" secondAttribute="width" id="w7a-dh-kCF"/>
+                <constraint firstItem="ixj-ks-LmZ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="x9r-9F-7MG"/>
             </constraints>
             <connections>
                 <outlet property="orLabel" destination="EVi-sP-nGr" id="eVl-qe-4VB"/>
                 <outlet property="signInButton" destination="ixj-ks-LmZ" id="DoF-GH-CqH"/>
                 <outlet property="signInDescription" destination="irF-9X-XWY" id="3mZ-Sf-hTi"/>
                 <outlet property="signInLaterButton" destination="V1s-LN-CSv" id="VSL-Cx-zRJ"/>
-                <outlet property="signUpButton" destination="bgI-wI-Zp7" id="kPR-eF-owh"/>
+                <outlet property="signupLabel" destination="s4N-ue-qRw" id="0Lp-Ah-VJD"/>
                 <outlet property="titleLabel" destination="xqu-6E-x1l" id="Ew1-v6-uBC"/>
             </connections>
-            <point key="canvasLocation" x="-275.5" y="-200.5"/>
+            <point key="canvasLocation" x="-165" y="-689"/>
         </view>
     </objects>
 </document>

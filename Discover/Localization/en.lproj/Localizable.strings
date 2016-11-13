@@ -25,15 +25,11 @@ searchMenuItemText = "Search";
 aboutmenuItemText = "About";
 
 /* Sign in */
-signInAction = "Sign in now to like and add movies to your personal watchlist";
-// Sign in now to browse movies and add like them or add them to your personal watchlist.
-
-signInDescription = "CLick sign in if you want to sign in with your account from themoviedb.org, If you do not have an account yet and wish to create one click the sign up button. If you wish to continue without signin in then click the continue without signing in button"; // Excape characters for quotes
-
-// Sign in with your existing TMDb account,
+signInTitle = "Welcome";
+signInDescription = "Sign in with your themoviedb.org account to start browsing movies and keep track of your favorites and watchlist.";
 signInButtonText = "Sign in";
-signUpButtonText = "Sign up";
 signInLaterButtonText = "Sign in later";
+signUpInstruction = "Create a new account at: www.themoviedb.org/account/signup";
 
 /* TopList */
 topListVCTitle= "Toplists";

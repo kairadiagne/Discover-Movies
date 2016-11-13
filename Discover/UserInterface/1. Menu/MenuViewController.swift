@@ -101,6 +101,7 @@ class MenuViewController: UIViewController {
         if signedIn {
             userService.getUserInfo()
         } else {
+            menuView.configure(withUser: user)
             menuView.tableView.reloadData()
         }
     }

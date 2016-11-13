@@ -50,18 +50,6 @@ class SignInViewController: UIViewController {
         signInService.requestToken()
     }
     
-    @IBAction func signUpButtonClick(_ sender: UIButton) {
-        guard let url = URL(string: "https://www.themoviedb.org/account/signup/") else {
-            ErrorHandler.shared.handle(error: .generic, authorizationError: false)
-            return
-        }
-        
-        safariViewController = SFSafariViewController(url: url)
-        safariViewController.delegate = self
-        
-        let _ = present(safariViewController, animated: true, completion: nil)
-    }
-    
     @IBAction func signInlaterButtonClick(_ sender: UIButton) {
         TMDbSessionManager.shared.activatePublicMode()
         dismissSignInViewController()

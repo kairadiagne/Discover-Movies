@@ -95,6 +95,16 @@ class SearchViewController: BaseViewController {
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
+    
+    // MARK: - SWRevealControllerDelegate
+    
+    override func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
+        super.revealController(revealController, willMoveTo: position)
+        
+        if position.rawValue == 4 {
+            searchController.searchBar.resignFirstResponder()
+        }
+    }
 
 }
 
@@ -178,16 +188,4 @@ extension SearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-}
-
-// MARK: - SWRevealControllerDelegate
-
-extension SearchViewController: SWRevealViewControllerDelegate {
-    
-    func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
-        if position.rawValue == 4 {
-            searchController.searchBar.resignFirstResponder()
-        }
-    }
-
 }

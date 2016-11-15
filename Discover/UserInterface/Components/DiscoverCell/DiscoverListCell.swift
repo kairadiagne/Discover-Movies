@@ -28,6 +28,16 @@ class DiscoverListCell: UITableViewCell {
         
         yearLabel.font = UIFont.H3()
         yearLabel.textColor = UIColor.white
+        
+        titleLabel.layer.shadowColor = UIColor.black.cgColor
+        titleLabel.layer.shadowOffset = CGSize(width: 2, height: 2)
+        titleLabel.layer.shadowOpacity = 0.5
+        titleLabel.layer.shadowRadius = 1
+        
+        yearLabel.layer.shadowColor = UIColor.black.cgColor
+        yearLabel.layer.shadowOffset = CGSize(width: 2, height: 2)
+        yearLabel.layer.shadowOpacity = 0.5
+        yearLabel.layer.shadowRadius = 1
     }
     
     // MARK: - Configure

@@ -20,10 +20,18 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
 
     // MARK: - Lifecycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        revealViewController().tapGestureRecognizer()
+        revealViewController().panGestureRecognizer()
+        
+        revealViewController().delegate = self
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Determines if the signin view controller needs to be shown
         if TMDbSessionManager.shared.signInStatus == .unkown {
             showSignInViewController()
         }
@@ -46,7 +54,6 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
     func addMenuButton() {
         guard let revealViewController = self.revealViewController() else { return }
-        view.addGestureRecognizer(revealViewController.panGestureRecognizer())
         
         let menuButton = UIBarButtonItem()
         menuButton.image = UIImage.menuIcon()
@@ -62,4 +69,19 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
         present(signInViewController, animated: true, completion: nil)
     }
 
+}
+
+//MARK: - SWRevealViewControllerDelegate
+
+extension BaseViewController: SWRevealViewControllerDelegate {
+    
+    func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
+        if position == FrontViewPosition.right {
+            revealController.frontViewController.view.isUserInteractionEnabled = false
+        }
+        else {
+            revealController.frontViewController.view.isUserInteractionEnabled = true
+        }
+    }
+    
 }

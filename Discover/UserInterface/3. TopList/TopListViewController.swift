@@ -120,7 +120,7 @@ class TopListViewController: BaseViewController {
         topListView.tableView.dataSource = dataSource
         
         // Try to preload data from cache
-        dataSource.update(withItems: manager.allItems)
+        dataSource.items = manager.allItems
         topListView.tableView.reloadData()
         
         // Reload data if needed
@@ -139,7 +139,7 @@ class TopListViewController: BaseViewController {
     override func dataManagerDidUpdate(notification: Notification) {
         let manager = self.manager(forList: currentList)
         let datasource = self.datasource(forList: currentList)
-        datasource.update(withItems: manager.allItems)
+        datasource.items = manager.allItems
         
         topListView.set(state: .idle)
         topListView.tableView.reloadData()

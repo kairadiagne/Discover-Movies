@@ -87,8 +87,7 @@ class GenericViewController: BaseViewController {
     // MARK: - DataManagerNotifications
     
     override func dataManagerDidUpdate(notification: Notification) {
-        dataSource.update(withItems: dataManager.allItems)
-        genericView.set(state: .idle)
+        dataSource.items = dataManager.allItems
         genericView.tableView.reloadData()
     }
     

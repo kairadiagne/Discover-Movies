@@ -100,7 +100,7 @@ class DetailViewController: BaseViewController {
     // MARK: - Notifications
     
     override func dataManagerDidUpdate(notification: Notification) {
-        similarMoviesDataSource.update(withItems: similarMoviesManager.allItems)
+        similarMoviesDataSource.items = similarMoviesManager.firstPage
         detailView.similarMovieCollectionView.reloadData()
     }
     
@@ -205,7 +205,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
             videoController = VideoViewController(video: trailer)
         }
         
-        castDataSource.update(withItems: info.cast)
+        castDataSource.items = info.cast
         detailView.castCollectionView.reloadData()
     }
     

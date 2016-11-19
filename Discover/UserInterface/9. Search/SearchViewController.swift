@@ -86,7 +86,7 @@ class SearchViewController: BaseViewController {
     // MARK: - Notifications
     
     override func dataManagerDidUpdate(notification: Notification) {
-        dataSource.update(withItems: searchManager.allItems)
+        dataSource.items = searchManager.allItems
         searchView.tableView.reloadData()
     }
     

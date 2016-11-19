@@ -74,7 +74,7 @@ class AccountListController: BaseViewController {
         accountListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
 
         // Try to preload data from cache
-        dataSource.update(withItems: accountListManager.allItems)
+        dataSource.items = accountListManager.allItems
         accountListView.tableView.reloadData()
         
         accountListManager.reloadIfNeeded(forceOnline: true)
@@ -95,7 +95,7 @@ class AccountListController: BaseViewController {
     
     override func dataManagerDidUpdate(notification: Notification) {
         accountListView.set(state: .idle)
-        dataSource.update(withItems: accountListManager.allItems)
+        dataSource.items = accountListManager.allItems
         accountListView.tableView.reloadData()
     }
     

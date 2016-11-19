@@ -39,14 +39,6 @@ class MovieListDataSource: NSObject, DataContaining, UITableViewDataSource {
             return cell
         }
     }
-    
-    // TODO: - Create basic datasource which configures a nodatacell
-    
-    func noDataCell(withMessage message: String, forTableView tableView: UITableView, indexPath: IndexPath) -> NoDataCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCell.defaultIdentifier(), for: indexPath) as! NoDataCell
-        cell.configure(with: message)
-        return cell
-    }
 
 }
 

@@ -86,7 +86,7 @@ class ReviewViewController: BaseViewController {
     
     override func dataManagerDidUpdate(notification: Notification) {
         reviewView.set(state: .idle)
-        reviewDataSource.update(withItems: reviewManager.allItems)
+        reviewDataSource.items = reviewManager.allItems
         reviewView.tableView.reloadData()
     }
     

@@ -13,13 +13,7 @@ public class SearchDataManager: ListDataManager<Movie> {
     // MARK: - Initialize 
     
     public init() {
-        super.init(refreshTimeOut: 0)
-    }
-    
-    // MARK: - Endpoint
-    
-    override func endpoint() -> String {
-        return "search/movie"
+        super.init(configuration: SearchRequestConfiguration(), refreshTimeOut: 0)
     }
     
     // MARK: - Search

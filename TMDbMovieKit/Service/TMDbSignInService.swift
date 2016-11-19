@@ -57,11 +57,9 @@ public class TMDbSignInService {
     // MARK: - Sign In 
     
     public func requestToken() {
-        let endpoint = "authentication/token/new"
-        
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: [:])) 
-            .validate().responseObject { (response: DataResponse<RequestToken>) in
-                
+        Alamofire.request(APIRouter.request(config: RequestTokenConfiguration(), queryParams: nil, bodyParams: nil)).validate()
+            .responseObject { (response: DataResponse<RequestToken>) in
+
                 guard response.result.error == nil else {
                     let error = self.errorHandler.categorize(error: response.result.error!)
                     self.delegate?.signIn(service: self, didFailWithError: error)
@@ -89,10 +87,9 @@ public class TMDbSignInService {
         }
         
         let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
-        let endpoint = "authentication/session/new"
         
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: paramaters))
-            .validate().responseJSON { response in
+        Alamofire.request(APIRouter.request(config: RequestSessionTokenConfiguration(), queryParams: paramaters, bodyParams: nil)).validate()
+            .responseJSON { response in
                 
                 switch response.result {
                 case .success(let json):

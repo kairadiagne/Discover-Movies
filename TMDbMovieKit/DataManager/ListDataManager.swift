@@ -18,8 +18,8 @@ public class ListDataManager<ItemType: DictionarySerializable>: DataManager<List
     
     // MARK: - Initialize
     
-    init(refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil, errorHandler: ErrorHandling = APIErrorHandler()) {
-        super.init(errorHandler: errorHandler, refreshTimeOut: refreshTimeOut, cacheIdentifier: cacheIdentifier)
+    init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil, errorHandler: ErrorHandling = APIErrorHandler()) {
+        super.init(configuration: configuration, refreshTimeOut: refreshTimeOut, errorHandler: errorHandler, cacheIdentifier: cacheIdentifier)
     }
     
     // MARK: - Calls 
@@ -27,17 +27,17 @@ public class ListDataManager<ItemType: DictionarySerializable>: DataManager<List
     public func loadMore() {
         guard isLoading == false else { return }
         guard let nextPage = cachedData.data?.nextPage else { return }
-        loadOnline(paramaters: paramaters, page: nextPage)
+        loadOnline(paramaters: cachedParams, page: nextPage)
     }
     
-    // MARK: - ResponseHandling
+    // MARK: - Response
     
     override func handle(data: List<ItemType>) {
         if data.page == 1 {
-            cachedData.clear()
-            cachedData.add(data)
+            cachedData.data = nil
+            cachedData.data = data
         } else {
-            cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount , items: data.items)
+             cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount , items: data.items)
         }
         
         postUpdateNofitication()

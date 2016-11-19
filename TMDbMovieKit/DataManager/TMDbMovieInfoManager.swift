@@ -35,12 +35,12 @@ public class TMDbMovieInfoManager {
     // MARK: - API Calls
     
     public func loadInfo() {
-        let parameters: [String: AnyObject] = ["append_to_response": "credits,trailers" as AnyObject]
+        let params: [String: AnyObject] = ["append_to_response": "credits,trailers" as AnyObject]
         
-        let endpoint = "movie/\(movieID)"
+        let configuration = MovieDetailConfiguration(movieID: movieID)
         
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate()
-            .responseObject { (response: DataResponse<MovieInfo>) in
+        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
+            .validate().responseObject { (response: DataResponse<MovieInfo>) in
                 
                 switch response.result {
                 case .success(let data):
@@ -49,7 +49,6 @@ public class TMDbMovieInfoManager {
                     let error = self.errorHandler.categorize(error: error)
                     self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                 }
-            
         }
     }
 
@@ -59,13 +58,13 @@ public class TMDbMovieInfoManager {
             return
         }
         
-        let parameters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
+        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         
         let body: [String: AnyObject] = ["media_type": "movie" as AnyObject, "media_id": movieID as AnyObject, list.name: status as AnyObject]
         
-        let endpoint = "account/\(userID)/\(list.name)"
+        let configuration = ListStatusConfiguration(userID: userID, list: list)
         
-        Alamofire.request(APIRouter.post(endpoint: endpoint, queryParams: parameters, bodyParams: body)).validate()
+        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: body)).validate()
             .responseJSON { (response) in
                 
                 guard response.result.error == nil else {
@@ -73,24 +72,22 @@ public class TMDbMovieInfoManager {
                     self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                     return
                 }
-            
         }
         
     }
 
-    
     public func loadAccountState() {
         guard let sessionID = TMDbSessionInfoStore().sessionID else {
             delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }
         
-        let parameters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
+        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         
-        let endpoint = "movie/\(movieID)/account_states"
+        let configuration = AccountStateConfiguration(movieID: movieID)
         
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: parameters)).validate()
-            .responseObject { (response: DataResponse<AccountState>) in
+        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
+            .validate().responseObject { (response: DataResponse<AccountState>) in
                 
                 switch response.result {
                 case .success(let data):

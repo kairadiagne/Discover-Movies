@@ -14,17 +14,15 @@ public class TMDbSimilarMoviesDataManager: ListDataManager<Movie> {
     
     let movieID: Int
     
+    public var firstPage: [Movie] {
+        return allItems.prefix(20) + []
+    }
+    
     // MARK: - Initialize
     
     public init(movieID: Int) {
         self.movieID = movieID
-        super.init(refreshTimeOut: 0)
+        super.init(configuration: SimilarMoviesRequestConfiguration(movieID: movieID), refreshTimeOut: 0)
     }
-    
-    // MARK: - Endpoint
-    
-    override func endpoint() -> String {
-        return "movie/\(movieID)/similar"
-    }
-    
+
 }

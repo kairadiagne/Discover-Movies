@@ -24,11 +24,14 @@ public class TMDbUserService {
     
     fileprivate let errorHandler: ErrorHandling
     
+    fileprivate let configuration: UserConfiguration
+    
     // MARK: - Initialize
     
     public init() {
         self.sessionInfoProvider = TMDbSessionInfoStore()
         self.errorHandler = APIErrorHandler()
+        self.configuration = UserConfiguration()
     }
     
     // MARK: - API Calls
@@ -39,10 +42,9 @@ public class TMDbUserService {
             return 
         }
         
-        let paramaters: [String: AnyObject] = ["session_id": sessionID as AnyObject]
-        let endpoint = "account"
+        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         
-        Alamofire.request(APIRouter.get(endpoint: endpoint, queryParams: paramaters))
+        Alamofire.request(APIRouter.request(config: configuration, queryParams: params , bodyParams: nil))
             .validate().responseObject { (response: DataResponse<User>) in
                 
                 switch response.result {

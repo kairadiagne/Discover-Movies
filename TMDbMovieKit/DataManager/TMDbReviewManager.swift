@@ -18,13 +18,7 @@ public class TMDbReviewManager: ListDataManager<Review> {
     
     public init(movieID: Int) {
         self.movieID = movieID
-        super.init(refreshTimeOut: 0)
-    }
-    
-    // MARK: - Endpoint
-    
-    override func endpoint() -> String {
-        return "movie/\(movieID)/reviews"
+        super.init(configuration: ReviewRequestConfiguration(movieID: movieID), refreshTimeOut: 0)
     }
 
 }

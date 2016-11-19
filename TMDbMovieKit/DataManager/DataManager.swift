@@ -19,15 +19,17 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     public weak var failureDelegate: DataManagerFailureDelegate?
     
-    let errorHandler: ErrorHandling
+    let requestConfig: RequestConfiguration
     
-    let cacheIdentifier: String?
+    let errorHandler: ErrorHandling
     
     var cachedData: CachedData<ModelType>
     
     let cacheRepository = Repository.cache
     
-    var paramaters = [String: AnyObject]()
+    let cacheIdentifier: String?
+    
+    var cachedParams = [String: AnyObject]()
     
     var isLoading = false
     
@@ -39,7 +41,8 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     // MARK: - Initialize
     
-    init(errorHandler: ErrorHandling, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
+    init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandler(), cacheIdentifier: String? = nil) {
+        self.requestConfig = configuration
         self.errorHandler = errorHandler
         self.cacheIdentifier = cacheIdentifier
         self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
@@ -50,34 +53,8 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
         guard cachedData.needsRefresh || forceOnline || params != nil else { return }
-        
-        if let params = params {
-           paramaters = defaultParamaters().merge(params)
-        } else {
-            paramaters = defaultParamaters()
-        }
-
-        loadOnline(paramaters: paramaters)
-    }
-    
-    // MARK: - Paramaters
-    
-    /**
-     Designated for subclass: Specifies a set of default paramaters that are required for every request
-    */
-    
-    func defaultParamaters() -> [String: AnyObject] {
-        return [:]
-    }
-    
-    // MARK: - Endpoint
-    
-    /** 
-     Designated for subclass: Specfies the endpoint for the GET call
-    */
-    
-    func endpoint() -> String {
-        return ""
+        cachedParams = params ?? [:]
+        loadOnline(paramaters: cachedParams)
     }
 
     // MARK: - Networking
@@ -87,10 +64,9 @@ public class DataManager<ModelType: DictionarySerializable> {
         
         var params = params
         params["page"] = page as AnyObject?
+        cachedParams = params
         
-        let endpoint = self.endpoint()
-        
-        sessionManager.request(APIRouter.get(endpoint: endpoint, queryParams: params))
+        sessionManager.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
             .validate().responseObject { (response: DataResponse<ModelType>) in
                 
                 self.stopLoading()
@@ -105,11 +81,11 @@ public class DataManager<ModelType: DictionarySerializable> {
                 }
         }
     }
-    
-    // MARK: - ResponseHandling
+
+    // MARK: - Response
 
     func handle(data: ModelType) {
-        cachedData.add(data)
+        cachedData.data = data
         postUpdateNofitication()
     }
     
@@ -129,6 +105,11 @@ public class DataManager<ModelType: DictionarySerializable> {
             self.cachedData = cachedData
             self.postUpdateNofitication()
         }
+    }
+    
+    func clear() {
+        cachedData.data = nil
+        cacheRepository.clearData() // For identifier
     }
     
     // MARK: - Loading

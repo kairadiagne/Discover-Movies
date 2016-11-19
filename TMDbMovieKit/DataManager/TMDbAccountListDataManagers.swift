@@ -21,23 +21,9 @@ public class TMDbAccountListDataManager: ListDataManager<Movie> {
     public init(list: TMDbAccountList) {
         self.list = list
         self.sessionInfoProvider = TMDbSessionInfoStore()
-        super.init(refreshTimeOut: 300, cacheIdentifier: list.name)
+        super.init(configuration: AccountListConfiguration(list: list), refreshTimeOut: 0, cacheIdentifier: list.name)
     }
 
-    // MARK: - Endpoint
-    
-    override func endpoint() -> String {
-        guard let userID = sessionInfoProvider.sessionID else { return "" }
-        return "account/\(userID)/\(list.name)/movies"
-    }
-
-    // MARK: - Paramaters
-    
-    override func defaultParamaters() -> [String : AnyObject] {
-        guard let sessionID = sessionInfoProvider.sessionID else { return [:] } 
-        return ["session_id": sessionID as AnyObject]
-    }
-      
 }
 
 

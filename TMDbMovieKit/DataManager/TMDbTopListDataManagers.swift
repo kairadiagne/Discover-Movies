@@ -14,20 +14,14 @@ public class TMDbTopListDataManager: ListDataManager<Movie> {
     
     let sessionInfoProvider: SessionInfoContaining
     
-    let list: TMDbListType
+    let list: TMDbList
     
     // MARK: - Initialize
     
     public init(list: TMDbTopList) {
         self.list = list
         self.sessionInfoProvider = TMDbSessionInfoStore()
-        super.init(refreshTimeOut: 3600, cacheIdentifier: list.name)
-    }
-    
-    // MARK: - Endpoint
-    
-    override func endpoint() -> String {
-        return "movie/\(list.name)"
+        super.init(configuration: TopListRequestConfiguration(list: list), refreshTimeOut: 3600, cacheIdentifier: list.name)
     }
     
 }

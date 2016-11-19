@@ -28,7 +28,6 @@ public struct MovieCredit: DictionarySerializable {
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
-        // No need to archive a MovieCredit
         return [:]
     }
     

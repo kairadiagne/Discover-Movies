@@ -39,7 +39,6 @@ public struct CrewMember: DictionarySerializable, Equatable {
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
-        // No need to archive a CrewMember
         return [:]
     }
     

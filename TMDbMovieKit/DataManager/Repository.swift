@@ -19,7 +19,7 @@ enum RepositoryLocation {
     }
 }
 
-class Repository: NSObject {
+struct Repository {
   
     // MARK: - Properties 
     
@@ -33,7 +33,6 @@ class Repository: NSObject {
     
     init(path: String) {
         self.path = path
-        super.init()
     }
     
     // MARK: - Persistence
@@ -54,6 +53,18 @@ class Repository: NSObject {
         }
         
         return data
+    }
+    
+    func clearData() {
+        
+        fileAccessQueue.async {
+            do {
+                try FileManager().removeItem(atPath: "\(self.path)/data") // TODO: - Identifier
+            } catch {
+                print("Could not clear cache")
+            }
+            
+        }
     }
     
     // MARK: - Location

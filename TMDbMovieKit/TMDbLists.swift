@@ -8,11 +8,11 @@
 
 import Foundation
 
-public protocol TMDbListType {
+public protocol TMDbList {
     var name: String { get }
 }
 
-public enum TMDbTopList: TMDbListType {
+public enum TMDbTopList: TMDbList {
     case popular
     case topRated
     case upcoming
@@ -32,7 +32,7 @@ public enum TMDbTopList: TMDbListType {
     }
 }
 
-public enum TMDbAccountList: TMDbListType {
+public enum TMDbAccountList: TMDbList {
     case favorite
     case watchlist
     

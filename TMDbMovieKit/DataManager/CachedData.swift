@@ -10,46 +10,32 @@ import Foundation
 
 class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
     
-    typealias DataType = ModelType
-    
     // MARK: - Properties
     
-    var data: ModelType?
+    var data: ModelType? {
+        didSet {
+            if data == nil {
+                lastUpdate = nil
+            } else {
+                lastUpdate = Date()
+            }
+        }
+    }
     
     var needsRefresh: Bool {
         guard let lastUpdate = lastUpdate else { return true }
         return Date().timeIntervalSince(lastUpdate) > refreshTimeOut
     }
     
-    var timeLastUpdated: Date? {
-        return lastUpdate
-    }
-    
     let refreshTimeOut: TimeInterval
     
-    fileprivate var lastUpdate: Date?
+    fileprivate(set) var lastUpdate: Date?
     
     // MARK: - Initialize
     
     required init(refreshTimeOut timeOut: TimeInterval) {
-        self.refreshTimeOut = timeOut
+        refreshTimeOut = timeOut
         super.init()
-    }
-    
-    // MARK: - Utils
-    
-    func add(_ data: ModelType) {
-        self.data = data
-        self.lastUpdate = Date()
-    }
-    
-    func clear() {
-        self.data = nil
-        self.lastUpdate = nil
-    }
-    
-    func setLastUpdate() {
-        self.lastUpdate = Date()
     }
     
     // MARK: - NSCoding

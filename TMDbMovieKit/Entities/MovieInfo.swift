@@ -41,7 +41,6 @@ public struct MovieInfo: DictionarySerializable {
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
-        // No need to archive MovieIfo
         return [:]
     }
     

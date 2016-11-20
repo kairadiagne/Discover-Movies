@@ -16,13 +16,7 @@ class AppCoordinator: UINavigationController {
     
     fileprivate let sessionManager: TMDbSessionManager
     
-    fileprivate var popularListManager: TMDbTopListDataManager?
-    
-    fileprivate var nowPlayingListManager: TMDbTopListDataManager?
-    
-    fileprivate var topratedListManager: TMDbTopListDataManager?
-    
-    fileprivate var upcomingListManager: TMDbTopListDataManager?
+    fileprivate var topListProxy: TopListDataManageProxy?
     
     fileprivate var favoritesManager: TMDbAccountListDataManager?
     
@@ -61,7 +55,11 @@ class AppCoordinator: UINavigationController {
     // MARK: - Start
     
     func start() {
-        let topListController = TopListViewController(signedIn: signedIn)
+        if topListProxy == nil {
+            topListProxy = TopListDataManageProxy()
+        }
+        
+        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy!)
         let navigationController = UINavigationController(rootViewController: topListController)
         let menuViewController = MenuViewController(sessionManager: sessionManager)
         revealVC = SWRevealViewController(rearViewController: menuViewController, frontViewController: navigationController)
@@ -95,8 +93,12 @@ class AppCoordinator: UINavigationController {
     }
     
     fileprivate func showTopListViewController(animated: Bool) {
-        let topListViewController = TopListViewController(signedIn: signedIn)
-        let navigationController = UINavigationController(rootViewController: topListViewController)
+        if topListProxy == nil {
+            topListProxy = TopListDataManageProxy()
+        }
+        
+        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy!)
+        let navigationController = UINavigationController(rootViewController: topListController)
         revealVC?.pushFrontViewController(navigationController, animated: animated)
     }
     
@@ -151,10 +153,7 @@ class AppCoordinator: UINavigationController {
         sessionManager.signOut()
         
         // Clear cache
-        popularListManager?.clear()
-        nowPlayingListManager?.clear()
-        topratedListManager?.clear()
-        upcomingListManager?.clear()
+        topListProxy?.clearCaches()
         favoritesManager?.clear()
         watchListManager?.clear()
         

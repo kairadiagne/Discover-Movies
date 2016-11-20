@@ -22,13 +22,7 @@ class TopListViewController: BaseViewController {
     
     @IBOutlet var topListView: topListView!
     
-    fileprivate let popularListManager = TMDbTopListDataManager(list: .popular)
-    
-    fileprivate let topRatedListManager = TMDbTopListDataManager(list: .topRated)
-    
-    fileprivate let upcomingListManager = TMDbTopListDataManager(list: .upcoming)
-    
-    fileprivate let nowPlayingListManager = TMDbTopListDataManager(list: .nowPlaying)
+    fileprivate let topListProxy: TopListDataManageProxy
     
     fileprivate let popularListDataSource = MovieListDataSource()
     
@@ -44,8 +38,9 @@ class TopListViewController: BaseViewController {
     
     // MARK: - Initialize
     
-    init(signedIn: Bool) {
+    init(signedIn: Bool, toplistProxy: TopListDataManageProxy) {
         self.signedIn = signedIn
+        self.topListProxy = toplistProxy
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -72,10 +67,7 @@ class TopListViewController: BaseViewController {
         
         topListView.refreshControl.addTarget(self, action: #selector(TopListViewController.refresh(control:)), for: .valueChanged)
         
-        popularListManager.failureDelegate = self
-        topRatedListManager.failureDelegate = self
-        upcomingListManager.failureDelegate = self
-        nowPlayingListManager.failureDelegate = self
+        topListProxy.register(failureDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,11 +75,7 @@ class TopListViewController: BaseViewController {
         
         let loadingSelector = #selector(TopListViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(TopListViewController.dataManagerDidUpdate(notification:))
-        
-        popularListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        topRatedListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        upcomingListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        nowPlayingListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        topListProxy.addObserver(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         // Reload data if needed
         load(list: currentList)
@@ -96,10 +84,7 @@ class TopListViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        popularListManager.remove(observer: self)
-        topRatedListManager.remove(observer: self)
-        upcomingListManager.remove(observer: self)
-        nowPlayingListManager.remove(observer: self)
+        topListProxy.remove(observer: self)
     }
     
     // MARK: - Actions
@@ -128,7 +113,7 @@ class TopListViewController: BaseViewController {
     
     private func load(list: TMDbTopList) {
         let dataSource = datasource(forList: list)
-        let manager = self.manager(forList: list)
+        let manager = topListProxy.manager(for: list)
         
         topListView.tableView.dataSource = dataSource
         
@@ -143,16 +128,16 @@ class TopListViewController: BaseViewController {
     // MARK: - Refresh
     
     @objc private func refresh(control: UIRefreshControl) {
-        let manager = self.manager(forList: currentList)
+        let manager = topListProxy.manager(for: currentList)
         manager.reloadIfNeeded(forceOnline: true)
     }
  
     // MARK: - DataManagerNotifications 
     
     override func dataManagerDidUpdate(notification: Notification) {
-        let manager = self.manager(forList: currentList)
-        let datasource = self.datasource(forList: currentList)
-        datasource.items = manager.allItems
+        let manager = topListProxy.manager(for: currentList)
+        let dataSource = datasource(forList: currentList)
+        dataSource.items = manager.allItems
         
         topListView.set(state: .idle)
         topListView.tableView.reloadData()
@@ -168,19 +153,6 @@ class TopListViewController: BaseViewController {
     }
     
     // MARK: - Utils
-    
-    fileprivate func manager(forList list: TMDbTopList) -> TMDbTopListDataManager {
-        switch list {
-        case .popular:
-            return popularListManager
-        case .nowPlaying:
-            return nowPlayingListManager
-        case .topRated:
-            return topRatedListManager
-        case .upcoming:
-            return upcomingListManager
-        }
-    }
     
     fileprivate func datasource(forList list: TMDbTopList) -> MovieListDataSource {
         switch list {
@@ -214,7 +186,7 @@ extension TopListViewController: UITableViewDelegate {
         if topListView.state == .loading && datasource(forList: currentList).isEmpty {
             cell.isHidden = true 
         } else if datasource(forList: currentList).itemCount - 10 == indexPath.row {
-            manager(forList: currentList).loadMore()
+            topListProxy.manager(for: currentList).loadMore()
         }
     }
     

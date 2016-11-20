@@ -29,15 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-    
-    // func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        
-        // if let navigationController = revealViewController?.frontViewController as? UINavigationController, let _ = navigationController.visibleViewController as? VideoViewController {
-            // return [.portrait, .landscapeLeft, .landscapeRight]
-        // }
-        
-        // return .portrait
-    // }
 
 }
 

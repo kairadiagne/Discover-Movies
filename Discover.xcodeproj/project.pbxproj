@@ -212,7 +212,7 @@
 		111942FF1CCB8EE4001CF39B /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		111943001CCB8EE4001CF39B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		111943011CCB8EE4001CF39B /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TMDbImageRouter.swift; path = Router/TMDbImageRouter.swift; sourceTree = "<group>"; };
+		1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbImageRouter.swift; sourceTree = "<group>"; };
 		111EC4461D436D24007DFA42 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		111EC4481D436D2F007DFA42 /* TMDbLists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbLists.swift; sourceTree = "<group>"; };
 		11290AEA1D981F0700AC4231 /* NoDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataCell.swift; sourceTree = "<group>"; };
@@ -496,8 +496,7 @@
 				EA288F2D1CF59057004FAEEF /* APIRouter.swift */,
 				11D5506D1DE1044400AAEA4E /* RequestConfigurations.swift */,
 			);
-			name = Request;
-			path = Router;
+			path = Request;
 			sourceTree = "<group>";
 		};
 		1119433A1CCB90C8001CF39B /* Extensions */ = {

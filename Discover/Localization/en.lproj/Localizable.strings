@@ -44,6 +44,7 @@ ratingLabelText = "Rating:";
 unknownGenreText = "Unknown";
 unknownReleaseText = "Unknown";
 unknownDirectorText = "Unknown";
+noDescriptionText = "Description unavailable";
 noSimilarMoviesText = "Similar movies unavailable";
 noCastmembersText = "Info about cast unavailable";
 seeAllButtonText = "See all";

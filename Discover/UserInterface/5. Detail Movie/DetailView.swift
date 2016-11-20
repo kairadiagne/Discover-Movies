@@ -133,7 +133,7 @@ class DetailView: UIView {
     
     func configure(withMovie movie: Movie, signedIn: Bool) {
         titleLabel.text = movie.title
-        descriptionLabel.text = movie.overview
+        descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : NSLocalizedString("noDescriptionText", comment: "")
         genreValueLabel.text = movie.mainGenre()?.name ?? NSLocalizedString("unknownGenreText", comment: "")
         ratingValueLabel.text =  "\(movie.rating)\\10.0"
         

@@ -10,18 +10,30 @@ import Foundation
 
 public class TMDbTopListDataManager: ListDataManager<Movie> {
     
-    // MARK: - Properties
-    
-    let sessionInfoProvider: SessionInfoContaining
-    
     let list: TMDbList
     
     // MARK: - Initialize
     
     public init(list: TMDbTopList) {
         self.list = list
-        self.sessionInfoProvider = TMDbSessionInfoStore()
         super.init(configuration: TopListRequestConfiguration(list: list), refreshTimeOut: 3600, cacheIdentifier: list.name)
+        
+    }
+    
+    override func handle(data: List<Movie>) {
+        if data.page == 1 {
+            cachedData.data = data
+        } else {
+            for item in allItems {
+                if data.items.contains(item) {
+                    print("Duplicate found: \(item)")
+                }
+            }
+            cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount , items: data.items)
+        }
+        
+        postUpdateNofitication()
+        
     }
     
 }

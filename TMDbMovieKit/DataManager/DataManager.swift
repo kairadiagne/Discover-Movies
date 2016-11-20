@@ -21,11 +21,9 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     let requestConfig: RequestConfiguration
     
-    let errorHandler: ErrorHandling
+    let cacheRepository = Repository.cache
     
     var cachedData: CachedData<ModelType>
-    
-    let cacheRepository = Repository.cache
     
     let cacheIdentifier: String?
     
@@ -41,9 +39,8 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     // MARK: - Initialize
     
-    init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, errorHandler: ErrorHandling = APIErrorHandler(), cacheIdentifier: String? = nil) {
+    init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
         self.requestConfig = configuration
-        self.errorHandler = errorHandler
         self.cacheIdentifier = cacheIdentifier
         self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
         self.loadData()
@@ -76,8 +73,11 @@ public class DataManager<ModelType: DictionarySerializable> {
                     self.handle(data: data)
                     self.persistDataIfNeeded()
                 case .failure(let error):
-                    let error = self.errorHandler.categorize(error: error)
-                    self.failureDelegate?.dataManager(self, didFailWithError: error)
+                    if let error = error as? APIError {
+                       self.failureDelegate?.dataManager(self, didFailWithError: error)
+                    } else {
+                        self.failureDelegate?.dataManager(self, didFailWithError: .generic)
+                    }
                 }
         }
     }
@@ -107,9 +107,12 @@ public class DataManager<ModelType: DictionarySerializable> {
         }
     }
     
-    func clear() {
+    public func clear() {
         cachedData.data = nil
-        cacheRepository.clearData() // For identifier
+        
+        if let cacheIdentifier = cacheIdentifier {
+            cacheRepository.clearData(withIdentifier: cacheIdentifier)
+        }
     }
     
     // MARK: - Loading

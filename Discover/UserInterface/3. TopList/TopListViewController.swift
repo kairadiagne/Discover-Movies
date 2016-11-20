@@ -40,6 +40,19 @@ class TopListViewController: BaseViewController {
     
     fileprivate var currentList: TMDbTopList = .popular
     
+    fileprivate let signedIn: Bool
+    
+    // MARK: - Initialize
+    
+    init(signedIn: Bool) {
+        self.signedIn = signedIn
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -192,7 +205,7 @@ extension TopListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = datasource(forList: currentList).item(atIndex: indexPath.row) else { return }
-        let detailViewController = DetailViewController(movie: movie)
+        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
         navigationController?.delegate = detailViewController 
         navigationController?.pushViewController(detailViewController, animated: true)
     }

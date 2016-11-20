@@ -27,11 +27,14 @@ class GenericViewController: BaseViewController {
     
     fileprivate let titleString: String
     
+    fileprivate let signedIn: Bool
+    
     // MARK: - Initialize
     
-    init(dataManager: ListDataManager<Movie>, titleString: String) {
+    init(dataManager: ListDataManager<Movie>, titleString: String, signedIn: Bool) {
         self.dataManager = dataManager
         self.titleString = titleString
+        self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -114,7 +117,7 @@ extension GenericViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-        let detailViewController = DetailViewController(movie: movie)
+        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
         navigationController?.delegate = detailViewController
         navigationController?.pushViewController(detailViewController, animated: true)
     }

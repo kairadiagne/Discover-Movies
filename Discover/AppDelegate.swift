@@ -8,7 +8,6 @@
 
 import UIKit
 import TMDbMovieKit
-import SWRevealViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,39 +15,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    var revealViewController: SWRevealViewController!
-    
-    var menuViewController: MenuViewController!
+    fileprivate(set) var appCoordinator: AppCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
-            let keys = NSDictionary(contentsOfFile: path), let APIKey = keys["APIKey"] as? String {
-            TMDbSessionManager.shared.registerAPIKey(APIKey)
-        }
-        
-        let topListViewController = TopListViewController()
-        let frontViewController = UINavigationController(rootViewController: topListViewController)
-        menuViewController =  MenuViewController() // Rear view controlelr
-        revealViewController = SWRevealViewController(rearViewController: menuViewController, frontViewController: frontViewController)
+        appCoordinator = AppCoordinator()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = revealViewController
+        window?.rootViewController = appCoordinator
         window?.makeKeyAndVisible()
         
         Theme.apply()
- 
+
         return true
     }
     
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+    // func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         
-        if let navigationController = revealViewController?.frontViewController as? UINavigationController, let _ = navigationController.visibleViewController as? VideoViewController {
-            return [.portrait, .landscapeLeft, .landscapeRight]
-        }
+        // if let navigationController = revealViewController?.frontViewController as? UINavigationController, let _ = navigationController.visibleViewController as? VideoViewController {
+            // return [.portrait, .landscapeLeft, .landscapeRight]
+        // }
         
-        return .portrait
-    }
+        // return .portrait
+    // }
 
 }
+
+
+
+
 

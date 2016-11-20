@@ -23,13 +23,17 @@ public class TMDbMovieInfoManager {
     
     public let movieID: Int
     
-    fileprivate let errorHandler: ErrorHandling
+    fileprivate let sessionInfoProvider: SessionInfoContaining
     
     // MARK: - Initialize
     
-    public init(movieID: Int) {
-        self.errorHandler = APIErrorHandler()
+    public convenience init(movieID: Int) {
+        self.init(movieID: movieID, sessionInfoProvider: TMDbSessionInfoStore())
+    }
+    
+    init(movieID: Int, sessionInfoProvider: SessionInfoContaining) {
         self.movieID = movieID
+        self.sessionInfoProvider = sessionInfoProvider
     }
     
     // MARK: - API Calls
@@ -40,20 +44,23 @@ public class TMDbMovieInfoManager {
         let configuration = MovieDetailConfiguration(movieID: movieID)
         
         Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
-            .validate().responseObject { (response: DataResponse<MovieInfo>) in
+            .responseObject { (response: DataResponse<MovieInfo>) in
                 
                 switch response.result {
                 case .success(let data):
                     self.delegate?.movieInfoManager(self, didLoadInfo: data, forMovieWIthID: self.movieID)
                 case .failure(let error):
-                    let error = self.errorHandler.categorize(error: error)
-                    self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+                    if let error = error as? APIError {
+                         self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+                    } else {
+                         self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
+                    }
                 }
         }
     }
 
     public func toggleStatusOfMovieInList(_ list: TMDbAccountList, status: Bool) {
-        guard let sessionID = TMDbSessionInfoStore().sessionID, let userID = TMDbSessionInfoStore().user?.id else {
+        guard let sessionID = sessionInfoProvider.sessionID, let userID = TMDbSessionInfoStore().user?.id else {
             delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }
@@ -64,11 +71,11 @@ public class TMDbMovieInfoManager {
         
         let configuration = ListStatusConfiguration(userID: userID, list: list)
         
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: body)).validate()
+        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: body))
             .responseJSON { (response) in
                 
                 guard response.result.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.result.error!)
+                    let error = APIErrorHandler.categorize(error: response.result.error!)
                     self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                     return
                 }
@@ -77,7 +84,7 @@ public class TMDbMovieInfoManager {
     }
 
     public func loadAccountState() {
-        guard let sessionID = TMDbSessionInfoStore().sessionID else {
+        guard let sessionID = sessionInfoProvider.sessionID else {
             delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }
@@ -87,14 +94,17 @@ public class TMDbMovieInfoManager {
         let configuration = AccountStateConfiguration(movieID: movieID)
         
         Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
-            .validate().responseObject { (response: DataResponse<AccountState>) in
+            .responseObject { (response: DataResponse<AccountState>) in
                 
                 switch response.result {
                 case .success(let data):
                     self.delegate?.movieInfoManager(self, movieWithID: self.movieID, inFavorites: data.favoriteStatus, inWatchList: data.watchlistStatus)
                 case .failure(let error):
-                    let error = self.errorHandler.categorize(error: error)
-                    self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+                    if let error = error as? APIError {
+                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+                    } else {
+                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
+                    }
                 }
         }
 

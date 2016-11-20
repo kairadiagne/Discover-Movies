@@ -12,12 +12,6 @@ import SWRevealViewController
 
 class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
-    // MARK: - Properties
-    
-    var signedIn: Bool {
-        return TMDbSessionManager.shared.signInStatus == .signedin
-    }
-
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -25,16 +19,7 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
         revealViewController().tapGestureRecognizer()
         revealViewController().panGestureRecognizer()
-        
         revealViewController().delegate = self
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if TMDbSessionManager.shared.signInStatus == .unkown {
-            showSignInViewController()
-        }
     }
     
     // MARK: - DataManagerNotifications
@@ -48,25 +33,21 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     // MARK: - DataManagerFailureDelegate
     
     func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+        
     }
     
     // MARK: - Menu
     
     func addMenuButton() {
-        guard let revealViewController = self.revealViewController() else { return }
+        guard let revealViewController = revealViewController() else {
+            return
+        }
         
         let menuButton = UIBarButtonItem()
         menuButton.image = UIImage.menuIcon()
         menuButton.target = revealViewController
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         navigationItem.leftBarButtonItem = menuButton
-    }
-    
-    // MARK: - Sign in 
-    
-    func showSignInViewController() {
-        let signInViewController = SignInViewController()
-        present(signInViewController, animated: true, completion: nil)
     }
 
 }

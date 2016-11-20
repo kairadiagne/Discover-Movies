@@ -9,7 +9,7 @@
 import Foundation
 import Locksmith
 
-protocol SessionInfoContaining {
+protocol SessionInfoContaining { // Remove
     var sessionID: String? { get }
     var user: User? { get }
     var APIKey: String { get }
@@ -19,7 +19,7 @@ protocol SessionInfoContaining {
     func saveAPIKey(_ key: String)
 }
 
-class TMDbSessionInfoStore: SessionInfoContaining {
+class TMDbSessionInfoStore: SessionInfoContaining { // Remove sessionInfoContaining
     
     // MARK: - Types
     
@@ -41,8 +41,10 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         return User(dictionary: userDict)
     }
     
+    // Memory cache for apikey 
+    
     var APIKey: String {
-        return  UserDefaults.standard.string(forKey: Keys.APIKey) ?? ""
+        return  UserDefaults.standard.string(forKey: Keys.APIKey) ?? "" // Save Hashed version // No user defaults just from plist
     }
     
     // MARK: - Persistence
@@ -52,7 +54,6 @@ class TMDbSessionInfoStore: SessionInfoContaining {
             try Locksmith.saveData(data: [Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
             print("Error saving sessionID from keychain")
-
         }
     }
     

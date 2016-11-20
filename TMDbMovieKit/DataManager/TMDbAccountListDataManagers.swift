@@ -18,9 +18,13 @@ public class TMDbAccountListDataManager: ListDataManager<Movie> {
 
     // MARK: - Initialize
     
-    public init(list: TMDbAccountList) {
+    public convenience init(list: TMDbAccountList) {
+        self.init(list: list, sessionInfoProvider: TMDbSessionInfoStore())
+    }
+    
+    init(list: TMDbAccountList, sessionInfoProvider: SessionInfoContaining) {
         self.list = list
-        self.sessionInfoProvider = TMDbSessionInfoStore()
+        self.sessionInfoProvider = sessionInfoProvider
         super.init(configuration: AccountListConfiguration(list: list), refreshTimeOut: 0, cacheIdentifier: list.name)
     }
 

@@ -55,11 +55,12 @@ struct Repository {
         return data
     }
     
-    func clearData() {
+    func clearData(withIdentifier identifier: String) {
         
         fileAccessQueue.async {
             do {
-                try FileManager().removeItem(atPath: "\(self.path)/data") // TODO: - Identifier
+                print("\(self.path)/data")
+                try FileManager().removeItem(atPath: self.file(forIdentifier: identifier))
             } catch {
                 print("Could not clear cache")
             }

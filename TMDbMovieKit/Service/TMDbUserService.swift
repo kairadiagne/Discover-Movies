@@ -22,15 +22,12 @@ public class TMDbUserService {
     
     fileprivate let sessionInfoProvider: SessionInfoContaining
     
-    fileprivate let errorHandler: ErrorHandling
-    
     fileprivate let configuration: UserConfiguration
     
     // MARK: - Initialize
     
     public init() {
         self.sessionInfoProvider = TMDbSessionInfoStore()
-        self.errorHandler = APIErrorHandler()
         self.configuration = UserConfiguration()
     }
     
@@ -52,10 +49,12 @@ public class TMDbUserService {
                     self.sessionInfoProvider.saveUser(user)
                     self.delegate?.user(service: self, didLoadUserInfo: user)
                 case .failure(let error):
-                    let error = self.errorHandler.categorize(error: error)
-                    self.delegate?.user(service: self, didFailWithError: error)
+                    if let error = error as? APIError {
+                        self.delegate?.user(service: self, didFailWithError: error)
+                    } else {
+                        self.delegate?.user(service: self, didFailWithError: .generic)
+                    }
                 }
-
         }
     }
         

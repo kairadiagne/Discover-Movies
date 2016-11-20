@@ -14,8 +14,9 @@ extension DataRequest {
     @discardableResult
     func responseObject<T: DictionarySerializable>(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
         let responseSerializer = DataResponseSerializer<T> { request, response, data, error in
+            
             guard error == nil else {
-                return .failure(error!)
+                return .failure(APIErrorHandler.categorize(error: error!))
             }
             
             // Parse respone as JSON
@@ -24,13 +25,11 @@ extension DataRequest {
             
             // Create model objects
             guard case let .success(jsonObject) = result else {
-                let error = NSError()
-                return .failure(error)
+                return .failure(APIErrorHandler.categorize(error: result.error!))
             }
             
             guard let responseDict = jsonObject as? [String: AnyObject], let responseObject = T(dictionary: responseDict) else {
-                let error = NSError()
-                return .failure(error)
+                return .failure(APIError.generic)
             }
             
             return .success(responseObject)
@@ -40,5 +39,4 @@ extension DataRequest {
     }
 
 }
-
 

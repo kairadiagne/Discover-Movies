@@ -28,14 +28,11 @@ class MenuTableViewCell: UITableViewCell {
     
     // MARK: - Configure
     
-    func configure(title: String, image: UIImage?, signedIn: Bool? = nil) {
+    func configure(title: String, image: UIImage?, enable: Bool) {
         titleLabel.text = title
         iconImageView.image = image
-        
-        if let signedIn = signedIn {
-            titleLabel.isEnabled = signedIn ? true : false
-            isUserInteractionEnabled = signedIn ? true : false
-        }
+        titleLabel.isEnabled = enable
+        isUserInteractionEnabled = enable
     }
     
 }

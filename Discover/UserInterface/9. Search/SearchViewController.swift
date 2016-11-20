@@ -24,6 +24,19 @@ class SearchViewController: BaseViewController {
     
     fileprivate var searchQuery = ""
     
+    fileprivate let signedIn: Bool
+    
+    // MARK: - Initialize
+    
+    init(signedIn: Bool) {
+        self.signedIn = signedIn
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -123,7 +136,7 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
         
-        let detailViewController = DetailViewController(movie: movie)
+        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
         navigationController?.delegate = detailViewController
         navigationController?.pushViewController(detailViewController, animated: true)
         

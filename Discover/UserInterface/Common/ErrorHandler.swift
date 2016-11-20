@@ -63,10 +63,10 @@ class ErrorHandler {
         currentBanner?.didDismissBlock = { [weak self] in
             guard let strongSelf = self else { return }
             
-            // If the dismissed banner was displaying an authorization error we need to sign out the user
+            // Sign out user in case of authorization error
             if strongSelf.currentError == .unAuthorized {
-                let menuViewController = (UIApplication.shared.delegate as? AppDelegate)?.menuViewController
-                menuViewController?.signout()
+                let appCoordinator = (UIApplication.shared.delegate as? AppDelegate)?.appCoordinator
+                appCoordinator?.signOut()
             }
             
             // Clear cached values

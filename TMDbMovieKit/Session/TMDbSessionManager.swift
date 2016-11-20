@@ -24,8 +24,6 @@ public class TMDbSessionManager {
     
     // MARK: - Properties
     
-    public static let shared = TMDbSessionManager()
-    
     public var user: User? {
         return sessionInfoProvider.user
     }
@@ -45,9 +43,13 @@ public class TMDbSessionManager {
         }
     }
     
+    public convenience init() {
+        self.init(sessionInfo: TMDbSessionInfoStore())
+    }
+    
     // MARK: - API Key
     
-    public func registerAPIKey(_ key: String) {
+    public func registerAPIKey(_ key: String) { // Candidate form removal 
         sessionInfoProvider.saveAPIKey(key)
     }
     
@@ -59,11 +61,11 @@ public class TMDbSessionManager {
         return .unkown
     }
     
+    // MARK: - Public Mode
+    
     fileprivate var publicModeActivated: Bool {
         return UserDefaults.standard.bool(forKey: "userIsInpublicMode")
     }
-    
-    // MARK: - Public Mode
     
     public func activatePublicMode() {
         UserDefaults.standard.set(true, forKey: "userIsInpublicMode")
@@ -72,6 +74,7 @@ public class TMDbSessionManager {
     public func deactivatePublicMode() {
         UserDefaults.standard.set(false, forKey: "userIsInpublicMode")
     }
+    
     
     // MARK: - Sign Out
     

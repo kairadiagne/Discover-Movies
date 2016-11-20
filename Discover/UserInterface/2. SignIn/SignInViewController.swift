@@ -10,11 +10,23 @@ import UIKit
 import TMDbMovieKit
 import SafariServices
 
+protocol SignInViewControllerDelegate: class {
+    func signInViewControllerDidFinish()
+}
+
 class SignInViewController: UIViewController {
     
     // MARK: - Properties
 
     @IBOutlet var signInView: SignInView!
+    
+    weak var delegate: SignInViewControllerDelegate?
+    
+    fileprivate let sessionManager: TMDbSessionManager
+    
+    fileprivate let signInService: TMDbSignInService
+    
+    fileprivate let userService: TMDbUserService
     
     fileprivate var safariViewController: SFSafariViewController! {
         didSet {
@@ -28,9 +40,18 @@ class SignInViewController: UIViewController {
         }
     }
     
-    fileprivate let signInService = TMDbSignInService()
+    // MARK: - Initialize 
     
-    fileprivate let userService = TMDbUserService()
+    init(sessionManager: TMDbSessionManager, signInService: TMDbSignInService = TMDbSignInService(), userService: TMDbUserService = TMDbUserService()) {
+        self.sessionManager = sessionManager
+        self.signInService = signInService
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life cycle
 
@@ -51,16 +72,10 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInlaterButtonClick(_ sender: UIButton) {
-        TMDbSessionManager.shared.activatePublicMode()
-        dismissSignInViewController()
+        sessionManager.activatePublicMode()
+        delegate?.signInViewControllerDidFinish()
     }
     
-    // MARK: - Navigation
-    
-    func dismissSignInViewController() {
-        presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-
 }
 
 // MARK: - TMDbSignInDelegate
@@ -84,7 +99,7 @@ extension SignInViewController: TMDbSignInDelegate {
     func signInServiceDidSignIn(_service service: TMDbSignInService) {
         signInView.set(state: .idle)
         userService.getUserInfo()
-        dismissSignInViewController()
+        delegate?.signInViewControllerDidFinish()
     }
     
 }

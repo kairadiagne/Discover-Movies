@@ -26,13 +26,13 @@ class AccountListController: BaseViewController {
     
     fileprivate let accountList: TMDbAccountList
     
-    fileprivate let accountListManager: TMDbAccountListDataManager // TODO: - Fix bug (on logut cach should be cleared)
+    fileprivate let accountListManager: TMDbAccountListDataManager
     
     // MARK: - Initialize
     
-    init(list aList: TMDbAccountList) {
+    init(list aList: TMDbAccountList, manager: TMDbAccountListDataManager) {
         self.accountList = aList
-        self.accountListManager = TMDbAccountListDataManager(list: aList)
+        self.accountListManager = manager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -113,7 +113,7 @@ class AccountListController: BaseViewController {
     // MARK: Navigation 
     
     func showDetailViewControllerForMovie(_ movie: Movie) {
-        let detailViewController = DetailViewController(movie: movie)
+        let detailViewController = DetailViewController(movie: movie, signedIn: true)
         navigationController?.pushViewController(detailViewController, animated: false)
     }
     

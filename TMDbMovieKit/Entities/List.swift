@@ -18,7 +18,7 @@ public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
     fileprivate(set) var items: [ModelType] = []
     
     var nextPage: Int? {
-        return page < pageCount ? page + 1 : nil
+        return page < pageCount ? page + 1 : nil // Error when movies are being left out becauset he are incomplete
     }
     
     // MARK: - Initialize

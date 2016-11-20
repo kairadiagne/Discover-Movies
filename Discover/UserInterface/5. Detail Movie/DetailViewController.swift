@@ -27,12 +27,15 @@ class DetailViewController: BaseViewController {
     
     fileprivate var videoController: VideoViewController?
     
+    fileprivate let signedIn: Bool
+    
     // MARK: - Initialize
     
-    init(movie: Movie) {
+    init(movie: Movie, signedIn: Bool) {
         self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
         self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.id)
         self.movie = movie
+        self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -121,7 +124,7 @@ class DetailViewController: BaseViewController {
     }
 
     @IBAction func reviewsButtonTap(_ sender: UIButton) {
-        let reviewViewController = ReviewViewController(movie: movie)
+        let reviewViewController = ReviewViewController(movie: movie, signedIn: signedIn)
         navigationController?.pushViewController(reviewViewController, animated: true)
     }
     
@@ -135,7 +138,8 @@ class DetailViewController: BaseViewController {
     }
     
     @IBAction func seeAllButtonClick(_ sender: UIButton) {
-        let similarMovieListController = GenericViewController(dataManager: similarMoviesManager, titleString: NSLocalizedString("similarMoviesVCTitle", comment: ""))
+        let title = NSLocalizedString("similarMoviesVCTitle", comment: "")
+        let similarMovieListController = GenericViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
         navigationController?.pushViewController(similarMovieListController, animated: true)
     }
 
@@ -157,7 +161,7 @@ extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
-        let detailViewController = DetailViewController(movie: movie)
+        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
         navigationController?.delegate = detailViewController
         navigationController?.pushViewController(detailViewController, animated: true)
     }

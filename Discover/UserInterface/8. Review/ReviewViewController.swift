@@ -27,11 +27,14 @@ class ReviewViewController: BaseViewController {
     
     fileprivate let reviewManager: TMDbReviewManager
     
+    fileprivate let signedIn: Bool
+    
     // MARK: - Initialize
     
-    init(movie: Movie) {
+    init(movie: Movie, signedIn: Bool) {
         self.movie = movie
         self.reviewManager = TMDbReviewManager(movieID: movie.id)
+        self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
     }
     

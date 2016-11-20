@@ -43,39 +43,38 @@ public class TMDbSignInService {
     
     fileprivate let sessionInfoProvider: SessionInfoContaining
     
-    fileprivate let errorHandler: ErrorHandling
-    
     fileprivate var token: RequestToken?
     
     // MARK: - Initialize
     
     public init() {
-        self.errorHandler = APIErrorHandler()
         self.sessionInfoProvider = TMDbSessionInfoStore()
     }
     
     // MARK: - Sign In 
     
     public func requestToken() {
-        Alamofire.request(APIRouter.request(config: RequestTokenConfiguration(), queryParams: nil, bodyParams: nil)).validate()
-            .responseObject { (response: DataResponse<RequestToken>) in
-
-                guard response.result.error == nil else {
-                    let error = self.errorHandler.categorize(error: response.result.error!)
-                    self.delegate?.signIn(service: self, didFailWithError: error)
-                    return
-                }
+        Alamofire.request(APIRouter.request(config: RequestTokenConfiguration(), queryParams: nil, bodyParams: nil))
+            .validate().responseObject { (response: DataResponse<RequestToken>) in
                 
-                if let requestToken = response.result.value {
-                    self.token = requestToken
+                switch response.result {
+                case .success(let token):
+                    self.token = token
                     
-                    let path: String = "\(TMDbAPI.AuthenticateURL)\(requestToken.token)"
+                    let path: String = "\(TMDbAPI.AuthenticateURL)\(token.token)"
                     
                     if let url = URL(string: path) {
                         self.delegate?.signIn(service: self, didReceiveAuthorizationURL: url)
                     } else {
                         self.delegate?.signIn(service: self, didFailWithError: .generic)
                     }
+                case .failure(let error):
+                    if let error = error as? APIError {
+                        self.delegate?.signIn(service: self, didFailWithError: error)
+                    } else {
+                        self.delegate?.signIn(service: self, didFailWithError: .generic)
+                    }
+                    
                 }
         }
     }
@@ -88,8 +87,8 @@ public class TMDbSignInService {
         
         let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
         
-        Alamofire.request(APIRouter.request(config: RequestSessionTokenConfiguration(), queryParams: paramaters, bodyParams: nil)).validate()
-            .responseJSON { response in
+        Alamofire.request(APIRouter.request(config: RequestSessionTokenConfiguration(), queryParams: paramaters, bodyParams: nil))
+            .validate().responseJSON { response in
                 
                 switch response.result {
                 case .success(let json):
@@ -100,7 +99,7 @@ public class TMDbSignInService {
                     self.delegate?.signInServiceDidSignIn(_service: self)
     
                 case .failure(let error):
-                    let error = self.errorHandler.categorize(error: error)
+                    let error = APIErrorHandler.categorize(error: error)
                     self.delegate?.signIn(service: self, didFailWithError: error)
                 }
         }

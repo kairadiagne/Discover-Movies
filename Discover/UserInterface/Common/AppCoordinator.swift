@@ -61,7 +61,7 @@ class AppCoordinator: UINavigationController {
     // MARK: - Start
     
     func start() {
-        let topListController = TopListViewController(signedIn: true)
+        let topListController = TopListViewController(signedIn: signedIn)
         let navigationController = UINavigationController(rootViewController: topListController)
         let menuViewController = MenuViewController(sessionManager: sessionManager)
         revealVC = SWRevealViewController(rearViewController: menuViewController, frontViewController: navigationController)
@@ -85,7 +85,7 @@ class AppCoordinator: UINavigationController {
     
     // MARK: - ViewControllers
     
-    func showSignInViewController() {
+    fileprivate func showSignInViewController() {
         let signInViewController = SignInViewController(sessionManager: sessionManager)
         signInViewController.delegate = self
         
@@ -94,13 +94,13 @@ class AppCoordinator: UINavigationController {
         }
     }
     
-    func showTopListViewController(animated: Bool) {
+    fileprivate func showTopListViewController(animated: Bool) {
         let topListViewController = TopListViewController(signedIn: signedIn)
         let navigationController = UINavigationController(rootViewController: topListViewController)
         revealVC?.pushFrontViewController(navigationController, animated: animated)
     }
     
-    func showWatchListViewController() {
+    fileprivate func showWatchListViewController() {
         if watchListManager == nil {
             watchListManager = TMDbAccountListDataManager(list: .watchlist)
         }
@@ -110,7 +110,7 @@ class AppCoordinator: UINavigationController {
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
-    func showFavoritesViewController() {
+    fileprivate func showFavoritesViewController() {
         if favoritesManager == nil {
             favoritesManager = TMDbAccountListDataManager(list: .favorite)
         }
@@ -120,13 +120,13 @@ class AppCoordinator: UINavigationController {
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
-    func showSearchViewController() {
+    fileprivate func showSearchViewController() {
         let searchViewController = SearchViewController(signedIn: signedIn)
         let navigationController = UINavigationController(rootViewController: searchViewController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
-    func showAboutViewController() {
+    fileprivate func showAboutViewController() {
         let aboutViewController = AboutViewController() // For now no sign in status
         let navigationConttoller = UINavigationController(rootViewController: aboutViewController)
         revealVC?.pushFrontViewController(navigationConttoller, animated: true)

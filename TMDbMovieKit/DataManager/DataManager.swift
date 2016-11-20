@@ -41,8 +41,8 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
         self.requestConfig = configuration
-        self.cacheIdentifier = cacheIdentifier
         self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
+        self.cacheIdentifier = cacheIdentifier
         self.loadData()
     }
     

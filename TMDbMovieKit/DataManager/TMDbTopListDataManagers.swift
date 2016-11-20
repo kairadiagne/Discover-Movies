@@ -33,7 +33,6 @@ public class TMDbTopListDataManager: ListDataManager<Movie> {
         }
         
         postUpdateNofitication()
-        
     }
     
 }

@@ -27,7 +27,7 @@ class MovieListDataSource: NSObject, DataContaining, UITableViewDataSource {
         if isEmpty {
             let cellIdentifier = NoDataCell.defaultIdentifier()
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NoDataCell
-            let message = NSLocalizedString("topListNoDataCellText", comment: "") // Change with init 
+            let message = NSLocalizedString("topListNoDataCellText", comment: "")
             cell.configure(with: message)
             return cell
         } else {

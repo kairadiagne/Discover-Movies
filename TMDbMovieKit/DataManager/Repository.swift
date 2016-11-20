@@ -57,12 +57,14 @@ struct Repository {
     
     func clearData(withIdentifier identifier: String) {
         
+        let path = self.file(forIdentifier: identifier)
+        
         fileAccessQueue.async {
             do {
                 print("\(self.path)/data")
-                try FileManager().removeItem(atPath: self.file(forIdentifier: identifier))
+                try FileManager().removeItem(atPath: path)
             } catch {
-                print("Could not clear cache")
+                print("Could not clear cached file at path: \(path))")
             }
             
         }

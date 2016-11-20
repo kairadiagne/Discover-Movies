@@ -80,7 +80,6 @@ public class TMDbMovieInfoManager {
                     return
                 }
         }
-        
     }
 
     public func loadAccountState() {

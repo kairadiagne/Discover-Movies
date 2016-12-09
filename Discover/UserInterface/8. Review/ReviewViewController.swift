@@ -69,7 +69,6 @@ class ReviewViewController: BaseViewController {
         let loadingSelector = #selector(ReviewViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(ReviewViewController.dataManagerDidUpdate(notification:))
         reviewManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-
         reviewManager.reloadIfNeeded()
     }
     

@@ -30,3 +30,9 @@ public class SearchDataManager: ListDataManager<Movie> {
     }
     
 }
+
+
+
+
+
+

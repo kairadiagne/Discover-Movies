@@ -20,7 +20,7 @@ class AboutViewController: BaseViewController {
     
     fileprivate var safariViewController: SFSafariViewController?
     
-    fileprivate var acknowledgements: [Acknowledgement] = []
+    fileprivate var acknowledgements = [Acknowledgement]()
     
     // MARK: - Lifecycle
 
@@ -34,15 +34,18 @@ class AboutViewController: BaseViewController {
         
         let aboutCellNib = UINib(nibName: AboutTableViewCell.nibName(), bundle: nil)
         aboutView.tableView.register(aboutCellNib, forCellReuseIdentifier: AboutTableViewCell.defaultIdentifier())
-        
-        loadAcknowledgements()
-        
-        title = NSLocalizedString("aboutTitle", comment: "")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadAcknowledgements()
+    }
+    
+    // MARK: - Acknowledgements
     
     func loadAcknowledgements() {
         if let path = Bundle.main.path(forResource: "Acknowledgements", ofType: "plist"),
-        let dicts = NSDictionary(contentsOfFile: path)?["PreferenceSpecifiers"] as? [[String: AnyObject]] {
+            let dicts = NSDictionary(contentsOfFile: path)?["PreferenceSpecifiers"] as? [[String: AnyObject]] {
             
             for dict in dicts {
                 if let acknowledgement = Acknowledgement(dictionary: dict) {
@@ -56,39 +59,6 @@ class AboutViewController: BaseViewController {
             
             aboutView.tableView.reloadData()
         }
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func tmdbButtonCLick() {
-        openURL(urlString: "https://www.themoviedb.org")
-    }
-    
-    @IBAction func icon8ButtonCLick() {
-        openURL(urlString: "https://icons8.com/")
-    }
-    
-    func openURL(urlString: String) {
-        if let url = URL(string: urlString) {
-            let safariViewController = SFSafariViewController(url: url)
-            safariViewController.delegate = self
-            present(safariViewController, animated: true, completion: nil)
-        } else {
-            print("Could not open url")
-        }
-        
-    }
-    
-    @IBAction func feedbackButtonClick(_ sender: DiscoverButton) {
-        guard MFMailComposeViewController.canSendMail() else { return }
-        
-        let composeVC = MFMailComposeViewController()
-        composeVC.mailComposeDelegate = self
-            
-        composeVC.setToRecipients(["diagekaira@yahoo.com"])
-        composeVC.setSubject("Hello!")
-            
-        present(composeVC, animated: true, completion: nil)
     }
     
 }
@@ -105,16 +75,8 @@ extension AboutViewController: UITableViewDelegate {
         return UITableViewAutomaticDimension
     }
     
-    @nonobjc func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-         return NSLocalizedString("acknowledgementsTitle", comment: "")
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = view as? UITableViewHeaderFooterView
-        header?.contentView.backgroundColor = UIColor.backgroundColor()
-        header?.textLabel?.tintColor = UIColor.white
-        header?.textLabel?.font = UIFont.Body()
-        return header
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 
 }
@@ -145,22 +107,63 @@ extension AboutViewController: SFSafariViewControllerDelegate {
     }
 }
 
-// MARK: - MFMailComposDelegate
+// MARK: - Actions
 
-extension AboutViewController: MFMailComposeViewControllerDelegate {
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        switch result {
-        case .saved, .sent:
-            let message = NSLocalizedString("thanks", comment: "")
-            let banner = Banner(title: "", subtitle: message,  backgroundColor: UIColor.flatGray())
-            banner.show(duration: 3.0)
-        default:
-            return
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-}
+//@IBAction func feedbackButtonClick(_ sender: DiscoverButton) {
+//    guard MFMailComposeViewController.canSendMail() else { return }
+//    
+//    let composeVC = MFMailComposeViewController()
+//    composeVC.mailComposeDelegate = self
+//    
+//    composeVC.setToRecipients(["diagekaira@yahoo.com"])
+//    composeVC.setSubject("Hello!")
+//    
+//    present(composeVC, animated: true, completion: nil)
+//}
 
+//// MARK: - MFMailComposDelegate
+//
+//extension AboutViewController: MFMailComposeViewControllerDelegate {
+//    
+//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+//        switch result {
+//        case .saved, .sent:
+//            let message = NSLocalizedString("thanks", comment: "")
+//            let banner = Banner(title: "", subtitle: message,  backgroundColor: UIColor.flatGray())
+//            banner.show(duration: 3.0)
+//        default:
+//            return
+//        }
+//        
+//        dismiss(animated: true, completion: nil)
+//    }
+//}
+
+//
+//@IBAction func tmdbButtonCLick() {
+//    openURL(urlString: "https://www.themoviedb.org")
+//}
+//
+//@IBAction func icon8ButtonCLick() {
+//    openURL(urlString: "https://icons8.com/")
+//}
+//
+//
+//
+//loadAcknowledgements()
+//
+//// MARK: - Actions
+//
+
+//
+//func openURL(urlString: String) {
+//    if let url = URL(string: urlString) {
+//        let safariViewController = SFSafariViewController(url: url)
+//        safariViewController.delegate = self
+//        present(safariViewController, animated: true, completion: nil)
+//    } else {
+//        print("Could not open url")
+//    }
+//    
+//}
 

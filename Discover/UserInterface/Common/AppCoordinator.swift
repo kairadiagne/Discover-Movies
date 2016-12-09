@@ -16,11 +16,11 @@ class AppCoordinator: UINavigationController {
     
     fileprivate let sessionManager: TMDbSessionManager
     
-    fileprivate var topListProxy: TopListDataManageProxy?
+    fileprivate let topListProxy: TopListDataManageProxy
     
-    fileprivate var favoritesManager: TMDbAccountListDataManager?
+    fileprivate let favoritesManager: TMDbAccountListDataManager
     
-    fileprivate var watchListManager: TMDbAccountListDataManager?
+    fileprivate let watchListManager: TMDbAccountListDataManager
     
     fileprivate var presentedRow = 0
     
@@ -34,6 +34,9 @@ class AppCoordinator: UINavigationController {
     
     init(sessionManager: TMDbSessionManager = TMDbSessionManager()) {
         self.sessionManager = sessionManager
+        self.topListProxy = TopListDataManageProxy()
+        self.favoritesManager = TMDbAccountListDataManager(list: .favorite)
+        self.watchListManager = TMDbAccountListDataManager(list: .watchlist)
         super.init(nibName: nil, bundle: nil)
         start()
     }
@@ -55,11 +58,7 @@ class AppCoordinator: UINavigationController {
     // MARK: - Start
     
     func start() {
-        if topListProxy == nil {
-            topListProxy = TopListDataManageProxy()
-        }
-        
-        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy!)
+        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy)
         let navigationController = UINavigationController(rootViewController: topListController)
         let menuViewController = MenuViewController(sessionManager: sessionManager)
         revealVC = SWRevealViewController(rearViewController: menuViewController, frontViewController: navigationController)
@@ -93,31 +92,19 @@ class AppCoordinator: UINavigationController {
     }
     
     fileprivate func showTopListViewController(animated: Bool) {
-        if topListProxy == nil {
-            topListProxy = TopListDataManageProxy()
-        }
-        
-        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy!)
+        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy)
         let navigationController = UINavigationController(rootViewController: topListController)
         revealVC?.pushFrontViewController(navigationController, animated: animated)
     }
     
     fileprivate func showWatchListViewController() {
-        if watchListManager == nil {
-            watchListManager = TMDbAccountListDataManager(list: .watchlist)
-        }
-        
-        let watchListController = AccountListController(list: .watchlist, manager: watchListManager!)
+        let watchListController = AccountListController(list: .watchlist, manager: watchListManager)
         let navigationController = UINavigationController(rootViewController: watchListController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
     fileprivate func showFavoritesViewController() {
-        if favoritesManager == nil {
-            favoritesManager = TMDbAccountListDataManager(list: .favorite)
-        }
-        
-        let favoritesController = AccountListController(list: .favorite, manager: favoritesManager!)
+        let favoritesController = AccountListController(list: .favorite, manager: favoritesManager)
         let navigationController = UINavigationController(rootViewController: favoritesController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
@@ -129,7 +116,7 @@ class AppCoordinator: UINavigationController {
     }
     
     fileprivate func showAboutViewController() {
-        let aboutViewController = AboutViewController() // For now no sign in status
+        let aboutViewController = AboutViewController()
         let navigationConttoller = UINavigationController(rootViewController: aboutViewController)
         revealVC?.pushFrontViewController(navigationConttoller, animated: true)
     }
@@ -141,9 +128,11 @@ class AppCoordinator: UINavigationController {
         case .signedin:
             signOut()
         case .publicMode:
+            clearCache()
             sessionManager.deactivatePublicMode()
             showSignInViewController()
         case .unkown:
+            clearCache()
             showSignInViewController()
         }
     }
@@ -151,13 +140,14 @@ class AppCoordinator: UINavigationController {
     func signOut() {
         // Clear user data
         sessionManager.signOut()
-        
-        // Clear cache
-        topListProxy?.clearCaches()
-        favoritesManager?.clear()
-        watchListManager?.clear()
-        
+        clearCache()
         showSignInViewController()
+    }
+    
+    fileprivate func clearCache() {
+        topListProxy.clearCaches()
+        favoritesManager.clear()
+        watchListManager.clear()
     }
     
 }
@@ -208,4 +198,7 @@ extension AppCoordinator: MenuViewControllerDelegate {
     }
     
 }
+
+
+
 

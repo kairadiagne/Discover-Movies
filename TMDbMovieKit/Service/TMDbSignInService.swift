@@ -39,11 +39,11 @@ public class TMDbSignInService {
     
     public weak var delegate: TMDbSignInDelegate?
     
-    fileprivate var isLoading = false
+    private var isLoading = false
     
-    fileprivate let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoProvider: SessionInfoContaining
     
-    fileprivate var token: RequestToken?
+    private var token: RequestToken?
     
     // MARK: - Initialize
     

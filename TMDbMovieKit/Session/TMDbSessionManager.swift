@@ -18,7 +18,7 @@ public class TMDbSessionManager {
     
     // MARK: - Types
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let FreshInstallKey = "FreshInstallKey"
     }
     
@@ -28,7 +28,7 @@ public class TMDbSessionManager {
         return sessionInfoProvider.user
     }
     
-    fileprivate let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoProvider: SessionInfoContaining
     
     // MARK: - Initialize
     
@@ -63,7 +63,7 @@ public class TMDbSessionManager {
     
     // MARK: - Public Mode
     
-    fileprivate var publicModeActivated: Bool {
+    private var publicModeActivated: Bool {
         return UserDefaults.standard.bool(forKey: "userIsInpublicMode")
     }
     

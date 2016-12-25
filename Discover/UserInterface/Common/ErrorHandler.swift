@@ -17,9 +17,9 @@ class ErrorHandler {
     
     static let shared = ErrorHandler()
     
-    fileprivate var currentBanner: Banner?
+    private var currentBanner: Banner?
     
-    fileprivate var currentError: APIError?
+    private var currentError: APIError?
     
     // MARK: - Handle Errors 
     

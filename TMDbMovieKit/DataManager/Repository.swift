@@ -25,9 +25,9 @@ struct Repository {
     
     static let cache = Repository(path: RepositoryLocation.cache.path)
     
-    fileprivate let path: String
+    private let path: String
     
-    fileprivate let fileAccessQueue = DispatchQueue(label: "com.discoverMovies.app.cache")
+    private let fileAccessQueue = DispatchQueue(label: "com.discoverMovies.app.cache")
     
     // MARK: - Initialize
     
@@ -72,7 +72,7 @@ struct Repository {
     
     // MARK: - Location
     
-    fileprivate func createDirectory() {
+    private func createDirectory() {
         do {
             try FileManager.default.createDirectory(atPath: "\(path)/data", withIntermediateDirectories: true, attributes: nil)
         } catch {
@@ -80,7 +80,7 @@ struct Repository {
         }
     }
     
-    fileprivate func file(forIdentifier identifier: String) -> String {
+    private func file(forIdentifier identifier: String) -> String {
         print("\(path)/data/\(identifier).plist")
         return "\(path)/data/\(identifier).plist"
     }

@@ -12,10 +12,10 @@ public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
     
     // MARK: - Properties
     
-    fileprivate(set) var page: Int
-    fileprivate(set) var pageCount: Int
-    fileprivate(set) var resultCount: Int
-    fileprivate(set) var items: [ModelType] = []
+    private(set) var page: Int
+    private(set) var pageCount: Int
+    private(set) var resultCount: Int
+    private(set) var items: [ModelType] = []
     
     var nextPage: Int? {
         return page < pageCount ? page + 1 : nil // Error when movies are being left out becauset he are incomplete

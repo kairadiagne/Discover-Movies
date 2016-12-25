@@ -10,9 +10,11 @@ import UIKit
 
 class FavouriteButton: AnimatedShapeButton {
     
-    // MARK: - Properties
-
-    fileprivate let lineWidth: CGFloat = 1.0
+    // MARK: - Types 
+    
+    private struct Constants {
+        static let LineWidth: CGFloat = 1.0
+    }
     
     // MARK: - Generate Shape
     
@@ -23,7 +25,7 @@ class FavouriteButton: AnimatedShapeButton {
         
         shapeLayer.frame = bounds
         shapeLayer.path = starPath.cgPath
-        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineWidth = Constants.LineWidth
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = lineColor.cgColor
         shapeLayer.lineJoin = kCALineCapRound
@@ -48,7 +50,7 @@ class FavouriteButton: AnimatedShapeButton {
     }
     
     // Generates a path shaped like a star
-    fileprivate func generateStarPath(_ width: CGFloat, height: CGFloat) -> UIBezierPath {
+    private func generateStarPath(_ width: CGFloat, height: CGFloat) -> UIBezierPath {
         // Calulate start position
         let startX: CGFloat = width / 2
         let startY: CGFloat = 0
@@ -71,12 +73,10 @@ class FavouriteButton: AnimatedShapeButton {
     
     // Generates the path that will be used for the filling animation
     
-    fileprivate func generateFillPath(_ wdith: CGFloat, height: CGFloat) -> UIBezierPath {
+    private func generateFillPath(_ wdith: CGFloat, height: CGFloat) -> UIBezierPath {
         let centerPoint = CGPoint(x: bounds.midX, y: bounds.midY)
         let fillRect = CGRect(origin: centerPoint, size: .zero)
         return UIBezierPath(ovalIn: fillRect)
     }
     
 }
-
-

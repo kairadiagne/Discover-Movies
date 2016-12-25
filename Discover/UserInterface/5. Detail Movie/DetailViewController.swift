@@ -19,11 +19,11 @@ class DetailViewController: BaseViewController {
 
     fileprivate let castDataSource = CastDataSource()
   
-    fileprivate let movieInfoManager: TMDbMovieInfoManager
+    private let movieInfoManager: TMDbMovieInfoManager
     
-    fileprivate let similarMoviesManager: TMDbSimilarMoviesDataManager
+    private let similarMoviesManager: TMDbSimilarMoviesDataManager
     
-    fileprivate let movie: Movie
+    private let movie: Movie
     
     fileprivate var videoController: VideoViewController?
     

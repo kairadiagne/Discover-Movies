@@ -43,11 +43,11 @@ class DetailView: UIView {
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var animationConstraint: NSLayoutConstraint!
    
-    fileprivate var contentInsetTop: CGFloat = 0
+    private var contentInsetTop: CGFloat = 0
     
-    fileprivate var defaultHeaderheight: CGFloat = 0
+    private var defaultHeaderheight: CGFloat = 0
     
-    fileprivate var didSetContentInset = false
+    private var didSetContentInset = false
     
     // MARK: - Awake
 

@@ -21,13 +21,13 @@ class ReviewViewController: BaseViewController {
     
     @IBOutlet var reviewView: ReviewView!
     
-    fileprivate let movie: Movie
+    private let movie: Movie
  
     fileprivate let reviewDataSource = ReviewDataSource()
     
     fileprivate let reviewManager: TMDbReviewManager
     
-    fileprivate let signedIn: Bool
+    private let signedIn: Bool
     
     // MARK: - Initialize
     

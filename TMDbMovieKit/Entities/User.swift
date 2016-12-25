@@ -14,8 +14,8 @@ public struct User: DictionarySerializable {
     
     public let id: Int
     public let userName: String
-    public fileprivate(set) var name: String?
-    public fileprivate(set) var profileHash: String?
+    public private(set) var name: String?
+    public private(set) var profileHash: String?
     
     // MARK: - Initialize
     

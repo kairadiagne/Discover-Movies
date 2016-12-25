@@ -14,9 +14,9 @@ class VideoViewController: UIViewController {
     
     // MARK: - Properties
     
-    fileprivate let youtubeView = YTPlayerView()
+    private let youtubeView = YTPlayerView()
     
-    fileprivate let video: Video
+    private let video: Video
     
     // MARK: - Initialize
   
@@ -94,3 +94,5 @@ extension VideoViewController: YTPlayerViewDelegate {
     }
     
 }
+
+// TODO: - Better Error Handling

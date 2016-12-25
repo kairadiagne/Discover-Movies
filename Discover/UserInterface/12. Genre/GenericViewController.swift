@@ -25,7 +25,7 @@ class GenericViewController: BaseViewController {
     
     fileprivate let dataSource = MovieListDataSource()
     
-    fileprivate let titleString: String
+    private let titleString: String
     
     fileprivate let signedIn: Bool
     
@@ -131,3 +131,5 @@ extension GenericViewController: UITableViewDelegate {
     }
 
 }
+
+// TODO: - Check Transitioning To detail view controller 

@@ -19,7 +19,7 @@ class BaseView: UIView {
     
     // MARK: - Properties
     
-    fileprivate(set) var state: State = .idle
+    private(set) var state: State = .idle
     
     let refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl(frame: .zero)

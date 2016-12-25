@@ -20,9 +20,9 @@ public class TMDbUserService {
     
     public weak var delegate: TMDbUserServiceDelegate?
     
-    fileprivate let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoProvider: SessionInfoContaining
     
-    fileprivate let configuration: UserConfiguration
+    private let configuration: UserConfiguration
     
     // MARK: - Initialize
     

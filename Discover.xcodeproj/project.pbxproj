@@ -564,8 +564,8 @@
 		114299DA1DC7E89900025290 /* NoDataCells */ = {
 			isa = PBXGroup;
 			children = (
-				11290AEB1D981F0700AC4231 /* NoDataCell.xib */,
 				11290AEA1D981F0700AC4231 /* NoDataCell.swift */,
+				11290AEB1D981F0700AC4231 /* NoDataCell.xib */,
 				11027BC71DAC2CB4004223F6 /* NoDataCollectionViewCell.swift */,
 				11027BC81DAC2CB4004223F6 /* NoDataCollectionViewCell.xib */,
 			);

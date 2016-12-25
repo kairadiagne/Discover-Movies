@@ -14,13 +14,13 @@ class AppCoordinator: UINavigationController {
     
     // MARK: - Propperties
     
-    fileprivate let sessionManager: TMDbSessionManager
+    private let sessionManager: TMDbSessionManager
     
-    fileprivate let topListProxy: TopListDataManageProxy
+    private let topListProxy: TopListDataManageProxy
     
-    fileprivate let favoritesManager: TMDbAccountListDataManager
+    private let favoritesManager: TMDbAccountListDataManager
     
-    fileprivate let watchListManager: TMDbAccountListDataManager
+    private let watchListManager: TMDbAccountListDataManager
     
     fileprivate var presentedRow = 0
     

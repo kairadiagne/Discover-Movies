@@ -24,13 +24,13 @@ class TopListViewController: BaseViewController {
     
     fileprivate let topListProxy: TopListDataManageProxy
     
-    fileprivate let popularListDataSource = MovieListDataSource()
+    private let popularListDataSource = MovieListDataSource()
     
-    fileprivate let topRatedListDataSource = MovieListDataSource()
+    private let topRatedListDataSource = MovieListDataSource()
     
-    fileprivate let upcomingListDataSource = MovieListDataSource()
+    private let upcomingListDataSource = MovieListDataSource()
     
-    fileprivate let nowplayingListDataSource = MovieListDataSource()
+    private let nowplayingListDataSource = MovieListDataSource()
     
     fileprivate var currentList: TMDbTopList = .popular
     

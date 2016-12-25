@@ -22,7 +22,7 @@ class SignInViewController: UIViewController {
     
     weak var delegate: SignInViewControllerDelegate?
     
-    fileprivate let sessionManager: TMDbSessionManager
+    private let sessionManager: TMDbSessionManager
     
     fileprivate let signInService: TMDbSignInService
     

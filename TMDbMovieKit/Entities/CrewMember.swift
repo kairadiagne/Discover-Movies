@@ -17,7 +17,7 @@ public struct CrewMember: DictionarySerializable, Equatable {
     public let name: String
     public let department: String?
     public let job: String?
-    public fileprivate(set) var profilePath: String?
+    public private(set) var profilePath: String?
     
     // MARK: - Initialize
     

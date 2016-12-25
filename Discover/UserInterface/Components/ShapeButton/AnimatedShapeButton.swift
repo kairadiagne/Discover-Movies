@@ -52,13 +52,13 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         commonInit()
     }
     
-    fileprivate func commonInit() {
+    private func commonInit() {
         self.backgroundColor = UIColor.clear
     }
 
     // MARK: - Layout
     
-    fileprivate var didAddLayers = false
+    private var didAddLayers = false
     
     override func layoutSubviews() {
         super.layoutSubviews()

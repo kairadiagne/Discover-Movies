@@ -12,13 +12,13 @@ public class TopListDataManageProxy {
     
     // MARK: - Properties
     
-    fileprivate let popularListManager: TMDbTopListDataManager
+    private let popularListManager: TMDbTopListDataManager
     
-    fileprivate let nowPlayingListManager: TMDbTopListDataManager
+    private let nowPlayingListManager: TMDbTopListDataManager
     
-    fileprivate let topratedListManager: TMDbTopListDataManager
+    private let topratedListManager: TMDbTopListDataManager
     
-    fileprivate let upcomingListManager: TMDbTopListDataManager
+    private let upcomingListManager: TMDbTopListDataManager
     
     // MARK: - Initialize
     

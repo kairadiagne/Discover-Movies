@@ -16,7 +16,7 @@ class SearchViewController: BaseViewController {
     
     @IBOutlet var searchView: SearchView!
     
-    fileprivate var searchController: UISearchController!
+    private var searchController: UISearchController!
     
     fileprivate let searchManager = SearchDataManager()
     

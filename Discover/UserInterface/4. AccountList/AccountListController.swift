@@ -24,7 +24,7 @@ class AccountListController: BaseViewController {
     
     fileprivate let dataSource = AccountListDataSource()
     
-    fileprivate let accountList: TMDbAccountList
+    private let accountList: TMDbAccountList
     
     fileprivate let accountListManager: TMDbAccountListDataManager
     
@@ -87,7 +87,7 @@ class AccountListController: BaseViewController {
     
     // MARK: - Refresh
     
-    @objc fileprivate func refresh(_ sender: UIRefreshControl) {
+    @objc private func refresh(_ sender: UIRefreshControl) {
         accountListManager.reloadIfNeeded(forceOnline: true)
     }
     

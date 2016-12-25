@@ -29,7 +29,7 @@ class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
     
     let refreshTimeOut: TimeInterval
     
-    fileprivate(set) var lastUpdate: Date?
+    private(set) var lastUpdate: Date?
     
     // MARK: - Initialize
     

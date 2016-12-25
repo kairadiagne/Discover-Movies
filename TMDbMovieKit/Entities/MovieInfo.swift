@@ -12,9 +12,8 @@ public struct MovieInfo: DictionarySerializable {
     
     // MARK: - Properties
     
-    fileprivate var credits: MovieCredit?
-    
-    fileprivate var trailers: [Video]?
+    private var credits: MovieCredit?
+    private var trailers: [Video]?
     
     public var cast: [CastMember] {
        return credits?.cast ?? []

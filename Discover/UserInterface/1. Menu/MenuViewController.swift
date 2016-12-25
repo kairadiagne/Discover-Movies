@@ -23,15 +23,15 @@ class MenuViewController: UIViewController {
     
     weak var delegate: MenuViewControllerDelegate?
     
-    fileprivate let userService: TMDbUserService
+    private let userService: TMDbUserService
     
-    fileprivate let sessionManager: TMDbSessionManager
+    private let sessionManager: TMDbSessionManager
 
     fileprivate var signedIn: Bool {
         return sessionManager.signInStatus == .signedin
     }
     
-    fileprivate var user: User? {
+    private var user: User? {
         return sessionManager.user
     }
     

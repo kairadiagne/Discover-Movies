@@ -23,7 +23,7 @@ public class TMDbMovieInfoManager {
     
     public let movieID: Int
     
-    fileprivate let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoProvider: SessionInfoContaining
     
     // MARK: - Initialize
     

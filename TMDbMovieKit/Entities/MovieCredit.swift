@@ -12,8 +12,8 @@ public struct MovieCredit: DictionarySerializable {
     
     // MARK: - Properties
     
-    public fileprivate(set) var cast: [CastMember] = []
-    public fileprivate(set) var crew: [CrewMember] = []
+    public private(set) var cast: [CastMember] = []
+    public private(set) var crew: [CrewMember] = []
     
     // MARK: - Initialize
     

@@ -18,7 +18,7 @@ public class SearchDataManager: ListDataManager<Movie> {
     
     // MARK: - Search
     
-    fileprivate var searchQuery: String = ""
+    private var searchQuery: String = ""
     
     public func search(for query: String) {
         searchQuery = query

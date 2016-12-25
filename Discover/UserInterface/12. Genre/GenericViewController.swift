@@ -129,5 +129,3 @@ extension GenericViewController: UITableViewDelegate {
     }
 
 }
-
-// TODO: - Check Transitioning To detail view controller 

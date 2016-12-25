@@ -177,9 +177,7 @@ extension TopListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = datasource(forList: currentList).item(atIndex: indexPath.row) else { return }
-        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
-        navigationController?.delegate = detailViewController 
-        navigationController?.pushViewController(detailViewController, animated: true)
+        showDetailViewController(for: movie, signedIn: signedIn)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -94,9 +94,6 @@ class DetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
-        
-        navigationController?.delegate = nil
-        
         similarMoviesManager.remove(observer: self)
     }
     
@@ -161,9 +158,7 @@ extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
-        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
-        navigationController?.delegate = detailViewController
-        navigationController?.pushViewController(detailViewController, animated: true)
+        showDetailViewController(for: movie, signedIn: signedIn)
     }
     
 }
@@ -219,17 +214,6 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-    }
-    
-}
-
-// MARK: - UINavigationControllerDelegate 
-
-extension DetailViewController: UINavigationControllerDelegate { 
-    
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        return toVC is DetailViewController ? DetailAnimatedTransitioning() : nil
     }
     
 }

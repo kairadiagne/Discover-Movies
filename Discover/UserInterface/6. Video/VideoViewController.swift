@@ -73,7 +73,6 @@ class VideoViewController: UIViewController {
     
     // MARK: - Rotation
     
-    
 }
 
 extension VideoViewController: YTPlayerViewDelegate {

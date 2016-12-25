@@ -135,11 +135,7 @@ extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-        
-        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
-        navigationController?.delegate = detailViewController
-        navigationController?.pushViewController(detailViewController, animated: true)
-        
+        showDetailViewController(for: movie, signedIn: signedIn)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

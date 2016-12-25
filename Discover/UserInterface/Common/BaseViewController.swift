@@ -22,6 +22,12 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
         revealViewController().delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        navigationController?.delegate = self
+    }
+    
     // MARK: - DataManagerNotifications
     
     func dataManagerDidStartLoading(notification: Notification) {
@@ -33,7 +39,6 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     // MARK: - DataManagerFailureDelegate
     
     func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        
     }
     
     // MARK: - Menu
@@ -49,7 +54,14 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         navigationItem.leftBarButtonItem = menuButton
     }
-
+    
+    // MARK: - Navigation 
+    
+    func showDetailViewController(for movie: Movie, signedIn: Bool) {
+        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
 }
 
 //MARK: - SWRevealViewControllerDelegate
@@ -63,6 +75,22 @@ extension BaseViewController: SWRevealViewControllerDelegate {
         else {
             revealController.frontViewController.view.isUserInteractionEnabled = true
         }
+    }
+
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension BaseViewController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if operation == .push {
+            return toVC is DetailViewController ? DetailAnimatedTransitioning() : nil
+        } else {
+            return nil
+        }
+       
     }
     
 }

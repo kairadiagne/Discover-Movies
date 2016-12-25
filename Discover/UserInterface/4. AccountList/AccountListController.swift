@@ -109,14 +109,7 @@ class AccountListController: BaseViewController {
         ErrorHandler.shared.handle(error: error, authorizationError: true)
         accountListView.set(state: .idle)
     }
-   
-    // MARK: Navigation 
-    
-    func showDetailViewControllerForMovie(_ movie: Movie) {
-        let detailViewController = DetailViewController(movie: movie, signedIn: true)
-        navigationController?.pushViewController(detailViewController, animated: false)
-    }
-    
+
 }
 
 // MARK: - UITableViewDelegate
@@ -125,7 +118,7 @@ extension AccountListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-        showDetailViewControllerForMovie(movie)
+        showDetailViewController(for: movie, signedIn: true)
         tableView.deselectRow(at: indexPath, animated: false)
     }
     

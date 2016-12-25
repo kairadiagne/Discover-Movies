@@ -71,7 +71,7 @@ class VideoViewController: UIViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Rotation
+    //  TODO: - Add rotation
     
 }
 
@@ -93,5 +93,3 @@ extension VideoViewController: YTPlayerViewDelegate {
     }
     
 }
-
-// TODO: - Better Error Handling

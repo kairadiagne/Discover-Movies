@@ -116,7 +116,6 @@ struct MovieDetailConfiguration: RequestConfiguration {
     }
 }
 
-
 struct ReviewRequestConfiguration: RequestConfiguration {
     let method: HTTPMethod = .get
     let movieID: Int
@@ -125,7 +124,6 @@ struct ReviewRequestConfiguration: RequestConfiguration {
         return "movie/\(movieID)/reviews"
     }
 }
-
 
 struct AccountStateConfiguration: RequestConfiguration {
     let method: HTTPMethod = .get

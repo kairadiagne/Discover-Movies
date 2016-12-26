@@ -12,6 +12,7 @@
 		11027BCE1DAC338D004223F6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11027BCC1DAC338D004223F6 /* SearchTableViewCell.swift */; };
 		11027BCF1DAC338D004223F6 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11027BCD1DAC338D004223F6 /* SearchTableViewCell.xib */; };
 		110F02D41E11795C005ADC4A /* DiscoverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F02D31E11795C005ADC4A /* DiscoverUITests.swift */; };
+		110F02DC1E117A79005ADC4A /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F02DB1E117A79005ADC4A /* SnapshotHelper.swift */; };
 		111837101D8748B200C58DF3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118370F1D8748B200C58DF3 /* Repository.swift */; };
 		111942671CCB8CBE001CF39B /* TMDbMovieKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 111942661CCB8CBE001CF39B /* TMDbMovieKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1119426E1CCB8CBF001CF39B /* TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */; };
@@ -199,6 +200,7 @@
 		110F02D11E11795C005ADC4A /* DiscoverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		110F02D31E11795C005ADC4A /* DiscoverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverUITests.swift; sourceTree = "<group>"; };
 		110F02D51E11795C005ADC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		110F02DB1E117A79005ADC4A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		1114E8DE1DD3B616009C5806 /* Discover.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Discover.entitlements; sourceTree = "<group>"; };
 		1118370F1D8748B200C58DF3 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1119423C1CCB8CA0001CF39B /* Discover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discover.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -383,6 +385,7 @@
 		110F02D21E11795C005ADC4A /* DiscoverUITests */ = {
 			isa = PBXGroup;
 			children = (
+				110F02DB1E117A79005ADC4A /* SnapshotHelper.swift */,
 				110F02D31E11795C005ADC4A /* DiscoverUITests.swift */,
 				110F02D51E11795C005ADC4A /* Info.plist */,
 			);
@@ -1197,6 +1200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				110F02D41E11795C005ADC4A /* DiscoverUITests.swift in Sources */,
+				110F02DC1E117A79005ADC4A /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

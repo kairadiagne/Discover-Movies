@@ -2,9 +2,9 @@
 
 # A list of devices you want to take the screenshots from
 # devices([
-#   "iPhone 6",
-#   "iPhone 6 Plus",
-#   "iPhone 5",
+   "iPhone 6",
+   "iPhone 6 Plus",
+   "iPhone 5",
 #   "iPad Pro (12.9 inch)",
 #   "iPad Pro (9.7 inch)",
 #   "Apple TV 1080p"
@@ -12,18 +12,15 @@
 
 languages([
   "en-US",
-  "de-DE",
-  "it-IT",
-  ["pt", "pt_BR"] # Portuguese with Brazilian locale
 ])
 
 # The name of the scheme which contains the UI Tests
-# scheme "SchemeName"
+# scheme "Discover"
 
 # Where should the resulting screenshots be stored?
 # output_directory "./screenshots"
 
-# clear_previous_screenshots true # remove the '#' to clear all previously generated screenshots before creating new ones
+clear_previous_screenshots true 
 
 # Choose which project/workspace to use
 # project "./Project.xcodeproj"

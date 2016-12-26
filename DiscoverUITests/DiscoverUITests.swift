@@ -13,24 +13,60 @@ class DiscoverUITests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Setup fastlane
+        let app = XCUIApplication()
+        setupSnapshot(app)
+        app.launch()
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGenerateAppStoreScreenshots() {
+        // Start of app
+        let app = XCUIApplication()
+        
+        // Navigate to menu
+        app.navigationBars["Toplists"].children(matching: .button).element.tap()
+        snapshot("Menu")
+        
+        // Grab the table
+        let tablesQuery = app.tables
+        
+        // Sign in and go back to menu
+        app.tables.staticTexts["Sign in"].tap()
+        app.buttons["Sign in"].tap()
+        app.buttons["Done"].tap()
+        snapshot("SignIn")
+        app.navigationBars["Toplists"].children(matching: .button).element.tap()
+        
+        // Show watchlist
+        tablesQuery.staticTexts["My watchlist"].tap()
+        app.navigationBars["Watchlist"].buttons["Menu"].tap()
+        snapshot("Watchlist")
+        
+        // Show favorites
+        tablesQuery.staticTexts["My favorite movies"].tap()
+        app.navigationBars["Favorites"].buttons["Menu"].tap()
+        snapshot("Favorites")
+        
+        // Go to first movie detail
+        tablesQuery.staticTexts["My favorite movies"].tap()
+        snapshot("MovieDetail-1")
+        
+        // Scroll down 
+        XCUIApplication().scrollViews.otherElements.containing(.staticText, identifier:"Her").element.swipeUp()
+        snapshot("MovieDetail-2")
+        
+        // Navigate back to menu
+        app.buttons["Back"].tap()
+        app.navigationBars["Favorites"].children(matching: .button).element.tap()
     }
     
 }

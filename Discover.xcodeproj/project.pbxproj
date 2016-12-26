@@ -11,6 +11,7 @@
 		11027BCA1DAC2CB4004223F6 /* NoDataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11027BC81DAC2CB4004223F6 /* NoDataCollectionViewCell.xib */; };
 		11027BCE1DAC338D004223F6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11027BCC1DAC338D004223F6 /* SearchTableViewCell.swift */; };
 		11027BCF1DAC338D004223F6 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11027BCD1DAC338D004223F6 /* SearchTableViewCell.xib */; };
+		110F02D41E11795C005ADC4A /* DiscoverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F02D31E11795C005ADC4A /* DiscoverUITests.swift */; };
 		111837101D8748B200C58DF3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118370F1D8748B200C58DF3 /* Repository.swift */; };
 		111942671CCB8CBE001CF39B /* TMDbMovieKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 111942661CCB8CBE001CF39B /* TMDbMovieKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1119426E1CCB8CBF001CF39B /* TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */; };
@@ -138,6 +139,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		110F02D61E11795C005ADC4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111942341CCB8CA0001CF39B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1119423B1CCB8CA0001CF39B;
+			remoteInfo = Discover;
+		};
 		111942511CCB8CA0001CF39B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 111942341CCB8CA0001CF39B /* Project object */;
@@ -188,6 +196,9 @@
 		11027BC81DAC2CB4004223F6 /* NoDataCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataCollectionViewCell.xib; sourceTree = "<group>"; };
 		11027BCC1DAC338D004223F6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		11027BCD1DAC338D004223F6 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		110F02D11E11795C005ADC4A /* DiscoverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		110F02D31E11795C005ADC4A /* DiscoverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverUITests.swift; sourceTree = "<group>"; };
+		110F02D51E11795C005ADC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1114E8DE1DD3B616009C5806 /* Discover.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Discover.entitlements; sourceTree = "<group>"; };
 		1118370F1D8748B200C58DF3 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1119423C1CCB8CA0001CF39B /* Discover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discover.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -328,6 +339,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		110F02CE1E11795C005ADC4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		111942391CCB8CA0001CF39B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,6 +380,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		110F02D21E11795C005ADC4A /* DiscoverUITests */ = {
+			isa = PBXGroup;
+			children = (
+				110F02D31E11795C005ADC4A /* DiscoverUITests.swift */,
+				110F02D51E11795C005ADC4A /* Info.plist */,
+			);
+			path = DiscoverUITests;
+			sourceTree = "<group>";
+		};
 		111942331CCB8CA0001CF39B = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +396,7 @@
 				111942651CCB8CBE001CF39B /* TMDbMovieKit */,
 				111942531CCB8CA0001CF39B /* DiscoverTests */,
 				111942731CCB8CBF001CF39B /* TMDbMovieKitTests */,
+				110F02D21E11795C005ADC4A /* DiscoverUITests */,
 				1119423D1CCB8CA0001CF39B /* Products */,
 				2693F16C0142D84C17AC1C7B /* Frameworks */,
 				A58B2FAFBDF0D6851ED6F320 /* Pods */,
@@ -382,6 +410,7 @@
 				111942501CCB8CA0001CF39B /* DiscoverTests.xctest */,
 				111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */,
 				1119426D1CCB8CBF001CF39B /* TMDbMovieKitTests.xctest */,
+				110F02D11E11795C005ADC4A /* DiscoverUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -855,6 +884,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		110F02D01E11795C005ADC4A /* DiscoverUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 110F02DA1E11795C005ADC4A /* Build configuration list for PBXNativeTarget "DiscoverUITests" */;
+			buildPhases = (
+				110F02CD1E11795C005ADC4A /* Sources */,
+				110F02CE1E11795C005ADC4A /* Frameworks */,
+				110F02CF1E11795C005ADC4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				110F02D71E11795C005ADC4A /* PBXTargetDependency */,
+			);
+			name = DiscoverUITests;
+			productName = DiscoverUITests;
+			productReference = 110F02D11E11795C005ADC4A /* DiscoverUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1119423B1CCB8CA0001CF39B /* Discover */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "Discover" */;
@@ -940,10 +987,16 @@
 		111942341CCB8CA0001CF39B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kaira Diagne";
 				TargetAttributes = {
+					110F02D01E11795C005ADC4A = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = S4F83VS4FR;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1119423B1CCB8CA0001CF39B;
+					};
 					1119423B1CCB8CA0001CF39B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 85J9C69P9Z;
@@ -994,11 +1047,19 @@
 				111942631CCB8CBE001CF39B /* TMDbMovieKit */,
 				1119424F1CCB8CA0001CF39B /* DiscoverTests */,
 				1119426C1CCB8CBF001CF39B /* TMDbMovieKitTests */,
+				110F02D01E11795C005ADC4A /* DiscoverUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		110F02CF1E11795C005ADC4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1119423A1CCB8CA0001CF39B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1131,6 +1192,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		110F02CD1E11795C005ADC4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				110F02D41E11795C005ADC4A /* DiscoverUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		111942381CCB8CA0001CF39B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1262,6 +1331,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		110F02D71E11795C005ADC4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1119423B1CCB8CA0001CF39B /* Discover */;
+			targetProxy = 110F02D61E11795C005ADC4A /* PBXContainerItemProxy */;
+		};
 		111942521CCB8CA0001CF39B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1119423B1CCB8CA0001CF39B /* Discover */;
@@ -1297,6 +1371,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		110F02D81E11795C005ADC4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = S4F83VS4FR;
+				INFOPLIST_FILE = DiscoverUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "713b8170-4b74-40dd-80d4-ba1884213a35";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Discover;
+			};
+			name = Debug;
+		};
+		110F02D91E11795C005ADC4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = S4F83VS4FR;
+				INFOPLIST_FILE = DiscoverUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "713b8170-4b74-40dd-80d4-ba1884213a35";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Discover;
+			};
+			name = Release;
+		};
 		111942571CCB8CA0001CF39B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1550,6 +1658,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		110F02DA1E11795C005ADC4A /* Build configuration list for PBXNativeTarget "DiscoverUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				110F02D81E11795C005ADC4A /* Debug */,
+				110F02D91E11795C005ADC4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		111942371CCB8CA0001CF39B /* Build configuration list for PBXProject "Discover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

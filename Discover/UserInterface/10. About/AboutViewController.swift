@@ -18,7 +18,7 @@ class AboutViewController: BaseViewController {
     
     @IBOutlet var aboutView: AboutView!
     
-    fileprivate var safariViewController: SFSafariViewController?
+    private var safariViewController: SFSafariViewController?
     
     fileprivate var acknowledgements = [Acknowledgement]()
     
@@ -34,6 +34,8 @@ class AboutViewController: BaseViewController {
         
         let aboutCellNib = UINib(nibName: AboutTableViewCell.nibName(), bundle: nil)
         aboutView.tableView.register(aboutCellNib, forCellReuseIdentifier: AboutTableViewCell.defaultIdentifier())
+        
+        title = NSLocalizedString("aboutTitle", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +70,7 @@ class AboutViewController: BaseViewController {
 extension AboutViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 118
+        return 100
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -106,64 +108,3 @@ extension AboutViewController: SFSafariViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
-
-// MARK: - Actions
-
-//@IBAction func feedbackButtonClick(_ sender: DiscoverButton) {
-//    guard MFMailComposeViewController.canSendMail() else { return }
-//    
-//    let composeVC = MFMailComposeViewController()
-//    composeVC.mailComposeDelegate = self
-//    
-//    composeVC.setToRecipients(["diagekaira@yahoo.com"])
-//    composeVC.setSubject("Hello!")
-//    
-//    present(composeVC, animated: true, completion: nil)
-//}
-
-//// MARK: - MFMailComposDelegate
-//
-//extension AboutViewController: MFMailComposeViewControllerDelegate {
-//    
-//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-//        switch result {
-//        case .saved, .sent:
-//            let message = NSLocalizedString("thanks", comment: "")
-//            let banner = Banner(title: "", subtitle: message,  backgroundColor: UIColor.flatGray())
-//            banner.show(duration: 3.0)
-//        default:
-//            return
-//        }
-//        
-//        dismiss(animated: true, completion: nil)
-//    }
-//}
-
-//
-//@IBAction func tmdbButtonCLick() {
-//    openURL(urlString: "https://www.themoviedb.org")
-//}
-//
-//@IBAction func icon8ButtonCLick() {
-//    openURL(urlString: "https://icons8.com/")
-//}
-//
-//
-//
-//loadAcknowledgements()
-//
-//// MARK: - Actions
-//
-
-//
-//func openURL(urlString: String) {
-//    if let url = URL(string: urlString) {
-//        let safariViewController = SFSafariViewController(url: url)
-//        safariViewController.delegate = self
-//        present(safariViewController, animated: true, completion: nil)
-//    } else {
-//        print("Could not open url")
-//    }
-//    
-//}
-

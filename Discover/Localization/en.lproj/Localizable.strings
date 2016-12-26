@@ -69,7 +69,7 @@ searchVCTitle = "Search";
 aboutTitle = "About Discover";
 description = "A convenient way to browse movies and keep track of your watchlist";
 
-tmdbacknowledgement = "This product uses the TMDb API but is not endorsed or certified by TMDb.";
+tmdbacknowledgement = "This product uses the TMDb API\nbut is not endorsed or certified by TMDb.";
 feedbackButtonTitle = "Feedback";
 icon8Acknowledgmenet = "Icons by icons8";
 acknowledgementsTitle = "Open-source Libraries";

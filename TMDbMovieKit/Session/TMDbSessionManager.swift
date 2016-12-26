@@ -49,7 +49,7 @@ public class TMDbSessionManager {
     
     // MARK: - API Key
     
-    public func registerAPIKey(_ key: String) { // Candidate form removal 
+    public func registerAPIKey(_ key: String) {
         sessionInfoProvider.saveAPIKey(key)
     }
     

@@ -157,6 +157,7 @@ extension DetailViewController: UIScrollViewDelegate {
 extension DetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard collectionView == detailView.similarMovieCollectionView else { return }
         guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
         showDetailViewController(for: movie, signedIn: signedIn)
     }

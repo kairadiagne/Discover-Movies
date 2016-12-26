@@ -102,6 +102,7 @@ class DetailViewController: BaseViewController {
     override func dataManagerDidUpdate(notification: Notification) {
         similarMoviesDataSource.items = similarMoviesManager.firstPage
         detailView.similarMovieCollectionView.reloadData()
+        detailView.seeAllButton.isHidden = similarMoviesDataSource.isEmpty
     }
     
     // MARK: - DataManagerFailureDelegate

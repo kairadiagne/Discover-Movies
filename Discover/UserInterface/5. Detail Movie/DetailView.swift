@@ -106,6 +106,7 @@ class DetailView: UIView {
         let seeAllButtontitle = NSLocalizedString("seeAllButtonText", comment: "")
         seeAllButton.setTitle(seeAllButtontitle, for: .normal)
         seeAllButton.setTitleColor(UIColor.white, for: .normal)
+        seeAllButton.isHidden = true 
         
         header.clipsToBounds = true 
         

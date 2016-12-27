@@ -68,10 +68,18 @@ class VideoViewController: UIViewController {
     
     @objc fileprivate func doneButtonClick(notification: Notification) {
         youtubeView.stopVideo()
-        presentingViewController?.dismiss(animated: true, completion: nil)
+        dismissVideoController()
     }
     
-    //  TODO: - Add rotation
+    // MARK: - Navigation 
+    
+    fileprivate func dismissVideoController() {
+        presentingViewController?.dismiss(animated: true, completion: { 
+            // set device rotation back to portrait
+            let portraitOrientation = Int(UIInterfaceOrientation.portrait.rawValue)
+            UIDevice.current.setValue(portraitOrientation, forKey: "orientation")
+        })
+    }
     
 }
 
@@ -89,7 +97,7 @@ extension VideoViewController: YTPlayerViewDelegate {
     }
     
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
+        dismissVideoController()
     }
     
 }

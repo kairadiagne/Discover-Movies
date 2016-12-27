@@ -31,8 +31,12 @@ class PersonCollectionViewCell: UICollectionViewCell {
     func configureWithCastMember(_ member: CastMember) {
         
         nameLabel.text = member.name
-        guard let profilePath = member.profilePath, let url = TMDbImageRouter.posterMedium(path: profilePath).url else { return }
-        profileImageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
+        
+        if let profilePath = member.profilePath, let url = TMDbImageRouter.posterMedium(path: profilePath).url {
+            profileImageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
+        } else {
+            profileImageView.image = UIImage.placeholderImage()
+        }
     }
     
     // MARK: - Reuse

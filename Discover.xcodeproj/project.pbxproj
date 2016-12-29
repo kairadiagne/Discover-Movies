@@ -1669,6 +1669,7 @@
 				110F02D91E11795C005ADC4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		111942371CCB8CA0001CF39B /* Build configuration list for PBXProject "Discover" */ = {
 			isa = XCConfigurationList;

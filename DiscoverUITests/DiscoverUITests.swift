@@ -34,6 +34,8 @@ class DiscoverUITests: XCTestCase {
     func testGenerateAppStoreScreenshots() {
         // Go to menu
         let app = XCUIApplication()
+        snapshot("Home-screenshot", waitForLoadingIndicator: true)
+        
         app.navigationBars["Toplists"].buttons["Menu"].tap()
         snapshot("menu-screenshot")
         

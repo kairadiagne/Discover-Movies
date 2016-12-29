@@ -10,6 +10,10 @@ import UIKit
 import TMDbMovieKit
 import youtube_ios_player_helper
 
+protocol VideoViewControllerDelegate: class {
+    func videoViewControllerDidFinish(_ controller: VideoViewController)
+}
+
 class VideoViewController: UIViewController {
     
     // MARK: - Properties
@@ -17,6 +21,8 @@ class VideoViewController: UIViewController {
     private let youtubeView = YTPlayerView()
     
     private let video: Video
+    
+    weak var delegate: VideoViewControllerDelegate?
     
     // MARK: - Initialize
   
@@ -68,17 +74,7 @@ class VideoViewController: UIViewController {
     
     @objc fileprivate func doneButtonClick(notification: Notification) {
         youtubeView.stopVideo()
-        dismissVideoController()
-    }
-    
-    // MARK: - Navigation 
-    
-    fileprivate func dismissVideoController() {
-        presentingViewController?.dismiss(animated: true, completion: { 
-            // set device rotation back to portrait
-            let portraitOrientation = Int(UIInterfaceOrientation.portrait.rawValue)
-            UIDevice.current.setValue(portraitOrientation, forKey: "orientation")
-        })
+        delegate?.videoViewControllerDidFinish(self)
     }
     
 }
@@ -97,7 +93,7 @@ extension VideoViewController: YTPlayerViewDelegate {
     }
     
     func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
-        dismissVideoController()
+        delegate?.videoViewControllerDidFinish(self)
     }
     
 }

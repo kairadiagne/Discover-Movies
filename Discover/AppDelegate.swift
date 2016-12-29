@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         guard let rootViewController = window?.rootViewController else { return .portrait }
         let topController = topViewController(withRootViewController: rootViewController)
-        return topController is VideoViewController ? .landscapeLeft : .portrait
+        return topController is VideoViewController ? .allButUpsideDown : .portrait
     }
     
     // Gets the top view controller from the window

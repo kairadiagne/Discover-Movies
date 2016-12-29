@@ -88,14 +88,20 @@ class DetailViewController: BaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         detailView.configure(withMovie: movie, signedIn: signedIn)
+        
+        // Set device rotation back to portrait
+        let portraitOrientation = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue((portraitOrientation), forKey: "orientation")
+        UIViewController.attemptRotationToDeviceOrientation()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
         similarMoviesManager.remove(observer: self)
     }
+    
     
     // MARK: - Notifications
     
@@ -128,6 +134,7 @@ class DetailViewController: BaseViewController {
     
     @IBAction func playButtonTap(_ sender: UIButton) {
         guard let videoController = videoController else { return }
+        videoController.delegate = self
         present(videoController, animated: true, completion: nil)
     }
     
@@ -219,3 +226,17 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     }
     
 }
+
+// MARK: - VideoViewControllerDelegate
+
+extension DetailViewController: VideoViewControllerDelegate {
+    
+    func videoViewControllerDidFinish(_ controller: VideoViewController) {
+        
+        dismiss(animated: true) {
+            
+        }
+    }
+}
+
+

@@ -1,24 +1,21 @@
 # Uncomment the lines below you want to change by removing the # in the beginning
 
 # A list of devices you want to take the screenshots from
-# devices([
-   "iPhone 6",
-   "iPhone 6 Plus",
+  devices([
+   "iPhone 7",
+   "iPhone 7 Plus",
    "iPhone 5"
-#   "iPad Pro (12.9 inch)",
-#   "iPad Pro (9.7 inch)",
-#   "Apple TV 1080p"
-# ])
+  ])
 
 languages([
   "en-US",
 ])
 
 # The name of the scheme which contains the UI Tests
-# scheme "Discover"
+scheme "DiscoverUITests"
 
 # Where should the resulting screenshots be stored?
-# output_directory "./screenshots"
+output_directory "./screenshots"
 
 clear_previous_screenshots true 
 

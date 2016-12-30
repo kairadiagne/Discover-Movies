@@ -1,5 +1,5 @@
 //
-//  AboutTableViewCell.swift
+//  AcknowledgementCell.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 30-10-16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutTableViewCell: UITableViewCell {
+class AcknowledgementCell: UITableViewCell {
     
     // MARK: - Properties
     

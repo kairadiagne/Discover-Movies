@@ -69,15 +69,16 @@ watchListVCTitle = "Watchlist";
 searchVCTitle = "Search";
 
 /* About */
-aboutTitle = "About Discover";
-description = "A convenient way to browse movies and keep track of your watchlist";
+aboutTitle = "About";
+aboutTermsOfUse = "TMDb Terms of Use";
+aboutPrivacyPolicy = "TMDb Privacy Policy";
+aboutAcknowledgements = "Open-Source Libraries";
+aboutContact = "Contact";
+aboutRate = "Rate DiscoverMovies";
+aboutSectionTitle = "Info";
+feedbackSectionTitle = "Feedback";
+aboutFooterText = "\n\n\nThis product uses the TMDb API\nbut is not endorsed or certified by TMDb.\n\nIcons by icons8";
 
-tmdbacknowledgement = "This product uses the TMDb API\nbut is not endorsed or certified by TMDb.";
-feedbackButtonTitle = "Feedback";
-icon8Acknowledgmenet = "Icons by icons8";
-acknowledgementsTitle = "Open-source Libraries";
-license = "License";
-thanks = "Thank you for your feedback";
 
 
 

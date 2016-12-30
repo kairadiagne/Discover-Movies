@@ -34,7 +34,7 @@ class MenuView: UIView {
     
     // MARK: - Configure
     
-    func configure(withUser user: User?) {
+    func configure(withUser user: User? = nil) {
         nameLabel.text = user?.name ?? NSLocalizedString("nameLabelGuest", comment: "")
         
         if let path = user?.profileHash, let url = TMDbImageRouter.profileLarge(path: path).url {

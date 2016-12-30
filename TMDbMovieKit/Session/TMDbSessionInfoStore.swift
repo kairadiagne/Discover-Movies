@@ -14,12 +14,12 @@ protocol SessionInfoContaining { // Remove
     var user: User? { get }
     var APIKey: String { get }
     func saveSessionID(_ sessionID: String)
-    func saveUser(_ user: User)
     func clearUserData()
+    func save(user: User)
     func saveAPIKey(_ key: String)
 }
 
-class TMDbSessionInfoStore: SessionInfoContaining { // Remove sessionInfoContaining
+class TMDbSessionInfoStore: SessionInfoContaining {
     
     // MARK: - Types
     
@@ -36,13 +36,26 @@ class TMDbSessionInfoStore: SessionInfoContaining { // Remove sessionInfoContain
         return Locksmith.loadDataForUserAccount(userAccount: Keys.UserAccount)?[Keys.SessionID] as? String
     }
     
+    // MARK: - User
+    
     var user: User? {
-        guard let userDict = UserDefaults.standard.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
-        return User(dictionary: userDict)
+        get {
+            guard let userDict = UserDefaults.standard.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
+            return User(dictionary: userDict)
+        } set {
+            if newValue != nil {
+                UserDefaults.standard.set(newValue!.dictionaryRepresentation(), forKey: Keys.User)
+            } else {
+                UserDefaults.standard.set([:], forKey: Keys.User)
+            }
+        }
     }
     
-    // Memory cache for apikey 
+    func save(user: User) {
+        self.user = user
+    }
     
+    // Memory cache for apikey
     var APIKey: String {
         return  UserDefaults.standard.string(forKey: Keys.APIKey) ?? "" // Save Hashed version // No user defaults just from plist
     }
@@ -57,14 +70,6 @@ class TMDbSessionInfoStore: SessionInfoContaining { // Remove sessionInfoContain
         }
     }
     
-    func saveUser(_ user: User) {
-        UserDefaults.standard.set(user.dictionaryRepresentation(), forKey: Keys.User)
-    }
-    
-    func clearUser() {
-        UserDefaults.standard.removeObject(forKey: Keys.User)
-    }
-    
     func saveAPIKey(_ key: String) {
         UserDefaults.standard.set(key, forKey: Keys.APIKey)
     }
@@ -74,7 +79,7 @@ class TMDbSessionInfoStore: SessionInfoContaining { // Remove sessionInfoContain
     func clearUserData() {
         do {
              try Locksmith.deleteDataForUserAccount(userAccount: Keys.UserAccount)
-             clearUser()
+             user = nil
         } catch {
             print("Error deleteing user data from store")
         }

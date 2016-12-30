@@ -89,6 +89,26 @@ class AboutViewController: BaseViewController {
         return section
     }
     
+    // MARK: - Navigation
+    
+    fileprivate func openInSafari(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        safariViewController = SFSafariViewController(url: url)
+        present(safariViewController!, animated: true, completion: nil)
+    }
+    
+    fileprivate func showAcknowledgements() {
+        let acknowledgementsViewController = AcknowledgementsTableViewController()
+        navigationController?.pushViewController(acknowledgementsViewController, animated: true)
+    }
+    
+    fileprivate func openMail() {
+        // TODO: - Change to discovermovies gmail address
+        guard let url = URL(string:"mailto:diagnekaira@yahoo.com") else { return }
+        guard UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.openURL(url)
+    }
+
 }
 
 // MARK: - UITableViewDelegate
@@ -115,10 +135,6 @@ extension AboutViewController: UITableViewDelegate {
         return section == 1 ? NSLocalizedString("aboutFooterText", comment: "") : nil
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let headerView  = view as? UITableViewHeaderFooterView else { return }
         headerView.textLabel?.font = UIFont.H3()
@@ -129,6 +145,30 @@ extension AboutViewController: UITableViewDelegate {
         guard let footerView = view as? UITableViewHeaderFooterView else { return }
         footerView.textLabel?.font = UIFont.Caption()
         footerView.textLabel?.textAlignment = .center
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let row = row(for: indexPath) else { return }
+        
+        if row is Info {
+            switch row as! Info {
+            case .termsOfUse:
+                openInSafari(urlString: "https://www.themoviedb.org/terms-of-use")
+            case .privacyPolicy:
+                openInSafari(urlString: "https://www.themoviedb.org/privacy-policy")
+            case .acknowledgements:
+                showAcknowledgements()
+            }
+        } else if row is Feedback {
+            switch row as! Feedback {
+            case .contact:
+                openMail()
+            case .rate:
+                return // Unimplemented
+            }
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
@@ -142,7 +182,7 @@ extension AboutViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 3 : 2
+        return section == 0 ? 3 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,26 +203,5 @@ extension AboutViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true, completion: nil)
     }
+    
 }
-
-    
-    // MARK: - Acknowledgements
-    
-    //    func loadAcknowledgements() {
-    //        if let path = Bundle.main.path(forResource: "Acknowledgements", ofType: "plist"),
-    //            let dicts = NSDictionary(contentsOfFile: path)?["PreferenceSpecifiers"] as? [[String: AnyObject]] {
-    //
-    //            for dict in dicts {
-    //                if let acknowledgement = Acknowledgement(dictionary: dict) {
-    //                    acknowledgements.append(acknowledgement)
-    //                }
-    //            }
-    //
-    //            // Filter out first and last entry related to cocoapods
-    //            let _ = acknowledgements.removeFirst()
-    //            let _ = acknowledgements.removeLast()
-    //
-    //            aboutView.tableView.reloadData()
-    //        }
-    //    }
-

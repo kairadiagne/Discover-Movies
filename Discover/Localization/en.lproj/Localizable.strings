@@ -49,6 +49,9 @@ noSimilarMoviesText = "Similar movies unavailable";
 noCastmembersText = "Info about cast unavailable";
 seeAllButtonText = "See all";
 
+/* Video */
+backButtonTitle = "Back";
+
 /* SimilarMovies */
 similarMoviesVCTitle = "Similar Movies";
 

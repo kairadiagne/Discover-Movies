@@ -18,27 +18,21 @@ class VideoViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let youtubeView = YTPlayerView()
+    var videoView: VideoView {
+        return view as! VideoView
+    }
     
     private let video: Video
     
     weak var delegate: VideoViewControllerDelegate?
     
-    // MARK: - Initialize
-  
-    required init(video: Video) {
-        self.video = video
-        
-        super.init(nibName: nil, bundle: nil)
+    var videoPlayerIsBeingPresented: Bool = false
     
-        self.view.addSubview(youtubeView)
-        self.youtubeView.translatesAutoresizingMaskIntoConstraints = false
-        self.youtubeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        self.youtubeView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        self.youtubeView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-        self.youtubeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        
-        self.youtubeView.delegate = self
+    // MARK: - Init
+    
+    init(video: Video) {
+        self.video = video
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,51 +43,68 @@ class VideoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        youtubeView.load(withVideoId: video.source)
+        
+        videoView.youtubePlayerView.delegate = self
+        
+        let playerVars = ["playsinline": 0]
+        videoView.youtubePlayerView.load(withVideoId: video.source, playerVars: playerVars)
+        
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.hidesNavigationBarHairline = true
+        
+        let backSelector = #selector(VideoViewController.doneButtonCLick(button:))
+        let barbuttontitle = NSLocalizedString("backButtonTitle", comment: "")
+        let backButton = UIBarButtonItem(title: barbuttontitle, style: .plain, target: self, action: backSelector)
+        backButton.tintColor = .white
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = backButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let doneSelector = #selector(VideoViewController.doneButtonClick(notification:))
-        NotificationCenter.default.addObserver(self, selector: doneSelector , name: NSNotification.Name.UIWindowDidBecomeHidden, object: view.window)
+        videoPlayerIsBeingPresented = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        youtubeView.playVideo()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIWindowDidBecomeHidden, object: view.window)
+    // MARK: - Rotation
+    
+    override var shouldAutorotate: Bool {
+        return true
     }
     
-    @objc fileprivate func doneButtonClick(notification: Notification) {
-        youtubeView.stopVideo()
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .allButUpsideDown
+    }
+    
+    // MARK: - Navigation
+    
+    @objc private func doneButtonCLick(button: UIBarButtonItem) {
+        // Reset video
+        videoView.youtubePlayerView.stopVideo()
         delegate?.videoViewControllerDidFinish(self)
     }
-    
+
 }
 
 extension VideoViewController: YTPlayerViewDelegate {
     
-    func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
-        let view = UIView()
-        view.frame = self.view.bounds
-        view.backgroundColor = UIColor.black
-        return view
-    }
-
-    func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
-        return UIColor.black
+    public func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        videoView.stopLoading()
+        videoView.youtubePlayerView.playVideo()
     }
     
-    func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
+    public func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
         delegate?.videoViewControllerDidFinish(self)
     }
     
+    public func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
+        return .black
+    }
+    
+    public func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
+        videoView.startLoading()
+        return videoView.loadingOverlayView
+    }
+
 }
+
+
+

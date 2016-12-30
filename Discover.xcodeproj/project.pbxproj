@@ -44,6 +44,8 @@
 		113946321CCBBA80001CFAEA /* NSDate+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* NSDate+ToString.swift */; };
 		113D8C661DA2E3C5002B4EF6 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */; };
 		113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */; };
+		114471701E167A3000A0C6DD /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1144716F1E167A3000A0C6DD /* VideoViewController.xib */; };
+		114471741E167A5800A0C6DD /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114471731E167A5800A0C6DD /* VideoView.swift */; };
 		1167E7661DC63FAC003400B7 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1167E7651DC63FAC003400B7 /* Acknowledgements.plist */; };
 		1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76A1DC648E6003400B7 /* AboutViewController.swift */; };
 		1167E76D1DC648E6003400B7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1167E76B1DC648E6003400B7 /* AboutViewController.xib */; };
@@ -241,6 +243,8 @@
 		113946311CCBBA80001CFAEA /* NSDate+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+ToString.swift"; sourceTree = "<group>"; };
 		113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
+		1144716F1E167A3000A0C6DD /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
+		114471731E167A5800A0C6DD /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		1167E7651DC63FAC003400B7 /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		1167E76A1DC648E6003400B7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		1167E76B1DC648E6003400B7 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
@@ -785,7 +789,6 @@
 				EAD2A8301CDC9EAF0005264B /* Detail */,
 				11C3CC021DB80B130009D6D7 /* Generic */,
 				EAD2A8311CDC9ECC0005264B /* Video */,
-				EAD2A8321CDC9EDE0005264B /* Review */,
 				EAD2A82F1CDC9E910005264B /* AccountList */,
 				1136FBD91DA2D7A300CED407 /* Search */,
 				1167E7691DC648C7003400B7 /* About */,
@@ -828,7 +831,10 @@
 		EAD2A8311CDC9ECC0005264B /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				EAD2A8321CDC9EDE0005264B /* Review */,
 				EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */,
+				1144716F1E167A3000A0C6DD /* VideoViewController.xib */,
+				114471731E167A5800A0C6DD /* VideoView.swift */,
 			);
 			name = Video;
 			path = "6. Video";
@@ -845,7 +851,7 @@
 				EADA5A801CE9AA2200C2FAE8 /* ReviewDataSource.swift */,
 			);
 			name = Review;
-			path = "8. Review";
+			path = "../8. Review";
 			sourceTree = "<group>";
 		};
 		EAD2A8331CDC9EEB0005264B /* Sign in */ = {
@@ -1081,6 +1087,7 @@
 				11027BCA1DAC2CB4004223F6 /* NoDataCollectionViewCell.xib in Resources */,
 				EADA5A721CE8AD9A00C2FAE8 /* PersonCollectionViewCell.xib in Resources */,
 				1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */,
+				114471701E167A3000A0C6DD /* VideoViewController.xib in Resources */,
 				1179FC5B1DA0E17900CA1E6D /* MenuViewController.xib in Resources */,
 				11DCC2621DCA7A7A007C84BC /* Assets.xcassets in Resources */,
 				EA870C6D1D12D68D009C71D5 /* Localizable.strings in Resources */,
@@ -1223,6 +1230,7 @@
 				EADA5AA61CEA664300C2FAE8 /* SimilarMovieDataSource.swift in Sources */,
 				EA870C4A1D11980C009C71D5 /* AccountListTableViewCell.swift in Sources */,
 				11027BCE1DAC338D004223F6 /* SearchTableViewCell.swift in Sources */,
+				114471741E167A5800A0C6DD /* VideoView.swift in Sources */,
 				1179FC691DA0FFEF00CA1E6D /* AccountListView.swift in Sources */,
 				EADA5AA81CEA6B3700C2FAE8 /* FontStack.swift in Sources */,
 				11D099FA1D907AC500FEDB21 /* UIButton+BackgroundColor.swift in Sources */,

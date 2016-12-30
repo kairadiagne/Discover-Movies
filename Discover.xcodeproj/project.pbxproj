@@ -791,6 +791,7 @@
 				11A4FDAD1D906C9E00CA7F07 /* TopList */,
 				EAD2A8301CDC9EAF0005264B /* Detail */,
 				11C3CC021DB80B130009D6D7 /* Generic */,
+				EAD2A8321CDC9EDE0005264B /* Review */,
 				EAD2A8311CDC9ECC0005264B /* Video */,
 				EAD2A82F1CDC9E910005264B /* AccountList */,
 				1136FBD91DA2D7A300CED407 /* Search */,
@@ -834,7 +835,6 @@
 		EAD2A8311CDC9ECC0005264B /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2A8321CDC9EDE0005264B /* Review */,
 				EA6487AF1CE4AB2900452DD0 /* VideoViewController.swift */,
 				1144716F1E167A3000A0C6DD /* VideoViewController.xib */,
 				114471731E167A5800A0C6DD /* VideoView.swift */,
@@ -854,7 +854,7 @@
 				EADA5A801CE9AA2200C2FAE8 /* ReviewDataSource.swift */,
 			);
 			name = Review;
-			path = "../8. Review";
+			path = "8. Review";
 			sourceTree = "<group>";
 		};
 		EAD2A8331CDC9EEB0005264B /* Sign in */ = {

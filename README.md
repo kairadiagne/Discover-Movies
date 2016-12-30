@@ -8,7 +8,6 @@ DiscoverMovies is an app that helps you find interesting movies to watch. Go thr
 - Watch trailers, read reviews & browse similar movies
 - Sign in with your themoviedb account and keep track of your watchlist and favorites
 
-This product uses the TMDb API but is not endorsed or certified by TMDb.
-
-
-
+Attribution: 
+- This product uses the TMDb API but is not endorsed or certified by TMDb.
+- Icons by icons8.

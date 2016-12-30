@@ -18,32 +18,7 @@ class AboutView: BaseView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         tableView.hideEmptyRows()
-        
-//        containerView.backgroundColor = UIColor.clear
-//        labelContainer.backgroundColor = UIColor.clear
-//        
-//        descriptionLabel.textColor = UIColor.white
-//        creditsLabel.textColor = UIColor.buttonColor()
-//        icon8Label.textColor = UIColor.white
-//        tmdbLabel.textColor = UIColor.white
-//        
-//        creditsLabel.font = UIFont.H2()
-//        descriptionLabel.font = UIFont.Body()
-//        tmdbLabel.font = UIFont.Caption2()
-//        icon8Label.font = UIFont.Caption2()
-//    
-//        descriptionLabel.textAlignment = .center
-//        tmdbLabel.textAlignment = .center
-//        icon8Label.textAlignment = .center
-//        tmdbLabel.numberOfLines = 0
-//        descriptionLabel.numberOfLines = 0
-//    
-//        descriptionLabel.text = NSLocalizedString("description", comment: "")
-//        icon8Label.text = NSLocalizedString("icon8Acknowledgmenet", comment: "")
-//        tmdbLabel.text = NSLocalizedString("tmdbacknowledgement", comment: "")
-//        creditsLabel.text = NSLocalizedString("acknowledgementsTitle", comment: "")
     }
 
 }

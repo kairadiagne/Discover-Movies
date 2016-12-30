@@ -20,17 +20,17 @@ class AboutViewController: BaseViewController {
     
     // MARK: - Types
     
-    fileprivate enum Info: Int, Section {
-        case termsOfUse
-        case privacyPolicy
+    fileprivate enum Acknowledgement: Int, Section {
+        case themoviedb
+        case icons8
         case acknowledgements
         
         var rowTitle: String {
             switch self {
-            case .termsOfUse:
-                return NSLocalizedString("aboutTermsOfUse", comment: "")
-            case .privacyPolicy:
-                return NSLocalizedString("aboutPrivacyPolicy", comment: "")
+            case .themoviedb:
+                return NSLocalizedString("aboutTheMoviedb", comment: "")
+            case .icons8:
+                return NSLocalizedString("aboutIcons8", comment: "")
             case .acknowledgements:
                 return NSLocalizedString("aboutAcknowledgements", comment: "")
             }
@@ -81,7 +81,7 @@ class AboutViewController: BaseViewController {
         var section: Section?
         
         if indexPath.section == 0 {
-            section = Info(rawValue: indexPath.row)
+            section = Acknowledgement(rawValue: indexPath.row)
         } else {
             section = Feedback(rawValue: indexPath.row)
         }
@@ -128,7 +128,7 @@ extension AboutViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? NSLocalizedString("aboutSectionTitle", comment: "") : NSLocalizedString("feedbackSectionTitle", comment: "")
+        return section == 0 ? NSLocalizedString("acknowledgementSectionTitle", comment: "") : NSLocalizedString("feedbackSectionTitle", comment: "")
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -150,12 +150,12 @@ extension AboutViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let row = row(for: indexPath) else { return }
         
-        if row is Info {
-            switch row as! Info {
-            case .termsOfUse:
-                openInSafari(urlString: "https://www.themoviedb.org/terms-of-use")
-            case .privacyPolicy:
-                openInSafari(urlString: "https://www.themoviedb.org/privacy-policy")
+        if row is Acknowledgement {
+            switch row as! Acknowledgement {
+            case .themoviedb:
+                openInSafari(urlString: "https://www.themoviedb.org")
+            case .icons8:
+                openInSafari(urlString: "https://icons8.com")
             case .acknowledgements:
                 showAcknowledgements()
             }

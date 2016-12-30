@@ -61,7 +61,7 @@ authorLabelPrefixText = "A movie review by";
 noReviewMessage = "No Reviews to show";
 
 /* AccountList */
-noMoviesInListText = "List doesn't contain any movies yet";
+noMoviesInListText = "List doesn't contain any movies";
 favoriteVCTitle = "Favorites";
 watchListVCTitle = "Watchlist";
 
@@ -70,14 +70,14 @@ searchVCTitle = "Search";
 
 /* About */
 aboutTitle = "About";
-aboutTermsOfUse = "TMDb Terms of Use";
-aboutPrivacyPolicy = "TMDb Privacy Policy";
+aboutTheMoviedb = "TMDb";
+aboutIcons8 = "Icons by icons8";
 aboutAcknowledgements = "Open-Source Libraries";
 aboutContact = "Contact";
 aboutRate = "Rate DiscoverMovies";
-aboutSectionTitle = "Info";
+acknowledgementSectionTitle = "Acknowledgements";
 feedbackSectionTitle = "Feedback";
-aboutFooterText = "\n\n\nThis product uses the TMDb API\nbut is not endorsed or certified by TMDb.\n\nIcons by icons8";
+aboutFooterText = "\n\n\nThis product uses the TMDb API\nbut is not endorsed or certified by TMDb.";
 
 
 

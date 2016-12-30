@@ -1,5 +1,5 @@
 //
-//  DetailViewController\.swift
+//  DetailViewController.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 11/05/16.
@@ -10,6 +10,10 @@ import UIKit
 import TMDbMovieKit
 
 class DetailViewController: BaseViewController {
+    
+    override var shouldAutorotate: Bool {
+        return false 
+    }
     
     // MARK: - Properties
     
@@ -25,9 +29,9 @@ class DetailViewController: BaseViewController {
     
     private let movie: Movie
     
-    fileprivate var videoController: VideoViewController?
-    
     fileprivate let signedIn: Bool
+    
+    fileprivate var trailer: Video?
     
     // MARK: - Initialize
     
@@ -88,11 +92,6 @@ class DetailViewController: BaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         detailView.configure(withMovie: movie, signedIn: signedIn)
-        
-        // Set device rotation back to portrait
-        let portraitOrientation = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue((portraitOrientation), forKey: "orientation")
-        UIViewController.attemptRotationToDeviceOrientation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -133,9 +132,11 @@ class DetailViewController: BaseViewController {
     }
     
     @IBAction func playButtonTap(_ sender: UIButton) {
-        guard let videoController = videoController else { return }
-        videoController.delegate = self
-        present(videoController, animated: true, completion: nil)
+        guard let trailer = trailer else { return }
+        let videoViewController = VideoViewController(video: trailer)
+        videoViewController.delegate = self
+        let navigationConroller = UINavigationController(rootViewController: videoViewController)
+        present(navigationConroller, animated: true, completion: nil)
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {
@@ -210,7 +211,7 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
         detailView.configure(withDirector: info.director)
         
         if let trailer = info.trailer {
-            videoController = VideoViewController(video: trailer)
+            self.trailer = trailer
         }
         
         castDataSource.items = info.cast
@@ -232,11 +233,6 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
 extension DetailViewController: VideoViewControllerDelegate {
     
     func videoViewControllerDidFinish(_ controller: VideoViewController) {
-        
-        dismiss(animated: true) {
-            
-        }
+        dismiss(animated: true, completion: nil)
     }
 }
-
-

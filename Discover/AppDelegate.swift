@@ -30,17 +30,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        if let videoViewController = window?.rootViewController?.presentedViewController as? VideoViewController {
-            if videoViewController.videoPlayerIsBeingPresented {
-                return .allButUpsideDown
-            } else {
-                return .portrait
-            }
-        } else {
-            return .portrait
-        }
-    }
-    
 }
-

@@ -150,6 +150,16 @@ class AppCoordinator: UINavigationController {
         watchListManager.clear()
     }
     
+    // MARK: - Rotation
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
 }
 
 extension AppCoordinator: SignInViewControllerDelegate {

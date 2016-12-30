@@ -56,7 +56,6 @@ class AcknowledgementsTableViewController: UITableViewController {
         return acknowledgements.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AcknowledgementCell.defaultIdentifier(), for: indexPath) as! AcknowledgementCell
         let acknowledgement = acknowledgements[indexPath.row]

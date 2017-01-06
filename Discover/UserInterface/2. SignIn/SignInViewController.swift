@@ -64,6 +64,16 @@ class SignInViewController: UIViewController {
         return .lightContent
     }
     
+    // MARK: - Rotation
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+    
     // MARK: - Actions
     
     @IBAction func signInButtonClick(_ sender: UIButton) {

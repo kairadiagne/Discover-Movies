@@ -114,7 +114,9 @@ extension ReviewViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if reviewView.state == .loading && reviewDataSource.isEmpty {
-            cell.isHidden = true 
+            cell.isHidden = true
+        } else if reviewDataSource.isEmpty {
+            cell.separatorInset.left = view.bounds.width
         } else if reviewDataSource.itemCount - 5 == indexPath.row {
             reviewManager.loadMore()
         }

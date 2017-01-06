@@ -31,10 +31,6 @@ class MenuViewController: UIViewController {
         return sessionManager.signInStatus == .signedin
     }
     
-    private var user: User? {
-        return sessionManager.user
-    }
-    
     init(sessionManager: TMDbSessionManager, userService: TMDbUserService = TMDbUserService()) {
         self.userService = userService
         self.sessionManager = sessionManager
@@ -66,10 +62,13 @@ class MenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        menuView.tableView.reloadData()
+        
         if signedIn {
+            menuView.configure(withUser: sessionManager.user)
             userService.getUserInfo()
         } else {
-            menuView.configure(withUser: user)
+            menuView.configure()
             menuView.tableView.reloadData()
         }
     }

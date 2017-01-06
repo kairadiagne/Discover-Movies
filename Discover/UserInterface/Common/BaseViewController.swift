@@ -62,6 +62,16 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
+    // MARK: - Rotation 
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
 }
 
 //MARK: - SWRevealViewControllerDelegate

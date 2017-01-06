@@ -49,6 +49,9 @@ noSimilarMoviesText = "Similar movies unavailable";
 noCastmembersText = "Info about cast unavailable";
 seeAllButtonText = "See all";
 
+/* Video */
+backButtonTitle = "Back";
+
 /* SimilarMovies */
 similarMoviesVCTitle = "Similar Movies";
 
@@ -58,7 +61,7 @@ authorLabelPrefixText = "A movie review by";
 noReviewMessage = "No Reviews to show";
 
 /* AccountList */
-noMoviesInListText = "List doesn't contain any movies yet";
+noMoviesInListText = "List doesn't contain any movies";
 favoriteVCTitle = "Favorites";
 watchListVCTitle = "Watchlist";
 
@@ -66,15 +69,16 @@ watchListVCTitle = "Watchlist";
 searchVCTitle = "Search";
 
 /* About */
-aboutTitle = "About Discover";
-description = "A convenient way to browse movies and keep track of your watchlist";
+aboutTitle = "About";
+aboutTheMoviedb = "TMDb";
+aboutIcons8 = "Icons by icons8";
+aboutAcknowledgements = "Open-Source Libraries";
+aboutContact = "Contact";
+aboutRate = "Rate DiscoverMovies";
+acknowledgementSectionTitle = "Acknowledgements";
+feedbackSectionTitle = "Feedback";
+aboutFooterText = "\n\n\nThis product uses the TMDb API\nbut is not endorsed or certified by TMDb.";
 
-tmdbacknowledgement = "This product uses the TMDb API\nbut is not endorsed or certified by TMDb.";
-feedbackButtonTitle = "Feedback";
-icon8Acknowledgmenet = "Icons by icons8";
-acknowledgementsTitle = "Open-source Libraries";
-license = "License";
-thanks = "Thank you for your feedback";
 
 
 

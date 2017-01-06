@@ -200,15 +200,15 @@
 		11027BC81DAC2CB4004223F6 /* NoDataCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataCollectionViewCell.xib; sourceTree = "<group>"; };
 		11027BCC1DAC338D004223F6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		11027BCD1DAC338D004223F6 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
-		110F02D11E11795C005ADC4A /* DiscoverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		110F02D11E11795C005ADC4A /* DiscoverMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		110F02D31E11795C005ADC4A /* DiscoverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverUITests.swift; sourceTree = "<group>"; };
 		110F02D51E11795C005ADC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		110F02DB1E117A79005ADC4A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		1114E8DE1DD3B616009C5806 /* Discover.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Discover.entitlements; sourceTree = "<group>"; };
 		1118370F1D8748B200C58DF3 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		1119423C1CCB8CA0001CF39B /* Discover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discover.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1119424B1CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		111942501CCB8CA0001CF39B /* DiscoverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		111942561CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TMDbMovieKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		111942661CCB8CBE001CF39B /* TMDbMovieKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMDbMovieKit.h; sourceTree = "<group>"; };
@@ -415,11 +415,11 @@
 		1119423D1CCB8CA0001CF39B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1119423C1CCB8CA0001CF39B /* Discover.app */,
-				111942501CCB8CA0001CF39B /* DiscoverTests.xctest */,
+				1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */,
+				111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */,
 				111942641CCB8CBE001CF39B /* TMDbMovieKit.framework */,
 				1119426D1CCB8CBF001CF39B /* TMDbMovieKitTests.xctest */,
-				110F02D11E11795C005ADC4A /* DiscoverUITests.xctest */,
+				110F02D11E11795C005ADC4A /* DiscoverMoviesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -896,9 +896,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		110F02D01E11795C005ADC4A /* DiscoverUITests */ = {
+		110F02D01E11795C005ADC4A /* DiscoverMoviesUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 110F02DA1E11795C005ADC4A /* Build configuration list for PBXNativeTarget "DiscoverUITests" */;
+			buildConfigurationList = 110F02DA1E11795C005ADC4A /* Build configuration list for PBXNativeTarget "DiscoverMoviesUITests" */;
 			buildPhases = (
 				110F02CD1E11795C005ADC4A /* Sources */,
 				110F02CE1E11795C005ADC4A /* Frameworks */,
@@ -909,14 +909,14 @@
 			dependencies = (
 				110F02D71E11795C005ADC4A /* PBXTargetDependency */,
 			);
-			name = DiscoverUITests;
+			name = DiscoverMoviesUITests;
 			productName = DiscoverUITests;
-			productReference = 110F02D11E11795C005ADC4A /* DiscoverUITests.xctest */;
+			productReference = 110F02D11E11795C005ADC4A /* DiscoverMoviesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		1119423B1CCB8CA0001CF39B /* Discover */ = {
+		1119423B1CCB8CA0001CF39B /* DiscoverMovies */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "Discover" */;
+			buildConfigurationList = 111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMovies" */;
 			buildPhases = (
 				C70C170F5FC230F3FFFCD484 /* [CP] Check Pods Manifest.lock */,
 				111942381CCB8CA0001CF39B /* Sources */,
@@ -931,14 +931,14 @@
 			dependencies = (
 				111942781CCB8CBF001CF39B /* PBXTargetDependency */,
 			);
-			name = Discover;
+			name = DiscoverMovies;
 			productName = DiscoverMovies;
-			productReference = 1119423C1CCB8CA0001CF39B /* Discover.app */;
+			productReference = 1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1119424F1CCB8CA0001CF39B /* DiscoverTests */ = {
+		1119424F1CCB8CA0001CF39B /* DiscoverMoviesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1119425C1CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverTests" */;
+			buildConfigurationList = 1119425C1CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMoviesTests" */;
 			buildPhases = (
 				1119424C1CCB8CA0001CF39B /* Sources */,
 				1119424D1CCB8CA0001CF39B /* Frameworks */,
@@ -949,9 +949,9 @@
 			dependencies = (
 				111942521CCB8CA0001CF39B /* PBXTargetDependency */,
 			);
-			name = DiscoverTests;
+			name = DiscoverMoviesTests;
 			productName = DiscoverMoviesTests;
-			productReference = 111942501CCB8CA0001CF39B /* DiscoverTests.xctest */;
+			productReference = 111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		111942631CCB8CBE001CF39B /* TMDbMovieKit */ = {
@@ -1042,7 +1042,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 111942371CCB8CA0001CF39B /* Build configuration list for PBXProject "Discover" */;
+			buildConfigurationList = 111942371CCB8CA0001CF39B /* Build configuration list for PBXProject "DiscoverMovies" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1055,11 +1055,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1119423B1CCB8CA0001CF39B /* Discover */,
+				1119423B1CCB8CA0001CF39B /* DiscoverMovies */,
 				111942631CCB8CBE001CF39B /* TMDbMovieKit */,
-				1119424F1CCB8CA0001CF39B /* DiscoverTests */,
+				1119424F1CCB8CA0001CF39B /* DiscoverMoviesTests */,
 				1119426C1CCB8CBF001CF39B /* TMDbMovieKitTests */,
-				110F02D01E11795C005ADC4A /* DiscoverUITests */,
+				110F02D01E11795C005ADC4A /* DiscoverMoviesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1349,12 +1349,12 @@
 /* Begin PBXTargetDependency section */
 		110F02D71E11795C005ADC4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1119423B1CCB8CA0001CF39B /* Discover */;
+			target = 1119423B1CCB8CA0001CF39B /* DiscoverMovies */;
 			targetProxy = 110F02D61E11795C005ADC4A /* PBXContainerItemProxy */;
 		};
 		111942521CCB8CA0001CF39B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1119423B1CCB8CA0001CF39B /* Discover */;
+			target = 1119423B1CCB8CA0001CF39B /* DiscoverMovies */;
 			targetProxy = 111942511CCB8CA0001CF39B /* PBXContainerItemProxy */;
 		};
 		111942701CCB8CBF001CF39B /* PBXTargetDependency */ = {
@@ -1364,7 +1364,7 @@
 		};
 		111942721CCB8CBF001CF39B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1119423B1CCB8CA0001CF39B /* Discover */;
+			target = 1119423B1CCB8CA0001CF39B /* DiscoverMovies */;
 			targetProxy = 111942711CCB8CBF001CF39B /* PBXContainerItemProxy */;
 		};
 		111942781CCB8CBF001CF39B /* PBXTargetDependency */ = {
@@ -1572,7 +1572,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discover.app/Discover";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Debug;
 		};
@@ -1585,7 +1585,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discover.app/Discover";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Release;
 		};
@@ -1653,7 +1653,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "TMDbMovieKitTests/Entities/TMDbMovieKitTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discover.app/Discover";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Debug;
 		};
@@ -1667,14 +1667,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TMDbMovieKitTests/Entities/TMDbMovieKitTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discover.app/Discover";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		110F02DA1E11795C005ADC4A /* Build configuration list for PBXNativeTarget "DiscoverUITests" */ = {
+		110F02DA1E11795C005ADC4A /* Build configuration list for PBXNativeTarget "DiscoverMoviesUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				110F02D81E11795C005ADC4A /* Debug */,
@@ -1683,7 +1683,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		111942371CCB8CA0001CF39B /* Build configuration list for PBXProject "Discover" */ = {
+		111942371CCB8CA0001CF39B /* Build configuration list for PBXProject "DiscoverMovies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				111942571CCB8CA0001CF39B /* Debug */,
@@ -1692,7 +1692,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "Discover" */ = {
+		111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMovies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1119425A1CCB8CA0001CF39B /* Debug */,
@@ -1701,7 +1701,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1119425C1CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverTests" */ = {
+		1119425C1CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMoviesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1119425D1CCB8CA0001CF39B /* Debug */,

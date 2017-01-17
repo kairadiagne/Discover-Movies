@@ -144,5 +144,17 @@ struct ListStatusConfiguration: RequestConfiguration {
     }
 }
 
+// MARK: - People Configurations
 
-
+struct PersonConfig: RequestConfiguration {
+    let method: HTTPMethod = .get
+    let personID: Int
+    
+    var endpoint: String {
+        return "person/\(personID)"
+    }
+    
+    var defaultParams: [String : AnyObject]? {
+        return ["append_to_response": "movie_credits" as AnyObject]
+    }
+}

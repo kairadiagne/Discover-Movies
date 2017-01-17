@@ -9,14 +9,14 @@
 import Foundation
 import Locksmith
 
-protocol SessionInfoContaining { // Remove
+protocol SessionInfoContaining {
     var sessionID: String? { get }
-    var user: User? { get }
-    var APIKey: String { get }
     func saveSessionID(_ sessionID: String)
-    func clearUserData()
-    func save(user: User)
+    var APIKey: String { get }
     func saveAPIKey(_ key: String)
+    var user: User? { get }
+    func save(user: User)
+    func clearUserData()
 }
 
 class TMDbSessionInfoStore: SessionInfoContaining {
@@ -30,10 +30,14 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         static let APIKey = "APIKey"
     }
     
-    // MARK: - Properties
+    // MARK: - APIKey
     
-    var sessionID: String? {
-        return Locksmith.loadDataForUserAccount(userAccount: Keys.UserAccount)?[Keys.SessionID] as? String
+    var APIKey: String {
+        return UserDefaults.standard.string(forKey: Keys.APIKey) ?? ""
+    }
+    
+    func saveAPIKey(_ key: String) {
+        UserDefaults.standard.set(key, forKey: Keys.APIKey)
     }
     
     // MARK: - User
@@ -55,33 +59,26 @@ class TMDbSessionInfoStore: SessionInfoContaining {
         self.user = user
     }
     
-    // Memory cache for apikey
-    var APIKey: String {
-        return  UserDefaults.standard.string(forKey: Keys.APIKey) ?? "" // Save Hashed version // No user defaults just from plist
+    func clearUserData() {
+        do {
+            try Locksmith.deleteDataForUserAccount(userAccount: Keys.UserAccount)
+            user = nil
+        } catch {
+            print("Error deleteing user data from store")
+        }
     }
     
-    // MARK: - Persistence
+    // MARK: - SessionID
+    
+    var sessionID: String? {
+        return Locksmith.loadDataForUserAccount(userAccount: Keys.UserAccount)?[Keys.SessionID] as? String
+    }
     
     func saveSessionID(_ sessionID: String) {
         do {
             try Locksmith.saveData(data: [Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
             print("Error saving sessionID from keychain")
-        }
-    }
-    
-    func saveAPIKey(_ key: String) {
-        UserDefaults.standard.set(key, forKey: Keys.APIKey)
-    }
-    
-    // MARK: - Clear
-    
-    func clearUserData() {
-        do {
-             try Locksmith.deleteDataForUserAccount(userAccount: Keys.UserAccount)
-             user = nil
-        } catch {
-            print("Error deleteing user data from store")
         }
     }
     

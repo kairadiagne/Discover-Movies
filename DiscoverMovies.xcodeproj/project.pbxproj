@@ -55,6 +55,9 @@
 		1167E7781DC65658003400B7 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E7761DC65658003400B7 /* AboutTableViewCell.swift */; };
 		1167E7791DC65658003400B7 /* AcknowledgementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1167E7771DC65658003400B7 /* AcknowledgementCell.xib */; };
 		116C2A8F1E2EA82A00E4C487 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C2A8E1E2EA82A00E4C487 /* Person.swift */; };
+		116C2A931E2EAE8000E4C487 /* PersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C2A911E2EAE8000E4C487 /* PersonDetailViewController.swift */; };
+		116C2A941E2EAE8000E4C487 /* PersonDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116C2A921E2EAE8000E4C487 /* PersonDetailViewController.xib */; };
+		116C2A961E2EAE9600E4C487 /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C2A951E2EAE9600E4C487 /* PersonDetailView.swift */; };
 		1179FC5B1DA0E17900CA1E6D /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */; };
 		1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */; };
 		1179FC611DA0E2D100CA1E6D /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1179FC5F1DA0E2D100CA1E6D /* MenuTableViewCell.xib */; };
@@ -256,6 +259,9 @@
 		1167E7761DC65658003400B7 /* AboutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
 		1167E7771DC65658003400B7 /* AcknowledgementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcknowledgementCell.xib; sourceTree = "<group>"; };
 		116C2A8E1E2EA82A00E4C487 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		116C2A911E2EAE8000E4C487 /* PersonDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailViewController.swift; sourceTree = "<group>"; };
+		116C2A921E2EAE8000E4C487 /* PersonDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonDetailViewController.xib; sourceTree = "<group>"; };
+		116C2A951E2EAE9600E4C487 /* PersonDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
 		1179FC561D98777300CA1E6D /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		1179FC5A1DA0E17900CA1E6D /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		1179FC5E1DA0E2D100CA1E6D /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -657,6 +663,17 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		116C2A901E2EAE3800E4C487 /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				116C2A911E2EAE8000E4C487 /* PersonDetailViewController.swift */,
+				116C2A921E2EAE8000E4C487 /* PersonDetailViewController.xib */,
+				116C2A951E2EAE9600E4C487 /* PersonDetailView.swift */,
+			);
+			name = Person;
+			path = "13. Person";
+			sourceTree = "<group>";
+		};
 		1179FC6C1DA1165D00CA1E6D /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,6 +811,7 @@
 				11A4FDAD1D906C9E00CA7F07 /* TopList */,
 				EAD2A8301CDC9EAF0005264B /* Detail */,
 				11C3CC021DB80B130009D6D7 /* Generic */,
+				116C2A901E2EAE3800E4C487 /* Person */,
 				EAD2A8321CDC9EDE0005264B /* Review */,
 				EAD2A8311CDC9ECC0005264B /* Video */,
 				EAD2A82F1CDC9E910005264B /* AccountList */,
@@ -1088,6 +1106,7 @@
 				11027BCF1DAC338D004223F6 /* SearchTableViewCell.xib in Resources */,
 				11290AEF1D98217E00AC4231 /* ReviewViewController.xib in Resources */,
 				11A4FDAC1D906C8500CA7F07 /* TopListViewController.xib in Resources */,
+				116C2A941E2EAE8000E4C487 /* PersonDetailViewController.xib in Resources */,
 				EA870C691D12CE5F009C71D5 /* AccountListTableViewCell.xib in Resources */,
 				EA6487C01CE4E50100452DD0 /* SignInViewController.xib in Resources */,
 				11027BCA1DAC2CB4004223F6 /* NoDataCollectionViewCell.xib in Resources */,
@@ -1244,6 +1263,7 @@
 				1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */,
 				EA6487B11CE4AB2900452DD0 /* VideoViewController.swift in Sources */,
 				113D8C661DA2E3C5002B4EF6 /* SearchDataSource.swift in Sources */,
+				116C2A931E2EAE8000E4C487 /* PersonDetailViewController.swift in Sources */,
 				EA6487C61CE503BD00452DD0 /* ReviewViewController.swift in Sources */,
 				1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */,
 				1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */,
@@ -1284,6 +1304,7 @@
 				11A4FDB01D906D0800CA7F07 /* TopListView.swift in Sources */,
 				EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */,
 				1167E7731DC64F10003400B7 /* DiscoverButton.swift in Sources */,
+				116C2A961E2EAE9600E4C487 /* PersonDetailView.swift in Sources */,
 				EA6487BF1CE4E50100452DD0 /* SignInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

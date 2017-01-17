@@ -9,11 +9,15 @@
 import Foundation
 import Alamofire
 
-public class PersonManager: DataManager<Person> {
+public class PersonDataManager: DataManager<Person> {
     
     // MARK: - Properties
     
     let personID: Int
+    
+    public var person: Person? {
+        return cachedData.data
+    }
     
     // MARK: - Initialize
     

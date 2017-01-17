@@ -9,16 +9,6 @@
 import Foundation
 import Locksmith
 
-protocol SessionInfoContaining {
-    var sessionID: String? { get }
-    func saveSessionID(_ sessionID: String)
-    var APIKey: String { get }
-    func saveAPIKey(_ key: String)
-    var user: User? { get }
-    func save(user: User)
-    func clearUserData()
-}
-
 class TMDbSessionInfoStore: SessionInfoContaining {
     
     // MARK: - Types

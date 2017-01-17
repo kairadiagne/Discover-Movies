@@ -18,7 +18,7 @@ public struct CastMember: DictionarySerializable, Equatable {
     public let name: String
     public let character: String
     public let order: Int
-    public fileprivate(set) var profilePath: String?
+    public private(set) var profilePath: String?
     
     // MARK: - Initialize
     

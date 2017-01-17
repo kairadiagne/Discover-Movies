@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = appCoordinator
         window?.makeKeyAndVisible()
         
+        // Start running
+        appCoordinator.start()
+        
         Theme.apply()
 
         return true

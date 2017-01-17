@@ -38,7 +38,6 @@ class AppCoordinator: UINavigationController {
         self.favoritesManager = TMDbAccountListDataManager(list: .favorite)
         self.watchListManager = TMDbAccountListDataManager(list: .watchlist)
         super.init(nibName: nil, bundle: nil)
-        start()
     }
     
     required init?(coder aDecoder: NSCoder) {

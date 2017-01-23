@@ -19,7 +19,7 @@ class DetailViewController: BaseViewController {
     
     @IBOutlet weak var detailView: DetailView!
     
-    fileprivate let similarMoviesDataSource = SimilarMovieDataSource()
+    fileprivate let similarMoviesDataSource: MovieCollectionDataSource
 
     fileprivate let castDataSource = CastDataSource()
   
@@ -38,6 +38,7 @@ class DetailViewController: BaseViewController {
     init(movie: Movie, signedIn: Bool) {
         self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
         self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.id)
+        self.similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: NSLocalizedString("noSimilarMoviesText", comment: ""))
         self.movie = movie
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
@@ -100,7 +101,6 @@ class DetailViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = false
         similarMoviesManager.remove(observer: self)
     }
-    
     
     // MARK: - Notifications
     

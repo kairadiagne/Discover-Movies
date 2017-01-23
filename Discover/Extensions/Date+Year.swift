@@ -1,5 +1,5 @@
 //
-//  NSDate+Year.swift
+//  Date+Year.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 17-04-16.

@@ -1,5 +1,5 @@
 //
-//  String+ToNSDate.swift
+//  String+ToDate.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 17-04-16.

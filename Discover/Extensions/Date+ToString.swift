@@ -1,5 +1,5 @@
 //
-//  NSDate+ToString.swift
+//  Date+ToString.swift
 //  
 //
 //  Created by Kaira Diagne on 23-04-16.

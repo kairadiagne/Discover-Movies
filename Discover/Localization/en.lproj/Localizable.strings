@@ -58,6 +58,7 @@ diedLabelPrefix = "Died: ";
 biographyTitleLabel = "Bio";
 moviesKnowFor = "Known for";
 homePageButton = "Visit Website";
+emptyMoviesMessage = "No movies available";
 
 /* SimilarMovies */
 similarMoviesVCTitle = "Similar Movies";

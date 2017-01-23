@@ -62,7 +62,7 @@ public struct Person: DictionarySerializable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
-    
+
 }
 
 //{

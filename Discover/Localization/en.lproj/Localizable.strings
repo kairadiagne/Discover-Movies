@@ -6,6 +6,9 @@
   Copyright © 2016 Kaira Diagne. All rights reserved.
 */
 
+/* Common */
+backButtonTitle = "Back";
+
 /* Error Handler */
 noConnectionTitle = "No internet connection";
 noConnectionMessage = "Please check your connection and try again later";
@@ -49,8 +52,12 @@ noSimilarMoviesText = "Similar movies unavailable";
 noCastmembersText = "Info about cast unavailable";
 seeAllButtonText = "See all";
 
-/* Video */
-backButtonTitle = "Back";
+/* Person Detail */
+bornLabeLPreix = "Born: ";
+diedLabelPrefix = "Died: ";
+biographyTitleLabel = "Bio";
+moviesKnowFor = "Known for";
+homePageButton = "Visit Website";
 
 /* SimilarMovies */
 similarMoviesVCTitle = "Similar Movies";

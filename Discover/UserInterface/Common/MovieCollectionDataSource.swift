@@ -1,5 +1,5 @@
 //
-//  SimilarMovieDataSource.swift
+//  MovieCollectionDataSource.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 16/05/16.
@@ -9,13 +9,22 @@
 import UIKit
 import TMDbMovieKit
 
-class SimilarMovieDataSource: NSObject, DataContaining, UICollectionViewDataSource {
+class MovieCollectionDataSource: NSObject, DataContaining, UICollectionViewDataSource {
     
     typealias ItemType = Movie
     
     // MARK: - Properties 
     
     var items: [Movie] = []
+    
+    private let emptyMessage: String
+    
+    // MARK: - Initialize
+    
+    init(emptyMessage: String) {
+        self.emptyMessage = emptyMessage
+        super.init()
+    }
     
     // MARK: - UICollectionViewDataSource
     
@@ -26,8 +35,7 @@ class SimilarMovieDataSource: NSObject, DataContaining, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isEmpty {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier(), for: indexPath) as! NoDataCollectionViewCell
-            let message = NSLocalizedString("noSimilarMoviesText", comment: "")
-            cell.configure(with: message)
+            cell.configure(with: emptyMessage)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.defaultIdentfier(), for: indexPath) as! MovieCollectionViewCell

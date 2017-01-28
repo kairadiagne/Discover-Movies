@@ -11,11 +11,11 @@ import TMDbMovieKit
 
 class MovieCollectionDataSource: NSObject, DataContaining, UICollectionViewDataSource {
     
-    typealias ItemType = Movie
+    typealias ItemType = MovieRepresentable
     
     // MARK: - Properties 
     
-    var items: [Movie] = []
+    var items: [MovieRepresentable] = []
     
     private let emptyMessage: String
     

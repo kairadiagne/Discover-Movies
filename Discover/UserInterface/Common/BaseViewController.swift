@@ -57,7 +57,7 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
     // MARK: - Navigation 
     
-    func showDetailViewController(for movie: Movie, signedIn: Bool) {
+    func showDetailViewController(for movie: MovieRepresentable, signedIn: Bool) {
         let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
         navigationController?.pushViewController(detailViewController, animated: true)
     }

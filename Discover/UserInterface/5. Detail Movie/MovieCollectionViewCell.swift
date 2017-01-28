@@ -18,7 +18,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Configure
     
-    func configureWithMovie(_ movie: Movie) {
+    func configureWithMovie(_ movie: MovieRepresentable) {
         if let url = TMDbImageRouter.posterMedium(path: movie.posterPath).url {
             movieImageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
         } else {

@@ -26,8 +26,6 @@ class VideoViewController: UIViewController {
     
     weak var delegate: VideoViewControllerDelegate?
     
-    var videoPlayerIsBeingPresented: Bool = false
-    
     // MARK: - Init
     
     init(video: Video) {
@@ -57,11 +55,6 @@ class VideoViewController: UIViewController {
         let backButton = UIBarButtonItem(title: barbuttontitle, style: .plain, target: self, action: backSelector)
         backButton.tintColor = .white
         navigationController?.navigationBar.topItem?.leftBarButtonItem = backButton
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        videoPlayerIsBeingPresented = true
     }
     
     // MARK: - Rotation

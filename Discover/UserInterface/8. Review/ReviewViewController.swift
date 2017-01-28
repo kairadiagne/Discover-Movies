@@ -21,7 +21,7 @@ class ReviewViewController: BaseViewController {
     
     @IBOutlet var reviewView: ReviewView!
     
-    private let movie: Movie
+    private let movie: MovieRepresentable
  
     fileprivate let reviewDataSource = ReviewDataSource()
     
@@ -31,7 +31,7 @@ class ReviewViewController: BaseViewController {
     
     // MARK: - Initialize
     
-    init(movie: Movie, signedIn: Bool) {
+    init(movie: MovieRepresentable, signedIn: Bool) {
         self.movie = movie
         self.reviewManager = TMDbReviewManager(movieID: movie.id)
         self.signedIn = signedIn

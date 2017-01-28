@@ -13,7 +13,6 @@ public struct MovieCredit: MovieRepresentable, Equatable {
     public let creditId: String
     public let title: String
     public let releaseDate: String
-    public let adult: Bool
     public let posterPath: String
 }
 
@@ -25,19 +24,17 @@ extension MovieCredit: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int,
-        let creditId = dict["credit_id"] as? String,
-        let title = dict["title"] as? String,
-        let releaseDate = ["release_date"] as? String,
-        let adult = dict["adult"] as? Bool,
-        let posterPath = dict["poster_path"] as? String  else {
-            return nil
+            let creditId = dict["credit_id"] as? String,
+            let title = dict["title"] as? String,
+            let releaseDate = dict["release_date"] as? String,
+            let posterPath = dict["poster_path"] as? String  else {
+                return nil
         }
         
         self.id = id
         self.creditId = creditId
         self.title = title
         self.releaseDate = releaseDate
-        self.adult = adult
         self.posterPath = posterPath
     }
     

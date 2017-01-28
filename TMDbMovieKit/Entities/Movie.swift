@@ -12,7 +12,6 @@ public protocol MovieRepresentable {
     var id: Int { get }
     var title: String { get }
     var releaseDate: String { get }
-    var adult: Bool { get }
     var posterPath: String { get }
 }
 

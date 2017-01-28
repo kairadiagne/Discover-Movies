@@ -26,7 +26,6 @@ public struct MovieInfo {
 extension MovieInfo: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
-        print(dict)
         guard let movie = Movie(dictionary: dict),
         let creditsDict = dict["credits"] as? [String: AnyObject],
             let castDicts = creditsDict["cast"] as? [[String: AnyObject]],
@@ -37,6 +36,10 @@ extension MovieInfo: DictionarySerializable {
         self.movie = movie
         self.cast = castDicts.map { return CastMember(dictionary: $0) }.flatMap { $0 }
         self.crew = crewDicts.map { return CrewMember(dictionary: $0) }.flatMap { $0 }
+        
+        if let trailerDicts = dict["trailers"] as? [String: AnyObject], let youtube = trailerDicts["youtube"] as? [[String: AnyObject]] {
+            self.trailers = youtube.flatMap { Video(dictionary: $0) }
+        }
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {

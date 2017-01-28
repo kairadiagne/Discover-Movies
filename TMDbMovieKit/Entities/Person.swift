@@ -26,7 +26,7 @@ public struct Person: PersonRepresentable, Equatable {
     public var biography: String?
     public var homepage: String?
     public fileprivate(set) var profilePath: String?
-//    public fileprivate(set) var movieCredits: [MovieRe] = []
+    public fileprivate(set) var movieCredits: [MovieCredit] = []
 }
 
 public func ==(lhs: Person, rhs: Person) -> Bool {
@@ -54,6 +54,17 @@ extension Person: DictionarySerializable {
         self.adult = adult
         self.profilePath = dict["profile_path"] as? String
         self.homepage = dict["homepage"] as? String
+        
+        if let movieCredits = dict["movie_credits"] as? [String: AnyObject] {
+            if let castDicts = movieCredits["cast"] as? [[String: AnyObject]] {
+                self.movieCredits = castDicts.flatMap { MovieCredit(dictionary: $0) }
+            }
+            
+            if let crewDicts = movieCredits["crew"] as? [[String: AnyObject]] {
+                let credits = crewDicts.flatMap { MovieCredit(dictionary: $0) }
+                self.movieCredits.append(contentsOf: credits)
+            }
+        }
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {

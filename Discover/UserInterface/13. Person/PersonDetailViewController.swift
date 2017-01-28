@@ -8,6 +8,7 @@
 
 import UIKit
 import TMDbMovieKit
+import SafariServices
 
 class PersonDetailViewController: BaseViewController {
     
@@ -20,6 +21,8 @@ class PersonDetailViewController: BaseViewController {
     fileprivate let personDataManager: PersonDataManager
     
     fileprivate let dataSource: MovieCollectionDataSource
+    
+    fileprivate var safariVC: SFSafariViewController?
     
     private let signedIn: Bool
     
@@ -60,6 +63,8 @@ class PersonDetailViewController: BaseViewController {
         personDataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         personDataManager.reloadIfNeeded()
+        
+        personDetailView.set(state: .loading)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,8 +77,22 @@ class PersonDetailViewController: BaseViewController {
     
     override func dataManagerDidUpdate(notification: Notification) {
         if let person = personDataManager.person {
+            personDetailView.moviesCollectionView.reloadData()
+            personDetailView.set(state: .idle)
             personDetailView.configure(with: person)
         }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func homepageButtonClick(_ sender: UIButton) {
+        guard let person = personDataManager.person, let path = person.homepage, let url = URL(string: path) else {
+            return
+        }
+      
+        safariVC = SFSafariViewController(url: url)
+        safariVC?.delegate  = self
+        present(safariVC!, animated: true, completion: nil)
     }
     
     // MARK: - DataManagerFailureDelegate
@@ -118,3 +137,16 @@ extension PersonDetailViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+// MARK: - SFSafariViewControllerDelegate
+
+extension PersonDetailViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true) {
+            self.safariVC = nil
+        }
+    }
+    
+}
+

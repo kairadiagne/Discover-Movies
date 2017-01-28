@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class PersonDetailView: UIView {
+class PersonDetailView: BaseView {
     
     // MARK: - Properties
     @IBOutlet weak var scrollView: UIScrollView!
@@ -21,7 +21,7 @@ class PersonDetailView: UIView {
     @IBOutlet weak var biographyLabelsStackView: UIStackView!
     @IBOutlet weak var moviesStackView: UIStackView!
     
-    @IBOutlet weak var profileImageView: ProfileImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bornLabel: UILabel!
     @IBOutlet weak var diedLabel: UILabel!
@@ -74,36 +74,64 @@ class PersonDetailView: UIView {
         moviesTitleLabel.text = NSLocalizedString("moviesKnowFor", comment: "")
         
         homepageButton.setTitle(NSLocalizedString("homePageButton", comment: ""), for: .normal)
+        homepageButton.isEnabled = false
+        
+        // Hide views until there is data
+        setViewElements(hidden: true)
     }
     
     // MARK: - Configure
     
     func configure(with person: Person) {
-        if let imageURL = TMDbImageRouter.posterLarge(path: person.profilePath).url {
-            profileImageView.imageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
-        } else {
-            profileImageView.imageView.image = UIImage.placeholderProfileImage()
-        }
-        
+        // Name
         nameLabel.text = person.name
         
-        let bornText = "\(person.birthDay) "
-      
-        // Add age
-        if let age = person.birthDay.toDate()?.age {
-            bornLabel.text = bornText + "\(((age)))" + "\n\(person.birthPlace)"
-        } else {
-            bornLabel.text = bornText + "\n\(person.birthPlace)"
+        // Set image
+        let path = person.profilePath ?? ""
+        let imageURL = TMDbImageRouter.posterLarge(path: path).url
+        profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+        
+        // BirthInfo
+        var birthInfo = ""
+        if let birthday = person.birthDay {
+            birthInfo = birthday
+            
+            if let age = birthday.toDate()?.age {
+                birthInfo = birthInfo + " " + "(" + "\(age)" + ")"
+            }
         }
         
-        // If died show death date
+        if let birthPlace = person.birthPlace {
+            birthInfo = birthInfo + "\n\(birthPlace)"
+        }
+        
+        bornLabel.text = birthInfo
+        
+        
+        // Death?
         if let deathDay = person.deathDay {
             diedLabel.text = deathDay
         } else {
-            diedLabel.isHighlighted = true
+            diedLabel.isHidden = true
         }
         
-        biograhphyLabel.text = person.biography
+        // Biography
+        biograhphyLabel.text = person.biography ?? NSLocalizedString("biographyUnavailable", comment: "")
+        
+        // Homepage
+        homepageButton.isEnabled = person.homepage != nil
+        
+        // Unhide everything
+        setViewElements(hidden: false)
+    }
+    
+    // MARK: - Utils
+    
+    func setViewElements(hidden: Bool) {
+        profileStackView.isHidden = hidden
+        biographyLabelsStackView.isHidden = hidden
+        moviesStackView.isHidden = hidden
+        homepageButton.isHidden = hidden
     }
 
 }

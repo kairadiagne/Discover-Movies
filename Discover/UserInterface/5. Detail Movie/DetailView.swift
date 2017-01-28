@@ -132,15 +132,16 @@ class DetailView: UIView {
     
     // MARK: - Configure
     
-    func configure(withMovie movie: Movie, signedIn: Bool) {
+    func configure(forSignIn signedIn: Bool) {
+        favouriteControl.isHidden = !signedIn
+        watchListControl.isHidden = !signedIn
+    }
+    
+    func configure(forMovie movie: Movie) {
         titleLabel.text = movie.title
         descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : NSLocalizedString("noDescriptionText", comment: "")
-        genreValueLabel.text = movie.mainGenre()?.name ?? NSLocalizedString("unknownGenreText", comment: "")
+        genreValueLabel.text = movie.mainGenre?.name ?? NSLocalizedString("unknownGenreText", comment: "")
         ratingValueLabel.text =  "\(movie.rating)\\10.0"
-        
-        if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
-            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
-        }
         
         if let releaseYear = movie.releaseDate.toDate()?.year() {
             releaseValueLabel.text = "\(releaseYear)"
@@ -148,8 +149,23 @@ class DetailView: UIView {
             releaseValueLabel.text = NSLocalizedString("unknownReleaseText", comment: "")
         }
         
-        favouriteControl.isHidden = !signedIn
-        watchListControl.isHidden = !signedIn
+        if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
+            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+        } else {
+            header.image = UIImage.placeholderImage()
+        }
+    }
+    
+    func configure(forMovieCredit credit: MovieCredit) {
+        titleLabel.text = credit.title
+        
+        if let releaseYear = credit.releaseDate.toDate()?.year() {
+            releaseValueLabel.text = "\(releaseYear)"
+        } else {
+            releaseValueLabel.text = NSLocalizedString("unknownReleaseText", comment: "")
+        }
+        
+        header.image = UIImage.placeholderImage()
     }
     
     func configureWithState(_ inFavorites: Bool, inWatchList: Bool) {
@@ -157,7 +173,7 @@ class DetailView: UIView {
         watchListControl.setSelectedState(inWatchList)
     }
     
-    func configure(withDirector director: CrewMember?) {
+    func configure(forDirector director: CrewMember?) {
         directorValueLabel.text = director?.name ?? NSLocalizedString("unknownDirectorText", comment: "")
     }
     

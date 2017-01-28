@@ -11,10 +11,6 @@ import TMDbMovieKit
 
 class DetailViewController: BaseViewController {
     
-    override var shouldAutorotate: Bool {
-        return false 
-    }
-    
     // MARK: - Properties
     
     @IBOutlet weak var detailView: DetailView!
@@ -27,7 +23,7 @@ class DetailViewController: BaseViewController {
     
     private let similarMoviesManager: TMDbSimilarMoviesDataManager
     
-    private let movie: Movie
+    fileprivate var movie: MovieRepresentable
     
     fileprivate let signedIn: Bool
     
@@ -35,7 +31,7 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Initialize
     
-    init(movie: Movie, signedIn: Bool) {
+    init(movie: MovieRepresentable, signedIn: Bool) {
         self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
         self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.id)
         self.similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: NSLocalizedString("noSimilarMoviesText", comment: ""))
@@ -74,25 +70,27 @@ class DetailViewController: BaseViewController {
         movieInfoManager.delegate = self
         similarMoviesManager.failureDelegate = self
         
-        movieInfoManager.loadInfo()
+        movieInfoManager.loadAdditionalInfo()
         movieInfoManager.loadAccountState()
+        
+        // Initial view configuring
+        detailView.configure(forSignIn: signedIn)
+        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        similarMoviesManager.reloadIfNeeded()
         
         let loadingSelector = #selector(TopListViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(TopListViewController.dataManagerDidUpdate(notification:))
         
         similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
+        similarMoviesManager.reloadIfNeeded()
+        
         navigationController?.navigationBar.isHidden = true
         
         automaticallyAdjustsScrollViewInsets = false
-        
-        detailView.configure(withMovie: movie, signedIn: signedIn)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,6 +100,16 @@ class DetailViewController: BaseViewController {
         similarMoviesManager.remove(observer: self)
     }
     
+    // MARK: - Update UI
+    
+    fileprivate func updateUI() {
+        if let movie = movie as? Movie {
+            detailView.configure(forMovie: movie)
+        } else if let movieCredit = movie as? MovieCredit {
+            detailView.configure(forMovieCredit: movieCredit)
+        }
+    }
+
     // MARK: - Notifications
     
     override func dataManagerDidUpdate(notification: Notification) {
@@ -171,7 +179,7 @@ extension DetailViewController: UICollectionViewDelegate {
             showDetailViewController(for: movie, signedIn: signedIn)
         } else if collectionView == detailView.castCollectionView {
             guard let person = castDataSource.item(atIndex: indexPath.row) else { return }
-            let personDetailViewController = PersonDetailViewController(personID: person.personID, signedIn: signedIn)
+            let personDetailViewController = PersonDetailViewController(personID: person.id, signedIn: signedIn)
             navigationController?.pushViewController(personDetailViewController, animated: true)
         }
     }
@@ -213,11 +221,11 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
 extension DetailViewController: TMDbMovieInfoManagerDelegate {
     
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
-        detailView.configure(withDirector: info.director)
+        movie = info.movie
+        trailer = info.trailer
         
-        if let trailer = info.trailer {
-            self.trailer = trailer
-        }
+        detailView.configure(forDirector: info.director)
+        updateUI()
         
         castDataSource.items = info.cast
         detailView.castCollectionView.reloadData()
@@ -240,4 +248,5 @@ extension DetailViewController: VideoViewControllerDelegate {
     func videoViewControllerDidFinish(_ controller: VideoViewController) {
         dismiss(animated: true, completion: nil)
     }
+    
 }

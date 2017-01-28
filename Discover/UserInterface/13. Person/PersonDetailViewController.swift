@@ -77,6 +77,7 @@ class PersonDetailViewController: BaseViewController {
     
     override func dataManagerDidUpdate(notification: Notification) {
         if let person = personDataManager.person {
+            dataSource.items = person.movieCredits
             personDetailView.moviesCollectionView.reloadData()
             personDetailView.set(state: .idle)
             personDetailView.configure(with: person)
@@ -109,9 +110,9 @@ class PersonDetailViewController: BaseViewController {
 extension PersonDetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // guard let movie =  else { return }
-        // let detailViewController = DetailViewController(movie: movie, signedIn: true)
-        // navigationController?.pushViewController(detailViewController, animated: true)
+         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
+         let detailViewController = DetailViewController(movie: movie, signedIn: true)
+         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
 }

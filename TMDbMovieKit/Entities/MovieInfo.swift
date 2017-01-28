@@ -1,42 +1,42 @@
 //
-//  MovieInfo.swift
+//  MovieCredit.swift
 //  DiscoverMovies
 //
-//  Created by Kaira Diagne on 24/05/16.
+//  Created by Kaira Diagne on 12/05/16.
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
 import Foundation
 
-public struct MovieInfo: DictionarySerializable {
+public struct MovieInfo {
+    public let movie: Movie
+    public internal(set) var trailers: [Video] = []
+    public internal(set) var cast: [CastMember] = []
+    public internal(set) var crew: [CrewMember] = []
     
-    // MARK: - Properties
-    
-    private var credits: MovieCredit?
-    private var trailers: [Video]?
-    
-    public var cast: [CastMember] {
-       return credits?.cast ?? []
+    public var trailer: Video? {
+        return trailers.filter { $0.type == "Trailer" }.first
     }
     
     public var director: CrewMember? {
-        return credits?.crew.filter { return $0.job == "Director" }.first ?? nil
+        return crew.filter { return $0.job == "Director" }.first ?? nil
     }
-    
-    public var trailer: Video? {
-        return trailers?.filter { $0.type == "Trailer" }.first
-    }
-    
-    // MARK: - Initialize
+}
+
+extension MovieInfo: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
-        if let creditDict = dict["credits"] as? [String: AnyObject] {
-            self.credits = MovieCredit(dictionary: creditDict)
+        print(dict)
+        guard let movie = Movie(dictionary: dict),
+        let creditsDict = dict["credits"] as? [String: AnyObject],
+            let castDicts = creditsDict["cast"] as? [[String: AnyObject]],
+            let crewDicts = creditsDict["crew"] as? [[String: AnyObject]] else {
+                return nil
         }
         
-        if let videoDicts = dict["trailers"]?["youtube"] as? [[String: AnyObject]] {
-            self.trailers = videoDicts.map { return Video(dictionary: $0) }.flatMap { $0 }
-        }
+        self.movie = movie
+        self.cast = castDicts.map { return CastMember(dictionary: $0) }.flatMap { $0 }
+        self.crew = crewDicts.map { return CrewMember(dictionary: $0) }.flatMap { $0 }
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
@@ -44,4 +44,3 @@ public struct MovieInfo: DictionarySerializable {
     }
     
 }
-

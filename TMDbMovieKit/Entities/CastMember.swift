@@ -8,37 +8,46 @@
 
 import Foundation
 
-public struct CastMember: DictionarySerializable, Equatable {
-    
-    // MARK: - Properties
-    
-    public let creditID: String
-    public let personID: Int
+protocol Cast {
+    var castID: Int { get }
+    var creditID: String { get }
+    var character: String { get }
+    var order: Int { get }
+}
+
+public struct CastMember: PersonRepresentable, Cast, Equatable {
+    public let id: Int
     public let castID: Int
+    public let creditID: String
     public let name: String
+    public fileprivate(set) var profilePath: String?
     public let character: String
     public let order: Int
-    public private(set) var profilePath: String?
-    
-    // MARK: - Initialize
+}
+
+public func ==(lhs: CastMember, rhs: CastMember) -> Bool {
+    return lhs.id == rhs.id
+}
+
+extension CastMember: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
-        guard let creditID = dict["credit_id"] as? String,
-            let personID = dict["id"] as? Int,
+        guard let id = dict["id"] as? Int,
             let castID = dict["cast_id"] as? Int,
+            let creditID = dict["credit_id"] as? String,
             let name = dict["name"] as? String,
             let character = dict["character"] as? String,
             let order = dict["order"] as? Int else {
-                return nil
+                return nil 
         }
         
-        self.creditID = creditID
-        self.personID = personID
+        self.id = id
         self.castID = castID
+        self.creditID = creditID
         self.name = name
+        self.profilePath = dict["profile_path"] as? String
         self.character = character
         self.order = order
-        self.profilePath = dict["profile_path"] as? String
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
@@ -46,10 +55,3 @@ public struct CastMember: DictionarySerializable, Equatable {
     }
     
 }
-
-public func ==(lhs: CastMember, rhs: CastMember) -> Bool {
-    return lhs.personID == rhs.personID
-}
-
-
-

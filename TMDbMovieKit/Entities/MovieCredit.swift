@@ -2,29 +2,43 @@
 //  MovieCredit.swift
 //  DiscoverMovies
 //
-//  Created by Kaira Diagne on 12/05/16.
-//  Copyright © 2016 Kaira Diagne. All rights reserved.
+//  Created by Kaira Diagne on 25-01-17.
+//  Copyright © 2017 Kaira Diagne. All rights reserved.
 //
 
 import Foundation
 
-public struct MovieCredit: DictionarySerializable {
-    
-    // MARK: - Properties
-    
-    public private(set) var cast: [CastMember] = []
-    public private(set) var crew: [CrewMember] = []
-    
-    // MARK: - Initialize
+public struct MovieCredit: MovieRepresentable, Equatable {
+    public let id: Int
+    public let creditId: String
+    public let title: String
+    public let releaseDate: String
+    public let adult: Bool
+    public let posterPath: String
+}
+
+public func ==(lhs: MovieCredit, rhs: MovieCredit) -> Bool {
+    return lhs.id == rhs.id
+}
+
+extension MovieCredit: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
-        guard let castDicts = dict["cast"] as? [[String: AnyObject]],
-            let crewDicts = dict["crew"] as? [[String: AnyObject]] else {
-                return nil
+        guard let id = dict["id"] as? Int,
+        let creditId = dict["credit_id"] as? String,
+        let title = dict["title"] as? String,
+        let releaseDate = ["release_date"] as? String,
+        let adult = dict["adult"] as? Bool,
+        let posterPath = dict["poster_path"] as? String  else {
+            return nil
         }
         
-        self.cast = castDicts.map { return CastMember(dictionary: $0) }.flatMap { $0 }
-        self.crew = crewDicts.map { return CrewMember(dictionary: $0) }.flatMap { $0 }
+        self.id = id
+        self.creditId = creditId
+        self.title = title
+        self.releaseDate = releaseDate
+        self.adult = adult
+        self.posterPath = posterPath
     }
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
@@ -32,7 +46,3 @@ public struct MovieCredit: DictionarySerializable {
     }
     
 }
-
-
-
-

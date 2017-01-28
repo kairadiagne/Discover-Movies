@@ -8,10 +8,15 @@
 
 import Foundation
 
-public struct Movie: DictionarySerializable, Equatable {
-    
-    // MARK: - Properties
-    
+public protocol MovieRepresentable {
+    var id: Int { get }
+    var title: String { get }
+    var releaseDate: String { get }
+    var adult: Bool { get }
+    var posterPath: String { get }
+}
+
+public struct Movie: MovieRepresentable, Equatable {
     public let id: Int
     public let title: String
     public let overview: String
@@ -22,14 +27,26 @@ public struct Movie: DictionarySerializable, Equatable {
     public let posterPath: String
     public let backDropPath: String
     
-    // MARK: - Initialize
+    public var mainGenre: TMDbGenre? {
+        guard let rawValue = genres.first else {
+            return nil
+        }
+        
+        return TMDbGenre(rawValue: rawValue)
+    }
+}
+
+public func ==(lhs: Movie, rhs: Movie) -> Bool {
+    return  lhs.id == rhs.id
+}
+
+extension Movie: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int,
             let title = dict["title"] as? String,
             let overView = dict["overview"] as? String,
             let releaseDate = dict["release_date"] as? String,
-            let genres = dict["genre_ids"] as? [Int],
             let rating = dict["vote_average"] as? Double,
             let adult = dict["adult"] as? Bool,
             let posterPath = dict["poster_path"] as? String,
@@ -41,7 +58,15 @@ public struct Movie: DictionarySerializable, Equatable {
         self.title = title
         self.overview = overView
         self.releaseDate = releaseDate
-        self.genres = genres
+        
+        if let genres = dict["genre_ids"] as? [Int] {
+            self.genres = genres
+        } else if let genres =  dict["genres"] as? [Int] {
+            self.genres = genres
+        } else {
+            self.genres = []
+        }
+    
         self.rating = rating
         self.adult = adult
         self.posterPath = posterPath
@@ -62,21 +87,4 @@ public struct Movie: DictionarySerializable, Equatable {
         return dictionary
     }
     
-    // MARK: - Utils
-    
-    public func mainGenre() -> TMDbGenre? {
-        if let rawValue = genres.first {
-            return TMDbGenre(rawValue: rawValue)
-        }
-        
-        return nil
-    }
-
 }
-
-public func ==(lhs: Movie, rhs: Movie) -> Bool {
-    return  lhs.id == rhs.id ? true : false
-}
-
-
-

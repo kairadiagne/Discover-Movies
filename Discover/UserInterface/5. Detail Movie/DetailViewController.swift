@@ -73,7 +73,6 @@ class DetailViewController: BaseViewController {
         movieInfoManager.loadAdditionalInfo()
         movieInfoManager.loadAccountState()
         
-        // Initial view configuring
         detailView.configure(forSignIn: signedIn)
         updateUI()
     }
@@ -81,22 +80,20 @@ class DetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.navigationBar.isHidden = true
+        
         let loadingSelector = #selector(TopListViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(TopListViewController.dataManagerDidUpdate(notification:))
-        
         similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         similarMoviesManager.reloadIfNeeded()
-        
-        navigationController?.navigationBar.isHidden = true
-        
-        automaticallyAdjustsScrollViewInsets = false
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
+        
         similarMoviesManager.remove(observer: self)
     }
     
@@ -143,8 +140,8 @@ class DetailViewController: BaseViewController {
         guard let trailer = trailer else { return }
         let videoViewController = VideoViewController(video: trailer)
         videoViewController.delegate = self
-        let navigationConroller = UINavigationController(rootViewController: videoViewController)
-        present(navigationConroller, animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: videoViewController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {

@@ -54,6 +54,3 @@ class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
     }
 
 }
-
-
-

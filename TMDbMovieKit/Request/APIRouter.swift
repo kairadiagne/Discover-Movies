@@ -86,5 +86,3 @@ enum APIRouter: URLRequestConvertible {
         return urlRequest
     }
 }
-
-

@@ -15,6 +15,7 @@ class AcknowledgementsTableViewController: UITableViewController {
     private var acknowledgements: [Acknowledgement] = []
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

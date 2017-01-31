@@ -24,6 +24,8 @@ class PersonDetailViewController: BaseViewController {
     
     fileprivate var safariVC: SFSafariViewController?
     
+    private var biographyExpanded = false
+    
     private let signedIn: Bool
     
     // MARK: - Initialize
@@ -63,8 +65,6 @@ class PersonDetailViewController: BaseViewController {
         personDataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         personDataManager.reloadIfNeeded()
-        
-        personDetailView.set(state: .loading)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +74,10 @@ class PersonDetailViewController: BaseViewController {
     }
     
     // MARK: - Notifications
+    
+    override func dataManagerDidStartLoading(notification: Notification) {
+         personDetailView.set(state: .loading)
+    }
     
     override func dataManagerDidUpdate(notification: Notification) {
         if let person = personDataManager.person {
@@ -94,6 +98,11 @@ class PersonDetailViewController: BaseViewController {
         safariVC = SFSafariViewController(url: url)
         safariVC?.delegate  = self
         present(safariVC!, animated: true, completion: nil)
+    }
+    
+    @IBAction func disclosureButonClick(_ sender: UIButton) {
+        personDetailView.setBiographyLabel(expanded: !biographyExpanded, animated: true)
+        biographyExpanded = !biographyExpanded
     }
     
     // MARK: - DataManagerFailureDelegate

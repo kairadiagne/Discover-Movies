@@ -13,6 +13,7 @@ import SDWebImage
 class PersonDetailView: BaseView {
     
     // MARK: - Properties
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
@@ -28,11 +29,12 @@ class PersonDetailView: BaseView {
     
     @IBOutlet weak var biographyTitleLabel: UILabel!
     @IBOutlet weak var biograhphyLabel: UILabel!
+    @IBOutlet weak var disclosureButton: UIButton!
     
     @IBOutlet weak var moviesTitleLabel: UILabel!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var homepageButton: DiscoverButton!
-    
+
     // MARK: - Awake
     
     override func awakeFromNib() {
@@ -62,8 +64,8 @@ class PersonDetailView: BaseView {
         
         biograhphyLabel.font = UIFont.Body()
         biograhphyLabel.textColor = .white
-        biograhphyLabel.numberOfLines = 0
-        biograhphyLabel.lineBreakMode = .byWordWrapping
+        setBiographyLabel(expanded: false, animated: false)
+        biograhphyLabel.lineBreakMode = .byTruncatingHead
         
         moviesTitleLabel.font = UIFont.H2()
         moviesTitleLabel.textColor = .white
@@ -76,6 +78,9 @@ class PersonDetailView: BaseView {
         homepageButton.setTitle(NSLocalizedString("homePageButton", comment: ""), for: .normal)
         homepageButton.isEnabled = false
         
+        disclosureButton.setBackgroundImage(UIImage(named: "Chevron"), for: .normal)
+        disclosureButton.tintColor = UIColor.white
+      
         // Hide views until there is data
         setViewElements(hidden: true)
     }
@@ -132,6 +137,17 @@ class PersonDetailView: BaseView {
         biographyLabelsStackView.isHidden = hidden
         moviesStackView.isHidden = hidden
         homepageButton.isHidden = hidden
+        disclosureButton.isHidden = true
+    }
+    
+    func setBiographyLabel(expanded: Bool, animated: Bool) {
+        biograhphyLabel.numberOfLines = expanded ? 0 : 5
+        
+        if animated {
+            UIView.animate(withDuration: 0.5) {
+                self.biograhphyLabel.layoutIfNeeded()
+            }
+        }
     }
 
 }

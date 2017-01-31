@@ -107,6 +107,7 @@ extension MenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.menu(viewController: self, didclickItemAtIndexPath: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

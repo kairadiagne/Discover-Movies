@@ -137,7 +137,7 @@ class PersonDetailView: BaseView {
         biographyLabelsStackView.isHidden = hidden
         moviesStackView.isHidden = hidden
         homepageButton.isHidden = hidden
-        disclosureButton.isHidden = true
+        disclosureButton.isHidden = hidden
     }
     
     func setBiographyLabel(expanded: Bool, animated: Bool) {

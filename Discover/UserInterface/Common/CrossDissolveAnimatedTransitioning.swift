@@ -35,11 +35,11 @@ class CrossDissolveAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
             
             fromView.frame = transitionContext.initialFrame(for: fromVC)
             toView.frame = transitionContext.finalFrame(for: toVC)
+            
+            containerView.addSubview(toView)
 
             toView.alpha = 0
             fromView.alpha = 1
-            
-            containerView.addSubview(toView)
             
             let transitionDuration = self.transitionDuration(using: transitionContext)
             

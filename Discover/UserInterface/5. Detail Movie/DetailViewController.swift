@@ -80,7 +80,7 @@ class DetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         let loadingSelector = #selector(TopListViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(TopListViewController.dataManagerDidUpdate(notification:))
@@ -92,9 +92,9 @@ class DetailViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.navigationBar.isHidden = false
-        
         similarMoviesManager.remove(observer: self)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - Update UI

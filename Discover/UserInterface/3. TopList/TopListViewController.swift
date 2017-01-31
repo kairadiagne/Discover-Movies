@@ -178,6 +178,7 @@ extension TopListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = datasource(forList: currentList).item(atIndex: indexPath.row) else { return }
         showDetailViewController(for: movie, signedIn: signedIn)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

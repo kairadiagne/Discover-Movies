@@ -42,7 +42,7 @@ extension Person: DictionarySerializable {
             let adult = dict["adult"] as? Bool else {
                 return nil
         }
-        
+      
         self.id = id
         self.imdbId = imdbId
         self.name = name

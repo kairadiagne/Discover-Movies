@@ -8,14 +8,7 @@
 
 import Foundation
 
-protocol Cast {
-    var castID: Int { get }
-    var creditID: String { get }
-    var character: String { get }
-    var order: Int { get }
-}
-
-public struct CastMember: PersonRepresentable, Cast, Equatable {
+public struct CastMember: PersonRepresentable, Equatable {
     public let id: Int
     public let castID: Int
     public let creditID: String

@@ -8,13 +8,7 @@
 
 import Foundation
 
-protocol Crew {
-    var creditID: String { get }
-    var department: String { get }
-    var job: String { get }
-}
-
-public struct CrewMember: PersonRepresentable, Crew, Equatable {
+public struct CrewMember: PersonRepresentable, Equatable {
     public let id: Int
     public let creditID: String
     public let name: String

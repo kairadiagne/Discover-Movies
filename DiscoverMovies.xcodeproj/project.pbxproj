@@ -43,6 +43,7 @@
 		1136FBE31DA2E30500CED407 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1136FBE21DA2E30500CED407 /* SearchView.swift */; };
 		113946321CCBBA80001CFAEA /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113946311CCBBA80001CFAEA /* Date+ToString.swift */; };
 		113D11361E412EC8006D8096 /* CrossDissolveAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D11351E412EC8006D8096 /* CrossDissolveAnimatedTransitioning.swift */; };
+		113D113A1E474E77006D8096 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D11391E474E77006D8096 /* BaseNavigationController.swift */; };
 		113D8C661DA2E3C5002B4EF6 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */; };
 		113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */; };
 		113E92E01E36B76D00C10ADE /* Date+Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113E92DF1E36B76D00C10ADE /* Date+Age.swift */; };
@@ -250,6 +251,7 @@
 		1136FBE21DA2E30500CED407 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		113946311CCBBA80001CFAEA /* Date+ToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		113D11351E412EC8006D8096 /* CrossDissolveAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossDissolveAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		113D11391E474E77006D8096 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		113D8C651DA2E3C5002B4EF6 /* SearchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
 		113E92DF1E36B76D00C10ADE /* Date+Age.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Age.swift"; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 				11D09A011D966E1C00FEDB21 /* MovieListDataSource.swift */,
 				EADA5AA51CEA664300C2FAE8 /* MovieCollectionDataSource.swift */,
 				113D11351E412EC8006D8096 /* CrossDissolveAnimatedTransitioning.swift */,
+				113D11391E474E77006D8096 /* BaseNavigationController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1275,6 +1278,7 @@
 				116C2A931E2EAE8000E4C487 /* PersonDetailViewController.swift in Sources */,
 				EA6487C61CE503BD00452DD0 /* ReviewViewController.swift in Sources */,
 				1179FC601DA0E2D100CA1E6D /* MenuTableViewCell.swift in Sources */,
+				113D113A1E474E77006D8096 /* BaseNavigationController.swift in Sources */,
 				1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */,
 				11DECAA71D02D24A00FFEAB4 /* UITableViewCell+defaultIdentifier.swift in Sources */,
 				EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */,

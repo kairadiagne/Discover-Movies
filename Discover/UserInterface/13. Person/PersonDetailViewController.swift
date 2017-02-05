@@ -46,6 +46,8 @@ class PersonDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        automaticallyAdjustsScrollViewInsets = false
+        
         let nib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
         personDetailView.moviesCollectionView.register(nib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
         let emptyNib = UINib(nibName: NoDataCollectionViewCell.nibName(), bundle: nil)
@@ -60,6 +62,8 @@ class PersonDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+        
         let loadingSelector = #selector(PersonDetailViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(PersonDetailViewController.dataManagerDidUpdate(notification:))
         personDataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
@@ -69,6 +73,8 @@ class PersonDetailViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+//        navigationController?.setNavigationBarHidden(false, animated: true)
         
         personDataManager.remove(observer: self)
     }
@@ -103,6 +109,10 @@ class PersonDetailViewController: BaseViewController {
     @IBAction func disclosureButonClick(_ sender: UIButton) {
         personDetailView.setBiographyLabel(expanded: !biographyExpanded, animated: true)
         biographyExpanded = !biographyExpanded
+    }
+    
+    @IBAction func backButtonClick(_ sender: UIButton) {
+        _ = navigationController?.popViewController(animated: false)
     }
     
     // MARK: - DataManagerFailureDelegate

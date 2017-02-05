@@ -98,6 +98,9 @@ class DetailView: UIView {
         watchListControl.lineColor = UIColor.buttonColor()
         watchListControl.fillColor = UIColor.buttonColor()
         
+        backButton.tintColor = .white
+        backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
+        
         directorLabel.text = NSLocalizedString("directorLabelText", comment: "")
         genreLabel.text = NSLocalizedString("genreLabelText", comment: "")
         releaseLabel.text = NSLocalizedString("releaseLabelText", comment: "")

@@ -34,6 +34,7 @@ class PersonDetailView: BaseView {
     @IBOutlet weak var moviesTitleLabel: UILabel!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var homepageButton: DiscoverButton!
+    @IBOutlet weak var backButton: UIButton!
 
     // MARK: - Awake
     
@@ -80,7 +81,10 @@ class PersonDetailView: BaseView {
         
         disclosureButton.setBackgroundImage(UIImage(named: "Chevron"), for: .normal)
         disclosureButton.tintColor = UIColor.white
-      
+        
+        backButton.tintColor = .white
+        backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
+        
         // Hide views until there is data
         setViewElements(hidden: true)
     }

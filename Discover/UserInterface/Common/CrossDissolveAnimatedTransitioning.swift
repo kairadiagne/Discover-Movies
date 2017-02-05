@@ -44,12 +44,13 @@ class CrossDissolveAnimatedTransitioning: NSObject, UIViewControllerAnimatedTran
             let transitionDuration = self.transitionDuration(using: transitionContext)
             
             // Animate
-            UIView.animate(withDuration: transitionDuration, delay: 0, options: [.curveLinear], animations: { 
+            UIView.animate(withDuration: transitionDuration, delay: 0, options: [], animations: { 
                 toView.alpha = 1
                 fromView.alpha = 0
             }, completion: { completed in
                 let transitionWasCancelled = transitionContext.transitionWasCancelled
                 transitionContext.completeTransition(!transitionWasCancelled)
+                fromView.alpha = 1
             })
         }
     }

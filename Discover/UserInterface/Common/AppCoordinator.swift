@@ -10,9 +10,13 @@ import UIKit
 import TMDbMovieKit
 import SWRevealViewController
 
-class AppCoordinator: UINavigationController {
+class AppCoordinator: NSObject {
     
     // MARK: - Propperties
+    
+    private let window: UIWindow
+    
+    fileprivate let rootNavigationController: UINavigationController
     
     private let sessionManager: TMDbSessionManager
     
@@ -32,33 +36,23 @@ class AppCoordinator: UINavigationController {
     
     // MARK: - Initialize
     
-    init(sessionManager: TMDbSessionManager = TMDbSessionManager()) {
+    init(window: UIWindow, rootNavController: UINavigationController = BaseNavigationController(), sessionManager: TMDbSessionManager = TMDbSessionManager()) {
+        self.window = window
+        self.rootNavigationController = rootNavController
+        self.window.rootViewController = rootNavController
         self.sessionManager = sessionManager
         self.topListProxy = TopListDataManageProxy()
         self.favoritesManager = TMDbAccountListDataManager(list: .favorite)
         self.watchListManager = TMDbAccountListDataManager(list: .watchlist)
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.backgroundColor()
-        
-        setNavigationBarHidden(true, animated: false)
+        super.init()
+        rootNavigationController.navigationBar.isHidden = true
     }
     
     // MARK: - Start
     
     func start() {
         let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy)
-        let navigationController = UINavigationController(rootViewController: topListController)
+        let navigationController = BaseNavigationController(rootViewController: topListController)
         let menuViewController = MenuViewController(sessionManager: sessionManager)
         revealVC = SWRevealViewController(rearViewController: menuViewController, frontViewController: navigationController)
         
@@ -69,13 +63,10 @@ class AppCoordinator: UINavigationController {
         
         menuViewController.delegate = self
         
-        viewControllers = [revealVC]
+        rootNavigationController.viewControllers = [revealVC]
         
-        switch sessionManager.signInStatus {
-        case .unkown:
+        if sessionManager.signInStatus == .unkown {
             showSignInViewController()
-        default:
-            return
         }
     }
     
@@ -85,38 +76,38 @@ class AppCoordinator: UINavigationController {
         let signInViewController = SignInViewController(sessionManager: sessionManager)
         signInViewController.delegate = self
         
-        present(signInViewController, animated: true) {
+        rootNavigationController.present(signInViewController, animated: true) {
             self.revealVC?.setFrontViewPosition(.leftSide, animated: false)
         }
     }
     
     fileprivate func showTopListViewController(animated: Bool) {
         let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy)
-        let navigationController = UINavigationController(rootViewController: topListController)
+        let navigationController = BaseNavigationController(rootViewController: topListController)
         revealVC?.pushFrontViewController(navigationController, animated: animated)
     }
     
     fileprivate func showWatchListViewController() {
         let watchListController = AccountListController(list: .watchlist, manager: watchListManager)
-        let navigationController = UINavigationController(rootViewController: watchListController)
+        let navigationController = BaseNavigationController(rootViewController: watchListController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
     fileprivate func showFavoritesViewController() {
         let favoritesController = AccountListController(list: .favorite, manager: favoritesManager)
-        let navigationController = UINavigationController(rootViewController: favoritesController)
+        let navigationController = BaseNavigationController(rootViewController: favoritesController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
     fileprivate func showSearchViewController() {
         let searchViewController = SearchViewController(signedIn: signedIn)
-        let navigationController = UINavigationController(rootViewController: searchViewController)
+        let navigationController = BaseNavigationController(rootViewController: searchViewController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
     fileprivate func showAboutViewController() {
         let aboutViewController = AboutViewController()
-        let navigationConttoller = UINavigationController(rootViewController: aboutViewController)
+        let navigationConttoller = BaseNavigationController(rootViewController: aboutViewController)
         revealVC?.pushFrontViewController(navigationConttoller, animated: true)
     }
     
@@ -149,23 +140,13 @@ class AppCoordinator: UINavigationController {
         watchListManager.clear()
     }
     
-    // MARK: - Rotation
-    
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
 }
 
 extension AppCoordinator: SignInViewControllerDelegate {
     
     func signInViewControllerDidFinish() {
         showTopListViewController(animated: false)
-        dismiss(animated: true, completion: nil)
+        rootNavigationController.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -72,10 +72,6 @@ class MenuViewController: UIViewController {
             menuView.tableView.reloadData()
         }
     }
-   
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
-    }
 
 }
 

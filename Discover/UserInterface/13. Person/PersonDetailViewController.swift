@@ -62,7 +62,7 @@ class PersonDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar.isHidden = true
         
         let loadingSelector = #selector(PersonDetailViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(PersonDetailViewController.dataManagerDidUpdate(notification:))
@@ -74,7 +74,7 @@ class PersonDetailViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.isHidden = false
         
         personDataManager.remove(observer: self)
     }
@@ -112,7 +112,7 @@ class PersonDetailViewController: BaseViewController {
     }
     
     @IBAction func backButtonClick(_ sender: UIButton) {
-        _ = navigationController?.popViewController(animated: false)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     // MARK: - DataManagerFailureDelegate

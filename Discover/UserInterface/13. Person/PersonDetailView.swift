@@ -83,6 +83,7 @@ class PersonDetailView: BaseView {
         disclosureButton.tintColor = UIColor.white
         
         backButton.tintColor = .white
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
         
         // Hide views until there is data

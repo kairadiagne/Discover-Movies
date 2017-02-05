@@ -32,9 +32,9 @@ class SignInViewController: UIViewController {
         didSet {
             if safariViewController != nil {
                 if #available(iOS 10.0, *) {
-                    safariViewController.preferredControlTintColor = UIColor.blue
+                    safariViewController.preferredControlTintColor = .blue
                 } else {
-                    safariViewController.view.tintColor = UIColor.defaultButtonColor()
+                    safariViewController.view.tintColor = .blue
                 }
             }
         }
@@ -59,11 +59,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         signInService.delegate = self
     }
-    
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
-    }
-    
+
     // MARK: - Rotation
     
     override var shouldAutorotate: Bool {
@@ -72,6 +68,12 @@ class SignInViewController: UIViewController {
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .portrait
+    }
+    
+    // MARK: - Status Bar 
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: - Actions

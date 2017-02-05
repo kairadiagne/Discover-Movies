@@ -96,15 +96,10 @@ extension BaseViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if operation == .push && toVC is DetailViewController {
-            
-            return CrossDissolveAnimatedTransitioning()
-            // Transition to detail
             return DetailAnimatedTransitioning()
         } else {
-            // Default
             return CrossDissolveAnimatedTransitioning()
         }
-
     }
     
 }

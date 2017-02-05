@@ -99,6 +99,7 @@ class DetailView: UIView {
         watchListControl.fillColor = UIColor.buttonColor()
         
         backButton.tintColor = .white
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
         
         directorLabel.text = NSLocalizedString("directorLabelText", comment: "")

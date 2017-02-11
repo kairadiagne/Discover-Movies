@@ -24,6 +24,8 @@ class AccountListTableViewCell: UITableViewCell {
         
         titleLabel.font = UIFont.Body()
         titleLabel.textColor = UIColor.white
+        titleLabel.numberOfLines = 1
+        titleLabel.lineBreakMode = .byWordWrapping
         
         overViewLabel.font = UIFont.Caption2()
         overViewLabel.textColor = UIColor.white

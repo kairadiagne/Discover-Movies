@@ -637,12 +637,12 @@
 			path = NoDataCells;
 			sourceTree = "<group>";
 		};
-		114299DB1DC7E8AE00025290 /* DiscoverButton */ = {
+		114299DB1DC7E8AE00025290 /* ButtonsMisc */ = {
 			isa = PBXGroup;
 			children = (
 				1167E7721DC64F10003400B7 /* DiscoverButton.swift */,
 			);
-			path = DiscoverButton;
+			path = ButtonsMisc;
 			sourceTree = "<group>";
 		};
 		114299DC1DC7E8C100025290 /* ImageViews */ = {
@@ -675,7 +675,7 @@
 				114299DA1DC7E89900025290 /* NoDataCells */,
 				114299D91DC7E87200025290 /* DiscoverCell */,
 				114299D81DC7E85000025290 /* ShapeButton */,
-				114299DB1DC7E8AE00025290 /* DiscoverButton */,
+				114299DB1DC7E8AE00025290 /* ButtonsMisc */,
 				114299DC1DC7E8C100025290 /* ImageViews */,
 			);
 			path = Components;

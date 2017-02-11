@@ -78,7 +78,10 @@ class PersonDetailView: BaseView {
         homepageButton.setTitle(NSLocalizedString("homePageButton", comment: ""), for: .normal)
         homepageButton.isEnabled = false
         
-        disclosureButton.setBackgroundImage(UIImage(named: "Chevron"), for: .normal)
+        disclosureButton.setImage(UIImage(named: "Expand"), for: .normal)
+        disclosureButton.setImage(UIImage(named: "Collapse"), for: .selected)
+        disclosureButton.setBackground(color: .clear, forState: .normal)
+        disclosureButton.setBackground(color: .clear, forState: .selected)
         disclosureButton.tintColor = UIColor.white
         
         backButton.tintColor = .white

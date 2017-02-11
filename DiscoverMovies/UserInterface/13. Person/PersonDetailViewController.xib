@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YjT-TQ-Gmj">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="713.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="730.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="a69-RL-aHx">
                                     <rect key="frame" x="20" y="336" width="335" height="49"/>
@@ -44,7 +44,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1fZ-Nt-hUc">
-                                    <rect key="frame" x="20" y="426" width="335" height="158.5"/>
+                                    <rect key="frame" x="20" y="443" width="335" height="158.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPy-om-AA8">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
@@ -68,7 +68,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Le-o5-LeE" customClass="DiscoverButton" customModule="DiscoverMovies" customModuleProvider="target">
-                                    <rect key="frame" x="113" y="624" width="150" height="50"/>
+                                    <rect key="frame" x="113" y="641" width="150" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="9Le-o5-LeE" secondAttribute="height" multiplier="3:1" id="hTL-KE-E7h"/>
                                     </constraints>
@@ -97,9 +97,10 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="era-5t-kW3">
-                                    <rect key="frame" x="168" y="393" width="40" height="23"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="era-5t-kW3">
+                                    <rect key="frame" x="168" y="393" width="40" height="40"/>
                                     <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="rja-aZ-RLH"/>
                                         <constraint firstAttribute="width" constant="40" id="zWF-Q9-rCF"/>
                                     </constraints>
                                     <connections>
@@ -121,7 +122,6 @@
                                 <constraint firstItem="1fZ-Nt-hUc" firstAttribute="top" secondItem="era-5t-kW3" secondAttribute="bottom" constant="10" id="9KX-ah-xOM"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9Le-o5-LeE" secondAttribute="bottom" constant="40" id="ANh-hm-5wF"/>
                                 <constraint firstItem="bqT-iz-WKd" firstAttribute="leading" secondItem="YjT-TQ-Gmj" secondAttribute="leading" constant="20" symbolic="YES" id="GGt-g9-Yg5"/>
-                                <constraint firstItem="1fZ-Nt-hUc" firstAttribute="top" secondItem="a69-RL-aHx" secondAttribute="bottom" constant="41" id="Kw6-Yv-GhM"/>
                                 <constraint firstItem="9Le-o5-LeE" firstAttribute="centerX" secondItem="YjT-TQ-Gmj" secondAttribute="centerX" id="MeH-gM-OjW"/>
                                 <constraint firstItem="bqT-iz-WKd" firstAttribute="top" secondItem="YjT-TQ-Gmj" secondAttribute="top" constant="62" id="Omq-py-C2Z"/>
                                 <constraint firstItem="bPI-az-eEc" firstAttribute="centerY" secondItem="bqT-iz-WKd" secondAttribute="centerY" id="XeM-4E-78c"/>

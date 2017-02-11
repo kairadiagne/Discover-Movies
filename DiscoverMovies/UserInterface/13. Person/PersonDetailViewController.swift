@@ -107,6 +107,7 @@ class PersonDetailViewController: BaseViewController {
     }
     
     @IBAction func disclosureButonClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
         personDetailView.setBiographyLabel(expanded: !biographyExpanded, animated: true)
         biographyExpanded = !biographyExpanded
     }

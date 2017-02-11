@@ -16,8 +16,7 @@ class PersonDetailView: BaseView {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    
-    @IBOutlet weak var profileStackView: UIStackView!
+
     @IBOutlet weak var infoLabelsStackView: UIStackView!
     @IBOutlet weak var biographyLabelsStackView: UIStackView!
     @IBOutlet weak var moviesStackView: UIStackView!
@@ -99,7 +98,7 @@ class PersonDetailView: BaseView {
         // Set image
         let path = person.profilePath ?? ""
         let imageURL = TMDbImageRouter.posterLarge(path: path).url
-        profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+        profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
         
         // BirthInfo
         var birthInfo = ""
@@ -138,7 +137,7 @@ class PersonDetailView: BaseView {
     // MARK: - Utils
     
     func setViewElements(hidden: Bool) {
-        profileStackView.isHidden = hidden
+        infoLabelsStackView.isHidden = hidden
         biographyLabelsStackView.isHidden = hidden
         moviesStackView.isHidden = hidden
         homepageButton.isHidden = hidden

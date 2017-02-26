@@ -59,7 +59,7 @@ biographyTitleLabel = "Bio";
 moviesKnowFor = "Known for";
 homePageButton = "Visit Website";
 emptyMoviesMessage = "No movies available";
-infoUnavailable = "No further info availabke";
+infoUnavailable = "No further info available";
 
 /* SimilarMovies */
 similarMoviesVCTitle = "Similar Movies";

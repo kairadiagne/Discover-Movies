@@ -14,6 +14,8 @@ class PersonDetailView: BaseView {
     
     // MARK: - Properties
     
+    @IBOutlet weak var backButton: UIButton!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
 
@@ -28,16 +30,19 @@ class PersonDetailView: BaseView {
     
     @IBOutlet weak var biographyTitleLabel: UILabel!
     @IBOutlet weak var biograhphyLabel: UILabel!
+    
+    @IBOutlet weak var disclosureButtonStackView: UIStackView!
     @IBOutlet weak var disclosureButton: UIButton!
     
     @IBOutlet weak var moviesTitleLabel: UILabel!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
+    @IBOutlet weak var homePageButtonStackView: UIStackView!
     @IBOutlet weak var homepageButton: DiscoverButton!
-    @IBOutlet weak var backButton: UIButton!
     
-    @IBOutlet weak var moviesStackViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var homePageButtonBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var moviesStackViewBottomToContentViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var unavailableLabel: UILabel!
+
+    @IBOutlet weak var biographyStackViewTop: NSLayoutConstraint!
+    @IBOutlet weak var profileImageBottomToMovieStackViewTop: NSLayoutConstraint!
     
     // MARK: - Awake
     
@@ -91,18 +96,26 @@ class PersonDetailView: BaseView {
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
         
+        unavailableLabel.tintColor = .white
+        unavailableLabel.font = UIFont.Body()
+        
         // Hide views until there is data
-        disclosureButton.isHidden = true
         infoLabelsStackView.isHidden = true
         biographyLabelsStackView.isHidden = true
+        disclosureButtonStackView.isHidden = true
         moviesStackView.isHidden = true
+        disclosureButton.isHidden = true
         homepageButton.isHidden = true
+        unavailableLabel.isHidden = true
     }
     
     // MARK: - Configure
     
     func configure(personRespresentable: PersonRepresentable) {
         nameLabel.text = personRespresentable.name
+        infoLabelsStackView.isHidden = false
+        unavailableLabel.text = NSLocalizedString("infoUnavailable", comment: "")
+        unavailableLabel.isHidden = false
         let path = personRespresentable.profilePath ?? ""
         let imageURL = TMDbImageRouter.posterLarge(path: path).url
         profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
@@ -111,6 +124,7 @@ class PersonDetailView: BaseView {
     func configure(person: Person) {
         // Name
         nameLabel.text = person.name
+        infoLabelsStackView.isHidden = false
         
         // Profile Image 
         let path = person.profilePath ?? ""
@@ -131,7 +145,6 @@ class PersonDetailView: BaseView {
             }
             
             bornLabel.text = birthInfo
-            infoLabelsStackView.isHidden = false
             bornLabel.isHidden = false
         }
         
@@ -147,22 +160,21 @@ class PersonDetailView: BaseView {
             biograhphyLabel.text = biography
             biograhphyLabel.isHidden = false
             disclosureButton.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
+            disclosureButtonStackView.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
             biographyLabelsStackView.isHidden = false
         } else {
-            biograhphyLabel.isHidden = true
-            disclosureButton.isHidden = true
+            biographyStackViewTop.priority = 250
+            profileImageBottomToMovieStackViewTop.priority = 750
         }
         
         // Homepage
         if person.homepage == nil {
             homepageButton.isHidden = true
-            moviesStackViewBottomConstraint.isActive = false
-            homePageButtonBottomConstraint.isActive = false
-            moviesStackViewBottomToContentViewConstraint.priority = 750
+            homePageButtonStackView.isHidden = true
         }
         
     }
-    
+   
     // MARK: - Utils
     
     func setBiographyLabel(expanded: Bool, animated: Bool) {

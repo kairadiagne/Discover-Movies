@@ -129,6 +129,8 @@ class PersonDetailViewController: BaseViewController {
     // MARK: - DataManagerFailureDelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+        personDetailView.set(state: .idle)
+        
         guard error != .generic else {
             personDetailView.configure(personRespresentable: self.person)
             return

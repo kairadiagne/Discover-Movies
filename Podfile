@@ -6,7 +6,7 @@ abstract_target 'Networking' do
     pod 'Alamofire'
     pod 'Locksmith'
     
-    target 'Discover' do
+    target 'DiscoverMovies' do
         pod 'SDWebImage'
         pod 'ChameleonFramework'
         pod 'youtube-ios-player-helper'

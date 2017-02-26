@@ -61,7 +61,6 @@ struct Repository {
         
         fileAccessQueue.async {
             do {
-                print("\(self.path)/data")
                 try FileManager().removeItem(atPath: path)
             } catch {
                 print("Could not clear cached file at path: \(path))")
@@ -81,11 +80,7 @@ struct Repository {
     }
     
     private func file(forIdentifier identifier: String) -> String {
-        print("\(path)/data/\(identifier).plist")
         return "\(path)/data/\(identifier).plist"
     }
     
 }
-
-
-

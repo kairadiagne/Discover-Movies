@@ -38,12 +38,10 @@ public class TMDbMovieInfoManager {
     
     // MARK: - API Calls
     
-    public func loadInfo() {
-        let params: [String: AnyObject] = ["append_to_response": "credits,trailers" as AnyObject]
-        
+    public func loadAdditionalInfo() {
         let configuration = MovieDetailConfiguration(movieID: movieID)
         
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
+        Alamofire.request(APIRouter.request(config: configuration, queryParams: configuration.defaultParams, bodyParams: nil))
             .responseObject { (response: DataResponse<MovieInfo>) in
                 
                 switch response.result {
@@ -51,9 +49,9 @@ public class TMDbMovieInfoManager {
                     self.delegate?.movieInfoManager(self, didLoadInfo: data, forMovieWIthID: self.movieID)
                 case .failure(let error):
                     if let error = error as? APIError {
-                         self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                     } else {
-                         self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
+                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
                     }
                 }
         }

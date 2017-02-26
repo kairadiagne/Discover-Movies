@@ -8,30 +8,32 @@
 
 import Foundation
 
-public struct CrewMember: DictionarySerializable, Equatable {
-    
-    // MARK: - Properties
-    
+public struct CrewMember: PersonRepresentable, Equatable {
+    public let id: Int
     public let creditID: String
-    public let personID: Int
     public let name: String
-    public let department: String?
-    public let job: String?
-    public private(set) var profilePath: String?
-    
-    // MARK: - Initialize
+    public var department: String
+    public let job: String
+    public fileprivate(set) var profilePath: String?
+}
+
+public func ==(lhs: CrewMember, rhs: CrewMember) -> Bool {
+    return lhs.id == rhs.id
+}
+
+extension CrewMember: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
-        guard let creditID = dict["credit_id"] as? String,
-            let personID = dict["id"] as? Int,
+        guard let id = dict["id"] as? Int,
+            let creditID = dict["credit_id"] as? String,
             let name = dict["name"] as? String,
             let department = dict["department"] as? String,
             let job = dict["job"] as? String else {
                 return nil
         }
-        
+    
+        self.id = id
         self.creditID = creditID
-        self.personID = personID
         self.name = name
         self.department = department
         self.job = job
@@ -43,8 +45,3 @@ public struct CrewMember: DictionarySerializable, Equatable {
     }
     
 }
-
-public func ==(lhs: CrewMember, rhs: CrewMember) -> Bool {
-    return lhs.personID == rhs.personID
-}
-

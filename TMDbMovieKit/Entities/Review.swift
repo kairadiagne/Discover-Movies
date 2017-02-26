@@ -8,14 +8,18 @@
 
 import Foundation
 
-public struct Review: DictionarySerializable, Equatable {
-    
-    // MARK: - Properties
-    
+public struct Review: Equatable {
     public let id: String
     public let author: String
     public let content: String
     public let url: URL
+}
+
+public func ==(lhs: Review, rhs: Review) -> Bool {
+    return  lhs.id == rhs.id 
+}
+
+extension Review: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? String,
@@ -23,7 +27,7 @@ public struct Review: DictionarySerializable, Equatable {
             let content = dict["content"] as? String,
             let urlString = dict["url"] as? String,
             let url = URL(string: urlString) else {
-            return nil
+                return nil
         }
         
         self.id = id
@@ -31,8 +35,6 @@ public struct Review: DictionarySerializable, Equatable {
         self.content = content
         self.url = url
     }
-    
-    // MARK: - Initialize 
     
     public func dictionaryRepresentation() -> [String : AnyObject] {
         var dictionary = [String: AnyObject]()
@@ -44,18 +46,3 @@ public struct Review: DictionarySerializable, Equatable {
     }
     
 }
-
-public func ==(lhs: Review, rhs: Review) -> Bool {
-    return  lhs.id == rhs.id ? true : false
-}
-
-
-
-
-
-
-
-
-
-
-

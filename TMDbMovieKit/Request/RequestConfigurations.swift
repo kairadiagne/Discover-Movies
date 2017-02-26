@@ -59,7 +59,7 @@ struct UserConfiguration: RequestConfiguration {
 // MARK: - MovieListConfigurations
 
 struct TopListRequestConfiguration: RequestConfiguration {
-    let list: TMDbList
+    let list: TMDbTopList
     let method: HTTPMethod = .get
     
     var endpoint: String {
@@ -69,7 +69,7 @@ struct TopListRequestConfiguration: RequestConfiguration {
 }
 
 struct AccountListConfiguration: RequestConfiguration {
-    let list: TMDbList
+    let list: TMDbAccountList
     let infoStore = TMDbSessionInfoStore()
     let method = HTTPMethod.get
     
@@ -144,5 +144,17 @@ struct ListStatusConfiguration: RequestConfiguration {
     }
 }
 
+// MARK: - People Configurations
 
-
+struct PersonConfig: RequestConfiguration {
+    let method: HTTPMethod = .get
+    let personID: Int
+    
+    var endpoint: String {
+        return "person/\(personID)"
+    }
+    
+    var defaultParams: [String : AnyObject]? {
+        return ["append_to_response": "movie_credits" as AnyObject]
+    }
+}

@@ -18,6 +18,8 @@ class PersonDetailViewController: BaseViewController {
         return view as! PersonDetailView
     }
     
+    fileprivate let person: PersonRepresentable
+    
     fileprivate let personDataManager: PersonDataManager
     
     fileprivate let dataSource: MovieCollectionDataSource
@@ -30,8 +32,9 @@ class PersonDetailViewController: BaseViewController {
     
     // MARK: - Initialize
     
-    init(personID: Int, signedIn: Bool) {
-        self.personDataManager = PersonDataManager(personID: personID)
+    init(person: PersonRepresentable, signedIn: Bool) {
+        self.person = person
+        self.personDataManager = PersonDataManager(personID: person.id)
         self.signedIn = signedIn
         self.dataSource = MovieCollectionDataSource(emptyMessage: NSLocalizedString("emptyMoviesMessage", comment: ""))
         super.init(nibName: nil, bundle: nil)
@@ -87,17 +90,24 @@ class PersonDetailViewController: BaseViewController {
     
     override func dataManagerDidUpdate(notification: Notification) {
         if let person = personDataManager.person {
-            dataSource.items = person.movieCredits
-            personDetailView.moviesCollectionView.reloadData()
+            
+            // Collection view
+            if person.movieCredits.count > 0 {
+                dataSource.items = person.movieCredits
+                personDetailView.moviesCollectionView.reloadData()
+                personDetailView.moviesStackView.isHidden = false
+            }
+            
+            // View
             personDetailView.set(state: .idle)
-            personDetailView.configure(with: person)
+            personDetailView.configure(person: person)
         }
     }
     
     // MARK: - Actions
     
     @IBAction func homepageButtonClick(_ sender: UIButton) {
-        guard let person = personDataManager.person, let path = person.homepage, let url = URL(string: path) else {
+        guard let person = personDataManager.person, let url = person.homepage else {
             return
         }
       
@@ -119,7 +129,11 @@ class PersonDetailViewController: BaseViewController {
     // MARK: - DataManagerFailureDelegate
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        // TODO: - What to do when we had no internet connection and now connection is back because no pull to refresh
+        guard error != .generic else {
+            personDetailView.configure(personRespresentable: self.person)
+            return
+        }
+        
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
 

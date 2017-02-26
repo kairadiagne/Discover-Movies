@@ -24,7 +24,7 @@ public struct Person: PersonRepresentable, Equatable {
     public var birthPlace: String?
     public var deathDay: String?
     public var biography: String?
-    public var homepage: String?
+    public var homepage: URL?
     public fileprivate(set) var profilePath: String?
     public fileprivate(set) var movieCredits: [MovieCredit] = []
 }
@@ -53,8 +53,15 @@ extension Person: DictionarySerializable {
         self.biography = dict["biography"] as? String
         self.adult = adult
         self.profilePath = dict["profile_path"] as? String
-        self.homepage = dict["homepage"] as? String
         
+        if let rawValue = dict["homepage"] as? String {
+            if rawValue.characters.count != 0 {
+                if let homepage = URL(string: rawValue) {
+                    self.homepage = homepage
+                }
+            }
+        }
+       
         if let movieCredits = dict["movie_credits"] as? [String: AnyObject] {
             if let castDicts = movieCredits["cast"] as? [[String: AnyObject]] {
                 self.movieCredits = castDicts.flatMap { MovieCredit(dictionary: $0) }

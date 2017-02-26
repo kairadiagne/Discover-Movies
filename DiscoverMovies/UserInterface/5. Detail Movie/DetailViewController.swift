@@ -176,7 +176,7 @@ extension DetailViewController: UICollectionViewDelegate {
             showDetailViewController(for: movie, signedIn: signedIn)
         } else if collectionView == detailView.castCollectionView {
             guard let person = castDataSource.item(atIndex: indexPath.row) else { return }
-            let personDetailViewController = PersonDetailViewController(personID: person.id, signedIn: signedIn)
+            let personDetailViewController = PersonDetailViewController(person: person, signedIn: signedIn)
             navigationController?.pushViewController(personDetailViewController, animated: true)
         }
     }

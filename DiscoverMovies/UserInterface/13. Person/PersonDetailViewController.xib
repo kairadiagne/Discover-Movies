@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YjT-TQ-Gmj">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="730.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="731"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="a69-RL-aHx">
                                     <rect key="frame" x="20" y="336" width="335" height="49"/>
@@ -73,6 +73,9 @@
                                         <constraint firstAttribute="width" secondItem="9Le-o5-LeE" secondAttribute="height" multiplier="3:1" id="hTL-KE-E7h"/>
                                     </constraints>
                                     <state key="normal" title="Homepage"/>
+                                    <connections>
+                                        <action selector="homepageButtonClick:" destination="-1" eventType="touchUpInside" id="nZ4-WH-lgC"/>
+                                    </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bPI-az-eEc">
                                     <rect key="frame" x="190" y="136.5" width="175" height="77.5"/>
@@ -120,14 +123,15 @@
                                 <constraint firstItem="bPI-az-eEc" firstAttribute="leading" secondItem="bqT-iz-WKd" secondAttribute="trailing" constant="20" id="0sQ-Ch-XnG"/>
                                 <constraint firstItem="a69-RL-aHx" firstAttribute="leading" secondItem="bqT-iz-WKd" secondAttribute="leading" id="4wN-Mq-eob"/>
                                 <constraint firstItem="1fZ-Nt-hUc" firstAttribute="top" secondItem="era-5t-kW3" secondAttribute="bottom" constant="10" id="9KX-ah-xOM"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9Le-o5-LeE" secondAttribute="bottom" constant="40" id="ANh-hm-5wF"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9Le-o5-LeE" secondAttribute="bottom" priority="750" constant="40" id="ANh-hm-5wF"/>
                                 <constraint firstItem="bqT-iz-WKd" firstAttribute="leading" secondItem="YjT-TQ-Gmj" secondAttribute="leading" constant="20" symbolic="YES" id="GGt-g9-Yg5"/>
                                 <constraint firstItem="9Le-o5-LeE" firstAttribute="centerX" secondItem="YjT-TQ-Gmj" secondAttribute="centerX" id="MeH-gM-OjW"/>
                                 <constraint firstItem="bqT-iz-WKd" firstAttribute="top" secondItem="YjT-TQ-Gmj" secondAttribute="top" constant="62" id="Omq-py-C2Z"/>
+                                <constraint firstAttribute="bottom" secondItem="1fZ-Nt-hUc" secondAttribute="bottom" priority="250" constant="40" id="X4V-4l-NRx"/>
                                 <constraint firstItem="bPI-az-eEc" firstAttribute="centerY" secondItem="bqT-iz-WKd" secondAttribute="centerY" id="XeM-4E-78c"/>
                                 <constraint firstItem="1fZ-Nt-hUc" firstAttribute="leading" secondItem="YjT-TQ-Gmj" secondAttribute="leading" constant="20" id="aGl-De-JZI"/>
                                 <constraint firstItem="era-5t-kW3" firstAttribute="centerX" secondItem="YjT-TQ-Gmj" secondAttribute="centerX" id="ap6-NB-hSL"/>
-                                <constraint firstItem="9Le-o5-LeE" firstAttribute="top" secondItem="1fZ-Nt-hUc" secondAttribute="bottom" constant="40" id="dhD-I5-Ynr"/>
+                                <constraint firstItem="9Le-o5-LeE" firstAttribute="top" secondItem="1fZ-Nt-hUc" secondAttribute="bottom" priority="750" constant="40" id="dhD-I5-Ynr"/>
                                 <constraint firstAttribute="trailing" secondItem="bPI-az-eEc" secondAttribute="trailing" constant="10" id="ecX-gm-NWE"/>
                                 <constraint firstItem="era-5t-kW3" firstAttribute="top" secondItem="a69-RL-aHx" secondAttribute="bottom" constant="8" symbolic="YES" id="pDw-IX-dgR"/>
                                 <constraint firstItem="9Le-o5-LeE" firstAttribute="width" secondItem="YjT-TQ-Gmj" secondAttribute="width" multiplier="0.4" id="s52-xI-kDw"/>
@@ -173,16 +177,19 @@
                 <outlet property="contentView" destination="YjT-TQ-Gmj" id="ztH-84-uuL"/>
                 <outlet property="diedLabel" destination="RIg-Zu-WFt" id="rbi-Tn-Exm"/>
                 <outlet property="disclosureButton" destination="era-5t-kW3" id="n8B-HE-T1S"/>
+                <outlet property="homePageButtonBottomConstraint" destination="ANh-hm-5wF" id="ljT-qW-xiH"/>
                 <outlet property="homepageButton" destination="9Le-o5-LeE" id="Ddu-FD-yVV"/>
                 <outlet property="infoLabelsStackView" destination="bPI-az-eEc" id="QCw-4v-pT0"/>
                 <outlet property="moviesCollectionView" destination="SQj-1m-Gmo" id="qv7-xB-Jxn"/>
                 <outlet property="moviesStackView" destination="1fZ-Nt-hUc" id="eyC-hG-XXC"/>
+                <outlet property="moviesStackViewBottomConstraint" destination="dhD-I5-Ynr" id="kaH-GH-kz3"/>
+                <outlet property="moviesStackViewBottomToContentViewConstraint" destination="X4V-4l-NRx" id="feg-Yt-lKl"/>
                 <outlet property="moviesTitleLabel" destination="EPy-om-AA8" id="e39-cq-9Oz"/>
                 <outlet property="nameLabel" destination="21p-iU-BuN" id="P1u-rY-k8m"/>
                 <outlet property="profileImageView" destination="bqT-iz-WKd" id="PgY-CH-Jgn"/>
                 <outlet property="scrollView" destination="8Y0-hE-ARx" id="jlM-HD-der"/>
             </connections>
-            <point key="canvasLocation" x="-383" y="-873"/>
+            <point key="canvasLocation" x="-384" y="-800"/>
         </view>
     </objects>
 </document>

@@ -34,7 +34,11 @@ class PersonDetailView: BaseView {
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var homepageButton: DiscoverButton!
     @IBOutlet weak var backButton: UIButton!
-
+    
+    @IBOutlet weak var moviesStackViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var homePageButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var moviesStackViewBottomToContentViewConstraint: NSLayoutConstraint!
+    
     // MARK: - Awake
     
     override func awakeFromNib() {
@@ -76,7 +80,6 @@ class PersonDetailView: BaseView {
         moviesTitleLabel.text = NSLocalizedString("moviesKnowFor", comment: "")
         
         homepageButton.setTitle(NSLocalizedString("homePageButton", comment: ""), for: .normal)
-        homepageButton.isEnabled = false
         
         disclosureButton.setImage(UIImage(named: "Expand"), for: .normal)
         disclosureButton.setImage(UIImage(named: "Collapse"), for: .selected)
@@ -89,63 +92,78 @@ class PersonDetailView: BaseView {
         backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
         
         // Hide views until there is data
-        setViewElements(hidden: true)
+        disclosureButton.isHidden = true
+        infoLabelsStackView.isHidden = true
+        biographyLabelsStackView.isHidden = true
+        moviesStackView.isHidden = true
+        homepageButton.isHidden = true
     }
     
     // MARK: - Configure
     
-    func configure(with person: Person) {
+    func configure(personRespresentable: PersonRepresentable) {
+        nameLabel.text = personRespresentable.name
+        let path = personRespresentable.profilePath ?? ""
+        let imageURL = TMDbImageRouter.posterLarge(path: path).url
+        profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
+    }
+    
+    func configure(person: Person) {
         // Name
         nameLabel.text = person.name
         
-        // Set image
+        // Profile Image 
         let path = person.profilePath ?? ""
         let imageURL = TMDbImageRouter.posterLarge(path: path).url
         profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
+        profileImageView.isHidden = false
         
-        // BirthInfo
-        var birthInfo = ""
+        // Birth
         if let birthday = person.birthDay {
-            birthInfo = birthday
+            var birthInfo = birthday
             
             if let age = birthday.toDate()?.age {
                 birthInfo = birthInfo + " " + "(" + "\(age)" + ")"
             }
+            
+            if let birthPlace = person.birthPlace {
+                birthInfo = birthInfo + "\n\(birthPlace)"
+            }
+            
+            bornLabel.text = birthInfo
+            infoLabelsStackView.isHidden = false
+            bornLabel.isHidden = false
         }
         
-        if let birthPlace = person.birthPlace {
-            birthInfo = birthInfo + "\n\(birthPlace)"
-        }
-        
-        bornLabel.text = birthInfo
-        
-        
-        // Death?
+        // DeathDay
         if let deathDay = person.deathDay {
             diedLabel.text = deathDay
-        } else {
-            diedLabel.isHidden = true
+            diedLabel.isHidden = false
+            infoLabelsStackView.isHidden = false
         }
         
         // Biography
-        biograhphyLabel.text = person.biography ?? NSLocalizedString("biographyUnavailable", comment: "")
+        if let biography = person.biography {
+            biograhphyLabel.text = biography
+            biograhphyLabel.isHidden = false
+            disclosureButton.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
+            biographyLabelsStackView.isHidden = false
+        } else {
+            biograhphyLabel.isHidden = true
+            disclosureButton.isHidden = true
+        }
         
         // Homepage
-        homepageButton.isEnabled = person.homepage != nil
+        if person.homepage == nil {
+            homepageButton.isHidden = true
+            moviesStackViewBottomConstraint.isActive = false
+            homePageButtonBottomConstraint.isActive = false
+            moviesStackViewBottomToContentViewConstraint.priority = 750
+        }
         
-        // Unhide everything
-        setViewElements(hidden: false)
     }
     
     // MARK: - Utils
-    
-    func setViewElements(hidden: Bool) {
-        infoLabelsStackView.isHidden = hidden
-        biographyLabelsStackView.isHidden = hidden
-        moviesStackView.isHidden = hidden
-        homepageButton.isHidden = hidden
-        disclosureButton.isHidden = hidden
-    }
     
     func setBiographyLabel(expanded: Bool, animated: Bool) {
         biograhphyLabel.numberOfLines = expanded ? 0 : 5

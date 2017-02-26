@@ -140,7 +140,7 @@ class DetailViewController: BaseViewController {
         guard let trailer = trailer else { return }
         let videoViewController = VideoViewController(video: trailer)
         videoViewController.delegate = self
-        let navigationController = UINavigationController(rootViewController: videoViewController)
+        let navigationController = BaseNavigationController(rootViewController: videoViewController)
         present(navigationController, animated: true, completion: nil)
     }
     

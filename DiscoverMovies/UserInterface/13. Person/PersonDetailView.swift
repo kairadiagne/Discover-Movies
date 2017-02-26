@@ -96,7 +96,7 @@ class PersonDetailView: BaseView {
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
         
-        unavailableLabel.tintColor = .white
+        unavailableLabel.textColor = .white
         unavailableLabel.font = UIFont.Body()
         
         // Hide views until there is data
@@ -112,10 +112,15 @@ class PersonDetailView: BaseView {
     // MARK: - Configure
     
     func configure(personRespresentable: PersonRepresentable) {
+        bornLabel.isHidden = true
+        diedLabel.isHidden = true
+        
         nameLabel.text = personRespresentable.name
         infoLabelsStackView.isHidden = false
+        
         unavailableLabel.text = NSLocalizedString("infoUnavailable", comment: "")
         unavailableLabel.isHidden = false
+        
         let path = personRespresentable.profilePath ?? ""
         let imageURL = TMDbImageRouter.posterLarge(path: path).url
         profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())

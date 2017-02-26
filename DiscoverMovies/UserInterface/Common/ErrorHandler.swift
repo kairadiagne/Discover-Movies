@@ -23,7 +23,7 @@ class ErrorHandler {
     
     // MARK: - Handle Errors 
     
-    func handle(error: APIError, authorizationError: Bool = false) {
+    func handle(error: APIError, authorizationError: Bool = false, hideGenericError: Bool = false) {
         
         // prevent two banners being presented at the same time
         if currentBanner != nil {
@@ -48,7 +48,7 @@ class ErrorHandler {
             let title = NSLocalizedString("authorizationErrorTitle", comment: "Title of authorization error alert")
             let message = NSLocalizedString("authorizationErrorMessage", comment: "Message of authorization error alert")
             currentBanner = Banner(title: title, subtitle: message, backgroundColor: UIColor.flatRed())
-        case .generic:
+        case .generic where hideGenericError != true:
             let title = NSLocalizedString("genericErrorTitle", comment: "Title of generic error alert")
             let message = NSLocalizedString("genericErrorMessage", comment: "Message of generic error alert")
             currentBanner = Banner(title: title, subtitle: message, backgroundColor: UIColor.flatGray())

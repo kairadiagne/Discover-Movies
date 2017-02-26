@@ -31,12 +31,6 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     var isLoading = false
     
-    let sessionManager: SessionManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.urlCache = nil
-        return SessionManager(configuration: configuration)
-    }()
-    
     // MARK: - Initialize
     
     init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
@@ -63,8 +57,8 @@ public class DataManager<ModelType: DictionarySerializable> {
         params["page"] = page as AnyObject?
         cachedParams = params
         
-        sessionManager.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
-            .validate().responseObject { (response: DataResponse<ModelType>) in
+        Alamofire.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
+            .validate().responseObject { (response: DataResponse<ModelType>)  in
                 
                 self.stopLoading()
                 

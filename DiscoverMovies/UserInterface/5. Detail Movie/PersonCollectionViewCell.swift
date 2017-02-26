@@ -35,7 +35,7 @@ class PersonCollectionViewCell: UICollectionViewCell {
         if let profilePath = member.profilePath, let url = TMDbImageRouter.posterMedium(path: profilePath).url {
             profileImageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
         } else {
-            profileImageView.image = UIImage.placeholderImage()
+            profileImageView.image = UIImage.placeholderProfileImage()
         }
     }
     

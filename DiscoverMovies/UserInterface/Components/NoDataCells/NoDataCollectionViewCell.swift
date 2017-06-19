@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NoDataCollectionViewCell: UICollectionViewCell, NibReusabelCell {
+class NoDataCollectionViewCell: UICollectionViewCell, NibReusabelCell, NoDataMessageConfigurable {
     
     // MARK: - Properties
     
@@ -21,12 +21,6 @@ class NoDataCollectionViewCell: UICollectionViewCell, NibReusabelCell {
         
         messageLabel.font = UIFont.Body()
         messageLabel.textColor = UIColor.white
-    }
-    
-    // MARK: - Configure
-    
-    func configure(with message: String) {
-        messageLabel.text = message
     }
 
 }

@@ -76,6 +76,7 @@ watchListVCTitle = "Watchlist";
 
 /* Search */
 searchVCTitle = "Search";
+noSearchResultsText = "No search results";
 
 /* About */
 aboutTitle = "About";

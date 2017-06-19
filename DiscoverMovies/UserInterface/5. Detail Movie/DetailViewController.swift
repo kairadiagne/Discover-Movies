@@ -17,7 +17,7 @@ class DetailViewController: BaseViewController {
     
     fileprivate let similarMoviesDataSource: MovieCollectionDataSource
 
-    fileprivate let castDataSource = CastDataSource()
+    fileprivate let castDataSource = CastDataSource(emptyMessage: NSLocalizedString("noCastmembersText", comment: ""))
   
     private let movieInfoManager: TMDbMovieInfoManager
     

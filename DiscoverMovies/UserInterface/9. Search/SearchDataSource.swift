@@ -9,26 +9,12 @@
 import UIKit
 import TMDbMovieKit
 
-class SearchDataSource: NSObject, DataContaining, UITableViewDataSource {
+class SearchDataSource: BaseTableViewDataSource<Movie, SearchTableViewCell> {
     
-    typealias ItemType = Movie
-    
-    // MARK: - Properties 
-    
-    var items: [Movie] = []
-    
-    // MARK: - UITableViewDataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemCount
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseId, for: indexPath) as! SearchTableViewCell
+    override func configure(_ cell: SearchTableViewCell, atIndexPath indexPath: IndexPath) {
         let movie = items[indexPath.row]
         let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
         cell.configure(withMovie: movie, imageURL: imageURL)
-        return cell
     }
-    
+
 }

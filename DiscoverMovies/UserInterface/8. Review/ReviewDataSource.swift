@@ -9,30 +9,11 @@
 import UIKit
 import TMDbMovieKit
 
-class ReviewDataSource: NSObject, DataContaining, UITableViewDataSource {
+class ReviewDataSource: BaseTableViewDataSource<Review, ReviewTableViewCell> {
     
-    typealias ItemType = Review
-    
-    // MARK: Properties
-
-    var items: [Review] = []
-    
-    // MARK: UITableViewDataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return !isEmpty ? items.count : 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isEmpty {
-            let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCell.reuseId, for: indexPath) as! NoDataCell
-            cell.messageLabel.text = NSLocalizedString("noReviewMessage", comment: "")
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableViewCell.reuseId, for: indexPath) as! ReviewTableViewCell
-            cell.configure(items[indexPath.row])
-            return cell
-        }
+    override func configure(_ cell: ReviewTableViewCell, atIndexPath indexPath: IndexPath) {
+        let review = items[indexPath.row]
+        cell.configure(review)
     }
     
 }

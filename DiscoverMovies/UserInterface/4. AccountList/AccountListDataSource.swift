@@ -9,34 +9,16 @@
 import UIKit
 import TMDbMovieKit
 
-class AccountListDataSource: NSObject, DataContaining, UITableViewDataSource {
+class AccountListDataSource: BaseTableViewDataSource<Movie, AccountListTableViewCell> {
     
-    typealias ItemTye = Movie
-    
-    // MARK: - Properties
-    
-    var items: [Movie] = []
-    
-    // MARK: UITableViewDataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return !isEmpty ? itemCount : 1
+    override init(emptyMessage: String = NSLocalizedString("noMoviesInListText", comment: "")) {
+        super.init(emptyMessage: emptyMessage)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isEmpty {
-            let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCell.reuseId, for: indexPath) as! NoDataCell
-            let message = NSLocalizedString("noMoviesInListText", comment: "")
-            cell.configure(with: message)
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: AccountListTableViewCell.reuseId) as! AccountListTableViewCell
-            let movie = items[indexPath.row]
-            let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
-            cell.configure(movie, imageURL: imageURL)
-            return cell
-        }
+    override func configure(_ cell: AccountListTableViewCell, atIndexPath indexPath: IndexPath) {
+        let movie = items[indexPath.row]
+        let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
+        cell.configure(movie, imageURL: imageURL)
     }
     
 }
-

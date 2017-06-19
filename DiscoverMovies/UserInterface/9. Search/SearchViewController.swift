@@ -20,7 +20,7 @@ class SearchViewController: BaseViewController {
     
     fileprivate let searchManager = SearchDataManager()
     
-    fileprivate let dataSource = SearchDataSource()
+    fileprivate let dataSource = SearchDataSource(emptyMessage: NSLocalizedString("noSearchResultsText", comment: ""))
     
     fileprivate var searchQuery = ""
     
@@ -57,6 +57,7 @@ class SearchViewController: BaseViewController {
         definesPresentationContext = true
         
         searchView.tableView.register(SearchTableViewCell.nib, forCellReuseIdentifier: SearchTableViewCell.reuseId)
+        searchView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         searchView.tableView.delegate = self
         searchView.tableView.dataSource = dataSource
         

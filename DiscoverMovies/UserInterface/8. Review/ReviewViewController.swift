@@ -23,7 +23,7 @@ class ReviewViewController: BaseViewController {
     
     private let movie: MovieRepresentable
  
-    fileprivate let reviewDataSource = ReviewDataSource()
+    fileprivate let reviewDataSource = ReviewDataSource(emptyMessage: NSLocalizedString("noReviewMessage", comment: ""))
     
     fileprivate let reviewManager: TMDbReviewManager
     

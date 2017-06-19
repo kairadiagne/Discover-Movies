@@ -50,9 +50,9 @@ class DetailViewController: BaseViewController {
         
         automaticallyAdjustsScrollViewInsets = false
         
-        detailView.similarMovieCollectionView.register(MovieCollectionViewCell.nib, forCellWithReuseIdentifier: MovieCollectionViewCell.reuseId)
+        detailView.similarMovieCollectionView.register(PosterImageCollectionViewCell.nib, forCellWithReuseIdentifier: PosterImageCollectionViewCell.reuseId)
         detailView.similarMovieCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
-        detailView.castCollectionView.register(PersonCollectionViewCell.nib, forCellWithReuseIdentifier: PersonCollectionViewCell.reuseId)
+        detailView.castCollectionView.register(PosterImageCollectionViewCell.nib, forCellWithReuseIdentifier: PosterImageCollectionViewCell.reuseId)
         detailView.castCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
         
         detailView.castCollectionView.dataSource = castDataSource

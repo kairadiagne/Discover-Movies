@@ -9,11 +9,11 @@
 import UIKit
 import TMDbMovieKit
 
-class MovieCollectionDataSource: BaseCollectionViewDataSource<MovieRepresentable, MovieCollectionViewCell> {
+class MovieCollectionDataSource: BaseCollectionViewDataSource<MovieRepresentable, PosterImageCollectionViewCell> {
     
-    override func configure(_ cell: MovieCollectionViewCell, atIndexPath indexPath: IndexPath) {
-        let item = items[indexPath.row]
-        cell.configureWithMovie(item)
+    override func configure(_ cell: PosterImageCollectionViewCell, atIndexPath indexPath: IndexPath) {
+        let viewModel = MoviePosterCellViewModel(movie: items[indexPath.row])
+        cell.configure(with: viewModel)
     }
 
 }

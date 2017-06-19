@@ -51,7 +51,7 @@ class PersonDetailViewController: BaseViewController {
         
         automaticallyAdjustsScrollViewInsets = false
         
-        personDetailView.moviesCollectionView.register(MovieCollectionViewCell.nib, forCellWithReuseIdentifier: MovieCollectionViewCell.reuseId)
+        personDetailView.moviesCollectionView.register(PosterImageCollectionViewCell.nib, forCellWithReuseIdentifier: PosterImageCollectionViewCell.reuseId)
         personDetailView.moviesCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
         personDetailView.moviesCollectionView.delegate = self
         personDetailView.moviesCollectionView.dataSource = dataSource

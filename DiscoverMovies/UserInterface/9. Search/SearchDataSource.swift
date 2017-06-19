@@ -24,7 +24,7 @@ class SearchDataSource: NSObject, DataContaining, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.defaultIdentifier(), for: indexPath) as! SearchTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseId, for: indexPath) as! SearchTableViewCell
         let movie = items[indexPath.row]
         let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
         cell.configure(withMovie: movie, imageURL: imageURL)

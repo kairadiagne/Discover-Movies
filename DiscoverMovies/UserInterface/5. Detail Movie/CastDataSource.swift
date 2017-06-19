@@ -25,12 +25,11 @@ class CastDataSource: NSObject, DataContaining, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isEmpty {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier(), for: indexPath) as! NoDataCollectionViewCell
-            let message = NSLocalizedString("noCastmembersText", comment: "")
-            cell.configure(with: message)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.reuseId, for: indexPath) as! NoDataCollectionViewCell
+            cell.configure(with: NSLocalizedString("noCastmembersText", comment: ""))
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCollectionViewCell.defaultIdentfier(), for: indexPath) as! PersonCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCollectionViewCell.reuseId, for: indexPath) as! PersonCollectionViewCell
             let castMember = items[indexPath.row]
             cell.configureWithCastMember(castMember)
             return cell

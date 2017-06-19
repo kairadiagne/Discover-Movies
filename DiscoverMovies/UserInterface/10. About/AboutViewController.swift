@@ -20,6 +20,10 @@ class AboutViewController: BaseViewController {
     
     // MARK: - Types
     
+    fileprivate struct Constants {
+        static let SectionCellIdentifier = "SectionCellIdentifier"
+    }
+    
     fileprivate enum Acknowledgement: Int, Section {
         case themoviedb
         case icons8
@@ -64,7 +68,7 @@ class AboutViewController: BaseViewController {
         
         addMenuButton()
         
-        aboutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.defaultIdentifier())
+        aboutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.SectionCellIdentifier)
         
         aboutView.tableView.delegate = self
         aboutView.tableView.dataSource = self
@@ -186,7 +190,7 @@ extension AboutViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.defaultIdentifier(), for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SectionCellIdentifier, for: indexPath)
         guard let row = row(for: indexPath) else { return cell }
         cell.textLabel?.text = row.rowTitle
         cell.textLabel?.textColor = UIColor.white

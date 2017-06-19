@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class PersonCollectionViewCell: UICollectionViewCell {
+class PersonCollectionViewCell: UICollectionViewCell, NibReusabelCell {
     
     // MARK: - Properties
 

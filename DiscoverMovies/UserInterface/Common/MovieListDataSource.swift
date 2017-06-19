@@ -25,17 +25,13 @@ class MovieListDataSource: NSObject, DataContaining, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isEmpty {
-            let cellIdentifier = NoDataCell.defaultIdentifier()
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NoDataCell
-            let message = NSLocalizedString("topListNoDataCellText", comment: "")
-            cell.configure(with: message)
+            let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCell.reuseId, for: indexPath) as! NoDataCell
+            cell.configure(with: NSLocalizedString("topListNoDataCellText", comment: ""))
             return cell
         } else {
-            let cellIdentifier = DiscoverListCell.defaultIdentifier()
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DiscoverListCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverListCell.reuseId, for: indexPath) as! DiscoverListCell
             let movie = items[indexPath.row]
-            let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url
-            cell.configure(movie, imageURL: imageURL)
+            cell.configure(movie, imageURL: TMDbImageRouter.backDropMedium(path: movie.backDropPath).url)
             return cell
         }
     }

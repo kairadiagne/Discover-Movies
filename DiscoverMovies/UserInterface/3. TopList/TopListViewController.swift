@@ -58,12 +58,8 @@ class TopListViewController: BaseViewController {
         addMenuButton()
         
         topListView.tableView.delegate = self
-        
-        let movieCellnib = UINib(nibName: DiscoverListCell.nibName(), bundle: nil)
-        topListView.tableView.register(movieCellnib, forCellReuseIdentifier: DiscoverListCell.defaultIdentifier())
-        
-        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
-        topListView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
+        topListView.tableView.register(DiscoverListCell.nib, forCellReuseIdentifier: DiscoverListCell.reuseId)
+        topListView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         
         topListView.refreshControl.addTarget(self, action: #selector(TopListViewController.refresh(control:)), for: .valueChanged)
         

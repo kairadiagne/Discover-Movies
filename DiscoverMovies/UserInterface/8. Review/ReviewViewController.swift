@@ -47,12 +47,8 @@ class ReviewViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let reviewCellNib = UINib(nibName: ReviewTableViewCell.nibName(), bundle: nil)
-        reviewView.tableView.register(reviewCellNib, forCellReuseIdentifier: ReviewTableViewCell.defaultIdentifier())
-        
-        let NoDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
-        reviewView.tableView.register(NoDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
-        
+        reviewView.tableView.register(ReviewTableViewCell.nib, forCellReuseIdentifier: ReviewTableViewCell.reuseId)
+        reviewView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         reviewView.tableView.dataSource = reviewDataSource
         reviewView.tableView.delegate = self
         

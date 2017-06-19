@@ -25,13 +25,12 @@ class AccountListDataSource: NSObject, DataContaining, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isEmpty {
-            let cellIdentifier =  NoDataCell.defaultIdentifier()
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NoDataCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCell.reuseId, for: indexPath) as! NoDataCell
             let message = NSLocalizedString("noMoviesInListText", comment: "")
             cell.configure(with: message)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: AccountListTableViewCell.defaultIdentifier()) as! AccountListTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: AccountListTableViewCell.reuseId) as! AccountListTableViewCell
             let movie = items[indexPath.row]
             let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
             cell.configure(movie, imageURL: imageURL)

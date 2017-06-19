@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuTableViewCell: UITableViewCell {
+class MenuTableViewCell: UITableViewCell, NibReusabelCell {
     
     // MARK: - Properties 
     

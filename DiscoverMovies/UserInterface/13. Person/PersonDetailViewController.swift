@@ -28,7 +28,7 @@ class PersonDetailViewController: BaseViewController {
     
     private var biographyExpanded = false
     
-    private let signedIn: Bool
+    fileprivate let signedIn: Bool
     
     // MARK: - Initialize
     
@@ -51,11 +51,8 @@ class PersonDetailViewController: BaseViewController {
         
         automaticallyAdjustsScrollViewInsets = false
         
-        let nib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
-        personDetailView.moviesCollectionView.register(nib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
-        let emptyNib = UINib(nibName: NoDataCollectionViewCell.nibName(), bundle: nil)
-        personDetailView.moviesCollectionView.register(emptyNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
-        
+        personDetailView.moviesCollectionView.register(MovieCollectionViewCell.nib, forCellWithReuseIdentifier: MovieCollectionViewCell.reuseId)
+        personDetailView.moviesCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
         personDetailView.moviesCollectionView.delegate = self
         personDetailView.moviesCollectionView.dataSource = dataSource
         
@@ -147,7 +144,7 @@ extension PersonDetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-         let detailViewController = DetailViewController(movie: movie, signedIn: true)
+         let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
          navigationController?.pushViewController(detailViewController, animated: true)
     }
     

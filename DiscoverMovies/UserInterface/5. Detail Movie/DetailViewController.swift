@@ -51,20 +51,17 @@ class DetailViewController: BaseViewController {
         
         automaticallyAdjustsScrollViewInsets = false
         
-        let movieCellNib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
-        let personCellNib = UINib(nibName: PersonCollectionViewCell.nibName(), bundle: nil)
-        let noDataCellNib = UINib(nibName: NoDataCollectionViewCell.nibName(), bundle: nil)
-        detailView.similarMovieCollectionView.register(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
-        detailView.similarMovieCollectionView.register(noDataCellNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
-        detailView.castCollectionView.register(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
-        detailView.castCollectionView.register(noDataCellNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
+        detailView.similarMovieCollectionView.register(MovieCollectionViewCell.nib, forCellWithReuseIdentifier: MovieCollectionViewCell.reuseId)
+        detailView.similarMovieCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
+        detailView.castCollectionView.register(PersonCollectionViewCell.nib, forCellWithReuseIdentifier: PersonCollectionViewCell.reuseId)
+        detailView.castCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
         
         detailView.castCollectionView.dataSource = castDataSource
         detailView.castCollectionView.delegate = self
         
         detailView.similarMovieCollectionView.dataSource = similarMoviesDataSource
         detailView.similarMovieCollectionView.delegate = self
-     
+        
         detailView.scrollView.delegate = self
         
         movieInfoManager.delegate = self

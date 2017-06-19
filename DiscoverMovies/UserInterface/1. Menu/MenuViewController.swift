@@ -46,8 +46,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let menuCellNib = UINib(nibName: MenuTableViewCell.nibName(), bundle: nil)
-        menuView.tableView.register(menuCellNib, forCellReuseIdentifier: MenuTableViewCell.defaultIdentifier())
+        menuView.tableView.register(MenuTableViewCell.nib, forCellReuseIdentifier: MenuTableViewCell.reuseId)
         
         menuView.tableView.dataSource = self
         menuView.tableView.delegate = self
@@ -56,7 +55,7 @@ class MenuViewController: UIViewController {
         
         userService.delegate = self
         
-        menuView.tableView.reloadData()
+        menuView.tableView.reloadData() // TODO: Can this be removed because it already gets called in view will appear
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,8 +83,11 @@ extension MenuViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.defaultIdentifier()) as? MenuTableViewCell else { return MenuTableViewCell() }
-        guard let menuItem = delegate?.menu(viewController: self, itemForRowAtIndexPath: indexPath) else { return cell }
+        let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.reuseId) as! MenuTableViewCell
+        
+        guard let menuItem = delegate?.menu(viewController: self, itemForRowAtIndexPath: indexPath) else {
+            return cell
+        }
         
         let title = menuItem.title(signedIn: signedIn)
         let icon = menuItem.icon(signedIn: signedIn)

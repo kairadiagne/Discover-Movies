@@ -151,6 +151,8 @@ class PersonDetailView: BaseView {
             
             bornLabel.text = birthInfo
             bornLabel.isHidden = false
+        } else {
+            bornLabel.isHidden = true
         }
         
         // DeathDay
@@ -158,6 +160,8 @@ class PersonDetailView: BaseView {
             diedLabel.text = deathDay
             diedLabel.isHidden = false
             infoLabelsStackView.isHidden = false
+        } else {
+            diedLabel.isHidden = true 
         }
         
         // Biography

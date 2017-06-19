@@ -19,7 +19,9 @@ class GenericViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var genericView: GenericView { return view as! GenericView }
+    var genericView: GenericView {
+        return view as! GenericView
+    }
 
     fileprivate let dataManager: ListDataManager<Movie>
     
@@ -53,14 +55,10 @@ class GenericViewController: BaseViewController {
         
         title = titleString
         
+        genericView.tableView.register(DiscoverListCell.nib, forCellReuseIdentifier: DiscoverListCell.reuseId)
+        genericView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         genericView.tableView.delegate = self
         genericView.tableView.dataSource = dataSource
-        
-        let movieCellnib = UINib(nibName: DiscoverListCell.nibName(), bundle: nil)
-        genericView.tableView.register(movieCellnib, forCellReuseIdentifier: DiscoverListCell.defaultIdentifier())
-        
-        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
-        genericView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
         
         genericView.refreshControl.addTarget(self, action: #selector(GenericViewController.refresh(control:)), for: .valueChanged)
        

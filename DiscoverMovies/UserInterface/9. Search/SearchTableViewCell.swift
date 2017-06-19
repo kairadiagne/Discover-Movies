@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class SearchTableViewCell: UITableViewCell {
+class SearchTableViewCell: UITableViewCell, NibReusabelCell {
     
     // MARK: - Properties
     

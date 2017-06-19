@@ -34,11 +34,11 @@ class MovieCollectionDataSource: NSObject, DataContaining, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isEmpty {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier(), for: indexPath) as! NoDataCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.reuseId, for: indexPath) as! NoDataCollectionViewCell
             cell.configure(with: emptyMessage)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.defaultIdentfier(), for: indexPath) as! MovieCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.reuseId, for: indexPath) as! MovieCollectionViewCell
             let movie = items[indexPath.row]
             cell.configureWithMovie(movie)
             return cell

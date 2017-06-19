@@ -56,9 +56,7 @@ class SearchViewController: BaseViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         definesPresentationContext = true
         
-        let searchCellNib = UINib(nibName: SearchTableViewCell.nibName(), bundle: nil)
-        searchView.tableView.register(searchCellNib, forCellReuseIdentifier: SearchTableViewCell.defaultIdentifier())
-        
+        searchView.tableView.register(SearchTableViewCell.nib, forCellReuseIdentifier: SearchTableViewCell.reuseId)
         searchView.tableView.delegate = self
         searchView.tableView.dataSource = dataSource
         

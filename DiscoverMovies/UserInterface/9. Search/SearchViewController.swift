@@ -20,7 +20,7 @@ class SearchViewController: BaseViewController {
     
     fileprivate let searchManager = SearchDataManager()
     
-    fileprivate let dataSource = SearchDataSource(emptyMessage: NSLocalizedString("noSearchResultsText", comment: ""))
+    fileprivate let dataSource = SearchDataSource(emptyMessage: "noSearchResultsText".localized)
     
     fileprivate var searchQuery = ""
     
@@ -67,7 +67,7 @@ class SearchViewController: BaseViewController {
         
         searchManager.failureDelegate = self
         
-        title = NSLocalizedString("searchVCTitle", comment: "")
+        title = "searchVCTitle".localized
     }
     
     override func viewWillAppear(_ animated: Bool) {

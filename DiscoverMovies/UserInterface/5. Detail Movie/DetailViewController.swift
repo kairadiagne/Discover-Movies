@@ -15,9 +15,9 @@ class DetailViewController: BaseViewController {
     
     @IBOutlet weak var detailView: DetailView!
     
-    fileprivate let similarMoviesDataSource: MovieCollectionDataSource
+    fileprivate let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
 
-    fileprivate let castDataSource = CastDataSource(emptyMessage: NSLocalizedString("noCastmembersText", comment: ""))
+    fileprivate let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
   
     private let movieInfoManager: TMDbMovieInfoManager
     
@@ -34,7 +34,6 @@ class DetailViewController: BaseViewController {
     init(movie: MovieRepresentable, signedIn: Bool) {
         self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
         self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.id)
-        self.similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: NSLocalizedString("noSimilarMoviesText", comment: ""))
         self.movie = movie
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
@@ -146,7 +145,7 @@ class DetailViewController: BaseViewController {
     }
     
     @IBAction func seeAllButtonClick(_ sender: UIButton) {
-        let title = NSLocalizedString("similarMoviesVCTitle", comment: "")
+        let title = "similarMoviesVCTitle".localized
         let similarMovieListController = GenericViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
         navigationController?.pushViewController(similarMovieListController, animated: true)
     }

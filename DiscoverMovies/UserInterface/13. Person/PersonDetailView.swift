@@ -79,12 +79,12 @@ class PersonDetailView: BaseView {
         moviesTitleLabel.font = UIFont.H2()
         moviesTitleLabel.textColor = .white
         
-        bornLabel.text = NSLocalizedString("bornLabeLPreix", comment: "")
-        diedLabel.text = NSLocalizedString("diedLabelPrefix", comment: "")
-        biographyTitleLabel.text = NSLocalizedString("biographyTitleLabel", comment: "")
-        moviesTitleLabel.text = NSLocalizedString("moviesKnowFor", comment: "")
+        bornLabel.text = "bornLabeLPreix".localized
+        diedLabel.text = "diedLabelPrefix".localized
+        biographyTitleLabel.text = "biographyTitleLabel".localized
+        moviesTitleLabel.text = "moviesKnowFor".localized
         
-        homepageButton.setTitle(NSLocalizedString("homePageButton", comment: ""), for: .normal)
+        homepageButton.setTitle("homePageButton".localized, for: .normal)
         
         disclosureButton.setImage(UIImage(named: "Expand"), for: .normal)
         disclosureButton.setImage(UIImage(named: "Collapse"), for: .selected)
@@ -94,7 +94,7 @@ class PersonDetailView: BaseView {
         
         backButton.tintColor = .white
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
+        backButton.setTitle("backButtonTitle".localized, for: .normal)
         
         unavailableLabel.textColor = .white
         unavailableLabel.font = UIFont.Body()
@@ -118,7 +118,7 @@ class PersonDetailView: BaseView {
         nameLabel.text = personRespresentable.name
         infoLabelsStackView.isHidden = false
         
-        unavailableLabel.text = NSLocalizedString("infoUnavailable", comment: "")
+        unavailableLabel.text = "infoUnavailable".localized
         unavailableLabel.isHidden = false
         
         let path = personRespresentable.profilePath ?? ""

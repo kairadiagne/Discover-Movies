@@ -56,9 +56,9 @@ class AccountListController: BaseViewController {
         accountListManager.failureDelegate = self
         
         if accountList == .favorite {
-            title = NSLocalizedString("favoriteVCTitle", comment: "")
+            title = "favoriteVCTitle".localized
         } else {
-            title = NSLocalizedString("watchListVCTitle", comment: "")
+            title = "watchListVCTitle".localized
         }
     }
     

@@ -33,7 +33,7 @@ class AcknowledgementCell: UITableViewCell, NibReusabelCell {
         titleLabel.text = acknowledgement.title
         
         if let license = acknowledgement.license {
-           licenseLabel.text = NSLocalizedString("license", comment: "") + " " + license
+           licenseLabel.text = "license".localized + " " + license
         }
     }
     

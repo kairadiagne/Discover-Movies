@@ -19,7 +19,7 @@ class AcknowledgementsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("aboutAcknowledgements", comment: "")
+        title = "aboutAcknowledgements".localized
         
         tableView.register(AcknowledgementCell.nib, forCellReuseIdentifier: AcknowledgementCell.reuseId)
     }

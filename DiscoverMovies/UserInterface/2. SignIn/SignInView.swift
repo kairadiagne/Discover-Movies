@@ -40,16 +40,13 @@ class SignInView: BaseView {
         signInButton.titleLabel?.font = UIFont.H3()
         signInLaterButton.titleLabel?.font = UIFont.H3()
         
-        titleLabel.text = NSLocalizedString("signInTitle", comment: "")
+        titleLabel.text = "signInTitle".localized
         
-        signInDescription.text = NSLocalizedString("signInDescription", comment: "")
-        signupLabel.text = NSLocalizedString("signUpInstruction", comment: "")
+        signInDescription.text = "signInDescription".localized
+        signupLabel.text = "signUpInstruction".localized
     
-        let signInButtonText = NSLocalizedString("signInButtonText", comment: "")
-        signInButton.setTitle(signInButtonText, for: .normal)
-        
-        let signInLaterButtonText = NSLocalizedString("signInLaterButtonText", comment: "")
-        signInLaterButton.setTitle(signInLaterButtonText, for: .normal)
+        signInButton.setTitle("signInButtonText".localized, for: .normal)
+        signInLaterButton.setTitle( "signInLaterButtonText".localized, for: .normal)
     }
 
 }

@@ -100,15 +100,14 @@ class DetailView: UIView {
         
         backButton.tintColor = .white
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: .normal)
+        backButton.setTitle("backButtonTitle".localized, for: .normal)
         
-        directorLabel.text = NSLocalizedString("directorLabelText", comment: "")
-        genreLabel.text = NSLocalizedString("genreLabelText", comment: "")
-        releaseLabel.text = NSLocalizedString("releaseLabelText", comment: "")
-        ratingLabel.text =  NSLocalizedString("ratingLabelText", comment: "")
+        directorLabel.text = "directorLabelText".localized
+        genreLabel.text = "genreLabelText".localized
+        releaseLabel.text = "releaseLabelText".localized
+        ratingLabel.text =  "ratingLabelText".localized
         
-        let seeAllButtontitle = NSLocalizedString("seeAllButtonText", comment: "")
-        seeAllButton.setTitle(seeAllButtontitle, for: .normal)
+        seeAllButton.setTitle("seeAllButtonText".localized, for: .normal)
         seeAllButton.setTitleColor(UIColor.white, for: .normal)
         seeAllButton.isHidden = true
         
@@ -143,14 +142,14 @@ class DetailView: UIView {
     
     func configure(forMovie movie: Movie) {
         titleLabel.text = movie.title
-        descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : NSLocalizedString("noDescriptionText", comment: "")
-        genreValueLabel.text = movie.mainGenre?.name ?? NSLocalizedString("unknownGenreText", comment: "")
+        descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : "noDescriptionText".localized
+        genreValueLabel.text = movie.mainGenre?.name ?? "unknownGenreText".localized
         ratingValueLabel.text =  "\(movie.rating)\\10.0"
         
         if let releaseYear = movie.releaseDate.toDate()?.year() {
             releaseValueLabel.text = "\(releaseYear)"
         } else {
-            releaseValueLabel.text = NSLocalizedString("unknownReleaseText", comment: "")
+            releaseValueLabel.text = "unknownReleaseText".localized
         }
         
         if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
@@ -166,7 +165,7 @@ class DetailView: UIView {
         if let releaseYear = credit.releaseDate.toDate()?.year() {
             releaseValueLabel.text = "\(releaseYear)"
         } else {
-            releaseValueLabel.text = NSLocalizedString("unknownReleaseText", comment: "")
+            releaseValueLabel.text = "unknownReleaseText".localized
         }
         
         header.image = UIImage.placeholderImage()
@@ -178,7 +177,7 @@ class DetailView: UIView {
     }
     
     func configure(forDirector director: CrewMember?) {
-        directorValueLabel.text = director?.name ?? NSLocalizedString("unknownDirectorText", comment: "")
+        directorValueLabel.text = director?.name ?? "unknownDirectorText".localized
     }
     
     // MARK: - Header

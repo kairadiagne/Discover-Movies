@@ -11,7 +11,7 @@ import TMDbMovieKit
 
 class AccountListDataSource: BaseTableViewDataSource<Movie, AccountListTableViewCell> {
     
-    override init(emptyMessage: String = NSLocalizedString("noMoviesInListText", comment: "")) {
+    override init(emptyMessage: String = "noMoviesInListText".localized) {
         super.init(emptyMessage: emptyMessage)
     }
     

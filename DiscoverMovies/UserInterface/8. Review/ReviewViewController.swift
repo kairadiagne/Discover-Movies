@@ -23,7 +23,7 @@ class ReviewViewController: BaseViewController {
     
     private let movie: MovieRepresentable
  
-    fileprivate let reviewDataSource = ReviewDataSource(emptyMessage: NSLocalizedString("noReviewMessage", comment: ""))
+    fileprivate let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
     
     fileprivate let reviewManager: TMDbReviewManager
     
@@ -54,7 +54,7 @@ class ReviewViewController: BaseViewController {
         
         reviewView.refreshControl.addTarget(self, action: #selector(ReviewViewController.refresh), for: .valueChanged)
     
-        title = NSLocalizedString("reviewvcTitle", comment: "")
+        title = "reviewvcTitle".localized
         
         reviewManager.failureDelegate = self
     }

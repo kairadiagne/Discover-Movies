@@ -20,17 +20,17 @@ enum MenuItem: Int {
     func title(signedIn: Bool) -> String {
         switch self {
         case .topList:
-            return NSLocalizedString("topListMenuItemText", comment: "")
+            return "topListMenuItemText".localized
         case .watchlist:
-            return NSLocalizedString("watchListMenuItemText", comment: "")
+            return "watchListMenuItemText".localized
         case .favorites:
-            return NSLocalizedString("favoritesMenuItemText", comment: "")
+            return "favoritesMenuItemText".localized
         case .search:
-            return NSLocalizedString("searchMenuItemText", comment: "")
+            return "searchMenuItemText".localized
         case .signin:
-            return signedIn ? NSLocalizedString("signOutMenuItemText", comment: "") : NSLocalizedString("signInMenuItemText", comment: "")
+            return signedIn ? "signOutMenuItemText".localized : "signInMenuItemText".localized
         case .about:
-            return NSLocalizedString("aboutmenuItemText", comment: "")
+            return "aboutmenuItemText".localized
         }
     }
     

@@ -36,7 +36,7 @@ class PersonDetailViewController: BaseViewController {
         self.person = person
         self.personDataManager = PersonDataManager(personID: person.id)
         self.signedIn = signedIn
-        self.dataSource = MovieCollectionDataSource(emptyMessage: NSLocalizedString("emptyMoviesMessage", comment: ""))
+        self.dataSource = MovieCollectionDataSource(emptyMessage: "emptyMoviesMessage".localized)
         super.init(nibName: nil, bundle: nil)
     }
     

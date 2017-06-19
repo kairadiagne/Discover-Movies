@@ -32,7 +32,7 @@ class ReviewTableViewCell: UITableViewCell, NibReusabelCell {
     
     func configure(_ review: Review) {
         
-        authorLabel?.text = NSLocalizedString("authorLabelPrefixText", comment: "") + " \(review.author)"
+        authorLabel?.text = "authorLabelPrefixText".localized + " \(review.author)"
         contentLabel?.text = review.content
     }
     

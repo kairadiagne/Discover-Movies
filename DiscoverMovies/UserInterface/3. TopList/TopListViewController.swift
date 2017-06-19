@@ -53,7 +53,7 @@ class TopListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("topListVCTitle", comment: "")
+        title = "topListVCTitle".localized
         
         addMenuButton()
         

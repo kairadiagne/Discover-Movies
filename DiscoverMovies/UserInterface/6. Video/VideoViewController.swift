@@ -51,7 +51,7 @@ class VideoViewController: UIViewController {
         navigationController?.hidesNavigationBarHairline = true
         
         let backSelector = #selector(VideoViewController.doneButtonCLick(button:))
-        let barbuttontitle = NSLocalizedString("backButtonTitle", comment: "")
+        let barbuttontitle = "backButtonTitle".localized
         let backButton = UIBarButtonItem(title: barbuttontitle, style: .plain, target: self, action: backSelector)
         backButton.tintColor = .white
         navigationController?.navigationBar.topItem?.leftBarButtonItem = backButton

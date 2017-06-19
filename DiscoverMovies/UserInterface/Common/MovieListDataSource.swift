@@ -11,7 +11,7 @@ import TMDbMovieKit
 
 class MovieListDataSource: BaseTableViewDataSource<Movie, DiscoverListCell> {
     
-    override init(emptyMessage: String = NSLocalizedString("topListNoDataCellText", comment: "")) {
+    override init(emptyMessage: String = "topListNoDataCellText".localized) {
         super.init(emptyMessage: emptyMessage)
     }
     

@@ -23,7 +23,7 @@ class ReviewViewController: BaseViewController {
     
     private let movie: MovieRepresentable
  
-    fileprivate let reviewDataSource = ReviewDataSource()
+    fileprivate let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
     
     fileprivate let reviewManager: TMDbReviewManager
     
@@ -47,18 +47,14 @@ class ReviewViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let reviewCellNib = UINib(nibName: ReviewTableViewCell.nibName(), bundle: nil)
-        reviewView.tableView.register(reviewCellNib, forCellReuseIdentifier: ReviewTableViewCell.defaultIdentifier())
-        
-        let NoDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
-        reviewView.tableView.register(NoDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
-        
+        reviewView.tableView.register(ReviewTableViewCell.nib, forCellReuseIdentifier: ReviewTableViewCell.reuseId)
+        reviewView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         reviewView.tableView.dataSource = reviewDataSource
         reviewView.tableView.delegate = self
         
         reviewView.refreshControl.addTarget(self, action: #selector(ReviewViewController.refresh), for: .valueChanged)
     
-        title = NSLocalizedString("reviewvcTitle", comment: "")
+        title = "reviewvcTitle".localized
         
         reviewManager.failureDelegate = self
     }
@@ -96,6 +92,8 @@ class ReviewViewController: BaseViewController {
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        reviewView.set(state: .idle)
+        reviewView.tableView.reloadData()
     }
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AcknowledgementCell: UITableViewCell {
+class AcknowledgementCell: UITableViewCell, NibReusabelCell {
     
     // MARK: - Properties
     
@@ -33,7 +33,7 @@ class AcknowledgementCell: UITableViewCell {
         titleLabel.text = acknowledgement.title
         
         if let license = acknowledgement.license {
-           licenseLabel.text = NSLocalizedString("license", comment: "") + " " + license
+           licenseLabel.text = "license".localized + " " + license
         }
     }
     

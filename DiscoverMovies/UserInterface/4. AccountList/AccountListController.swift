@@ -46,23 +46,19 @@ class AccountListController: BaseViewController {
         super.viewDidLoad()
         addMenuButton()
         
-        accountListManager.failureDelegate = self
-        
-        let accountListCellNib = UINib(nibName: AccountListTableViewCell.nibName(), bundle: nil)
-        accountListView.tableView.register(accountListCellNib, forCellReuseIdentifier: AccountListTableViewCell.defaultIdentifier())
-        
-        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
-        accountListView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
-        
+        accountListView.tableView.register(AccountListTableViewCell.nib, forCellReuseIdentifier: AccountListTableViewCell.reuseId)
+        accountListView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         accountListView.tableView.delegate = self
         accountListView.tableView.dataSource = dataSource
         
         accountListView.refreshControl.addTarget(self, action: #selector(AccountListController.refresh(_:)), for: .valueChanged)
         
+        accountListManager.failureDelegate = self
+        
         if accountList == .favorite {
-            title = NSLocalizedString("favoriteVCTitle", comment: "")
+            title = "favoriteVCTitle".localized
         } else {
-            title = NSLocalizedString("watchListVCTitle", comment: "")
+            title = "watchListVCTitle".localized
         }
     }
     
@@ -108,6 +104,7 @@ class AccountListController: BaseViewController {
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: true)
         accountListView.set(state: .idle)
+        accountListView.tableView.reloadData()
     }
 
 }

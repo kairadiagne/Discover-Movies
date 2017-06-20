@@ -19,13 +19,13 @@ class GenericViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var genericView: GenericView { return view as! GenericView }
+    var genericView: GenericView {
+        return view as! GenericView
+    }
 
     fileprivate let dataManager: ListDataManager<Movie>
     
     fileprivate let dataSource = MovieListDataSource()
-    
-    private let titleString: String
     
     fileprivate let signedIn: Bool
     
@@ -33,9 +33,9 @@ class GenericViewController: BaseViewController {
     
     init(dataManager: ListDataManager<Movie>, titleString: String, signedIn: Bool) {
         self.dataManager = dataManager
-        self.titleString = titleString
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
+        self.title = titleString
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,16 +51,10 @@ class GenericViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = titleString
-        
+        genericView.tableView.register(DiscoverListCell.nib, forCellReuseIdentifier: DiscoverListCell.reuseId)
+        genericView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         genericView.tableView.delegate = self
         genericView.tableView.dataSource = dataSource
-        
-        let movieCellnib = UINib(nibName: DiscoverListCell.nibName(), bundle: nil)
-        genericView.tableView.register(movieCellnib, forCellReuseIdentifier: DiscoverListCell.defaultIdentifier())
-        
-        let noDataCellNib = UINib(nibName: NoDataCell.nibName(), bundle: nil)
-        genericView.tableView.register(noDataCellNib, forCellReuseIdentifier: NoDataCell.defaultIdentifier())
         
         genericView.refreshControl.addTarget(self, action: #selector(GenericViewController.refresh(control:)), for: .valueChanged)
        
@@ -74,7 +68,7 @@ class GenericViewController: BaseViewController {
         let updateSelector = #selector(GenericViewController.dataManagerDidUpdate(notification:))
         dataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
-        dataManager.reloadIfNeeded()
+        loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,13 +77,24 @@ class GenericViewController: BaseViewController {
         dataManager.remove(observer: self)
     }
     
-    func refresh(control: UIRefreshControl) {
+    // MARK: - Actions
+    
+    @objc private func refresh(control: UIRefreshControl) {
         dataManager.reloadIfNeeded(forceOnline: true)
+    }
+    
+    private func loadData() {
+        // Try to preload data from cache
+        dataSource.items = dataManager.allItems
+        genericView.tableView.reloadData()
+        
+        dataManager.reloadIfNeeded()
     }
     
     // MARK: - DataManagerNotifications
     
     override func dataManagerDidUpdate(notification: Notification) {
+        genericView.set(state: .idle)
         dataSource.items = dataManager.allItems
         genericView.tableView.reloadData()
     }
@@ -103,6 +108,7 @@ class GenericViewController: BaseViewController {
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         genericView.set(state: .idle)
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        genericView.tableView.reloadData()
     }
 
 }

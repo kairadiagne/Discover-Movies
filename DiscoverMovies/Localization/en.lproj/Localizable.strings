@@ -38,6 +38,10 @@ signUpInstruction = "Create a new account at: www.themoviedb.org/account/signup"
 topListVCTitle= "Toplists";
 topListNoDataCellText = "No movies to show";
 cellUnknownYearText = "Unknown";
+popular = "Popular";
+nowPlaying = "Now Playing";
+topRated = "Top Rated";
+upcoming = "Upcoming";
 
 /* Detail */
 directorLabelText = "Director:";
@@ -76,6 +80,7 @@ watchListVCTitle = "Watchlist";
 
 /* Search */
 searchVCTitle = "Search";
+noSearchResultsText = "No search results";
 
 /* About */
 aboutTitle = "About";

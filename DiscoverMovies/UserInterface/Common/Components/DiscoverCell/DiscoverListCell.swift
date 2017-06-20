@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class DiscoverListCell: UITableViewCell {
+class DiscoverListCell: UITableViewCell, NibReusabelCell{
     
     // MARK: - Properties
     
@@ -48,7 +48,7 @@ class DiscoverListCell: UITableViewCell {
         if let releaseYear = movie.releaseDate.toDate()?.year() {
             yearLabel.text = "\(releaseYear)"
         } else {
-            yearLabel.text = NSLocalizedString("cellUnknownYearText", comment: "")
+            yearLabel.text = "cellUnknownYearText".localized
         }
         
         movieImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())

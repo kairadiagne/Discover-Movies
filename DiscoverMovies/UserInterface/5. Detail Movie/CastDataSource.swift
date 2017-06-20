@@ -9,33 +9,11 @@
 import UIKit
 import TMDbMovieKit
 
-class CastDataSource: NSObject, DataContaining, UICollectionViewDataSource {
-    
-    typealias ItemType = CastMember
-    
-    // MARK: - Properties 
-    
-    var items: [CastMember] = []
-    
-    // MARK: - UICollectionViewDataSource
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return !isEmpty ? itemCount : 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isEmpty {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier(), for: indexPath) as! NoDataCollectionViewCell
-            let message = NSLocalizedString("noCastmembersText", comment: "")
-            cell.configure(with: message)
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCollectionViewCell.defaultIdentfier(), for: indexPath) as! PersonCollectionViewCell
-            let castMember = items[indexPath.row]
-            cell.configureWithCastMember(castMember)
-            return cell
-        }
-    }
+class CastDataSource: BaseCollectionViewDataSource<CastMember, PosterImageCollectionViewCell> {
 
+    override func configure(_ cell: PosterImageCollectionViewCell, atIndexPath indexPath: IndexPath) {
+        let viewModel = PersonCellViewModel(person: items[indexPath.row])
+        cell.configure(with: viewModel)
+    }
+    
 }
-

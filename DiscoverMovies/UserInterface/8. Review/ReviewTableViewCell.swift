@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class ReviewTableViewCell: UITableViewCell {
+class ReviewTableViewCell: UITableViewCell, NibReusabelCell {
     
     // MARK: - Properties
     
@@ -32,7 +32,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     func configure(_ review: Review) {
         
-        authorLabel?.text = NSLocalizedString("authorLabelPrefixText", comment: "") + " \(review.author)"
+        authorLabel?.text = "authorLabelPrefixText".localized + " \(review.author)"
         contentLabel?.text = review.content
     }
     

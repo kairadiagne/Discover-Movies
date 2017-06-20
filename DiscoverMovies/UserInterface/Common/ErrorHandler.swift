@@ -1,3 +1,4 @@
+
 //
 //  ErrorHandler.swift
 //  DiscoverMovies
@@ -37,20 +38,20 @@ class ErrorHandler {
         // Create Error Banner
         switch error {
         case .noInternetConnection:
-            let title = NSLocalizedString("noConnectionTitle", comment: "Title of no internet connection banner")
-            let message = NSLocalizedString("noConnectionMessage", comment: "Message of no internet connection bannner")
+            let title = "noConnectionTitle".localized
+            let message = "noConnectionMessage".localized
             currentBanner = Banner(title: title, subtitle: message, backgroundColor: UIColor.flatOrange())
         case .timedOut:
-            let title = NSLocalizedString("noConnectionTitle", comment: "Title of no internet connection banner")
-            let message = NSLocalizedString("noConnectionMessage", comment: "Message of no internet connection bannner")
+            let title = "noConnectionTitle".localized
+            let message = "noConnectionMessage".localized
             currentBanner = Banner(title: title, subtitle: message, backgroundColor: UIColor.flatOrange())
         case .unAuthorized where authorizationError:
-            let title = NSLocalizedString("authorizationErrorTitle", comment: "Title of authorization error alert")
-            let message = NSLocalizedString("authorizationErrorMessage", comment: "Message of authorization error alert")
+            let title = "authorizationErrorTitle".localized
+            let message = "authorizationErrorMessage".localized
             currentBanner = Banner(title: title, subtitle: message, backgroundColor: UIColor.flatRed())
         case .generic where hideGenericError != true:
-            let title = NSLocalizedString("genericErrorTitle", comment: "Title of generic error alert")
-            let message = NSLocalizedString("genericErrorMessage", comment: "Message of generic error alert")
+            let title = "genericErrorTitle".localized
+            let message = "genericErrorMessage".localized
             currentBanner = Banner(title: title, subtitle: message, backgroundColor: UIColor.flatGray())
         default:
             return

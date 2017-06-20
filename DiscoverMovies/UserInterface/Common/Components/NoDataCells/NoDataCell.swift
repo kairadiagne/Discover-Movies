@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NoDataCell: UITableViewCell {
+class NoDataCell: UITableViewCell, NibReusabelCell, NoDataMessageConfigurable {
     
     // MARK: - Properties
     
@@ -21,12 +21,6 @@ class NoDataCell: UITableViewCell {
         
         messageLabel.font = UIFont.Body()
         messageLabel.textColor = UIColor.white
-    }
-    
-    // MARK: - Configure
-    
-    func configure(with message: String) {
-        messageLabel.text = message
     }
     
 }

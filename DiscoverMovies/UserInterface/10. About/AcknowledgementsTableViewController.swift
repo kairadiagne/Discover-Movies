@@ -19,10 +19,9 @@ class AcknowledgementsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("aboutAcknowledgements", comment: "")
+        title = "aboutAcknowledgements".localized
         
-        let nib = UINib(nibName: AcknowledgementCell.nibName(), bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: AcknowledgementCell.defaultIdentifier())
+        tableView.register(AcknowledgementCell.nib, forCellReuseIdentifier: AcknowledgementCell.reuseId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +57,7 @@ class AcknowledgementsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AcknowledgementCell.defaultIdentifier(), for: indexPath) as! AcknowledgementCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: AcknowledgementCell.reuseId, for: indexPath) as! AcknowledgementCell
         let acknowledgement = acknowledgements[indexPath.row]
         cell.configure(with: acknowledgement)
         return cell

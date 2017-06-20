@@ -20,6 +20,10 @@ class AboutViewController: BaseViewController {
     
     // MARK: - Types
     
+    fileprivate struct Constants {
+        static let SectionCellIdentifier = "SectionCellIdentifier"
+    }
+    
     fileprivate enum Acknowledgement: Int, Section {
         case themoviedb
         case icons8
@@ -28,11 +32,11 @@ class AboutViewController: BaseViewController {
         var rowTitle: String {
             switch self {
             case .themoviedb:
-                return NSLocalizedString("aboutTheMoviedb", comment: "")
+                return "aboutTheMoviedb".localized
             case .icons8:
-                return NSLocalizedString("aboutIcons8", comment: "")
+                return "aboutIcons8".localized
             case .acknowledgements:
-                return NSLocalizedString("aboutAcknowledgements", comment: "")
+                return "aboutAcknowledgements".localized
             }
         }
     }
@@ -44,9 +48,9 @@ class AboutViewController: BaseViewController {
         var rowTitle: String {
             switch self {
             case .contact:
-                return NSLocalizedString("aboutContact", comment: "")
+                return "aboutContact".localized
             case .rate:
-                return NSLocalizedString("aboutRate", comment: "")
+                return "aboutRate".localized
             }
         }
     }
@@ -64,11 +68,11 @@ class AboutViewController: BaseViewController {
         
         addMenuButton()
         
-        aboutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.defaultIdentifier())
+        aboutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.SectionCellIdentifier)
         
         aboutView.tableView.delegate = self
         aboutView.tableView.dataSource = self
-        title = NSLocalizedString("aboutTitle", comment: "")
+        title = "aboutTitle".localized
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,11 +132,11 @@ extension AboutViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? NSLocalizedString("acknowledgementSectionTitle", comment: "") : NSLocalizedString("feedbackSectionTitle", comment: "")
+        return section == 0 ? "acknowledgementSectionTitle".localized : "feedbackSectionTitle".localized
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 1 ? NSLocalizedString("aboutFooterText", comment: "") : nil
+        return section == 1 ? "aboutFooterText".localized : nil
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -186,7 +190,7 @@ extension AboutViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.defaultIdentifier(), for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SectionCellIdentifier, for: indexPath)
         guard let row = row(for: indexPath) else { return cell }
         cell.textLabel?.text = row.rowTitle
         cell.textLabel?.textColor = UIColor.white

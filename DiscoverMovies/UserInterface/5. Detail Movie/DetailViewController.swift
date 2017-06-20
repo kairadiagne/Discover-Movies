@@ -15,9 +15,9 @@ class DetailViewController: BaseViewController {
     
     @IBOutlet weak var detailView: DetailView!
     
-    fileprivate let similarMoviesDataSource: MovieCollectionDataSource
+    fileprivate let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
 
-    fileprivate let castDataSource = CastDataSource()
+    fileprivate let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
   
     private let movieInfoManager: TMDbMovieInfoManager
     
@@ -34,7 +34,6 @@ class DetailViewController: BaseViewController {
     init(movie: MovieRepresentable, signedIn: Bool) {
         self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
         self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.id)
-        self.similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: NSLocalizedString("noSimilarMoviesText", comment: ""))
         self.movie = movie
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
@@ -51,20 +50,17 @@ class DetailViewController: BaseViewController {
         
         automaticallyAdjustsScrollViewInsets = false
         
-        let movieCellNib = UINib(nibName: MovieCollectionViewCell.nibName(), bundle: nil)
-        let personCellNib = UINib(nibName: PersonCollectionViewCell.nibName(), bundle: nil)
-        let noDataCellNib = UINib(nibName: NoDataCollectionViewCell.nibName(), bundle: nil)
-        detailView.similarMovieCollectionView.register(movieCellNib, forCellWithReuseIdentifier: MovieCollectionViewCell.defaultIdentfier())
-        detailView.similarMovieCollectionView.register(noDataCellNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
-        detailView.castCollectionView.register(personCellNib, forCellWithReuseIdentifier: PersonCollectionViewCell.defaultIdentfier())
-        detailView.castCollectionView.register(noDataCellNib, forCellWithReuseIdentifier: NoDataCollectionViewCell.defaultIdentfier())
+        detailView.similarMovieCollectionView.register(PosterImageCollectionViewCell.nib, forCellWithReuseIdentifier: PosterImageCollectionViewCell.reuseId)
+        detailView.similarMovieCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
+        detailView.castCollectionView.register(PosterImageCollectionViewCell.nib, forCellWithReuseIdentifier: PosterImageCollectionViewCell.reuseId)
+        detailView.castCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
         
         detailView.castCollectionView.dataSource = castDataSource
         detailView.castCollectionView.delegate = self
         
         detailView.similarMovieCollectionView.dataSource = similarMoviesDataSource
         detailView.similarMovieCollectionView.delegate = self
-     
+        
         detailView.scrollView.delegate = self
         
         movieInfoManager.delegate = self
@@ -82,8 +78,8 @@ class DetailViewController: BaseViewController {
         
         navigationController?.navigationBar.isHidden = true
         
-        let loadingSelector = #selector(TopListViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(TopListViewController.dataManagerDidUpdate(notification:))
+        let loadingSelector = #selector(DetailViewController.dataManagerDidStartLoading(notification:))
+        let updateSelector = #selector(DetailViewController.dataManagerDidUpdate(notification:))
         similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         similarMoviesManager.reloadIfNeeded()
@@ -119,6 +115,8 @@ class DetailViewController: BaseViewController {
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        detailView.similarMovieCollectionView.reloadData()
+        detailView.castCollectionView.reloadData()
     }
 
     // MARK: - Actions
@@ -149,7 +147,7 @@ class DetailViewController: BaseViewController {
     }
     
     @IBAction func seeAllButtonClick(_ sender: UIButton) {
-        let title = NSLocalizedString("similarMoviesVCTitle", comment: "")
+        let title = "similarMoviesVCTitle".localized
         let similarMovieListController = GenericViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
         navigationController?.pushViewController(similarMovieListController, animated: true)
     }

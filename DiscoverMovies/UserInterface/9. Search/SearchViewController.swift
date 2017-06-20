@@ -20,7 +20,7 @@ class SearchViewController: BaseViewController {
     
     fileprivate let searchManager = SearchDataManager()
     
-    fileprivate let dataSource = SearchDataSource()
+    fileprivate let dataSource = SearchDataSource(emptyMessage: "noSearchResultsText".localized)
     
     fileprivate var searchQuery = ""
     
@@ -56,9 +56,8 @@ class SearchViewController: BaseViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         definesPresentationContext = true
         
-        let searchCellNib = UINib(nibName: SearchTableViewCell.nibName(), bundle: nil)
-        searchView.tableView.register(searchCellNib, forCellReuseIdentifier: SearchTableViewCell.defaultIdentifier())
-        
+        searchView.tableView.register(SearchTableViewCell.nib, forCellReuseIdentifier: SearchTableViewCell.reuseId)
+        searchView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         searchView.tableView.delegate = self
         searchView.tableView.dataSource = dataSource
         
@@ -68,7 +67,7 @@ class SearchViewController: BaseViewController {
         
         searchManager.failureDelegate = self
         
-        title = NSLocalizedString("searchVCTitle", comment: "")
+        title = "searchVCTitle".localized
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +106,7 @@ class SearchViewController: BaseViewController {
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        searchView.tableView.reloadData()
     }
     
     // MARK: - SWRevealControllerDelegate

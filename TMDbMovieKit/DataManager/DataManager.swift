@@ -57,9 +57,9 @@ public class DataManager<ModelType: DictionarySerializable> {
         params["page"] = page as AnyObject?
         cachedParams = params
         
-        Alamofire.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
-            .validate().responseObject { (response: DataResponse<ModelType>)  in
-                
+        NetworkManager.shared.sessionManager.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
+            .validate().responseObject { (response: DataResponse<ModelType>) in
+        
                 self.stopLoading()
                 
                 switch response.result {

@@ -12,7 +12,7 @@ import SWRevealViewController
 
 class AppCoordinator: NSObject {
     
-    // MARK: - Propperties
+    // MARK: - Properties
     
     private let window: UIWindow
     
@@ -20,7 +20,13 @@ class AppCoordinator: NSObject {
     
     private let sessionManager: TMDbSessionManager
     
-    private let topListProxy: TopListDataManageProxy
+    private let popularListManager: TMDbTopListDataManager
+    
+    private let nowPlayingListManager: TMDbTopListDataManager
+    
+    private let topratedListManager: TMDbTopListDataManager
+    
+    private let upcomingListManager: TMDbTopListDataManager
     
     private let favoritesManager: TMDbAccountListDataManager
     
@@ -41,7 +47,10 @@ class AppCoordinator: NSObject {
         self.rootNavigationController = rootNavController
         self.window.rootViewController = rootNavController
         self.sessionManager = sessionManager
-        self.topListProxy = TopListDataManageProxy()
+        self.popularListManager = TMDbTopListDataManager(list: .popular)
+        self.nowPlayingListManager = TMDbTopListDataManager(list: .nowPlaying)
+        self.topratedListManager = TMDbTopListDataManager(list: .topRated)
+        self.upcomingListManager = TMDbTopListDataManager(list: .upcoming)
         self.favoritesManager = TMDbAccountListDataManager(list: .favorite)
         self.watchListManager = TMDbAccountListDataManager(list: .watchlist)
         super.init()
@@ -51,8 +60,8 @@ class AppCoordinator: NSObject {
     // MARK: - Start
     
     func start() {
-        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy)
-        let navigationController = BaseNavigationController(rootViewController: topListController)
+        let topListVC = TopListViewController(popularListManager: popularListManager, nowPlayingListManager: nowPlayingListManager, topRatedListManager: topratedListManager, upcomingListManager: upcomingListManager, signedIn: signedIn)
+        let navigationController = BaseNavigationController(rootViewController: topListVC)
         let menuViewController = MenuViewController(sessionManager: sessionManager)
         revealVC = SWRevealViewController(rearViewController: menuViewController, frontViewController: navigationController)
         
@@ -82,7 +91,7 @@ class AppCoordinator: NSObject {
     }
     
     fileprivate func showTopListViewController(animated: Bool) {
-        let topListController = TopListViewController(signedIn: signedIn, toplistProxy: topListProxy)
+        let topListController = TopListViewController(popularListManager: popularListManager, nowPlayingListManager: nowPlayingListManager, topRatedListManager: topratedListManager, upcomingListManager: upcomingListManager, signedIn: signedIn)
         let navigationController = BaseNavigationController(rootViewController: topListController)
         revealVC?.pushFrontViewController(navigationController, animated: animated)
     }
@@ -135,7 +144,10 @@ class AppCoordinator: NSObject {
     }
     
     fileprivate func clearCache() {
-        topListProxy.clearCaches()
+        popularListManager.clear()
+        nowPlayingListManager.clear()
+        topratedListManager.clear()
+        upcomingListManager.clear()
         favoritesManager.clear()
         watchListManager.clear()
     }

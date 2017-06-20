@@ -41,20 +41,6 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
     }
     
-    // MARK: - Menu
-    
-    func addMenuButton() {
-        guard let revealViewController = revealViewController() else {
-            return
-        }
-        
-        let menuButton = UIBarButtonItem()
-        menuButton.image = UIImage.menuIcon()
-        menuButton.target = revealViewController
-        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-        navigationItem.leftBarButtonItem = menuButton
-    }
-    
     // MARK: - Navigation 
     
     func showDetailViewController(for movie: MovieRepresentable, signedIn: Bool) {

@@ -38,7 +38,7 @@ class ErrorHandler {
         switch error {
         case .noInternetConnection:
             let title = "noConnectionTitle".localized
-            let message = "noConnectionMessage",
+            let message = "noConnectionMessage".localized
             currentBanner = Banner(title: title, subtitle: message, backgroundColor: UIColor.flatOrange())
         case .timedOut:
             let title = "noConnectionTitle".localized

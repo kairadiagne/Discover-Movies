@@ -72,7 +72,6 @@
 		1179FC711DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */; };
 		118E238C1DE11E1B00324DEF /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118E238B1DE11E1B00324DEF /* MenuItem.swift */; };
 		118E238E1DE1A8A800324DEF /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118E238D1DE1A8A800324DEF /* AppCoordinator.swift */; };
-		118E23901DE237F800324DEF /* TopListDataManageProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118E238F1DE237F800324DEF /* TopListDataManageProxy.swift */; };
 		11924C811D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C801D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift */; };
 		11924C8A1D69D7C400B1022E /* String+ToDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C891D69D7C400B1022E /* String+ToDate.swift */; };
 		11924C8C1D69E33700B1022E /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C8B1D69E33700B1022E /* ProfileImageView.swift */; };
@@ -82,9 +81,10 @@
 		1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */; };
 		119A1F3E1D415B0D00AC61C7 /* CachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* CachedData.swift */; };
 		119DADE11EF8247C0078C6E9 /* NibReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119DADE01EF8247C0078C6E9 /* NibReusableCell.swift */; };
+		11A479011EF87E440067E85F /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479001EF87E440067E85F /* SegmentedViewController.swift */; };
+		11A479031EF87E5F0067E85F /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479021EF87E5F0067E85F /* SegmentedView.swift */; };
+		11A479051EF895880067E85F /* UIViewController+SWRevealController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479041EF895880067E85F /* UIViewController+SWRevealController.swift */; };
 		11A4FDAB1D906C8500CA7F07 /* TopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */; };
-		11A4FDAC1D906C8500CA7F07 /* TopListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A4FDAA1D906C8500CA7F07 /* TopListViewController.xib */; };
-		11A4FDB01D906D0800CA7F07 /* TopListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4FDAF1D906D0800CA7F07 /* TopListView.swift */; };
 		11B350811D848B90001B6A87 /* ListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B350801D848B90001B6A87 /* ListDataManager.swift */; };
 		11B350831D8497D2001B6A87 /* TMDbTopListDataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B350821D8497D2001B6A87 /* TMDbTopListDataManagers.swift */; };
 		11C3CC051DB80B550009D6D7 /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC031DB80B550009D6D7 /* GenericViewController.swift */; };
@@ -279,7 +279,6 @@
 		1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+HideEmptyRows.swift"; sourceTree = "<group>"; };
 		118E238B1DE11E1B00324DEF /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		118E238D1DE1A8A800324DEF /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		118E238F1DE237F800324DEF /* TopListDataManageProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListDataManageProxy.swift; sourceTree = "<group>"; };
 		11924C801D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireDataRequest+DictionaryRepresentable.swift"; sourceTree = "<group>"; };
 		11924C891D69D7C400B1022E /* String+ToDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToDate.swift"; sourceTree = "<group>"; };
 		11924C8B1D69E33700B1022E /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
@@ -289,13 +288,14 @@
 		1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = "DiscoverMovies/UserInterface/5. Detail Movie/DetailViewController.xib"; sourceTree = SOURCE_ROOT; };
 		119A1F3D1D415B0D00AC61C7 /* CachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedData.swift; sourceTree = "<group>"; };
 		119DADE01EF8247C0078C6E9 /* NibReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibReusableCell.swift; sourceTree = "<group>"; };
+		11A479001EF87E440067E85F /* SegmentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
+		11A479021EF87E5F0067E85F /* SegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
+		11A479041EF895880067E85F /* UIViewController+SWRevealController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SWRevealController.swift"; sourceTree = "<group>"; };
 		11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListViewController.swift; sourceTree = "<group>"; };
-		11A4FDAA1D906C8500CA7F07 /* TopListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopListViewController.xib; sourceTree = "<group>"; };
-		11A4FDAF1D906D0800CA7F07 /* TopListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListView.swift; sourceTree = "<group>"; };
 		11B350801D848B90001B6A87 /* ListDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataManager.swift; sourceTree = "<group>"; };
 		11B350821D8497D2001B6A87 /* TMDbTopListDataManagers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopListDataManagers.swift; sourceTree = "<group>"; };
-		11C3CC031DB80B550009D6D7 /* GenericViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
-		11C3CC081DB80B6B0009D6D7 /* GenericView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericView.swift; sourceTree = "<group>"; };
+		11C3CC031DB80B550009D6D7 /* GenericViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericViewController.swift; path = "../12. Genre/GenericViewController.swift"; sourceTree = "<group>"; };
+		11C3CC081DB80B6B0009D6D7 /* GenericView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericView.swift; path = "../12. Genre/GenericView.swift"; sourceTree = "<group>"; };
 		11C5014C1E4F34C90093DE9E /* DiscoverMovies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiscoverMovies.entitlements; sourceTree = "<group>"; };
 		11C5014D1E4F37550093DE9E /* DiscoverMovies-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DiscoverMovies-Bridging-Header.h"; sourceTree = "<group>"; };
 		11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = DiscoverMovies/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -513,6 +513,7 @@
 				11924C891D69D7C400B1022E /* String+ToDate.swift */,
 				11D099F91D907AC500FEDB21 /* UIButton+BackgroundColor.swift */,
 				1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */,
+				11A479041EF895880067E85F /* UIViewController+SWRevealController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -755,21 +756,9 @@
 			isa = PBXGroup;
 			children = (
 				11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */,
-				11A4FDAA1D906C8500CA7F07 /* TopListViewController.xib */,
-				11A4FDAF1D906D0800CA7F07 /* TopListView.swift */,
 			);
 			name = TopList;
 			path = "3. TopList";
-			sourceTree = "<group>";
-		};
-		11C3CC021DB80B130009D6D7 /* Generic */ = {
-			isa = PBXGroup;
-			children = (
-				11C3CC081DB80B6B0009D6D7 /* GenericView.swift */,
-				11C3CC031DB80B550009D6D7 /* GenericViewController.swift */,
-			);
-			name = Generic;
-			path = "12. Genre";
 			sourceTree = "<group>";
 		};
 		11D099FE1D966B2500FEDB21 /* Common */ = {
@@ -785,6 +774,10 @@
 				EADA5AA51CEA664300C2FAE8 /* MovieCollectionDataSource.swift */,
 				113D11351E412EC8006D8096 /* CrossDissolveAnimatedTransitioning.swift */,
 				113D11391E474E77006D8096 /* BaseNavigationController.swift */,
+				11A479021EF87E5F0067E85F /* SegmentedView.swift */,
+				11A479001EF87E440067E85F /* SegmentedViewController.swift */,
+				11C3CC081DB80B6B0009D6D7 /* GenericView.swift */,
+				11C3CC031DB80B550009D6D7 /* GenericViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -807,7 +800,6 @@
 				11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */,
 				11B350801D848B90001B6A87 /* ListDataManager.swift */,
 				11B350821D8497D2001B6A87 /* TMDbTopListDataManagers.swift */,
-				118E238F1DE237F800324DEF /* TopListDataManageProxy.swift */,
 				EA782B7E1CE0C50000DC38AD /* TMDbAccountListDataManagers.swift */,
 				EA6487B51CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift */,
 				11C9856F1DD8F8800044C23B /* TMDbSimilarMoviesDataManager.swift */,
@@ -837,7 +829,6 @@
 				EAD2A8331CDC9EEB0005264B /* Sign in */,
 				11A4FDAD1D906C9E00CA7F07 /* TopList */,
 				EAD2A8301CDC9EAF0005264B /* Detail */,
-				11C3CC021DB80B130009D6D7 /* Generic */,
 				116C2A901E2EAE3800E4C487 /* Person */,
 				EAD2A8321CDC9EDE0005264B /* Review */,
 				EAD2A8311CDC9ECC0005264B /* Video */,
@@ -1127,7 +1118,6 @@
 				11290AED1D981F0700AC4231 /* NoDataCell.xib in Resources */,
 				11027BCF1DAC338D004223F6 /* SearchTableViewCell.xib in Resources */,
 				11290AEF1D98217E00AC4231 /* ReviewViewController.xib in Resources */,
-				11A4FDAC1D906C8500CA7F07 /* TopListViewController.xib in Resources */,
 				116C2A941E2EAE8000E4C487 /* PersonDetailViewController.xib in Resources */,
 				EA870C691D12CE5F009C71D5 /* AccountListTableViewCell.xib in Resources */,
 				EA6487C01CE4E50100452DD0 /* SignInViewController.xib in Resources */,
@@ -1290,6 +1280,7 @@
 				113D113A1E474E77006D8096 /* BaseNavigationController.swift in Sources */,
 				1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */,
 				EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */,
+				11A479031EF87E5F0067E85F /* SegmentedView.swift in Sources */,
 				1167E7701DC64934003400B7 /* AboutView.swift in Sources */,
 				EADA5A811CE9AA2200C2FAE8 /* ReviewDataSource.swift in Sources */,
 				EADA5A961CEA309800C2FAE8 /* MenuViewController.swift in Sources */,
@@ -1301,6 +1292,7 @@
 				11290AF21D98250400AC4231 /* ReviewView.swift in Sources */,
 				11924C8A1D69D7C400B1022E /* String+ToDate.swift in Sources */,
 				111942F21CCB8EB8001CF39B /* Theme.swift in Sources */,
+				11A479051EF895880067E85F /* UIViewController+SWRevealController.swift in Sources */,
 				EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */,
 				EADA5AAA1CEA6B6A00C2FAE8 /* Colors.swift in Sources */,
 				EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */,
@@ -1326,7 +1318,7 @@
 				EA64879F1CE3569700452DD0 /* DetailViewController.swift in Sources */,
 				11DC09AE1DC7EE19008CA93C /* DataContaining.swift in Sources */,
 				113D11361E412EC8006D8096 /* CrossDissolveAnimatedTransitioning.swift in Sources */,
-				11A4FDB01D906D0800CA7F07 /* TopListView.swift in Sources */,
+				11A479011EF87E440067E85F /* SegmentedViewController.swift in Sources */,
 				EAA862061CEDBDE300C76D4D /* FavouriteButton.swift in Sources */,
 				1167E7731DC64F10003400B7 /* DiscoverButton.swift in Sources */,
 				116C2A961E2EAE9600E4C487 /* PersonDetailView.swift in Sources */,
@@ -1371,7 +1363,6 @@
 				119A1F3E1D415B0D00AC61C7 /* CachedData.swift in Sources */,
 				116C2A981E2EB54B00E4C487 /* SessionInfoContaining.swift in Sources */,
 				EAE605C81CEA72C500D904EB /* TMDbSessionInfoStore.swift in Sources */,
-				118E23901DE237F800324DEF /* TopListDataManageProxy.swift in Sources */,
 				111EC4471D436D24007DFA42 /* APIError.swift in Sources */,
 				111EC4491D436D2F007DFA42 /* TMDbLists.swift in Sources */,
 				EADA5A6C1CE8A53700C2FAE8 /* CastMember.swift in Sources */,

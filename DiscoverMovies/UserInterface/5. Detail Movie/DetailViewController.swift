@@ -78,8 +78,8 @@ class DetailViewController: BaseViewController {
         
         navigationController?.navigationBar.isHidden = true
         
-        let loadingSelector = #selector(TopListViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(TopListViewController.dataManagerDidUpdate(notification:))
+        let loadingSelector = #selector(DetailViewController.dataManagerDidStartLoading(notification:))
+        let updateSelector = #selector(DetailViewController.dataManagerDidUpdate(notification:))
         similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         similarMoviesManager.reloadIfNeeded()

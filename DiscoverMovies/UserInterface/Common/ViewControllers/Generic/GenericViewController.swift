@@ -108,6 +108,7 @@ class GenericViewController: BaseViewController {
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         genericView.set(state: .idle)
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        genericView.tableView.reloadData()
     }
 
 }

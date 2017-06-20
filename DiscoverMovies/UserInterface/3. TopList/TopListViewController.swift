@@ -29,10 +29,10 @@ class TopListViewController: SegmentedViewController {
          signedIn: Bool)
     {
         
-        let topListVCs = [GenericViewController(dataManager: popularListManager, titleString: "Popular", signedIn: signedIn),
-                          GenericViewController(dataManager: nowPlayingListManager, titleString: "Now Playing", signedIn: signedIn),
-                          GenericViewController(dataManager: topRatedListManager, titleString: "Top Rated", signedIn: signedIn),
-                          GenericViewController(dataManager: upcomingListManager, titleString: "Upcoming", signedIn: signedIn)]
+        let topListVCs = [GenericViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),
+                          GenericViewController(dataManager: nowPlayingListManager, titleString: "nowPlaying".localized, signedIn: signedIn),
+                          GenericViewController(dataManager: topRatedListManager, titleString: "topRated".localized, signedIn: signedIn),
+                          GenericViewController(dataManager: upcomingListManager, titleString: "upcoming".localized, signedIn: signedIn)]
         super.init(viewControllers: topListVCs, title: "topListVCTitle".localized)
     }
     

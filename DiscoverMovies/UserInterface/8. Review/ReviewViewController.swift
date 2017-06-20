@@ -92,6 +92,8 @@ class ReviewViewController: BaseViewController {
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        reviewView.set(state: .idle)
+        reviewView.tableView.reloadData()
     }
     
 }

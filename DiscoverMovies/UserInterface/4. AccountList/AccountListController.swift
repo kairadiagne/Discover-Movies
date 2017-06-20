@@ -104,6 +104,7 @@ class AccountListController: BaseViewController {
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: true)
         accountListView.set(state: .idle)
+        accountListView.tableView.reloadData()
     }
 
 }

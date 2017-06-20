@@ -106,6 +106,7 @@ class SearchViewController: BaseViewController {
     
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        searchView.tableView.reloadData()
     }
     
     // MARK: - SWRevealControllerDelegate

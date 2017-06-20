@@ -55,7 +55,7 @@ class MenuViewController: UIViewController {
         
         userService.delegate = self
         
-        menuView.tableView.reloadData() // TODO: Can this be removed because it already gets called in view will appear
+        menuView.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

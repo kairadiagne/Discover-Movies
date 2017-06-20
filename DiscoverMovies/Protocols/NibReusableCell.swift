@@ -19,8 +19,6 @@ protocol NibLoadable {
 
 typealias NibReusabelCell = ReusableCell & NibLoadable
 
-// MARK: - Default implementations
-
 /// Default to the **`String` value of the Class name** for both reuseId and nibName for ease of implementation
 extension ReusableCell {
     

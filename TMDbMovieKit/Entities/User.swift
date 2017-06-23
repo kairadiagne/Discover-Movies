@@ -8,16 +8,14 @@
 
 import Foundation
 
-public struct User: DictionarySerializable {
-    
-    // MARK: - Properties
-    
+public struct User {
     public let id: Int
     public let userName: String
-    public private(set) var name: String?
-    public private(set) var profileHash: String?
-    
-    // MARK: - Initialize
+    public fileprivate(set) var name: String?
+    public fileprivate(set) var profileHash: String?
+}
+
+extension User: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int, let userName = dict["username"] as? String else { return nil }
@@ -43,9 +41,8 @@ public struct User: DictionarySerializable {
         gravatarDict["gravatar"] = ["hash": profileHash as AnyObject]
         
         dictionary["avatar"] = gravatarDict as AnyObject
-    
+        
         return dictionary
     }
     
 }
-

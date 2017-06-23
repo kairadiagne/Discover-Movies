@@ -1,0 +1,98 @@
+/* 
+  Localizable.strings
+  DiscoverMovies
+
+  Created by Kaira Diagne on 16/06/16.
+  Copyright © 2016 Kaira Diagne. All rights reserved.
+*/
+
+/* Common */
+backButtonTitle = "Back";
+
+/* Error Handler */
+noConnectionTitle = "No internet connection";
+noConnectionMessage = "Please check your connection and try again later";
+authorizationErrorTitle = "Authorization error";
+authorizationErrorMessage = "This feauture requires you to sign in with your TMDb account";
+genericErrorTitle = "Unexpected error";
+genericErrorMessage = "Oops! something went wrong!";
+
+/* Menu */
+topListMenuItemText = "Browse toplists";
+watchListMenuItemText = "My watchlist";
+favoritesMenuItemText = "My favorite movies";
+signInMenuItemText = "Sign in";
+signOutMenuItemText = "Sign out";
+nameLabelGuest = "Guest";
+searchMenuItemText = "Search";
+aboutmenuItemText = "About";
+
+/* Sign in */
+signInTitle = "Welcome";
+signInDescription = "Sign in with your themoviedb.org account to start browsing movies and keep track of your favorites and watchlist.";
+signInButtonText = "Sign in";
+signInLaterButtonText = "Sign in later";
+signUpInstruction = "Create a new account at: www.themoviedb.org/account/signup";
+
+/* TopList */
+topListVCTitle= "Toplists";
+topListNoDataCellText = "No movies to show";
+cellUnknownYearText = "Unknown";
+popular = "Popular";
+nowPlaying = "Now Playing";
+topRated = "Top Rated";
+upcoming = "Upcoming";
+
+/* Detail */
+directorLabelText = "Director:";
+genreLabelText = "Genre:";
+releaseLabelText = "Released in:";
+ratingLabelText = "Rating:";
+unknownGenreText = "Unknown";
+unknownReleaseText = "Unknown";
+unknownDirectorText = "Unknown";
+noDescriptionText = "Description unavailable";
+noSimilarMoviesText = "Similar movies unavailable";
+noCastmembersText = "Info about cast unavailable";
+seeAllButtonText = "See all";
+
+/* Person Detail */
+bornLabeLPreix = "Born: ";
+diedLabelPrefix = "Died: ";
+biographyTitleLabel = "Bio";
+moviesKnowFor = "Known for";
+homePageButton = "Visit Website";
+emptyMoviesMessage = "No movies available";
+infoUnavailable = "No further info available";
+
+/* SimilarMovies */
+similarMoviesVCTitle = "Similar Movies";
+
+/* Review */
+reviewvcTitle = "Reviews";
+authorLabelPrefixText = "A movie review by";
+noReviewMessage = "No Reviews to show";
+
+/* AccountList */
+noMoviesInListText = "List doesn't contain any movies";
+favoriteVCTitle = "Favorites";
+watchListVCTitle = "Watchlist";
+
+/* Search */
+searchVCTitle = "Search";
+noSearchResultsText = "No search results";
+
+/* About */
+aboutTitle = "About";
+aboutTheMoviedb = "TMDb";
+aboutIcons8 = "Icons by icons8";
+aboutAcknowledgements = "Open-Source Libraries";
+aboutContact = "Contact";
+aboutRate = "Rate DiscoverMovies";
+acknowledgementSectionTitle = "Acknowledgements";
+feedbackSectionTitle = "Feedback";
+aboutFooterText = "\n\n\nThis product uses the TMDb API\nbut is not endorsed or certified by TMDb.";
+
+
+
+

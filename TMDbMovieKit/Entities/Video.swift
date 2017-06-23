@@ -8,16 +8,14 @@
 
 import Foundation
 
-public struct Video: DictionarySerializable {
-    
-    // MARK: - Properties
-    
+public struct Video {
     public let name: String
     public let source: String
     public let size: String
     public let type: String
-    
-    // MARK: - Initialize
+}
+
+extension Video: DictionarySerializable {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let source = dict["source"] as? String,
@@ -44,3 +42,4 @@ public struct Video: DictionarySerializable {
     }
     
 }
+

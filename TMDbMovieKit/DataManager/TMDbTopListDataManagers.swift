@@ -24,11 +24,6 @@ public class TMDbTopListDataManager: ListDataManager<Movie> {
         if data.page == 1 {
             cachedData.data = data
         } else {
-            for item in allItems {
-                if data.items.contains(item) {
-                    print("Duplicate found: \(item)")
-                }
-            }
             cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount , items: data.items)
         }
         

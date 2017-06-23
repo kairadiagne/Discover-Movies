@@ -8,15 +8,13 @@
 
 import Foundation
 
-public struct AccountState: DictionarySerializable {
-    
-    // MARK: - Properties
-    
+public struct AccountState {
     public let favoriteStatus: Bool
     public let watchlistStatus: Bool
-    
-    // MARK: - Initialize
-    
+}
+
+extension AccountState: DictionarySerializable  {
+   
     public init?(dictionary dict: [String : AnyObject]) {
         guard let favoriteStatus = dict["favorite"] as? Bool,
             let watchlistStatus =  dict["watchlist"] as? Bool else {
@@ -30,5 +28,5 @@ public struct AccountState: DictionarySerializable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
+    
 }
-

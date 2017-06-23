@@ -8,13 +8,11 @@
 
 import Foundation
 
-struct RequestToken: DictionarySerializable {
-    
-    // MARK: - Properties
-    
+struct RequestToken {
     let token: String
-    
-    // MARK: - Initialize
+}
+
+extension RequestToken: DictionarySerializable {
     
     init?(dictionary dict: [String : AnyObject]) {
         guard let token = dict["request_token"] as? String else { return nil }
@@ -24,4 +22,5 @@ struct RequestToken: DictionarySerializable {
     func dictionaryRepresentation() -> [String : AnyObject] {
         return ["request_token": token as AnyObject]
     }
+    
 }

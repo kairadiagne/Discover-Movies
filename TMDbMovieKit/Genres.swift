@@ -77,6 +77,3 @@ public enum TMDbGenre: Int {
     
 }
     
-    
-   
-

@@ -23,7 +23,7 @@ class BaseView: UIView {
     
     let refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl(frame: .zero)
-        refreshControl.tintColor = UIColor.white
+        refreshControl.tintColor = .white
         return refreshControl
     }()
     
@@ -34,11 +34,11 @@ class BaseView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.backgroundColor()
+        backgroundColor = .backgroundColor()
         
         activityIndicator = UIActivityIndicatorView(frame: .zero)
         activityIndicator?.activityIndicatorViewStyle = .whiteLarge
-        activityIndicator?.color = UIColor.gray
+        activityIndicator?.color = .gray
         
         addSubview(activityIndicator!)
         

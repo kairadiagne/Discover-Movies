@@ -12,7 +12,7 @@ import SDWebImage
 
 class TopListViewController: SegmentedViewController {
     
-    // MARK; - Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -22,7 +22,7 @@ class SearchTableViewCell: UITableViewCell, NibReusabelCell {
         super.awakeFromNib()
         
         titleLabel.font = UIFont.Body()
-        titleLabel.textColor = UIColor.white
+        titleLabel.textColor = .white
         
         accessoryType = .disclosureIndicator
     }

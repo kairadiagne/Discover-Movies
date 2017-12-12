@@ -24,18 +24,18 @@ class SignInView: BaseView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        titleLabel.textColor = UIColor.white
-        signInDescription.textColor = UIColor.white
-        signupLabel.textColor = UIColor.white
-        orLabel.textColor = UIColor.white
+        titleLabel.textColor = .white
+        signInDescription.textColor = .white
+        signupLabel.textColor = .white
+        orLabel.textColor = .white
     
         titleLabel.font = UIFont.H1()
         signInDescription.font = UIFont.H2()
         signupLabel.font = UIFont.Caption2()
         orLabel.font = UIFont.H2()
     
-        signInButton.tintColor = UIColor.white
-        signInLaterButton.tintColor = UIColor.white
+        signInButton.tintColor = .white
+        signInLaterButton.tintColor = .white
         
         signInButton.titleLabel?.font = UIFont.H3()
         signInLaterButton.titleLabel?.font = UIFont.H3()

@@ -28,7 +28,7 @@ class AccountListTableViewCell: UITableViewCell, NibReusabelCell {
         titleLabel.lineBreakMode = .byWordWrapping
         
         overViewLabel.font = UIFont.Caption2()
-        overViewLabel.textColor = UIColor.white
+        overViewLabel.textColor = .white
     }
     
     // MARK: - Configure

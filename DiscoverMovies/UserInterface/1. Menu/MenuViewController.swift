@@ -71,7 +71,6 @@ class MenuViewController: UIViewController {
             menuView.tableView.reloadData()
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource 
@@ -96,7 +95,6 @@ extension MenuViewController: UITableViewDataSource {
         cell.configure(title: title , image: icon, enable: enable)
         return cell
     }
-
 }
 
 // MARK: - UITableViewDelegate
@@ -107,7 +105,6 @@ extension MenuViewController: UITableViewDelegate {
         delegate?.menu(viewController: self, didclickItemAtIndexPath: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 
 // MARK: - TMDbUserServiceDelegate

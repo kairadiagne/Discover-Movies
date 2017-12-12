@@ -18,7 +18,8 @@ class AccountListView: BaseView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
+        tableView.backgroundColor = .clear
         tableView.hideEmptyRows()
         
         if #available(iOS 10.0, *) {

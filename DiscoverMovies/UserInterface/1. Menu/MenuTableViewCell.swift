@@ -20,10 +20,10 @@ class MenuTableViewCell: UITableViewCell, NibReusabelCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.backgroundColor()
+        backgroundColor = .backgroundColor()
         titleLabel.font = UIFont.H3()
-        titleLabel.textColor = UIColor.white
-        iconImageView.tintColor = UIColor.white
+        titleLabel.textColor = .white
+        iconImageView.tintColor = .white
     }
     
     // MARK: - Configure

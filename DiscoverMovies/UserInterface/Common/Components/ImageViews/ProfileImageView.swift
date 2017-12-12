@@ -27,7 +27,7 @@ class ProfileImageView: UIView {
     }
     
     func commonInit() {
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = .clear
     
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.layer.borderWidth = 2

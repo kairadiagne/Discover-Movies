@@ -21,7 +21,7 @@ class PosterImageCollectionViewCell: UICollectionViewCell, NibReusabelCell {
         super.awakeFromNib()
         
         textLabel.font = UIFont.Caption2()
-        textLabel.textColor = UIColor.white
+        textLabel.textColor = .white
     }
     
     // MARK: - Configure

@@ -53,7 +53,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
     }
     
     private func commonInit() {
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = .clear
     }
 
     // MARK: - Layout

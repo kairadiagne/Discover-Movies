@@ -49,9 +49,9 @@ class PersonDetailView: BaseView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.backgroundColor()
-        scrollView.backgroundColor = UIColor.backgroundColor()
-        contentView.backgroundColor = UIColor.backgroundColor()
+        backgroundColor = .backgroundColor()
+        scrollView.backgroundColor = .backgroundColor()
+        contentView.backgroundColor = .backgroundColor()
         
         nameLabel.font = UIFont.H2()
         nameLabel.textColor = .white
@@ -90,7 +90,7 @@ class PersonDetailView: BaseView {
         disclosureButton.setImage(UIImage(named: "Collapse"), for: .selected)
         disclosureButton.setBackground(color: .clear, forState: .normal)
         disclosureButton.setBackground(color: .clear, forState: .selected)
-        disclosureButton.tintColor = UIColor.white
+        disclosureButton.tintColor = .white
         
         backButton.tintColor = .white
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)

@@ -20,6 +20,6 @@ class NoDataCell: UITableViewCell, NibReusabelCell, NoDataMessageConfigurable {
         super.awakeFromNib()
         
         messageLabel.font = UIFont.Body()
-        messageLabel.textColor = UIColor.white
+        messageLabel.textColor = .white
     }
 }

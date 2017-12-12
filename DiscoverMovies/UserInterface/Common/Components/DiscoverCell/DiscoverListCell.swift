@@ -24,10 +24,10 @@ class DiscoverListCell: UITableViewCell, NibReusabelCell{
         super.awakeFromNib()
         
         titleLabel.font = UIFont.H1()
-        titleLabel.textColor = UIColor.white
+        titleLabel.textColor = .white
         
         yearLabel.font = UIFont.H3()
-        yearLabel.textColor = UIColor.white
+        yearLabel.textColor = .white
         
         titleLabel.layer.shadowColor = UIColor.black.cgColor
         titleLabel.layer.shadowOffset = CGSize(width: 2, height: 2)

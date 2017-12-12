@@ -142,5 +142,4 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
             changeScaleAnimated(1.45, toValue: 1, duration: 0.10, key: Constants.ShrinkAnimationKey)
         }
     }
-
 }

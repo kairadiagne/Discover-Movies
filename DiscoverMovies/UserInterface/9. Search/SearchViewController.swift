@@ -18,13 +18,13 @@ class SearchViewController: BaseViewController {
     
     private var searchController: UISearchController!
     
-    fileprivate let searchManager = SearchDataManager()
+    private let searchManager = SearchDataManager()
     
-    fileprivate let dataSource = SearchDataSource(emptyMessage: "noSearchResultsText".localized)
+    private let dataSource = SearchDataSource(emptyMessage: "noSearchResultsText".localized)
     
-    fileprivate var searchQuery = ""
+    private var searchQuery = ""
     
-    fileprivate let signedIn: Bool
+    private let signedIn: Bool
     
     // MARK: - Initialize
     
@@ -118,7 +118,6 @@ class SearchViewController: BaseViewController {
             searchController.searchBar.resignFirstResponder()
         }
     }
-
 }
 
 // MARK: - UITableViewDelegate
@@ -144,7 +143,6 @@ extension SearchViewController: UITableViewDelegate {
             searchManager.loadMore()
         }
     }
-    
 }
 
 // MARK: - UISearchResultsUpdating
@@ -176,7 +174,6 @@ extension SearchViewController: UISearchResultsUpdating {
             searchManager.search(for: searchQuery)
         }
     }
-    
 }
 
 // MARK: - UISearchControllerDelegate
@@ -186,7 +183,6 @@ extension SearchViewController: UISearchControllerDelegate {
     func presentSearchController(_ searchController: UISearchController) {
         searchController.searchBar.becomeFirstResponder()
     }
-
 }
 
 // MARK: - UISearchBarDelegate 
@@ -196,5 +192,4 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
 }

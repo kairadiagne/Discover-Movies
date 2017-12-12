@@ -61,5 +61,4 @@ class DiscoverListCell: UITableViewCell, NibReusabelCell{
         
         movieImageView.image = nil 
     }
-    
 }

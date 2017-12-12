@@ -48,5 +48,4 @@ class PosterImageCollectionViewCell: UICollectionViewCell, NibReusabelCell {
         
         posterImageView.image = nil
     }
-    
 }

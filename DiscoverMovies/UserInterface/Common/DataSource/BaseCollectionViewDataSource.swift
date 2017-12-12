@@ -47,6 +47,6 @@ class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UICol
     
     /// Designated for subclass
     func configure(_ cell: Cell, atIndexPath indexPath: IndexPath) {
+        fatalError("Designated for subclass")
     }
-    
 }

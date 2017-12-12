@@ -27,7 +27,7 @@ class MenuViewController: UIViewController {
     
     private let sessionManager: TMDbSessionManager
 
-    fileprivate var signedIn: Bool {
+    private var signedIn: Bool {
         return sessionManager.signInStatus == .signedin
     }
     
@@ -122,5 +122,4 @@ extension MenuViewController: TMDbUserServiceDelegate {
     func user(service: TMDbUserService, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error)
     }
-    
 }

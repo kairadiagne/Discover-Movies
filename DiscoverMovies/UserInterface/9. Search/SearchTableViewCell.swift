@@ -33,5 +33,4 @@ class SearchTableViewCell: UITableViewCell, NibReusabelCell {
         titleLabel.text = movie.title
         movieImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
     }
-
 }

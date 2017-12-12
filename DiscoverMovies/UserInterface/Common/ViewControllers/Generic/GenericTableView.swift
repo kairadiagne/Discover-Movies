@@ -26,7 +26,7 @@ class GenericTableView: BaseView {
         commonInit()
     }
     
-    fileprivate func commonInit() {
+    private func commonInit() {
         tableView = UITableView()
         
         addSubview(tableView)

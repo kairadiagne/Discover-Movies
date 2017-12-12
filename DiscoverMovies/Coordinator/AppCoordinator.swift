@@ -16,7 +16,7 @@ class AppCoordinator: NSObject {
     
     private let window: UIWindow
     
-    fileprivate let rootNavigationController: UINavigationController
+    private let rootNavigationController: UINavigationController
     
     private let sessionManager: TMDbSessionManager
     
@@ -32,11 +32,11 @@ class AppCoordinator: NSObject {
     
     private let watchListManager: TMDbAccountListDataManager
     
-    fileprivate var presentedRow = 0
+    private var presentedRow = 0
     
-    fileprivate var revealVC: SWRevealViewController!
+    private var revealVC: SWRevealViewController!
     
-    fileprivate var signedIn: Bool {
+    private var signedIn: Bool {
         return sessionManager.signInStatus == .signedin
     }
     
@@ -81,7 +81,7 @@ class AppCoordinator: NSObject {
     
     // MARK: - ViewControllers
     
-    fileprivate func showSignInViewController() {
+    private func showSignInViewController() {
         let signInViewController = SignInViewController(sessionManager: sessionManager)
         signInViewController.delegate = self
         
@@ -90,31 +90,31 @@ class AppCoordinator: NSObject {
         }
     }
     
-    fileprivate func showTopListViewController(animated: Bool) {
+    private func showTopListViewController(animated: Bool) {
         let topListController = TopListViewController(popularListManager: popularListManager, nowPlayingListManager: nowPlayingListManager, topRatedListManager: topratedListManager, upcomingListManager: upcomingListManager, signedIn: signedIn)
         let navigationController = BaseNavigationController(rootViewController: topListController)
         revealVC?.pushFrontViewController(navigationController, animated: animated)
     }
     
-    fileprivate func showWatchListViewController() {
+    private func showWatchListViewController() {
         let watchListController = AccountListController(list: .watchlist, manager: watchListManager)
         let navigationController = BaseNavigationController(rootViewController: watchListController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
-    fileprivate func showFavoritesViewController() {
+    private func showFavoritesViewController() {
         let favoritesController = AccountListController(list: .favorite, manager: favoritesManager)
         let navigationController = BaseNavigationController(rootViewController: favoritesController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
-    fileprivate func showSearchViewController() {
+    private func showSearchViewController() {
         let searchViewController = SearchViewController(signedIn: signedIn)
         let navigationController = BaseNavigationController(rootViewController: searchViewController)
         revealVC?.pushFrontViewController(navigationController, animated: true)
     }
     
-    fileprivate func showAboutViewController() {
+    private func showAboutViewController() {
         let aboutViewController = AboutViewController()
         let navigationConttoller = BaseNavigationController(rootViewController: aboutViewController)
         revealVC?.pushFrontViewController(navigationConttoller, animated: true)
@@ -122,7 +122,7 @@ class AppCoordinator: NSObject {
     
     // MARK: Toggle sign in
     
-    fileprivate func toggleSignIn() {
+    private func toggleSignIn() {
         switch sessionManager.signInStatus {
         case .signedin:
             signOut()
@@ -143,7 +143,7 @@ class AppCoordinator: NSObject {
         showSignInViewController()
     }
     
-    fileprivate func clearCache() {
+    private func clearCache() {
         popularListManager.clear()
         nowPlayingListManager.clear()
         topratedListManager.clear()
@@ -198,5 +198,4 @@ extension AppCoordinator: MenuViewControllerDelegate {
         
         presentedRow = indexPath.row
     }
-    
 }

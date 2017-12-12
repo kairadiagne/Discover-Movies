@@ -21,5 +21,4 @@ class SearchView: UIView {
         
         backgroundColor = UIColor.backgroundColor()
     }
-    
 }

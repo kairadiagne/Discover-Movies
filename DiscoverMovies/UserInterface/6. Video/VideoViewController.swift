@@ -74,7 +74,6 @@ class VideoViewController: UIViewController {
         videoView.youtubePlayerView.stopVideo()
         delegate?.videoViewControllerDidFinish(self)
     }
-
 }
 
 extension VideoViewController: YTPlayerViewDelegate {
@@ -96,8 +95,4 @@ extension VideoViewController: YTPlayerViewDelegate {
         videoView.startLoading()
         return videoView.loadingOverlayView
     }
-
 }
-
-
-

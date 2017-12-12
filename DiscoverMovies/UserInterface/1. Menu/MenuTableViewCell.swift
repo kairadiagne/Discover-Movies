@@ -34,5 +34,4 @@ class MenuTableViewCell: UITableViewCell, NibReusabelCell {
         titleLabel.isEnabled = enable
         isUserInteractionEnabled = enable
     }
-    
 }

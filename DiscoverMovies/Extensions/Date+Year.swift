@@ -15,5 +15,4 @@ extension Date {
         let components = (calendar as NSCalendar).components([.year], from: self)
         return components.year!
     }
-    
 }

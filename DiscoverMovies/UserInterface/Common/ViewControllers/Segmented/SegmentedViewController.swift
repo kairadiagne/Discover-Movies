@@ -21,14 +21,14 @@ class SegmentedViewController: UIViewController {
         return sv
     }()
     
-    fileprivate lazy var pageViewController: UIPageViewController = {
+    private lazy var pageViewController: UIPageViewController = {
         let pvc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pvc.delegate = self
         pvc.dataSource = self
         return pvc
     }()
     
-    fileprivate let viewControllers: [UIViewController]
+    private let viewControllers: [UIViewController]
     
     // MARK: - Initialize 
     
@@ -59,7 +59,6 @@ class SegmentedViewController: UIViewController {
         pageViewController.setViewControllers([viewControllers.first!], direction: .forward, animated: false, completion: nil)
         segmentedView.set(selectedIndex: 0)
     }
-
 }
 
 // MARK: - SegmentedViewDelegate
@@ -71,7 +70,6 @@ extension SegmentedViewController: SegmentedViewDelegate {
         let vc = viewControllers[toValue]
         pageViewController.setViewControllers([vc], direction: direction, animated: true, completion: nil)
     }
-
 }
 
 // MARK: - UIPageViewControllerDelegate
@@ -87,7 +85,6 @@ extension SegmentedViewController: UIPageViewControllerDelegate {
         let index = viewControllers.index(of: viewController)! + 1
         return index >= 0 && index < viewControllers.count ? viewControllers[index] : nil
     }
-    
 }
 
 // MARK: - UIPageViewControllerDataSource
@@ -104,5 +101,4 @@ extension SegmentedViewController: UIPageViewControllerDataSource {
         let index = viewControllers.index(of: visibleViewController)!
         segmentedView.set(selectedIndex: index)
     }
-    
 }

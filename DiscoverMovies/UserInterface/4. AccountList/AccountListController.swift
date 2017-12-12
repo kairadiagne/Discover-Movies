@@ -14,7 +14,7 @@ class AccountListController: BaseViewController {
     
     // MARK: - Types
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let DefaultRowHeight: CGFloat = 100
     }
     
@@ -22,11 +22,11 @@ class AccountListController: BaseViewController {
 
     @IBOutlet var accountListView: AccountListView!
     
-    fileprivate let dataSource = AccountListDataSource()
+    private let dataSource = AccountListDataSource()
     
     private let accountList: TMDbAccountList
     
-    fileprivate let accountListManager: TMDbAccountListDataManager
+    private let accountListManager: TMDbAccountListDataManager
     
     // MARK: - Initialize
     
@@ -106,7 +106,6 @@ class AccountListController: BaseViewController {
         accountListView.set(state: .idle)
         accountListView.tableView.reloadData()
     }
-
 }
 
 // MARK: - UITableViewDelegate
@@ -134,5 +133,4 @@ extension AccountListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return !dataSource.isEmpty ? UITableViewAutomaticDimension : tableView.bounds.height
     }
-    
 }

@@ -22,5 +22,4 @@ class NoDataCollectionViewCell: UICollectionViewCell, NibReusabelCell, NoDataMes
         messageLabel.font = UIFont.Body()
         messageLabel.textColor = UIColor.white
     }
-
 }

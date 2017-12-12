@@ -42,5 +42,4 @@ class DiscoverButton: UIButton {
         super.layoutSubviews()
         layer.cornerRadius = bounds.height / 2
     }
-
 }

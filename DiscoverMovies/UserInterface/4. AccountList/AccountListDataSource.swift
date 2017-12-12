@@ -20,5 +20,4 @@ class AccountListDataSource: BaseTableViewDataSource<Movie, AccountListTableView
         let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
         cell.configure(movie, imageURL: imageURL)
     }
-    
 }

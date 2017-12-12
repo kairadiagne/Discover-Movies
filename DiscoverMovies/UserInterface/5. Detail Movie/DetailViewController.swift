@@ -15,19 +15,19 @@ class DetailViewController: BaseViewController {
     
     @IBOutlet weak var detailView: DetailView!
     
-    fileprivate let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
+    private let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
 
-    fileprivate let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
+    private let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
   
     private let movieInfoManager: TMDbMovieInfoManager
     
     private let similarMoviesManager: TMDbSimilarMoviesDataManager
     
-    fileprivate var movie: MovieRepresentable
+    private var movie: MovieRepresentable
     
-    fileprivate let signedIn: Bool
+    private let signedIn: Bool
     
-    fileprivate var trailer: Video?
+    private var trailer: Video?
     
     // MARK: - Initialize
     
@@ -95,7 +95,7 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Update UI
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         if let movie = movie as? Movie {
             detailView.configure(forMovie: movie)
         } else if let movieCredit = movie as? MovieCredit {
@@ -148,10 +148,9 @@ class DetailViewController: BaseViewController {
     
     @IBAction func seeAllButtonClick(_ sender: UIButton) {
         let title = "similarMoviesVCTitle".localized
-        let similarMovieListController = GenericViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
+        let similarMovieListController = GenericTableViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
         navigationController?.pushViewController(similarMovieListController, animated: true)
     }
-
 }
 
 // MARK: - UISCrollViewDelegate
@@ -161,7 +160,6 @@ extension DetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         detailView.moveHeaderOnScroll()
     }
-    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -178,7 +176,6 @@ extension DetailViewController: UICollectionViewDelegate {
             navigationController?.pushViewController(personDetailViewController, animated: true)
         }
     }
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -208,7 +205,6 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-    
 }
 
 // MARK: - TMDbMovieInfoManagerDelegate
@@ -233,7 +229,6 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
-    
 }
 
 // MARK: - VideoViewControllerDelegate
@@ -243,5 +238,4 @@ extension DetailViewController: VideoViewControllerDelegate {
     func videoViewControllerDidFinish(_ controller: VideoViewController) {
         dismiss(animated: true, completion: nil)
     }
-    
 }

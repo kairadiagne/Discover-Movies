@@ -35,5 +35,4 @@ class ReviewTableViewCell: UITableViewCell, NibReusabelCell {
         authorLabel?.text = "authorLabelPrefixText".localized + " \(review.author)"
         contentLabel?.text = review.content
     }
-    
 }

@@ -43,5 +43,4 @@ class MenuView: UIView {
             profileImageView.imageView.image = UIImage.placeholderImage()
         }
     }
-    
 }

@@ -25,8 +25,8 @@ public struct Person: PersonRepresentable, Equatable {
     public var deathDay: String?
     public var biography: String?
     public var homepage: URL?
-    public fileprivate(set) var profilePath: String?
-    public fileprivate(set) var movieCredits: [MovieCredit] = []
+    public private(set) var profilePath: String?
+    public private(set) var movieCredits: [MovieCredit] = []
 }
 
 public func ==(lhs: Person, rhs: Person) -> Bool {

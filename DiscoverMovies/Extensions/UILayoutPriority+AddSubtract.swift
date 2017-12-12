@@ -6,4 +6,23 @@
 //  Copyright © 2017 Kaira Diagne. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UILayoutPriority {
+
+    static func + (lhs: UILayoutPriority, rhs: Float) -> UILayoutPriority {
+        return UILayoutPriority(lhs.rawValue + rhs)
+    }
+
+    static func - (lhs: UILayoutPriority, rhs: Float) -> UILayoutPriority {
+        return UILayoutPriority(lhs.rawValue - rhs)
+    }
+
+    static func += (lhs: inout UILayoutPriority, rhs: UILayoutPriority) {
+        lhs = lhs + rhs.rawValue
+    }
+
+    static func -= (lhs: inout UILayoutPriority, rhs: UILayoutPriority) {
+        lhs = lhs - rhs.rawValue
+    }
+}

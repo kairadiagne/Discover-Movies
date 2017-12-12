@@ -25,7 +25,6 @@ extension ReusableCell {
     static var reuseId : String {
         return String(describing: self)
     }
-    
 }
 
 extension NibLoadable where Self: NSObject {
@@ -51,5 +50,4 @@ extension NibLoadable where Self: NSObject {
         
         return nil
     }
-    
 }

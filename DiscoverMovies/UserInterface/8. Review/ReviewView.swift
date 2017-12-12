@@ -29,5 +29,4 @@ class ReviewView: BaseView {
         
         tableView.separatorColor = UIColor.lightGray
     }
-    
 }

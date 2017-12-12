@@ -28,7 +28,6 @@ class PersonCellViewModel: PosterImageCellConfigurable {
         self.imageURL = person.profilePath != nil ? TMDbImageRouter.posterMedium(path: person.profilePath!).url : nil
         self.text = person.name
     }
-    
 }
 
 class MoviePosterCellViewModel: PosterImageCellConfigurable {
@@ -42,5 +41,4 @@ class MoviePosterCellViewModel: PosterImageCellConfigurable {
     init(movie: MovieRepresentable) {
         self.imageURL = TMDbImageRouter.posterMedium(path: movie.posterPath).url
     }
-    
 }

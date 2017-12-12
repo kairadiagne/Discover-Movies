@@ -47,5 +47,4 @@ class ProfileImageView: UIView {
         layer.cornerRadius = bounds.size.width / 2
         imageView.layer.cornerRadius = imageView.bounds.size.width / 2
     }
-
 }

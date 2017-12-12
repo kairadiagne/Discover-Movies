@@ -35,5 +35,4 @@ class VideoView: UIView {
     func stopLoading() {
         loadingIndicator.stopAnimating()
     }
-
 }

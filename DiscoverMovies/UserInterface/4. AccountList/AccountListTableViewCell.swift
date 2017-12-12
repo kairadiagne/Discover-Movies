@@ -46,5 +46,4 @@ class AccountListTableViewCell: UITableViewCell, NibReusabelCell {
         
         posterView.image = nil
     }
-    
 }

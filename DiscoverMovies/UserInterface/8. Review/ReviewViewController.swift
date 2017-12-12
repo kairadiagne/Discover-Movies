@@ -13,7 +13,7 @@ class ReviewViewController: BaseViewController {
     
     // MARK: - Types
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let DefaultRowHeight: CGFloat = 200
     }
     
@@ -23,9 +23,9 @@ class ReviewViewController: BaseViewController {
     
     private let movie: MovieRepresentable
  
-    fileprivate let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
+    private let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
     
-    fileprivate let reviewManager: TMDbReviewManager
+    private let reviewManager: TMDbReviewManager
     
     private let signedIn: Bool
     
@@ -72,7 +72,7 @@ class ReviewViewController: BaseViewController {
         reviewManager.remove(observer: self)
     }
     
-    @objc fileprivate func refresh() {
+    @objc private func refresh() {
         reviewManager.reloadIfNeeded(forceOnline: true)
     }
     
@@ -95,7 +95,6 @@ class ReviewViewController: BaseViewController {
         reviewView.set(state: .idle)
         reviewView.tableView.reloadData()
     }
-    
 }
 
 // MARK: UITableViewDelegate
@@ -123,6 +122,4 @@ extension ReviewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
-    
 }
-

@@ -48,6 +48,5 @@ class SignInView: BaseView {
         signInButton.setTitle("signInButtonText".localized, for: .normal)
         signInLaterButton.setTitle( "signInLaterButtonText".localized, for: .normal)
     }
-
 }
 

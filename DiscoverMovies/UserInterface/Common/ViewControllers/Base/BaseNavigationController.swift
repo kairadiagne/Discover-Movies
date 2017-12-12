@@ -33,5 +33,4 @@ class BaseNavigationController: UINavigationController {
         
         view.backgroundColor = UIColor.backgroundColor()
     }
-    
 }

@@ -13,21 +13,21 @@ class GenericTableViewController: BaseViewController {
     
     // MARK: - Types
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let CellHeight: CGFloat = 250
     }
     
     // MARK: - Properties
     
-    var genericView: GenericView {
-        return view as! GenericView
+    var genericView: GenericTableView {
+        return view as! GenericTableView
     }
 
-    fileprivate let dataManager: ListDataManager<Movie>
+    private let dataManager: ListDataManager<Movie>
     
-    fileprivate let dataSource = MovieListDataSource()
+    private let dataSource = MovieListDataSource()
     
-    fileprivate let signedIn: Bool
+    private let signedIn: Bool
     
     // MARK: - Initialize
     
@@ -45,7 +45,7 @@ class GenericTableViewController: BaseViewController {
     // MARK: - Life cycle
     
     override func loadView() {
-        view = GenericView(frame: UIScreen.main.bounds)
+        view = GenericTableView(frame: UIScreen.main.bounds)
     }
 
     override func viewDidLoad() {

@@ -181,7 +181,6 @@ class PersonDetailView: BaseView {
             homepageButton.isHidden = true
             homePageButtonStackView.isHidden = true
         }
-        
     }
    
     // MARK: - Utils
@@ -195,5 +194,4 @@ class PersonDetailView: BaseView {
             }
         }
     }
-
 }

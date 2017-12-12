@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenericView: BaseView {
+class GenericTableView: BaseView {
 
     // MARK: - Properties
     
@@ -45,5 +45,4 @@ class GenericView: BaseView {
             tableView.addSubview(refreshControl)
         }
     }
-    
 }

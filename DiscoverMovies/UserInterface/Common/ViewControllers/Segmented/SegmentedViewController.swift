@@ -52,10 +52,10 @@ class SegmentedViewController: UIViewController {
         view = segmentedView
         pageViewController.didMove(toParentViewController: self)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
         pageViewController.setViewControllers([viewControllers.first!], direction: .forward, animated: false, completion: nil)
         segmentedView.set(selectedIndex: 0)
     }

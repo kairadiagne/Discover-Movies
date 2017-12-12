@@ -23,7 +23,7 @@ class Theme {
     class func styleNavigationBar() {
         UINavigationBar.appearance().barTintColor = UIColor.backgroundColor()
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().isOpaque = false
     }

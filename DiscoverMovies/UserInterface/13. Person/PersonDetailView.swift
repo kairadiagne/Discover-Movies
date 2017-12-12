@@ -172,8 +172,8 @@ class PersonDetailView: BaseView {
             disclosureButtonStackView.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
             biographyLabelsStackView.isHidden = false
         } else {
-            biographyStackViewTop.priority = 250
-            profileImageBottomToMovieStackViewTop.priority = 750
+            biographyStackViewTop.priority = UILayoutPriority(rawValue: 250)
+            profileImageBottomToMovieStackViewTop.priority = UILayoutPriority(rawValue: 750)
         }
         
         // Homepage

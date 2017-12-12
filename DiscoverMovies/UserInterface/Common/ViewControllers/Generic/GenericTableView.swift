@@ -39,11 +39,6 @@ class GenericTableView: BaseView {
 
         tableView.backgroundColor = .clear
         tableView.hideEmptyRows()
-        
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = refreshControl
-        } else {
-            tableView.addSubview(refreshControl)
-        }
+        tableView.refreshControl = refreshControl
     }
 }

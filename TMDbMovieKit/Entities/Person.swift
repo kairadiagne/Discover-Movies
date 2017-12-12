@@ -55,7 +55,7 @@ extension Person: DictionarySerializable {
         self.profilePath = dict["profile_path"] as? String
         
         if let rawValue = dict["homepage"] as? String {
-            if rawValue.characters.count != 0 {
+            if rawValue.count != 0 {
                 if let homepage = URL(string: rawValue) {
                     self.homepage = homepage
                 }

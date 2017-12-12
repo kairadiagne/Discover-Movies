@@ -125,7 +125,7 @@ class SearchViewController: BaseViewController {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return searchView.tableView.rowHeight
+        return dataSource.isEmpty ? tableView.bounds.height: searchView.tableView.rowHeight
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

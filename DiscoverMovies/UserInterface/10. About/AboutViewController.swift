@@ -107,10 +107,9 @@ class AboutViewController: BaseViewController {
     }
     
     private func openMail() {
-        // TODO: - Change to discovermovies gmail address
         guard let url = URL(string:"mailto:discover.movies.app@gmail.com") else { return }
         guard UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url)
     }
 
 }

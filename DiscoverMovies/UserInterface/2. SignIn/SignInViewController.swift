@@ -30,13 +30,7 @@ class SignInViewController: UIViewController {
     
     private var safariViewController: SFSafariViewController! {
         didSet {
-            if safariViewController != nil {
-                if #available(iOS 10.0, *) {
-                    safariViewController.preferredControlTintColor = .blue
-                } else {
-                    safariViewController.view.tintColor = .blue
-                }
-            }
+            safariViewController?.preferredControlTintColor = .blue
         }
     }
     

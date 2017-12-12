@@ -19,12 +19,7 @@ class ReviewView: BaseView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = refreshControl
-        } else {
-            tableView.addSubview(refreshControl)
-        }
-
+        tableView.refreshControl = refreshControl
         tableView.backgroundColor = .clear
         tableView.separatorColor = .lightGray
         tableView.hideEmptyRows()

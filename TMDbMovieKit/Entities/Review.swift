@@ -44,5 +44,4 @@ extension Review: DictionarySerializable {
         dictionary["url"] = url as AnyObject?
         return dictionary
     }
-    
 }

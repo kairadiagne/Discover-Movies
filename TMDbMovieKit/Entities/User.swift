@@ -44,5 +44,4 @@ extension User: DictionarySerializable {
         
         return dictionary
     }
-    
 }

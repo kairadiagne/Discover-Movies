@@ -22,5 +22,4 @@ extension RequestToken: DictionarySerializable {
     func dictionaryRepresentation() -> [String : AnyObject] {
         return ["request_token": token as AnyObject]
     }
-    
 }

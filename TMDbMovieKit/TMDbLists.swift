@@ -44,5 +44,4 @@ public enum TMDbAccountList: TMDbList {
             return "watchlist"
         }
     }
-    
 }

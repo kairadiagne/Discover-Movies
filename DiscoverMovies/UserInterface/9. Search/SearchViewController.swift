@@ -157,7 +157,7 @@ extension SearchViewController: UISearchResultsUpdating {
             searchQuery = searchFieldtext
             
             // Check if query is empty
-            guard searchQuery.characters.count > 0 else {
+            guard searchQuery.count > 0 else {
                 // Make sure the results screen is cleared
                 if !dataSource.isEmpty {
                     dataSource.clear()
@@ -168,7 +168,7 @@ extension SearchViewController: UISearchResultsUpdating {
             }
 
             // Check if last character added was white space
-            guard searchQuery.characters.last != " " else { return }
+            guard searchQuery.last != " " else { return }
             
             // Perform search
             searchManager.search(for: searchQuery)

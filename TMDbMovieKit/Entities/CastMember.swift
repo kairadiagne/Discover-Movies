@@ -46,5 +46,4 @@ extension CastMember: DictionarySerializable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
-    
 }

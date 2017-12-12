@@ -57,5 +57,4 @@ public enum TMDbImageRouter {
         
         return URL(string: urlString) ?? nil
     }
-
 }

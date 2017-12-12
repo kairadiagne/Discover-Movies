@@ -28,5 +28,4 @@ extension AccountState: DictionarySerializable  {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
-    
 }

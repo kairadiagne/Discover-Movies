@@ -40,6 +40,5 @@ extension Video: DictionarySerializable {
         dictionary["type"] = type as AnyObject?
         return dictionary
     }
-    
 }
 

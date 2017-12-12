@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum APIError: Error {
+@objc public enum APIError: Int, Error {
     case generic
     case noInternetConnection
     case unAuthorized

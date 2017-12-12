@@ -43,5 +43,4 @@ extension CrewMember: DictionarySerializable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
-    
 }

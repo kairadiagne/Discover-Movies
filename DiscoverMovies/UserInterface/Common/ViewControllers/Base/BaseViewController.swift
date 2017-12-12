@@ -30,15 +30,15 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
     // MARK: - DataManagerNotifications
     
-    func dataManagerDidStartLoading(notification: Notification) {
+    @objc func dataManagerDidStartLoading(notification: Notification) {
     }
     
-    func dataManagerDidUpdate(notification: Notification) {
+    @objc func dataManagerDidUpdate(notification: Notification) {
     }
     
     // MARK: - DataManagerFailureDelegate
     
-    func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+    @objc func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
     }
     
     // MARK: - Navigation 

@@ -52,5 +52,4 @@ class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
         aCoder.encode(lastUpdate, forKey: "lastUpdate")
         aCoder.encode(refreshTimeOut, forKey: "timeOut")
     }
-
 }

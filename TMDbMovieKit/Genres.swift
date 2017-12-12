@@ -74,6 +74,5 @@ public enum TMDbGenre: Int {
             return "Western"
         }
     }
-    
 }
     

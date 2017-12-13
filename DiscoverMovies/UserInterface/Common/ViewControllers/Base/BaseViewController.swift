@@ -38,7 +38,7 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
     // MARK: - DataManagerFailureDelegate
     
-    @objc func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+    func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
     }
     
     // MARK: - Navigation 

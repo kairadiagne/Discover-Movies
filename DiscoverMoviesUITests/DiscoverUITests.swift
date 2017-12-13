@@ -9,19 +9,15 @@
 import XCTest
 
 class DiscoverUITests: XCTestCase {
+    
+    var app: XCUIApplication!
 
     override func setUp() {
         super.setUp()
 
-        // Create the app
-        let app = XCUIApplication()
-
-        // Set up snapshot
+        app = XCUIApplication()
         setupSnapshot(app)
-
-        // Stop in case of failure
         continueAfterFailure = false
-        // Launch the application
         app.launch()
     }
 
@@ -30,14 +26,11 @@ class DiscoverUITests: XCTestCase {
     }
 
     // This test requires the app to be logged in
-    // This is not possible in the test because the website has no accesabiliy support
     func testGenerateAppStoreScreenshots() {
         // Go to menu
-        let app = XCUIApplication()
         snapshot("Home-screenshot", waitForLoadingIndicator: true)
 
-        // TODO: - See if you can login
-        app.navigationBars["Toplists"].buttons["Menu"].tap()
+        tapMenuButton()
         snapshot("menu-screenshot")
 
         // Go to watchlist
@@ -46,7 +39,7 @@ class DiscoverUITests: XCTestCase {
         snapshot("watchlist-screenshot", waitForLoadingIndicator: true)
 
         // Go back to menu
-        app.navigationBars["Watchlist"].buttons["Menu"].tap()
+        tapMenuButton()
             
         // Go to favorites
         tablesQuery.staticTexts["My favorite movies"].tap()
@@ -62,5 +55,8 @@ class DiscoverUITests: XCTestCase {
         snapshot("detail-screenshot-2")
     }
 
+    private func tapMenuButton() {
+        app.navigationBars.children(matching: .button).element.tap()
+    }
 }
 

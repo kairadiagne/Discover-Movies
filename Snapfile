@@ -10,16 +10,15 @@ languages([
 ])
 
 # The name of the scheme which contains the UI Tests
-scheme "DiscoverUITests"
+scheme "Discover"
 
 # Where should the resulting screenshots be stored?
 output_directory "./screenshots"
 
-clear_previous_screenshots true 
+clear_previous_screenshots true
 
 # Choose which project/workspace to use
-# project "./Project.xcodeproj"
-# workspace "./Project.xcworkspace"
+workspace "./DiscoverMovies.xcworkspace"
 
 # Arguments to pass to the app on launch. See https://github.com/fastlane/snapshot#launch-arguments
 # launch_arguments(["-favColor red"])

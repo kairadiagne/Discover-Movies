@@ -1700,7 +1700,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "713b8170-4b74-40dd-80d4-ba1884213a35";
+				PROVISIONING_PROFILE = "f7ec8ef3-1c88-44ab-88bc-119b8d12cac5";
 				PROVISIONING_PROFILE_SPECIFIER = DiscoverDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

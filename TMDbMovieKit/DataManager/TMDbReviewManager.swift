@@ -20,5 +20,4 @@ public class TMDbReviewManager: ListDataManager<Review> {
         self.movieID = movieID
         super.init(configuration: ReviewRequestConfiguration(movieID: movieID), refreshTimeOut: 0)
     }
-
 }

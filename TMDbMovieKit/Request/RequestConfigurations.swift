@@ -27,7 +27,6 @@ extension RequestConfiguration {
     var headers: HTTPHeaders? {
         return nil
     }
-    
 }
 
 // MARK: - Authentication Configurations

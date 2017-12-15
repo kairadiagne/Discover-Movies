@@ -43,5 +43,4 @@ public class ListDataManager<ItemType: DictionarySerializable>: DataManager<List
     
         postUpdateNofitication()
     }
-
 }

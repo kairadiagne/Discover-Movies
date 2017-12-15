@@ -18,13 +18,13 @@ class SearchViewController: BaseViewController {
     
     private var searchController: UISearchController!
     
-    fileprivate let searchManager = SearchDataManager()
+    private let searchManager = SearchDataManager()
     
-    fileprivate let dataSource = SearchDataSource(emptyMessage: "noSearchResultsText".localized)
+    private let dataSource = SearchDataSource(emptyMessage: "noSearchResultsText".localized)
     
-    fileprivate var searchQuery = ""
+    private var searchQuery = ""
     
-    fileprivate let signedIn: Bool
+    private let signedIn: Bool
     
     // MARK: - Initialize
     
@@ -118,7 +118,6 @@ class SearchViewController: BaseViewController {
             searchController.searchBar.resignFirstResponder()
         }
     }
-
 }
 
 // MARK: - UITableViewDelegate
@@ -126,7 +125,7 @@ class SearchViewController: BaseViewController {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return searchView.tableView.rowHeight
+        return dataSource.isEmpty ? tableView.bounds.height: searchView.tableView.rowHeight
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -144,7 +143,6 @@ extension SearchViewController: UITableViewDelegate {
             searchManager.loadMore()
         }
     }
-    
 }
 
 // MARK: - UISearchResultsUpdating
@@ -159,7 +157,7 @@ extension SearchViewController: UISearchResultsUpdating {
             searchQuery = searchFieldtext
             
             // Check if query is empty
-            guard searchQuery.characters.count > 0 else {
+            guard searchQuery.count > 0 else {
                 // Make sure the results screen is cleared
                 if !dataSource.isEmpty {
                     dataSource.clear()
@@ -170,13 +168,12 @@ extension SearchViewController: UISearchResultsUpdating {
             }
 
             // Check if last character added was white space
-            guard searchQuery.characters.last != " " else { return }
+            guard searchQuery.last != " " else { return }
             
             // Perform search
             searchManager.search(for: searchQuery)
         }
     }
-    
 }
 
 // MARK: - UISearchControllerDelegate
@@ -186,7 +183,6 @@ extension SearchViewController: UISearchControllerDelegate {
     func presentSearchController(_ searchController: UISearchController) {
         searchController.searchBar.becomeFirstResponder()
     }
-
 }
 
 // MARK: - UISearchBarDelegate 
@@ -196,5 +192,4 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
 }

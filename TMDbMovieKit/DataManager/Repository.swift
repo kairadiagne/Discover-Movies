@@ -27,8 +27,8 @@ struct Repository {
     
     private let path: String
     
-    private let fileAccessQueue = DispatchQueue(label: "com.discoverMovies.app.cache")
-    
+    private let fileAccessQueue = DispatchQueue(label: "com.discoverMovies.app.repository.serial", qos: .background)
+
     // MARK: - Initialize
     
     init(path: String) {
@@ -82,5 +82,4 @@ struct Repository {
     private func file(forIdentifier identifier: String) -> String {
         return "\(path)/data/\(identifier).plist"
     }
-    
 }

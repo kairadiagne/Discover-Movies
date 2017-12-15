@@ -80,5 +80,4 @@ class ErrorHandler {
         currentBanner?.dismissesOnSwipe = true
         currentBanner?.show(duration: 3.0)
     }
-    
 }

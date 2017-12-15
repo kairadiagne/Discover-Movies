@@ -44,9 +44,8 @@ class BaseTableViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UITableVie
             return cell
         }
     }
-    
-    /// Designated for subclass
+
     func configure(_ cell: Cell, atIndexPath indexPath: IndexPath) {
+        fatalError("Designated for subclass")
     }
-    
 }

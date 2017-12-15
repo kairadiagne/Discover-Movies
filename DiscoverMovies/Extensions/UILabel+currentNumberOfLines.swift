@@ -18,5 +18,4 @@ extension UILabel {
         lineCount = rHeight/charSize
         return lineCount
     }
-    
 }

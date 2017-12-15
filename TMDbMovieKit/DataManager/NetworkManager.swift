@@ -20,5 +20,4 @@ final class NetworkManager {
         config.urlCache = nil
         return SessionManager(configuration: config)
     }()
-    
 }

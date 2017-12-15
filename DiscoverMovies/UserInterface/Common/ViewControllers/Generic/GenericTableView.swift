@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenericView: BaseView {
+class GenericTableView: BaseView {
 
     // MARK: - Properties
     
@@ -26,7 +26,7 @@ class GenericView: BaseView {
         commonInit()
     }
     
-    fileprivate func commonInit() {
+    private func commonInit() {
         tableView = UITableView()
         
         addSubview(tableView)
@@ -36,14 +36,9 @@ class GenericView: BaseView {
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
+
+        tableView.backgroundColor = .clear
         tableView.hideEmptyRows()
-        
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = refreshControl
-        } else {
-            tableView.addSubview(refreshControl)
-        }
+        tableView.refreshControl = refreshControl
     }
-    
 }

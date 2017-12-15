@@ -33,5 +33,4 @@ extension UIFont {
     static func Caption2() -> UIFont? {
         return UIFont(name: "Avenir-Book", size: 11.0)
     }
-    
 }

@@ -78,5 +78,4 @@ class FavouriteButton: AnimatedShapeButton {
         let fillRect = CGRect(origin: centerPoint, size: .zero)
         return UIBezierPath(ovalIn: fillRect)
     }
-    
 }

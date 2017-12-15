@@ -24,5 +24,4 @@ extension UIButton {
             setBackgroundImage(image, for: state)
         }
     }
-    
 }

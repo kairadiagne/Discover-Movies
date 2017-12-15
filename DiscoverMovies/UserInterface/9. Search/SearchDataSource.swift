@@ -16,5 +16,4 @@ class SearchDataSource: BaseTableViewDataSource<Movie, SearchTableViewCell> {
         let imageURL = TMDbImageRouter.posterSmall(path: movie.posterPath).url
         cell.configure(withMovie: movie, imageURL: imageURL)
     }
-
 }

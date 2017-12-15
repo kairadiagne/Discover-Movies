@@ -41,5 +41,4 @@ extension MovieCredit: DictionarySerializable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
-    
 }

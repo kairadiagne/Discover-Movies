@@ -49,9 +49,9 @@ class PersonDetailView: BaseView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.backgroundColor()
-        scrollView.backgroundColor = UIColor.backgroundColor()
-        contentView.backgroundColor = UIColor.backgroundColor()
+        backgroundColor = .backgroundColor()
+        scrollView.backgroundColor = .backgroundColor()
+        contentView.backgroundColor = .backgroundColor()
         
         nameLabel.font = UIFont.H2()
         nameLabel.textColor = .white
@@ -90,7 +90,7 @@ class PersonDetailView: BaseView {
         disclosureButton.setImage(UIImage(named: "Collapse"), for: .selected)
         disclosureButton.setBackground(color: .clear, forState: .normal)
         disclosureButton.setBackground(color: .clear, forState: .selected)
-        disclosureButton.tintColor = UIColor.white
+        disclosureButton.tintColor = .white
         
         backButton.tintColor = .white
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -172,8 +172,8 @@ class PersonDetailView: BaseView {
             disclosureButtonStackView.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
             biographyLabelsStackView.isHidden = false
         } else {
-            biographyStackViewTop.priority = 250
-            profileImageBottomToMovieStackViewTop.priority = 750
+            biographyStackViewTop.priority = UILayoutPriority(rawValue: 250)
+            profileImageBottomToMovieStackViewTop.priority = UILayoutPriority(rawValue: 750)
         }
         
         // Homepage
@@ -181,7 +181,6 @@ class PersonDetailView: BaseView {
             homepageButton.isHidden = true
             homePageButtonStackView.isHidden = true
         }
-        
     }
    
     // MARK: - Utils
@@ -195,5 +194,4 @@ class PersonDetailView: BaseView {
             }
         }
     }
-
 }

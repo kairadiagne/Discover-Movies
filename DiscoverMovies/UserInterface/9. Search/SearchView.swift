@@ -19,7 +19,7 @@ class SearchView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.backgroundColor()
+        backgroundColor = .backgroundColor()
+        tableView.backgroundColor = .clear
     }
-    
 }

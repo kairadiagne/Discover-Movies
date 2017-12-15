@@ -85,5 +85,4 @@ extension Movie: DictionarySerializable {
         dictionary["backdrop_path"] = backDropPath as AnyObject?
         return dictionary
     }
-    
 }

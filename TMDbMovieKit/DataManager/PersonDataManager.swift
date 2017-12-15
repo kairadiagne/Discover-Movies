@@ -26,5 +26,4 @@ public class PersonDataManager: DataManager<Person> {
         let configuration = PersonConfig(personID: personID)
         super.init(configuration: configuration , refreshTimeOut: 600)
     }
-    
 }

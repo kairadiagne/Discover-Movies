@@ -30,11 +30,11 @@ class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioni
             containerView.addSubview(detailVC.view)
             
             // Let content of detailVC scrollView slide on screen
-            detailVC.detailView.animationConstraint.priority += 2
+            detailVC.detailView.animationConstraint.priority += UILayoutPriority(2.0)
             detailVC.detailView.layoutIfNeeded()
    
             UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
-                detailVC.detailView.animationConstraint.priority -= 2
+                detailVC.detailView.animationConstraint.priority -= UILayoutPriority(2.0)
                 detailVC.detailView.layoutIfNeeded()
             }, completion: nil)
             
@@ -53,7 +53,4 @@ class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioni
             })
         }
     }
-    
 }
-
-

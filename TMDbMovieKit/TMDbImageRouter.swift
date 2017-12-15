@@ -45,7 +45,7 @@ public enum TMDbImageRouter {
         }
     }
     
-    fileprivate func imageURL(_ path: String, size: String) -> URL? {
+    private func imageURL(_ path: String, size: String) -> URL? {
         var urlString = ""
         
         switch self {
@@ -57,5 +57,4 @@ public enum TMDbImageRouter {
         
         return URL(string: urlString) ?? nil
     }
-
 }

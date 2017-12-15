@@ -18,5 +18,4 @@ extension NoDataMessageConfigurable {
     func configure(with message: String) {
         messageLabel.text = message
     }
-    
 }

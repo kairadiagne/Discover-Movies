@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,18 +23,18 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lWt-8b-0C6">
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Yq-NkN">
+                    <rect key="frame" x="0.0" y="0.0" width="307.5" height="200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aA-Ts-OX2" customClass="ProfileImageView" customModule="DiscoverMovies" customModuleProvider="target">
+                            <rect key="frame" x="100" y="46" width="107.5" height="108"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="8aA-Ts-OX2" secondAttribute="height" multiplier="1:1" id="PsG-Il-zf8"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53f-21-yhg">
+                            <rect key="frame" x="131.5" y="162" width="45" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -46,18 +51,23 @@
                         <constraint firstItem="8aA-Ts-OX2" firstAttribute="centerY" secondItem="nCv-Yq-NkN" secondAttribute="centerY" id="jeB-x1-Lag"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lWt-8b-0C6">
+                    <rect key="frame" x="0.0" y="200" width="375" height="467"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="nCv-Yq-NkN" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.82" id="1Un-jl-dPC"/>
+                <constraint firstItem="lWt-8b-0C6" firstAttribute="bottom" secondItem="2OX-Wz-bbK" secondAttribute="bottom" id="9Gq-LS-dDH"/>
+                <constraint firstItem="lWt-8b-0C6" firstAttribute="leading" secondItem="2OX-Wz-bbK" secondAttribute="leading" id="DZN-Xb-vC9"/>
                 <constraint firstItem="lWt-8b-0C6" firstAttribute="top" secondItem="nCv-Yq-NkN" secondAttribute="bottom" id="FeZ-ZZ-hZG"/>
-                <constraint firstAttribute="bottom" secondItem="lWt-8b-0C6" secondAttribute="bottom" id="Mru-w0-UQQ"/>
-                <constraint firstItem="nCv-Yq-NkN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WWS-FN-UbL"/>
-                <constraint firstAttribute="trailing" secondItem="lWt-8b-0C6" secondAttribute="trailing" id="ghy-cH-oQq"/>
+                <constraint firstItem="lWt-8b-0C6" firstAttribute="trailing" secondItem="2OX-Wz-bbK" secondAttribute="trailing" id="f6g-4u-rku"/>
+                <constraint firstItem="nCv-Yq-NkN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kyq-eY-RsX"/>
                 <constraint firstItem="nCv-Yq-NkN" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="lCU-2t-tZe"/>
-                <constraint firstItem="lWt-8b-0C6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vqJ-yv-th7"/>
-                <constraint firstItem="nCv-Yq-NkN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zyV-pf-kVK"/>
+                <constraint firstItem="nCv-Yq-NkN" firstAttribute="leading" secondItem="2OX-Wz-bbK" secondAttribute="leading" id="yZv-ez-F4e"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="2OX-Wz-bbK"/>
             <connections>
                 <outlet property="nameLabel" destination="53f-21-yhg" id="HRX-PL-w6B"/>
                 <outlet property="profileImageView" destination="8aA-Ts-OX2" id="HrY-5S-Czs"/>

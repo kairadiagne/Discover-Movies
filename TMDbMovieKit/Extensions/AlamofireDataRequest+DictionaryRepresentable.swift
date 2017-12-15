@@ -37,6 +37,5 @@ extension DataRequest {
         
         return response(queue: queue, responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
-
 }
 

@@ -11,8 +11,8 @@ import Foundation
 public struct User {
     public let id: Int
     public let userName: String
-    public fileprivate(set) var name: String?
-    public fileprivate(set) var profileHash: String?
+    public private(set) var name: String?
+    public private(set) var profileHash: String?
 }
 
 extension User: DictionarySerializable {
@@ -44,5 +44,4 @@ extension User: DictionarySerializable {
         
         return dictionary
     }
-    
 }

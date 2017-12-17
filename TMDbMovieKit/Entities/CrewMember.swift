@@ -14,7 +14,7 @@ public struct CrewMember: PersonRepresentable, Equatable {
     public let name: String
     public var department: String
     public let job: String
-    public fileprivate(set) var profilePath: String?
+    public private(set) var profilePath: String?
 }
 
 public func ==(lhs: CrewMember, rhs: CrewMember) -> Bool {
@@ -43,5 +43,4 @@ extension CrewMember: DictionarySerializable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
-    
 }

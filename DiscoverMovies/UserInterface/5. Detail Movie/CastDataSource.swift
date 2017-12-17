@@ -15,5 +15,4 @@ class CastDataSource: BaseCollectionViewDataSource<CastMember, PosterImageCollec
         let viewModel = PersonCellViewModel(person: items[indexPath.row])
         cell.configure(with: viewModel)
     }
-    
 }

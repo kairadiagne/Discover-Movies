@@ -27,7 +27,7 @@ class ProfileImageView: UIView {
     }
     
     func commonInit() {
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = .clear
     
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.layer.borderWidth = 2
@@ -47,5 +47,4 @@ class ProfileImageView: UIView {
         layer.cornerRadius = bounds.size.width / 2
         imageView.layer.cornerRadius = imageView.bounds.size.width / 2
     }
-
 }

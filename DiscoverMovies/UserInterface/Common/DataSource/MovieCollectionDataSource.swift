@@ -15,5 +15,4 @@ class MovieCollectionDataSource: BaseCollectionViewDataSource<MovieRepresentable
         let viewModel = MoviePosterCellViewModel(movie: items[indexPath.row])
         cell.configure(with: viewModel)
     }
-
 }

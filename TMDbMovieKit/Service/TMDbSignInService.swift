@@ -74,7 +74,6 @@ public class TMDbSignInService {
                     } else {
                         self.delegate?.signIn(service: self, didFailWithError: .generic)
                     }
-                    
                 }
         }
     }
@@ -97,12 +96,11 @@ public class TMDbSignInService {
                     
                     self.sessionInfoProvider.saveSessionID(sessionID)
                     self.delegate?.signInServiceDidSignIn(_service: self)
-    
+
                 case .failure(let error):
                     let error = APIErrorHandler.categorize(error: error)
                     self.delegate?.signIn(service: self, didFailWithError: error)
                 }
         }
     }
-
 }

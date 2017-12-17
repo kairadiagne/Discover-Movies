@@ -15,5 +15,4 @@ class ReviewDataSource: BaseTableViewDataSource<Review, ReviewTableViewCell> {
         let review = items[indexPath.row]
         cell.configure(review)
     }
-    
 }

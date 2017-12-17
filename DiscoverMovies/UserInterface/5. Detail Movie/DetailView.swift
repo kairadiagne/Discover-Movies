@@ -54,49 +54,49 @@ class DetailView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.backgroundColor()
-        contentView.backgroundColor = UIColor.backgroundColor()
+        backgroundColor = .backgroundColor()
+        contentView.backgroundColor = .backgroundColor()
         
         titleLabel.font = UIFont.H1()
-        titleLabel.textColor = UIColor.white
+        titleLabel.textColor = .white
         
         descriptionLabel.font = UIFont.Body()
         descriptionLabel.textColor = UIColor.white
         
         directorLabel.font = UIFont.H2()
-        directorLabel.textColor = UIColor.white
+        directorLabel.textColor = .white
         
         directorValueLabel.font = UIFont.Caption()
-        directorValueLabel.textColor = UIColor.white
+        directorValueLabel.textColor = .white
 
         releaseLabel.font = UIFont.H2()
-        releaseLabel.textColor = UIColor.white
+        releaseLabel.textColor = .white
         
         releaseValueLabel.font = UIFont.Caption()
-        releaseValueLabel.textColor = UIColor.white
+        releaseValueLabel.textColor = .white
         
         genreLabel.font = UIFont.H2()
-        genreLabel.textColor = UIColor.white
+        genreLabel.textColor = .white
         
         genreValueLabel.font = UIFont.Caption()
-        genreValueLabel.textColor = UIColor.white
+        genreValueLabel.textColor = .white
         
         ratingLabel.font = UIFont.H2()
-        ratingLabel.textColor = UIColor.white
+        ratingLabel.textColor = .white
         
         ratingValueLabel.font = UIFont.Caption()
-        ratingValueLabel.textColor = UIColor.white
+        ratingValueLabel.textColor = .white
         
         castLabel.font = UIFont.H2()
-        castLabel.textColor = UIColor.white
+        castLabel.textColor = .white
         
         similarLabel.font = UIFont.H2()
-        similarLabel.textColor = UIColor.white
+        similarLabel.textColor = .white
         
-        favouriteControl.lineColor = UIColor.buttonColor()
-        favouriteControl.fillColor = UIColor.buttonColor()
-        watchListControl.lineColor = UIColor.buttonColor()
-        watchListControl.fillColor = UIColor.buttonColor()
+        favouriteControl.lineColor = .buttonColor()
+        favouriteControl.fillColor = .buttonColor()
+        watchListControl.lineColor = .buttonColor()
+        watchListControl.fillColor = .buttonColor()
         
         backButton.tintColor = .white
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -108,7 +108,7 @@ class DetailView: UIView {
         ratingLabel.text =  "ratingLabelText".localized
         
         seeAllButton.setTitle("seeAllButtonText".localized, for: .normal)
-        seeAllButton.setTitleColor(UIColor.white, for: .normal)
+        seeAllButton.setTitleColor(.white, for: .normal)
         seeAllButton.isHidden = true
         
         header.clipsToBounds = true 

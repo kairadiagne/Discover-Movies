@@ -27,5 +27,4 @@ public class TMDbAccountListDataManager: ListDataManager<Movie> {
         self.sessionInfoProvider = sessionInfoProvider
         super.init(configuration: AccountListConfiguration(list: list), refreshTimeOut: 0, cacheIdentifier: list.name)
     }
-
 }

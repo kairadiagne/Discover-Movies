@@ -20,11 +20,11 @@ class AboutViewController: BaseViewController {
     
     // MARK: - Types
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let SectionCellIdentifier = "SectionCellIdentifier"
     }
     
-    fileprivate enum Acknowledgement: Int, Section {
+    private enum Acknowledgement: Int, Section {
         case themoviedb
         case icons8
         case acknowledgements
@@ -41,7 +41,7 @@ class AboutViewController: BaseViewController {
         }
     }
     
-    fileprivate enum Feedback: Int, Section {
+    private enum Feedback: Int, Section {
         case contact
         case rate
         
@@ -95,22 +95,21 @@ class AboutViewController: BaseViewController {
     
     // MARK: - Navigation
     
-    fileprivate func openInSafari(urlString: String) {
+    private func openInSafari(urlString: String) {
         guard let url = URL(string: urlString) else { return }
         safariViewController = SFSafariViewController(url: url)
         present(safariViewController!, animated: true, completion: nil)
     }
     
-    fileprivate func showAcknowledgements() {
+    private func showAcknowledgements() {
         let acknowledgementsViewController = AcknowledgementsTableViewController()
         navigationController?.pushViewController(acknowledgementsViewController, animated: true)
     }
     
-    fileprivate func openMail() {
-        // TODO: - Change to discovermovies gmail address
+    private func openMail() {
         guard let url = URL(string:"mailto:discover.movies.app@gmail.com") else { return }
         guard UIApplication.shared.canOpenURL(url) else { return }
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url)
     }
 
 }
@@ -142,7 +141,7 @@ extension AboutViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let headerView  = view as? UITableViewHeaderFooterView else { return }
         headerView.textLabel?.font = UIFont.H3()
-        headerView.textLabel?.textColor = UIColor.buttonColor()
+        headerView.textLabel?.textColor = .buttonColor()
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
@@ -193,7 +192,7 @@ extension AboutViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SectionCellIdentifier, for: indexPath)
         guard let row = row(for: indexPath) else { return cell }
         cell.textLabel?.text = row.rowTitle
-        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.Body()
         return cell
     }

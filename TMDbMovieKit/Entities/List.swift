@@ -57,5 +57,4 @@ public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
         self.resultCount = resultCount
         self.items.append(contentsOf: items)
     }
-    
 }

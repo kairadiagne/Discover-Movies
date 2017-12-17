@@ -15,5 +15,4 @@ extension String {
         formatter.dateFormat = "yyy-MM-DD"
         return formatter.date(from: self)
     }
-    
 }

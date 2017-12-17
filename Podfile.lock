@@ -1,13 +1,13 @@
 PODS:
-  - Alamofire (4.3.0)
-  - BRYXBanner (0.7.1)
+  - Alamofire (4.6.0)
+  - BRYXBanner (0.8.0)
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
-  - Locksmith (3.0.0)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
+  - Locksmith (4.0.0)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
   - SWRevealViewController (2.3.0)
   - youtube-ios-player-helper (0.1.6)
 
@@ -21,14 +21,14 @@ DEPENDENCIES:
   - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
-  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
-  BRYXBanner: 34eabf9c6c009f187948ca78a4f3bba3767d0f04
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  BRYXBanner: 406c3775789136531da6f3c98058be2f16e08a34
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
-  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
+  Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
 PODFILE CHECKSUM: 84e52a31ddc16aac6058cd073ecec07a99c0fea9
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.2.1

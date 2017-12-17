@@ -58,7 +58,5 @@ enum MenuItem: Int {
         default:
             return true
         }
-        
     }
-    
 }

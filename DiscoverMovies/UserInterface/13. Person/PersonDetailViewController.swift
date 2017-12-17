@@ -18,17 +18,17 @@ class PersonDetailViewController: BaseViewController {
         return view as! PersonDetailView
     }
     
-    fileprivate let person: PersonRepresentable
+    private let person: PersonRepresentable
     
-    fileprivate let personDataManager: PersonDataManager
+    private let personDataManager: PersonDataManager
     
-    fileprivate let dataSource: MovieCollectionDataSource
+    private let dataSource: MovieCollectionDataSource
     
-    fileprivate var safariVC: SFSafariViewController?
+    private var safariVC: SFSafariViewController?
     
     private var biographyExpanded = false
     
-    fileprivate let signedIn: Bool
+    private let signedIn: Bool
     
     // MARK: - Initialize
     
@@ -135,7 +135,6 @@ class PersonDetailViewController: BaseViewController {
         
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
-
 }
 
 // MARK: - UICollectionViewDelegate
@@ -147,7 +146,6 @@ extension PersonDetailViewController: UICollectionViewDelegate {
          let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
          navigationController?.pushViewController(detailViewController, animated: true)
     }
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -169,7 +167,6 @@ extension PersonDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-    
 }
 
 // MARK: - SFSafariViewControllerDelegate
@@ -181,6 +178,5 @@ extension PersonDetailViewController: SFSafariViewControllerDelegate {
             self.safariVC = nil
         }
     }
-    
 }
 

@@ -28,5 +28,4 @@ public class SearchDataManager: ListDataManager<Movie> {
             self.reloadIfNeeded(forceOnline: true, paramaters: ["query": self.searchQuery as AnyObject])
         }
     }
-    
 }

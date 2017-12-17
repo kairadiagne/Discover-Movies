@@ -9,25 +9,25 @@
 import UIKit
 import TMDbMovieKit
 
-class GenericViewController: BaseViewController {
+class GenericTableViewController: BaseViewController {
     
     // MARK: - Types
     
-    fileprivate struct Constants {
+    private struct Constants {
         static let CellHeight: CGFloat = 250
     }
     
     // MARK: - Properties
     
-    var genericView: GenericView {
-        return view as! GenericView
+    var genericView: GenericTableView {
+        return view as! GenericTableView
     }
 
-    fileprivate let dataManager: ListDataManager<Movie>
+    private let dataManager: ListDataManager<Movie>
     
-    fileprivate let dataSource = MovieListDataSource()
+    private let dataSource = MovieListDataSource()
     
-    fileprivate let signedIn: Bool
+    private let signedIn: Bool
     
     // MARK: - Initialize
     
@@ -45,7 +45,7 @@ class GenericViewController: BaseViewController {
     // MARK: - Life cycle
     
     override func loadView() {
-        view = GenericView(frame: UIScreen.main.bounds)
+        view = GenericTableView(frame: UIScreen.main.bounds)
     }
 
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class GenericViewController: BaseViewController {
         genericView.tableView.delegate = self
         genericView.tableView.dataSource = dataSource
         
-        genericView.refreshControl.addTarget(self, action: #selector(GenericViewController.refresh(control:)), for: .valueChanged)
+        genericView.refreshControl.addTarget(self, action: #selector(GenericTableViewController.refresh(control:)), for: .valueChanged)
        
         dataManager.failureDelegate = self
     }
@@ -64,8 +64,8 @@ class GenericViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let loadingSelector = #selector(GenericViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(GenericViewController.dataManagerDidUpdate(notification:))
+        let loadingSelector = #selector(GenericTableViewController.dataManagerDidStartLoading(notification:))
+        let updateSelector = #selector(GenericTableViewController.dataManagerDidUpdate(notification:))
         dataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         loadData()
@@ -110,12 +110,11 @@ class GenericViewController: BaseViewController {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
         genericView.tableView.reloadData()
     }
-
 }
 
 // MARK: - UITableViewDelegate
 
-extension GenericViewController: UITableViewDelegate {
+extension GenericTableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return !dataSource.isEmpty ? Constants.CellHeight : tableView.bounds.height
@@ -134,5 +133,4 @@ extension GenericViewController: UITableViewDelegate {
             dataManager.loadMore()
         }
     }
-
 }

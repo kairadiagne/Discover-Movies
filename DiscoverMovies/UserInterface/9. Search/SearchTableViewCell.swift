@@ -22,7 +22,7 @@ class SearchTableViewCell: UITableViewCell, NibReusabelCell {
         super.awakeFromNib()
         
         titleLabel.font = UIFont.Body()
-        titleLabel.textColor = UIColor.white
+        titleLabel.textColor = .white
         
         accessoryType = .disclosureIndicator
     }
@@ -33,5 +33,4 @@ class SearchTableViewCell: UITableViewCell, NibReusabelCell {
         titleLabel.text = movie.title
         movieImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
     }
-
 }

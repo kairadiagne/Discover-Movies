@@ -90,8 +90,8 @@
 		11A4FDAB1D906C8500CA7F07 /* TopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */; };
 		11B350811D848B90001B6A87 /* ListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B350801D848B90001B6A87 /* ListDataManager.swift */; };
 		11B350831D8497D2001B6A87 /* TMDbTopListDataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B350821D8497D2001B6A87 /* TMDbTopListDataManagers.swift */; };
-		11C3CC051DB80B550009D6D7 /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC031DB80B550009D6D7 /* GenericViewController.swift */; };
-		11C3CC091DB80B6B0009D6D7 /* GenericView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC081DB80B6B0009D6D7 /* GenericView.swift */; };
+		11C3CC051DB80B550009D6D7 /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC031DB80B550009D6D7 /* GenericTableViewController.swift */; };
+		11C3CC091DB80B6B0009D6D7 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC081DB80B6B0009D6D7 /* GenericTableView.swift */; };
 		11C5014F1E4F3B1C0093DE9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */; };
 		11C985701DD8F8800044C23B /* TMDbSimilarMoviesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9856F1DD8F8800044C23B /* TMDbSimilarMoviesDataManager.swift */; };
 		11D099FA1D907AC500FEDB21 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D099F91D907AC500FEDB21 /* UIButton+BackgroundColor.swift */; };
@@ -108,6 +108,8 @@
 		11DDFC331DF2F9FD00F9BBBE /* PersonDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDFC321DF2F9FD00F9BBBE /* PersonDataManager.swift */; };
 		11DECAAB1D04CEC200FFEAB4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */; };
 		11E8F59E1DB3A70900583840 /* DetailAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8F59D1DB3A70900583840 /* DetailAnimatedTransitioning.swift */; };
+		11E923DF1FE0726A001F6530 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 110F02D51E11795C005ADC4A /* Info.plist */; };
+		11E923E11FE07938001F6530 /* UILayoutPriority+AddSubtract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */; };
 		11F7A1691DC6A6F600296259 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7A1681DC6A6F600296259 /* Acknowledgement.swift */; };
 		DD4A7EB7277B6F88230BB3CF /* Pods_Networking_DiscoverMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0FA42D494DE562E1A3C996 /* Pods_Networking_DiscoverMovies.framework */; };
 		EA288F1B1CF4401E004FAEEF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1A1CF4401E004FAEEF /* Movie.swift */; };
@@ -300,8 +302,8 @@
 		11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListViewController.swift; sourceTree = "<group>"; };
 		11B350801D848B90001B6A87 /* ListDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDataManager.swift; sourceTree = "<group>"; };
 		11B350821D8497D2001B6A87 /* TMDbTopListDataManagers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbTopListDataManagers.swift; sourceTree = "<group>"; };
-		11C3CC031DB80B550009D6D7 /* GenericViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
-		11C3CC081DB80B6B0009D6D7 /* GenericView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericView.swift; sourceTree = "<group>"; };
+		11C3CC031DB80B550009D6D7 /* GenericTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTableViewController.swift; sourceTree = "<group>"; };
+		11C3CC081DB80B6B0009D6D7 /* GenericTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
 		11C5014C1E4F34C90093DE9E /* DiscoverMovies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiscoverMovies.entitlements; sourceTree = "<group>"; };
 		11C5014D1E4F37550093DE9E /* DiscoverMovies-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DiscoverMovies-Bridging-Header.h"; sourceTree = "<group>"; };
 		11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = DiscoverMovies/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -318,6 +320,7 @@
 		11DDFC321DF2F9FD00F9BBBE /* PersonDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDataManager.swift; sourceTree = "<group>"; };
 		11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		11E8F59D1DB3A70900583840 /* DetailAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutPriority+AddSubtract.swift"; sourceTree = "<group>"; };
 		11F7A1681DC6A6F600296259 /* Acknowledgement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acknowledgement.swift; sourceTree = "<group>"; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA10D6DCE5A94D7B8AB2B2C /* Pods-Networking-TMDbMovieKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking-TMDbMovieKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Networking-TMDbMovieKit/Pods-Networking-TMDbMovieKit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -421,14 +424,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		110F02D21E11795C005ADC4A /* DiscoverUITests */ = {
+		110F02D21E11795C005ADC4A /* DiscoverMoviesUITests */ = {
 			isa = PBXGroup;
 			children = (
 				110F02DB1E117A79005ADC4A /* SnapshotHelper.swift */,
 				110F02D31E11795C005ADC4A /* DiscoverUITests.swift */,
 				110F02D51E11795C005ADC4A /* Info.plist */,
 			);
-			name = DiscoverUITests;
 			path = DiscoverMoviesUITests;
 			sourceTree = "<group>";
 		};
@@ -439,7 +441,7 @@
 				111942651CCB8CBE001CF39B /* TMDbMovieKit */,
 				111942531CCB8CA0001CF39B /* DiscoverMoviesTests */,
 				111942731CCB8CBF001CF39B /* TMDbMovieKitTests */,
-				110F02D21E11795C005ADC4A /* DiscoverUITests */,
+				110F02D21E11795C005ADC4A /* DiscoverMoviesUITests */,
 				1119423D1CCB8CA0001CF39B /* Products */,
 				2693F16C0142D84C17AC1C7B /* Frameworks */,
 				0525FCD6A748A3A26E04B315 /* Pods */,
@@ -467,7 +469,7 @@
 				EAD2A8211CDC9D000005264B /* UserInterface */,
 				111942881CCB8D6F001CF39B /* Theme */,
 				111942841CCB8D13001CF39B /* Extensions */,
-				1179FC6D1DA1167B00CA1E6D /* Resources */,
+				11E923DE1FE06DD7001F6530 /* Resources */,
 				111942861CCB8D2B001CF39B /* Supporting files */,
 			);
 			path = DiscoverMovies;
@@ -522,6 +524,7 @@
 				11D099F91D907AC500FEDB21 /* UIButton+BackgroundColor.swift */,
 				1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */,
 				11A479041EF895880067E85F /* UIViewController+SWRevealController.swift */,
+				11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -714,15 +717,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		1179FC6D1DA1167B00CA1E6D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */,
-				EA870C6A1D12D642009C71D5 /* Localization */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		11924C841D68D3EF00B1022E /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,8 +803,8 @@
 		11A4790C1EF89E8A0067E85F /* GenericView */ = {
 			isa = PBXGroup;
 			children = (
-				11C3CC081DB80B6B0009D6D7 /* GenericView.swift */,
-				11C3CC031DB80B550009D6D7 /* GenericViewController.swift */,
+				11C3CC081DB80B6B0009D6D7 /* GenericTableView.swift */,
+				11C3CC031DB80B550009D6D7 /* GenericTableViewController.swift */,
 			);
 			name = GenericView;
 			path = Generic;
@@ -857,6 +851,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		11E923DE1FE06DD7001F6530 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA870C6A1D12D642009C71D5 /* Localization */,
+				11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2693F16C0142D84C17AC1C7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -891,8 +894,7 @@
 			children = (
 				EA870C6F1D12D68D009C71D5 /* Localizable.strings */,
 			);
-			name = Localization;
-			path = DiscoverMovies/Localization;
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		EAD2A8211CDC9D000005264B /* UserInterface */ = {
@@ -1109,18 +1111,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Kaira Diagne";
 				TargetAttributes = {
 					110F02D01E11795C005ADC4A = {
 						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1119423B1CCB8CA0001CF39B;
 					};
 					1119423B1CCB8CA0001CF39B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 85J9C69P9Z;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -1133,19 +1136,19 @@
 					};
 					1119424F1CCB8CA0001CF39B = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1119423B1CCB8CA0001CF39B;
 					};
 					111942631CCB8CBE001CF39B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = S4F83VS4FR;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0910;
 					};
 					1119426C1CCB8CBF001CF39B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = S4F83VS4FR;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1119423B1CCB8CA0001CF39B;
 					};
@@ -1178,6 +1181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E923DF1FE0726A001F6530 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1247,7 +1251,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2A6B772BCDC59D427129D593 /* [CP] Embed Pods Frameworks */ = {
@@ -1307,7 +1311,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1327,10 +1331,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA8620F1CEE582800C76D4D /* AnimatedShapeButton.swift in Sources */,
-				11C3CC091DB80B6B0009D6D7 /* GenericView.swift in Sources */,
+				11C3CC091DB80B6B0009D6D7 /* GenericTableView.swift in Sources */,
 				11DC09B11DC7EE21008CA93C /* ErrorHandler.swift in Sources */,
 				118E238E1DE1A8A800324DEF /* AppCoordinator.swift in Sources */,
 				11D8E0C61EF86E890028E531 /* String+Localized.swift in Sources */,
+				11E923E11FE07938001F6530 /* UILayoutPriority+AddSubtract.swift in Sources */,
 				11290AEC1D981F0700AC4231 /* NoDataCell.swift in Sources */,
 				11D8E0C81EF876B90028E531 /* PosterImageCellConfigurable+ViewModels.swift in Sources */,
 				EADA5A711CE8AD9A00C2FAE8 /* PosterImageCollectionViewCell.swift in Sources */,
@@ -1379,7 +1384,7 @@
 				EA6487A21CE356C300452DD0 /* DetailView.swift in Sources */,
 				11027BC91DAC2CB4004223F6 /* NoDataCollectionViewCell.swift in Sources */,
 				111942A11CCB8DD4001CF39B /* UIImage+Defaults.swift in Sources */,
-				11C3CC051DB80B550009D6D7 /* GenericViewController.swift in Sources */,
+				11C3CC051DB80B550009D6D7 /* GenericTableViewController.swift in Sources */,
 				113E92E01E36B76D00C10ADE /* Date+Age.swift in Sources */,
 				1167E7781DC65658003400B7 /* AboutTableViewCell.swift in Sources */,
 				11DC09B01DC7EE1E008CA93C /* BaseView.swift in Sources */,
@@ -1512,18 +1517,20 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = DiscoverUITests/Info.plist;
+				INFOPLIST_FILE = DiscoverMoviesUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMoviesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Discover;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = DiscoverMovies;
 			};
 			name = Debug;
 		};
@@ -1532,16 +1539,18 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = DiscoverUITests/Info.plist;
+				INFOPLIST_FILE = DiscoverMoviesUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMoviesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Discover;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = DiscoverMovies;
 			};
 			name = Release;
 		};
@@ -1554,14 +1563,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1584,7 +1599,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE_SPECIFIER = Automatic;
@@ -1603,14 +1618,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1627,7 +1648,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE_SPECIFIER = Automatic;
 				SDKROOT = iphoneos;
@@ -1649,7 +1670,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = "$(SRCROOT)/DiscoverMovies/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1657,7 +1678,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = DiscoverDevelopment;
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1674,15 +1696,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = "$(SRCROOT)/DiscoverMovies/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "713b8170-4b74-40dd-80d4-ba1884213a35";
+				PROVISIONING_PROFILE = "f7ec8ef3-1c88-44ab-88bc-119b8d12cac5";
 				PROVISIONING_PROFILE_SPECIFIER = DiscoverDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1698,7 +1721,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Debug;
@@ -1714,7 +1738,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.DiscoverMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Release;
@@ -1733,14 +1758,15 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = TMDbMovieKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.TMDbMovieKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1760,13 +1786,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = TMDbMovieKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.TMDbMovieKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1785,7 +1812,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TMDbMovieKitTests/Entities/TMDbMovieKitTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Debug;
@@ -1802,7 +1830,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TMDbMovieKitTests/Entities/TMDbMovieKitTests-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Release;

@@ -138,7 +138,6 @@ public class DataManager<ModelType: DictionarySerializable> {
     func postLoadingNotification() {
         NotificationCenter.default.post(name: Notification.Name.DataManager.didStartLoading, object: self)
     }
-    
 }
 
 // MARK: - DataManagerNotification 
@@ -149,5 +148,4 @@ extension Notification.Name {
         public static let update = Notification.Name("DataManagerDidUpdateNotification")
         public static let didStartLoading = Notification.Name("DataManagerDidStartLoading")
     }
-
 }

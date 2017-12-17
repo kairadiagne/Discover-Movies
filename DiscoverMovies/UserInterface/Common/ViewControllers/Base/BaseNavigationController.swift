@@ -31,7 +31,6 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.backgroundColor()
+        view.backgroundColor = .backgroundColor()
     }
-    
 }

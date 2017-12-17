@@ -81,5 +81,4 @@ public class TMDbSessionManager {
     public func signOut() {
         sessionInfoProvider.clearUserData()
     }
-    
 }

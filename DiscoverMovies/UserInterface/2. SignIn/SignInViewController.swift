@@ -24,19 +24,13 @@ class SignInViewController: UIViewController {
     
     private let sessionManager: TMDbSessionManager
     
-    fileprivate let signInService: TMDbSignInService
+    private let signInService: TMDbSignInService
     
-    fileprivate let userService: TMDbUserService
+    private let userService: TMDbUserService
     
-    fileprivate var safariViewController: SFSafariViewController! {
+    private var safariViewController: SFSafariViewController! {
         didSet {
-            if safariViewController != nil {
-                if #available(iOS 10.0, *) {
-                    safariViewController.preferredControlTintColor = .blue
-                } else {
-                    safariViewController.view.tintColor = .blue
-                }
-            }
+            safariViewController?.preferredControlTintColor = .blue
         }
     }
     
@@ -87,7 +81,6 @@ class SignInViewController: UIViewController {
         sessionManager.activatePublicMode()
         delegate?.signInViewControllerDidFinish()
     }
-    
 }
 
 // MARK: - TMDbSignInDelegate
@@ -113,7 +106,6 @@ extension SignInViewController: TMDbSignInDelegate {
         userService.getUserInfo()
         delegate?.signInViewControllerDidFinish()
     }
-    
 }
 
 // MARK: - SFSafariViewControllerDelegate

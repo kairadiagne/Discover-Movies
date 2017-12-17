@@ -12,7 +12,7 @@ class GradientImageView: UIImageView {
     
     // MARK: - Properties
 
-    fileprivate var gradientLayer = CAGradientLayer()
+    private var gradientLayer = CAGradientLayer()
     
     var colors: [CGColor] = [UIColor.clear.cgColor, UIColor.backgroundColor().cgColor] {
         didSet {
@@ -54,5 +54,4 @@ class GradientImageView: UIImageView {
         // Commit all changes made during the current transaction
         CATransaction.commit()
     }
-    
 }

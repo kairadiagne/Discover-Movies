@@ -12,7 +12,7 @@ import SDWebImage
 
 class TopListViewController: SegmentedViewController {
     
-    // MARK; - Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +29,14 @@ class TopListViewController: SegmentedViewController {
          signedIn: Bool)
     {
         
-        let topListVCs = [GenericViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),
-                          GenericViewController(dataManager: nowPlayingListManager, titleString: "nowPlaying".localized, signedIn: signedIn),
-                          GenericViewController(dataManager: topRatedListManager, titleString: "topRated".localized, signedIn: signedIn),
-                          GenericViewController(dataManager: upcomingListManager, titleString: "upcoming".localized, signedIn: signedIn)]
+        let topListVCs = [GenericTableViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),
+                          GenericTableViewController(dataManager: nowPlayingListManager, titleString: "nowPlaying".localized, signedIn: signedIn),
+                          GenericTableViewController(dataManager: topRatedListManager, titleString: "topRated".localized, signedIn: signedIn),
+                          GenericTableViewController(dataManager: upcomingListManager, titleString: "upcoming".localized, signedIn: signedIn)]
         super.init(viewControllers: topListVCs, title: "topListVCTitle".localized)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

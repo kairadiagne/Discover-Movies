@@ -30,10 +30,10 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
     // MARK: - DataManagerNotifications
     
-    func dataManagerDidStartLoading(notification: Notification) {
+    @objc func dataManagerDidStartLoading(notification: Notification) {
     }
     
-    func dataManagerDidUpdate(notification: Notification) {
+    @objc func dataManagerDidUpdate(notification: Notification) {
     }
     
     // MARK: - DataManagerFailureDelegate
@@ -57,7 +57,6 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
 }
 
 //MARK: - SWRevealViewControllerDelegate
@@ -72,7 +71,6 @@ extension BaseViewController: SWRevealViewControllerDelegate {
             revealController.frontViewController.view.isUserInteractionEnabled = true
         }
     }
-
 }
 
 // MARK: - UINavigationControllerDelegate
@@ -87,5 +85,4 @@ extension BaseViewController: UINavigationControllerDelegate {
             return CrossDissolveAnimatedTransitioning()
         }
     }
-    
 }

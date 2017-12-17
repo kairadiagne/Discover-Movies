@@ -41,5 +41,4 @@ extension DataContaining {
     func clear() {
         items.removeAll()
     }
-    
 }

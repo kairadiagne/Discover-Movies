@@ -23,12 +23,16 @@ class MenuView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = UIColor.backgroundColor()
-        profileView.backgroundColor = UIColor.clear
+        backgroundColor = .backgroundColor()
+        profileView.backgroundColor = .clear
         
-        nameLabel.textColor = UIColor.white
+        nameLabel.textColor = .white
         nameLabel.textAlignment = .center
-        
+
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
+
+        tableView.backgroundColor = .clear
         tableView.hideEmptyRows()
     }
     
@@ -43,5 +47,4 @@ class MenuView: UIView {
             profileImageView.imageView.image = UIImage.placeholderImage()
         }
     }
-    
 }

@@ -12,7 +12,7 @@ class WatchListButton: AnimatedShapeButton {
     
     // MARK: - Properties
 
-    fileprivate let lineWidth: CGFloat = 1
+    private let lineWidth: CGFloat = 1
     
     // MARK: - Generate Shape
     
@@ -41,7 +41,7 @@ class WatchListButton: AnimatedShapeButton {
         fillLayer.mask = maskLayer
     }
     
-    fileprivate func generateWatchListPath(_ width: CGFloat, height: CGFloat) -> UIBezierPath {
+    private func generateWatchListPath(_ width: CGFloat, height: CGFloat) -> UIBezierPath {
         let rectangle = CGRect(x: 0, y: height * 0.1, width: width * 0.85, height: height * 0.15)
         let rectanglePath = UIBezierPath(rect: rectangle)
         
@@ -91,5 +91,4 @@ class WatchListButton: AnimatedShapeButton {
         fillAnimation.isRemovedOnCompletion = false
         fillLayer.add(fillAnimation, forKey: Constants.FillAnimationKey)
     }
-
 }

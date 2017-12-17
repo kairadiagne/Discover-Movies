@@ -13,5 +13,4 @@ extension UITableView {
     func hideEmptyRows() {
         tableFooterView = UIView(frame: .zero)
     }
-    
 }

@@ -23,8 +23,8 @@ class AcknowledgementCell: UITableViewCell, NibReusabelCell {
         titleLabel.font = UIFont.Caption()
         licenseLabel.font = UIFont.Caption2()
         
-        titleLabel.textColor = UIColor.white
-        licenseLabel.textColor = UIColor.white
+        titleLabel.textColor = .white
+        licenseLabel.textColor = .white
     }
     
     // MARK: - Configure

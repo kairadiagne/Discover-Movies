@@ -13,7 +13,7 @@ public struct CastMember: PersonRepresentable, Equatable {
     public let castID: Int
     public let creditID: String
     public let name: String
-    public fileprivate(set) var profilePath: String?
+    public private(set) var profilePath: String?
     public let character: String
     public let order: Int
 }
@@ -46,5 +46,4 @@ extension CastMember: DictionarySerializable {
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return [:]
     }
-    
 }

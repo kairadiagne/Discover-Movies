@@ -22,5 +22,4 @@ extension UIViewController {
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         navigationItem.leftBarButtonItem = menuButton
     }
-    
 }

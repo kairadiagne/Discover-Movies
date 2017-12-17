@@ -78,5 +78,4 @@ class SegmentedView: UIView {
         currentSelectedIndex = index
         segmentedControl.selectedSegmentIndex = currentSelectedIndex
     }
-
 }

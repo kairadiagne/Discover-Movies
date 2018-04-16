@@ -14,12 +14,12 @@ struct RequestToken {
 
 extension RequestToken: DictionarySerializable {
     
-    init?(dictionary dict: [String : AnyObject]) {
+    init?(dictionary dict: [String: AnyObject]) {
         guard let token = dict["request_token"] as? String else { return nil }
         self.token = token
     }
     
-    func dictionaryRepresentation() -> [String : AnyObject] {
+    func dictionaryRepresentation() -> [String: AnyObject] {
         return ["request_token": token as AnyObject]
     }
 }

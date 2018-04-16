@@ -15,7 +15,7 @@ public struct AccountState {
 
 extension AccountState: DictionarySerializable {
    
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let favoriteStatus = dict["favorite"] as? Bool,
             let watchlistStatus =  dict["watchlist"] as? Bool else {
                 return nil
@@ -25,7 +25,7 @@ extension AccountState: DictionarySerializable {
         self.watchlistStatus = watchlistStatus
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         return [:]
     }
 }

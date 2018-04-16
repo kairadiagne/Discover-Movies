@@ -101,7 +101,7 @@ extension SignInViewController: TMDbSignInDelegate {
         ErrorHandler.shared.handle(error: error)
     }
     
-    func signInServiceDidSignIn(_service service: TMDbSignInService) {
+    func signInServiceDidSignIn(_ service: TMDbSignInService) {
         signInView.set(state: .idle)
         userService.getUserInfo()
         delegate?.signInViewControllerDidFinish()

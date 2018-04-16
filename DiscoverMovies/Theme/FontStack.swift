@@ -8,6 +8,9 @@
 
 import UIKit
 
+// TODO: - Cleanup
+//swiftlint:disable identifier_name
+
 extension UIFont {
     
     static func H1() -> UIFont? {

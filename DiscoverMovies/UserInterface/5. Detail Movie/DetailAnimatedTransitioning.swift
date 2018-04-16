@@ -17,7 +17,7 @@ class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioni
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        if let _ = transitionContext.viewController(forKey: .from),
+        if transitionContext.viewController(forKey: .from) != nil,
             let detailVC = transitionContext.viewController(forKey: .to) as? DetailViewController {
             
             let containerView = transitionContext.containerView

@@ -107,7 +107,7 @@ class AboutViewController: BaseViewController {
     }
     
     private func openMail() {
-        guard let url = URL(string:"mailto:discover.movies.app@gmail.com") else { return }
+        guard let url = URL(string: "mailto:discover.movies.app@gmail.com") else { return }
         guard UIApplication.shared.canOpenURL(url) else { return }
         UIApplication.shared.open(url)
     }
@@ -154,6 +154,7 @@ extension AboutViewController: UITableViewDelegate {
         guard let row = row(for: indexPath) else { return }
         
         if row is Acknowledgement {
+            // swiftlint:disable force_cast
             switch row as! Acknowledgement {
             case .themoviedb:
                 openInSafari(urlString: "https://www.themoviedb.org")
@@ -163,6 +164,7 @@ extension AboutViewController: UITableViewDelegate {
                 showAcknowledgements()
             }
         } else if row is Feedback {
+            // swiftlint:disable force_cast
             switch row as! Feedback {
             case .contact:
                 openMail()

@@ -57,6 +57,7 @@ class AcknowledgementsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // swiftlint:disable force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: AcknowledgementCell.reuseId, for: indexPath) as! AcknowledgementCell
         let acknowledgement = acknowledgements[indexPath.row]
         cell.configure(with: acknowledgement)

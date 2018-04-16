@@ -1,4 +1,3 @@
-
 //
 //  ErrorHandler.swift
 //  DiscoverMovies

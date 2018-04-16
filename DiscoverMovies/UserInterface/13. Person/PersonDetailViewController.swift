@@ -179,4 +179,3 @@ extension PersonDetailViewController: SFSafariViewControllerDelegate {
         }
     }
 }
-

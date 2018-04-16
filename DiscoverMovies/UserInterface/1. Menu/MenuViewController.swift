@@ -92,7 +92,7 @@ extension MenuViewController: UITableViewDataSource {
         let icon = menuItem.icon(signedIn: signedIn)
         let enable = menuItem.enable(signedIn: signedIn)
         
-        cell.configure(title: title , image: icon, enable: enable)
+        cell.configure(title: title, image: icon, enable: enable)
         return cell
     }
 }

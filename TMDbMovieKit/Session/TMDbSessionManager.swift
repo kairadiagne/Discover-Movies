@@ -75,7 +75,6 @@ public class TMDbSessionManager {
         UserDefaults.standard.set(false, forKey: "userIsInpublicMode")
     }
     
-    
     // MARK: - Sign Out
     
     public func signOut() {

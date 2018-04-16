@@ -1,4 +1,3 @@
-
 //
 //  DetailTransitioning.swift
 //  DiscoverMovies
@@ -46,7 +45,7 @@ class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioni
             // Fade in detaiLVC playbutton
             UIView.animate(withDuration: 0.2, delay: 0.6, options: [.curveLinear], animations: {
                 detailVC.detailView.playButton.alpha = 1.0
-            }, completion: { completed in
+            }, completion: { _ in
                 // Finish transition
                 let wasCancelled = transitionContext.transitionWasCancelled
                 transitionContext.completeTransition(!wasCancelled)

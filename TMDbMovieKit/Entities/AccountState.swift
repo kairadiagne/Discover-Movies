@@ -13,7 +13,7 @@ public struct AccountState {
     public let watchlistStatus: Bool
 }
 
-extension AccountState: DictionarySerializable  {
+extension AccountState: DictionarySerializable {
    
     public init?(dictionary dict: [String : AnyObject]) {
         guard let favoriteStatus = dict["favorite"] as? Bool,

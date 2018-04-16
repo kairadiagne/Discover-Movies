@@ -43,8 +43,8 @@ class AcknowledgementsTableViewController: UITableViewController {
             }
             
             // Filter out first and last entry related to cocoapods
-            let _ = acknowledgements.removeFirst()
-            let _ = acknowledgements.removeLast()
+            _ = acknowledgements.removeFirst()
+            _ = acknowledgements.removeLast()
             
             tableView.reloadData()
         }

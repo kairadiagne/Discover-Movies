@@ -12,7 +12,6 @@ import TMDbMovieKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
     var window: UIWindow?
     
     private(set) var appCoordinator: AppCoordinator!

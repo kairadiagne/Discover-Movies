@@ -82,6 +82,7 @@ extension MenuViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // swiftlint:disable force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.reuseId) as! MenuTableViewCell
         
         guard let menuItem = delegate?.menu(viewController: self, itemForRowAtIndexPath: indexPath) else {
@@ -92,7 +93,7 @@ extension MenuViewController: UITableViewDataSource {
         let icon = menuItem.icon(signedIn: signedIn)
         let enable = menuItem.enable(signedIn: signedIn)
         
-        cell.configure(title: title , image: icon, enable: enable)
+        cell.configure(title: title, image: icon, enable: enable)
         return cell
     }
 }

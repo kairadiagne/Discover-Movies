@@ -30,7 +30,7 @@ import Alamofire
 public protocol TMDbSignInDelegate: class {
     func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: URL)
     func signIn(service: TMDbSignInService, didFailWithError error: APIError)
-    func signInServiceDidSignIn(_service: TMDbSignInService)
+    func signInServiceDidSignIn(_ service: TMDbSignInService)
 }
 
 public class TMDbSignInService {
@@ -95,7 +95,7 @@ public class TMDbSignInService {
                     guard let sessionID = resultDict["session_id"] as? String else { return }
                     
                     self.sessionInfoProvider.saveSessionID(sessionID)
-                    self.delegate?.signInServiceDidSignIn(_service: self)
+                    self.delegate?.signInServiceDidSignIn(self)
 
                 case .failure(let error):
                     let error = APIErrorHandler.categorize(error: error)

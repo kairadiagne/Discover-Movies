@@ -19,10 +19,10 @@ extension UILayoutPriority {
     }
 
     static func += (lhs: inout UILayoutPriority, rhs: UILayoutPriority) {
-        lhs = lhs + rhs.rawValue
+        lhs += rhs.rawValue
     }
 
     static func -= (lhs: inout UILayoutPriority, rhs: UILayoutPriority) {
-        lhs = lhs - rhs.rawValue
+        lhs -= rhs.rawValue
     }
 }

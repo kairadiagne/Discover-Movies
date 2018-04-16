@@ -30,17 +30,17 @@ public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
         self.items = []
     }
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         self.page = dict["page"] as? Int ?? 0
         self.pageCount = dict["total_pages"] as? Int ?? 0
         self.resultCount = dict["total_results"] as? Int ?? 0
         
         if let itemDicts = dict["results"] as? [[String: AnyObject]] {
-            self.items = itemDicts.flatMap { return ModelType(dictionary: $0) }
+            self.items = itemDicts.compactMap { return ModelType(dictionary: $0) }
         }
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         var dictionary = [String: AnyObject]()
         dictionary["page"] = page as AnyObject?
         dictionary["total_pages"] = pageCount as AnyObject?

@@ -35,10 +35,12 @@ class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isEmpty {
+            // swiftlint:disable force_cast
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCellType.reuseId, for: indexPath) as! NoDataCellType
             cell.configure(with: emptyMessage)
             return cell
         } else {
+            // swiftlint:disable force_cast
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellType.reuseId, for: indexPath) as! CellType
             configure(cell, atIndexPath: indexPath)
             return cell

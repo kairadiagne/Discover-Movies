@@ -35,6 +35,7 @@ class BaseTableViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isEmpty {
+            // swiftlint:disable force_cast
             let cell = tableView.dequeueReusableCell(withIdentifier: NoDataCellType.reuseId, for: indexPath) as! NoDataCellType
             cell.configure(with: emptyMessage)
             return cell

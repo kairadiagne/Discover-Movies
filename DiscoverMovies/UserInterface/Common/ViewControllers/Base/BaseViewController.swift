@@ -59,15 +59,14 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
     }
 }
 
-//MARK: - SWRevealViewControllerDelegate
+// MARK: - SWRevealViewControllerDelegate
 
 extension BaseViewController: SWRevealViewControllerDelegate {
     
     func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
         if position == FrontViewPosition.right {
             revealController.frontViewController.view.isUserInteractionEnabled = false
-        }
-        else {
+        } else {
             revealController.frontViewController.view.isUserInteractionEnabled = true
         }
     }

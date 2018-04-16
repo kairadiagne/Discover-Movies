@@ -22,7 +22,7 @@ public func ==(lhs: MovieCredit, rhs: MovieCredit) -> Bool {
 
 extension MovieCredit: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int,
             let creditId = dict["credit_id"] as? String,
             let title = dict["title"] as? String,

@@ -15,6 +15,7 @@ class PersonDetailViewController: BaseViewController {
     // MARK: - Properties
     
     var personDetailView: PersonDetailView {
+        // swiftlint:disable force_cast
         return view as! PersonDetailView
     }
     
@@ -179,4 +180,3 @@ extension PersonDetailViewController: SFSafariViewControllerDelegate {
         }
     }
 }
-

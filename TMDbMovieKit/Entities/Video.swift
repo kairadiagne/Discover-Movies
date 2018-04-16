@@ -41,4 +41,3 @@ extension Video: DictionarySerializable {
         return dictionary
     }
 }
-

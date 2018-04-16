@@ -14,7 +14,7 @@ protocol ReusableCell {
 
 protocol NibLoadable {
     static var nibName: String {get}
-    static var nib: UINib  {get}
+    static var nib: UINib {get}
 }
 
 typealias NibReusabelCell = ReusableCell & NibLoadable
@@ -22,18 +22,18 @@ typealias NibReusabelCell = ReusableCell & NibLoadable
 /// Default to the **`String` value of the Class name** for both reuseId and nibName for ease of implementation
 extension ReusableCell {
     
-    static var reuseId : String {
+    static var reuseId: String {
         return String(describing: self)
     }
 }
 
 extension NibLoadable where Self: NSObject {
     
-    static var nibName : String {
+    static var nibName: String {
         return String(describing: self)
     }
     
-    static var nib : UINib {
+    static var nib: UINib {
         return UINib(nibName: self.nibName, bundle: Bundle(for: self))
     }
     

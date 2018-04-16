@@ -20,4 +20,3 @@ class MovieListDataSource: BaseTableViewDataSource<Movie, DiscoverListCell> {
         cell.configure(movie, imageURL: TMDbImageRouter.backDropMedium(path: movie.backDropPath).url)
     }
 }
-

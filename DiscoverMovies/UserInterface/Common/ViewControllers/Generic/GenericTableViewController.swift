@@ -20,6 +20,7 @@ class GenericTableViewController: BaseViewController {
     // MARK: - Properties
     
     var genericView: GenericTableView {
+        // swiftlint:disable force_cast
         return view as! GenericTableView
     }
 

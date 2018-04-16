@@ -19,6 +19,7 @@ class VideoViewController: UIViewController {
     // MARK: - Properties
     
     var videoView: VideoView {
+        // swiftlint:disable force_cast
         return view as! VideoView
     }
     

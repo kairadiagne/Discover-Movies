@@ -54,7 +54,7 @@ class WatchListButton: AnimatedShapeButton {
         let plusPath = UIBezierPath()
         plusPath.move(to: CGPoint(x: width * 0.7, y: height * 0.65))
         plusPath.addLine(to: CGPoint(x: plusPath.currentPoint.x, y: height * 0.75))
-        plusPath.addLine(to: CGPoint(x: width * 0.6 , y: plusPath.currentPoint.y))
+        plusPath.addLine(to: CGPoint(x: width * 0.6, y: plusPath.currentPoint.y))
         plusPath.addLine(to: CGPoint(x: plusPath.currentPoint.x, y: height * 0.85))
         plusPath.addLine(to: CGPoint(x: width * 0.7, y: plusPath.currentPoint.y))
         plusPath.addLine(to: CGPoint(x: plusPath.currentPoint.x, y: height * 0.95))

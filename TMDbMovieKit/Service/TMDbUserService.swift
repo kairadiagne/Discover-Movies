@@ -41,7 +41,7 @@ public class TMDbUserService {
         
         let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
         
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params , bodyParams: nil))
+        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
             .validate().responseObject { (response: DataResponse<User>) in
                 
                 switch response.result {

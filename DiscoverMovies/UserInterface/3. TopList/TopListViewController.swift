@@ -20,14 +20,13 @@ class TopListViewController: SegmentedViewController {
         addMenuButton()
     }
     
-    // MARK:  - Initialize
+    // MARK: - Initialize
     
     init(popularListManager: TMDbTopListDataManager,
          nowPlayingListManager: TMDbTopListDataManager,
          topRatedListManager: TMDbTopListDataManager,
          upcomingListManager: TMDbTopListDataManager,
-         signedIn: Bool)
-    {
+         signedIn: Bool) {
         
         let topListVCs = [GenericTableViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),
                           GenericTableViewController(dataManager: nowPlayingListManager, titleString: "nowPlaying".localized, signedIn: signedIn),

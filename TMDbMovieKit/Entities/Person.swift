@@ -35,7 +35,7 @@ public func ==(lhs: Person, rhs: Person) -> Bool {
 
 extension Person: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int,
             let imdbId = dict["imdb_id"] as? String,
             let name = dict["name"] as? String,
@@ -64,11 +64,11 @@ extension Person: DictionarySerializable {
        
         if let movieCredits = dict["movie_credits"] as? [String: AnyObject] {
             if let castDicts = movieCredits["cast"] as? [[String: AnyObject]] {
-                self.movieCredits = castDicts.flatMap { MovieCredit(dictionary: $0) }
+                self.movieCredits = castDicts.compactMap { MovieCredit(dictionary: $0) }
             }
             
             if let crewDicts = movieCredits["crew"] as? [[String: AnyObject]] {
-                let credits = crewDicts.flatMap { MovieCredit(dictionary: $0) }
+                let credits = crewDicts.compactMap { MovieCredit(dictionary: $0) }
                 self.movieCredits.append(contentsOf: credits)
             }
         }

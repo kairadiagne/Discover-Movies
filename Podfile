@@ -19,6 +19,7 @@ end
 target 'TMDbMovieKit' do
     pod 'Alamofire'
     pod 'Locksmith'
+    pod 'RealmSwift'
 end
 
 # Acknowledgement

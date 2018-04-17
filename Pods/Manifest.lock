@@ -5,6 +5,11 @@ PODS:
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
   - Locksmith (4.0.0)
+  - Realm (3.3.2):
+    - Realm/Headers (= 3.3.2)
+  - Realm/Headers (3.3.2)
+  - RealmSwift (3.3.2):
+    - Realm (= 3.3.2)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
@@ -17,6 +22,7 @@ DEPENDENCIES:
   - BRYXBanner
   - ChameleonFramework
   - Locksmith
+  - RealmSwift
   - SDWebImage
   - SwiftLint
   - SWRevealViewController
@@ -28,6 +34,8 @@ SPEC REPOS:
     - BRYXBanner
     - ChameleonFramework
     - Locksmith
+    - Realm
+    - RealmSwift
     - SDWebImage
     - SwiftLint
     - SWRevealViewController
@@ -38,11 +46,13 @@ SPEC CHECKSUMS:
   BRYXBanner: 406c3775789136531da6f3c98058be2f16e08a34
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  Realm: d927fbf66df5532cfafc08afb5f7e53ded37b894
+  RealmSwift: 4e903a494e05d866581d69ad6f7e7b879d446baf
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: ec316a7e505e54cf581a76fabb8e6b1eebb87f2a
+PODFILE CHECKSUM: 09cfa3e2079c50346878637e834cf4237f25fdd6
 
 COCOAPODS: 1.5.0

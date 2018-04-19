@@ -1,5 +1,5 @@
 //
-//  DataStore.swift
+//  RealmRepository.swift
 //  TappApp
 //
 //  Created by Kaira Diagne on 23-01-18.
@@ -9,34 +9,41 @@
 import Foundation
 import RealmSwift
 
-enum DataBaseError: Error {
+enum RepositoryError: Error {
     case error(Error)
     case generic
 }
 
-protocol RealmDataBaseProtocol {
-    typealias Completion = (DataBaseError?) -> Void
-    var mainRealm: Realm { get }
-    var writeQueue: DispatchQueue { get }
-    func writeAsync<T: ThreadConfined>(obj: T, writeBlock: @escaping ((Realm, T)) -> Void, completion: Completion?)
-    func addOrUpdate(object: Object, refresh: Bool, completion: Completion?)
-    func delete<T: Object>(object: T, refresh: Bool, completion: Completion?)
+typealias Completion = (RepositoryError?) -> Void
+
+protocol RealmReading {
+    func getObject<T: Object>(primaryKey: String) -> T?
+    func getObjects<T: Object>() -> Results<T>
+    func getObjects<T: Object>(filter: NSPredicate, sortedBy keyPath: String, ascending: Bool) -> Results<T>
 }
 
-final class DataBase: RealmDataBaseProtocol {
+protocol RealmWriting {
+    func createOrUpdateObject(_ object: Object, completion: Completion?)
+    func createOrUpdateObjects<T: Object>(_ objects: [T], completion: Completion?)
+    func delete<T: Object>(object: T, completion: Completion?)
+}
+
+typealias RealmRepositoryType = RealmReading & RealmWriting
+
+final class RealmRepository: RealmRepositoryType {
 
     // MARK: - Properties
 
-    static let shared = DataBase()
+    static let shared = RealmRepository()
 
     private(set) var writeQueue = DispatchQueue(label: "nl.tappapp.realm.write", attributes: [])
 
     // swiftlint:disable:next force_try
     private(set) var mainRealm = try! Realm()
 
-    // MARK: - Generic
+    // MARK: - Write
 
-    func writeAsync<T: ThreadConfined>(obj: T,
+    private func writeAsync<T: ThreadConfined>(obj: T,
                                        writeBlock: @escaping ((Realm, T)) -> Void,
                                        completion: Completion?) {
 
@@ -45,7 +52,7 @@ final class DataBase: RealmDataBaseProtocol {
         if obj.realm != nil {
             wrappedObj = ThreadSafeReference(to: obj)
         }
-
+        
         writeQueue.async {
             autoreleasepool {
                 do {
@@ -74,40 +81,49 @@ final class DataBase: RealmDataBaseProtocol {
             }
         }
     }
-
-    // MARK: - Add
-
-    func addOrUpdate(object: Object,
-                     refresh: Bool,
-                     completion: Completion?) {
-
+    
+    // MARK: - RealmReading
+    
+    func getObject<T: Object>(primaryKey: String) -> T? {
+        return mainRealm.object(ofType: T.self, forPrimaryKey: primaryKey)
+    }
+    
+    func getObjects<T: Object>() -> Results<T> {
+        return mainRealm.objects(T.self)
+    }
+    
+    func getObjects<T: Object>(filter predicate: NSPredicate, sortedBy keyPath: String, ascending: Bool) -> Results<T> {
+        return mainRealm.objects(T.self).filter(predicate).sorted(byKeyPath: keyPath, ascending: ascending)
+    }
+    
+    // MARK: - RealmWriting
+    
+    func createOrUpdateObject(_ object: Object, completion: Completion?) {
         writeAsync(obj: object, writeBlock: { realm, object in
             realm.add(object, update: true)
-
+            
         }, completion: { error in
-            if refresh {
-                self.mainRealm.refresh()
-            }
             completion?(error)
         })
     }
     
-    // TODO: - addOrUpdateObjects
-
-    // MARK: - Delete
-
-    func delete<T: Object>(object: T,
-                           refresh: Bool,
-                           completion: Completion?) {
-
+    func createOrUpdateObjects<T: Object>(_ objects: [T], completion: Completion?) {
+        let list = RealmSwift.List<T>()
+        list.append(objectsIn: objects)
+    
+        writeAsync(obj: list, writeBlock: { realm, objects in
+            realm.add(objects, update: true)
+            
+        }, completion: { error in
+            completion?(error)
+        })
+    }
+    
+    func delete<T: Object>(object: T, completion: Completion?) {
         writeAsync(obj: object, writeBlock: { realm, object  in
             realm.delete(object)
 
         }, completion: { error in
-            if refresh {
-                self.mainRealm.refresh()
-            }
-
             completion?(error)
         })
     }

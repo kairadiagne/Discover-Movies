@@ -9,7 +9,12 @@
 import Foundation
 import Alamofire
 
-class APIClient {
+protocol APIClientProtocol {
+    func get<T: Codable>(path: String, paramaters: [String: Any]?, body: [String: String]?, completion: @escaping (T) ->())
+    func post(path: String, body: [String: String], completion: (Bool, Error) -> Void)
+}
+
+class APIClient: APIClientProtocol {
 
     // MARK: - Properties
 
@@ -23,7 +28,7 @@ class APIClient {
 
     // MARK: - Get
 
-    func get<T: Codable>(path: String, paramaters: [String: Any]?, body: [String: Any]?, completion: @escaping (T) ->() ) {
+    func get<T: Codable>(path: String, paramaters: [String: Any]?, body: [String: String]?, completion: @escaping (T) ->()) {
         let request = APIRequest.tmdbAPI(method: .get, path: path, paramaters: paramaters, body: body)
 
         sessionManager.request(request).validate().responseJSON { jsonResponse in
@@ -32,4 +37,12 @@ class APIClient {
     }
 
     // MARK: - Post
+    
+    func post(path: String, body: [String : String], completion: (Bool, Error) -> Void) {
+        let endpoint = APIRequest.tmdbAPI(method: .post, path: path, paramaters: nil, body: body)
+        
+        sessionManager.request(endpoint).validate().responseJSON { jsopnResponse in
+            print(jsopnResponse)
+        }
+    }
 }

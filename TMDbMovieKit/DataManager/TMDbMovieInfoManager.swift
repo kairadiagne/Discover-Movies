@@ -38,6 +38,8 @@ public class TMDbMovieInfoManager {
     
     // MARK: - API Calls
     
+    // IF not possible in one request with append_to_respone use a dispatch group
+    
     public func loadAdditionalInfo() {
         let configuration = MovieDetailConfiguration(movieID: movieID)
         

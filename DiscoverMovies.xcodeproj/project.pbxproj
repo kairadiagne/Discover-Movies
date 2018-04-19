@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09E732177BDE09AC0820CAA7 /* Pods_Networking_TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA2A94B2E0365953BB8018C /* Pods_Networking_TMDbMovieKit.framework */; };
 		09FB1BBEA766C71DD2EFDFEE /* Pods_DiscoverMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34BF40F445430313F4B7461F /* Pods_DiscoverMovies.framework */; };
 		11027BC91DAC2CB4004223F6 /* NoDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11027BC71DAC2CB4004223F6 /* NoDataCollectionViewCell.swift */; };
 		11027BCA1DAC2CB4004223F6 /* NoDataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11027BC81DAC2CB4004223F6 /* NoDataCollectionViewCell.xib */; };
@@ -55,7 +54,11 @@
 		114471701E167A3000A0C6DD /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1144716F1E167A3000A0C6DD /* VideoViewController.xib */; };
 		114471741E167A5800A0C6DD /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114471731E167A5800A0C6DD /* VideoView.swift */; };
 		114471781E16D92200A0C6DD /* AcknowledgementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114471771E16D92200A0C6DD /* AcknowledgementsTableViewController.swift */; };
-		115C86E220855595000E086E /* MovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C86E120855595000E086E /* MovieController.swift */; };
+		115C86E220855595000E086E /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115C86E120855595000E086E /* ListController.swift */; };
+		1166EECE2085D13B0066B7D7 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166EECD2085D13B0066B7D7 /* RealmRepository.swift */; };
+		1166EEDC208657310066B7D7 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166EEDB208657310066B7D7 /* CacheManager.swift */; };
+		1166EEDE20868B1F0066B7D7 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166EEDD20868B1F0066B7D7 /* MovieListController.swift */; };
+		1166EEE020868B9A0066B7D7 /* ObjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166EEDF20868B9A0066B7D7 /* ObjectController.swift */; };
 		1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76A1DC648E6003400B7 /* AboutViewController.swift */; };
 		1167E76D1DC648E6003400B7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1167E76B1DC648E6003400B7 /* AboutViewController.xib */; };
 		1167E7701DC64934003400B7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76F1DC64934003400B7 /* AboutView.swift */; };
@@ -116,7 +119,6 @@
 		11E923E11FE07938001F6530 /* UILayoutPriority+AddSubtract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */; };
 		11F7A1691DC6A6F600296259 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7A1681DC6A6F600296259 /* Acknowledgement.swift */; };
 		CE1FC293EB2AB3629C08AD4F /* Pods_TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B517A7EF77BB9F5AA2AB73 /* Pods_TMDbMovieKit.framework */; };
-		DD4A7EB7277B6F88230BB3CF /* Pods_Networking_DiscoverMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0FA42D494DE562E1A3C996 /* Pods_Networking_DiscoverMovies.framework */; };
 		EA288F1B1CF4401E004FAEEF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1A1CF4401E004FAEEF /* Movie.swift */; };
 		EA288F1F1CF4EE8C004FAEEF /* AccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F1E1CF4EE8C004FAEEF /* AccountState.swift */; };
 		EA288F231CF57955004FAEEF /* RequestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA288F221CF57955004FAEEF /* RequestToken.swift */; };
@@ -270,7 +272,11 @@
 		1144716F1E167A3000A0C6DD /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
 		114471731E167A5800A0C6DD /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		114471771E16D92200A0C6DD /* AcknowledgementsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsTableViewController.swift; sourceTree = "<group>"; };
-		115C86E120855595000E086E /* MovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieController.swift; sourceTree = "<group>"; };
+		115C86E120855595000E086E /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
+		1166EECD2085D13B0066B7D7 /* RealmRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
+		1166EEDB208657310066B7D7 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		1166EEDD20868B1F0066B7D7 /* MovieListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListController.swift; sourceTree = "<group>"; };
+		1166EEDF20868B9A0066B7D7 /* ObjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectController.swift; sourceTree = "<group>"; };
 		1167E76A1DC648E6003400B7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		1167E76B1DC648E6003400B7 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		1167E76F1DC64934003400B7 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -398,7 +404,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD4A7EB7277B6F88230BB3CF /* Pods_Networking_DiscoverMovies.framework in Frameworks */,
 				09FB1BBEA766C71DD2EFDFEE /* Pods_DiscoverMovies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,7 +419,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09E732177BDE09AC0820CAA7 /* Pods_Networking_TMDbMovieKit.framework in Frameworks */,
 				CE1FC293EB2AB3629C08AD4F /* Pods_TMDbMovieKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,11 +600,15 @@
 		111943391CCB90BE001CF39B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				111C22D9208537B2008BC725 /* APIClient.swift */,
 				111C22DB208539D3008BC725 /* APIRequest.swift */,
-				115C86E120855595000E086E /* MovieController.swift */,
+				111C22D9208537B2008BC725 /* APIClient.swift */,
+				1166EECD2085D13B0066B7D7 /* RealmRepository.swift */,
+				115C86E120855595000E086E /* ListController.swift */,
+				1166EEDF20868B9A0066B7D7 /* ObjectController.swift */,
+				1166EEDD20868B1F0066B7D7 /* MovieListController.swift */,
 				EA288F2D1CF59057004FAEEF /* APIRouter.swift */,
 				11D5506D1DE1044400AAEA4E /* RequestConfigurations.swift */,
+				1166EEDB208657310066B7D7 /* CacheManager.swift */,
 			);
 			name = API;
 			path = Request;
@@ -1471,6 +1479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11DDFC331DF2F9FD00F9BBBE /* PersonDataManager.swift in Sources */,
+				1166EEDC208657310066B7D7 /* CacheManager.swift in Sources */,
 				EA6487B61CE4AF0D00452DD0 /* TMDbMovieInfoManager.swift in Sources */,
 				EA288F1B1CF4401E004FAEEF /* Movie.swift in Sources */,
 				111943081CCB8EE4001CF39B /* Review.swift in Sources */,
@@ -1485,7 +1494,7 @@
 				11A479151EF8F7F80067E85F /* NetworkManager.swift in Sources */,
 				11B350831D8497D2001B6A87 /* TMDbTopListDataManagers.swift in Sources */,
 				116BB60F1E39598D00E767FB /* MovieCredit.swift in Sources */,
-				115C86E220855595000E086E /* MovieController.swift in Sources */,
+				115C86E220855595000E086E /* ListController.swift in Sources */,
 				113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */,
 				11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */,
 				111942F71CCB8EDE001CF39B /* Constants.swift in Sources */,
@@ -1493,9 +1502,11 @@
 				112CDE2E1D5A62B80028BE33 /* DictionarySerializable.swift in Sources */,
 				EA288F2A1CF58D42004FAEEF /* TMDbUserService.swift in Sources */,
 				11DECAAB1D04CEC200FFEAB4 /* DataManager.swift in Sources */,
+				1166EEDE20868B1F0066B7D7 /* MovieListController.swift in Sources */,
 				EA782B871CE0CA4500DC38AD /* TMDbReviewManager.swift in Sources */,
 				EA288F2E1CF59057004FAEEF /* APIRouter.swift in Sources */,
 				119A1F3E1D415B0D00AC61C7 /* CachedData.swift in Sources */,
+				1166EEE020868B9A0066B7D7 /* ObjectController.swift in Sources */,
 				116C2A981E2EB54B00E4C487 /* SessionInfoContaining.swift in Sources */,
 				EAE605C81CEA72C500D904EB /* TMDbSessionInfoStore.swift in Sources */,
 				111EC4471D436D24007DFA42 /* APIError.swift in Sources */,
@@ -1509,6 +1520,7 @@
 				111C22DC208539D3008BC725 /* APIRequest.swift in Sources */,
 				116C2A8F1E2EA82A00E4C487 /* Person.swift in Sources */,
 				11D5506E1DE1044400AAEA4E /* RequestConfigurations.swift in Sources */,
+				1166EECE2085D13B0066B7D7 /* RealmRepository.swift in Sources */,
 				11924C941D731AC100B1022E /* APIErrorHandler.swift in Sources */,
 				EA288F1F1CF4EE8C004FAEEF /* AccountState.swift in Sources */,
 				EADA5A6E1CE8A54200C2FAE8 /* CrewMember.swift in Sources */,

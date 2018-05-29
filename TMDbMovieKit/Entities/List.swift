@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 public struct List<ModelType: Codable>: Codable, Equatable {
     

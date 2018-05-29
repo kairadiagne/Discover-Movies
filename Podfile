@@ -13,13 +13,13 @@ target 'DiscoverMovies' do
     pod 'youtube-ios-player-helper'
     pod 'SWRevealViewController'
     pod 'BRYXBanner'
-    pod 'SwiftLint'
+    shared_pods
 end
 
 target 'TMDbMovieKit' do
     pod 'Alamofire'
     pod 'Locksmith'
-    pod 'RealmSwift'
+    shared_pods
 end
 
 # Acknowledgement

@@ -18,11 +18,7 @@ public struct CastMember: PersonRepresentable, Equatable {
     public let order: Int
 }
 
-public func ==(lhs: CastMember, rhs: CastMember) -> Bool {
-    return lhs.id == rhs.id
-}
-
-extension CastMember: DictionarySerializable {
+extension CastMember {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int,

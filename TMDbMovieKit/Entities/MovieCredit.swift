@@ -16,11 +16,7 @@ public struct MovieCredit: MovieRepresentable, Equatable {
     public let posterPath: String
 }
 
-public func ==(lhs: MovieCredit, rhs: MovieCredit) -> Bool {
-    return lhs.id == rhs.id
-}
-
-extension MovieCredit: DictionarySerializable {
+extension MovieCredit {
     
     public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int,

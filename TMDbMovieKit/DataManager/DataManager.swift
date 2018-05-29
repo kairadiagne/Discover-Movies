@@ -9,32 +9,23 @@
 import Foundation
 import Alamofire
 
-public protocol DataManagerFailureDelegate: class {
-    func dataManager(_ manager: AnyObject, didFailWithError error: APIError)
-}
-
-public class DataManager<ModelType: DictionarySerializable> {
+public class DataManager<T: Codable> {
     
     // MARK: - Properties
-    
-    public weak var failureDelegate: DataManagerFailureDelegate?
-    
-    let requestConfig: RequestConfiguration
-    
-    let cacheRepository = Repository.cache
-    
-    var cachedData: CachedData<ModelType>
-    
+
+    let apiService = APIService()
+
     let cacheIdentifier: String?
-    
-    var cachedParams = [String: AnyObject]()
+
+    let cacheRepository = Repository.cache
+
+    var cachedData: CachedData<T>
     
     var isLoading = false
+
+    // MARK: - Init
     
-    // MARK: - Initialize
-    
-    init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
-        self.requestConfig = configuration
+    init(refreshTimeOut: TimeInterval = 0, cacheIdentifier: String? = nil) {
         self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
         self.cacheIdentifier = cacheIdentifier
         self.loadData()
@@ -42,43 +33,37 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     // MARK: - Public API
     
-    public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
-        guard cachedData.needsRefresh || forceOnline || params != nil else { return }
-        cachedParams = params ?? [:]
-        loadOnline(paramaters: cachedParams)
+    public func reloadIfNeeded(forceOnline: Bool = false) {
+        guard cachedData.needsRefresh || forceOnline else { return }
+        loadOnline()
     }
 
     // MARK: - Networking
-    
-    func loadOnline(paramaters params: [String: AnyObject], page: Int = 1) {
+
+    func loadOnline() {
+        preconditionFailure("This method must be overridden")
+    }
+
+    func makeRequest(builder: RequestBuilder) {
         startLoading()
-        
-        var params = params
-        params["page"] = page as AnyObject?
-        cachedParams = params
-        
-        NetworkManager.shared.sessionManager.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
-            .validate().responseObject { (response: DataResponse<ModelType>) in
-        
-                self.stopLoading()
-                
-                switch response.result {
-                case .success(let data):
-                    self.handle(data: data)
-                    self.persistDataIfNeeded()
-                case .failure(let error):
-                    if let error = error as? APIError {
-                       self.failureDelegate?.dataManager(self, didFailWithError: error)
-                    } else {
-                        self.failureDelegate?.dataManager(self, didFailWithError: .generic)
-                    }
-                }
+
+        apiService.executeRequest(builder: builder) { (response: APIResult<T>) in
+            self.stopLoading()
+
+            switch response {
+            case .failure(let error):
+                print(error)
+            case .success(let object):
+                print(object)
+                self.handle(data: object)
+                self.persistDataIfNeeded()
+            }
         }
     }
 
     // MARK: - Response
 
-    func handle(data: ModelType) {
+    func handle(data: T) {
         cachedData.data = data
         postUpdateNofitication()
     }
@@ -86,18 +71,26 @@ public class DataManager<ModelType: DictionarySerializable> {
     // MARK: - Caching
     
     func persistDataIfNeeded() {
-        guard let cacheIdentifier = self.cacheIdentifier else { return }
-        guard cachedData.data != nil else { return }
-        cacheRepository.persistData(data: cachedData, withIdentifier: cacheIdentifier)
+        guard
+            let cacheIdentifier = self.cacheIdentifier,
+            cachedData.data != nil else {
+            return
+        }
+
+        cacheRepository.persistData(object: cachedData, cacheKey: cacheIdentifier)
     }
     
     func loadData() {
-        guard let cacheIdentifier = cacheIdentifier else { return }
-        self.startLoading()
-        if let cachedData = cacheRepository.restoreData(forIdentifier: cacheIdentifier) as? CachedData<ModelType> {
-            self.stopLoading()
+        guard let cacheIdentifier = cacheIdentifier else {
+            return
+        }
+
+        startLoading()
+
+        if let cachedData: CachedData<T> = cacheRepository.restoreData(cacheKey: cacheIdentifier) {
+            stopLoading()
             self.cachedData = cachedData
-            self.postUpdateNofitication()
+            postUpdateNofitication()
         }
     }
     
@@ -105,7 +98,7 @@ public class DataManager<ModelType: DictionarySerializable> {
         cachedData.data = nil
         
         if let cacheIdentifier = cacheIdentifier {
-            cacheRepository.clearData(withIdentifier: cacheIdentifier)
+            cacheRepository.clearData(cacheKey: cacheIdentifier)
         }
     }
     

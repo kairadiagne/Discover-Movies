@@ -9,13 +9,7 @@
 import Foundation
 
 public class SearchDataManager: ListDataManager<Movie> {
-    
-    // MARK: - Initialize 
-    
-    public init() {
-        super.init(configuration: SearchRequestConfiguration(), refreshTimeOut: 0)
-    }
-    
+
     // MARK: - Search
     
     private var searchQuery: String = ""

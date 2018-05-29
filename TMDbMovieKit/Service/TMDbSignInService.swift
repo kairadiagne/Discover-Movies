@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 
+// TODO: - Use SFAuthenticatioNSession in iOS 11 devices
+
 /*
  TMDb authentication workflow:
  

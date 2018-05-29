@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct AccountState {
+public struct AccountState: Equatable {
     public let favoriteStatus: Bool
     public let watchlistStatus: Bool
 }
 
-extension AccountState: DictionarySerializable {
+extension AccountState {
    
     public init?(dictionary dict: [String: AnyObject]) {
         guard let favoriteStatus = dict["favorite"] as? Bool,

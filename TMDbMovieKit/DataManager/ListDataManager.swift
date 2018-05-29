@@ -7,32 +7,36 @@
 //
 
 import Foundation
+import Alamofire
 
-public class ListDataManager<ItemType: DictionarySerializable>: DataManager<List<ItemType>> {
+public class ListDataManager<T: Codable >: DataManager<List<T>> {
     
     // MARK: - Properties
     
-    public var allItems: [ItemType] {
+    public var allItems: [T] {
         return cachedData.data?.items ?? []
     }
-    
-    // MARK: - Initialize
-    
-    override init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
-        super.init(configuration: configuration, refreshTimeOut: refreshTimeOut, cacheIdentifier: cacheIdentifier)
+
+    var currentPage: Int = 1
+
+    // MARK: - Calls
+
+    override public func reloadIfNeeded(forceOnline: Bool) {
+        guard cachedData.needsRefresh || forceOnline else { return }
+        currentPage = 0
+        loadOnline()
     }
-    
-    // MARK: - Calls 
-    
+
     public func loadMore() {
         guard isLoading == false else { return }
         guard let nextPage = cachedData.data?.nextPage else { return }
-        loadOnline(paramaters: cachedParams, page: nextPage)
+        currentPage = nextPage
+        loadOnline()
     }
-    
+
     // MARK: - Response
     
-    override func handle(data: List<ItemType>) {
+    override func handle(data: List<T>) {
         if data.page == 0 {
             print("Page 0 so page is empty")
         } else if data.page == 1 {

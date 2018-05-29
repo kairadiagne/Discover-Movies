@@ -1,5 +1,5 @@
 //
-//  TMDbMovieInfoManager.swift
+//  MovieDetailDataManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 12/05/16.
@@ -7,15 +7,14 @@
 //
 
 import Foundation
-import Alamofire
 
 public protocol TMDbMovieInfoManagerDelegate: class {
-    func movieInfoManager(_ manager: TMDbMovieInfoManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int)
-    func movieInfoManager(_ manager: TMDbMovieInfoManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool)
-    func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError)
+    func movieInfoManager(_ manager: MovieDetailManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int)
+    func movieInfoManager(_ manager: MovieDetailManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool)
+    func movieInfoManager(_ manager: MovieDetailManager, didFailWithErorr error: APIError)
 }
 
-public class TMDbMovieInfoManager {
+public class MovieDetailDataManager {
     
     // MARK: - Properties
     
@@ -57,7 +56,7 @@ public class TMDbMovieInfoManager {
                     }
                 }
         }
-    }
+    
 
     public func toggleStatusOfMovieInList(_ list: TMDbAccountList, status: Bool) {
         guard let sessionID = sessionInfoProvider.sessionID, let userID = sessionInfoProvider.user?.id else {

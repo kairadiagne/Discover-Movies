@@ -9,25 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class PaginatedList<ModelType: Object, Codable>: Object {
-    @objc dynamic var page: Int = 0
-    @objc dynamic var pageCount: Int = 0
-    @objc dynamic var resultCount: Int = 0
-    var items = RealmSwift.List<ModelType>()
-    
-    var nextPage: Int? {
-        return page < pageCount ? page + 1 : nil
-    }
-    
-    func update(withNetxPage page: Int, pageCount: Int, resultCount: Int, items: [ModelType]) {
-        self.page = page
-        self.pageCount = pageCount
-        self.resultCount = resultCount
-        self.items.append(objectsIn: items)
-    }
-}
-
-public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
+public struct List<ModelType: Codable>: Codable, Equatable {
     
     // MARK: - Properties
     

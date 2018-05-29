@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MovieInfo {
+public struct MovieInfo: Equatable {
     public let movie: Movie
     public internal(set) var trailers: [Video] = []
     public internal(set) var cast: [CastMember] = []
@@ -23,7 +23,7 @@ public struct MovieInfo {
     }
 }
 
-extension MovieInfo: DictionarySerializable {
+extension MovieInfo {
     
     public init?(dictionary dict: [String: AnyObject]) {
         guard let movie = Movie(dictionary: dict),

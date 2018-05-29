@@ -26,6 +26,10 @@ struct Repository {
     static let cache = Repository(path: RepositoryLocation.cache.path)
     
     private let path: String
+
+    private let decoder = JSONDecoder()
+
+    private let encoder = JSONEncoder()
     
     private let fileAccessQueue = DispatchQueue(label: "com.discoverMovies.app.repository.serial", qos: .background)
 
@@ -33,31 +37,42 @@ struct Repository {
     
     init(path: String) {
         self.path = path
+        self.setupJSONDecoder()
+        self.setupJSONEncoder()
+        self.setupDirectory()
     }
     
     // MARK: - Persistence
     
-    func persistData(data: NSCoding, withIdentifier identifier: String) {
-        createDirectory()
-        
-        fileAccessQueue.async {
-            NSKeyedArchiver.archiveRootObject(data, toFile: self.file(forIdentifier: identifier))
+    func persistData<T: Codable>(object: T, cacheKey: String) {
+        fileAccessQueue.async(flags: .barrier) {
+            do {
+                let data = try self.encoder.encode(object)
+                try data.write(to: self.url(cacheKey: cacheKey), options: [.atomicWrite, .completeFileProtection])
+            } catch {
+                print("Error saving object to disk, reasons: \(error.localizedDescription)")
+            }
         }
     }
     
-    func restoreData(forIdentifier identifier: String) -> Any? {
-        var data: Any?
+    func restoreData<T: Codable>(cacheKey: String) -> T? {
+        var object: T?
         
         fileAccessQueue.sync {
-            data = NSKeyedUnarchiver.unarchiveObject(withFile: self.file(forIdentifier: identifier))
+            do {
+                let data = try Data(contentsOf: self.url(cacheKey: cacheKey))
+                object = try decoder.decode(T.self, from: data)
+            } catch {
+                print("Error reading file from disk, reason: \(error.localizedDescription)")
+            }
         }
         
-        return data
+        return object
     }
     
-    func clearData(withIdentifier identifier: String) {
+    func clearData(cacheKey: String) {
         
-        let path = self.file(forIdentifier: identifier)
+        let path = url(cacheKey: cacheKey).path
         
         fileAccessQueue.async {
             do {
@@ -65,13 +80,18 @@ struct Repository {
             } catch {
                 print("Could not clear cached file at path: \(path))")
             }
-            
         }
     }
     
-    // MARK: - Location
-    
-    private func createDirectory() {
+    // MARK: - Utils
+
+    private func setupJSONEncoder() {
+    }
+
+    private func setupJSONDecoder() {
+    }
+
+    private func setupDirectory() {
         do {
             try FileManager.default.createDirectory(atPath: "\(path)/data", withIntermediateDirectories: true, attributes: nil)
         } catch {
@@ -79,7 +99,7 @@ struct Repository {
         }
     }
     
-    private func file(forIdentifier identifier: String) -> String {
-        return "\(path)/data/\(identifier).plist"
+    private func url(cacheKey: String) -> URL {
+        return URL(fileURLWithPath: "\(path)/data/\(cacheKey)")
     }
 }

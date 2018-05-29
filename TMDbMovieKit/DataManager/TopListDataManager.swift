@@ -1,5 +1,5 @@
 //
-//  TMDbTopListDataManagers.swift
+//  TopListDataManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10-09-16.
@@ -8,16 +8,22 @@
 
 import Foundation
 
-public class TMDbTopListDataManager: ListDataManager<Movie> {
+public class TopListDataManager: ListDataManager<Movie> {
     
-    let list: TMDbList
+    private let list: TMDbList
     
     // MARK: - Initialize
     
     public init(list: TMDbTopList) {
         self.list = list
-        super.init(configuration: TopListRequestConfiguration(list: list), refreshTimeOut: 3600, cacheIdentifier: list.name)
-        
+        super.init(refreshTimeOut: 3600, cacheIdentifier: list.name)
+    }
+
+    // MARK: - Calls
+
+    override func loadOnline() {
+        let requestBuilder = RequestBuilder.topList(list: list, page: currentPage)
+        makeRequest(builder: requestBuilder)
     }
     
     override func handle(data: List<Movie>) {

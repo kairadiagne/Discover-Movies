@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct User {
+public struct User: Equatable {
     public let id: Int
     public let userName: String
     public private(set) var name: String?
     public private(set) var profileHash: String?
 }
 
-extension User: DictionarySerializable {
+extension User {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int, let userName = dict["username"] as? String else { return nil }

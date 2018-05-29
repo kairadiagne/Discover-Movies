@@ -1,5 +1,5 @@
 //
-//  TMDbSessionInfoStore.swift
+//  SessionInfoService.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10/05/16.
@@ -9,7 +9,23 @@
 import Foundation
 import Locksmith
 
-class TMDbSessionInfoStore: SessionInfoContaining {
+protocol SessionInfoReading {
+    var sessionID: String? { get }
+    var APIKey: String { get }
+    var user: User? { get }
+}
+
+protocol SessionInfoMutating {
+    func saveSessionID(_ sessionID: String)
+    func saveAPIKey(_ key: String) // Remove
+    func save(user: User)
+    func clearUserData()
+}
+
+typealias SessionInfoContaining = SessionInfoReading & SessionInfoMutating
+
+
+final class SessionInfoService: SessionInfoContaining {
     
     // MARK: - Types
     
@@ -23,15 +39,16 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     // MARK: - APIKey
     
     var APIKey: String {
-        return UserDefaults.standard.string(forKey: Keys.APIKey) ?? ""
+        return UserDefaults.standard.string(forKey: Keys.APIKey) ?? "" // Keep in memory instead of user defaults
     }
     
     func saveAPIKey(_ key: String) {
-        UserDefaults.standard.set(key, forKey: Keys.APIKey)
+        UserDefaults.standard.set(key, forKey: Keys.APIKey) // Keep in memory instead of userdefaultsx
     }
     
     // MARK: - User
-    
+
+    // Store in filesystem with DATAProtection complete
     var user: User? {
         get {
             guard let userDict = UserDefaults.standard.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
@@ -61,11 +78,13 @@ class TMDbSessionInfoStore: SessionInfoContaining {
     // MARK: - SessionID
     
     var sessionID: String? {
+        // USE keychain api met Data Protection complete
         return Locksmith.loadDataForUserAccount(userAccount: Keys.UserAccount)?[Keys.SessionID] as? String
     }
     
     func saveSessionID(_ sessionID: String) {
         do {
+            // USE keychain api met Data Protection complete
             try Locksmith.saveData(data: [Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
             print("Error saving sessionID from keychain")

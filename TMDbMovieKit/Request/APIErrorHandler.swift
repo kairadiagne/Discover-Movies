@@ -9,9 +9,16 @@
 import Foundation
 import Alamofire
 
+public enum APIError: Error {
+    case generic
+    case noInternetConnection
+    case unAuthorized
+    case timedOut
+}
+
 class APIErrorHandler {
     
-    static func categorize(error: Error) -> APIError {
+    func categorize(error: Error) -> APIError {
         if let error = error as? URLError {
             if error.code  == .notConnectedToInternet {
                 return .noInternetConnection

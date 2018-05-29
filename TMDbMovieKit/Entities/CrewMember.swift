@@ -17,11 +17,7 @@ public struct CrewMember: PersonRepresentable, Equatable {
     public private(set) var profilePath: String?
 }
 
-public func ==(lhs: CrewMember, rhs: CrewMember) -> Bool {
-    return lhs.id == rhs.id
-}
-
-extension CrewMember: DictionarySerializable {
+extension CrewMember {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int,

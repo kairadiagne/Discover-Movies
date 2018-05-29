@@ -1,5 +1,5 @@
 //
-//  TMDbSimilarMoviesDataManager.swift
+//  SimilarMoviesDataManager.swift
 //  Discover
 //
 //  Created by Kaira Diagne on 13-11-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbSimilarMoviesDataManager: ListDataManager<Movie> {
+public class SimilarMoviesDataManager: ListDataManager<Movie> {
     
     // MARK: - Properties
     
@@ -22,6 +22,13 @@ public class TMDbSimilarMoviesDataManager: ListDataManager<Movie> {
     
     public init(movieID: Int) {
         self.movieID = movieID
-        super.init(configuration: SimilarMoviesRequestConfiguration(movieID: movieID), refreshTimeOut: 0)
+        super.init()
+    }
+
+    // MARK: - Calls
+
+    override func loadOnline() {
+        let requestBuilder = RequestBuilder.similarMovies(movieID: movieID, page: currentPage)
+        makeRequest(builder: requestBuilder)
     }
 }

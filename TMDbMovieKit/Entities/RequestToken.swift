@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct RequestToken {
+struct RequestToken: Equatable {
     let token: String
 }
 
-extension RequestToken: DictionarySerializable {
+extension RequestToken {
     
     init?(dictionary dict: [String: AnyObject]) {
         guard let token = dict["request_token"] as? String else { return nil }

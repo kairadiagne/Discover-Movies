@@ -15,7 +15,7 @@ public protocol MovieRepresentable {
     var posterPath: String { get }
 }
 
-public struct Movie: MovieRepresentable, Equatable {
+public struct Movie: MovieRepresentable, Equatable, Codable {
     public let id: Int
     public let title: String
     public let overview: String
@@ -39,7 +39,7 @@ public func ==(lhs: Movie, rhs: Movie) -> Bool {
     return  lhs.id == rhs.id
 }
 
-extension Movie: DictionarySerializable {
+extension Movie {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? Int,

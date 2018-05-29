@@ -7,23 +7,28 @@
 //
 
 import Foundation
-import Alamofire
 
 public class PersonDataManager: DataManager<Person> {
     
     // MARK: - Properties
     
-    let personID: Int
+    private let personID: Int
     
     public var person: Person? {
         return cachedData.data
     }
     
-    // MARK: - Initialize
+    // MARK: - Init
     
     public init(personID: Int) {
         self.personID = personID
-        let configuration = PersonConfig(personID: personID)
-        super.init(configuration: configuration, refreshTimeOut: 600)
+        super.init(refreshTimeOut: 500)
+    }
+
+    // MARK: - Calls
+
+    override func loadOnline() {
+        let requestBuilder = RequestBuilder.person(personID: personID)
+        makeRequest(builder: requestBuilder)
     }
 }

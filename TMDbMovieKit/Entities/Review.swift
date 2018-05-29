@@ -8,18 +8,14 @@
 
 import Foundation
 
-public struct Review: Equatable {
+public struct Review: Equatable, Codable {
     public let id: String
     public let author: String
     public let content: String
     public let url: URL
 }
 
-public func ==(lhs: Review, rhs: Review) -> Bool {
-    return  lhs.id == rhs.id 
-}
-
-extension Review: DictionarySerializable {
+extension Review {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let id = dict["id"] as? String,

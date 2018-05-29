@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct Video {
+public struct Video: Equatable {
     public let name: String
     public let source: String
     public let size: String
     public let type: String
 }
 
-extension Video: DictionarySerializable {
+extension Video {
     
     public init?(dictionary dict: [String : AnyObject]) {
         guard let source = dict["source"] as? String,

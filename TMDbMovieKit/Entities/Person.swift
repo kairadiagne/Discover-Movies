@@ -14,7 +14,7 @@ public protocol PersonRepresentable {
     var profilePath: String? { get }
 }
 
-public struct Person: PersonRepresentable, Equatable {
+public struct Person: PersonRepresentable, Equatable, Codable {
     public let id: Int
     public let imdbId: String
     public let name: String
@@ -29,11 +29,7 @@ public struct Person: PersonRepresentable, Equatable {
     public private(set) var movieCredits: [MovieCredit] = []
 }
 
-public func ==(lhs: Person, rhs: Person) -> Bool {
-    return lhs.id == rhs.id
-}
-
-extension Person: DictionarySerializable {
+extension Person  {
     
     public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int,

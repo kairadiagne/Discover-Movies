@@ -1,5 +1,5 @@
 //
-//  TMDbSessionManager.swift
+//  SessionManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10/05/16.
@@ -14,7 +14,11 @@ public enum TMDBSigInStatus {
     case unkown
 }
 
-public class TMDbSessionManager {
+// Should be splitted accross different Types of managers
+// User data manager
+// AuthenticationManager
+
+public class SessionManager {
     
     // MARK: - Types
     
@@ -48,7 +52,8 @@ public class TMDbSessionManager {
     }
     
     // MARK: - API Key
-    
+
+    // Key should come from framework
     public func registerAPIKey(_ key: String) {
         sessionInfoProvider.saveAPIKey(key)
     }

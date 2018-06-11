@@ -50,59 +50,59 @@ public class TMDbSignInService {
     // MARK: - Initialize
     
     public init() {
-        self.sessionInfoProvider = TMDbSessionInfoStore()
+        self.sessionInfoProvider = SessionInfoService.shared
     }
     
     // MARK: - Sign In 
     
     public func requestToken() {
-        Alamofire.request(APIRouter.request(config: RequestTokenConfiguration(), queryParams: nil, bodyParams: nil))
-            .validate().responseObject { (response: DataResponse<RequestToken>) in
-                
-                switch response.result {
-                case .success(let token):
-                    self.token = token
-                    
-                    let path: String = "\(TMDbAPI.AuthenticateURL)\(token.token)"
-                    
-                    if let url = URL(string: path) {
-                        self.delegate?.signIn(service: self, didReceiveAuthorizationURL: url)
-                    } else {
-                        self.delegate?.signIn(service: self, didFailWithError: .generic)
-                    }
-                case .failure(let error):
-                    if let error = error as? APIError {
-                        self.delegate?.signIn(service: self, didFailWithError: error)
-                    } else {
-                        self.delegate?.signIn(service: self, didFailWithError: .generic)
-                    }
-                }
-        }
+//        Alamofire.request(APIRouter.request(config: RequestTokenConfiguration(), queryParams: nil, bodyParams: nil))
+//            .validate().responseObject { (response: DataResponse<RequestToken>) in
+//
+//                switch response.result {
+//                case .success(let token):
+//                    self.token = token
+//
+//                    let path: String = "\(TMDbAPI.AuthenticateURL)\(token.token)"
+//
+//                    if let url = URL(string: path) {
+//                        self.delegate?.signIn(service: self, didReceiveAuthorizationURL: url)
+//                    } else {
+//                        self.delegate?.signIn(service: self, didFailWithError: .generic)
+//                    }
+//                case .failure(let error):
+//                    if let error = error as? APIError {
+//                        self.delegate?.signIn(service: self, didFailWithError: error)
+//                    } else {
+//                        self.delegate?.signIn(service: self, didFailWithError: .generic)
+//                    }
+//                }
+//        }
     }
     
     public func requestSessionID() {
-        guard let token = token?.token else {
-            delegate?.signIn(service: self, didFailWithError: .generic)
-            return
-        }
-        
-        let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
-        
-        Alamofire.request(APIRouter.request(config: RequestSessionTokenConfiguration(), queryParams: paramaters, bodyParams: nil))
-            .validate().responseJSON { response in
-                
-                switch response.result {
-                case .success(let json):
-                    guard let resultDict = json as? [String: AnyObject] else { return }
-                    guard let sessionID = resultDict["session_id"] as? String else { return }
-                    
-                    self.sessionInfoProvider.saveSessionID(sessionID)
-                    self.delegate?.signInServiceDidSignIn(self)
-
-                case .failure(let error):
-                    let error = APIErrorHandler.categorize(error: error)
-                    self.delegate?.signIn(service: self, didFailWithError: error)
-                }
-        }
+//        guard let token = token?.token else {
+//            delegate?.signIn(service: self, didFailWithError: .generic)
+//            return
+//        }
+//        
+//        let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
+//        
+//        Alamofire.request(APIRouter.request(config: RequestSessionTokenConfiguration(), queryParams: paramaters, bodyParams: nil))
+//            .validate().responseJSON { response in
+//                
+//                switch response.result {
+//                case .success(let json):
+//                    guard let resultDict = json as? [String: AnyObject] else { return }
+//                    guard let sessionID = resultDict["session_id"] as? String else { return }
+//                    
+//                    self.sessionInfoProvider.saveSessionID(sessionID)
+//                    self.delegate?.signInServiceDidSignIn(self)
+//
+//                case .failure(let error):
+//                    let error = APIErrorHandler.categorize(error: error)
+//                    self.delegate?.signIn(service: self, didFailWithError: error)
+//                }
+//        }
     }
 }

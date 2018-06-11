@@ -8,24 +8,17 @@
 
 import Foundation
 
-public struct AccountState: Equatable {
+public struct AccountState: Equatable, Codable {
+
+    // MARK: - Properties
+
     public let favoriteStatus: Bool
     public let watchlistStatus: Bool
-}
 
-extension AccountState {
-   
-    public init?(dictionary dict: [String: AnyObject]) {
-        guard let favoriteStatus = dict["favorite"] as? Bool,
-            let watchlistStatus =  dict["watchlist"] as? Bool else {
-                return nil
-        }
-        
-        self.favoriteStatus = favoriteStatus
-        self.watchlistStatus = watchlistStatus
-    }
-    
-    public func dictionaryRepresentation() -> [String: AnyObject] {
-        return [:]
+    // MARK: - Codable
+
+    enum CodingKeys: String, CodingKey {
+        case favoriteStatus = "favorite"
+        case watchlistStatus = "watchlist"
     }
 }

@@ -48,16 +48,17 @@ struct RequestBuilder: URLRequestConvertible {
 
     // MARK: - URLRequestConvertible
 
-    mutating func asURLRequest() throws -> URLRequest {
+    func asURLRequest() throws -> URLRequest {
         let url = try base.asURL()
 
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
 
-        self.paramaters["api_key"] = sessionInfo.APIKey as AnyObject
+        var paramsCopy = paramaters
+        paramsCopy["api_key"] = sessionInfo.APIKey as AnyObject
 
         if paramaters.isEmpty == false {
-            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: paramaters)
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: paramsCopy)
         }
 
         if body?.isEmpty == false {
@@ -123,7 +124,7 @@ extension RequestBuilder {
         return RequestBuilder(base: basePath, path: "account/\(userID)/\(list.name)", method: .get)
     }
 
-    static func accountList(userID: String, sessionID: Int, list: TMDbAccountList, page: Int) -> RequestBuilder {
+    static func accountList(userID: Int, sessionID: String, list: TMDbAccountList, page: Int) -> RequestBuilder {
         var params = ["session_id": sessionID as AnyObject]
         params = params.merge(generatePageDict(page: page))
         return RequestBuilder(base: basePath, path: "account/\(userID)/\(list.name)/movies", method: .get, paramaters: params)

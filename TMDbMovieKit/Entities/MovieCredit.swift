@@ -8,33 +8,23 @@
 
 import Foundation
 
-public struct MovieCredit: MovieRepresentable, Equatable {
+public struct MovieCredit: MovieRepresentable, Equatable, Codable {
+
+    // MARK: - Properties
+
     public let id: Int
     public let creditId: String
     public let title: String
     public let releaseDate: String
     public let posterPath: String
-}
 
-extension MovieCredit {
-    
-    public init?(dictionary dict: [String: AnyObject]) {
-        guard let id = dict["id"] as? Int,
-            let creditId = dict["credit_id"] as? String,
-            let title = dict["title"] as? String,
-            let releaseDate = dict["release_date"] as? String,
-            let posterPath = dict["poster_path"] as? String  else {
-                return nil
-        }
-        
-        self.id = id
-        self.creditId = creditId
-        self.title = title
-        self.releaseDate = releaseDate
-        self.posterPath = posterPath
-    }
-    
-    public func dictionaryRepresentation() -> [String : AnyObject] {
-        return [:]
+    // MARK: - Codable
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case creditId = "credit_id"
+        case title
+        case releaseDate = "release_date"
+        case posterPath = "poster_path"
     }
 }

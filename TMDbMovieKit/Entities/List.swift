@@ -8,53 +8,34 @@
 
 import Foundation
 
-public struct List<ModelType: Codable>: Codable, Equatable {
-    
+public struct List<ModelType: Codable>: Codable {
+
     // MARK: - Properties
     
-    private(set) var page: Int
-    private(set) var pageCount: Int
-    private(set) var resultCount: Int
-    private(set) var items: [ModelType] = []
+    private(set) var page: Int = 0
+    private(set) var totalPages: Int = 0
+    private(set) var totalResults: Int = 0
+    private(set) var results: [ModelType] = []
     
     var nextPage: Int? {
-        return page < pageCount ? page + 1 : nil
+        return page < totalPages ? page + 1 : nil
     }
-    
-    // MARK: - Initialize
-    
-    init() {
-        self.page = 0
-        self.pageCount = 0
-        self.resultCount = 0
-        self.items = []
+
+    // MARK: - Codable
+
+    enum CodingKeys: String, CodingKey {
+        case page
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+        case results = "results"
     }
-    
-    public init?(dictionary dict: [String: AnyObject]) {
-        self.page = dict["page"] as? Int ?? 0
-        self.pageCount = dict["total_pages"] as? Int ?? 0
-        self.resultCount = dict["total_results"] as? Int ?? 0
-        
-        if let itemDicts = dict["results"] as? [[String: AnyObject]] {
-            self.items = itemDicts.compactMap { return ModelType(dictionary: $0) }
-        }
-    }
-    
-    public func dictionaryRepresentation() -> [String: AnyObject] {
-        var dictionary = [String: AnyObject]()
-        dictionary["page"] = page as AnyObject?
-        dictionary["total_pages"] = pageCount as AnyObject?
-        dictionary["total_results"] = resultCount as AnyObject?
-        dictionary["results"] = items.map { return $0.dictionaryRepresentation() } as AnyObject
-        return dictionary
-    }
-    
+
     // MARK: - Update
     
     mutating func update(withNetxPage page: Int, pageCount: Int, resultCount: Int, items: [ModelType]) {
         self.page = page
-        self.pageCount = pageCount
-        self.resultCount = resultCount
-        self.items.append(contentsOf: items)
+        self.totalPages = pageCount
+        self.totalResults = resultCount
+        self.results.append(contentsOf: items)
     }
 }

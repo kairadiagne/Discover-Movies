@@ -19,7 +19,7 @@ public class AccountListDataManager: ListDataManager<Movie> {
     // MARK: - Initialize
     
     public convenience init(list: TMDbAccountList) {
-        self.init(list: list, sessionInfo: SessionInfoService())
+        self.init(list: list, sessionInfo: SessionInfoService.shared)
     }
     
     init(list: TMDbAccountList, sessionInfo: SessionInfoReading) {

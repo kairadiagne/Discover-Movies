@@ -8,38 +8,27 @@
 
 import Foundation
 
-public struct CastMember: PersonRepresentable, Equatable {
+public struct CastMember: PersonRepresentable, Equatable, Codable {
+
+    // MARK: - Properties
+
     public let id: Int
     public let castID: Int
     public let creditID: String
     public let name: String
-    public private(set) var profilePath: String?
+    public let profilePath: String?
     public let character: String
     public let order: Int
-}
 
-extension CastMember {
-    
-    public init?(dictionary dict: [String : AnyObject]) {
-        guard let id = dict["id"] as? Int,
-            let castID = dict["cast_id"] as? Int,
-            let creditID = dict["credit_id"] as? String,
-            let name = dict["name"] as? String,
-            let character = dict["character"] as? String,
-            let order = dict["order"] as? Int else {
-                return nil 
-        }
-        
-        self.id = id
-        self.castID = castID
-        self.creditID = creditID
-        self.name = name
-        self.profilePath = dict["profile_path"] as? String
-        self.character = character
-        self.order = order
-    }
-    
-    public func dictionaryRepresentation() -> [String : AnyObject] {
-        return [:]
+    // MARK: - Codable
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case castID = "cast_id"
+        case creditID = "credit_id"
+        case name
+        case profilePath = "profile_path"
+        case character
+        case order
     }
 }

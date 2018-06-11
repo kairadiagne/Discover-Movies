@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-let defaultManager: SessionManager = {
+let defaultManager: Alamofire.SessionManager = {
     let config = URLSessionConfiguration.default
     config.urlCache = nil
-    return SessionManager(configuration: config)
+    return Alamofire.SessionManager(configuration: config)
 }()

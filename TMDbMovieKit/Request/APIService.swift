@@ -18,7 +18,7 @@ class APIService {
 
     // MARK: - Properties
 
-    private let sessionManager: SessionManager
+    private let sessionManager: Alamofire.SessionManager
 
     private let errorHandler = APIErrorHandler()
 
@@ -28,7 +28,7 @@ class APIService {
 
     // MARK: - Initialize
 
-    init(sessionManager: SessionManager = defaultManager) {
+    init(sessionManager: Alamofire.SessionManager = defaultManager) {
         self.sessionManager = sessionManager
         self.decoder.keyDecodingStrategy = .convertFromSnakeCase
     }

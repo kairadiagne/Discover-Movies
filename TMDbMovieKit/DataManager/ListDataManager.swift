@@ -14,7 +14,7 @@ public class ListDataManager<T: Codable >: DataManager<List<T>> {
     // MARK: - Properties
     
     public var allItems: [T] {
-        return cachedData.data?.items ?? []
+        return cachedData.data?.results ?? []
     }
 
     var currentPage: Int = 1
@@ -42,7 +42,7 @@ public class ListDataManager<T: Codable >: DataManager<List<T>> {
         } else if data.page == 1 {
             cachedData.data = data
         } else {
-            cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount, items: data.items)
+            cachedData.data?.update(withNetxPage: data.page, pageCount: data.totalPages, resultCount: data.totalResults, items: data.results)
         }
     
         postUpdateNofitication()

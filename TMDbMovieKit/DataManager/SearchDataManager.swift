@@ -19,7 +19,7 @@ public class SearchDataManager: ListDataManager<Movie> {
         
         let delay = DispatchTime.now() + 0.25
         DispatchQueue.main.asyncAfter(deadline: delay) { 
-            self.reloadIfNeeded(forceOnline: true, paramaters: ["query": self.searchQuery as AnyObject])
+//            self.reloadIfNeeded(forceOnline: true, paramaters: ["query": self.searchQuery as AnyObject])
         }
     }
 }

@@ -8,18 +8,18 @@
 
 import Foundation
 
-enum RepositoryLocation {
-    case cache
-    
-    var path: String {
-        switch self {
-        case .cache:
-            return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+struct Repository {
+
+    enum RepositoryLocation {
+        case cache
+
+        var path: String {
+            switch self {
+            case .cache:
+                return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+            }
         }
     }
-}
-
-struct Repository {
   
     // MARK: - Properties 
     

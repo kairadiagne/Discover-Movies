@@ -36,7 +36,7 @@ public class SessionManager {
     
     // MARK: - Initialize
     
-    init(sessionInfo: SessionInfoContaining = TMDbSessionInfoStore()) {
+    init(sessionInfo: SessionInfoContaining) {
         self.sessionInfoProvider = sessionInfo
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
         let freshInstall = UserDefaults.standard.bool(forKey: Constants.FreshInstallKey) == false
@@ -48,14 +48,7 @@ public class SessionManager {
     }
     
     public convenience init() {
-        self.init(sessionInfo: TMDbSessionInfoStore())
-    }
-    
-    // MARK: - API Key
-
-    // Key should come from framework
-    public func registerAPIKey(_ key: String) {
-        sessionInfoProvider.saveAPIKey(key)
+        self.init(sessionInfo: SessionInfoService.shared)
     }
     
     // MARK: - Signin Status

@@ -8,18 +8,15 @@
 
 import Foundation
 
-struct RequestToken: Equatable {
-    let token: String
-}
+struct RequestToken: Equatable, Codable {
 
-extension RequestToken {
-    
-    init?(dictionary dict: [String: AnyObject]) {
-        guard let token = dict["request_token"] as? String else { return nil }
-        self.token = token
-    }
-    
-    func dictionaryRepresentation() -> [String: AnyObject] {
-        return ["request_token": token as AnyObject]
+    // MARK: - Properties
+
+    let token: String
+
+    // MARK: - Codable
+
+    enum CodingKeys: String, CodingKey {
+        case token = "request_token"
     }
 }

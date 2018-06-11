@@ -65,11 +65,6 @@ class AppCoordinator: NSObject {
         let menuViewController = MenuViewController(sessionManager: sessionManager)
         revealVC = SWRevealViewController(rearViewController: menuViewController, frontViewController: navigationController)
         
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
-            let keys = NSDictionary(contentsOfFile: path), let APIKey = keys["APIKey"] as? String {
-            sessionManager.registerAPIKey(APIKey)
-        }
-        
         menuViewController.delegate = self
         
         rootNavigationController.viewControllers = [revealVC]

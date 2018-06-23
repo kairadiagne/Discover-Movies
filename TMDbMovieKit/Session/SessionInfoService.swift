@@ -37,6 +37,7 @@ final class SessionInfoService: SessionInfoContaining {
 
     init() {
         let path = Bundle(for: type(of: self)).path(forResource: "Keys", ofType: "plist")!
+        // swiftlint:disable:next force_cast
         APIKey = NSDictionary(contentsOfFile: path)![Keys.APIKey] as! String
     }
 

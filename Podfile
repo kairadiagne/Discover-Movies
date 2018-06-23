@@ -22,6 +22,11 @@ target 'TMDbMovieKit' do
     shared_pods
 end
 
+target 'TMDbMovieKitTests' do
+    pod 'Alamofire'
+    pod 'Locksmith'
+end
+
 # Acknowledgement
 #post_install do | installer |
 #    require 'fileutils'

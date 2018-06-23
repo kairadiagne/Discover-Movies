@@ -35,7 +35,7 @@ public struct Movie: MovieRepresentable, Equatable, Codable {
 
     // MARK: - Codable
 
-    enum codingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case title
         case overview

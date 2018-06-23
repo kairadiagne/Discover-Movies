@@ -14,6 +14,8 @@ struct CachedData<T: Codable>: Codable {
 
     private let refreshTimeOut: TimeInterval
 
+    private var dateGenerator: DateGenerating = DateGenerator()
+
     private var lastUpdate: Date?
 
     var data: T? {
@@ -21,21 +23,32 @@ struct CachedData<T: Codable>: Codable {
             if data == nil {
                 lastUpdate = nil
             } else {
-                lastUpdate = Date()
+                lastUpdate = dateGenerator.getCurrentDate()
+                print(lastUpdate)
             }
         }
     }
 
-    // MARK: - Init
+    // MARK: - Initialize
 
-    init(refreshTimeOut: TimeInterval) {
+    init(refreshTimeOut: TimeInterval, dateGenerator: DateGenerating = DateGenerator()) {
         self.refreshTimeOut = refreshTimeOut
+        self.dateGenerator = dateGenerator
+    }
+
+    // MARK: - Codable
+
+    enum CodingKeys: String, CodingKey {
+        case refreshTimeOut
+        case lastUpdate
     }
 
     // MARK: - Utils
 
     var needsRefresh: Bool {
         guard let lastUpdate = lastUpdate else { return true }
-        return Date().timeIntervalSince(lastUpdate) > refreshTimeOut
+        let now = dateGenerator.getCurrentDate()
+        print(now)
+        return now.timeIntervalSince(lastUpdate) > refreshTimeOut
     }
 }

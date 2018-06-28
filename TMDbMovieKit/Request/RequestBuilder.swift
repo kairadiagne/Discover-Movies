@@ -83,8 +83,9 @@ extension RequestBuilder {
         return RequestBuilder(base: basePath ,path: "authentication/session/new", method: .get)
     }
 
-    static func sessionToken() -> RequestBuilder {
-        return RequestBuilder(base: basePath, path: "authentication/token/new", method: .get)
+    static func sessionToken(requestToken: String) -> RequestBuilder {
+        let params: [String: AnyObject] = ["request_token": requestToken as AnyObject]
+        return RequestBuilder(base: basePath, path: "authentication/token/new", method: .get, paramaters: params)
     }
 
     static func user(sessionID: String) -> RequestBuilder {

@@ -18,6 +18,7 @@ final class SessionInfoService: SessionInfoContaining {
         static let SessionID = "sessionID"
         static let User = "user"
         static let APIKey = "APIKey"
+        static let AppWasLaunchedAtLeastOnce = "AppWasLaunchedAtLeastOnce"
     }
 
     // MARK: - Properties
@@ -27,7 +28,6 @@ final class SessionInfoService: SessionInfoContaining {
     var user: User?
 
     var sessionID: String? {
-        // USE keychain api met Data Protection complete
         return Locksmith.loadDataForUserAccount(userAccount: Keys.UserAccount)?[Keys.SessionID] as? String
     }
 
@@ -39,13 +39,17 @@ final class SessionInfoService: SessionInfoContaining {
         let path = Bundle(for: type(of: self)).path(forResource: "Keys", ofType: "plist")!
         // swiftlint:disable:next force_cast
         APIKey = NSDictionary(contentsOfFile: path)![Keys.APIKey] as! String
+
+        if UserDefaults.standard.bool(forKey: Keys.AppWasLaunchedAtLeastOnce) == false {
+            UserDefaults.standard.set(true, forKey: Keys.AppWasLaunchedAtLeastOnce)
+            clearUserData()
+        }
     }
 
     // MARK: - SessionID
 
     func saveSessionID(_ sessionID: String) {
         do {
-            // USE keychain api met Data Protection complete
             try Locksmith.saveData(data: [Keys.SessionID: sessionID], forUserAccount: Keys.UserAccount)
         } catch {
             print("Error saving sessionID from keychain")

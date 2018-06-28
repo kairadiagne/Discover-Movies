@@ -37,8 +37,6 @@ struct Repository {
     
     init(path: String) {
         self.path = path
-        self.setupJSONDecoder()
-        self.setupJSONEncoder()
         self.setupDirectory()
     }
     
@@ -82,14 +80,8 @@ struct Repository {
             }
         }
     }
-    
+
     // MARK: - Utils
-
-    private func setupJSONEncoder() {
-    }
-
-    private func setupJSONDecoder() {
-    }
 
     private func setupDirectory() {
         do {

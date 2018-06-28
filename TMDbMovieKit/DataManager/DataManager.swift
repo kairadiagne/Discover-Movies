@@ -71,8 +71,7 @@ public class DataManager<T: Codable> {
     // MARK: - Caching
     
     func persistDataIfNeeded() {
-        guard
-            let cacheIdentifier = self.cacheIdentifier,
+        guard let cacheIdentifier = self.cacheIdentifier,
             cachedData.data != nil else {
             return
         }

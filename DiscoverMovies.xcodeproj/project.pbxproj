@@ -30,6 +30,7 @@
 		111943091CCB8EE4001CF39B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943001CCB8EE4001CF39B /* User.swift */; };
 		1119430A1CCB8EE4001CF39B /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943011CCB8EE4001CF39B /* Video.swift */; };
 		111943111CCB8EF6001CF39B /* TMDbImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */; };
+		111B363D20E56B0B00548CF2 /* SessionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B363C20E56B0B00548CF2 /* SessionToken.swift */; };
 		111C22D62085318E008BC725 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 111C22D52085318E008BC725 /* .swiftlint.yml */; };
 		111C22D8208536F7008BC725 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111C22D7208536F7008BC725 /* Acknowledgements.plist */; };
 		111EC4491D436D2F007DFA42 /* TMDbLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111EC4481D436D2F007DFA42 /* TMDbLists.swift */; };
@@ -133,11 +134,9 @@
 		EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */; };
 		EA6487E31CE5A4E300452DD0 /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */; };
 		EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */; };
-		EA782B7D1CE0B5F100DC38AD /* TMDbSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7C1CE0B5F100DC38AD /* TMDbSignInService.swift */; };
 		EA782B7F1CE0C50000DC38AD /* AccountListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B7E1CE0C50000DC38AD /* AccountListDataManager.swift */; };
 		EA782B871CE0CA4500DC38AD /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B861CE0CA4500DC38AD /* ReviewManager.swift */; };
 		EA782B8F1CE0E26C00DC38AD /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B8E1CE0E26C00DC38AD /* List.swift */; };
-		EA782B931CE1D28800DC38AD /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA782B921CE1D28800DC38AD /* SessionManager.swift */; };
 		EA870C361D1170C4009C71D5 /* AccountListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C351D1170C4009C71D5 /* AccountListController.swift */; };
 		EA870C3B1D1177C7009C71D5 /* AccountListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C3A1D1177C7009C71D5 /* AccountListDataSource.swift */; };
 		EA870C4A1D11980C009C71D5 /* AccountListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA870C481D11980C009C71D5 /* AccountListTableViewCell.swift */; };
@@ -225,6 +224,7 @@
 		111943001CCB8EE4001CF39B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		111943011CCB8EE4001CF39B /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbImageRouter.swift; sourceTree = "<group>"; };
+		111B363C20E56B0B00548CF2 /* SessionToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionToken.swift; sourceTree = "<group>"; };
 		111C22D52085318E008BC725 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		111C22D7208536F7008BC725 /* Acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		111EC4481D436D2F007DFA42 /* TMDbLists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbLists.swift; sourceTree = "<group>"; };
@@ -339,11 +339,9 @@
 		EA6487E01CE5A4E300452DD0 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		EA6487E11CE5A4E300452DD0 /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
 		EA6487F11CE5DFEE00452DD0 /* GradientImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
-		EA782B7C1CE0B5F100DC38AD /* TMDbSignInService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSignInService.swift; sourceTree = "<group>"; };
 		EA782B7E1CE0C50000DC38AD /* AccountListDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountListDataManager.swift; sourceTree = "<group>"; };
 		EA782B861CE0CA4500DC38AD /* ReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		EA782B8E1CE0E26C00DC38AD /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
-		EA782B921CE1D28800DC38AD /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		EA870C351D1170C4009C71D5 /* AccountListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListController.swift; path = "DiscoverMovies/UserInterface/4. AccountList/AccountListController.swift"; sourceTree = SOURCE_ROOT; };
 		EA870C3A1D1177C7009C71D5 /* AccountListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListDataSource.swift; path = "DiscoverMovies/UserInterface/4. AccountList/AccountListDataSource.swift"; sourceTree = SOURCE_ROOT; };
 		EA870C481D11980C009C71D5 /* AccountListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountListTableViewCell.swift; path = "DiscoverMovies/UserInterface/4. AccountList/AccountListTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -524,6 +522,7 @@
 				1173BA1F20CEEE310072564F /* Avatar.swift */,
 				1173BA2120CEEEE20072564F /* Gravatar.swift */,
 				EA288F221CF57955004FAEEF /* RequestToken.swift */,
+				111B363C20E56B0B00548CF2 /* SessionToken.swift */,
 				EA6487B71CE4BC9D00452DD0 /* MovieInfo.swift */,
 			);
 			path = Entities;
@@ -682,10 +681,8 @@
 		11924C841D68D3EF00B1022E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				EA782B7C1CE0B5F100DC38AD /* TMDbSignInService.swift */,
 				1145BFE820BC9A490072F018 /* AuthenticationManager.swift */,
 				1145BFEA20BC9A530072F018 /* UserDataManager.swift */,
-				EA782B921CE1D28800DC38AD /* SessionManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1415,18 +1412,17 @@
 				EA782B7F1CE0C50000DC38AD /* AccountListDataManager.swift in Sources */,
 				1173BA1D20CEE6D30072564F /* SessionInfoContaining.swift in Sources */,
 				EA782B8F1CE0E26C00DC38AD /* List.swift in Sources */,
+				111B363D20E56B0B00548CF2 /* SessionToken.swift in Sources */,
 				1173BA2820CF02980072564F /* DateGenerator.swift in Sources */,
 				1119430A1CCB8EE4001CF39B /* Video.swift in Sources */,
 				1145BFE520BB48A20072F018 /* SessionManager+Default.swift in Sources */,
 				11C985701DD8F8800044C23B /* SimilarMoviesDataManager.swift in Sources */,
-				EA782B931CE1D28800DC38AD /* SessionManager.swift in Sources */,
 				11B350831D8497D2001B6A87 /* TopListDataManager.swift in Sources */,
 				1145BFE120BB43C70072F018 /* RequestBuilder.swift in Sources */,
 				116BB60F1E39598D00E767FB /* MovieCredit.swift in Sources */,
 				113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */,
 				11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */,
 				111942F71CCB8EDE001CF39B /* Constants.swift in Sources */,
-				EA782B7D1CE0B5F100DC38AD /* TMDbSignInService.swift in Sources */,
 				11DECAAB1D04CEC200FFEAB4 /* DataManager.swift in Sources */,
 				1145BFE720BB4E060072F018 /* APIService.swift in Sources */,
 				EA782B871CE0CA4500DC38AD /* ReviewManager.swift in Sources */,

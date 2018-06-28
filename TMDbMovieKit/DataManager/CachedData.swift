@@ -24,7 +24,6 @@ struct CachedData<T: Codable>: Codable {
                 lastUpdate = nil
             } else {
                 lastUpdate = dateGenerator.getCurrentDate()
-                print(lastUpdate)
             }
         }
     }
@@ -48,7 +47,6 @@ struct CachedData<T: Codable>: Codable {
     var needsRefresh: Bool {
         guard let lastUpdate = lastUpdate else { return true }
         let now = dateGenerator.getCurrentDate()
-        print(now)
         return now.timeIntervalSince(lastUpdate) > refreshTimeOut
     }
 }

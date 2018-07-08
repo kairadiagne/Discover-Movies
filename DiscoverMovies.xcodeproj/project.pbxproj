@@ -453,9 +453,8 @@
 			isa = PBXGroup;
 			children = (
 				11924C881D69C82500B1022E /* Session */,
-				111943391CCB90BE001CF39B /* API */,
+				111943391CCB90BE001CF39B /* Network */,
 				EA08B7F31CF7588800EC804B /* DataManager */,
-				11924C841D68D3EF00B1022E /* Service */,
 				111943381CCB90B5001CF39B /* Entities */,
 				1119433A1CCB90C8001CF39B /* Extensions */,
 				111942FB1CCB8EE4001CF39B /* Genres.swift */,
@@ -528,7 +527,7 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		111943391CCB90BE001CF39B /* API */ = {
+		111943391CCB90BE001CF39B /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				1145BFE420BB48A20072F018 /* SessionManager+Default.swift */,
@@ -536,7 +535,7 @@
 				11924C931D731AC100B1022E /* APIErrorHandler.swift */,
 				1145BFE620BB4E060072F018 /* APIService.swift */,
 			);
-			name = API;
+			name = Network;
 			path = Request;
 			sourceTree = "<group>";
 		};
@@ -678,20 +677,12 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		11924C841D68D3EF00B1022E /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				1145BFE820BC9A490072F018 /* AuthenticationManager.swift */,
-				1145BFEA20BC9A530072F018 /* UserDataManager.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		11924C881D69C82500B1022E /* Session */ = {
 			isa = PBXGroup;
 			children = (
 				1173BA1C20CEE6D30072564F /* SessionInfoContaining.swift */,
 				EAE605C71CEA72C500D904EB /* SessionInfoService.swift */,
+				1145BFE820BC9A490072F018 /* AuthenticationManager.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -841,6 +832,7 @@
 			children = (
 				1118370F1D8748B200C58DF3 /* Repository.swift */,
 				119A1F3D1D415B0D00AC61C7 /* CachedData.swift */,
+				1173BA2720CF02980072564F /* DateGenerator.swift */,
 				11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */,
 				11B350801D848B90001B6A87 /* ListDataManager.swift */,
 				11B350821D8497D2001B6A87 /* TopListDataManager.swift */,
@@ -850,7 +842,7 @@
 				EA782B861CE0CA4500DC38AD /* ReviewManager.swift */,
 				113D8C671DA2EBF2002B4EF6 /* SearchDataManager.swift */,
 				11DDFC321DF2F9FD00F9BBBE /* PersonDataManager.swift */,
-				1173BA2720CF02980072564F /* DateGenerator.swift */,
+				1145BFEA20BC9A530072F018 /* UserDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";

@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import Alamofire
 
 public protocol TMDbUserServiceDelegate: class {

@@ -35,8 +35,7 @@ struct RequestBuilder: URLRequestConvertible {
          headers: [String: String] = [:],
          paramaters: [String: AnyObject] = [:],
          body: [String: String] = [:],
-         sessionInfo: SessionInfoReading = SessionInfoService())
-             {
+         sessionInfo: SessionInfoReading = SessionInfoService()) {
         self.base = base
         self.path = path
         self.method = method
@@ -57,7 +56,7 @@ struct RequestBuilder: URLRequestConvertible {
         var paramsCopy = paramaters
         paramsCopy["api_key"] = sessionInfo.APIKey as AnyObject
 
-        if paramaters.isEmpty == false {
+        if paramsCopy.isEmpty == false {
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: paramsCopy)
         }
 
@@ -80,7 +79,7 @@ extension RequestBuilder {
     static let basePath = TMDbAPI.BaseURL
 
     static func requestToken() -> RequestBuilder {
-        return RequestBuilder(base: basePath ,path: "authentication/session/new", method: .get)
+        return RequestBuilder(base: basePath, path: "authentication/session/new", method: .get)
     }
 
     static func sessionToken(requestToken: String) -> RequestBuilder {
@@ -90,7 +89,7 @@ extension RequestBuilder {
 
     static func user(sessionID: String) -> RequestBuilder {
         let params: [String: String] = ["session_id": sessionID]
-        return RequestBuilder(base: basePath, path: "account", method: .get, paramaters: params as [String : AnyObject])
+        return RequestBuilder(base: basePath, path: "account", method: .get, paramaters: params as [String: AnyObject])
     }
 
     static func topList(list: TMDbTopList, page: Int) -> RequestBuilder {

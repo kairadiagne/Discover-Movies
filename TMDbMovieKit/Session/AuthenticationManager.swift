@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SafariServices
 
 /*
  TMDb authentication workflow:
@@ -80,9 +81,27 @@ public final class AuthenticationManager {
 
                 if let url = URL(string: path) {
                     self.delegate?.authenticationManager(self, didReceiveAuthorizationURL: url)
+
+                    if #available(iOS 11.0, *) {
+                        let authenticationSession = SFAuthenticationSession(url: url, callbackURLScheme: nil, completionHandler: { url, error in
+                            print(url)
+                            print(error)
+
+                            if error != nil {
+                                // Delegate error
+                            } else {
+                                // request session token
+                            }
+                        })
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 } else {
                     self.delegate?.authenticationManager(self, didFailWithError: .generic)
                 }
+
+
+
             }
         }
     }
@@ -111,6 +130,12 @@ public final class AuthenticationManager {
 
             }
         }
+    }
+
+    // MARK: - Anonomous User
+
+    public func signInAsAnonomousUser() {
+        
     }
 
     // MARK: - Sign out

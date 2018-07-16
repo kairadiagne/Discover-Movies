@@ -10,30 +10,24 @@ import UIKit
 import TMDbMovieKit
 
 protocol MenuViewControllerDelegate: class {
-    func menu(viewController: UIViewController, didclickItemAtIndexPath indexPath: IndexPath)
-    func menu(viewController: UIViewController, itemForRowAtIndexPath indexPath: IndexPath) -> MenuItem?
-    func menu(viewController: UIViewController, numberOfItemsInSection: Int) -> Int
+    // did select item
 }
 
-class MenuViewController: UIViewController {
+final class MenuViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: Properties
 
     @IBOutlet var menuView: MenuView!
     
     weak var delegate: MenuViewControllerDelegate?
-    
-    private let userService: TMDbUserService
-    
-    private let sessionManager: TMDbSessionManager
 
-    private var signedIn: Bool {
-        return sessionManager.signInStatus == .signedin
-    }
+    private let authenticationManager: AuthenticationManager
     
-    init(sessionManager: TMDbSessionManager, userService: TMDbUserService = TMDbUserService()) {
-        self.userService = userService
-        self.sessionManager = sessionManager
+    private let userDataManager: UserDataManager
+    
+    init(authenticationManager: AuthenticationManager, userDataManager: UserDataManager) {
+        self.authenticationManager = authenticationManager
+        self.userDataManager = userDataManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -41,7 +35,7 @@ class MenuViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: LifeCycle
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +47,6 @@ class MenuViewController: UIViewController {
         
         menuView.tableView.bounces = false
         
-        userService.delegate = self
-        
         menuView.tableView.reloadData()
     }
     
@@ -63,13 +55,14 @@ class MenuViewController: UIViewController {
         
         menuView.tableView.reloadData()
         
-        if signedIn {
-            menuView.configure(withUser: sessionManager.user)
-            userService.getUserInfo()
-        } else {
-            menuView.configure()
-            menuView.tableView.reloadData()
-        }
+//        if signedIn {
+//            userDataManager.getUserInfo()
+//            menuView.configure(withUser: sessionManager.user)
+//            userService.getUserInfo()
+//        } else {
+//            menuView.configure()
+//            menuView.tableView.reloadData()
+//        }
     }
 }
 
@@ -78,22 +71,23 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return delegate?.menu(viewController: self, numberOfItemsInSection: section) ?? 0
+//        return delegate?.menu(viewController: self, numberOfItemsInSection: section) ?? 0
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.reuseId) as! MenuTableViewCell
         
-        guard let menuItem = delegate?.menu(viewController: self, itemForRowAtIndexPath: indexPath) else {
-            return cell
-        }
-        
-        let title = menuItem.title(signedIn: signedIn)
-        let icon = menuItem.icon(signedIn: signedIn)
-        let enable = menuItem.enable(signedIn: signedIn)
-        
-        cell.configure(title: title, image: icon, enable: enable)
+//        guard let menuItem = delegate?.menu(viewController: self, itemForRowAtIndexPath: indexPath) else {
+//            return cell
+//        }
+
+//        let title = menuItem.title(signedIn: signedIn)
+//        let icon = menuItem.icon(signedIn: signedIn)
+//        let enable = menuItem.enable(signedIn: signedIn)
+
+//        cell.configure(title: title, image: icon, enable: enable)
         return cell
     }
 }
@@ -103,21 +97,21 @@ extension MenuViewController: UITableViewDataSource {
 extension MenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.menu(viewController: self, didclickItemAtIndexPath: indexPath)
+//        delegate?.menu(viewController: self, didclickItemAtIndexPath: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 // MARK: - TMDbUserServiceDelegate
 
-extension MenuViewController: TMDbUserServiceDelegate {
-    
-    func user(service: TMDbUserService, didLoadUserInfo user: User) {
-        menuView.configure(withUser: user)
-        menuView.tableView.reloadData()
-    }
-    
-    func user(service: TMDbUserService, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error)
-    }
-}
+//extension MenuViewController: TMDbUserServiceDelegate {
+//
+//    func user(service: TMDbUserService, didLoadUserInfo user: User) {
+//        menuView.configure(withUser: user)
+//        menuView.tableView.reloadData()
+//    }
+//
+//    func user(service: TMDbUserService, didFailWithError error: APIError) {
+//        ErrorHandler.shared.handle(error: error)
+//    }
+//}

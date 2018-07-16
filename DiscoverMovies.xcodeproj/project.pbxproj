@@ -50,7 +50,7 @@
 		114471701E167A3000A0C6DD /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1144716F1E167A3000A0C6DD /* VideoViewController.xib */; };
 		114471741E167A5800A0C6DD /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114471731E167A5800A0C6DD /* VideoView.swift */; };
 		114471781E16D92200A0C6DD /* AcknowledgementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114471771E16D92200A0C6DD /* AcknowledgementsTableViewController.swift */; };
-		1145BFE120BB43C70072F018 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145BFE020BB43C70072F018 /* RequestBuilder.swift */; };
+		1145BFE120BB43C70072F018 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145BFE020BB43C70072F018 /* APIRequest.swift */; };
 		1145BFE520BB48A20072F018 /* SessionManager+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145BFE420BB48A20072F018 /* SessionManager+Default.swift */; };
 		1145BFE720BB4E060072F018 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145BFE620BB4E060072F018 /* APIService.swift */; };
 		1145BFE920BC9A490072F018 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145BFE820BC9A490072F018 /* AuthenticationManager.swift */; };
@@ -116,6 +116,8 @@
 		11DECAAB1D04CEC200FFEAB4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */; };
 		11E8F59E1DB3A70900583840 /* DetailAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8F59D1DB3A70900583840 /* DetailAnimatedTransitioning.swift */; };
 		11E923E11FE07938001F6530 /* UILayoutPriority+AddSubtract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */; };
+		11EE458220F24AB700B55511 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE458120F24AB700B55511 /* AppDependency.swift */; };
+		11EE458420F2578F00B55511 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EE458320F2578F00B55511 /* MenuCoordinator.swift */; };
 		11F7A1691DC6A6F600296259 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7A1681DC6A6F600296259 /* Acknowledgement.swift */; };
 		54A73EECB2005526278555E2 /* Pods_TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F1B5CC4A608C734E8598B5 /* Pods_TMDbMovieKit.framework */; };
 		C1E6ECC1C2EAD5317E2ACDFF /* Pods_DiscoverMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FCD19D993D72D6DC2FCBA7 /* Pods_DiscoverMovies.framework */; };
@@ -244,7 +246,7 @@
 		1144716F1E167A3000A0C6DD /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
 		114471731E167A5800A0C6DD /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		114471771E16D92200A0C6DD /* AcknowledgementsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsTableViewController.swift; sourceTree = "<group>"; };
-		1145BFE020BB43C70072F018 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		1145BFE020BB43C70072F018 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		1145BFE420BB48A20072F018 /* SessionManager+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionManager+Default.swift"; sourceTree = "<group>"; };
 		1145BFE620BB4E060072F018 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		1145BFE820BC9A490072F018 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
@@ -313,6 +315,8 @@
 		11DECAAA1D04CEC200FFEAB4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		11E8F59D1DB3A70900583840 /* DetailAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutPriority+AddSubtract.swift"; sourceTree = "<group>"; };
+		11EE458120F24AB700B55511 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		11EE458320F2578F00B55511 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
 		11F7A1681DC6A6F600296259 /* Acknowledgement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acknowledgement.swift; sourceTree = "<group>"; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3154D676C5AE03A022F1F8DA /* Pods-TMDbMovieKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDbMovieKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TMDbMovieKitTests/Pods-TMDbMovieKitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -531,7 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				1145BFE420BB48A20072F018 /* SessionManager+Default.swift */,
-				1145BFE020BB43C70072F018 /* RequestBuilder.swift */,
+				1145BFE020BB43C70072F018 /* APIRequest.swift */,
 				11924C931D731AC100B1022E /* APIErrorHandler.swift */,
 				1145BFE620BB4E060072F018 /* APIService.swift */,
 			);
@@ -700,7 +704,9 @@
 		11A479071EF89DCD0067E85F /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				11EE458120F24AB700B55511 /* AppDependency.swift */,
 				118E238D1DE1A8A800324DEF /* AppCoordinator.swift */,
+				11EE458320F2578F00B55511 /* MenuCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1354,6 +1360,7 @@
 				11DC09AF1DC7EE1C008CA93C /* BaseViewController.swift in Sources */,
 				11290AF21D98250400AC4231 /* ReviewView.swift in Sources */,
 				11924C8A1D69D7C400B1022E /* String+ToDate.swift in Sources */,
+				11EE458420F2578F00B55511 /* MenuCoordinator.swift in Sources */,
 				111942F21CCB8EB8001CF39B /* Theme.swift in Sources */,
 				11A479051EF895880067E85F /* UIViewController+SWRevealController.swift in Sources */,
 				EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */,
@@ -1374,6 +1381,7 @@
 				119DADE11EF8247C0078C6E9 /* NibReusableCell.swift in Sources */,
 				1119429E1CCB8DD4001CF39B /* Date+Year.swift in Sources */,
 				114471781E16D92200A0C6DD /* AcknowledgementsTableViewController.swift in Sources */,
+				11EE458220F24AB700B55511 /* AppDependency.swift in Sources */,
 				11D8E0C41EF85DCE0028E531 /* NoDataMessageConfigurable.swift in Sources */,
 				1136FBDC1DA2DE6D00CED407 /* SearchViewController.swift in Sources */,
 				11E8F59E1DB3A70900583840 /* DetailAnimatedTransitioning.swift in Sources */,
@@ -1410,7 +1418,7 @@
 				1145BFE520BB48A20072F018 /* SessionManager+Default.swift in Sources */,
 				11C985701DD8F8800044C23B /* SimilarMoviesDataManager.swift in Sources */,
 				11B350831D8497D2001B6A87 /* TopListDataManager.swift in Sources */,
-				1145BFE120BB43C70072F018 /* RequestBuilder.swift in Sources */,
+				1145BFE120BB43C70072F018 /* APIRequest.swift in Sources */,
 				116BB60F1E39598D00E767FB /* MovieCredit.swift in Sources */,
 				113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */,
 				11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */,
@@ -1641,7 +1649,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = "$(SRCROOT)/DiscoverMovies/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1667,7 +1675,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = "$(SRCROOT)/DiscoverMovies/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";

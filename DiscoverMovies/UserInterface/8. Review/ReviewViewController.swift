@@ -25,15 +25,15 @@ class ReviewViewController: BaseViewController {
  
     private let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
     
-    private let reviewManager: TMDbReviewManager
-    
+//    private let reviewManager: TMDbReviewManager
+
     private let signedIn: Bool
     
     // MARK: - Initialize
     
     init(movie: MovieRepresentable, signedIn: Bool) {
         self.movie = movie
-        self.reviewManager = TMDbReviewManager(movieID: movie.id)
+//        self.reviewManager = TMDbReviewManager(movieID: movie.id)
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,7 +56,7 @@ class ReviewViewController: BaseViewController {
     
         title = "reviewvcTitle".localized
         
-        reviewManager.failureDelegate = self
+//        reviewManager.failureDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,16 +64,16 @@ class ReviewViewController: BaseViewController {
         
         let loadingSelector = #selector(ReviewViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(ReviewViewController.dataManagerDidUpdate(notification:))
-        reviewManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        reviewManager.reloadIfNeeded()
+//        reviewManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+//        reviewManager.reloadIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        reviewManager.remove(observer: self)
+//        reviewManager.remove(observer: self)
     }
     
     @objc private func refresh() {
-        reviewManager.reloadIfNeeded(forceOnline: true)
+//        reviewManager.reloadIfNeeded(forceOnline: true)
     }
     
     // MARK: - DataManagerNotifications
@@ -84,7 +84,7 @@ class ReviewViewController: BaseViewController {
     
     override func dataManagerDidUpdate(notification: Notification) {
         reviewView.set(state: .idle)
-        reviewDataSource.items = reviewManager.allItems
+//        reviewDataSource.items = reviewManager.allItems
         reviewView.tableView.reloadData()
     }
     
@@ -115,7 +115,7 @@ extension ReviewViewController: UITableViewDelegate {
         } else if reviewDataSource.isEmpty {
             cell.separatorInset.left = view.bounds.width
         } else if reviewDataSource.itemCount - 5 == indexPath.row {
-            reviewManager.loadMore()
+//            reviewManager.loadMore()
         }
     }
     

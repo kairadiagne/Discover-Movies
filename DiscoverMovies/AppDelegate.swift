@@ -9,7 +9,6 @@
 import UIKit
 import TMDbMovieKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -21,10 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .backgroundColor()
-        appCoordinator = AppCoordinator(window: window!)
-        
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
+
+        appCoordinator = AppCoordinator(rootViewController: navigationController)
         appCoordinator.start()
         
         Theme.apply()

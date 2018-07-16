@@ -41,10 +41,10 @@ class MenuView: UIView {
     func configure(withUser user: User? = nil) {
         nameLabel.text = user?.name ?? "nameLabelGuest".localized
         
-        if let path = user?.profileHash, let url = TMDbImageRouter.profileLarge(path: path).url {
-            profileImageView.imageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
-        } else {
-            profileImageView.imageView.image = UIImage.placeholderImage()
-        }
+//        if let path = user?.profileHash, let url = TMDbImageRouter.profileLarge(path: path).url {
+//            profileImageView.imageView.sd_setImage(with: url, placeholderImage: UIImage.placeholderImage())
+//        } else {
+//            profileImageView.imageView.image = UIImage.placeholderImage()
+//        }
     }
 }

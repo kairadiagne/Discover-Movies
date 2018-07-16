@@ -10,7 +10,7 @@ import Foundation
 import Locksmith
 
 final class SessionInfoService: SessionInfoContaining {
-    
+
     // MARK: - Types
     
     struct Keys {
@@ -26,6 +26,8 @@ final class SessionInfoService: SessionInfoContaining {
     let APIKey: String
 
     var user: User?
+
+    var isAnonymousUser: Bool = false
 
     var sessionID: String? {
         return Locksmith.loadDataForUserAccount(userAccount: Keys.UserAccount)?[Keys.SessionID] as? String

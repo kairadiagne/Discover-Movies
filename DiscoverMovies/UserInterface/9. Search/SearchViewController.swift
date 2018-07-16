@@ -18,8 +18,8 @@ class SearchViewController: BaseViewController {
     
     private var searchController: UISearchController!
     
-    private let searchManager = SearchDataManager()
-    
+//    private let searchManager = SearchDataManager()
+
     private let dataSource = SearchDataSource(emptyMessage: "noSearchResultsText".localized)
     
     private var searchQuery = ""
@@ -65,8 +65,8 @@ class SearchViewController: BaseViewController {
         
         searchView.tableView.keyboardDismissMode = .onDrag
         
-        searchManager.failureDelegate = self
-        
+//        searchManager.failureDelegate = self
+
         title = "searchVCTitle".localized
     }
     
@@ -75,8 +75,8 @@ class SearchViewController: BaseViewController {
         
         let loadingSelector = #selector(SearchViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(SearchViewController.dataManagerDidUpdate(notification:))
-        searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        
+//        searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+
         revealViewController().delegate = self
     }
     
@@ -90,15 +90,15 @@ class SearchViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        searchManager.remove(observer: self)
-        
+//        searchManager.remove(observer: self)
+
         revealViewController().delegate = nil
     }
     
     // MARK: - Notifications
     
     override func dataManagerDidUpdate(notification: Notification) {
-        dataSource.items = searchManager.allItems
+//        dataSource.items = searchManager.allItems
         searchView.tableView.reloadData()
     }
     
@@ -140,7 +140,7 @@ extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if dataSource.itemCount - 10 == indexPath.row {
-            searchManager.loadMore()
+//            searchManager.loadMore()
         }
     }
 }
@@ -171,7 +171,7 @@ extension SearchViewController: UISearchResultsUpdating {
             guard searchQuery.last != " " else { return }
             
             // Perform search
-            searchManager.search(for: searchQuery)
+//            searchManager.search(for: searchQuery)
         }
     }
 }

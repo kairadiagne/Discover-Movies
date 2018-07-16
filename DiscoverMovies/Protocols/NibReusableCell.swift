@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Extend with version from TappApp
+
 protocol ReusableCell {
     static var reuseId: String {get}
 }

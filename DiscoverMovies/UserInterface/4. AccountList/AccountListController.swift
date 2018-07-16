@@ -26,16 +26,16 @@ class AccountListController: BaseViewController {
     
     private let accountList: TMDbAccountList
     
-    private let accountListManager: TMDbAccountListDataManager
-    
+//    private let accountListManager: TMDbAccountListDataManager
+
     // MARK: - Initialize
-    
-    init(list aList: TMDbAccountList, manager: TMDbAccountListDataManager) {
-        self.accountList = aList
-        self.accountListManager = manager
-        super.init(nibName: nil, bundle: nil)
-    }
-    
+//
+//    init(list aList: TMDbAccountList, manager: TMDbAccountListDataManager) {
+//        self.accountList = aList
+//        self.accountListManager = manager
+//        super.init(nibName: nil, bundle: nil)
+//    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,8 +53,8 @@ class AccountListController: BaseViewController {
         
         accountListView.refreshControl.addTarget(self, action: #selector(AccountListController.refresh(_:)), for: .valueChanged)
         
-        accountListManager.failureDelegate = self
-        
+//        accountListManager.failureDelegate = self
+
         if accountList == .favorite {
             title = "favoriteVCTitle".localized
         } else {
@@ -67,31 +67,32 @@ class AccountListController: BaseViewController {
         
         let loadingSelector = #selector(AccountListController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(AccountListController.dataManagerDidUpdate(notification:))
-        accountListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+//        accountListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
 
         // Try to preload data from cache
-        dataSource.items = accountListManager.allItems
+//        dataSource.items = accountListManager.allItems
         accountListView.tableView.reloadData()
         
-        accountListManager.reloadIfNeeded(forceOnline: true)
+//        accountListManager.reloadIfNeeded(forceOnline: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        accountListManager.remove(observer: self)
+
+//        accountListManager.remove(observer: self)
     }
     
     // MARK: - Refresh
     
     @objc private func refresh(_ sender: UIRefreshControl) {
-        accountListManager.reloadIfNeeded(forceOnline: true)
+//        accountListManager.reloadIfNeeded(forceOnline: true)
     }
     
     // MARK: - Notifications
     
     override func dataManagerDidUpdate(notification: Notification) {
         accountListView.set(state: .idle)
-        dataSource.items = accountListManager.allItems
+//        dataSource.items = accountListManager.allItems
         accountListView.tableView.reloadData()
     }
     
@@ -122,7 +123,7 @@ extension AccountListController: UITableViewDelegate {
         if accountListView.state == .loading && dataSource.isEmpty {
             cell.isHidden = true
         } else if dataSource.itemCount - 5 == indexPath.row {
-            accountListManager.loadMore()
+//            accountListManager.loadMore()
         }
     }
     

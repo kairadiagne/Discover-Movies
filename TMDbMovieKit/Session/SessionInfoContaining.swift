@@ -11,7 +11,8 @@ import Foundation
 protocol SessionInfoReading {
     var sessionID: String? { get }
     var APIKey: String { get }
-    var user: User? { get set } // Remove 
+    var user: User? { get set }
+    var isAnonymousUser: Bool { get set }
 }
 
 protocol SessionInfoMutating {

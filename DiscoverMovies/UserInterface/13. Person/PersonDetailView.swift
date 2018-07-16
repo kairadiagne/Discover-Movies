@@ -138,34 +138,32 @@ class PersonDetailView: BaseView {
         profileImageView.isHidden = false
         
         // Birth
-        if let birthday = person.birthDay {
-            var birthInfo = birthday
-            
-            if let age = birthday.toDate()?.age {
-                // swiftlint:disable shorthand_operator
-                birthInfo = birthInfo + " " + "(" + "\(age)" + ")"
-            }
-            
-            if let birthPlace = person.birthPlace {
-                // swiftlint:disable shorthand_operator
-                birthInfo = birthInfo + "\n\(birthPlace)"
-            }
-            
-            bornLabel.text = birthInfo
-            bornLabel.isHidden = false
-        } else {
-            bornLabel.isHidden = true
-        }
-        
+//        if let birthday = person.birthDay {
+//            var birthInfo = birthday
+//
+//            if let age = birthday.toDate()?.age {
+//                birthInfo = birthInfo + " " + "(" + "\(age)" + ")"
+//            }
+//
+//            if let birthPlace = person.birthPlace {
+//                birthInfo = birthInfo + "\n\(birthPlace)"
+//            }
+//
+//            bornLabel.text = birthInfo
+//            bornLabel.isHidden = false
+//        } else {
+//            bornLabel.isHidden = true
+//        }
+
         // DeathDay
-        if let deathDay = person.deathDay {
-            diedLabel.text = deathDay
-            diedLabel.isHidden = false
-            infoLabelsStackView.isHidden = false
-        } else {
-            diedLabel.isHidden = true 
-        }
-        
+//        if let deathDay = person.deathDay {
+//            diedLabel.text = deathDay
+//            diedLabel.isHidden = false
+//            infoLabelsStackView.isHidden = false
+//        } else {
+//            diedLabel.isHidden = true
+//        }
+
         // Biography
         if let biography = person.biography {
             biograhphyLabel.text = biography

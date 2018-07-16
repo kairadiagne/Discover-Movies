@@ -59,7 +59,7 @@ class GenericTableViewController: BaseViewController {
         
         genericView.refreshControl.addTarget(self, action: #selector(GenericTableViewController.refresh(control:)), for: .valueChanged)
        
-        dataManager.failureDelegate = self
+//        dataManager.failureDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +89,7 @@ class GenericTableViewController: BaseViewController {
         dataSource.items = dataManager.allItems
         genericView.tableView.reloadData()
         
-        dataManager.reloadIfNeeded()
+//        dataManager.reloadIfNeeded()
     }
     
     // MARK: - DataManagerNotifications

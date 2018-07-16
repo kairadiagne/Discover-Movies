@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SWRevealViewController
 
-class BaseViewController: UIViewController, DataManagerFailureDelegate {
+class BaseViewController: UIViewController {
     
     // MARK: - Lifecycle
     

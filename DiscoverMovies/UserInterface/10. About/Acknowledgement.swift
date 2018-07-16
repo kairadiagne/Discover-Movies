@@ -9,7 +9,7 @@
 import Foundation
 import TMDbMovieKit
 
-struct Acknowledgement: DictionarySerializable {
+struct Acknowledgement {
     
     // MARK: - Properties
     

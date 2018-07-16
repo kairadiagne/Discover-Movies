@@ -57,7 +57,7 @@ class PersonDetailViewController: BaseViewController {
         personDetailView.moviesCollectionView.delegate = self
         personDetailView.moviesCollectionView.dataSource = dataSource
         
-        personDataManager.failureDelegate = self
+//        personDataManager.failureDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {

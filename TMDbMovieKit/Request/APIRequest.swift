@@ -36,7 +36,7 @@ struct RequestBuilder: URLRequestConvertible {
          paramaters: [String: AnyObject] = [:],
          body: [String: String] = [:],
          sessionInfo: SessionInfoReading = SessionInfoService())
-    {
+             {
         self.base = base
         self.path = path
         self.method = method

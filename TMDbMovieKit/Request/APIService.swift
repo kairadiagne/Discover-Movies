@@ -30,7 +30,6 @@ class APIService {
 
     init(sessionManager: Alamofire.SessionManager = defaultManager) {
         self.sessionManager = sessionManager
-        self.decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
 
     // MARK: - Request

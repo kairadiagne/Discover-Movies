@@ -79,17 +79,17 @@ extension RequestBuilder {
     static let basePath = TMDbAPI.BaseURL
 
     static func requestToken() -> RequestBuilder {
-        return RequestBuilder(base: basePath, path: "authentication/session/new", method: .get)
+        return RequestBuilder(base: basePath, path: "authentication/token/new", method: .get)
     }
 
     static func sessionToken(requestToken: String) -> RequestBuilder {
         let params: [String: AnyObject] = ["request_token": requestToken as AnyObject]
-        return RequestBuilder(base: basePath, path: "authentication/token/new", method: .get, paramaters: params)
+        return RequestBuilder(base: basePath, path: "authentication/session/new", method: .get, paramaters: params)
     }
 
     static func user(sessionID: String) -> RequestBuilder {
-        let params: [String: String] = ["session_id": sessionID]
-        return RequestBuilder(base: basePath, path: "account", method: .get, paramaters: params as [String: AnyObject])
+        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
+        return RequestBuilder(base: basePath, path: "account", method: .get, paramaters: params)
     }
 
     static func topList(list: TMDbTopList, page: Int) -> RequestBuilder {
@@ -131,8 +131,8 @@ extension RequestBuilder {
     }
 
     static func person(personID: Int) -> RequestBuilder {
-        let params = ["append_to_response": "movie_credits"]
-        return RequestBuilder(base: basePath, path: "person/\(personID)", method: .get, paramaters: params as [String : AnyObject])
+        let params: [String: AnyObject] = ["append_to_response": "movie_credits" as AnyObject]
+        return RequestBuilder(base: basePath, path: "person/\(personID)", method: .get, paramaters: params)
     }
 
     // MARK: - Utils

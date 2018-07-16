@@ -28,9 +28,9 @@ import SafariServices
  */
 
 public protocol AuthenticationManagerDelegate: class {
-    func authenticationManager(_ manager: AuthenticationManager, didReceiveAuthorizationURL url: URL)
-    func authenticationManager(_ manager: AuthenticationManager, didFailWithError: APIError)
     func authenticationManagerDidFinish(_ manager: AuthenticationManager)
+    func authenticationManagerDidCancel(_ manager: AuthenticationManager)
+    func authenticationManager(_ manager: AuthenticationManager, didFailWithError: Error)
 }
 
 public final class AuthenticationManager {
@@ -54,61 +54,58 @@ public final class AuthenticationManager {
 
     private var token: RequestToken?
 
+    private var authsession: SFAuthenticationSession?
+
+    private let redirectURI: String
+
     // MARK: - Initialize
 
-    public convenience init() {
-        self.init()
+    public convenience init(redirectURI: String) {
+        self.init(redirectURI: redirectURI, sessionInfo: SessionInfoService.shared, apiService: APIService())
     }
 
-    init(sessionInfo: SessionInfoContaining = SessionInfoService.shared, apiService: APIService = APIService()) {
+    init(redirectURI: String, sessionInfo: SessionInfoContaining = SessionInfoService.shared, apiService: APIService = APIService()) {
+        self.redirectURI = redirectURI
         self.sessionInfo = sessionInfo
         self.apiService = apiService
     }
 
     // MARK: - Sign in
 
-    public func requestToken() {
+    public func authenticate() {
         let tokenRequestBuilder = RequestBuilder.requestToken()
+
         apiService.executeRequest(builder: tokenRequestBuilder) { (result: (APIResult<RequestToken>)) in
             switch result {
             case .failure(let error):
-                self.delegate?.authenticationManager(self, didFailWithError: error as? APIError ?? .generic)
+                self.delegate?.authenticationManager(self, didFailWithError: error)
 
             case .success(let token):
                 self.token = token
 
-                let path: String = "\(TMDbAPI.AuthenticateURL)\(token.token)"
-
+                let path: String = "\(TMDbAPI.AuthenticateURL)\(token.token)?redirect_to=\(self.redirectURI)"
                 if let url = URL(string: path) {
-                    self.delegate?.authenticationManager(self, didReceiveAuthorizationURL: url)
-
-                    if #available(iOS 11.0, *) {
-                        let authenticationSession = SFAuthenticationSession(url: url, callbackURLScheme: nil, completionHandler: { url, error in
-                            print(url)
-                            print(error)
-
-                            if error != nil {
-                                // Delegate error
-                            } else {
-                                // request session token
-                            }
-                        })
-                    } else {
-                        // Fallback on earlier versions
+                    self.authsession = SFAuthenticationSession(url: url, callbackURLScheme: self.redirectURI) { url, error in
+                        if let error = error {
+                            self.delegate?.authenticationManager(self, didFailWithError: error)
+                        } else if let url = url, url.absoluteString.contains("denied=true") {
+                            self.delegate?.authenticationManagerDidCancel(self)
+                        } else if let url = url, url.absoluteString.contains("approved=true") {
+                            self.requestSessionToken()
+                        }
                     }
+
+                    self.authsession?.start()
                 } else {
-                    self.delegate?.authenticationManager(self, didFailWithError: .generic)
+//                    self.delegate?.authenticationManager(self, didFailWithError: .generic)
                 }
-
-
-
             }
         }
     }
 
-    public func requestSessionToken() {
+    private func requestSessionToken() {
         guard let requestToken = token?.token else {
-            delegate?.authenticationManager(self, didFailWithError: .generic)
+//            delegate?.authenticationManager(self, didFailWithError: .generic)
             return
         }
 
@@ -135,7 +132,7 @@ public final class AuthenticationManager {
     // MARK: - Anonomous User
 
     public func signInAsAnonomousUser() {
-        
+
     }
 
     // MARK: - Sign out
@@ -144,3 +141,4 @@ public final class AuthenticationManager {
         sessionInfo.clearUserData()
     }
 }
+

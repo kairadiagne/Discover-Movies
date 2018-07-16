@@ -25,7 +25,7 @@ class AppCoordinator: NSObject {
     init(rootViewController: UINavigationController) {
         self.rootViewController = rootViewController
 
-        self.dependencies = AppDependency(authenticationManager: AuthenticationManager(),
+        self.dependencies = AppDependency(authenticationManager: AuthenticationManager(redirectURI: "discovermovies://"),
                                           userDataManager: UserDataManager(),
                                           popularListManager: TopListDataManager(list: .popular),
                                           nowPlayingListManager: TopListDataManager(list: .nowPlaying),

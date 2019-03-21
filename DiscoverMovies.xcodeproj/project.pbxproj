@@ -1045,7 +1045,6 @@
 			buildConfigurationList = 111942591CCB8CA0001CF39B /* Build configuration list for PBXNativeTarget "DiscoverMovies" */;
 			buildPhases = (
 				CF304D3EE2FE87DFC58175FE /* [CP] Check Pods Manifest.lock */,
-				111C22D42085310D008BC725 /* Warn on TODO and FIXME */,
 				111C22D3208530E2008BC725 /* SwiftLint */,
 				111942381CCB8CA0001CF39B /* Sources */,
 				1119427E1CCB8CBF001CF39B /* Embed Frameworks */,
@@ -1266,20 +1265,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
-		};
-		111C22D42085310D008BC725 /* Warn on TODO and FIXME */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Warn on TODO and FIXME";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Handle TODOs and FIMEs etc. for debug (source: https://krakendev.io/blog/generating-warnings-in-xcode)\ndebugConfig=\"Debug\"\n\nif [ \"$debugConfig\" == \"${CONFIGURATION}\" ]; then\nTAGS=\"TODO:|FIXME:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -and \\( -path \"${SRCROOT}/Pods/*\" -prune -o -print0 \\) | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\nfi";
 		};
 		1BF88361BEB75561D6C23504 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

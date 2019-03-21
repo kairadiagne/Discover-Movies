@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 enum APIRouter: URLRequestConvertible {
+    // swiftlint:disable:next identifier_name
     case request(config: RequestConfiguration, queryParams: [String: AnyObject]?, bodyParams: [String: AnyObject]?)
 
     var APIKey: String {

@@ -41,7 +41,7 @@ public func ==(lhs: Movie, rhs: Movie) -> Bool {
 
 extension Movie: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int,
             let title = dict["title"] as? String,
             let overView = dict["overview"] as? String,
@@ -72,7 +72,7 @@ extension Movie: DictionarySerializable {
         self.backDropPath = backDropPath
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         var dictionary = [String: AnyObject]()
         dictionary["id"] = id as AnyObject?
         dictionary["title"] = title as AnyObject?

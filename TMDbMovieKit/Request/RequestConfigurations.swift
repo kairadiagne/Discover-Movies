@@ -77,7 +77,7 @@ struct AccountListConfiguration: RequestConfiguration {
         return "account/\(userID)/\(list.name)/movies"
     }
     
-    var defaultParams: [String : AnyObject]? {
+    var defaultParams: [String: AnyObject]? {
         guard let sessionID = infoStore.sessionID else { return [:] }
         return ["session_id": sessionID as AnyObject]
     }
@@ -110,7 +110,7 @@ struct MovieDetailConfiguration: RequestConfiguration {
         return "movie/\(movieID)"
     }
     
-    var defaultParams: [String : AnyObject]? {
+    var defaultParams: [String: AnyObject]? {
         return ["append_to_response": "credits,trailers" as AnyObject]
     }
 }
@@ -153,7 +153,7 @@ struct PersonConfig: RequestConfiguration {
         return "person/\(personID)"
     }
     
-    var defaultParams: [String : AnyObject]? {
+    var defaultParams: [String: AnyObject]? {
         return ["append_to_response": "movie_credits" as AnyObject]
     }
 }

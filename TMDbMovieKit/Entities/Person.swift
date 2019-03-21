@@ -74,7 +74,7 @@ extension Person: DictionarySerializable {
         }
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         return [:]
     }
 }

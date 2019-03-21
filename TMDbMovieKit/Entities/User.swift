@@ -17,7 +17,7 @@ public struct User {
 
 extension User: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int, let userName = dict["username"] as? String else { return nil }
         
         self.id = id
@@ -31,7 +31,7 @@ extension User: DictionarySerializable {
         }
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         var dictionary = [String: AnyObject]()
         dictionary["id"] = id as AnyObject
         dictionary["username"] = userName as AnyObject

@@ -127,10 +127,10 @@ extension AccountListController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return !dataSource.isEmpty ? UITableViewAutomaticDimension : tableView.bounds.height
+        return !dataSource.isEmpty ? UITableView.automaticDimension : tableView.bounds.height
     }
 }

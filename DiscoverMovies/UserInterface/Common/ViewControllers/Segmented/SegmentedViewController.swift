@@ -48,9 +48,9 @@ class SegmentedViewController: UIViewController {
     // MARK: - Lifecycle
 
     override func loadView() {
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         view = segmentedView
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
     }
 
     override func viewDidLoad() {
@@ -66,7 +66,7 @@ class SegmentedViewController: UIViewController {
 extension SegmentedViewController: SegmentedViewDelegate {
     
     func segmentedView(_ view: SegmentedView, changedSegmentedIndexToValue toValue: Int, fromValue: Int) {
-        let direction = toValue > fromValue ? UIPageViewControllerNavigationDirection.forward : UIPageViewControllerNavigationDirection.reverse
+        let direction = toValue > fromValue ? UIPageViewController.NavigationDirection.forward : UIPageViewController.NavigationDirection.reverse
         let vc = viewControllers[toValue]
         pageViewController.setViewControllers([vc], direction: direction, animated: true, completion: nil)
     }

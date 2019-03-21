@@ -17,7 +17,7 @@ public struct Video {
 
 extension Video: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let source = dict["source"] as? String,
             let name = dict["name"] as? String,
             let size = dict["size"] as? String,
@@ -32,7 +32,7 @@ extension Video: DictionarySerializable {
         
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         var dictionary = [String: AnyObject]()
         dictionary["name"] = name as AnyObject?
         dictionary["source"] = source as AnyObject?

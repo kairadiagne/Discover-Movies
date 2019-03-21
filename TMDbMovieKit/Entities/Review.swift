@@ -21,7 +21,7 @@ public func ==(lhs: Review, rhs: Review) -> Bool {
 
 extension Review: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? String,
             let author = dict["author"] as? String,
             let content = dict["content"] as? String,
@@ -36,7 +36,7 @@ extension Review: DictionarySerializable {
         self.url = url
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         var dictionary = [String: AnyObject]()
         dictionary["id"] = id as AnyObject?
         dictionary["author"] = author as AnyObject?

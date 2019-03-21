@@ -23,7 +23,7 @@ public func ==(lhs: CrewMember, rhs: CrewMember) -> Bool {
 
 extension CrewMember: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int,
             let creditID = dict["credit_id"] as? String,
             let name = dict["name"] as? String,
@@ -40,7 +40,7 @@ extension CrewMember: DictionarySerializable {
         self.profilePath = dict["profile_path"] as? String
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         return [:]
     }
 }

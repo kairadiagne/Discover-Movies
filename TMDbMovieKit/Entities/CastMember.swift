@@ -24,7 +24,7 @@ public func ==(lhs: CastMember, rhs: CastMember) -> Bool {
 
 extension CastMember: DictionarySerializable {
     
-    public init?(dictionary dict: [String : AnyObject]) {
+    public init?(dictionary dict: [String: AnyObject]) {
         guard let id = dict["id"] as? Int,
             let castID = dict["cast_id"] as? Int,
             let creditID = dict["credit_id"] as? String,
@@ -43,7 +43,7 @@ extension CastMember: DictionarySerializable {
         self.order = order
     }
     
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    public func dictionaryRepresentation() -> [String: AnyObject] {
         return [:]
     }
 }

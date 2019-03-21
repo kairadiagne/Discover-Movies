@@ -23,7 +23,7 @@ DEPENDENCIES:
   - youtube-ios-player-helper
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - BRYXBanner
     - ChameleonFramework
@@ -43,6 +43,6 @@ SPEC CHECKSUMS:
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: ec316a7e505e54cf581a76fabb8e6b1eebb87f2a
+PODFILE CHECKSUM: 1be1836ad2fde8c12bf9a6b6792cd63355e0aefb
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.1

@@ -33,7 +33,6 @@
 		1119430A1CCB8EE4001CF39B /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111943011CCB8EE4001CF39B /* Video.swift */; };
 		111943111CCB8EF6001CF39B /* TMDbImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */; };
 		111C22D62085318E008BC725 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 111C22D52085318E008BC725 /* .swiftlint.yml */; };
-		111C22D8208536F7008BC725 /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 111C22D7208536F7008BC725 /* Acknowledgements.plist */; };
 		111EC4471D436D24007DFA42 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111EC4461D436D24007DFA42 /* APIError.swift */; };
 		111EC4491D436D2F007DFA42 /* TMDbLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111EC4481D436D2F007DFA42 /* TMDbLists.swift */; };
 		11290AEC1D981F0700AC4231 /* NoDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11290AEA1D981F0700AC4231 /* NoDataCell.swift */; };
@@ -244,7 +243,6 @@
 		111943011CCB8EE4001CF39B /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbImageRouter.swift; sourceTree = "<group>"; };
 		111C22D52085318E008BC725 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		111C22D7208536F7008BC725 /* Acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		111EC4461D436D24007DFA42 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		111EC4481D436D2F007DFA42 /* TMDbLists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbLists.swift; sourceTree = "<group>"; };
 		11290AEA1D981F0700AC4231 /* NoDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataCell.swift; sourceTree = "<group>"; };
@@ -552,7 +550,6 @@
 				1119424B1CCB8CA0001CF39B /* Info.plist */,
 				11924C8F1D72F1D600B1022E /* Keys.plist */,
 				11C5014C1E4F34C90093DE9E /* DiscoverMovies.entitlements */,
-				111C22D7208536F7008BC725 /* Acknowledgements.plist */,
 			);
 			name = "Supporting files";
 			sourceTree = "<group>";
@@ -1209,7 +1206,6 @@
 				111C22D62085318E008BC725 /* .swiftlint.yml in Resources */,
 				1179FC6B1DA1002900CA1E6D /* AccountListController.xib in Resources */,
 				11924C901D72F1D600B1022E /* Keys.plist in Resources */,
-				111C22D8208536F7008BC725 /* Acknowledgements.plist in Resources */,
 				111942BB1CCB8DE5001CF39B /* DiscoverListCell.xib in Resources */,
 				111942EE1CCB8EAE001CF39B /* LaunchScreen.storyboard in Resources */,
 				11290AED1D981F0700AC4231 /* NoDataCell.xib in Resources */,
@@ -1309,7 +1305,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DiscoverMovies/Pods-DiscoverMovies-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DiscoverMovies/Pods-DiscoverMovies-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BRYXBanner/BRYXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -1330,7 +1326,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DiscoverMovies/Pods-DiscoverMovies-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DiscoverMovies/Pods-DiscoverMovies-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CF304D3EE2FE87DFC58175FE /* [CP] Check Pods Manifest.lock */ = {

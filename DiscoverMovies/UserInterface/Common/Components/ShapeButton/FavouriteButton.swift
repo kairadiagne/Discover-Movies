@@ -28,7 +28,7 @@ class FavouriteButton: AnimatedShapeButton {
         shapeLayer.lineWidth = Constants.LineWidth
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = lineColor.cgColor
-        shapeLayer.lineJoin = kCALineCapRound
+        shapeLayer.lineJoin = .round
         
         // Fill layer animates the filling
         let fillPath = generateFillPath(bounds.width, height: bounds.height)
@@ -37,12 +37,12 @@ class FavouriteButton: AnimatedShapeButton {
         fillLayer.frame = bounds
         fillLayer.path = fillPath.cgPath
         fillLayer.fillColor = fillColor.cgColor
-        fillLayer.lineJoin = kCALineCapRound
+        fillLayer.lineJoin = .round
         
         maskLayer = CAShapeLayer()
         maskLayer.path = generateStarPath(bounds.width, height: bounds.height).cgPath
         maskLayer.frame = self.bounds
-        maskLayer.lineJoin = kCALineJoinRound
+        maskLayer.lineJoin = CAShapeLayerLineJoin.round
         
         layer.addSublayer(shapeLayer)
         layer.addSublayer(fillLayer)

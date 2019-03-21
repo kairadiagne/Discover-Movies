@@ -106,7 +106,7 @@ extension ReviewViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return !reviewDataSource.isEmpty ? UITableViewAutomaticDimension : tableView.bounds.height
+        return !reviewDataSource.isEmpty ? UITableView.automaticDimension : tableView.bounds.height
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -36,7 +36,7 @@ class AccountListTableViewCell: UITableViewCell, NibReusabelCell {
     func configure(_ movie: Movie, imageURL: URL?) {
         titleLabel.text = movie.title
         overViewLabel.text = movie.overview
-        posterView.sd_setImage(with: imageURL) // TODO: Add new placeholder
+        posterView.sd_setImage(with: imageURL)
     }
     
     // MARK: - Reuse

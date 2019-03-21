@@ -116,7 +116,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         fillAnimation.fromValue = fill ? unfilledPath.cgPath : filledPath.cgPath
         fillAnimation.toValue = fill ? filledPath.cgPath : unfilledPath.cgPath
         fillAnimation.duration = duration
-        fillAnimation.fillMode = kCAFillModeForwards
+        fillAnimation.fillMode = CAMediaTimingFillMode.forwards
         fillAnimation.isRemovedOnCompletion = false
         fillLayer.add(fillAnimation, forKey: Constants.FillAnimationKey)
     }
@@ -127,7 +127,7 @@ class AnimatedShapeButton: UIControl, CAAnimationDelegate {
         scaleAnimation.fromValue = fromValue
         scaleAnimation.toValue = toValue
         scaleAnimation.duration = duration
-        scaleAnimation.fillMode = kCAFillModeForwards
+        scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
         scaleAnimation.isRemovedOnCompletion = false
         self.layer.add(scaleAnimation, forKey: key)
     }

@@ -22,7 +22,7 @@ class WatchListButton: AnimatedShapeButton {
         shapeLayer.lineWidth = lineWidth
         shapeLayer.strokeColor = lineColor.cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.lineJoin = kCALineJoinRound
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
         
         let fillRect = CGRect(x: 0, y: bounds.height, width: bounds.width, height: 0)
         fillLayer.frame = bounds
@@ -30,11 +30,11 @@ class WatchListButton: AnimatedShapeButton {
         fillLayer.lineWidth = lineWidth
         fillLayer.strokeColor = lineColor.cgColor
         fillLayer.fillColor = fillColor.cgColor
-        fillLayer.lineJoin = kCALineJoinRound
+        fillLayer.lineJoin = CAShapeLayerLineJoin.round
         
         maskLayer.frame = bounds
         maskLayer.path = generateWatchListPath(bounds.width, height: bounds.height).cgPath
-        maskLayer.lineJoin = kCALineJoinRound
+        maskLayer.lineJoin = CAShapeLayerLineJoin.round
         
         layer.addSublayer(shapeLayer)
         layer.addSublayer(fillLayer)
@@ -87,7 +87,7 @@ class WatchListButton: AnimatedShapeButton {
         fillAnimation.fromValue = fill ? unfilledPath.cgPath : filledPath.cgPath
         fillAnimation.toValue = fill ? filledPath.cgPath : unfilledPath.cgPath
         fillAnimation.duration = duration
-        fillAnimation.fillMode = kCAFillModeForwards
+        fillAnimation.fillMode = CAMediaTimingFillMode.forwards
         fillAnimation.isRemovedOnCompletion = false
         fillLayer.add(fillAnimation, forKey: Constants.FillAnimationKey)
     }

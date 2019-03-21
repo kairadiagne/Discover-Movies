@@ -866,7 +866,6 @@
 				80A75C46988BC125D8FDDA75 /* Pods-TMDbMovieKit.debug.xcconfig */,
 				A68C6ABAB40BCA49D0F614CE /* Pods-TMDbMovieKit.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1115,14 +1114,14 @@
 				TargetAttributes = {
 					110F02D01E11795C005ADC4A = {
 						CreatedOnToolsVersion = 8.2;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1119423B1CCB8CA0001CF39B;
 					};
 					1119423B1CCB8CA0001CF39B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 85J9C69P9Z;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -1142,7 +1141,7 @@
 					111942631CCB8CBE001CF39B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = S4F83VS4FR;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1010;
 					};
 					1119426C1CCB8CBF001CF39B = {
 						CreatedOnToolsVersion = 7.3;
@@ -1543,8 +1542,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = DiscoverMovies;
 			};
 			name = Debug;
@@ -1563,8 +1561,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = DiscoverMovies;
 			};
 			name = Release;
@@ -1697,8 +1694,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = DiscoverDevelopment;
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1723,8 +1719,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = DiscoverDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoverMovies/DiscoverMovies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1784,8 +1779,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1811,8 +1805,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

@@ -10,7 +10,7 @@ import UIKit
 
 extension UIButton {
     
-    func setBackground(color: UIColor, forState state: UIControlState) {
+    func setBackground(color: UIColor, forState state: UIControl.State) {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
         if let context = UIGraphicsGetCurrentContext() {

@@ -30,7 +30,7 @@ class MenuView: UIView {
         nameLabel.textAlignment = .center
 
         tableView.estimatedRowHeight = 80
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
 
         tableView.backgroundColor = .clear
         tableView.hideEmptyRows()

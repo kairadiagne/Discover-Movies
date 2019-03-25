@@ -9,10 +9,6 @@ default_platform(:ios)
 platform :ios do
 
   before_all do
-    # Make sure we have the required certificates
-    cert
-    # Make sure we have the requried provisioning Profiles
-    sigh(force: true)
   end
 
   desc "Description of what the lane does"

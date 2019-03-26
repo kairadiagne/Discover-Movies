@@ -15,5 +15,11 @@ platform :ios do
   lane :release do
     # Make sure we have the required certificate and provisioning profile
     match(type: "appstore", force: true)
+    # Make a clean build of the app
+    gym(clean: true,
+      scheme: "DiscoverMovies",
+      export_options: {
+        method: "app-store"
+      })
   end
 end

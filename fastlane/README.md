@@ -16,11 +16,11 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios custom_lane
+### ios release
 ```
-fastlane ios custom_lane
+fastlane ios release
 ```
-Description of what the lane does
+Distributes a new build to the App Store
 
 ----
 

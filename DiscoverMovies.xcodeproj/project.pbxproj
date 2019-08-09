@@ -772,8 +772,8 @@
 		11A4790A1EF89E150067E85F /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				113D11391E474E77006D8096 /* BaseNavigationController.swift */,
 				1179FC561D98777300CA1E6D /* BaseView.swift */,
+				113D11391E474E77006D8096 /* BaseNavigationController.swift */,
 				11D09A091D97C04300FEDB21 /* BaseViewController.swift */,
 			);
 			path = Base;
@@ -1109,7 +1109,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Kaira Diagne";
 				TargetAttributes = {
 					110F02D01E11795C005ADC4A = {
@@ -1154,7 +1154,7 @@
 			};
 			buildConfigurationList = 111942371CCB8CA0001CF39B /* Build configuration list for PBXProject "DiscoverMovies" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -1570,6 +1570,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1627,6 +1628,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

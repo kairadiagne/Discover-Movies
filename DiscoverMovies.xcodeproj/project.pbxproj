@@ -899,9 +899,8 @@
 		EAD2A8211CDC9D000005264B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				1120B28E22FE019500F28E7C /* Root */,
 				1179FC6C1DA1165D00CA1E6D /* Launch */,
-				EAD2A8341CDC9EF30005264B /* Menu */,
+				1120B28E22FE019500F28E7C /* Root */,
 				EAD2A8331CDC9EEB0005264B /* Sign in */,
 				11A4FDAD1D906C9E00CA7F07 /* TopList */,
 				EAD2A8301CDC9EAF0005264B /* Detail */,
@@ -911,6 +910,7 @@
 				EAD2A82F1CDC9E910005264B /* AccountList */,
 				1136FBD91DA2D7A300CED407 /* Search */,
 				1167E7691DC648C7003400B7 /* About */,
+				EAD2A8341CDC9EF30005264B /* Menu */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

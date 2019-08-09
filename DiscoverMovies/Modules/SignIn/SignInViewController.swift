@@ -11,7 +11,7 @@ import TMDbMovieKit
 import SafariServices
 
 protocol SignInViewControllerDelegate: class {
-    func signInViewControllerDidFinish()
+    func signInViewControllerDidFinish(_ controller: SignInViewController)
 }
 
 final class SignInViewController: UIViewController {
@@ -79,7 +79,7 @@ final class SignInViewController: UIViewController {
     
     @IBAction func signInlaterButtonClick(_ sender: UIButton) {
         sessionManager.activatePublicMode()
-        delegate?.signInViewControllerDidFinish()
+        delegate?.signInViewControllerDidFinish(self)
     }
 }
 
@@ -104,7 +104,7 @@ extension SignInViewController: TMDbSignInDelegate {
     func signInServiceDidSignIn(_ service: TMDbSignInService) {
         signInView.set(state: .idle)
         userService.getUserInfo()
-        delegate?.signInViewControllerDidFinish()
+        delegate?.signInViewControllerDidFinish(self)
     }
 }
 

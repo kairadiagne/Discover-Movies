@@ -53,8 +53,24 @@ final class DiscoverTabBarController: UITabBarController {
         tabBar.tintColor = UIColor.buttonColor()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        guard dependencyContainer.sessionManager.signInStatus == .unkown else { return }
+        let signInViewController = SignInViewControllerFactory.create(with: dependencyContainer)
+        signInViewController.delegate = self
+        present(signInViewController, animated: true, completion: nil)
+    }
+
     private func freshNavigationController(rootViewController: UIViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: rootViewController)
         return navigationController
+    }
+}
+
+extension DiscoverTabBarController: SignInViewControllerDelegate {
+
+    func signInViewControllerDidFinish(_ controller: SignInViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }

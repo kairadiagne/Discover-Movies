@@ -77,12 +77,12 @@ extension SegmentedViewController: SegmentedViewDelegate {
 extension SegmentedViewController: UIPageViewControllerDelegate {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let index = viewControllers.index(of: viewController)! - 1
+        let index = viewControllers.firstIndex(of: viewController)! - 1
         return index >= 0 && index < viewControllers.count ? viewControllers[index] : nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let index = viewControllers.index(of: viewController)! + 1
+        let index = viewControllers.firstIndex(of: viewController)! + 1
         return index >= 0 && index < viewControllers.count ? viewControllers[index] : nil
     }
 }
@@ -98,7 +98,7 @@ extension SegmentedViewController: UIPageViewControllerDataSource {
         }
         
         let visibleViewController = pageViewController.viewControllers!.first!
-        let index = viewControllers.index(of: visibleViewController)!
+        let index = viewControllers.firstIndex(of: visibleViewController)!
         segmentedView.set(selectedIndex: index)
     }
 }

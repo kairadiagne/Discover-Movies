@@ -111,7 +111,7 @@ extension ApiRequest {
         return ApiRequest(base: TMDbAPI.BaseURL, path: "search/movie")
     }
 
-    // MARK - Details
+    // MARK: - Details
 
     static func movieDetail(movieID: Int) -> ApiRequest {
         return ApiRequest(base: TMDbAPI.BaseURL, path: "movie/\(movieID)", paramaters: ["append_to_response": "credits,trailers" as AnyObject])

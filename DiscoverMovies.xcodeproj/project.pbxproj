@@ -86,6 +86,7 @@
 		11924C901D72F1D600B1022E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11924C8F1D72F1D600B1022E /* Keys.plist */; };
 		11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C911D73037500B1022E /* Dictionary+merge.swift */; };
 		11924C941D731AC100B1022E /* APIErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C931D731AC100B1022E /* APIErrorHandler.swift */; };
+		119493A522FE32DB00E0A6F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119493A422FE32DB00E0A6F8 /* SceneDelegate.swift */; };
 		1195B4AE1D30F4B2004287A3 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */; };
 		119A1F3E1D415B0D00AC61C7 /* CachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* CachedData.swift */; };
 		119DADE11EF8247C0078C6E9 /* NibReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119DADE01EF8247C0078C6E9 /* NibReusableCell.swift */; };
@@ -300,6 +301,7 @@
 		11924C8F1D72F1D600B1022E /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		11924C911D73037500B1022E /* Dictionary+merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+merge.swift"; path = "TMDbMovieKit/Extensions/Dictionary+merge.swift"; sourceTree = SOURCE_ROOT; };
 		11924C931D731AC100B1022E /* APIErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIErrorHandler.swift; sourceTree = "<group>"; };
+		119493A422FE32DB00E0A6F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1195B4AD1D30F4B2004287A3 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = DiscoverMovies/Modules/Detail/DetailViewController.xib; sourceTree = SOURCE_ROOT; };
 		119A1F3D1D415B0D00AC61C7 /* CachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedData.swift; sourceTree = "<group>"; };
 		119DADE01EF8247C0078C6E9 /* NibReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibReusableCell.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			children = (
 				1120B27C22FDF78900F28E7C /* DependencyContainer.swift */,
 				1119428A1CCB8DBF001CF39B /* AppDelegate.swift */,
+				119493A422FE32DB00E0A6F8 /* SceneDelegate.swift */,
 				11A479081EF89DDA0067E85F /* Protocols */,
 				11D099FE1D966B2500FEDB21 /* UIElements */,
 				EAD2A8211CDC9D000005264B /* Modules */,
@@ -1386,6 +1389,7 @@
 				EA6487E21CE5A4E300452DD0 /* ReviewTableViewCell.swift in Sources */,
 				EADA5AAA1CEA6B6A00C2FAE8 /* Colors.swift in Sources */,
 				EAA8620D1CEE41C300C76D4D /* WatchListButton.swift in Sources */,
+				119493A522FE32DB00E0A6F8 /* SceneDelegate.swift in Sources */,
 				11D09A021D966E1C00FEDB21 /* MovieListDataSource.swift in Sources */,
 				1179FC711DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift in Sources */,
 				1136FBE31DA2E30500CED407 /* SearchView.swift in Sources */,
@@ -1685,7 +1689,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = "$(SRCROOT)/DiscoverMovies/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1710,7 +1714,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 85J9C69P9Z;
 				INFOPLIST_FILE = "$(SRCROOT)/DiscoverMovies/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kairadiagne.discover;
 				PRODUCT_NAME = "$(TARGET_NAME)";

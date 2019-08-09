@@ -8,7 +8,6 @@
 
 import UIKit
 import TMDbMovieKit
-import SWRevealViewController
 
 class SearchViewController: BaseViewController {
     
@@ -42,8 +41,6 @@ class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addMenuButton()
-        
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
@@ -76,8 +73,6 @@ class SearchViewController: BaseViewController {
         let loadingSelector = #selector(SearchViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(SearchViewController.dataManagerDidUpdate(notification:))
         searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        
-        revealViewController().delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,8 +86,6 @@ class SearchViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchManager.remove(observer: self)
-        
-        revealViewController().delegate = nil
     }
     
     // MARK: - Notifications
@@ -107,16 +100,6 @@ class SearchViewController: BaseViewController {
     override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
         searchView.tableView.reloadData()
-    }
-    
-    // MARK: - SWRevealControllerDelegate
-    
-    override func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
-        super.revealController(revealController, willMoveTo: position)
-        
-        if position.rawValue == 4 {
-            searchController.searchBar.resignFirstResponder()
-        }
     }
 }
 

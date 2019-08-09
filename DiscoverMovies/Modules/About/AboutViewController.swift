@@ -66,8 +66,6 @@ class AboutViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addMenuButton()
-        
         aboutView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.SectionCellIdentifier)
         
         aboutView.tableView.delegate = self

@@ -8,19 +8,10 @@
 
 import UIKit
 import TMDbMovieKit
-import SWRevealViewController
 
 class BaseViewController: UIViewController, DataManagerFailureDelegate {
     
     // MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-        revealViewController().tapGestureRecognizer()
-        revealViewController().panGestureRecognizer()
-        revealViewController().delegate = self
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,19 +47,6 @@ class BaseViewController: UIViewController, DataManagerFailureDelegate {
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
-    }
-}
-
-// MARK: - SWRevealViewControllerDelegate
-
-extension BaseViewController: SWRevealViewControllerDelegate {
-    
-    func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
-        if position == FrontViewPosition.right {
-            revealController.frontViewController.view.isUserInteractionEnabled = false
-        } else {
-            revealController.frontViewController.view.isUserInteractionEnabled = true
-        }
     }
 }
 

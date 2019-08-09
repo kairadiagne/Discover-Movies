@@ -65,8 +65,8 @@ class ErrorHandler {
             
             // Sign out user in case of authorization error
             if strongSelf.currentError == .unAuthorized {
-                let appCoordinator = (UIApplication.shared.delegate as? AppDelegate)?.appCoordinator
-                appCoordinator?.signOut()
+//                let appCoordinator = (UIApplication.shared.delegate as? AppDelegate)?.appCoordinator
+//                appCoordinator?.signOut()
             }
             
             // Clear cached values

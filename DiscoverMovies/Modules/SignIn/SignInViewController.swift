@@ -36,7 +36,7 @@ class SignInViewController: UIViewController {
     
     // MARK: - Initialize 
     
-    init(sessionManager: TMDbSessionManager, signInService: TMDbSignInService = TMDbSignInService(), userService: TMDbUserService = TMDbUserService()) {
+    init(sessionManager: TMDbSessionManager, signInService: TMDbSignInService, userService: TMDbUserService) {
         self.sessionManager = sessionManager
         self.signInService = signInService
         self.userService = userService

@@ -44,7 +44,6 @@ class AccountListController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addMenuButton()
         
         accountListView.tableView.register(AccountListTableViewCell.nib, forCellReuseIdentifier: AccountListTableViewCell.reuseId)
         accountListView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)

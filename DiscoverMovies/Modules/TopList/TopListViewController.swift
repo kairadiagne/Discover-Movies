@@ -8,18 +8,9 @@
 
 import UIKit
 import TMDbMovieKit
-import SDWebImage
 
-class TopListViewController: SegmentedViewController {
-    
-    // MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        addMenuButton()
-    }
-    
+final class TopListViewController: SegmentedViewController {
+
     // MARK: - Initialize
     
     init(popularListManager: TMDbTopListDataManager,

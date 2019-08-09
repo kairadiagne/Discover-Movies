@@ -29,5 +29,16 @@ public final class TMDbAccountListDataManager: ListDataManager<Movie> {
         let userID = sessionInfoStorage.user?.id ?? 1
         let sessionID = sessionInfoStorage.sessionID ?? ""
         super.init(request: ApiRequest.accountList(list, userID: userID, sessionID: sessionID), refreshTimeOut: 0, cacheIdentifier: list.name)
+        subscribeForNotifications()
+    }
+
+    // MARK: - Notifications
+
+    private func subscribeForNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didLogOut), name: Notification.Name.SessionManager.didLogOut, object: nil)
+    }
+
+    @objc private func didLogOut() {
+        clear()
     }
 }

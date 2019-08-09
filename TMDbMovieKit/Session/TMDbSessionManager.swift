@@ -38,6 +38,7 @@ public final class TMDbSessionManager {
     
     init(storage: SessionInfoStorage) {
         self.sessionInfoStorage = storage
+
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
         let freshInstall = UserDefaults.standard.bool(forKey: Constants.FreshInstallKey) == false
         
@@ -60,13 +61,17 @@ public final class TMDbSessionManager {
         if publicModeActivated { return .publicMode }
         return .unknown
     }
+
+    func logOut() {
+        NotificationCenter.default.post(name: Notification.Name.SessionManager.didLogOut, object: nil, userInfo: nil)
+    }
     
     // MARK: - Public Mode
     
     private var publicModeActivated: Bool {
         return UserDefaults.standard.bool(forKey: "userIsInpublicMode")
     }
-    
+
     public func activatePublicMode() {
         UserDefaults.standard.set(true, forKey: "userIsInpublicMode")
     }
@@ -74,10 +79,10 @@ public final class TMDbSessionManager {
     public func deactivatePublicMode() {
         UserDefaults.standard.set(false, forKey: "userIsInpublicMode")
     }
-    
-    // MARK: - Sign Out
-    
-    public func signOut() {
-        sessionInfoStorage.clearUserData()
+}
+
+extension Notification.Name {
+    struct SessionManager {
+        static let didLogOut = Notification.Name(rawValue: "SessionManagerDidLogout")
     }
 }

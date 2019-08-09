@@ -94,8 +94,9 @@ public final class TMDbSignInService {
                 case .success(let json):
                     guard let resultDict = json as? [String: AnyObject] else { return }
                     guard let sessionID = resultDict["session_id"] as? String else { return }
-                    
+
                     self.sessionInfoStorage.saveSessionID(sessionID)
+
                     self.delegate?.signInServiceDidSignIn(self)
 
                 case .failure(let error):

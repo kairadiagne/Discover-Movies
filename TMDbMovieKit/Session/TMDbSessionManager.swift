@@ -11,7 +11,7 @@ import Foundation
 public enum TMDBSigInStatus {
     case signedin
     case publicMode
-    case unkown
+    case unknown
 }
 
 public final class TMDbSessionManager {
@@ -58,7 +58,7 @@ public final class TMDbSessionManager {
     public var signInStatus: TMDBSigInStatus {
         if sessionInfoProvider.sessionID != nil { return .signedin }
         if publicModeActivated { return .publicMode }
-        return .unkown
+        return .unknown
     }
     
     // MARK: - Public Mode

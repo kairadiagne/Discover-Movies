@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class ReviewDataSource: BaseTableViewDataSource<Review, ReviewTableViewCell> {
+final class ReviewDataSource: BaseTableViewDataSource<Review, ReviewTableViewCell> {
     
     override func configure(_ cell: ReviewTableViewCell, atIndexPath indexPath: IndexPath) {
         let review = items[indexPath.row]

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NoDataCell: UITableViewCell, NibReusabelCell, NoDataMessageConfigurable {
+final class NoDataCell: UITableViewCell, NibReusabelCell, NoDataMessageConfigurable {
     
     // MARK: - Properties
     

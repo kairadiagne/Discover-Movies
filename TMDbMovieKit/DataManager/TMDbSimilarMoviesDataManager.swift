@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbSimilarMoviesDataManager: ListDataManager<Movie> {
+public final class TMDbSimilarMoviesDataManager: ListDataManager<Movie> {
     
     // MARK: - Properties
     

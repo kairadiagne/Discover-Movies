@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class CastDataSource: BaseCollectionViewDataSource<CastMember, PosterImageCollectionViewCell> {
+final class CastDataSource: BaseCollectionViewDataSource<CastMember, PosterImageCollectionViewCell> {
 
     override func configure(_ cell: PosterImageCollectionViewCell, atIndexPath indexPath: IndexPath) {
         let viewModel = PersonCellViewModel(person: items[indexPath.row])

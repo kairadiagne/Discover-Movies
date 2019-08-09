@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchView: UIView {
+final class SearchView: UIView {
 
     // MARK: - Properties
     

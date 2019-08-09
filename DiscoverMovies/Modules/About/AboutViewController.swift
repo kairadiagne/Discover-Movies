@@ -16,7 +16,7 @@ protocol Section {
     var rowTitle: String { get }
 }
 
-class AboutViewController: BaseViewController {
+final class AboutViewController: BaseViewController {
     
     // MARK: - Types
     

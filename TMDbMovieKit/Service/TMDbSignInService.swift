@@ -33,7 +33,7 @@ public protocol TMDbSignInDelegate: class {
     func signInServiceDidSignIn(_ service: TMDbSignInService)
 }
 
-public class TMDbSignInService {
+public final class TMDbSignInService {
     
     // MARK: - Properties
     

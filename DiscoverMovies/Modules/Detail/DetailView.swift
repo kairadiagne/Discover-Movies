@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class DetailView: UIView {
+final class DetailView: UIView {
     
     // MARK: - Properties
     

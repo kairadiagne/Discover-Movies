@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SafariServices
 
-class PersonDetailViewController: BaseViewController {
+final class PersonDetailViewController: BaseViewController {
     
     // MARK: - Properties
     

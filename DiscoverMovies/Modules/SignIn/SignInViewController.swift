@@ -14,7 +14,7 @@ protocol SignInViewControllerDelegate: class {
     func signInViewControllerDidFinish()
 }
 
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
     
     // MARK: - Properties
 

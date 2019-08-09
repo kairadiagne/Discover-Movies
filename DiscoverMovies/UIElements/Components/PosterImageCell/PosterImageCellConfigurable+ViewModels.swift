@@ -14,7 +14,7 @@ protocol PosterImageCellConfigurable {
     var text: String? { get }
 }
 
-class PersonCellViewModel: PosterImageCellConfigurable {
+final class PersonCellViewModel: PosterImageCellConfigurable {
     
     // MARK: - Properties
     
@@ -30,7 +30,7 @@ class PersonCellViewModel: PosterImageCellConfigurable {
     }
 }
 
-class MoviePosterCellViewModel: PosterImageCellConfigurable {
+final class MoviePosterCellViewModel: PosterImageCellConfigurable {
     
     private(set) var imageURL: URL?
     

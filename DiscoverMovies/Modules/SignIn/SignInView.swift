@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInView: BaseView {
+final class SignInView: BaseView {
     
     // MARK: - Properties
     

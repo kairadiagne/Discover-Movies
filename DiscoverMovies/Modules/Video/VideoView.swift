@@ -9,7 +9,7 @@
 import UIKit
 import youtube_ios_player_helper
 
-class VideoView: UIView {
+final class VideoView: UIView {
     
     // MARK: - Properties 
     

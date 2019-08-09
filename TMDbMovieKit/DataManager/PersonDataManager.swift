@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class PersonDataManager: DataManager<Person> {
+public final class PersonDataManager: DataManager<Person> {
     
     // MARK: - Properties
     

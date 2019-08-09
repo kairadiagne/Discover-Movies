@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AcknowledgementsTableViewController: UITableViewController {
+final class AcknowledgementsTableViewController: UITableViewController {
     
     // MARK: - Properties
     

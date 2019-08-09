@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class SearchDataSource: BaseTableViewDataSource<Movie, SearchTableViewCell> {
+final class SearchDataSource: BaseTableViewDataSource<Movie, SearchTableViewCell> {
     
     override func configure(_ cell: SearchTableViewCell, atIndexPath indexPath: IndexPath) {
         let movie = items[indexPath.row]

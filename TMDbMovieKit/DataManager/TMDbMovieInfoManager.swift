@@ -15,7 +15,7 @@ public protocol TMDbMovieInfoManagerDelegate: class {
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError)
 }
 
-public class TMDbMovieInfoManager {
+public final class TMDbMovieInfoManager {
     
     // MARK: - Properties
     

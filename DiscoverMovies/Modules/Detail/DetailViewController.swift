@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class DetailViewController: BaseViewController {
+final class DetailViewController: BaseViewController {
     
     // MARK: - Properties
     

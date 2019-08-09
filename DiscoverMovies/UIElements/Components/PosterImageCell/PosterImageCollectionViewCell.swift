@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-class PosterImageCollectionViewCell: UICollectionViewCell, NibReusabelCell {
+final class PosterImageCollectionViewCell: UICollectionViewCell, NibReusabelCell {
     
     // MARK: - Properties
     

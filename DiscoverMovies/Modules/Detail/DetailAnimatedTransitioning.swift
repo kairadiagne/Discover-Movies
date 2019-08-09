@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+final class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: - UIViewControllerAnimatedTransitioning
     

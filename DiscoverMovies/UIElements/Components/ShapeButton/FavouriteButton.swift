@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouriteButton: AnimatedShapeButton {
+final class FavouriteButton: AnimatedShapeButton {
     
     // MARK: - Types 
     

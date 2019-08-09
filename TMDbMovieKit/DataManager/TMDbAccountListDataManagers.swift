@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbAccountListDataManager: ListDataManager<Movie> {
+public final class TMDbAccountListDataManager: ListDataManager<Movie> {
     
     // MARK: - Properties 
     

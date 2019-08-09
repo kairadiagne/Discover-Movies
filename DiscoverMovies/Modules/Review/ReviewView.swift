@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewView: BaseView {
+final class ReviewView: BaseView {
 
     // MARK: - Properties
 

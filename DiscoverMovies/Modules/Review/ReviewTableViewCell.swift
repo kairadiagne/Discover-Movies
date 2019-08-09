@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class ReviewTableViewCell: UITableViewCell, NibReusabelCell {
+final class ReviewTableViewCell: UITableViewCell, NibReusabelCell {
     
     // MARK: - Properties
     

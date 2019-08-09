@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountListView: BaseView {
+final class AccountListView: BaseView {
 
     // MARK: - Properties
 

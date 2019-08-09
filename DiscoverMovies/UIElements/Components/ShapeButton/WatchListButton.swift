@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WatchListButton: AnimatedShapeButton {
+final class WatchListButton: AnimatedShapeButton {
     
     // MARK: - Properties
 

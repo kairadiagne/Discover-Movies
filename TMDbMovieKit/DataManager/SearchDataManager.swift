@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SearchDataManager: ListDataManager<Movie> {
+public final class SearchDataManager: ListDataManager<Movie> {
     
     // MARK: - Initialize 
     

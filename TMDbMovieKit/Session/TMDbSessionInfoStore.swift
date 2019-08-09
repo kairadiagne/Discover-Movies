@@ -9,7 +9,7 @@
 import Foundation
 import Locksmith
 
-class TMDbSessionInfoStore: SessionInfoContaining {
+final class TMDbSessionInfoStore: SessionInfoContaining {
     
     // MARK: - Types
     

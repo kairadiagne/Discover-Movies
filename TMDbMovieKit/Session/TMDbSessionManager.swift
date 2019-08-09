@@ -14,7 +14,7 @@ public enum TMDBSigInStatus {
     case unkown
 }
 
-public class TMDbSessionManager {
+public final class TMDbSessionManager {
     
     // MARK: - Types
     

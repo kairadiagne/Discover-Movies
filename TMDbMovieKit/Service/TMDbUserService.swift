@@ -14,7 +14,7 @@ public protocol TMDbUserServiceDelegate: class {
     func user(service: TMDbUserService, didFailWithError error: APIError)
 }
 
-public class TMDbUserService {
+public final class TMDbUserService {
     
     // MARK: - Properties
     

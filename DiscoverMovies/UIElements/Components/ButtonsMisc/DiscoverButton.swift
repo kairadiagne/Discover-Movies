@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiscoverButton: UIButton {
+final class DiscoverButton: UIButton {
     
     // MARK: - Initialize 
     

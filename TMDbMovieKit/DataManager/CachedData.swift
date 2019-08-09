@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
+final class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
     
     // MARK: - Properties
     

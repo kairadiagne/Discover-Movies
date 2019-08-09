@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GradientImageView: UIImageView {
+final class GradientImageView: UIImageView {
     
     // MARK: - Properties
 

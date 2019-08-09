@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class ReviewViewController: BaseViewController {
+final class ReviewViewController: BaseViewController {
     
     // MARK: - Types
     

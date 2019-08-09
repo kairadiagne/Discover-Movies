@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class AccountListDataSource: BaseTableViewDataSource<Movie, AccountListTableViewCell> {
+final class AccountListDataSource: BaseTableViewDataSource<Movie, AccountListTableViewCell> {
     
     override init(emptyMessage: String = "noMoviesInListText".localized) {
         super.init(emptyMessage: emptyMessage)

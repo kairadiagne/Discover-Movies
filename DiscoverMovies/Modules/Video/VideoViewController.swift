@@ -14,7 +14,7 @@ protocol VideoViewControllerDelegate: class {
     func videoViewControllerDidFinish(_ controller: VideoViewController)
 }
 
-class VideoViewController: UIViewController {
+final class VideoViewController: UIViewController {
     
     // MARK: - Properties
     

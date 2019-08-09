@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbReviewManager: ListDataManager<Review> {
+public final class TMDbReviewManager: ListDataManager<Review> {
     
     // MARK: - Properties
 

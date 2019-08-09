@@ -100,7 +100,6 @@
 		11D8E0C41EF85DCE0028E531 /* NoDataMessageConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8E0C31EF85DCE0028E531 /* NoDataMessageConfigurable.swift */; };
 		11D8E0C61EF86E890028E531 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8E0C51EF86E890028E531 /* String+Localized.swift */; };
 		11D8E0C81EF876B90028E531 /* PosterImageCellConfigurable+ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8E0C71EF876B90028E531 /* PosterImageCellConfigurable+ViewModels.swift */; };
-		11DC09AE1DC7EE19008CA93C /* DataContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D099FF1D966B4600FEDB21 /* DataContaining.swift */; };
 		11DC09AF1DC7EE1C008CA93C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D09A091D97C04300FEDB21 /* BaseViewController.swift */; };
 		11DC09B01DC7EE1E008CA93C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC561D98777300CA1E6D /* BaseView.swift */; };
 		11DC09B11DC7EE21008CA93C /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179FC6E1DA11FE400CA1E6D /* ErrorHandler.swift */; };
@@ -308,7 +307,6 @@
 		11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = DiscoverMovies/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		11C9856F1DD8F8800044C23B /* TMDbSimilarMoviesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSimilarMoviesDataManager.swift; sourceTree = "<group>"; };
 		11D099F91D907AC500FEDB21 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
-		11D099FF1D966B4600FEDB21 /* DataContaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContaining.swift; sourceTree = "<group>"; };
 		11D09A011D966E1C00FEDB21 /* MovieListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieListDataSource.swift; path = ../DataSource/MovieListDataSource.swift; sourceTree = "<group>"; };
 		11D09A091D97C04300FEDB21 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		11D5506D1DE1044400AAEA4E /* RequestConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestConfigurations.swift; sourceTree = "<group>"; };
@@ -754,7 +752,6 @@
 			isa = PBXGroup;
 			children = (
 				119DADE01EF8247C0078C6E9 /* NibReusableCell.swift */,
-				11D099FF1D966B4600FEDB21 /* DataContaining.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1411,7 +1408,6 @@
 				11E8F59E1DB3A70900583840 /* DetailAnimatedTransitioning.swift in Sources */,
 				113946321CCBBA80001CFAEA /* Date+ToString.swift in Sources */,
 				EA64879F1CE3569700452DD0 /* DetailViewController.swift in Sources */,
-				11DC09AE1DC7EE19008CA93C /* DataContaining.swift in Sources */,
 				113D11361E412EC8006D8096 /* CrossDissolveAnimatedTransitioning.swift in Sources */,
 				11A479131EF8F0560067E85F /* BaseCollectionViewDataSource.swift in Sources */,
 				11A479011EF87E440067E85F /* SegmentedViewController.swift in Sources */,

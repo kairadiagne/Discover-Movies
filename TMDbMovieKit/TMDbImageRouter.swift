@@ -8,7 +8,6 @@
 
 import Foundation
 
-// swiftlint:disable identifier_name
 public enum TMDbImageRouter {
     case backDropSmall(path: String)
     case backDropMedium(path: String)

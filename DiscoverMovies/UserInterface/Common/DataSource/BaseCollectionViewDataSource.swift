@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UICollectionViewDataSource, DataContaining where Cell: UICollectionViewCell {
+class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionViewCell>: NSObject, UICollectionViewDataSource  {
     
     typealias ItemType = Item
     typealias NoDataCellType = NoDataCollectionViewCell
@@ -50,5 +50,26 @@ class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UICol
     /// Designated for subclass
     func configure(_ cell: Cell, atIndexPath indexPath: IndexPath) {
         fatalError("Designated for subclass")
+    }
+
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+
+    var itemCount: Int {
+        return items.count
+    }
+
+    var numberOfItems: Int {
+        return isEmpty ? 1 : itemCount
+    }
+
+    func item(atIndex index: Int) -> ItemType? {
+        guard index >= 0 && index <= itemCount && !isEmpty else { return nil }
+        return items[index]
+    }
+
+    func clear() {
+        items.removeAll()
     }
 }

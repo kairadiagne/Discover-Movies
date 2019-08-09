@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UITableViewDataSource, DataContaining where Cell: UITableViewCell {
+class BaseTableViewDataSource<Item, Cell: NibReusabelCell & UITableViewCell>: NSObject, UITableViewDataSource {
     
     typealias ItemType = Item
     typealias NoDataCellType = NoDataCell
@@ -48,5 +48,26 @@ class BaseTableViewDataSource<Item, Cell: NibReusabelCell>: NSObject, UITableVie
 
     func configure(_ cell: Cell, atIndexPath indexPath: IndexPath) {
         fatalError("Designated for subclass")
+    }
+
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+
+    var itemCount: Int {
+        return items.count
+    }
+
+    var numberOfItems: Int {
+        return isEmpty ? 1 : itemCount
+    }
+
+    func item(atIndex index: Int) -> ItemType? {
+        guard index >= 0 && index <= itemCount && !isEmpty else { return nil }
+        return items[index]
+    }
+
+    func clear() {
+        items.removeAll()
     }
 }

@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         dependencyContainer.sessionManager.registerAPIKey(apiKey)
 
-        // Set up the tab bar controller
         let tabBarController = DiscoverTabBarController(dependencyContainer: dependencyContainer)
         window?.rootViewController = tabBarController
 

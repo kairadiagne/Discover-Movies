@@ -11,7 +11,6 @@ target 'DiscoverMovies' do
     pod 'SDWebImage'
     pod 'ChameleonFramework'
     pod 'youtube-ios-player-helper'
-    pod 'SWRevealViewController'
     pod 'BRYXBanner'
     pod 'SwiftLint'
 end

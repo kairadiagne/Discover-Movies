@@ -49,8 +49,8 @@ public final class TMDbSessionManager {
 
     // MARK: - API Key
     
-    public func registerAPIKey(_ key: String) {
-        sessionInfoStorage.APIKey = key
+    public static func registerAPIKey(_ key: String) {
+        Configuration.configure(apiKey: key)
     }
     
     // MARK: - Signin Status

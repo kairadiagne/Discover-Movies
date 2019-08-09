@@ -19,7 +19,7 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     public weak var failureDelegate: DataManagerFailureDelegate?
     
-    let requestConfig: RequestConfiguration
+    private var request: ApiRequest
     
     let cacheRepository = Repository.cache
     
@@ -33,8 +33,8 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     // MARK: - Initialize
     
-    init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
-        self.requestConfig = configuration
+    init(request: ApiRequest, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
+        self.request = request
         self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
         self.cacheIdentifier = cacheIdentifier
         self.loadData()
@@ -56,8 +56,9 @@ public class DataManager<ModelType: DictionarySerializable> {
         var params = params
         params["page"] = page as AnyObject?
         cachedParams = params
-        
-        NetworkManager.shared.sessionManager.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
+        request.add(paramaters: params)
+
+        NetworkManager.shared.sessionManager.request(request)
             .validate().responseObject { (response: DataResponse<ModelType>) in
         
                 self.stopLoading()

@@ -10,7 +10,6 @@ import Foundation
 import Locksmith
 
 protocol SessionInfoContaining: class {
-    var APIKey: String { get set }
     var user: User? { get set }
     func clearUserData()
     var sessionID: String? { get}
@@ -36,16 +35,6 @@ final class SessionInfoStorage: SessionInfoContaining {
 
     init(keyValueStorage: KeyValueStorage) {
         self.keyValueStorage = keyValueStorage
-    }
-    
-    // MARK: - APIKey
-    
-    var APIKey: String {
-        get {
-            return keyValueStorage.string(forKey: Keys.APIKey) ?? ""
-        } set {
-            keyValueStorage.set(newValue, forKey: Keys.APIKey)
-        }
     }
     
     // MARK: - User

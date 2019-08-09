@@ -40,9 +40,9 @@ public final class TMDbMovieInfoManager {
     // MARK: - API Calls
     
     public func loadAdditionalInfo() {
-        let configuration = MovieDetailConfiguration(movieID: movieID)
+        let request = ApiRequest.movieDetail(movieID: movieID)
         
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: configuration.defaultParams, bodyParams: nil))
+        Alamofire.request(request)
             .responseObject { (response: DataResponse<MovieInfo>) in
                 
                 switch response.result {
@@ -63,14 +63,8 @@ public final class TMDbMovieInfoManager {
             delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }
-        
-        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
-        
-        let body: [String: AnyObject] = ["media_type": "movie" as AnyObject, "media_id": movieID as AnyObject, list.name: status as AnyObject]
-        
-        let configuration = ListStatusConfiguration(userID: userID, list: list)
-        
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: body))
+
+        Alamofire.request(ApiRequest.setMovieStatus(status: status, movieID: movieID, in: list, userID: userID, sessionID: sessionID))
             .responseJSON { (response) in
                 
                 guard response.result.error == nil else {
@@ -87,11 +81,9 @@ public final class TMDbMovieInfoManager {
             return
         }
         
-        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
+        let request = ApiRequest.accountState(movieID: movieID, sessionID: sessionID)
         
-        let configuration = AccountStateConfiguration(movieID: movieID)
-        
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
+        Alamofire.request(request)
             .responseObject { (response: DataResponse<AccountState>) in
                 
                 switch response.result {

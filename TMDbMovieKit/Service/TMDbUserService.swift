@@ -22,8 +22,6 @@ public final class TMDbUserService {
     
     private let sessionInfoStorage: SessionInfoContaining
     
-    private let configuration = UserConfiguration()
-    
     // MARK: - Initialize
 
     public convenience init() {
@@ -42,9 +40,7 @@ public final class TMDbUserService {
             return 
         }
         
-        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
-        
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
+        Alamofire.request(ApiRequest.getUser(sessionID: sessionID))
             .validate().responseObject { (response: DataResponse<User>) in
                 
                 switch response.result {

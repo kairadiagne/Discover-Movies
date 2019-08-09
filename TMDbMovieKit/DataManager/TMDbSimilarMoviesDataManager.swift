@@ -22,6 +22,6 @@ public final class TMDbSimilarMoviesDataManager: ListDataManager<Movie> {
     
     public init(movieID: Int) {
         self.movieID = movieID
-        super.init(configuration: SimilarMoviesRequestConfiguration(movieID: movieID), refreshTimeOut: 0)
+        super.init(request: ApiRequest.similarMovies(movieID: movieID), refreshTimeOut: 0)
     }
 }

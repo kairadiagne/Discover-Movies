@@ -13,8 +13,9 @@ enum APIRouter: URLRequestConvertible {
     // swiftlint:disable:next identifier_name
     case request(config: RequestConfiguration, queryParams: [String: AnyObject]?, bodyParams: [String: AnyObject]?)
 
+    // Adapter
     var APIKey: String {
-        return TMDbSessionInfoStore().APIKey
+        return SessionInfoStorage(keyValueStorage: UserDefaults.standard).APIKey
     }
     
     var path: String {

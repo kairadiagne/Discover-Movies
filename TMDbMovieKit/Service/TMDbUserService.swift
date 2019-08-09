@@ -20,21 +20,24 @@ public final class TMDbUserService {
     
     public weak var delegate: TMDbUserServiceDelegate?
     
-    private let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoStorage: SessionInfoContaining
     
-    private let configuration: UserConfiguration
+    private let configuration = UserConfiguration()
     
     // MARK: - Initialize
-    
-    public init() {
-        self.sessionInfoProvider = TMDbSessionInfoStore()
-        self.configuration = UserConfiguration()
+
+    public convenience init() {
+        self.init(sessionInfoStorage: SessionInfoStorage(keyValueStorage: UserDefaults.standard))
+    }
+
+    init(sessionInfoStorage: SessionInfoStorage) {
+        self.sessionInfoStorage = sessionInfoStorage
     }
     
     // MARK: - API Calls
     
     public func getUserInfo() {
-        guard let sessionID = sessionInfoProvider.sessionID else {
+        guard let sessionID = sessionInfoStorage.sessionID else {
             self.delegate?.user(service: self, didFailWithError: .unAuthorized)
             return 
         }
@@ -46,7 +49,7 @@ public final class TMDbUserService {
                 
                 switch response.result {
                 case .success(let user):
-                    self.sessionInfoProvider.save(user: user)
+                    self.sessionInfoStorage.user = user
                     self.delegate?.user(service: self, didLoadUserInfo: user)
                 case .failure(let error):
                     if let error = error as? APIError {

@@ -28,7 +28,7 @@ class MenuViewController: UIViewController {
     private let sessionManager: TMDbSessionManager
 
     private var signedIn: Bool {
-        return sessionManager.signInStatus == .signedin
+        return sessionManager.status == .signedin
     }
     
     init(sessionManager: TMDbSessionManager, userService: TMDbUserService = TMDbUserService()) {

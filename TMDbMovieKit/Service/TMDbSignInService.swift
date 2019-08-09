@@ -41,14 +41,18 @@ public final class TMDbSignInService {
     
     private var isLoading = false
     
-    private let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoStorage: SessionInfoContaining
     
     private var token: RequestToken?
     
     // MARK: - Initialize
     
-    public init() {
-        self.sessionInfoProvider = TMDbSessionInfoStore()
+    public convenience init() {
+        self.init(sessionInfoStorage: SessionInfoStorage(keyValueStorage: UserDefaults.standard))
+    }
+
+    init(sessionInfoStorage: SessionInfoStorage) {
+        self.sessionInfoStorage = sessionInfoStorage
     }
     
     // MARK: - Sign In 
@@ -94,7 +98,7 @@ public final class TMDbSignInService {
                     guard let resultDict = json as? [String: AnyObject] else { return }
                     guard let sessionID = resultDict["session_id"] as? String else { return }
                     
-                    self.sessionInfoProvider.saveSessionID(sessionID)
+                    self.sessionInfoStorage.saveSessionID(sessionID)
                     self.delegate?.signInServiceDidSignIn(self)
 
                 case .failure(let error):

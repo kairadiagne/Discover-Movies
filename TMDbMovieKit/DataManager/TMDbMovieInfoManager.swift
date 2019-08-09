@@ -28,7 +28,8 @@ public final class TMDbMovieInfoManager {
     // MARK: - Initialize
     
     public convenience init(movieID: Int) {
-        self.init(movieID: movieID, sessionInfoProvider: TMDbSessionInfoStore())
+        let sessionInfoStorage = SessionInfoStorage(keyValueStorage: UserDefaults.standard)
+        self.init(movieID: movieID, sessionInfoProvider: sessionInfoStorage)
     }
     
     init(movieID: Int, sessionInfoProvider: SessionInfoContaining) {

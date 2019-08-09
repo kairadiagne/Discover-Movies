@@ -8,15 +8,15 @@
 
 import Foundation
 
-public enum TMDBSigInStatus {
-    case signedin
-    case publicMode
-    case unknown
-}
-
 public final class TMDbSessionManager {
     
     // MARK: - Types
+
+    public enum Status {
+        case signedin
+        case publicMode
+        case unknown
+    }
     
     private struct Constants {
         static let FreshInstallKey = "FreshInstallKey"
@@ -25,38 +25,38 @@ public final class TMDbSessionManager {
     // MARK: - Properties
     
     public var user: User? {
-        return sessionInfoProvider.user
+        return sessionInfoStorage.user
     }
     
-    private let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoStorage: SessionInfoContaining
     
     // MARK: - Initialize
+
+    public convenience init() {
+        self.init(storage: SessionInfoStorage(keyValueStorage: UserDefaults.standard))
+    }
     
-    init(sessionInfo: SessionInfoContaining = TMDbSessionInfoStore()) {
-        self.sessionInfoProvider = sessionInfo
+    init(storage: SessionInfoStorage) {
+        self.sessionInfoStorage = storage
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
         let freshInstall = UserDefaults.standard.bool(forKey: Constants.FreshInstallKey) == false
         
         if freshInstall {
             UserDefaults.standard.set(true, forKey: Constants.FreshInstallKey)
-            sessionInfoProvider.clearUserData()
+            sessionInfoStorage.clearUserData()
         }
     }
-    
-    public convenience init() {
-        self.init(sessionInfo: TMDbSessionInfoStore())
-    }
-    
+
     // MARK: - API Key
     
     public func registerAPIKey(_ key: String) {
-        sessionInfoProvider.saveAPIKey(key)
+        sessionInfoStorage.APIKey = key
     }
     
     // MARK: - Signin Status
     
-    public var signInStatus: TMDBSigInStatus {
-        if sessionInfoProvider.sessionID != nil { return .signedin }
+    public var status: Status {
+        if sessionInfoStorage.sessionID != nil { return .signedin }
         if publicModeActivated { return .publicMode }
         return .unknown
     }
@@ -78,6 +78,6 @@ public final class TMDbSessionManager {
     // MARK: - Sign Out
     
     public func signOut() {
-        sessionInfoProvider.clearUserData()
+        sessionInfoStorage.clearUserData()
     }
 }

@@ -69,17 +69,18 @@ struct TopListRequestConfiguration: RequestConfiguration {
 
 struct AccountListConfiguration: RequestConfiguration {
     let list: TMDbAccountList
-    let infoStore = TMDbSessionInfoStore()
     let method = HTTPMethod.get
     
     var endpoint: String {
-        guard let userID = infoStore.sessionID else { return "" }
-        return "account/\(userID)/\(list.name)/movies"
+        return ""
+//        guard let userID = infoStore.sessionID else { return "" }
+//        return "account/\(userID)/\(list.name)/movies"
     }
     
     var defaultParams: [String: AnyObject]? {
-        guard let sessionID = infoStore.sessionID else { return [:] }
-        return ["session_id": sessionID as AnyObject]
+        return nil
+//        guard let sessionID = infoStore.sessionID else { return [:] }
+//        return ["session_id": sessionID as AnyObject]
     }
 }
 

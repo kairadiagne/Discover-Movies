@@ -9,7 +9,15 @@
 import Foundation
 import Locksmith
 
-final class TMDbSessionInfoStore: SessionInfoContaining {
+protocol SessionInfoContaining: class {
+    var APIKey: String { get set }
+    var user: User? { get set }
+    func clearUserData()
+    var sessionID: String? { get}
+    func saveSessionID(_ sessionID: String)
+}
+
+final class SessionInfoStorage: SessionInfoContaining {
     
     // MARK: - Types
     
@@ -19,34 +27,36 @@ final class TMDbSessionInfoStore: SessionInfoContaining {
         static let User = "user"
         static let APIKey = "APIKey"
     }
+
+    // MARK: - Properties
+
+    private let keyValueStorage: KeyValueStorage
+
+    // MARK: - Initialize
+
+    init(keyValueStorage: KeyValueStorage) {
+        self.keyValueStorage = keyValueStorage
+    }
     
     // MARK: - APIKey
     
     var APIKey: String {
-        return UserDefaults.standard.string(forKey: Keys.APIKey) ?? ""
-    }
-    
-    func saveAPIKey(_ key: String) {
-        UserDefaults.standard.set(key, forKey: Keys.APIKey)
+        get {
+            return keyValueStorage.string(forKey: Keys.APIKey) ?? ""
+        } set {
+            keyValueStorage.set(newValue, forKey: Keys.APIKey)
+        }
     }
     
     // MARK: - User
     
     var user: User? {
         get {
-            guard let userDict = UserDefaults.standard.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
+            guard let userDict = keyValueStorage.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
             return User(dictionary: userDict)
         } set {
-            if newValue != nil {
-                UserDefaults.standard.set(newValue!.dictionaryRepresentation(), forKey: Keys.User)
-            } else {
-                UserDefaults.standard.set([:], forKey: Keys.User)
-            }
+            keyValueStorage.set(newValue?.dictionaryRepresentation(), forKey: Keys.User)
         }
-    }
-    
-    func save(user: User) {
-        self.user = user
     }
     
     func clearUserData() {

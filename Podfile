@@ -19,3 +19,8 @@ target 'TMDbMovieKit' do
     pod 'Alamofire'
     pod 'Locksmith'
 end
+
+target `TMDbMovieKitTests` do
+    pod 'Alamofire'
+end
+

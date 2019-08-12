@@ -26,7 +26,6 @@ extension DataRequest {
             // Create model objects
             switch result {
             case .success(let data):
-                return .failure(APIError.generic)
                 do {
                     let object = try decoder.decode(T.self, from: data)
                     return .success(object)

@@ -14,7 +14,7 @@ struct CachedData<ModelType: Codable>: Codable {
     
     var data: ModelType? {
         didSet {
-            lastUpdate = data == nil ? dateGenerator.getCurrentDate() : nil
+            lastUpdate = data != nil ? dateGenerator.getCurrentDate() : nil
         }
     }
 

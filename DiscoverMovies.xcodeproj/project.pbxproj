@@ -190,6 +190,13 @@
 			remoteGlobalIDString = 111942631CCB8CBE001CF39B;
 			remoteInfo = TMDbMovieKit;
 		};
+		11C67C392302128400F3FC1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111942341CCB8CA0001CF39B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1119423B1CCB8CA0001CF39B;
+			remoteInfo = DiscoverMovies;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1133,6 +1140,7 @@
 			);
 			dependencies = (
 				111942701CCB8CBF001CF39B /* PBXTargetDependency */,
+				11C67C3A2302128400F3FC1B /* PBXTargetDependency */,
 			);
 			name = TMDbMovieKitTests;
 			productName = TMDbMovieKitTests;
@@ -1184,6 +1192,7 @@
 						CreatedOnToolsVersion = 7.3;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Manual;
+						TestTargetID = 1119423B1CCB8CA0001CF39B;
 					};
 				};
 			};
@@ -1606,6 +1615,11 @@
 			target = 111942631CCB8CBE001CF39B /* TMDbMovieKit */;
 			targetProxy = 111942771CCB8CBF001CF39B /* PBXContainerItemProxy */;
 		};
+		11C67C3A2302128400F3FC1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1119423B1CCB8CA0001CF39B /* DiscoverMovies */;
+			targetProxy = 11C67C392302128400F3FC1B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1933,6 +1947,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Debug;
 		};
@@ -1952,6 +1967,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoverMovies.app/DiscoverMovies";
 			};
 			name = Release;
 		};

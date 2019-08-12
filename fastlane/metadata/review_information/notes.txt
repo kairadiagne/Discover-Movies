@@ -1,0 +1,5 @@
+This app uses themoviedb.org API. For more information about this API visit the following pages:
+- Terms of use: https://www.themoviedb.org/documentation/api/terms-of-use
+- Privacy Policy: https://www.themoviedb.org/privacy-policy
+
+Some of the icons that are being used in this app come from icons8. These icons are free for personal or commercial use, but required linking to the icons9 website. For more info you could visit the following page: https://icons8.com/license/.

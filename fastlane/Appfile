@@ -1,0 +1,4 @@
+# https://docs.fastlane.tools/advanced/#appfile
+app_identifier(ENV["BUNDLE_ID"])
+apple_id(ENV["APPlE_ID"])
+team_id(ENV["TEAM_ID"])

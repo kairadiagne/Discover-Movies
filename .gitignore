@@ -63,6 +63,10 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+fastlane/.env
+
+# ignore provisioning profiles
+Profiles/
 
 # ignore Keys plist
 DiscoverMovies/Keys.plist

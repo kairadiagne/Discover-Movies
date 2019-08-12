@@ -1,0 +1,25 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+
+# Update fastlane automatically
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do
+  end
+
+  desc "Distributes a new build to the App Store"
+  lane :release do
+    # Make sure we have the required certificate and provisioning profile
+    match(type: "appstore", force: true)
+    # Make a clean build of the app
+    gym(clean: true,
+      scheme: "DiscoverMovies",
+      export_options: {
+        method: "app-store"
+      })
+  end
+end

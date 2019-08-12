@@ -94,4 +94,3 @@ public struct Person: PersonRepresentable, Codable {
         try movieCredits.encode(crew.self, forKey: .crew)
     }
 }
-

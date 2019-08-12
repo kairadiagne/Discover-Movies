@@ -21,7 +21,7 @@ public struct CrewMember: PersonRepresentable, Codable {
 
     // MARK: Codable
 
-    enum CodingKeys: String, CodingKey  {
+    enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case creditID = "credit_id"
         case name

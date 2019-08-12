@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionViewCell>: NSObject, UICollectionViewDataSource  {
+class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionViewCell>: NSObject, UICollectionViewDataSource {
     
     typealias ItemType = Item
     typealias NoDataCellType = NoDataCollectionViewCell

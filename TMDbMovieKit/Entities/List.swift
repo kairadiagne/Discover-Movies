@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
+public struct List<ModelType: Codable>: Codable {
     
-    // MARK: - Properties
+    // MARK: Properties
     
     private(set) var page: Int
     private(set) var pageCount: Int
@@ -20,36 +20,17 @@ public struct List<ModelType: DictionarySerializable>: DictionarySerializable {
     var nextPage: Int? {
         return page < pageCount ? page + 1 : nil
     }
+
+    // MARK: Codable
+
+    enum CodingKeys: String, CodingKey {
+         case page
+         case pageCount = "total_pages"
+         case resultCount = "total_results"
+         case items = "results"
+     }
     
-    // MARK: - Initialize
-    
-    init() {
-        self.page = 0
-        self.pageCount = 0
-        self.resultCount = 0
-        self.items = []
-    }
-    
-    public init?(dictionary dict: [String: AnyObject]) {
-        self.page = dict["page"] as? Int ?? 0
-        self.pageCount = dict["total_pages"] as? Int ?? 0
-        self.resultCount = dict["total_results"] as? Int ?? 0
-        
-        if let itemDicts = dict["results"] as? [[String: AnyObject]] {
-            self.items = itemDicts.compactMap { return ModelType(dictionary: $0) }
-        }
-    }
-    
-    public func dictionaryRepresentation() -> [String: AnyObject] {
-        var dictionary = [String: AnyObject]()
-        dictionary["page"] = page as AnyObject?
-        dictionary["total_pages"] = pageCount as AnyObject?
-        dictionary["total_results"] = resultCount as AnyObject?
-        dictionary["results"] = items.map { return $0.dictionaryRepresentation() } as AnyObject
-        return dictionary
-    }
-    
-    // MARK: - Update
+    // MARK: Update
     
     mutating func update(withNetxPage page: Int, pageCount: Int, resultCount: Int, items: [ModelType]) {
         self.page = page

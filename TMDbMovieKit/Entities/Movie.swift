@@ -15,74 +15,67 @@ public protocol MovieRepresentable {
     var posterPath: String { get }
 }
 
-public struct Movie: MovieRepresentable, Equatable {
+public struct Movie: MovieRepresentable, Codable {
+
+    // MARK: Properties
+
     public let id: Int
     public let title: String
     public let overview: String
     public let releaseDate: String
-    public let genres: [Int]
     public let rating: Double
     public let adult: Bool
     public let posterPath: String
     public let backDropPath: String
+
+    private let genres: [Int]
+    private let genereIDs: [Int]
     
     public var mainGenre: TMDbGenre? {
-        guard let rawValue = genres.first else {
-            return nil
-        }
-        
+        guard let rawValue = genres.first ?? genereIDs.first else { return nil }
         return TMDbGenre(rawValue: rawValue)
     }
-}
 
-public func ==(lhs: Movie, rhs: Movie) -> Bool {
-    return  lhs.id == rhs.id
-}
+    // MARK: Codable
 
-extension Movie: DictionarySerializable {
-    
-    public init?(dictionary dict: [String: AnyObject]) {
-        guard let id = dict["id"] as? Int,
-            let title = dict["title"] as? String,
-            let overView = dict["overview"] as? String,
-            let releaseDate = dict["release_date"] as? String,
-            let rating = dict["vote_average"] as? Double,
-            let adult = dict["adult"] as? Bool,
-            let posterPath = dict["poster_path"] as? String,
-            let backDropPath = dict["backdrop_path"] as? String else {
-                return nil
-        }
-        
-        self.id = id
-        self.title = title
-        self.overview = overView
-        self.releaseDate = releaseDate
-        
-        if let genres = dict["genre_ids"] as? [Int] {
-            self.genres = genres
-        } else if let genres =  dict["genres"] as? [Int] {
-            self.genres = genres
-        } else {
-            self.genres = []
-        }
-    
-        self.rating = rating
-        self.adult = adult
-        self.posterPath = posterPath
-        self.backDropPath = backDropPath
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case title
+        case overview
+        case releaseDate = "release_date"
+        case rating = "vote_average"
+        case adult
+        case posterPath = "poster_path"
+        case backDropPath = "backdrop_path"
+        case genres = "genres"
+        case genreIDs = "genere_ids"
     }
-    
-    public func dictionaryRepresentation() -> [String: AnyObject] {
-        var dictionary = [String: AnyObject]()
-        dictionary["id"] = id as AnyObject?
-        dictionary["title"] = title as AnyObject?
-        dictionary["overview"] = overview as AnyObject?
-        dictionary["release_date"] = releaseDate as AnyObject?
-        dictionary["genre_ids"] = genres as AnyObject?
-        dictionary["vote_average"] = rating as AnyObject?
-        dictionary["adult"] = adult as AnyObject?
-        dictionary["poster_path"] = posterPath as AnyObject?
-        dictionary["backdrop_path"] = backDropPath as AnyObject?
-        return dictionary
+
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(Int.self, forKey: CodingKeys.id)
+        title = try values.decode(String.self, forKey: CodingKeys.title)
+        overview = try values.decode(String.self, forKey: CodingKeys.overview)
+        releaseDate = try values.decode(String.self, forKey: CodingKeys.overview)
+        rating = try values.decode(Double.self, forKey: CodingKeys.rating)
+        adult = try values.decode(Bool.self, forKey: CodingKeys.adult)
+        posterPath = try values.decode(String.self, forKey: CodingKeys.posterPath)
+        backDropPath = try values.decode(String.self, forKey: CodingKeys.backDropPath)
+        genres = try values.decodeIfPresent([Int].self, forKey: CodingKeys.genres) ?? []
+        genereIDs = try values.decodeIfPresent([Int].self, forKey: CodingKeys.genreIDs) ?? []
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: CodingKeys.id)
+        try container.encode(title, forKey: CodingKeys.title)
+        try container.encode(overview, forKey: CodingKeys.overview)
+        try container.encode(releaseDate, forKey: CodingKeys.releaseDate)
+        try container.encode(rating, forKey: CodingKeys.rating)
+        try container.encode(adult, forKey: CodingKeys.adult)
+        try container.encode(posterPath, forKey: CodingKeys.posterPath)
+        try container.encode(backDropPath, forKey: CodingKeys.backDropPath)
+        try container.encode(genres, forKey: CodingKeys.genres)
+        try container.encode(genereIDs, forKey: CodingKeys.genreIDs)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AlamofireDataRequest+DictionarySerializable.swift
+//  AlamofireDataRequest+Codable.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 20-08-16.
@@ -12,7 +12,7 @@ import Alamofire
 extension DataRequest {
     
     @discardableResult
-    func responseObject<T: DictionarySerializable>(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
+    func responseObject<T: Codable>(decoder: JSONDecoder = JSONDecoder(), queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
         let responseSerializer = DataResponseSerializer<T> { request, response, data, error in
             
             guard error == nil else {
@@ -20,19 +20,24 @@ extension DataRequest {
             }
             
             // Parse respone as JSON
-            let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
-            let result = jsonResponseSerializer.serializeResponse(request, response, data, nil)
+            let dataResponseSerializer = DataRequest.dataResponseSerializer()
+            let result = dataResponseSerializer.serializeResponse(request, response, data, nil)
             
             // Create model objects
-            guard case let .success(jsonObject) = result else {
-                return .failure(APIErrorHandler.categorize(error: result.error!))
-            }
-            
-            guard let responseDict = jsonObject as? [String: AnyObject], let responseObject = T(dictionary: responseDict) else {
+            switch result {
+            case .success(let data):
                 return .failure(APIError.generic)
+                do {
+                    let object = try decoder.decode(T.self, from: data)
+                    return .success(object)
+                } catch {
+                    print(error)
+                    return .failure(APIError.generic)
+                }
+
+            case .failure(let error):
+                return .failure(APIErrorHandler.categorize(error: error))
             }
-            
-            return .success(responseObject)
         }
         
         return response(queue: queue, responseSerializer: responseSerializer, completionHandler: completionHandler)

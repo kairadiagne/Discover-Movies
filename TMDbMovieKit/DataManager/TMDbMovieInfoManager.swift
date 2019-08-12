@@ -42,20 +42,20 @@ public final class TMDbMovieInfoManager {
     public func loadAdditionalInfo() {
         let request = ApiRequest.movieDetail(movieID: movieID)
         
-        Alamofire.request(request)
-            .responseObject { (response: DataResponse<MovieInfo>) in
-                
-                switch response.result {
-                case .success(let data):
-                    self.delegate?.movieInfoManager(self, didLoadInfo: data, forMovieWIthID: self.movieID)
-                case .failure(let error):
-                    if let error = error as? APIError {
-                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
-                    } else {
-                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
-                    }
-                }
-        }
+//        Alamofire.request(request)
+////            .responseObject { (response: DataResponse<MovieInfo>) in
+////                
+////                switch response.result {
+////                case .success(let data):
+////                    self.delegate?.movieInfoManager(self, didLoadInfo: data, forMovieWIthID: self.movieID)
+////                case .failure(let error):
+////                    if let error = error as? APIError {
+////                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+////                    } else {
+////                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
+////                    }
+////                }
+//        }
     }
 
     public func toggleStatusOfMovieInList(_ list: TMDbAccountList, status: Bool) {

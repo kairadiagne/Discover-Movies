@@ -9,13 +9,17 @@
 import Foundation
 
 public final class TMDbSessionManager {
-    
-    // MARK: - Types
 
     public enum Status {
+
+        /// The user us signed in with a TMDB account
         case signedin
+
+        /// The user choose not to sign in or is signed out.
         case publicMode
-        case unknown
+
+        /// The session state is unknown, present the user with options.
+        case undetermined
     }
     
     private struct Constants {
@@ -23,6 +27,12 @@ public final class TMDbSessionManager {
     }
     
     // MARK: - Properties
+
+    public var status: Status {
+        if sessionInfoStorage.sessionID != nil { return .signedin }
+        if publicModeActivated { return .publicMode }
+        return .undetermined
+    }
     
     public var user: User? {
         return sessionInfoStorage.user
@@ -39,6 +49,7 @@ public final class TMDbSessionManager {
     init(storage: SessionInfoStorage) {
         self.sessionInfoStorage = storage
 
+        // Move to keychain
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
         let freshInstall = UserDefaults.standard.bool(forKey: Constants.FreshInstallKey) == false
         
@@ -55,12 +66,6 @@ public final class TMDbSessionManager {
     }
     
     // MARK: - Signin Status
-    
-    public var status: Status {
-        if sessionInfoStorage.sessionID != nil { return .signedin }
-        if publicModeActivated { return .publicMode }
-        return .unknown
-    }
 
     func logOut() {
         NotificationCenter.default.post(name: Notification.Name.SessionManager.didLogOut, object: nil, userInfo: nil)

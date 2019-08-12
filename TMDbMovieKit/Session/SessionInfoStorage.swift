@@ -41,10 +41,12 @@ final class SessionInfoStorage: SessionInfoContaining {
     
     var user: User? {
         get {
-            guard let userDict = keyValueStorage.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
-            return User(dictionary: userDict)
+            return nil
+//            guard let userDict = keyValueStorage.object(forKey: Keys.User) as? [String: AnyObject] else { return nil }
+//            return User(dictionary: userDict)
         } set {
-            keyValueStorage.set(newValue?.dictionaryRepresentation(), forKey: Keys.User)
+            print(newValue)
+//            keyValueStorage.set(newValue?.dictionaryRepresentation(), forKey: Keys.User)
         }
     }
     

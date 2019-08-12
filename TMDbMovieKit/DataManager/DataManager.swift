@@ -12,8 +12,8 @@ import Alamofire
 public protocol DataManagerFailureDelegate: class {
     func dataManager(_ manager: AnyObject, didFailWithError error: APIError)
 }
-
-public class DataManager<ModelType: DictionarySerializable> {
+/// `DataManager` is an abstract class manging data conforming to `Codable` that is saved to `UserDefaults`.
+public class DataManager<ModelType: Codable> {
     
     // MARK: - Properties
     
@@ -43,7 +43,7 @@ public class DataManager<ModelType: DictionarySerializable> {
     // MARK: - Public API
     
     public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
-        guard cachedData.needsRefresh || forceOnline || params != nil else { return }
+        guard cachedData.needsRefresh() || forceOnline || params != nil else { return }
         cachedParams = params ?? [:]
         loadOnline(paramaters: cachedParams)
     }
@@ -95,7 +95,7 @@ public class DataManager<ModelType: DictionarySerializable> {
     func loadData() {
         guard let cacheIdentifier = cacheIdentifier else { return }
         self.startLoading()
-        if let cachedData = cacheRepository.restoreData(forIdentifier: cacheIdentifier) as? CachedData<ModelType> {
+        if let cachedData: CachedData<ModelType> = cacheRepository.restoreData(forIdentifier: cacheIdentifier) {
             self.stopLoading()
             self.cachedData = cachedData
             self.postUpdateNofitication()

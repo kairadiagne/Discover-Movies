@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ListDataManager<ItemType: DictionarySerializable>: DataManager<List<ItemType>> {
+public class ListDataManager<ItemType: Codable>: DataManager<List<ItemType>> {
     
     // MARK: - Properties
     

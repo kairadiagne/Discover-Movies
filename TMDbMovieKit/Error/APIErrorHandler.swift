@@ -9,7 +9,14 @@
 import Foundation
 import Alamofire
 
-class APIErrorHandler {
+public enum APIError: Error {
+    case generic
+    case noInternetConnection
+    case unAuthorized
+    case timedOut
+}
+
+final class APIErrorHandler {
     
     static func categorize(error: Error) -> APIError {
         if let error = error as? URLError {

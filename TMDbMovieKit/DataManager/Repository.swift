@@ -8,78 +8,89 @@
 
 import Foundation
 
-enum RepositoryLocation {
-    case cache
-    
-    var path: String {
-        switch self {
-        case .cache:
-            return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        }
-    }
-}
-
 struct Repository {
-  
-    // MARK: - Properties 
-    
-    static let cache = Repository(path: RepositoryLocation.cache.path)
-    
-    private let path: String
-    
-    private let fileAccessQueue = DispatchQueue(label: "com.discoverMovies.app.repository.serial", qos: .background)
 
-    // MARK: - Initialize
-    
-    init(path: String) {
+    enum Location {
+        case cache
+
+        var path: String {
+            switch self {
+            case .cache:
+                return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+            }
+        }
+    }
+
+    // MARK: Properties
+
+    static let cache = Repository(path: Repository.Location.cache.path)
+
+    private let path: String
+
+    private let fileAccessQueue = DispatchQueue(label: "com.exampleproject.app.repository.serial", qos: .background)
+
+    private let fileManager: FileManaging
+
+    // MARK: Initialize
+
+    init(path: String, fileManager: FileManaging = FileManager.default) {
         self.path = path
+        self.fileManager = fileManager
+        self.setupDirectory()
     }
-    
-    // MARK: - Persistence
-    
-    func persistData(data: NSCoding, withIdentifier identifier: String) {
-        createDirectory()
-        
-        fileAccessQueue.async {
-            NSKeyedArchiver.archiveRootObject(data, toFile: self.file(forIdentifier: identifier))
+
+    // MARK: Persistence
+
+    func persistData<T: Codable>(data: T, withIdentifier identifier: String) {
+        fileAccessQueue.async(flags: .barrier) {
+            do {
+                let data = try JSONEncoder().encode(data)
+                let url = self.url(identifier: identifier)
+                _ = self.fileManager.createFile(atPath: url.path, contents: data, attributes: [:])
+            } catch {
+                print("Error saving object to disk, reasons: \(error.localizedDescription)")
+            }
         }
     }
-    
-    func restoreData(forIdentifier identifier: String) -> Any? {
-        var data: Any?
-        
+
+    func restoreData<T: Codable>(forIdentifier identifier: String) -> T? {
+        var object: T?
+
         fileAccessQueue.sync {
-            data = NSKeyedUnarchiver.unarchiveObject(withFile: self.file(forIdentifier: identifier))
+            do {
+                guard let data = fileManager.contents(atPath: self.url(identifier: identifier).path) else { return }
+                object = try JSONDecoder().decode(T.self, from: data)
+            } catch {
+                print("Error reading file from disk, reason: \(error.localizedDescription)")
+            }
         }
-        
-        return data
+
+        return object
     }
-    
+
     func clearData(withIdentifier identifier: String) {
-        
-        let path = self.file(forIdentifier: identifier)
-        
+        let path = self.url(identifier: identifier).path
+
         fileAccessQueue.async {
             do {
-                try FileManager().removeItem(atPath: path)
+                try self.fileManager.removeItem(atPath: path)
             } catch {
                 print("Could not clear cached file at path: \(path))")
             }
-            
         }
     }
-    
-    // MARK: - Location
-    
-    private func createDirectory() {
+
+    // MARK: Utils
+
+    private func setupDirectory() {
         do {
-            try FileManager.default.createDirectory(atPath: "\(path)/data", withIntermediateDirectories: true, attributes: nil)
+            try self.fileManager.createDirectory(atPath: "\(path)/data", withIntermediateDirectories: true, attributes: nil)
         } catch {
             print("Error creating a new directory")
         }
     }
-    
-    private func file(forIdentifier identifier: String) -> String {
-        return "\(path)/data/\(identifier).plist"
+
+    private func url(identifier: String) -> URL {
+        return URL(fileURLWithPath: "\(path)/data/\(identifier)")
     }
 }

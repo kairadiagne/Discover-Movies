@@ -8,57 +8,67 @@
 
 import Foundation
 
-public enum TMDBSigInStatus {
-    case signedin
-    case publicMode
-    case unkown
-}
+public final class TMDbSessionManager {
 
-public class TMDbSessionManager {
-    
-    // MARK: - Types
+    public enum Status {
+
+        /// The user us signed in with a TMDB account
+        case signedin
+
+        /// The user choose not to sign in or is signed out.
+        case publicMode
+
+        /// The session state is unknown, present the user with options.
+        case undetermined
+    }
     
     private struct Constants {
         static let FreshInstallKey = "FreshInstallKey"
     }
     
     // MARK: - Properties
-    
-    public var user: User? {
-        return sessionInfoProvider.user
+
+    public var status: Status {
+        if sessionInfoStorage.sessionID != nil { return .signedin }
+        if publicModeActivated { return .publicMode }
+        return .undetermined
     }
     
-    private let sessionInfoProvider: SessionInfoContaining
+    public var user: User? {
+        return sessionInfoStorage.user
+    }
+    
+    private let sessionInfoStorage: SessionInfoContaining
     
     // MARK: - Initialize
+
+    public convenience init() {
+        self.init(storage: SessionInfoStorage(keyValueStorage: UserDefaults.standard))
+    }
     
-    init(sessionInfo: SessionInfoContaining = TMDbSessionInfoStore()) {
-        self.sessionInfoProvider = sessionInfo
+    init(storage: SessionInfoStorage) {
+        self.sessionInfoStorage = storage
+
+        // Move to keychain
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
         let freshInstall = UserDefaults.standard.bool(forKey: Constants.FreshInstallKey) == false
         
         if freshInstall {
             UserDefaults.standard.set(true, forKey: Constants.FreshInstallKey)
-            sessionInfoProvider.clearUserData()
+            sessionInfoStorage.clearUserData()
         }
     }
-    
-    public convenience init() {
-        self.init(sessionInfo: TMDbSessionInfoStore())
-    }
-    
+
     // MARK: - API Key
     
-    public func registerAPIKey(_ key: String) {
-        sessionInfoProvider.saveAPIKey(key)
+    public static func registerAPIKey(_ key: String) {
+        Configuration.configure(apiKey: key)
     }
     
     // MARK: - Signin Status
-    
-    public var signInStatus: TMDBSigInStatus {
-        if sessionInfoProvider.sessionID != nil { return .signedin }
-        if publicModeActivated { return .publicMode }
-        return .unkown
+
+    func logOut() {
+        NotificationCenter.default.post(name: Notification.Name.SessionManager.didLogOut, object: nil, userInfo: nil)
     }
     
     // MARK: - Public Mode
@@ -66,7 +76,7 @@ public class TMDbSessionManager {
     private var publicModeActivated: Bool {
         return UserDefaults.standard.bool(forKey: "userIsInpublicMode")
     }
-    
+
     public func activatePublicMode() {
         UserDefaults.standard.set(true, forKey: "userIsInpublicMode")
     }
@@ -74,10 +84,10 @@ public class TMDbSessionManager {
     public func deactivatePublicMode() {
         UserDefaults.standard.set(false, forKey: "userIsInpublicMode")
     }
-    
-    // MARK: - Sign Out
-    
-    public func signOut() {
-        sessionInfoProvider.clearUserData()
+}
+
+extension Notification.Name {
+    struct SessionManager {
+        static let didLogOut = Notification.Name(rawValue: "SessionManagerDidLogout")
     }
 }

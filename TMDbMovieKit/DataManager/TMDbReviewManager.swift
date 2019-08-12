@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbReviewManager: ListDataManager<Review> {
+public final class TMDbReviewManager: ListDataManager<Review> {
     
     // MARK: - Properties
 
@@ -18,6 +18,6 @@ public class TMDbReviewManager: ListDataManager<Review> {
     
     public init(movieID: Int) {
         self.movieID = movieID
-        super.init(configuration: ReviewRequestConfiguration(movieID: movieID), refreshTimeOut: 0)
+        super.init(request: ApiRequest.review(movieID: movieID), refreshTimeOut: 0)
     }
 }

@@ -1,6 +1,5 @@
-# Global Configuration
-platform :ios, '10.0'
-use_frameworks!
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
 inhibit_all_warnings!
 
 def shared_pods
@@ -8,15 +7,37 @@ def shared_pods
 end
 
 target 'DiscoverMovies' do
-    pod 'SDWebImage'
-    pod 'ChameleonFramework'
-    pod 'youtube-ios-player-helper'
-    pod 'SWRevealViewController'
-    pod 'BRYXBanner'
-    pod 'SwiftLint'
+  use_frameworks!
+
+  # Pods for DiscoverMovies
+  shared_pods
+  pod 'SDWebImage'
+  pod 'ChameleonFramework'
+  pod 'youtube-ios-player-helper'
+  pod 'BRYXBanner'
+  pod 'SwiftLint'
+
+  target 'DiscoverMoviesTests' do
+    inherit! :search_paths
+  end
+
+  target 'DiscoverMoviesUITests' do
+    inherit! :search_paths
+  end
+
 end
 
 target 'TMDbMovieKit' do
-    pod 'Alamofire'
-    pod 'Locksmith'
+  use_frameworks!
+
+  # Pods for TMDbMovieKit
+  shared_pods
+  pod 'Alamofire'
+  pod 'Locksmith'
+
+  target 'TMDbMovieKitTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+  
 end

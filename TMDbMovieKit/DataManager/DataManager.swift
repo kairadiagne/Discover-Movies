@@ -12,14 +12,14 @@ import Alamofire
 public protocol DataManagerFailureDelegate: class {
     func dataManager(_ manager: AnyObject, didFailWithError error: APIError)
 }
-
-public class DataManager<ModelType: DictionarySerializable> {
+/// `DataManager` is an abstract class manging data conforming to `Codable` that is saved to `UserDefaults`.
+public class DataManager<ModelType: Codable> {
     
     // MARK: - Properties
     
     public weak var failureDelegate: DataManagerFailureDelegate?
     
-    let requestConfig: RequestConfiguration
+    private var request: ApiRequest
     
     let cacheRepository = Repository.cache
     
@@ -33,8 +33,8 @@ public class DataManager<ModelType: DictionarySerializable> {
     
     // MARK: - Initialize
     
-    init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
-        self.requestConfig = configuration
+    init(request: ApiRequest, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
+        self.request = request
         self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
         self.cacheIdentifier = cacheIdentifier
         self.loadData()
@@ -43,7 +43,7 @@ public class DataManager<ModelType: DictionarySerializable> {
     // MARK: - Public API
     
     public func reloadIfNeeded(forceOnline: Bool = false, paramaters params: [String: AnyObject]? = nil) {
-        guard cachedData.needsRefresh || forceOnline || params != nil else { return }
+        guard cachedData.needsRefresh() || forceOnline || params != nil else { return }
         cachedParams = params ?? [:]
         loadOnline(paramaters: cachedParams)
     }
@@ -56,8 +56,9 @@ public class DataManager<ModelType: DictionarySerializable> {
         var params = params
         params["page"] = page as AnyObject?
         cachedParams = params
-        
-        NetworkManager.shared.sessionManager.request(APIRouter.request(config: requestConfig, queryParams: params, bodyParams: nil))
+        request.add(paramaters: params)
+
+        NetworkManager.shared.sessionManager.request(request)
             .validate().responseObject { (response: DataResponse<ModelType>) in
         
                 self.stopLoading()
@@ -94,7 +95,7 @@ public class DataManager<ModelType: DictionarySerializable> {
     func loadData() {
         guard let cacheIdentifier = cacheIdentifier else { return }
         self.startLoading()
-        if let cachedData = cacheRepository.restoreData(forIdentifier: cacheIdentifier) as? CachedData<ModelType> {
+        if let cachedData: CachedData<ModelType> = cacheRepository.restoreData(forIdentifier: cacheIdentifier) {
             self.stopLoading()
             self.cachedData = cachedData
             self.postUpdateNofitication()

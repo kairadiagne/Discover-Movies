@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class PersonDataManager: DataManager<Person> {
+public final class PersonDataManager: DataManager<Person> {
     
     // MARK: - Properties
     
@@ -23,7 +23,6 @@ public class PersonDataManager: DataManager<Person> {
     
     public init(personID: Int) {
         self.personID = personID
-        let configuration = PersonConfig(personID: personID)
-        super.init(configuration: configuration, refreshTimeOut: 600)
+        super.init(request: ApiRequest.person(with: personID), refreshTimeOut: 600)
     }
 }

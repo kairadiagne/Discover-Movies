@@ -8,23 +8,37 @@
 
 import Foundation
 
-public class TMDbAccountListDataManager: ListDataManager<Movie> {
+public final class TMDbAccountListDataManager: ListDataManager<Movie> {
     
     // MARK: - Properties 
     
-    let list: TMDbAccountList
+    private let list: TMDbAccountList
     
-    let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoStorage: SessionInfoContaining
 
     // MARK: - Initialize
     
     public convenience init(list: TMDbAccountList) {
-        self.init(list: list, sessionInfoProvider: TMDbSessionInfoStore())
+        let sessionInfoStorage = SessionInfoStorage(keyValueStorage: UserDefaults.standard)
+        self.init(list: list, sessionInfoProvider: sessionInfoStorage)
     }
     
     init(list: TMDbAccountList, sessionInfoProvider: SessionInfoContaining) {
         self.list = list
-        self.sessionInfoProvider = sessionInfoProvider
-        super.init(configuration: AccountListConfiguration(list: list), refreshTimeOut: 0, cacheIdentifier: list.name)
+        self.sessionInfoStorage = sessionInfoProvider
+        let userID = sessionInfoStorage.user?.identifier ?? 1
+        let sessionID = sessionInfoStorage.sessionID ?? ""
+        super.init(request: ApiRequest.accountList(list, userID: userID, sessionID: sessionID), refreshTimeOut: 0, cacheIdentifier: list.name)
+        subscribeForNotifications()
+    }
+
+    // MARK: - Notifications
+
+    private func subscribeForNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didLogOut), name: Notification.Name.SessionManager.didLogOut, object: nil)
+    }
+
+    @objc private func didLogOut() {
+        clear()
     }
 }

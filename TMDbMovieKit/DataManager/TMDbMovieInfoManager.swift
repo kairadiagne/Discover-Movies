@@ -15,7 +15,7 @@ public protocol TMDbMovieInfoManagerDelegate: class {
     func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError)
 }
 
-public class TMDbMovieInfoManager {
+public final class TMDbMovieInfoManager {
     
     // MARK: - Properties
     
@@ -28,7 +28,8 @@ public class TMDbMovieInfoManager {
     // MARK: - Initialize
     
     public convenience init(movieID: Int) {
-        self.init(movieID: movieID, sessionInfoProvider: TMDbSessionInfoStore())
+        let sessionInfoStorage = SessionInfoStorage(keyValueStorage: UserDefaults.standard)
+        self.init(movieID: movieID, sessionInfoProvider: sessionInfoStorage)
     }
     
     init(movieID: Int, sessionInfoProvider: SessionInfoContaining) {
@@ -39,37 +40,31 @@ public class TMDbMovieInfoManager {
     // MARK: - API Calls
     
     public func loadAdditionalInfo() {
-        let configuration = MovieDetailConfiguration(movieID: movieID)
+        let request = ApiRequest.movieDetail(movieID: movieID)
         
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: configuration.defaultParams, bodyParams: nil))
-            .responseObject { (response: DataResponse<MovieInfo>) in
-                
-                switch response.result {
-                case .success(let data):
-                    self.delegate?.movieInfoManager(self, didLoadInfo: data, forMovieWIthID: self.movieID)
-                case .failure(let error):
-                    if let error = error as? APIError {
-                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
-                    } else {
-                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
-                    }
-                }
-        }
+//        Alamofire.request(request)
+////            .responseObject { (response: DataResponse<MovieInfo>) in
+////                
+////                switch response.result {
+////                case .success(let data):
+////                    self.delegate?.movieInfoManager(self, didLoadInfo: data, forMovieWIthID: self.movieID)
+////                case .failure(let error):
+////                    if let error = error as? APIError {
+////                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+////                    } else {
+////                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
+////                    }
+////                }
+//        }
     }
 
     public func toggleStatusOfMovieInList(_ list: TMDbAccountList, status: Bool) {
-        guard let sessionID = sessionInfoProvider.sessionID, let userID = sessionInfoProvider.user?.id else {
+        guard let sessionID = sessionInfoProvider.sessionID, let userID = sessionInfoProvider.user?.identifier else {
             delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }
-        
-        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
-        
-        let body: [String: AnyObject] = ["media_type": "movie" as AnyObject, "media_id": movieID as AnyObject, list.name: status as AnyObject]
-        
-        let configuration = ListStatusConfiguration(userID: userID, list: list)
-        
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: body))
+
+        Alamofire.request(ApiRequest.setMovieStatus(status: status, movieID: movieID, in: list, userID: userID, sessionID: sessionID))
             .responseJSON { (response) in
                 
                 guard response.result.error == nil else {
@@ -86,11 +81,9 @@ public class TMDbMovieInfoManager {
             return
         }
         
-        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
+        let request = ApiRequest.accountState(movieID: movieID, sessionID: sessionID)
         
-        let configuration = AccountStateConfiguration(movieID: movieID)
-        
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
+        Alamofire.request(request)
             .responseObject { (response: DataResponse<AccountState>) in
                 
                 switch response.result {

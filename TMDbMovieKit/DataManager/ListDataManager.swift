@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ListDataManager<ItemType: DictionarySerializable>: DataManager<List<ItemType>> {
+public class ListDataManager<ItemType: Codable>: DataManager<List<ItemType>> {
     
     // MARK: - Properties
     
@@ -18,8 +18,8 @@ public class ListDataManager<ItemType: DictionarySerializable>: DataManager<List
     
     // MARK: - Initialize
     
-    override init(configuration: RequestConfiguration, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
-        super.init(configuration: configuration, refreshTimeOut: refreshTimeOut, cacheIdentifier: cacheIdentifier)
+    override init(request: ApiRequest, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
+        super.init(request: request, refreshTimeOut: refreshTimeOut, cacheIdentifier: cacheIdentifier)
     }
     
     // MARK: - Calls 

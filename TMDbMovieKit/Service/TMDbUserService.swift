@@ -14,39 +14,38 @@ public protocol TMDbUserServiceDelegate: class {
     func user(service: TMDbUserService, didFailWithError error: APIError)
 }
 
-public class TMDbUserService {
+public final class TMDbUserService {
     
     // MARK: - Properties
     
     public weak var delegate: TMDbUserServiceDelegate?
     
-    private let sessionInfoProvider: SessionInfoContaining
-    
-    private let configuration: UserConfiguration
+    private let sessionInfoStorage: SessionInfoContaining
     
     // MARK: - Initialize
-    
-    public init() {
-        self.sessionInfoProvider = TMDbSessionInfoStore()
-        self.configuration = UserConfiguration()
+
+    public convenience init() {
+        self.init(sessionInfoStorage: SessionInfoStorage(keyValueStorage: UserDefaults.standard))
+    }
+
+    init(sessionInfoStorage: SessionInfoStorage) {
+        self.sessionInfoStorage = sessionInfoStorage
     }
     
     // MARK: - API Calls
     
     public func getUserInfo() {
-        guard let sessionID = sessionInfoProvider.sessionID else {
+        guard let sessionID = sessionInfoStorage.sessionID else {
             self.delegate?.user(service: self, didFailWithError: .unAuthorized)
             return 
         }
         
-        let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
-        
-        Alamofire.request(APIRouter.request(config: configuration, queryParams: params, bodyParams: nil))
+        Alamofire.request(ApiRequest.getUser(sessionID: sessionID))
             .validate().responseObject { (response: DataResponse<User>) in
                 
                 switch response.result {
                 case .success(let user):
-                    self.sessionInfoProvider.save(user: user)
+                    self.sessionInfoStorage.user = user
                     self.delegate?.user(service: self, didLoadUserInfo: user)
                 case .failure(let error):
                     if let error = error as? APIError {

@@ -8,48 +8,40 @@
 
 import Foundation
 
-class CachedData<ModelType: DictionarySerializable>: NSObject, NSCoding {
+struct CachedData<ModelType: Codable>: Codable {
     
     // MARK: - Properties
     
     var data: ModelType? {
         didSet {
-            if data == nil {
-                lastUpdate = nil
-            } else {
-                lastUpdate = Date()
-            }
+            lastUpdate = data != nil ? dateGenerator.getCurrentDate() : nil
         }
     }
-    
-    var needsRefresh: Bool {
-        guard let lastUpdate = lastUpdate else { return true }
-        return Date().timeIntervalSince(lastUpdate) > refreshTimeOut
-    }
-    
+
     let refreshTimeOut: TimeInterval
-    
+
     private(set) var lastUpdate: Date?
-    
-    // MARK: - Initialize
-    
-    required init(refreshTimeOut timeOut: TimeInterval) {
-        refreshTimeOut = timeOut
-        super.init()
+
+    private var dateGenerator: DateGenerating = DateGenerator()
+
+    // MARK: Initialize
+
+    init(refreshTimeOut: TimeInterval, dateGenerator: DateGenerating = DateGenerator()) {
+        self.refreshTimeOut = refreshTimeOut
+        self.dateGenerator = dateGenerator
     }
-    
-    // MARK: - NSCoding
-    
-    required init?(coder aDecoder: NSCoder) {
-        guard let dataDict = aDecoder.decodeObject(forKey: "data") as? [String: AnyObject] else { return nil }
-        self.data = ModelType(dictionary: dataDict)
-        self.lastUpdate = aDecoder.decodeObject(forKey: "lastUpdate") as? Date
-        self.refreshTimeOut = aDecoder.decodeObject(forKey: "timeOut") as? TimeInterval ?? 300
+
+    // MARK: Codable
+
+    enum CodingKeys: String, CodingKey {
+        case data
+        case refreshTimeOut
+        case lastUpdate
     }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(data?.dictionaryRepresentation(), forKey: "data")
-        aCoder.encode(lastUpdate, forKey: "lastUpdate")
-        aCoder.encode(refreshTimeOut, forKey: "timeOut")
+
+    func needsRefresh() -> Bool {
+        guard let lastUpdate = lastUpdate else { return true }
+        let now = dateGenerator.getCurrentDate()
+        return now.timeIntervalSince(lastUpdate) > refreshTimeOut
     }
 }

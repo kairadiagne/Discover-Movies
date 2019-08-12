@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TMDbTopListDataManager: ListDataManager<Movie> {
+public final class TMDbTopListDataManager: ListDataManager<Movie> {
     
     let list: TMDbList
     
@@ -16,7 +16,7 @@ public class TMDbTopListDataManager: ListDataManager<Movie> {
     
     public init(list: TMDbTopList) {
         self.list = list
-        super.init(configuration: TopListRequestConfiguration(list: list), refreshTimeOut: 3600, cacheIdentifier: list.name)
+        super.init(request: ApiRequest.topList(list: list), refreshTimeOut: 3600, cacheIdentifier: list.name)
         
     }
     

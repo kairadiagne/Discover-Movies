@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class SearchDataManager: ListDataManager<Movie> {
+public final class SearchDataManager: ListDataManager<Movie> {
     
     // MARK: - Initialize 
     
     public init() {
-        super.init(configuration: SearchRequestConfiguration(), refreshTimeOut: 0)
+        super.init(request: ApiRequest.search(), refreshTimeOut: 0)
     }
     
     // MARK: - Search

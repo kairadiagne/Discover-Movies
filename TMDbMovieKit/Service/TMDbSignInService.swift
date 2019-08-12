@@ -33,7 +33,7 @@ public protocol TMDbSignInDelegate: class {
     func signInServiceDidSignIn(_ service: TMDbSignInService)
 }
 
-public class TMDbSignInService {
+public final class TMDbSignInService {
     
     // MARK: - Properties
     
@@ -41,20 +41,24 @@ public class TMDbSignInService {
     
     private var isLoading = false
     
-    private let sessionInfoProvider: SessionInfoContaining
+    private let sessionInfoStorage: SessionInfoContaining
     
     private var token: RequestToken?
     
     // MARK: - Initialize
     
-    public init() {
-        self.sessionInfoProvider = TMDbSessionInfoStore()
+    public convenience init() {
+        self.init(sessionInfoStorage: SessionInfoStorage(keyValueStorage: UserDefaults.standard))
+    }
+
+    init(sessionInfoStorage: SessionInfoStorage) {
+        self.sessionInfoStorage = sessionInfoStorage
     }
     
     // MARK: - Sign In 
     
     public func requestToken() {
-        Alamofire.request(APIRouter.request(config: RequestTokenConfiguration(), queryParams: nil, bodyParams: nil))
+        Alamofire.request(ApiRequest.requestToken())
             .validate().responseObject { (response: DataResponse<RequestToken>) in
                 
                 switch response.result {
@@ -83,18 +87,16 @@ public class TMDbSignInService {
             delegate?.signIn(service: self, didFailWithError: .generic)
             return
         }
-        
-        let paramaters: [String: AnyObject] = ["request_token": token as AnyObject]
-        
-        Alamofire.request(APIRouter.request(config: RequestSessionTokenConfiguration(), queryParams: paramaters, bodyParams: nil))
+
+        Alamofire.request(ApiRequest.requestSessionToken(token: token))
             .validate().responseJSON { response in
-                
                 switch response.result {
                 case .success(let json):
                     guard let resultDict = json as? [String: AnyObject] else { return }
                     guard let sessionID = resultDict["session_id"] as? String else { return }
-                    
-                    self.sessionInfoProvider.saveSessionID(sessionID)
+
+                    self.sessionInfoStorage.saveSessionID(sessionID)
+
                     self.delegate?.signInServiceDidSignIn(self)
 
                 case .failure(let error):

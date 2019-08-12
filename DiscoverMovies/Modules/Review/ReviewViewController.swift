@@ -33,7 +33,7 @@ final class ReviewViewController: BaseViewController {
     
     init(movie: MovieRepresentable, signedIn: Bool) {
         self.movie = movie
-        self.reviewManager = TMDbReviewManager(movieID: movie.id)
+        self.reviewManager = TMDbReviewManager(movieID: movie.identifier)
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
     }

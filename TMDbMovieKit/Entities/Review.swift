@@ -12,7 +12,7 @@ public struct Review: Codable {
 
     // MARK: Properties
 
-    public let id: String
+    public let identifier: String
     public let author: String
     public let content: String
     public let url: URL
@@ -20,7 +20,7 @@ public struct Review: Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case identifier = "id"
         case author
         case content
         case url

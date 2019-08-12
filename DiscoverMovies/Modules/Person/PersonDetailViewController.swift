@@ -35,7 +35,7 @@ final class PersonDetailViewController: BaseViewController {
     
     init(person: PersonRepresentable, signedIn: Bool) {
         self.person = person
-        self.personDataManager = PersonDataManager(personID: person.id)
+        self.personDataManager = PersonDataManager(personID: person.identifier)
         self.signedIn = signedIn
         self.dataSource = MovieCollectionDataSource(emptyMessage: "emptyMoviesMessage".localized)
         super.init(nibName: nil, bundle: nil)

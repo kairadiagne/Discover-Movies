@@ -59,7 +59,7 @@ public final class TMDbMovieInfoManager {
     }
 
     public func toggleStatusOfMovieInList(_ list: TMDbAccountList, status: Bool) {
-        guard let sessionID = sessionInfoProvider.sessionID, let userID = sessionInfoProvider.user?.id else {
+        guard let sessionID = sessionInfoProvider.sessionID, let userID = sessionInfoProvider.user?.identifier else {
             delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }

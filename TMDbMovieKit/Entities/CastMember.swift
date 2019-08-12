@@ -12,7 +12,7 @@ public struct CastMember: PersonRepresentable, Codable {
 
     // MARK: Properties
 
-    public let id: Int
+    public let identifier: Int
     public let castID: Int
     public let creditID: String
     public let name: String
@@ -23,7 +23,7 @@ public struct CastMember: PersonRepresentable, Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case identifier = "id"
         case castID = "cast_id"
         case creditID = "credit_id"
         case name = "name"

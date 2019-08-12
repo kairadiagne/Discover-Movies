@@ -12,7 +12,7 @@ public struct MovieCredit: MovieRepresentable, Codable {
 
     // MARK: Properties
 
-    public let id: Int
+    public let identifier: Int
     public let creditId: String
     public let title: String
     public let releaseDate: String
@@ -21,7 +21,7 @@ public struct MovieCredit: MovieRepresentable, Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case identifier = "id"
         case creditId = "credit_id"
         case title
         case releaseDate = "release_date"

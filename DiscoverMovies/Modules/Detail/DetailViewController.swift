@@ -32,8 +32,8 @@ final class DetailViewController: BaseViewController {
     // MARK: - Initialize
     
     init(movie: MovieRepresentable, signedIn: Bool) {
-        self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.id)
-        self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.id)
+        self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.identifier)
+        self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.identifier)
         self.movie = movie
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)

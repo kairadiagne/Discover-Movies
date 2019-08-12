@@ -12,7 +12,7 @@ public struct User: Codable {
 
     // MARK: Properties
 
-    public let id: Int
+    public let identifier: Int
     public let userName: String
     public let name: String?
     public let avatar: Gravatar?
@@ -20,7 +20,7 @@ public struct User: Codable {
     // MARK: Codable
 
     enum Codingkeys: String, CodingKey {
-        case id = "id"
+        case identifier = "id"
         case userName
         case name
         case avatar

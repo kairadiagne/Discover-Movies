@@ -12,7 +12,7 @@ public struct CrewMember: PersonRepresentable, Codable {
 
     // MARK: Properties
 
-    public let id: Int
+    public let identifier: Int
     public let creditID: String
     public let name: String
     public var department: String
@@ -22,7 +22,7 @@ public struct CrewMember: PersonRepresentable, Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey  {
-        case id = "id"
+        case identifier = "id"
         case creditID = "credit_id"
         case name
         case department

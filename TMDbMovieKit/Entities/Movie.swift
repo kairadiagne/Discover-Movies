@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol MovieRepresentable {
-    var id: Int { get }
+    var identifier: Int { get }
     var title: String { get }
     var releaseDate: String { get }
     var posterPath: String { get }
@@ -19,7 +19,7 @@ public struct Movie: MovieRepresentable, Codable {
 
     // MARK: Properties
 
-    public let id: Int
+    public let identifier: Int
     public let title: String
     public let overview: String
     public let releaseDate: String
@@ -39,7 +39,7 @@ public struct Movie: MovieRepresentable, Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case identifier = "id"
         case title
         case overview
         case releaseDate = "release_date"
@@ -53,7 +53,7 @@ public struct Movie: MovieRepresentable, Codable {
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decode(Int.self, forKey: CodingKeys.id)
+        identifier = try values.decode(Int.self, forKey: CodingKeys.identifier)
         title = try values.decode(String.self, forKey: CodingKeys.title)
         overview = try values.decode(String.self, forKey: CodingKeys.overview)
         releaseDate = try values.decode(String.self, forKey: CodingKeys.overview)
@@ -67,7 +67,7 @@ public struct Movie: MovieRepresentable, Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: CodingKeys.id)
+        try container.encode(identifier, forKey: CodingKeys.identifier)
         try container.encode(title, forKey: CodingKeys.title)
         try container.encode(overview, forKey: CodingKeys.overview)
         try container.encode(releaseDate, forKey: CodingKeys.releaseDate)

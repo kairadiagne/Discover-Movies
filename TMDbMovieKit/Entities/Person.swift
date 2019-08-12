@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol PersonRepresentable {
-    var id: Int { get }
+    var identifier: Int { get }
     var name: String { get }
     var profilePath: String? { get }
 }
@@ -18,7 +18,7 @@ public struct Person: PersonRepresentable, Codable {
 
     // MARK: Properties
 
-    public let id: Int
+    public let identifier: Int
     public let imdbId: String
     public let name: String
     public var gender: Int
@@ -39,7 +39,7 @@ public struct Person: PersonRepresentable, Codable {
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case identifier = "id"
         case imdbId = "imdb_id"
         case name
         case gender
@@ -60,7 +60,7 @@ public struct Person: PersonRepresentable, Codable {
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decode(Int.self, forKey: CodingKeys.id)
+        identifier = try values.decode(Int.self, forKey: CodingKeys.identifier)
         imdbId = try values.decode(String.self, forKey: CodingKeys.imdbId)
         name = try values.decode(String.self, forKey: CodingKeys.name)
         gender = try values.decode(Int.self, forKey: CodingKeys.gender)
@@ -78,7 +78,7 @@ public struct Person: PersonRepresentable, Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: CodingKeys.id)
+        try container.encode(identifier, forKey: CodingKeys.identifier)
         try container.encode(imdbId, forKey: CodingKeys.imdbId)
         try container.encode(name, forKey: CodingKeys.name)
         try container.encode(gender, forKey: CodingKeys.gender)

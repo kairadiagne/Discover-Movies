@@ -21,6 +21,11 @@ struct Repository {
         }
     }
 
+    enum Error: Swift.Error {
+        case encoding
+        case writeError
+    }
+    
     // MARK: Properties
 
     static let cache = Repository(path: Repository.Location.cache.path)
@@ -41,13 +46,18 @@ struct Repository {
 
     // MARK: Persistence
 
-    func persistData<T: Codable>(data: T, withIdentifier identifier: String) {
+    func persistData<T: Codable>(data: T, withIdentifier identifier: String, completion: ((Result<Void, Error>) -> Void)? = nil) {
         fileAccessQueue.async(flags: .barrier) {
             do {
                 let data = try JSONEncoder().encode(data)
                 let url = self.url(identifier: identifier)
-                _ = self.fileManager.createFile(atPath: url.path, contents: data, attributes: [:])
+                if self.fileManager.createFile(atPath: url.path, contents: data, attributes: [:]) {
+                    completion?(.success(()))
+                } else {
+                    completion?(.failure(.writeError))
+                }
             } catch {
+                completion?(.failure(.encoding))
                 print("Error saving object to disk, reasons: \(error.localizedDescription)")
             }
         }
@@ -84,13 +94,13 @@ struct Repository {
 
     private func setupDirectory() {
         do {
-            try self.fileManager.createDirectory(atPath: "\(path)/data", withIntermediateDirectories: true, attributes: nil)
+            try self.fileManager.createDirectory(atPath: "\(path)/discovermovies", withIntermediateDirectories: true, attributes: nil)
         } catch {
             print("Error creating a new directory")
         }
     }
-
+    // Refactor into a method that creates a path
     private func url(identifier: String) -> URL {
-        return URL(fileURLWithPath: "\(path)/data/\(identifier)")
+        return URL(fileURLWithPath: "\(path)/discovermovies/\(identifier)")
     }
 }

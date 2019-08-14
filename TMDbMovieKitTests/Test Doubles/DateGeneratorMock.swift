@@ -1,5 +1,5 @@
 //
-//  MockDateGenerator.swift
+//  DateGeneratorMock.swift
 //  TMDbMovieKitTests
 //
 //  Created by Kaira Diagne on 12/08/2019.
@@ -8,7 +8,7 @@
 
 @testable import TMDbMovieKit
 
-final class MockDateGenerator: DateGenerating {
+final class DateGeneratorMock: DateGenerating {
 
     // MARK: - Properties
 

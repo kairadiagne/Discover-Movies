@@ -31,7 +31,7 @@ final class CachedDataTests: XCTestCase {
     func testCachedDataNeedsRefreshIsFalseAfterUpdate() {
         let startDate = Date()
         let refreshInterval: TimeInterval = 500
-        let dateGenerator = MockDateGenerator(date: startDate)
+        let dateGenerator = DateGeneratorMock(date: startDate)
         sut = CachedData(refreshTimeOut: refreshInterval, dateGenerator: dateGenerator)
 
         sut.data = "Initial data"
@@ -45,7 +45,7 @@ final class CachedDataTests: XCTestCase {
     func testCachedDataNeedsRefreshAfterRefreshTimerExpired() {
         let startDate = Date()
         let refreshInterval: TimeInterval = 500
-        let dateGenerator = MockDateGenerator(date: startDate)
+        let dateGenerator = DateGeneratorMock(date: startDate)
         sut = CachedData(refreshTimeOut: refreshInterval, dateGenerator: dateGenerator)
 
         sut.data = "Initial data"

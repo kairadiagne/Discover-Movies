@@ -97,12 +97,15 @@
 		11C3CC051DB80B550009D6D7 /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC031DB80B550009D6D7 /* GenericTableViewController.swift */; };
 		11C3CC091DB80B6B0009D6D7 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC081DB80B6B0009D6D7 /* GenericTableView.swift */; };
 		11C5014F1E4F3B1C0093DE9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */; };
+		11C67C3C230488DC00F3FC1B /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67C3B230488DC00F3FC1B /* RepositoryTests.swift */; };
+		11C67C3E2304897800F3FC1B /* FileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67C3D2304897800F3FC1B /* FileManagerMock.swift */; };
+		11C67C402304935A00F3FC1B /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67C3F2304935A00F3FC1B /* Result+Extensions.swift */; };
 		11C985701DD8F8800044C23B /* TMDbSimilarMoviesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9856F1DD8F8800044C23B /* TMDbSimilarMoviesDataManager.swift */; };
 		11C9A8202300269500BE3B7F /* Gravatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A81F2300269500BE3B7F /* Gravatar.swift */; };
 		11C9A8222300388300BE3B7F /* DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8212300388300BE3B7F /* DateGenerator.swift */; };
 		11C9A8242300515300BE3B7F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8232300515300BE3B7F /* FileManager.swift */; };
 		11C9A826230207CA00BE3B7F /* CachedDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A825230207CA00BE3B7F /* CachedDataTests.swift */; };
-		11C9A8282302082300BE3B7F /* MockDateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8272302082300BE3B7F /* MockDateGenerator.swift */; };
+		11C9A8282302082300BE3B7F /* DateGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */; };
 		11D099FA1D907AC500FEDB21 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D099F91D907AC500FEDB21 /* UIButton+BackgroundColor.swift */; };
 		11D09A021D966E1C00FEDB21 /* MovieListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D09A011D966E1C00FEDB21 /* MovieListDataSource.swift */; };
 		11D5506E1DE1044400AAEA4E /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5506D1DE1044400AAEA4E /* APIRequest.swift */; };
@@ -318,12 +321,15 @@
 		11C5014C1E4F34C90093DE9E /* DiscoverMovies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiscoverMovies.entitlements; sourceTree = "<group>"; };
 		11C5014D1E4F37550093DE9E /* DiscoverMovies-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DiscoverMovies-Bridging-Header.h"; sourceTree = "<group>"; };
 		11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = DiscoverMovies/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		11C67C3B230488DC00F3FC1B /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
+		11C67C3D2304897800F3FC1B /* FileManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMock.swift; sourceTree = "<group>"; };
+		11C67C3F2304935A00F3FC1B /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
 		11C9856F1DD8F8800044C23B /* TMDbSimilarMoviesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDbSimilarMoviesDataManager.swift; sourceTree = "<group>"; };
 		11C9A81F2300269500BE3B7F /* Gravatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gravatar.swift; sourceTree = "<group>"; };
 		11C9A8212300388300BE3B7F /* DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGenerator.swift; sourceTree = "<group>"; };
 		11C9A8232300515300BE3B7F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		11C9A825230207CA00BE3B7F /* CachedDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDataTests.swift; sourceTree = "<group>"; };
-		11C9A8272302082300BE3B7F /* MockDateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDateGenerator.swift; sourceTree = "<group>"; };
+		11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGeneratorMock.swift; sourceTree = "<group>"; };
 		11D099F91D907AC500FEDB21 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		11D09A011D966E1C00FEDB21 /* MovieListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieListDataSource.swift; path = ../DataSource/MovieListDataSource.swift; sourceTree = "<group>"; };
 		11D09A091D97C04300FEDB21 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -500,8 +506,8 @@
 			children = (
 				1120B29722FE1E1600F28E7C /* Configuration.swift */,
 				119866A41D8F33DA00923483 /* Helper */,
-				11924C881D69C82500B1022E /* Session */,
 				EA08B7F31CF7588800EC804B /* DataManager */,
+				11924C881D69C82500B1022E /* Session */,
 				11924C841D68D3EF00B1022E /* Service */,
 				111943391CCB90BE001CF39B /* Request */,
 				111943381CCB90B5001CF39B /* Entities */,
@@ -598,6 +604,7 @@
 			children = (
 				11924C801D68B38A00B1022E /* AlamofireDataRequest+DictionaryRepresentable.swift */,
 				11924C911D73037500B1022E /* Dictionary+merge.swift */,
+				11C67C3F2304935A00F3FC1B /* Result+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -851,7 +858,8 @@
 		11C9A8292302084300BE3B7F /* Test Doubles */ = {
 			isa = PBXGroup;
 			children = (
-				11C9A8272302082300BE3B7F /* MockDateGenerator.swift */,
+				11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */,
+				11C67C3D2304897800F3FC1B /* FileManagerMock.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -860,6 +868,7 @@
 			isa = PBXGroup;
 			children = (
 				11C9A825230207CA00BE3B7F /* CachedDataTests.swift */,
+				11C67C3B230488DC00F3FC1B /* RepositoryTests.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -1187,6 +1196,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = S4F83VS4FR;
 						LastSwiftMigration = 1030;
+						ProvisioningStyle = Manual;
 					};
 					1119426C1CCB8CBF001CF39B = {
 						CreatedOnToolsVersion = 7.3;
@@ -1557,6 +1567,7 @@
 				11B350831D8497D2001B6A87 /* TMDbTopListDataManagers.swift in Sources */,
 				116BB60F1E39598D00E767FB /* MovieCredit.swift in Sources */,
 				113D8C681DA2EBF2002B4EF6 /* SearchDataManager.swift in Sources */,
+				11C67C402304935A00F3FC1B /* Result+Extensions.swift in Sources */,
 				11C9A8202300269500BE3B7F /* Gravatar.swift in Sources */,
 				11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */,
 				111942F71CCB8EDE001CF39B /* Constants.swift in Sources */,
@@ -1588,7 +1599,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C9A826230207CA00BE3B7F /* CachedDataTests.swift in Sources */,
-				11C9A8282302082300BE3B7F /* MockDateGenerator.swift in Sources */,
+				11C67C3E2304897800F3FC1B /* FileManagerMock.swift in Sources */,
+				11C9A8282302082300BE3B7F /* DateGeneratorMock.swift in Sources */,
+				11C67C3C230488DC00F3FC1B /* RepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

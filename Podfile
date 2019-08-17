@@ -33,7 +33,6 @@ target 'TMDbMovieKit' do
   # Pods for TMDbMovieKit
   shared_pods
   pod 'Alamofire'
-  pod 'Locksmith'
 
   target 'TMDbMovieKitTests' do
     inherit! :search_paths

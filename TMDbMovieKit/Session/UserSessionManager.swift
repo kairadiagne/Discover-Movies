@@ -1,5 +1,5 @@
 //
-//  TMDbSessionManager.swift
+//  UserSessionManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class TMDbSessionManager {
+public final class UserSessionManager {
 
     public enum Status {
 

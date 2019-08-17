@@ -13,10 +13,10 @@ final class TopListViewController: SegmentedViewController {
 
     // MARK: - Initialize
     
-    init(popularListManager: TMDbTopListDataManager,
-         nowPlayingListManager: TMDbTopListDataManager,
-         topRatedListManager: TMDbTopListDataManager,
-         upcomingListManager: TMDbTopListDataManager,
+    init(popularListManager: TopListDataManager,
+         nowPlayingListManager: TopListDataManager,
+         topRatedListManager: TopListDataManager,
+         upcomingListManager: TopListDataManager,
          signedIn: Bool) {
         
         let topListVCs = [GenericTableViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),

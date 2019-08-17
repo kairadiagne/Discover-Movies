@@ -1,5 +1,5 @@
 //
-//  TMDbAccountListDataManagers.swift
+//  AccountListDataManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 09/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class TMDbAccountListDataManager: ListDataManager<Movie> {
+public final class AccountListDataManager: ListDataManager<Movie> {
     
     // MARK: - Properties 
     

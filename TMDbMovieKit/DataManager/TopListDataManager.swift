@@ -1,5 +1,5 @@
 //
-//  TMDbTopListDataManagers.swift
+//  TopListDataManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10-09-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class TMDbTopListDataManager: ListDataManager<Movie> {
+public final class TopListDataManager: ListDataManager<Movie> {
     
     let list: TMDbList
     

@@ -1,5 +1,5 @@
 //
-//  TMDbReviewManager.swift
+//  MovieReviewManager.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 09/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class TMDbReviewManager: ListDataManager<Review> {
+public final class MovieReviewManager: ListDataManager<Review> {
     
     // MARK: - Properties
 

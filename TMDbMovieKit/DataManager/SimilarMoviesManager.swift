@@ -1,5 +1,5 @@
 //
-//  TMDbSimilarMoviesDataManager.swift
+//  SimilarMoviesManager.swift
 //  Discover
 //
 //  Created by Kaira Diagne on 13-11-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class TMDbSimilarMoviesDataManager: ListDataManager<Movie> {
+public final class SimilarMoviesManager: ListDataManager<Movie> {
     
     // MARK: - Properties
     

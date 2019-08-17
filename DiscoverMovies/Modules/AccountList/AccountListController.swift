@@ -26,11 +26,11 @@ final class AccountListController: BaseViewController {
     
     private let accountList: TMDbAccountList
     
-    private let accountListManager: TMDbAccountListDataManager
+    private let accountListManager: AccountListDataManager
     
     // MARK: - Initialize
     
-    init(list aList: TMDbAccountList, manager: TMDbAccountListDataManager) {
+    init(list aList: TMDbAccountList, manager: AccountListDataManager) {
         self.accountList = aList
         self.accountListManager = manager
         super.init(nibName: nil, bundle: nil)

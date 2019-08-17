@@ -19,9 +19,9 @@ final class DetailViewController: BaseViewController {
 
     private let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
   
-    private let movieInfoManager: TMDbMovieInfoManager
+    private let movieInfoManager: MovieDetailManager
     
-    private let similarMoviesManager: TMDbSimilarMoviesDataManager
+    private let similarMoviesManager: SimilarMoviesDataManager
     
     private var movie: MovieRepresentable
     
@@ -32,8 +32,8 @@ final class DetailViewController: BaseViewController {
     // MARK: - Initialize
     
     init(movie: MovieRepresentable, signedIn: Bool) {
-        self.movieInfoManager = TMDbMovieInfoManager(movieID: movie.identifier)
-        self.similarMoviesManager = TMDbSimilarMoviesDataManager(movieID: movie.identifier)
+        self.movieInfoManager = MovieDetailManager(movieID: movie.identifier)
+        self.similarMoviesManager = SimilarMoviesDataManager(movieID: movie.identifier)
         self.movie = movie
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
@@ -205,11 +205,11 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - TMDbMovieInfoManagerDelegate
+// MARK: - MovieDetailManagerDelegate
 
-extension DetailViewController: TMDbMovieInfoManagerDelegate {
+extension DetailViewController: MovieDetailManagerDelegate {
     
-    func movieInfoManager(_ manager: TMDbMovieInfoManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
+    func movieInfoManager(_ manager: MovieDetailManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
         movie = info.movie
         trailer = info.trailer
         
@@ -220,11 +220,11 @@ extension DetailViewController: TMDbMovieInfoManagerDelegate {
         detailView.castCollectionView.reloadData()
     }
     
-    func movieInfoManager(_ manager: TMDbMovieInfoManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
+    func movieInfoManager(_ manager: MovieDetailManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
         detailView.configureWithState(inFavorites, inWatchList: inWatchList)
     }
     
-    func movieInfoManager(_ manager: TMDbMovieInfoManager, didFailWithErorr error: APIError) {
+    func movieInfoManager(_ manager: MovieDetailManager, didFailWithErorr error: APIError) {
         ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
     }
 }

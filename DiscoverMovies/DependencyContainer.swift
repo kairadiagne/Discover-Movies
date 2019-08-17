@@ -12,17 +12,17 @@ struct DependencyContainer {
 
     // MARK: - Properties
 
-    private(set) var sessionManager = TMDbSessionManager()
+    private(set) var sessionManager = UserSessionManager()
 
-    private(set) var popularListManager = TMDbTopListDataManager(list: .popular)
+    private(set) var popularListManager = TopListDataManager(list: .popular)
 
-    private(set) var nowPlayingListManager = TMDbTopListDataManager(list: .nowPlaying)
+    private(set) var nowPlayingListManager = TopListDataManager(list: .nowPlaying)
 
-    private(set) var topratedListManager = TMDbTopListDataManager(list: .topRated)
+    private(set) var topratedListManager = TopListDataManager(list: .topRated)
 
-    private(set) var upcomingListManager = TMDbTopListDataManager(list: .upcoming)
+    private(set) var upcomingListManager = TopListDataManager(list: .upcoming)
 
-    private(set) var favoritesManager = TMDbAccountListDataManager(list: .favorite)
+    private(set) var favoritesManager = AccountListDataManager(list: .favorite)
 
-    private(set) var watchListManager = TMDbAccountListDataManager(list: .watchlist)
+    private(set) var watchListManager = AccountListDataManager(list: .watchlist)
 }

@@ -37,7 +37,7 @@ class BaseView: UIView {
         backgroundColor = .backgroundColor()
         
         activityIndicator = UIActivityIndicatorView(frame: .zero)
-        activityIndicator?.style = .whiteLarge
+        activityIndicator?.style = .large
         activityIndicator?.color = .gray
         
         addSubview(activityIndicator!)

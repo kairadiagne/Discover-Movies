@@ -23,7 +23,7 @@ final class VideoView: UIView {
         super.awakeFromNib()
         
         loadingOverlayView.backgroundColor = .black
-        loadingIndicator.style = .whiteLarge
+        loadingIndicator.style = .large
     }
     
     // MARK: - Video Controls

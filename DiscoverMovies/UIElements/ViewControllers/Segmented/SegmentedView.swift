@@ -49,7 +49,6 @@ class SegmentedView: UIView {
         segmentedControl.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.HorizontalOffSet).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.HorizontalOffSet).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: Constants.ControlHeight)
         
         pageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: Constants.ControlBottom).isActive = true
         pageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true

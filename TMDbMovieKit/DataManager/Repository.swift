@@ -22,11 +22,12 @@ struct Repository {
     }
 
     enum Error: Swift.Error {
+        case decoding
         case encoding
         case writeError
     }
     
-    // MARK: Properties
+    // MARK: - Properties
 
     static let cache = Repository(path: Repository.Location.cache.path)
 
@@ -36,7 +37,7 @@ struct Repository {
 
     private let fileManager: FileManaging
 
-    // MARK: Initialize
+    // MARK: - Initialize
 
     init(path: String, fileManager: FileManaging = FileManager.default) {
         self.path = path
@@ -44,7 +45,7 @@ struct Repository {
         self.setupDirectory()
     }
 
-    // MARK: Persistence
+    // MARK: - Persistence
 
     func persistData<T: Codable>(data: T, withIdentifier identifier: String, completion: ((Result<Void, Error>) -> Void)? = nil) {
         fileAccessQueue.async(flags: .barrier) {
@@ -90,7 +91,7 @@ struct Repository {
         }
     }
 
-    // MARK: Utils
+    // MARK: - Utils
 
     private func setupDirectory() {
         do {

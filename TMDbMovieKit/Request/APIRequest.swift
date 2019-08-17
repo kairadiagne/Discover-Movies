@@ -55,7 +55,7 @@ struct ApiRequest: URLRequestConvertible {
         urlRequest.httpMethod = method.rawValue
 
         var paramsCopy = paramaters
-        paramsCopy["api_key"] = Configuration.shared.apiKey as AnyObject
+        paramsCopy["api_key"] = DiscoverMoviesKit.shared.apiKey as AnyObject
 
         if let additionalParamaters = additionalParamaters {
             paramsCopy = paramsCopy.merge(additionalParamaters)

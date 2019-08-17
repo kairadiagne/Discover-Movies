@@ -24,14 +24,14 @@ struct CachedData<ModelType: Codable>: Codable {
 
     private var dateGenerator: DateGenerating = DateGenerator()
 
-    // MARK: Initialize
+    // MARK: - Initialize
 
     init(refreshTimeOut: TimeInterval, dateGenerator: DateGenerating = DateGenerator()) {
         self.refreshTimeOut = refreshTimeOut
         self.dateGenerator = dateGenerator
     }
 
-    // MARK: Codable
+    // MARK: - Codable
 
     enum CodingKeys: String, CodingKey {
         case data

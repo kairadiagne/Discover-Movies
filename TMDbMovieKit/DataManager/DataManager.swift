@@ -12,31 +12,34 @@ import Alamofire
 public protocol DataManagerFailureDelegate: class {
     func dataManager(_ manager: AnyObject, didFailWithError error: APIError)
 }
-/// `DataManager` is an abstract class manging data conforming to `Codable` that is saved to `UserDefaults`.
+/// `DataManager` is an abstract class manging data conforming to `Codable` that is persisteted to the user's caches folder.
 public class DataManager<ModelType: Codable> {
     
     // MARK: - Properties
     
     public weak var failureDelegate: DataManagerFailureDelegate?
-    
-    private var request: ApiRequest
+
+    let sessionManager: SessionManager
     
     let cacheRepository = Repository.cache
     
     var cachedData: CachedData<ModelType>
+
+    private var request: ApiRequest
     
     let cacheIdentifier: String?
     
     var cachedParams = [String: AnyObject]()
     
     var isLoading = false
-    
+
     // MARK: - Initialize
     
-    init(request: ApiRequest, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
+    init(request: ApiRequest, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil, sessionManager: SessionManager = DiscoverMoviesKit.shared.sessionManager) {
         self.request = request
         self.cachedData = CachedData(refreshTimeOut: refreshTimeOut)
         self.cacheIdentifier = cacheIdentifier
+        self.sessionManager = sessionManager
         self.loadData()
     }
     
@@ -58,22 +61,22 @@ public class DataManager<ModelType: Codable> {
         cachedParams = params
         request.add(paramaters: params)
 
-        NetworkManager.shared.sessionManager.request(request)
-            .validate().responseObject { (response: DataResponse<ModelType>) in
-        
-                self.stopLoading()
-                
-                switch response.result {
-                case .success(let data):
-                    self.handle(data: data)
-                    self.persistDataIfNeeded()
-                case .failure(let error):
-                    if let error = error as? APIError {
-                       self.failureDelegate?.dataManager(self, didFailWithError: error)
-                    } else {
-                        self.failureDelegate?.dataManager(self, didFailWithError: .generic)
-                    }
+        sessionManager.request(request).validate().responseObject { [weak self] (response: DataResponse<ModelType>) in
+            guard let self = self else { return }
+
+            self.stopLoading()
+
+            switch response.result {
+            case .success(let data):
+                self.handle(data: data)
+                self.persistDataIfNeeded()
+            case .failure(let error):
+                if let error = error as? APIError {
+                    self.failureDelegate?.dataManager(self, didFailWithError: error)
+                } else {
+                    self.failureDelegate?.dataManager(self, didFailWithError: .generic)
                 }
+            }
         }
     }
 

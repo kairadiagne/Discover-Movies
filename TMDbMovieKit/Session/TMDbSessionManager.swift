@@ -62,7 +62,7 @@ public final class TMDbSessionManager {
     // MARK: - API Key
     
     public static func registerAPIKey(_ key: String) {
-        Configuration.configure(apiKey: key)
+        DiscoverMoviesKit.configure(apiKey: key)
     }
     
     // MARK: - Signin Status

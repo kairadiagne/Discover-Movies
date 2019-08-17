@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 public class ListDataManager<ItemType: Codable>: DataManager<List<ItemType>> {
     
@@ -14,13 +15,7 @@ public class ListDataManager<ItemType: Codable>: DataManager<List<ItemType>> {
     
     public var allItems: [ItemType] {
         return cachedData.data?.items ?? []
-    }
-    
-    // MARK: - Initialize
-    
-    override init(request: ApiRequest, refreshTimeOut: TimeInterval, cacheIdentifier: String? = nil) {
-        super.init(request: request, refreshTimeOut: refreshTimeOut, cacheIdentifier: cacheIdentifier)
-    }
+    } 
     
     // MARK: - Calls 
     

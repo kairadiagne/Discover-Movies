@@ -8,7 +8,6 @@
 
 import UIKit
 import TMDbMovieKit
-import SafariServices
 
 protocol SignInViewControllerDelegate: class {
     func signInViewControllerDidFinish(_ controller: SignInViewController)
@@ -22,36 +21,17 @@ final class SignInViewController: UIViewController {
     
     weak var delegate: SignInViewControllerDelegate?
     
-    private let sessionManager: TMDbSessionManager
-    
-    private let signInService: TMDbSignInService
-    
-    private let userService: TMDbUserService
-    
-    private var safariViewController: SFSafariViewController! {
-        didSet {
-            safariViewController?.preferredControlTintColor = .blue
-        }
-    }
+    private let authenticator: UserAuthenticating
     
     // MARK: - Initialize 
     
-    init(sessionManager: TMDbSessionManager, signInService: TMDbSignInService, userService: TMDbUserService) {
-        self.sessionManager = sessionManager
-        self.signInService = signInService
-        self.userService = userService
+    init(authenticator: UserAuthenticating) {
+        self.authenticator = authenticator
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Life cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        signInService.delegate = self
     }
 
     // MARK: - Rotation
@@ -74,52 +54,36 @@ final class SignInViewController: UIViewController {
     
     @IBAction func signInButtonClick(_ sender: UIButton) {
         signInView.set(state: .loading)
-        signInService.requestToken()
+        signIn()
     }
     
     @IBAction func signInlaterButtonClick(_ sender: UIButton) {
-        sessionManager.activatePublicMode()
         delegate?.signInViewControllerDidFinish(self)
+    }
+
+    private func signIn() {
+        authenticator.authenticate(authContextProvider: self)
     }
 }
 
-// MARK: - TMDbSignInDelegate
+// MARK: - UserAuthenticatingContextProviding
 
-extension SignInViewController: TMDbSignInDelegate {
-    
-    func signIn(service: TMDbSignInService, didReceiveAuthorizationURL url: URL) {
-        signInView.set(state: .idle)
-        
-        safariViewController = SFSafariViewController(url: url)
-        safariViewController.delegate = self
-        
-        present(safariViewController, animated: true, completion: nil)
-    }
-    
-    func signIn(service: TMDbSignInService, didFailWithError error: APIError) {
-        signInView.set(state: .idle)
-        ErrorHandler.shared.handle(error: error)
-    }
-    
-    func signInServiceDidSignIn(_ service: TMDbSignInService) {
-        signInView.set(state: .idle)
-        userService.getUserInfo()
-        delegate?.signInViewControllerDidFinish(self)
-    }
-}
+extension SignInViewController: UserAuthenticatingDelegate {
 
-// MARK: - SFSafariViewControllerDelegate
+    func present(authenticationController: UIViewController) {
+        present(authenticationController, animated: true, completion: nil)
+    }
 
-extension SignInViewController: SFSafariViewControllerDelegate {
-    
-    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
-        if !didLoadSuccessfully {
-            controller.dismiss(animated: true, completion: nil)
+    func didFinishAuthentication(with result: Result<Void, Error>) {
+        dismiss(animated: true) {
+            switch result {
+            case .success:
+                self.signInView.set(state: .idle)
+                self.delegate?.signInViewControllerDidFinish(self)
+            case .failure(let error):
+                self.signInView.set(state: .idle)
+                // ErrorHandler.shared.handle(error: error)
+            }
         }
-    }
-    
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        signInView.set(state: .loading)
-        signInService.requestSessionID()
     }
 }

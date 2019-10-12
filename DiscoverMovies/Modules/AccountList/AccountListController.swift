@@ -52,8 +52,6 @@ final class AccountListController: BaseViewController {
         
         accountListView.refreshControl.addTarget(self, action: #selector(AccountListController.refresh(_:)), for: .valueChanged)
         
-        accountListManager.failureDelegate = self
-        
         if accountList == .favorite {
             title = "favoriteVCTitle".localized
         } else {
@@ -66,7 +64,7 @@ final class AccountListController: BaseViewController {
         
         let loadingSelector = #selector(AccountListController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(AccountListController.dataManagerDidUpdate(notification:))
-        accountListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+        // accountListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
 
         // Try to preload data from cache
         dataSource.items = accountListManager.allItems

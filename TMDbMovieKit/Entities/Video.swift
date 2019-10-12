@@ -10,7 +10,7 @@ import Foundation
 
 public struct Video: Codable {
 
-    // MARK: - Properties
+    // MARK: Properties
 
     public let name: String
     public let source: String

@@ -68,6 +68,7 @@ public final class MovieDetailManager {
             .responseJSON { (response) in
                 
                 guard response.result.error == nil else {
+                    // swiftlint:disable:next force_unwrapping
                     let error = APIErrorHandler.categorize(error: response.result.error!)
                     self.delegate?.movieInfoManager(self, didFailWithErorr: error)
                     return

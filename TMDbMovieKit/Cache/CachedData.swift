@@ -11,6 +11,8 @@ import Foundation
 struct CachedData<ModelType: Codable>: Codable {
     
     // MARK: - Properties
+
+    // lock queue tread safe
     
     var data: ModelType? {
         didSet {

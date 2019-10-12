@@ -9,7 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
-class BaseViewController: UIViewController, DataManagerFailureDelegate {
+class BaseViewController: UIViewController {
     
     // MARK: - Lifecycle
     

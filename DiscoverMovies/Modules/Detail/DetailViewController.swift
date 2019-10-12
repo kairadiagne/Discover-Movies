@@ -62,7 +62,6 @@ final class DetailViewController: BaseViewController {
         detailView.scrollView.delegate = self
         
         movieInfoManager.delegate = self
-        similarMoviesManager.failureDelegate = self
         
         movieInfoManager.loadAdditionalInfo()
         movieInfoManager.loadAccountState()
@@ -78,7 +77,7 @@ final class DetailViewController: BaseViewController {
         
         let loadingSelector = #selector(DetailViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(DetailViewController.dataManagerDidUpdate(notification:))
-        similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+//        similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         similarMoviesManager.reloadIfNeeded()
     }

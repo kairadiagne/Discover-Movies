@@ -27,12 +27,10 @@ public struct Movie: MovieRepresentable, Codable {
     public let adult: Bool
     public let posterPath: String
     public let backDropPath: String
-
-    private let genres: [Int]
-    private let genereIDs: [Int]
+    public let genres: [Int]
     
     public var mainGenre: TMDbGenre? {
-        guard let rawValue = genres.first ?? genereIDs.first else { return nil }
+        guard let rawValue = genres.first else { return nil }
         return TMDbGenre(rawValue: rawValue)
     }
 
@@ -61,8 +59,7 @@ public struct Movie: MovieRepresentable, Codable {
         adult = try values.decode(Bool.self, forKey: CodingKeys.adult)
         posterPath = try values.decode(String.self, forKey: CodingKeys.posterPath)
         backDropPath = try values.decode(String.self, forKey: CodingKeys.backDropPath)
-        genres = try values.decodeIfPresent([Int].self, forKey: CodingKeys.genres) ?? []
-        genereIDs = try values.decodeIfPresent([Int].self, forKey: CodingKeys.genreIDs) ?? []
+        genres = try values.decodeIfPresent([Int].self, forKey: CodingKeys.genreIDs) ?? values.decodeIfPresent([Int].self, forKey: .genres) ?? []
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -76,6 +73,5 @@ public struct Movie: MovieRepresentable, Codable {
         try container.encode(posterPath, forKey: CodingKeys.posterPath)
         try container.encode(backDropPath, forKey: CodingKeys.backDropPath)
         try container.encode(genres, forKey: CodingKeys.genres)
-        try container.encode(genereIDs, forKey: CodingKeys.genreIDs)
     }
 }

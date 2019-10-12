@@ -16,6 +16,7 @@ extension DataRequest {
         let responseSerializer = DataResponseSerializer<T> { request, response, data, error in
             
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 return .failure(APIErrorHandler.categorize(error: error!))
             }
             

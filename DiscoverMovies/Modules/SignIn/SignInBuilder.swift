@@ -12,6 +12,6 @@ import TMDbMovieKit
 struct SignInViewControllerFactory {
 
     static func create(with container: DependencyContainer) -> SignInViewController {
-        return SignInViewController(sessionManager: container.sessionManager, signInService: TMDbSignInService(), userService: TMDbUserService())
+        return SignInViewController(authenticator: UserAuthenticator())
     }
 }

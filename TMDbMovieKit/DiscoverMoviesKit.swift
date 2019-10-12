@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 /// Holds the values
-struct DiscoverMoviesKit {
+public struct DiscoverMoviesKit {
 
     static var shared: DiscoverMoviesKit {
         guard let shared = _shared else {
@@ -35,7 +35,7 @@ struct DiscoverMoviesKit {
     /// Configures the shared instance of `Configuration` with a specified API key.
     ///
     /// - Parameter apiKey: The API key uses to authenticate with the The Movie Database API.
-    static func configure(apiKey: String) {
+    public static func configure(apiKey: String) {
         _shared = DiscoverMoviesKit(apiKey: apiKey)
     }
 }

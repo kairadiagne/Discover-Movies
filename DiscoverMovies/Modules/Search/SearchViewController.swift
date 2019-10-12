@@ -62,8 +62,6 @@ final class SearchViewController: BaseViewController {
         
         searchView.tableView.keyboardDismissMode = .onDrag
         
-        searchManager.failureDelegate = self
-        
         title = "searchVCTitle".localized
     }
     
@@ -72,7 +70,7 @@ final class SearchViewController: BaseViewController {
         
         let loadingSelector = #selector(SearchViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(SearchViewController.dataManagerDidUpdate(notification:))
-        searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+//        searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
     }
     
     override func viewDidAppear(_ animated: Bool) {

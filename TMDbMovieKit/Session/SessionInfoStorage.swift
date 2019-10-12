@@ -10,8 +10,8 @@ import Foundation
 
 protocol SessionInfoContaining: class {
     var user: User? { get set }
-    func clearUserData()
     var sessionID: String? { get}
+    func clearUserData()
     func saveSessionID(_ sessionID: String)
 }
 
@@ -23,7 +23,6 @@ final class SessionInfoStorage: SessionInfoContaining {
         static let UserAccount = "User"
         static let SessionID = "sessionID"
         static let User = "user"
-        static let APIKey = "APIKey"
     }
 
     // MARK: - Properties

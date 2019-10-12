@@ -25,7 +25,7 @@ final class ReviewViewController: BaseViewController {
  
     private let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
     
-    private let reviewManager: TMDbReviewManager
+    private let reviewManager: MovieReviewManager
     
     private let signedIn: Bool
     
@@ -33,7 +33,7 @@ final class ReviewViewController: BaseViewController {
     
     init(movie: MovieRepresentable, signedIn: Bool) {
         self.movie = movie
-        self.reviewManager = TMDbReviewManager(movieID: movie.identifier)
+        self.reviewManager = MovieReviewManager(movieID: movie.identifier)
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
     }
@@ -55,8 +55,6 @@ final class ReviewViewController: BaseViewController {
         reviewView.refreshControl.addTarget(self, action: #selector(ReviewViewController.refresh), for: .valueChanged)
     
         title = "reviewvcTitle".localized
-        
-        reviewManager.failureDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +62,7 @@ final class ReviewViewController: BaseViewController {
         
         let loadingSelector = #selector(ReviewViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(ReviewViewController.dataManagerDidUpdate(notification:))
-        reviewManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+//        reviewManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         reviewManager.reloadIfNeeded()
     }
     

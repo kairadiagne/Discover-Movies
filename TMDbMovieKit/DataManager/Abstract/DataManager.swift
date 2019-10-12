@@ -9,15 +9,10 @@
 import Foundation
 import Alamofire
 
-public protocol DataManagerFailureDelegate: class {
-    func dataManager(_ manager: AnyObject, didFailWithError error: APIError)
-}
-/// `DataManager` is an abstract class manging data conforming to `Codable` that is persisteted to the user's caches folder.
+/// `DataManager` is an abstract class managing data conforming to `Codable` that is persisteted to the user's caches folder.
 public class DataManager<ModelType: Codable> {
     
     // MARK: - Properties
-    
-    public weak var failureDelegate: DataManagerFailureDelegate?
 
     let sessionManager: SessionManager
     
@@ -61,6 +56,7 @@ public class DataManager<ModelType: Codable> {
         cachedParams = params
         request.add(paramaters: params)
 
+        // service + parser
         sessionManager.request(request).validate().responseObject { [weak self] (response: DataResponse<ModelType>) in
             guard let self = self else { return }
 
@@ -71,11 +67,7 @@ public class DataManager<ModelType: Codable> {
                 self.handle(data: data)
                 self.persistDataIfNeeded()
             case .failure(let error):
-                if let error = error as? APIError {
-                    self.failureDelegate?.dataManager(self, didFailWithError: error)
-                } else {
-                    self.failureDelegate?.dataManager(self, didFailWithError: .generic)
-                }
+                DataManagerUpdateEvent.didFailWithError(error).post()
             }
         }
     }
@@ -84,7 +76,7 @@ public class DataManager<ModelType: Codable> {
 
     func handle(data: ModelType) {
         cachedData.data = data
-        postUpdateNofitication()
+        DataManagerUpdateEvent.didUpdate.post()
     }
     
     // MARK: - Caching
@@ -101,7 +93,7 @@ public class DataManager<ModelType: Codable> {
         if let cachedData: CachedData<ModelType> = cacheRepository.restoreData(forIdentifier: cacheIdentifier) {
             self.stopLoading()
             self.cachedData = cachedData
-            self.postUpdateNofitication()
+            DataManagerUpdateEvent.didUpdate.post()
         }
     }
     
@@ -117,7 +109,7 @@ public class DataManager<ModelType: Codable> {
     
     func startLoading() {
         isLoading = true
-        postLoadingNotification()
+        DataManagerUpdateEvent.didStartLoading.post()
     }
     
     func stopLoading() {
@@ -126,30 +118,11 @@ public class DataManager<ModelType: Codable> {
     
     // MARK: - Notifications
     
-    public func add(observer: AnyObject, loadingSelector: Selector, updateSelector: Selector) {
-        NotificationCenter.default.addObserver(observer, selector: loadingSelector, name: Notification.Name.DataManager.didStartLoading, object: self)
-        NotificationCenter.default.addObserver(observer, selector: updateSelector, name: Notification.Name.DataManager.update, object: self)
+    public func add(observer: AnyObject, updateSelector: Selector) {
+        NotificationCenter.default.addObserver(observer, selector: updateSelector, name: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: self)
     }
     
     public func remove(observer: AnyObject) {
         NotificationCenter.default.removeObserver(observer)
-    }
-    
-    func postUpdateNofitication() {
-        NotificationCenter.default.post(name: Notification.Name.DataManager.update, object: self)
-    }
-    
-    func postLoadingNotification() {
-        NotificationCenter.default.post(name: Notification.Name.DataManager.didStartLoading, object: self)
-    }
-}
-
-// MARK: - DataManagerNotification 
-
-extension Notification.Name {
-    
-    public struct DataManager {
-        public static let update = Notification.Name("DataManagerDidUpdateNotification")
-        public static let didStartLoading = Notification.Name("DataManagerDidStartLoading")
     }
 }

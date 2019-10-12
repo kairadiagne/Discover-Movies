@@ -1,5 +1,5 @@
 //
-//  SimilarMoviesManager.swift
+//  SimilarMoviesDataManager.swift
 //  Discover
 //
 //  Created by Kaira Diagne on 13-11-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class SimilarMoviesManager: ListDataManager<Movie> {
+public final class SimilarMoviesDataManager: ListDataManager<Movie> {
     
     // MARK: - Properties
     

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Failed to read tmdb api key from the plist file")
         }
 
-        TMDbSessionManager.registerAPIKey(apiKey)
+        DiscoverMoviesKit.configure(apiKey: apiKey)
 
         let tabBarController = DiscoverTabBarController(dependencyContainer: dependencyContainer)
         window?.rootViewController = tabBarController

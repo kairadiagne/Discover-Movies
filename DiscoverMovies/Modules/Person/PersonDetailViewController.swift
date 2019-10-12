@@ -54,8 +54,6 @@ final class PersonDetailViewController: BaseViewController {
         personDetailView.moviesCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
         personDetailView.moviesCollectionView.delegate = self
         personDetailView.moviesCollectionView.dataSource = dataSource
-        
-        personDataManager.failureDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +63,7 @@ final class PersonDetailViewController: BaseViewController {
         
         let loadingSelector = #selector(PersonDetailViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(PersonDetailViewController.dataManagerDidUpdate(notification:))
-        personDataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+//        personDataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         personDataManager.reloadIfNeeded()
     }
@@ -106,9 +104,10 @@ final class PersonDetailViewController: BaseViewController {
         guard let person = personDataManager.person, let url = person.homepage else {
             return
         }
-      
+
         safariVC = SFSafariViewController(url: url)
         safariVC?.delegate  = self
+
         present(safariVC!, animated: true, completion: nil)
     }
     

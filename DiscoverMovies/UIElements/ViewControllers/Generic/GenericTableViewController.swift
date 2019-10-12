@@ -58,8 +58,6 @@ class GenericTableViewController: BaseViewController {
         genericView.tableView.dataSource = dataSource
         
         genericView.refreshControl.addTarget(self, action: #selector(GenericTableViewController.refresh(control:)), for: .valueChanged)
-       
-        dataManager.failureDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +65,7 @@ class GenericTableViewController: BaseViewController {
         
         let loadingSelector = #selector(GenericTableViewController.dataManagerDidStartLoading(notification:))
         let updateSelector = #selector(GenericTableViewController.dataManagerDidUpdate(notification:))
-        dataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
+//        dataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         
         loadData()
     }

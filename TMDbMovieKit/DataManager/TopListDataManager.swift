@@ -19,14 +19,4 @@ public final class TopListDataManager: ListDataManager<Movie> {
         super.init(request: ApiRequest.topList(list: list), refreshTimeOut: 3600, cacheIdentifier: list.name)
         
     }
-    
-    override func handle(data: List<Movie>) {
-        if data.page == 1 {
-            cachedData.data = data
-        } else {
-            cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount, items: data.items)
-        }
-        
-        postUpdateNofitication()
-    }
 }

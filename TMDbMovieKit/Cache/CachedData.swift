@@ -11,12 +11,18 @@ import Foundation
 struct CachedData<ModelType: Codable>: Codable {
     
     // MARK: - Properties
-
-    // lock queue tread safe
     
     var data: ModelType? {
+        get {
+            dataAccessQueue.sync { return _data }
+        } set {
+            dataAccessQueue.sync { _data = newValue }
+        }
+    }
+
+    private var _data: ModelType? {
         didSet {
-            lastUpdate = data != nil ? dateGenerator.getCurrentDate() : nil
+            lastUpdate = _data != nil ? dateGenerator.getCurrentDate() : nil
         }
     }
 
@@ -25,6 +31,8 @@ struct CachedData<ModelType: Codable>: Codable {
     private(set) var lastUpdate: Date?
 
     private var dateGenerator: DateGenerating = DateGenerator()
+
+    private let dataAccessQueue = DispatchQueue(label: "com.tmdbmoviekit.cachedata", qos: .background)
 
     // MARK: - Initialize
 
@@ -36,7 +44,8 @@ struct CachedData<ModelType: Codable>: Codable {
     // MARK: - Codable
 
     enum CodingKeys: String, CodingKey {
-        case data
+        // swiftlint:disable:next identifier_name
+        case _data
         case refreshTimeOut
         case lastUpdate
     }

@@ -62,7 +62,7 @@ final class SignInViewController: UIViewController {
     }
 
     private func signIn() {
-        authenticator.authenticate(authContextProvider: self)
+        authenticator.authenticate(delegate: self)
     }
 }
 

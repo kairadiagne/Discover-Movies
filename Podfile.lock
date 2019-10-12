@@ -4,6 +4,7 @@ PODS:
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
+  - Mocker (1.3.0)
   - SDWebImage (5.1.0):
     - SDWebImage/Core (= 5.1.0)
   - SDWebImage/Core (5.1.0)
@@ -14,27 +15,31 @@ DEPENDENCIES:
   - Alamofire
   - BRYXBanner
   - ChameleonFramework
+  - Mocker
   - SDWebImage
   - SwiftLint
   - youtube-ios-player-helper
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - BRYXBanner
     - ChameleonFramework
     - SDWebImage
     - SwiftLint
     - youtube-ios-player-helper
+  trunk:
+    - Mocker
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   BRYXBanner: 4fbd266f96ce000e4c6cc9a0558c446bd88d9801
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Mocker: 7b7361f71444f5b8cc85745fcc38e9d6a1662d18
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
   SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 403d87343ef7043f72e27ff480df7e02ed0d77c0
+PODFILE CHECKSUM: 5dc1652ce707dbee0f55e70e08e93a46f5cb12e5
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3

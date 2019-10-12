@@ -37,6 +37,7 @@ target 'TMDbMovieKit' do
   target 'TMDbMovieKitTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Mocker'
   end
   
 end

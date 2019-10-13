@@ -10,7 +10,6 @@ import Foundation
 
 /// Contains all available data mocks
 final class MockedData {
-    static let teamMemberResponse = Bundle(for: MockedData.self).url(forResource: "", withExtension: "json")!.data
 }
 
 extension URL {

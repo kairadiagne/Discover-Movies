@@ -1,88 +1,19 @@
 //
-//  RequestConfigurations.swift
-//  Discover
+//  APIRequest+TMDB.swift
+//  TMDbMovieKit
 //
-//  Created by Kaira Diagne on 19-11-16.
-//  Copyright © 2016 Kaira Diagne. All rights reserved.
+//  Created by Kaira Diagne on 13/10/2019.
+//  Copyright © 2019 Kaira Diagne. All rights reserved.
 //
 
-import Alamofire
-
-struct ApiRequest: URLRequestConvertible {
-
-    // MARK: Properties
-
-    private let base: String
-
-    private let path: String
-
-    private let method: HTTPMethod
-
-    private let headers: [String: String]
-
-    private var paramaters: [String: AnyObject]
-
-    private var additionalParamaters: [String: AnyObject]?
-
-    private var body: [String: AnyObject]
-
-    // MARK: Initialize
-
-    init(base: String,
-         path: String,
-         method: HTTPMethod = .get,
-         headers: [String: String] = [:],
-         paramaters: [String: AnyObject] = [:],
-         body: [String: AnyObject] = [:]) {
-        self.base = base
-        self.path = path
-        self.method = method
-        self.headers = headers
-        self.paramaters = paramaters
-        self.body = body
-    }
-
-    mutating func add(paramaters: [String: AnyObject]) {
-        additionalParamaters = paramaters
-    }
-
-    // MARK: URLRequestConvertible
-
-    func asURLRequest() throws -> URLRequest {
-        let url = try base.asURL()
-
-        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
-        urlRequest.httpMethod = method.rawValue
-
-        var paramsCopy = paramaters
-        paramsCopy["api_key"] = DiscoverMoviesKit.shared.apiKey as AnyObject
-
-        if let additionalParamaters = additionalParamaters {
-            paramsCopy = paramsCopy.merge(additionalParamaters)
-        }
-
-        if !paramsCopy.isEmpty {
-            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: paramsCopy)
-        }
-
-        if !body.isEmpty {
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: body)
-        }
-
-        if headers.isEmpty == false {
-            headers.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
-        }
-
-        return urlRequest
-    }
-}
+import Foundation
 
 extension ApiRequest {
 
     // MARK: - Authentication
 
-    static func requestToken() -> ApiRequest {
-        return ApiRequest(base: TMDbAPI.BaseURL, path: "authentication/token/new")
+    static func requestToken(redirectURL: String) -> ApiRequest {
+        return ApiRequest(base: TMDbAPI.BaseURLV4, path: "auth/request_token", method: .post, body: ["redirect_to": redirectURL as AnyObject] )
     }
 
     static func authenticate(token: String) -> ApiRequest {

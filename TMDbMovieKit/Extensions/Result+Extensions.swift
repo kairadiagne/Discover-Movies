@@ -10,6 +10,7 @@ import Foundation
 
 extension Result {
 
+    /// Returns the Error in case Result is a failure.
     var error: Error? {
         switch self {
         case .failure(let error):

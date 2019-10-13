@@ -21,11 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .backgroundColor()
 
-        guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist"), let apiKey = NSDictionary(contentsOfFile: path)?["APIKey"] as? String else {
+        guard
+            let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
+            let dictionary = NSDictionary(contentsOfFile: path) as? [String: AnyObject],
+            let apiKey = dictionary["APIKey"] as? String,
+            let readOnlyAPIKey = dictionary["APIKeyV4"] as? String
+        else {
             fatalError("Failed to read tmdb api key from the plist file")
         }
 
-        DiscoverMoviesKit.configure(apiKey: apiKey)
+        DiscoverMoviesKit.configure(apiKey: apiKey, readOnlyApiKey: readOnlyAPIKey)
 
         let tabBarController = DiscoverTabBarController(dependencyContainer: dependencyContainer)
         window?.rootViewController = tabBarController

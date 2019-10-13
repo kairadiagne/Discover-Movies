@@ -33,7 +33,7 @@ struct Repository {
 
     private let path: String
 
-    private let fileAccessQueue = DispatchQueue(label: "com.exampleproject.app.repository.serial", qos: .background)
+    private let fileAccessQueue = DispatchQueue(label: "com.tmdbmoviekit.repository.serial", qos: .background)
 
     private let fileManager: FileManaging
 

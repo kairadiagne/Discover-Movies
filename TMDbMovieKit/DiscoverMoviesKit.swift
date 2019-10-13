@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 
-/// Holds the values
 public struct DiscoverMoviesKit {
 
     static var shared: DiscoverMoviesKit {
@@ -22,20 +21,25 @@ public struct DiscoverMoviesKit {
 
     private static var _shared: DiscoverMoviesKit!
 
-    /// The API key used to authenticate with the The Movie Database API.
+    /// The API key used to authenticate with the The Movie Database API v3.
     let apiKey: String
+
+    /// The API key for read only access with The Movie Database API v4.
+    let readOnlyApiKey: String
 
     /// The session manager responsible for creating and managing the requests in the app.
     let sessionManager: SessionManager = {
         let config = URLSessionConfiguration.default
         config.urlCache = nil
-        return SessionManager(configuration: config)
+        let sessionManager = SessionManager(configuration: config)
+        sessionManager.adapter = MovieDBRequestAdapter()
+        return sessionManager
     }()
 
     /// Configures the shared instance of `Configuration` with a specified API key.
     ///
     /// - Parameter apiKey: The API key uses to authenticate with the The Movie Database API.
-    public static func configure(apiKey: String) {
-        _shared = DiscoverMoviesKit(apiKey: apiKey)
+    public static func configure(apiKey: String, readOnlyApiKey: String) {
+        _shared = DiscoverMoviesKit(apiKey: apiKey, readOnlyApiKey: readOnlyApiKey)
     }
 }

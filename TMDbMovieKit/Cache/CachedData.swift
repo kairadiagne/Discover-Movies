@@ -32,7 +32,7 @@ struct CachedData<ModelType: Codable>: Codable {
 
     private var dateGenerator: DateGenerating = DateGenerator()
 
-    private let dataAccessQueue = DispatchQueue(label: "com.tmdbmoviekit.cachedata", qos: .background)
+    private let dataAccessQueue = DispatchQueue(label: "com.tmdbmoviekit.cachedata.serial", qos: .background)
 
     // MARK: - Initialize
 

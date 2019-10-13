@@ -9,7 +9,9 @@
 import Foundation
 
 extension Dictionary {
-    
+
+    /// Merges the content of the passed in dictionary.
+    /// - Parameter dict: The dictionary whose content should be merged.
     func merge(_ dict: [Key: Value]) -> [Key: Value] {
         var mutableCopy = self
         for (key, value) in dict {

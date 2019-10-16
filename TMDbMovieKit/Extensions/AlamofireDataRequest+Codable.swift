@@ -12,7 +12,7 @@ import Alamofire
 extension DataRequest {
     
     @discardableResult
-    func responseObject<T: Codable>(decoder: JSONDecoder = JSONDecoder(), queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
+    func responseObject<T: Decodable>(decoder: JSONDecoder = JSONDecoder(), queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
         let responseSerializer = DataResponseSerializer<T> { request, response, data, error in
             
             guard error == nil else {

@@ -26,14 +26,12 @@
 			<key>CFBundleTypeRole</key>
 			<string>None</string>
 			<key>CFBundleURLName</key>
-			<string>com.kairadiagne.discovermovies.authentication</string>
+			<string>com.kairadiagne.discover</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>discovermovies://</string>
+				<string>discovermovies</string>
 			</array>
 		</dict>
-		<dict/>
-		<dict/>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>16</string>

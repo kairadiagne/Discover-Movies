@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SessionToken: Equatable, Codable {
+struct SessionToken: Equatable, Decodable {
 
     // MARK: Properties
 

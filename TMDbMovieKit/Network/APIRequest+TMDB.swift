@@ -16,12 +16,8 @@ extension ApiRequest {
         return ApiRequest(base: TMDbAPI.BaseURLV4, path: "auth/request_token", method: .post, body: ["redirect_to": redirectURL as AnyObject] )
     }
 
-    static func authenticate(token: String) -> ApiRequest {
-        return ApiRequest(base: "https://www.themoviedb.org/authenticate", path: "\(token)")
-    }
-
-    static func requestSessionToken(token: String) -> ApiRequest {
-        return ApiRequest(base: TMDbAPI.BaseURL, path: "authentication/session/new", paramaters: ["request_token": token as AnyObject])
+    static func createAccessToken(requestToken: String) -> ApiRequest {
+        return ApiRequest(base: TMDbAPI.BaseURLV4, path: "auth/access_token", method: .post, paramaters: ["request_token": requestToken as AnyObject])
     }
 
     static func getUser(sessionID: String) -> ApiRequest {

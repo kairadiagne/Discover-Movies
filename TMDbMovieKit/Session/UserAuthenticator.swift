@@ -16,8 +16,9 @@ public protocol UserAuthenticating: class {
 
     /// Starts the flow of authenticating with the Movie Database webservice.
     /// - Parameter callbackURLScheme: The redirect URL used to redirect to the app after authentication.
+    /// - Parameter presentationContextprovider: The window in which the authentication UI should be presented.
     /// - Parameter completion: The completion handler called when authentication has succeded or failed.
-    func authenticate(callbackURLScheme: String, completion: @escaping AuthenticationCallBack)
+    func authenticate(callbackURLScheme: String, presentationContextprovider: ASWebAuthenticationPresentationContextProviding, completion: @escaping AuthenticationCallBack)
 }
 
 public final class UserAuthenticator: NSObject, UserAuthenticating {
@@ -57,7 +58,7 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
 
     // MARK: UserAuthenticating
 
-    public func authenticate(callbackURLScheme: String, completion: @escaping AuthenticationCallBack) {
+    public func authenticate(callbackURLScheme: String, presentationContextprovider: ASWebAuthenticationPresentationContextProviding, completion: @escaping AuthenticationCallBack) {
         let request = ApiRequest.requestToken(redirectURL: callbackURLScheme)
 
         sessionManager.request(request).validate().responseObject { [weak self] (response: DataResponse<RequestToken>) in
@@ -65,25 +66,26 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
 
             switch response.result {
             case .success(let token):
-                self.startAuthenticationSession(requestToken: token, callbackURLScheme: callbackURLScheme, completion: completion)
+                self.startAuthenticationSession(callBackURLScheme: callbackURLScheme, presentationContextProvier: presentationContextprovider, requestToken: token, completion: completion)
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
 
-    private func startAuthenticationSession(requestToken: RequestToken, callbackURLScheme: String, completion: @escaping AuthenticationCallBack) {
-        let url = URL(fileURLWithPath: "")
+    private func startAuthenticationSession(callBackURLScheme: String, presentationContextProvier: ASWebAuthenticationPresentationContextProviding, requestToken: RequestToken, completion: @escaping AuthenticationCallBack) {
+        guard let authenticationURL = URL(string: "https://www.themoviedb.org/auth/access?request_token=\(requestToken.value)") else {
+            completion(.failure(Error.generic))
+            return
+        }
 
-        authenticationSession = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackURLScheme) { [weak self] url, error in
+        authenticationSession = ASWebAuthenticationSession(url: authenticationURL, callbackURLScheme: callBackURLScheme) { [weak self] url, error in
             guard let self = self else { return }
 
             if let error = error as? ASWebAuthenticationSessionError, error.code == .canceledLogin {
                 completion(.failure(Error.cancelled))
-            } else if let url = url, url.absoluteString.contains("denied=true") {
-                completion(.failure(Error.cancelled))
-            } else if let url = url, url.absoluteString.contains("approved=true") {
-                self.requestSessionToken(requestToken: requestToken, completion: completion)
+            } else if url?.absoluteString == callBackURLScheme {
+                self.requestAccessToken(requestToken: requestToken, completion: completion)
             } else {
                 completion(.failure(Error.generic))
             }
@@ -91,16 +93,17 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
             self.authenticationSession = nil
         }
 
+        authenticationSession?.presentationContextProvider = presentationContextProvier
         authenticationSession?.start()
     }
 
-    private func requestSessionToken(requestToken: RequestToken, completion: @escaping AuthenticationCallBack) {
-        let sessionTokenRequest = ApiRequest.requestSessionToken(token: requestToken.token)
+    private func requestAccessToken(requestToken: RequestToken, completion: @escaping AuthenticationCallBack) {
+        let accessTokenRequest = ApiRequest.createAccessToken(requestToken: requestToken.value)
 
-        sessionManager.request(sessionTokenRequest).validate().responseObject { (response: DataResponse<SessionToken>) in
+        sessionManager.request(accessTokenRequest).validate().responseObject { (response: DataResponse<AccessToken>) in
             switch response.result {
             case .success(let token):
-                self.sessionStorage.saveSessionID(token.sessionID)
+                self.sessionStorage.saveSessionID(token.value)
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
@@ -108,6 +111,3 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
         }
     }
 }
-
-
-

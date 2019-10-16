@@ -12,11 +12,11 @@ struct RequestToken: Codable {
 
     // MARK: Properties
 
-    let token: String
+    let value: String
 
     // MARK: Codable
 
     enum CodingKeys: String, CodingKey {
-        case token = "request_token"
+        case value = "request_token"
     }
 }

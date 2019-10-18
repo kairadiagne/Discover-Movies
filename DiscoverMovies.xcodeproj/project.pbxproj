@@ -781,8 +781,8 @@
 		11924C881D69C82500B1022E /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				EAE605C71CEA72C500D904EB /* SessionInfoStorage.swift */,
 				115B312B23088F2D00E23BDF /* UserAuthenticator.swift */,
+				EAE605C71CEA72C500D904EB /* SessionInfoStorage.swift */,
 				EA782B921CE1D28800DC38AD /* UserSessionManager.swift */,
 			);
 			path = Session;

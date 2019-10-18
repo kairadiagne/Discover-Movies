@@ -12,5 +12,5 @@ struct TMDbAPI {
     static let BaseURL = "https://api.themoviedb.org/3/"
     static let BaseURLV4 = "https://api.themoviedb.org/4/"
     static let ImageBaseURL = "https://image.tmdb.org/t/p/"
-    static let GravatarBaseURLString = "http://www.gravatar.com/avatar/"
+    static let GravatarBaseURLString = "https://www.gravatar.com/avatar/"
 }

@@ -1,7 +1,7 @@
 {
-    "success": true,
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzEzNDkwNzcsInN1YiI6IjU4NjEzYjZiOTI1MTQxMTViZTAyZWZkZiIsImp0aSI6IjE2MDcyODIiLCJhdWQiOiJiMjNiMGFkN2E2YzExNjQwZTRlMjMyNTI3ZjJlNmQ2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCIsImFwaV93cml0ZSJdLCJ2ZXJzaW9uIjoxfQ.ScEaszTc_hVhuReYhP6bOfHoAFJxNmqrotvUHEl10I4",
-    "status_code": 1,
-    "status_message": "Success.",
-    "account_id": "58613b6b925dddd115be02efdf"
+  "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzEzNDkwNzcsInN1YiI6IjU4NjEzYjZiOTI1MTQxMTViZTAyZWZkZiIsImp0aSI6IjE2MDcyODIiLCJhdWQiOiJiMjNiMGFkN2E2YzExNjQwZTRlMjMyNTI3ZjJlNmQ2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCIsImFwaV93cml0ZSJdLCJ2ZXJzaW9uIjoxfQ.ScEaszTc_hVhuReYhP6bOfHoAFJxNmqrotvUHEl10I4",
+  "account_id" : "58613b6b925dddd115be02efdf",
+  "status_code" : 1,
+  "status_message" : "Success.",
+  "success" : true
 }

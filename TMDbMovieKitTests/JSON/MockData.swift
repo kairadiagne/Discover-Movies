@@ -10,6 +10,8 @@ import Foundation
 
 /// Contains all available data mocks
 final class MockedData {
+    static let requestTokenResponse = Bundle(for: MockedData.self).url(forResource: "RequestToken", withExtension: "json")!.data
+    static let accessTokenResponse = Bundle(for: MockedData.self).url(forResource: "AccessToken", withExtension: "json")!.data
 }
 
 extension URL {

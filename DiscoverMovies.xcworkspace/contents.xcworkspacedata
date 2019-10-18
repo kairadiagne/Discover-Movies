@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/kairaDiagne/Desktop/Git/discover-movies/TMDbMovieKitTests/JSON/AccessToken.json">
+   </FileRef>
+   <FileRef
       location = "group:DiscoverMovies.xcodeproj">
    </FileRef>
    <FileRef

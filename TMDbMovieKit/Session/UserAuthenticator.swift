@@ -32,16 +32,18 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
         case generic
     }
 
+    typealias AuthenticationSessionFactory = (URL, String, @escaping ASWebAuthenticationSession.CompletionHandler) -> ASWebAuthenticationSession
+
     // MARK: - Properties
 
     /// The session manager responsible for handling the API requests.
     private let sessionManager: SessionManager
 
-    /// The authentication session that handles the approval of the request ID for the MovieDB
-    private var authenticationSession: ASWebAuthenticationSession?
-
     /// The session storage used to persist the session ID.
     private let sessionStorage: SessionInfoContaining
+
+    /// A closure used to create a new Authentication session instance.
+    private var authenticationSessionFactory: AuthenticationSessionFactory
 
     // MARK: - Initialize
 
@@ -51,9 +53,10 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
         self.init(sessionInfoStorage: storage, sessionManager: sessionManager)
     }
 
-    init(sessionInfoStorage: SessionInfoContaining, sessionManager: SessionManager) {
+    init(sessionInfoStorage: SessionInfoContaining, sessionManager: SessionManager, authenticationSessionFactory: @escaping AuthenticationSessionFactory = ASWebAuthenticationSession.init) {
         self.sessionStorage = sessionInfoStorage
         self.sessionManager = sessionManager
+        self.authenticationSessionFactory = authenticationSessionFactory
     }
 
     // MARK: UserAuthenticating
@@ -79,7 +82,7 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
             return
         }
 
-        authenticationSession = ASWebAuthenticationSession(url: authenticationURL, callbackURLScheme: callBackURLScheme) { [weak self] url, error in
+        let authenticationSession = authenticationSessionFactory(authenticationURL, callBackURLScheme) { [weak self] url, error in
             guard let self = self else { return }
 
             if let error = error as? ASWebAuthenticationSessionError, error.code == .canceledLogin {
@@ -89,12 +92,10 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
             } else {
                 completion(.failure(Error.generic))
             }
-
-            self.authenticationSession = nil
         }
 
-        authenticationSession?.presentationContextProvider = presentationContextProvier
-        authenticationSession?.start()
+        authenticationSession.presentationContextProvider = presentationContextProvier
+        authenticationSession.start()
     }
 
     private func requestAccessToken(requestToken: RequestToken, completion: @escaping AuthenticationCallBack) {

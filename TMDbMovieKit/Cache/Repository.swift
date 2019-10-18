@@ -100,7 +100,7 @@ struct Repository {
             print("Error creating a new directory")
         }
     }
-    // Refactor into a method that creates a path
+
     private func url(identifier: String) -> URL {
         return URL(fileURLWithPath: "\(path)/discovermovies/\(identifier)")
     }

@@ -56,7 +56,6 @@ public class DataManager<ModelType: Codable> {
         cachedParams = params
         request.add(paramaters: params)
 
-        // service + parser
         sessionManager.request(request).validate().responseObject { [weak self] (response: DataResponse<ModelType>) in
             guard let self = self else { return }
 

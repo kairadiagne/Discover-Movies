@@ -12,6 +12,8 @@ struct DependencyContainer {
 
     // MARK: - Properties
 
+    static let shared = DependencyContainer()
+
     private(set) var sessionManager = UserSessionManager()
 
     private(set) var popularListManager = TopListDataManager(list: .popular)

@@ -61,6 +61,7 @@
 		115B312D23088F2E00E23BDF /* UserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115B312B23088F2D00E23BDF /* UserAuthenticator.swift */; };
 		115B313123092CEE00E23BDF /* SessionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115B313023092CEE00E23BDF /* SessionToken.swift */; };
 		1164737C235A4E88008B5536 /* AccessToken.json in Resources */ = {isa = PBXBuildFile; fileRef = 1164737B235A4E87008B5536 /* AccessToken.json */; };
+		116473BF235A527F008B5536 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116473BD235A5279008B5536 /* SceneDelegate.swift */; };
 		1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76A1DC648E6003400B7 /* AboutViewController.swift */; };
 		1167E76D1DC648E6003400B7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1167E76B1DC648E6003400B7 /* AboutViewController.xib */; };
 		1167E7701DC64934003400B7 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167E76F1DC64934003400B7 /* AboutView.swift */; };
@@ -289,6 +290,7 @@
 		115B312B23088F2D00E23BDF /* UserAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthenticator.swift; sourceTree = "<group>"; };
 		115B313023092CEE00E23BDF /* SessionToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionToken.swift; sourceTree = "<group>"; };
 		1164737B235A4E87008B5536 /* AccessToken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AccessToken.json; sourceTree = "<group>"; };
+		116473BD235A5279008B5536 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1167E76A1DC648E6003400B7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		1167E76B1DC648E6003400B7 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		1167E76F1DC64934003400B7 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			children = (
 				1120B27C22FDF78900F28E7C /* DependencyContainer.swift */,
 				1119428A1CCB8DBF001CF39B /* AppDelegate.swift */,
+				116473BD235A5279008B5536 /* SceneDelegate.swift */,
 				11A479081EF89DDA0067E85F /* Protocols */,
 				11D099FE1D966B2500FEDB21 /* UIElements */,
 				EAD2A8211CDC9D000005264B /* Modules */,
@@ -1567,6 +1570,7 @@
 				11A479111EF8F04A0067E85F /* BaseTableViewDataSource.swift in Sources */,
 				1179FC691DA0FFEF00CA1E6D /* AccountListView.swift in Sources */,
 				EADA5AA81CEA6B3700C2FAE8 /* FontStack.swift in Sources */,
+				116473BF235A527F008B5536 /* SceneDelegate.swift in Sources */,
 				11D099FA1D907AC500FEDB21 /* UIButton+BackgroundColor.swift in Sources */,
 				11A4FDAB1D906C8500CA7F07 /* TopListViewController.swift in Sources */,
 				1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */,

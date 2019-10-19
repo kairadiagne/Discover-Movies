@@ -83,7 +83,7 @@ public class DataManager<ModelType: Codable> {
     func persistDataIfNeeded() {
         guard let cacheIdentifier = self.cacheIdentifier else { return }
         guard cachedData.data != nil else { return }
-        cacheRepository.persistData(data: cachedData, withIdentifier: cacheIdentifier)
+        cacheRepository.persistData(data: cachedData, withIdentifier: cacheIdentifier, completion: nil)
     }
     
     func loadData() {
@@ -117,7 +117,7 @@ public class DataManager<ModelType: Codable> {
     
     // MARK: - Notifications
     
-    public func add(observer: AnyObject, updateSelector: Selector) {
+    public func add(observer: AnyObject, updateSelector: Selector, queue: DispatchQueue) {
         NotificationCenter.default.addObserver(observer, selector: updateSelector, name: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: self)
     }
     

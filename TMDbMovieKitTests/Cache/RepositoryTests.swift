@@ -22,7 +22,7 @@ final class RepositoryTests: XCTestCase {
         super.setUp()
 
         fileManager = FileManagerMock()
-        sut = Repository(path: Repository.Location.cache.path, fileManager: fileManager)
+        sut = Repository(path: Location.cache.path, fileManager: fileManager)
     }
 
     override func tearDown() {
@@ -32,9 +32,10 @@ final class RepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    /// It should create a directory in the caches folder of the user's home directory.
+    /// It should create a directory in the caches folder of the user its home directory.
     func testRepositoryCreatesHomeDirectory() {
         assertFile(path: fileManager.createDirectoryPath, contains: "/Library/Caches/discovermovies")
+        XCTAssertEqual(fileManager.createDirectoryAtPathCallCount, 1)
         XCTAssertEqual(fileManager.createIntermediatesDirectories, true)
         XCTAssertNil(fileManager.createDirectoryAttributes)
     }
@@ -48,6 +49,7 @@ final class RepositoryTests: XCTestCase {
             XCTAssertNil(result.error)
             self.assertFile(path: self.fileManager.createdFilePath, contains: "/Library/Caches/discovermovies/\(mockdata.identifier)")
             XCTAssertNotNil(self.fileManager.createdFileAttributes)
+            XCTAssertNotNil(self.fileManager.createFileData)
             expectation.fulfill()
         }
 
@@ -68,17 +70,39 @@ final class RepositoryTests: XCTestCase {
         waitForExpectations(timeout: 5.0)
     }
 
-    /// It should succesfuly restore a file.
+    /// It should call into the file manager to restore the data with the right path
+    func testRestoresFileFromFolder() throws {
+        let identifier = UUID().uuidString
+        let object: MockData? = sut.restoreData(forIdentifier: identifier)
+        XCTAssertEqual(fileManager.contentsAtPathCallCount, 1)
+        assertFile(path: fileManager.path, contains: identifier)
+    }
 
-    /// It should restore a file from the right path
+    /// It should return the decoded object when the data is found and can be restored.
+    func testRestoresObject() throws {
+        let identifier = UUID().uuidString
+        let data = try XCTUnwrap(JSONSerialization.data(withJSONObject: ["identifier": identifier], options: []))
+        fileManager.content = data
 
-    /// It should return nil if it can't find a file for the right path
+        let object: MockData? = sut.restoreData(forIdentifier: identifier)
+        XCTAssertNotNil(object)
+    }
 
-    /// It should remove an item at the right path
+    /// It should call into the filemanager to remove the item with the right path.
+    func testRemovesItemAtPath() {
+        let identifier = UUID().uuidString
+        sut.clearData(withIdentifier: identifier)
+
+        let predicate = NSPredicate(format: "removeItemAtPathCallCount == 1")
+        let expectation = self.expectation(for: predicate, evaluatedWith: fileManager, handler: nil)
+
+        wait(for: [expectation], timeout: 5.0)
+        assertFile(path: fileManager.removeItemPath, contains: identifier)
+    }
 
     // MARK: Helpers
 
-    private func assertFile(path: String, contains subPath: String,  file: StaticString = #file, line: UInt = #line) {
-        XCTAssertTrue(path.contains(subPath), "\(subPath) is not a sub path of \(path)")
+    private func assertFile(path: String?, contains subPath: String,  file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(path?.contains(subPath), true, "\(subPath) is not a sub path of \(String(describing: path))")
     }
 }

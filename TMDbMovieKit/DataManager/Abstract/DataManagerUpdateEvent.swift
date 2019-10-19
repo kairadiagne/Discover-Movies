@@ -9,7 +9,7 @@
 import Foundation
 
 /// Defines a set of update events that can be triggered from an instance of `DataManager`.
-enum DataManagerUpdateEvent {
+public enum DataManagerUpdateEvent {
 
     /// The data manager did start loading new data.
     case didStartLoading
@@ -20,10 +20,10 @@ enum DataManagerUpdateEvent {
     /// The data manager did fail with an error.
     case didFailWithError(Error)
 
-    static let dataManagerUpdateNotificationName = Notification.Name(rawValue: "DataManagerUpdateEvent")
+    public static let dataManagerUpdateNotificationName = Notification.Name(rawValue: "DataManagerUpdateEvent")
 
     /// Posts a notification to notify subscribers of the update event.
-    func post() {
+    public func post() {
         NotificationCenter.default.post(name: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: self)
     }
 }

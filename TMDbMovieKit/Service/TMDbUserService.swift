@@ -45,7 +45,7 @@ public final class TMDbUserService {
                 
                 switch response.result {
                 case .success(let user):
-                    self.sessionInfoStorage.user = user
+//                    self.sessionInfoStorage.user = user
                     self.delegate?.user(service: self, didLoadUserInfo: user)
                 case .failure(let error):
                     if let error = error as? APIError {

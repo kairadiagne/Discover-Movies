@@ -8,9 +8,12 @@
 
 import Foundation
 
+// This becomes more Discover logic
 public final class UserSessionManager {
 
     public enum Status {
+
+        // On first install we should request the status
 
         /// The user us signed in with a TMDB account
         case signedin
@@ -25,10 +28,6 @@ public final class UserSessionManager {
 
     public var status: Status {
         return .publicMode
-    }
-
-    public var user: User? {
-        return sessionInfoStorage.user
     }
     
     private let sessionInfoStorage: SessionInfoContaining

@@ -1,5 +1,5 @@
 //
-//  TMDbSessionInfoStore.swift
+//  SessionInfoStorage.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10/05/16.
@@ -9,10 +9,10 @@
 import Foundation
 
 protocol SessionInfoContaining: class {
-    var user: User? { get set }
+    var accessToken: String? { get }
     var sessionID: String? { get}
-    func clearUserData()
     func saveSessionID(_ sessionID: String)
+    func clearUserData()
 }
 
 final class SessionInfoStorage: SessionInfoContaining {
@@ -22,10 +22,17 @@ final class SessionInfoStorage: SessionInfoContaining {
     struct Keys {
         static let UserAccount = "User"
         static let SessionID = "sessionID"
-        static let User = "user"
     }
 
     // MARK: - Properties
+
+    var accessToken: String? {
+        return nil
+    }
+
+    var sessionID: String? {
+        return keyValueStorage.object(forKey: Keys.SessionID) as? String
+    }
 
     private let keyValueStorage: KeyValueStorage
 
@@ -34,27 +41,14 @@ final class SessionInfoStorage: SessionInfoContaining {
     init(keyValueStorage: KeyValueStorage) {
         self.keyValueStorage = keyValueStorage
     }
-    
-    // MARK: - User
-    
-    var user: User? {
-        get {
-            return nil
-        } set {
-            print(newValue)
-        }
-    }
-    
+
     func clearUserData() {
+        keyValueStorage.set(nil, forKey: Keys.SessionID)
     }
     
     // MARK: - SessionID
     
-    var sessionID: String? {
-        // TODO: - Write a test for migration of locksmith keychain implementation and new implementation
-        return nil
-    }
-    
     func saveSessionID(_ sessionID: String) {
+        keyValueStorage.set(sessionID, forKey: Keys.SessionID)
     }
 }

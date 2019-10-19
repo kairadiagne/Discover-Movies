@@ -184,17 +184,15 @@ final class AuthenticationSessionMock: ASWebAuthenticationSession {
 final class SessionStorageMock: SessionInfoContaining {
 
     private(set) var saveSessionIDCallCount = 0
-    private(set)var sessionID: String?
+    private(set) var sessionID: String?
+    private(set) var accessToken: String?
 
     func saveSessionID(_ sessionID: String) {
         saveSessionIDCallCount += 1
         self.sessionID = sessionID
     }
 
-    var user: User?
-
-    func clearUserData() {
-    }
+    func clearUserData() { }
 }
 
 final class AuthenticationContextProviderMock: NSObject, ASWebAuthenticationPresentationContextProviding {

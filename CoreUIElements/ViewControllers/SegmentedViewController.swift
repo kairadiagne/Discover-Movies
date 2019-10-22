@@ -9,7 +9,7 @@
 import UIKit
 
 /// A view controller that dipslays a `UISegmentedControl` that lets the user page through several view controllers.
-class SegmentedViewController: UIViewController {
+public class SegmentedViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -37,7 +37,7 @@ class SegmentedViewController: UIViewController {
 
     // MARK: - Initialize 
     
-    init(viewControllers: [UIViewController], title: String? = nil) {
+    public init(viewControllers: [UIViewController], title: String? = nil) {
         guard viewControllers.count > 0 else {
             fatalError("Initialize segmentedVC with at least one view controller")
         }
@@ -53,7 +53,7 @@ class SegmentedViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         setupSegmentedControl()
@@ -98,12 +98,12 @@ class SegmentedViewController: UIViewController {
 
 extension SegmentedViewController: UIPageViewControllerDelegate {
 
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let index = viewControllers.firstIndex(of: viewController)! - 1
         return index >= 0 && index < viewControllers.count ? viewControllers[index] : nil
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let index = viewControllers.firstIndex(of: viewController)! + 1
         return index >= 0 && index < viewControllers.count ? viewControllers[index] : nil
     }
@@ -113,7 +113,7 @@ extension SegmentedViewController: UIPageViewControllerDelegate {
 
 extension SegmentedViewController: UIPageViewControllerDataSource {
     
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else { return }
         
         let visibleViewController = pageViewController.viewControllers!.first!

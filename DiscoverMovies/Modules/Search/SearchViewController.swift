@@ -95,10 +95,10 @@ final class SearchViewController: BaseViewController {
     
     // MARK: - FailureDelegate
     
-    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-        searchView.tableView.reloadData()
-    }
+//    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+//        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+//        searchView.tableView.reloadData()
+//    }
 }
 
 // MARK: - UITableViewDelegate

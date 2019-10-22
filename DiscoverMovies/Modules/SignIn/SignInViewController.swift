@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 import TMDbMovieKit
 
 protocol SignInViewControllerDelegate: class {
@@ -62,28 +63,24 @@ final class SignInViewController: UIViewController {
     }
 
     private func signIn() {
-        authenticator.authenticate(delegate: self)
-    }
-}
+        authenticator.authenticate(callbackURLScheme: "discovermovies:", presentationContextprovider: self) { [weak self] result in
+            guard let self = self else { return }
 
-// MARK: - UserAuthenticatingContextProviding
-
-extension SignInViewController: UserAuthenticatingDelegate {
-
-    func present(authenticationController: UIViewController) {
-        present(authenticationController, animated: true, completion: nil)
-    }
-
-    func didFinishAuthentication(with result: Result<Void, Error>) {
-        dismiss(animated: true) {
             switch result {
             case .success:
                 self.signInView.set(state: .idle)
                 self.delegate?.signInViewControllerDidFinish(self)
             case .failure(let error):
                 self.signInView.set(state: .idle)
-                // ErrorHandler.shared.handle(error: error)
             }
         }
+    }
+}
+
+extension SignInViewController: ASWebAuthenticationPresentationContextProviding {
+
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        // swiftlint:disable:next force_cast
+        return view.window!
     }
 }

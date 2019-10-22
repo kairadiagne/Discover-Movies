@@ -27,11 +27,6 @@ class BaseViewController: UIViewController {
     @objc func dataManagerDidUpdate(notification: Notification) {
     }
     
-    // MARK: - DataManagerFailureDelegate
-    
-    func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-    }
-    
     // MARK: - Navigation 
     
     func showDetailViewController(for movie: MovieRepresentable, signedIn: Bool) {

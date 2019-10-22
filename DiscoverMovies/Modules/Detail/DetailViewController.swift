@@ -110,11 +110,11 @@ final class DetailViewController: BaseViewController {
     
     // MARK: - DataManagerFailureDelegate
     
-    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-        detailView.similarMovieCollectionView.reloadData()
-        detailView.castCollectionView.reloadData()
-    }
+//    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+//        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+//        detailView.similarMovieCollectionView.reloadData()
+//        detailView.castCollectionView.reloadData()
+//    }
 
     // MARK: - Actions
     

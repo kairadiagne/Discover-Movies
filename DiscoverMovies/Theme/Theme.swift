@@ -15,7 +15,7 @@ final class Theme {
     // MARK: - Apply Theme
     
     class func apply() {
-        styleNavigationBar()
+//        styleNavigationBar()
         styleTableView()
         styleCollectionView()
     }

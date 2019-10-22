@@ -49,8 +49,8 @@ final class DiscoverTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.barTintColor = UIColor.backgroundColor()
-        tabBar.tintColor = UIColor.buttonColor()
+        tabBar.barTintColor = .backgroundColor()
+        tabBar.tintColor = .buttonColor()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -63,6 +63,7 @@ final class DiscoverTabBarController: UITabBarController {
 
     private func freshNavigationController(rootViewController: UIViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: rootViewController)
+        navigationController.navigationBar.barTintColor = .backgroundColor()
         return navigationController
     }
 }

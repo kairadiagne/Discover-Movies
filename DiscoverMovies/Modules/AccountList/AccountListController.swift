@@ -98,11 +98,11 @@ final class AccountListController: BaseViewController {
     
     // MARK: - Failuredelegate
     
-    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        ErrorHandler.shared.handle(error: error, authorizationError: true)
-        accountListView.set(state: .idle)
-        accountListView.tableView.reloadData()
-    }
+//    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
+//        ErrorHandler.shared.handle(error: error, authorizationError: true)
+//        accountListView.set(state: .idle)
+//        accountListView.tableView.reloadData()
+//    }
 }
 
 // MARK: - UITableViewDelegate

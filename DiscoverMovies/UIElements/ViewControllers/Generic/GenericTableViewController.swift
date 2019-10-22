@@ -27,6 +27,8 @@ class GenericTableViewController: BaseViewController {
     private let dataManager: ListDataManager<Movie>
     
     private let dataSource = MovieListDataSource()
+
+    private var notificationToken: NSObjectProtocol?
     
     private let signedIn: Bool
     
@@ -55,25 +57,21 @@ class GenericTableViewController: BaseViewController {
         genericView.tableView.register(DiscoverListCell.nib, forCellReuseIdentifier: DiscoverListCell.reuseId)
         genericView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
         genericView.tableView.delegate = self
+        genericView.tableView.dragDelegate = self
         genericView.tableView.dataSource = dataSource
         
         genericView.refreshControl.addTarget(self, action: #selector(GenericTableViewController.refresh(control:)), for: .valueChanged)
+
+        notificationToken = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: nil, queue: .main) { [weak self] notification in
+            guard let self = self, let updateEvent = notification.object as? DataManagerUpdateEvent else { return }
+            self.handleUpdateEvent(updateEvent)
+        }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let loadingSelector = #selector(GenericTableViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(GenericTableViewController.dataManagerDidUpdate(notification:))
-//        dataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        
+
         loadData()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        dataManager.remove(observer: self)
     }
     
     // MARK: - Actions
@@ -83,31 +81,28 @@ class GenericTableViewController: BaseViewController {
     }
     
     private func loadData() {
-        // Try to preload data from cache
         dataSource.items = dataManager.allItems
         genericView.tableView.reloadData()
         
         dataManager.reloadIfNeeded()
     }
     
-    // MARK: - DataManagerNotifications
+    // MARK: - Notifications
     
-    override func dataManagerDidUpdate(notification: Notification) {
-        genericView.set(state: .idle)
-        dataSource.items = dataManager.allItems
-        genericView.tableView.reloadData()
-    }
-    
-    override func dataManagerDidStartLoading(notification: Notification) {
-        genericView.set(state: .loading)
-    }
-    
-    // MARK: - DataManagerFailureDelegate
-    
-    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-        genericView.set(state: .idle)
-        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-        genericView.tableView.reloadData()
+    private func handleUpdateEvent(_ updateEvent: DataManagerUpdateEvent) {
+        switch updateEvent {
+        case .didStartLoading:
+            genericView.set(state: .loading)
+        case .didUpdate:
+            genericView.set(state: .idle)
+            dataSource.items = dataManager.allItems
+            genericView.tableView.reloadData()
+        case .didFailWithError(let error):
+            genericView.set(state: .idle)
+            genericView.tableView.reloadData()
+            guard let error = error as? APIError else { return }
+            ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+        }
     }
 }
 
@@ -129,7 +124,22 @@ extension GenericTableViewController: UITableViewDelegate {
         if genericView.state == .loading && dataSource.isEmpty {
             cell.isHidden = true
         } else if dataSource.itemCount - 10 == indexPath.row {
-            dataManager.loadMore()
+//            dataManager.loadMore()
         }
+    }
+}
+
+extension GenericTableViewController: UITableViewDragDelegate {
+
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        guard let selectedMovie = dataSource.item(atIndex: indexPath.row) else { return [] }
+
+        let userActivity = selectedMovie.openMovieDetailUseractivity
+        let itemProvider = NSItemProvider(object: userActivity)
+
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = selectedMovie
+
+        return [dragItem]
     }
 }

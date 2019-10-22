@@ -135,6 +135,8 @@
 		11E8F59E1DB3A70900583840 /* DetailAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8F59D1DB3A70900583840 /* DetailAnimatedTransitioning.swift */; };
 		11E923E11FE07938001F6530 /* UILayoutPriority+AddSubtract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */; };
 		11F7A1691DC6A6F600296259 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7A1681DC6A6F600296259 /* Acknowledgement.swift */; };
+		11FA2D05235F946C0029738C /* MovieDetailSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */; };
+		11FA2D0B235FA1920029738C /* Movie+NSUserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA2D0A235FA1920029738C /* Movie+NSUserActivity.swift */; };
 		1D61661334F3AAA5995E6C12 /* Pods_TMDbMovieKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F6360DB7F9FC7955C98533 /* Pods_TMDbMovieKit.framework */; };
 		4C5C3EF83FAD6925EF56563F /* Pods_DiscoverMoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C3AD3929A7C22D01DAF071 /* Pods_DiscoverMoviesTests.framework */; };
 		6AC7AEA1ECD6D365525CEF06 /* Pods_DiscoverMoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A5AB186B9DDD1BF4840DAA /* Pods_DiscoverMoviesUITests.framework */; };
@@ -377,6 +379,8 @@
 		11E8F59D1DB3A70900583840 /* DetailAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutPriority+AddSubtract.swift"; sourceTree = "<group>"; };
 		11F7A1681DC6A6F600296259 /* Acknowledgement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acknowledgement.swift; sourceTree = "<group>"; };
+		11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailSceneDelegate.swift; sourceTree = "<group>"; };
+		11FA2D0A235FA1920029738C /* Movie+NSUserActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+NSUserActivity.swift"; sourceTree = "<group>"; };
 		13D8535EC1FD0A652AB2C504 /* Pods_TMDbMovieKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDbMovieKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1785B701E9DA1FD16917F346 /* Pods-TMDbMovieKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDbMovieKitTests.release.xcconfig"; path = "Target Support Files/Pods-TMDbMovieKitTests/Pods-TMDbMovieKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		1D131F3E4A479CA6233CF73E /* Pods-DiscoverMoviesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverMoviesUITests.release.xcconfig"; path = "Target Support Files/Pods-DiscoverMoviesUITests/Pods-DiscoverMoviesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -525,6 +529,7 @@
 				1120B27C22FDF78900F28E7C /* DependencyContainer.swift */,
 				1119428A1CCB8DBF001CF39B /* AppDelegate.swift */,
 				116473BD235A5279008B5536 /* SceneDelegate.swift */,
+				11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */,
 				11A479081EF89DDA0067E85F /* Protocols */,
 				11D099FE1D966B2500FEDB21 /* UIElements */,
 				EAD2A8211CDC9D000005264B /* Modules */,
@@ -532,6 +537,7 @@
 				111942841CCB8D13001CF39B /* Extensions */,
 				11E923DE1FE06DD7001F6530 /* Resources */,
 				111942861CCB8D2B001CF39B /* Supporting files */,
+				11FA2D0A235FA1920029738C /* Movie+NSUserActivity.swift */,
 			);
 			path = DiscoverMovies;
 			sourceTree = "<group>";
@@ -1656,6 +1662,7 @@
 				1167E7701DC64934003400B7 /* AboutView.swift in Sources */,
 				EADA5A811CE9AA2200C2FAE8 /* ReviewDataSource.swift in Sources */,
 				1120B28922FE002000F28E7C /* AccountListTableViewCell.swift in Sources */,
+				11FA2D05235F946C0029738C /* MovieDetailSceneDelegate.swift in Sources */,
 				11924C8C1D69E33700B1022E /* ProfileImageView.swift in Sources */,
 				11D8B1261E62EB9D00E4621F /* UILabel+currentNumberOfLines.swift in Sources */,
 				EADA5A771CE8AE9700C2FAE8 /* CastDataSource.swift in Sources */,
@@ -1674,6 +1681,7 @@
 				11027BC91DAC2CB4004223F6 /* NoDataCollectionViewCell.swift in Sources */,
 				111942A11CCB8DD4001CF39B /* UIImage+Defaults.swift in Sources */,
 				11C3CC051DB80B550009D6D7 /* GenericTableViewController.swift in Sources */,
+				11FA2D0B235FA1920029738C /* Movie+NSUserActivity.swift in Sources */,
 				113E92E01E36B76D00C10ADE /* Date+Age.swift in Sources */,
 				1167E7781DC65658003400B7 /* AboutTableViewCell.swift in Sources */,
 				11DC09B01DC7EE1E008CA93C /* BaseView.swift in Sources */,

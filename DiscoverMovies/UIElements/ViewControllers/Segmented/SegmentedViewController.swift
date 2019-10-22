@@ -7,69 +7,91 @@
 //
 
 import UIKit
-import TMDbMovieKit
 
+/// A view controller that dipslays a `UISegmentedControl` that lets the user page through several view controllers.
 class SegmentedViewController: UIViewController {
-    
+
     // MARK: - Properties
-    
-    lazy var segmentedView: SegmentedView = {
-        var titles: [String] = []
-        for vc in self.viewControllers { titles.append(vc.title ?? "" ) }
-        let sv = SegmentedView(frame: .zero, segmentTitles: titles, pageView: self.pageViewController.view)
-        sv.delegate = self
-        return sv
+
+    /// The segmented control used to switch between the different pages of content.
+    private lazy var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl()
+        segmentedControl.tintColor = .white
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+        return segmentedControl
     }()
-    
+
+    /// A page view controller which shows the different pages associated with the different segments of the segmented control.
     private lazy var pageViewController: UIPageViewController = {
         let pvc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pvc.delegate = self
         pvc.dataSource = self
         return pvc
     }()
-    
+
+    /// The view controllers that should be shown in the different pages.
     private let viewControllers: [UIViewController]
-    
+
+    /// The index of the current presented view controller used to keep track of the scroll direction of the page view controller.
+    private var currentSelectedIndex = 0
+
     // MARK: - Initialize 
     
     init(viewControllers: [UIViewController], title: String? = nil) {
         guard viewControllers.count > 0 else {
             fatalError("Initialize segmentedVC with at least one view controller")
         }
+
         self.viewControllers = viewControllers
         super.init(nibName: nil, bundle: nil)
         self.title = title
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Lifecycle
 
-    override func loadView() {
-        addChild(pageViewController)
-        view = segmentedView
-        pageViewController.didMove(toParent: self)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupSegmentedControl()
+        setupPageViewController()
+        navigationItem.titleView = segmentedControl
+
         pageViewController.setViewControllers([viewControllers.first!], direction: .forward, animated: false, completion: nil)
-        segmentedView.set(selectedIndex: 0)
+        set(selectedIndex: 0)
     }
-}
 
-// MARK: - SegmentedViewDelegate
-
-extension SegmentedViewController: SegmentedViewDelegate {
-    
-    func segmentedView(_ view: SegmentedView, changedSegmentedIndexToValue toValue: Int, fromValue: Int) {
-        let direction = toValue > fromValue ? UIPageViewController.NavigationDirection.forward : UIPageViewController.NavigationDirection.reverse
-        let vc = viewControllers[toValue]
-        pageViewController.setViewControllers([vc], direction: direction, animated: true, completion: nil)
+    private func setupPageViewController() {
+        addChild(pageViewController)
+        view.addSubview(pageViewController.view)
+        pageViewController.didMove(toParent: self)
     }
+
+    private func setupSegmentedControl() {
+        for (index, vc) in viewControllers.enumerated() {
+            segmentedControl.insertSegment(withTitle: vc.title, at: index, animated: false)
+        }
+    }
+
+    // MARK: - Actions
+
+    @objc private func segmentedControlValueChanged(_ control: UISegmentedControl) {
+        let oldSegmentedIndex = currentSelectedIndex
+        let newSegmentedIndex = control.selectedSegmentIndex
+        let direction = newSegmentedIndex > oldSegmentedIndex ? UIPageViewController.NavigationDirection.forward : UIPageViewController.NavigationDirection.reverse
+        let newViewController = viewControllers[newSegmentedIndex]
+        pageViewController.setViewControllers([newViewController], direction: direction, animated: true, completion: nil)
+        currentSelectedIndex = newSegmentedIndex
+    }
+
+    func set(selectedIndex index: Int) {
+        currentSelectedIndex = index
+        segmentedControl.selectedSegmentIndex = currentSelectedIndex
+    }
+
 }
 
 // MARK: - UIPageViewControllerDelegate
@@ -92,13 +114,10 @@ extension SegmentedViewController: UIPageViewControllerDelegate {
 extension SegmentedViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        
-        guard completed else {
-            return
-        }
+        guard completed else { return }
         
         let visibleViewController = pageViewController.viewControllers!.first!
         let index = viewControllers.firstIndex(of: visibleViewController)!
-        segmentedView.set(selectedIndex: index)
+        set(selectedIndex: index)
     }
 }

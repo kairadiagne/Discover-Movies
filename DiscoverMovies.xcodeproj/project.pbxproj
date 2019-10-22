@@ -87,7 +87,6 @@
 		119A1F3E1D415B0D00AC61C7 /* CachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* CachedData.swift */; };
 		119DADE11EF8247C0078C6E9 /* NibReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119DADE01EF8247C0078C6E9 /* NibReusableCell.swift */; };
 		11A479011EF87E440067E85F /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479001EF87E440067E85F /* SegmentedViewController.swift */; };
-		11A479031EF87E5F0067E85F /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479021EF87E5F0067E85F /* SegmentedView.swift */; };
 		11A479111EF8F04A0067E85F /* BaseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479101EF8F04A0067E85F /* BaseTableViewDataSource.swift */; };
 		11A479131EF8F0560067E85F /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479121EF8F0560067E85F /* BaseCollectionViewDataSource.swift */; };
 		11A4FDAB1D906C8500CA7F07 /* TopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */; };
@@ -319,7 +318,6 @@
 		119A1F3D1D415B0D00AC61C7 /* CachedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedData.swift; sourceTree = "<group>"; };
 		119DADE01EF8247C0078C6E9 /* NibReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibReusableCell.swift; sourceTree = "<group>"; };
 		11A479001EF87E440067E85F /* SegmentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
-		11A479021EF87E5F0067E85F /* SegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
 		11A479101EF8F04A0067E85F /* BaseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseTableViewDataSource.swift; path = ../DataSource/BaseTableViewDataSource.swift; sourceTree = "<group>"; };
 		11A479121EF8F0560067E85F /* BaseCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseCollectionViewDataSource.swift; path = ../DataSource/BaseCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopListViewController.swift; sourceTree = "<group>"; };
@@ -841,7 +839,6 @@
 		11A4790B1EF89E330067E85F /* Segmented */ = {
 			isa = PBXGroup;
 			children = (
-				11A479021EF87E5F0067E85F /* SegmentedView.swift */,
 				11A479001EF87E440067E85F /* SegmentedViewController.swift */,
 			);
 			path = Segmented;
@@ -1584,7 +1581,6 @@
 				1120B28D22FE005500F28E7C /* AcountListViewControllerFactory.swift in Sources */,
 				1167E76C1DC648E6003400B7 /* AboutViewController.swift in Sources */,
 				EA6487F21CE5DFEE00452DD0 /* GradientImageView.swift in Sources */,
-				11A479031EF87E5F0067E85F /* SegmentedView.swift in Sources */,
 				1167E7701DC64934003400B7 /* AboutView.swift in Sources */,
 				EADA5A811CE9AA2200C2FAE8 /* ReviewDataSource.swift in Sources */,
 				1120B28922FE002000F28E7C /* AccountListTableViewCell.swift in Sources */,

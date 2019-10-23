@@ -82,12 +82,21 @@ final class DetailViewController: BaseViewController {
         similarMoviesManager.reloadIfNeeded()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        guard let movie = movie as? Movie else { return }
+        view.window?.windowScene?.userActivity = movie.openMovieDetailUseractivity
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
         
         similarMoviesManager.remove(observer: self)
+
+        view.window?.windowScene?.userActivity = nil
     }
     
     // MARK: - Update UI

@@ -528,8 +528,7 @@
 			children = (
 				1120B27C22FDF78900F28E7C /* DependencyContainer.swift */,
 				1119428A1CCB8DBF001CF39B /* AppDelegate.swift */,
-				116473BD235A5279008B5536 /* SceneDelegate.swift */,
-				11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */,
+				11FA2D0C235FAA390029738C /* Scenes */,
 				11A479081EF89DDA0067E85F /* Protocols */,
 				11D099FE1D966B2500FEDB21 /* UIElements */,
 				EAD2A8211CDC9D000005264B /* Modules */,
@@ -1014,6 +1013,15 @@
 				11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		11FA2D0C235FAA390029738C /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				116473BD235A5279008B5536 /* SceneDelegate.swift */,
+				11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		2693F16C0142D84C17AC1C7B /* Frameworks */ = {

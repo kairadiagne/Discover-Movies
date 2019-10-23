@@ -26,7 +26,6 @@ final class MovieDetailSceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
 
-        // typed user activities
         guard let movieData = userActivity.userInfo?[Movie.OpenMovieDetailInfoKey] as? Data else {
             return
         }

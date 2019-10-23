@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  TMDbMovieKitTests
+//  DiscoverMovies
 //
 //  Created by Kaira Diagne on 18/10/2019.
 //  Copyright © 2019 Kaira Diagne. All rights reserved.

@@ -78,18 +78,3 @@ class ErrorHandler {
         currentBanner?.show(duration: 3.0)
     }
 }
-
-extension UIColor {
-
-    static func flatGray() -> UIColor {
-        return UIColor(hue: 184 / 360, saturation: 10 / 100, brightness: 65 / 100, alpha: 1.0)
-    }
-
-    static func flatOrange() -> UIColor {
-        return UIColor(hue: 28 / 360, saturation: 85 / 100, brightness: 90 / 100, alpha: 1.0)
-    }
-
-    static func flatRed() -> UIColor {
-        return UIColor(hue: 6 / 360, saturation: 74 / 100, brightness: 91 / 100, alpha: 1.0)
-    }
-}

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Kaira Diagne. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
 public enum APIError: Error {

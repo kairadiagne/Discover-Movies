@@ -9,11 +9,11 @@
 import UIKit
 import TMDbMovieKit
 
-final class DetailViewController: BaseViewController {
+final class MovieDetailViewController: BaseViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var detailView: DetailView!
+    @IBOutlet weak var detailView: MovieDetailView!
     
     private let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
 
@@ -75,10 +75,11 @@ final class DetailViewController: BaseViewController {
         
         navigationController?.navigationBar.isHidden = true
         
-        let loadingSelector = #selector(DetailViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(DetailViewController.dataManagerDidUpdate(notification:))
+        let loadingSelector = #selector(MovieDetailViewController.dataManagerDidStartLoading(notification:))
+        let updateSelector = #selector(MovieDetailViewController.dataManagerDidUpdate(notification:))
 //        similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        
+
+        // Moe simulr moies and casts etc into a child view controller. 
         similarMoviesManager.reloadIfNeeded()
     }
 
@@ -161,7 +162,7 @@ final class DetailViewController: BaseViewController {
 
 // MARK: - UISCrollViewDelegate
 
-extension DetailViewController: UIScrollViewDelegate {
+extension MovieDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         detailView.moveHeaderOnScroll()
@@ -170,7 +171,7 @@ extension DetailViewController: UIScrollViewDelegate {
 
 // MARK: - UICollectionViewDelegate
 
-extension DetailViewController: UICollectionViewDelegate {
+extension MovieDetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == detailView.similarMovieCollectionView {
@@ -186,7 +187,7 @@ extension DetailViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension DetailViewController: UICollectionViewDelegateFlowLayout {
+extension MovieDetailViewController: UICollectionViewDelegateFlowLayout {
     
     // Size of the specified item's cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -215,7 +216,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - MovieDetailManagerDelegate
 
-extension DetailViewController: MovieDetailManagerDelegate {
+extension MovieDetailViewController: MovieDetailManagerDelegate {
     
     func movieInfoManager(_ manager: MovieDetailManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
         movie = info.movie
@@ -239,7 +240,7 @@ extension DetailViewController: MovieDetailManagerDelegate {
 
 // MARK: - VideoViewControllerDelegate
 
-extension DetailViewController: VideoViewControllerDelegate {
+extension MovieDetailViewController: VideoViewControllerDelegate {
     
     func videoViewControllerDidFinish(_ controller: VideoViewController) {
         dismiss(animated: true, completion: nil)

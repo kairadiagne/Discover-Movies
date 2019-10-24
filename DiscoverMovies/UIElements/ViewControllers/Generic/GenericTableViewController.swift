@@ -9,6 +9,7 @@
 import UIKit
 import TMDbMovieKit
 
+// Convert into a `UICollectionViewController` with a flow layout that has two three or one column based on the size of the window.
 class GenericTableViewController: BaseViewController {
     
     // MARK: - Types

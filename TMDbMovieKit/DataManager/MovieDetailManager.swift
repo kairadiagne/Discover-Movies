@@ -84,19 +84,19 @@ public final class MovieDetailManager {
         
         let request = ApiRequest.accountState(movieID: movieID, sessionID: sessionID)
         
-//        Alamofire.request(request)
-//            .responseObject { (response: DataResponse<AccountState>) in
-//
-//                switch response.result {
-//                case .success(let data):
-//                    self.delegate?.movieInfoManager(self, movieWithID: self.movieID, inFavorites: data.favoriteStatus, inWatchList: data.watchlistStatus)
-//                case .failure(let error):
-//                    if let error = error as? APIError {
-//                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
-//                    } else {
-//                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
-//                    }
-//                }
+        Alamofire.request(request)
+            .responseObject { (response: DataResponse<AccountState>) in
+
+                switch response.result {
+                case .success(let data):
+                    self.delegate?.movieInfoManager(self, movieWithID: self.movieID, inFavorites: data.favoriteStatus, inWatchList: data.watchlistStatus)
+                case .failure(let error):
+                    if let error = error as? APIError {
+                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+                    } else {
+                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
+                    }
+                }
         }
-//    }
+    }
 }

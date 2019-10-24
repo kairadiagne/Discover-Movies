@@ -8,26 +8,23 @@
 
 import Foundation
 
-// This becomes more Discover logic
+///
 public final class UserSessionManager {
-
-    public enum Status {
-
-        // On first install we should request the status
-
-        /// The user us signed in with a TMDB account
-        case signedin
-
-        /// The user choose not to sign in or is signed out.
-        case publicMode
-    }
     
     private struct Constants {
         static let FreshInstallKey = "FreshInstallKey"
     }
 
-    public var status: Status {
-        return .publicMode
+    enum State {
+
+        ///
+        case loggedOut
+
+        ///
+        case loggedIn
+
+        ///
+        case sessionExpired
     }
     
     private let sessionInfoStorage: SessionInfoContaining
@@ -49,24 +46,5 @@ public final class UserSessionManager {
             UserDefaults.standard.set(true, forKey: Constants.FreshInstallKey)
             sessionInfoStorage.clearUserData()
         }
-    }
-
-    // MARK: - Signin Status
-
-    func logOut() {
-    }
-    
-    // MARK: - Public Mode
-    
-    private var publicModeActivated: Bool {
-        return UserDefaults.standard.bool(forKey: "userIsInpublicMode")
-    }
-
-    public func activatePublicMode() {
-        UserDefaults.standard.set(true, forKey: "userIsInpublicMode")
-    }
-    
-    public func deactivatePublicMode() {
-        UserDefaults.standard.set(false, forKey: "userIsInpublicMode")
     }
 }

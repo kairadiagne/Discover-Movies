@@ -141,7 +141,7 @@ extension PersonDetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-         let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
+         let detailViewController = MovieDetailViewController(movie: movie, signedIn: signedIn)
          navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

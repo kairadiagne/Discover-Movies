@@ -15,6 +15,6 @@ struct TopListViewControllerFactory {
                                                      nowPlayingListManager: container.nowPlayingListManager,
                                                      topRatedListManager: container.topratedListManager,
                                                      upcomingListManager: container.upcomingListManager,
-                                                     signedIn: container.sessionManager.status == .signedin)
+                                                     signedIn: false)
     }
 }

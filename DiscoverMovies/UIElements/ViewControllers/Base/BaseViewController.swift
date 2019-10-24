@@ -30,7 +30,7 @@ class BaseViewController: UIViewController {
     // MARK: - Navigation 
     
     func showDetailViewController(for movie: MovieRepresentable, signedIn: Bool) {
-        let detailViewController = DetailViewController(movie: movie, signedIn: signedIn)
+        let detailViewController = MovieDetailViewController(movie: movie, signedIn: signedIn)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
@@ -51,7 +51,7 @@ extension BaseViewController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if operation == .push && toVC is DetailViewController {
+        if operation == .push && toVC is MovieDetailViewController {
             return DetailAnimatedTransitioning()
         } else {
             return CrossDissolveAnimatedTransitioning()

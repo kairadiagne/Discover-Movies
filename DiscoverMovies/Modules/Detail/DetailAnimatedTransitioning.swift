@@ -18,7 +18,7 @@ final class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if transitionContext.viewController(forKey: .from) != nil,
-            let detailVC = transitionContext.viewController(forKey: .to) as? DetailViewController {
+            let detailVC = transitionContext.viewController(forKey: .to) as? MovieDetailViewController {
             
             let containerView = transitionContext.containerView
             

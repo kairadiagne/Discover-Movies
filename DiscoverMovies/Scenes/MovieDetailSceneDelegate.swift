@@ -38,7 +38,7 @@ final class MovieDetailSceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.backgroundColor = .backgroundColor()
 
-        let navigationController = UINavigationController(rootViewController: DetailViewController(movie: movie, signedIn: false))
+        let navigationController = UINavigationController(rootViewController: MovieDetailViewController(movie: movie, signedIn: false))
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

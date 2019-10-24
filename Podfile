@@ -12,7 +12,6 @@ target 'DiscoverMovies' do
   # Pods for DiscoverMovies
   shared_pods
   pod 'SDWebImage'
-  pod 'ChameleonFramework'
   pod 'youtube-ios-player-helper'
   pod 'BRYXBanner'
   pod 'SwiftLint'

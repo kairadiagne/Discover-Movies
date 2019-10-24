@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ChameleonFramework
 import youtube_ios_player_helper
 
 final class Theme {
@@ -15,17 +14,8 @@ final class Theme {
     // MARK: - Apply Theme
     
     class func apply() {
-//        styleNavigationBar()
         styleTableView()
         styleCollectionView()
-    }
-    
-    class func styleNavigationBar() {
-        UINavigationBar.appearance().barTintColor = .backgroundColor()
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().isOpaque = false
     }
     
     class func styleTableView() {

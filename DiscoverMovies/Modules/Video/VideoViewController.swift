@@ -49,7 +49,6 @@ final class VideoViewController: UIViewController {
         videoView.youtubePlayerView.load(withVideoId: video.source, playerVars: playerVars)
         
         navigationController?.navigationBar.barTintColor = .black
-        navigationController?.hidesNavigationBarHairline = true
         
         let backSelector = #selector(VideoViewController.doneButtonCLick(button:))
         let barbuttontitle = "backButtonTitle".localized

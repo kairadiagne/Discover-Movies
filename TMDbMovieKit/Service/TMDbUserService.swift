@@ -25,7 +25,7 @@ public final class TMDbUserService {
     // MARK: - Initialize
 
     public convenience init() {
-        self.init(sessionInfoStorage: SessionInfoStorage(keyValueStorage: UserDefaults.standard))
+        self.init(sessionInfoStorage: SessionInfoStorage())
     }
 
     init(sessionInfoStorage: SessionInfoStorage) {
@@ -35,7 +35,7 @@ public final class TMDbUserService {
     // MARK: - API Calls
     
     public func getUserInfo() {
-        guard let sessionID = sessionInfoStorage.sessionID else {
+        guard let sessionID = sessionInfoStorage.accessToken else {
             self.delegate?.user(service: self, didFailWithError: .unAuthorized)
             return 
         }

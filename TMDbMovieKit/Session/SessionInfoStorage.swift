@@ -9,10 +9,15 @@
 import Foundation
 
 protocol SessionInfoContaining: class {
+
+    ///
     var accessToken: String? { get }
-    var sessionID: String? { get}
-    func saveSessionID(_ sessionID: String)
-    func clearUserData()
+
+    ///
+    func storeAccessToken(_ accessToken: String)
+
+    ///
+    func deleteAccessToken()
 }
 
 final class SessionInfoStorage: SessionInfoContaining {
@@ -20,35 +25,30 @@ final class SessionInfoStorage: SessionInfoContaining {
     // MARK: - Types
     
     struct Keys {
-        static let UserAccount = "User"
-        static let SessionID = "sessionID"
+        static let server = "htps://www.themoviedb.org"
+        static let account = "AccessToken"
     }
 
     // MARK: - Properties
 
-    var accessToken: String? {
-        return nil
-    }
+    private(set) var accessToken: String?
 
-    var sessionID: String? {
-        return keyValueStorage.object(forKey: Keys.SessionID) as? String
-    }
-
-    private let keyValueStorage: KeyValueStorage
+    private let keychain: KeychainPassswordStoring
 
     // MARK: - Initialize
 
-    init(keyValueStorage: KeyValueStorage) {
-        self.keyValueStorage = keyValueStorage
+    init(keychain: KeychainWrapper = KeychainWrapper()) {
+        self.keychain = keychain
+        self.accessToken = try? keychain.readItem(server: Keys.server, account: Keys.account)
+    }
+    
+    // MARK: - SessionInfoContaining
+    
+    func storeAccessToken(_ accessToken: String) {
+        try? keychain.addOrUpdateItem(accessToken, server: Keys.server, account: Keys.account)
     }
 
-    func clearUserData() {
-        keyValueStorage.set(nil, forKey: Keys.SessionID)
-    }
-    
-    // MARK: - SessionID
-    
-    func saveSessionID(_ sessionID: String) {
-        keyValueStorage.set(sessionID, forKey: Keys.SessionID)
+    func deleteAccessToken() {
+        try? keychain.deleteItem(server: Keys.server, account: Keys.account)
     }
 }

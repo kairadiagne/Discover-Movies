@@ -112,8 +112,8 @@ final class UserAuthenticatorTests: BaseTestCase {
 
         sut.authenticate(callbackURLScheme: redirectScheme, presentationContextprovider: authenticationContextProviderMock) { result in
             XCTAssertNil(result.error)
-            XCTAssertEqual(self.sessionStorageMock.saveSessionIDCallCount, 1)
-            XCTAssertEqual(self.sessionStorageMock.sessionID, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzEzNDkwNzcsInN1YiI6IjU4NjEzYjZiOTI1MTQxMTViZTAyZWZkZiIsImp0aSI6IjE2MDcyODIiLCJhdWQiOiJiMjNiMGFkN2E2YzExNjQwZTRlMjMyNTI3ZjJlNmQ2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCIsImFwaV93cml0ZSJdLCJ2ZXJzaW9uIjoxfQ.ScEaszTc_hVhuReYhP6bOfHoAFJxNmqrotvUHEl10I4")
+            XCTAssertEqual(self.sessionStorageMock.storeAccessTokenCallCount, 1)
+            XCTAssertEqual(self.sessionStorageMock.accessToken, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzEzNDkwNzcsInN1YiI6IjU4NjEzYjZiOTI1MTQxMTViZTAyZWZkZiIsImp0aSI6IjE2MDcyODIiLCJhdWQiOiJiMjNiMGFkN2E2YzExNjQwZTRlMjMyNTI3ZjJlNmQ2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCIsImFwaV93cml0ZSJdLCJ2ZXJzaW9uIjoxfQ.ScEaszTc_hVhuReYhP6bOfHoAFJxNmqrotvUHEl10I4")
             expectation.fulfill()
         }
 
@@ -131,7 +131,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
         sut.authenticate(callbackURLScheme: redirectScheme, presentationContextprovider: authenticationContextProviderMock) { result in
             XCTAssertNotNil(result.error)
-            XCTAssertEqual(self.sessionStorageMock.saveSessionIDCallCount, 0)
+            XCTAssertEqual(self.sessionStorageMock.storeAccessTokenCallCount, 0)
             expectation.fulfill()
         }
 
@@ -183,16 +183,18 @@ final class AuthenticationSessionMock: ASWebAuthenticationSession {
 
 final class SessionStorageMock: SessionInfoContaining {
 
-    private(set) var saveSessionIDCallCount = 0
-    private(set) var sessionID: String?
+    private(set) var storeAccessTokenCallCount = 0
+    private(set) var deleteAccessTokenCallCount = 0
     private(set) var accessToken: String?
 
-    func saveSessionID(_ sessionID: String) {
-        saveSessionIDCallCount += 1
-        self.sessionID = sessionID
+    func storeAccessToken(_ accessToken: String) {
+        storeAccessTokenCallCount += 1
+        self.accessToken = accessToken
     }
 
-    func clearUserData() { }
+    func deleteAccessToken() {
+        deleteAccessTokenCallCount += 1
+    }
 }
 
 final class AuthenticationContextProviderMock: NSObject, ASWebAuthenticationPresentationContextProviding {

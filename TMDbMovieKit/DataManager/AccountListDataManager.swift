@@ -19,7 +19,7 @@ public final class AccountListDataManager: ListDataManager<Movie> {
     // MARK: - Initialize
     
     public convenience init(list: TMDbAccountList) {
-        let sessionInfoStorage = SessionInfoStorage(keyValueStorage: UserDefaults.standard)
+        let sessionInfoStorage = SessionInfoStorage()
         self.init(list: list, sessionInfoProvider: sessionInfoStorage)
     }
     
@@ -28,7 +28,7 @@ public final class AccountListDataManager: ListDataManager<Movie> {
         self.sessionInfoStorage = sessionInfoProvider
 //        let userID = sessionInfoStorage.user?.identifier ?? 1
         let userID = 1
-        let sessionID = sessionInfoStorage.sessionID ?? ""
+        let sessionID = sessionInfoStorage.accessToken ?? ""
         super.init(request: ApiRequest.accountList(list, userID: userID, sessionID: sessionID), refreshTimeOut: 0, cacheIdentifier: list.name)
     }
 }

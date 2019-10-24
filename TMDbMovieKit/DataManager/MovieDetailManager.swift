@@ -28,7 +28,7 @@ public final class MovieDetailManager {
     // MARK: - Initialize
     
     public convenience init(movieID: Int) {
-        let sessionInfoStorage = SessionInfoStorage(keyValueStorage: UserDefaults.standard)
+        let sessionInfoStorage = SessionInfoStorage()
         self.init(movieID: movieID, sessionInfoProvider: sessionInfoStorage)
     }
     
@@ -77,7 +77,7 @@ public final class MovieDetailManager {
     }
 
     public func loadAccountState() {
-        guard let sessionID = sessionInfoProvider.sessionID else {
+        guard let sessionID = sessionInfoProvider.accessToken else {
             delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
             return
         }

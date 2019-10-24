@@ -48,7 +48,7 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
     // MARK: - Initialize
 
     public convenience override init() {
-        let storage = SessionInfoStorage(keyValueStorage: UserDefaults.standard)
+        let storage = SessionInfoStorage()
         let sessionManager = DiscoverMoviesKit.shared.sessionManager
         self.init(sessionInfoStorage: storage, sessionManager: sessionManager)
     }
@@ -104,7 +104,7 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
         sessionManager.request(accessTokenRequest).validate().responseObject { (response: DataResponse<AccessToken>) in
             switch response.result {
             case .success(let token):
-                self.sessionStorage.saveSessionID(token.value)
+                self.sessionStorage.storeAccessToken(token.value)
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))

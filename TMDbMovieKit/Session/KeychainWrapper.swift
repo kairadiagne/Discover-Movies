@@ -8,26 +8,24 @@
 
 import Foundation
 
-/// Types confirming to `KeychainPasswordStoring` are can store an password in the keychain.
+/// Types confirming to `KeychainPasswordStoring` can manage the storage of passwords in the keychain.
 protocol KeychainPassswordStoring {
 
-    /// Looks up a specific item in the users keychain.
+    /// Looks up a specific password in the users keychain.
     /// - Parameter server: The name of the server for which to retrieve the password.
     /// - Parameter account: The name of the account to which the password belongs.
-    func readItem(server: String, account: String) throws -> String
+    func readPassword(server: String, account: String) throws -> String
 
-
-    /// Adds or updates a item in the keychain.
+    /// Adds or updates a password in the keychain.
     /// - Parameter password: The password to store in the keychain.
     /// - Parameter server: The name of the server for which to store the password.
     /// - Parameter account: The name of the account to which the password belongs.
-    func addOrUpdateItem(_ password: String, server: String, account: String) throws
+    func addOrUpdatePassword(_ password: String, server: String, account: String) throws
 
-
-    /// Deletes a speicifc keychain item from
+    /// Deletes a speicifc keychain password from
     /// - Parameter server: The name of the server for which to delete the password.
     /// - Parameter account: The name of the account to which the password belongs.
-    func  deleteItem(server: String, account: String) throws
+    func  deletePasssword(server: String, account: String) throws
 }
 
 struct KeychainWrapper: KeychainPassswordStoring {
@@ -41,7 +39,7 @@ struct KeychainWrapper: KeychainPassswordStoring {
         case generic
     }
 
-    func readItem(server: String, account: String) throws -> String {
+    func readPassword(server: String, account: String) throws -> String {
         var query = KeychainWrapper.keychainQuery(withService: server, account: account)
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnAttributes as String] = kCFBooleanTrue
@@ -60,7 +58,7 @@ struct KeychainWrapper: KeychainPassswordStoring {
             throw Error.generic
         }
 
-        guard let existingItem = queryResult as? [String : AnyObject],
+        guard let existingItem = queryResult as? [String: AnyObject],
             let passwordData = existingItem[kSecValueData as String] as? Data,
             let password = String(data: passwordData, encoding: String.Encoding.utf8)
             else {
@@ -70,17 +68,17 @@ struct KeychainWrapper: KeychainPassswordStoring {
         return password
     }
 
-    func addOrUpdateItem(_ password: String, server: String, account: String) throws {
+    func addOrUpdatePassword(_ password: String, server: String, account: String) throws {
         guard let encodedPassword = password.data(using: String.Encoding.utf8) else {
             throw Error.generic
         }
 
         do {
             // Check for an existing item in the keychain.
-            try _ = readItem(server: server, account: account)
+            try _ = readPassword(server: server, account: account)
 
             // Update the existing item with the new password.
-            var attributesToUpdate = [String : AnyObject]()
+            var attributesToUpdate = [String: AnyObject]()
             attributesToUpdate[kSecValueData as String] = encodedPassword as AnyObject?
 
             let query = KeychainWrapper.keychainQuery(withService: server, account: account)
@@ -88,8 +86,7 @@ struct KeychainWrapper: KeychainPassswordStoring {
 
             // Throw an error if an unexpected status was returned.
             guard status == noErr else { throw Error.generic }
-        }
-        catch Error.noPassword {
+        } catch Error.noPassword {
             // Add new password item.
             var newItem = KeychainWrapper.keychainQuery(withService: server, account: account)
             newItem[kSecValueData as String] = encodedPassword as AnyObject?
@@ -102,7 +99,7 @@ struct KeychainWrapper: KeychainPassswordStoring {
         }
     }
 
-    func deleteItem(server: String, account: String) throws {
+    func deletePasssword(server: String, account: String) throws {
         let query = KeychainWrapper.keychainQuery(withService: server, account: account)
         let status = SecItemDelete(query as CFDictionary)
 
@@ -113,8 +110,8 @@ struct KeychainWrapper: KeychainPassswordStoring {
 
     // MARK: - Convenience
 
-    static func keychainQuery(withService service: String, account: String, accessGroup: String? = nil) -> [String : AnyObject] {
-        var query = [String : AnyObject]()
+    static func keychainQuery(withService service: String, account: String, accessGroup: String? = nil) -> [String: AnyObject] {
+        var query = [String: AnyObject]()
         query[kSecClass as String] = kSecClassGenericPassword
         query[kSecAttrService as String] = service as AnyObject?
         query[kSecAttrAccount as String] = account as AnyObject?

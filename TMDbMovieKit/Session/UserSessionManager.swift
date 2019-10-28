@@ -8,19 +8,26 @@
 
 import Foundation
 
-
-
-///
 public final class UserSessionManager {
-    
-    private struct Constants {
-        static let FreshInstallKey = "FreshInstallKey"
-    }
 
-    public var userIsLoggedIn: Bool {
-        return sessionInfoStorage.accessToken != nil
+    public enum SessionState: Equatable {
+
+        /// The user is logged out of the Movie Database.
+        case loggedOut
+
+        /// The user is logged in with a the Movie Database account.
+        case loggedIn
+
+        public static let sessionStateDidChange = Notification.Name(rawValue: "SessionState")
+
+        /// Posts a notification to notify observers of State change.
+        public func post() {
+            NotificationCenter.default.post(name: SessionState.sessionStateDidChange, object: self)
+        }
     }
     
+    public var currentState: SessionState = .loggedOut
+
     private let sessionInfoStorage: SessionInfoContaining
 
     // MARK: - Initialize
@@ -32,12 +39,19 @@ public final class UserSessionManager {
     init(storage: SessionInfoStorage) {
         self.sessionInfoStorage = storage
 
-        // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
-        let freshInstall = UserDefaults.standard.bool(forKey: Constants.FreshInstallKey) == false
-        
-        if freshInstall {
-            UserDefaults.standard.set(true, forKey: Constants.FreshInstallKey)
-            sessionInfoStorage.deleteAccessToken()
+        // Calculate the initial state
+        calculateState()
+    }
+
+    private func calculateState() {
+        let prevState = currentState
+        currentState = sessionInfoStorage.accessToken != nil ? .loggedIn : .loggedOut
+
+        guard prevState != currentState else {
+            return
         }
+
+        /// Notify all observers about the state change. 
+        currentState.post()
     }
 }

@@ -24,7 +24,8 @@ final class SessionInfoStorage: SessionInfoContaining {
     
     // MARK: - Types
     
-    struct Keys {
+    struct Constants {
+        static let FreshInstallKey = "FreshInstallKey"
         static let server = "htps://www.themoviedb.org"
         static let account = "AccessToken"
     }
@@ -35,20 +36,31 @@ final class SessionInfoStorage: SessionInfoContaining {
 
     private let keychain: KeychainPassswordStoring
 
+    private let keyValueStorage: KeyValueStorage
+
     // MARK: - Initialize
 
-    init(keychain: KeychainWrapper = KeychainWrapper()) {
+    init(keychain: KeychainWrapper = KeychainWrapper(), storage: KeyValueStorage = UserDefaults.standard) {
         self.keychain = keychain
-        self.accessToken = try? keychain.readItem(server: Keys.server, account: Keys.account)
+        self.keyValueStorage = storage
+        self.accessToken = try? keychain.readPassword(server: Constants.server, account: Constants.account)
+
+        // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
+        let freshInstall = keyValueStorage.object(forKey: Constants.FreshInstallKey) as? Bool == false
+        if freshInstall {
+            keyValueStorage.set(true, forKey: Constants.FreshInstallKey)
+            deleteAccessToken()
+        }
     }
     
     // MARK: - SessionInfoContaining
     
     func storeAccessToken(_ accessToken: String) {
-        try? keychain.addOrUpdateItem(accessToken, server: Keys.server, account: Keys.account)
+        try? keychain.addOrUpdatePassword(accessToken, server: Constants.server, account: Constants.account)
+        
     }
 
     func deleteAccessToken() {
-        try? keychain.deleteItem(server: Keys.server, account: Keys.account)
+        try? keychain.deletePasssword(server: Constants.server, account: Constants.account)
     }
 }

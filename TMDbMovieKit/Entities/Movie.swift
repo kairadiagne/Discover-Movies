@@ -59,7 +59,7 @@ public struct Movie: MovieRepresentable, Codable {
         adult = try values.decode(Bool.self, forKey: CodingKeys.adult)
         posterPath = try values.decode(String.self, forKey: CodingKeys.posterPath)
         backDropPath = try values.decode(String.self, forKey: CodingKeys.backDropPath)
-        genres = try values.decodeIfPresent([Int].self, forKey: CodingKeys.genreIDs) ?? values.decodeIfPresent([Int].self, forKey: .genres) ?? []
+        genres = (try? values.decodeIfPresent([Int].self, forKey: CodingKeys.genreIDs) ?? values.decodeIfPresent([Int].self, forKey: .genres)) ?? []
     }
 
     public func encode(to encoder: Encoder) throws {

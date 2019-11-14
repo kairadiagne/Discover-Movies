@@ -63,8 +63,8 @@ class GenericTableViewController: BaseViewController {
         
         genericView.refreshControl.addTarget(self, action: #selector(GenericTableViewController.refresh(control:)), for: .valueChanged)
 
-        notificationToken = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: nil, queue: .main) { [weak self] notification in
-            guard let self = self, let updateEvent = notification.object as? DataManagerUpdateEvent else { return }
+        notificationToken = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: dataManager, queue: .main) { [weak self] notification in
+            guard let self = self, let updateEvent = notification.userInfo?[DataManagerUpdateEvent.updateNotificationKey] as? DataManagerUpdateEvent else { return }
             self.handleUpdateEvent(updateEvent)
         }
     }
@@ -125,7 +125,7 @@ extension GenericTableViewController: UITableViewDelegate {
         if genericView.state == .loading && dataSource.isEmpty {
             cell.isHidden = true
         } else if dataSource.itemCount - 10 == indexPath.row {
-//            dataManager.loadMore()
+            dataManager.loadMore()
         }
     }
 }

@@ -66,7 +66,7 @@ public class DataManager<ModelType: Codable> {
                 self.handle(data: data)
                 self.persistDataIfNeeded()
             case .failure(let error):
-                DataManagerUpdateEvent.didFailWithError(error).post()
+                self.post(event: .didFailWithError(error))
             }
         }
     }
@@ -75,7 +75,7 @@ public class DataManager<ModelType: Codable> {
 
     func handle(data: ModelType) {
         cachedData.data = data
-        DataManagerUpdateEvent.didUpdate.post()
+        post(event: .didUpdate)
     }
     
     // MARK: - Caching
@@ -92,7 +92,7 @@ public class DataManager<ModelType: Codable> {
         if let cachedData: CachedData<ModelType> = cacheRepository.restoreData(forIdentifier: cacheIdentifier) {
             self.stopLoading()
             self.cachedData = cachedData
-            DataManagerUpdateEvent.didUpdate.post()
+            self.post(event: .didUpdate)
         }
     }
     
@@ -108,7 +108,7 @@ public class DataManager<ModelType: Codable> {
     
     func startLoading() {
         isLoading = true
-        DataManagerUpdateEvent.didStartLoading.post()
+        post(event: .didStartLoading)
     }
     
     func stopLoading() {
@@ -116,6 +116,10 @@ public class DataManager<ModelType: Codable> {
     }
     
     // MARK: - Notifications
+
+    func post(event: DataManagerUpdateEvent) {
+        NotificationCenter.default.post(name: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: self, userInfo: event.userInfo)
+    }
     
     public func add(observer: AnyObject, updateSelector: Selector, queue: DispatchQueue) {
         NotificationCenter.default.addObserver(observer, selector: updateSelector, name: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: self)

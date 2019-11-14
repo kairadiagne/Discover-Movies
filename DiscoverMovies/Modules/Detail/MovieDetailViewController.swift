@@ -18,21 +18,21 @@ final class MovieDetailViewController: BaseViewController {
     private let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
 
     private let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
-  
-    private let movieInfoManager: MovieDetailManager
+
+    private let movieDetailManager: MovieDetailManager
     
     private let similarMoviesManager: SimilarMoviesDataManager
     
     private var movie: MovieRepresentable
     
     private let signedIn: Bool
-    
-    private var trailer: Video?
-    
+
+    private var observation: NSObjectProtocol?
+
     // MARK: - Initialize
     
     init(movie: MovieRepresentable, signedIn: Bool) {
-        self.movieInfoManager = MovieDetailManager(movieID: movie.identifier)
+        self.movieDetailManager = MovieDetailManager(movieID: movie.identifier)
         self.similarMoviesManager = SimilarMoviesDataManager(movieID: movie.identifier)
         self.movie = movie
         self.signedIn = signedIn
@@ -60,25 +60,49 @@ final class MovieDetailViewController: BaseViewController {
         detailView.similarMovieCollectionView.delegate = self
         
         detailView.scrollView.delegate = self
-        
-        movieInfoManager.loadAdditionalInfo()
-        movieInfoManager.loadAccountState()
-        
+
         detailView.configure(forSignIn: signedIn)
         updateUI()
+
+        observation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: movieDetailManager, queue: .main) { [weak self] notification in
+            self?.dataManagerDidUpdate(notification: notification)
+        }
     }
+
+    override func dataManagerDidUpdate(notification: Notification) {
+        guard let update = notification.userInfo?[DataManagerUpdateEvent.updateNotificationKey] as? DataManagerUpdateEvent else {
+            return
+        }
+
+        switch update {
+        case .didUpdate:
+            guard let movieDetails = movieDetailManager.movieInfo else { return }
+
+            movie = movieDetails.movie
+            detailView.configure(forDirector: movieDetails.director)
+            detailView.configureWithState(inFavorites: movieDetailManager.accountState?.favoriteStatus ?? false, inWatchList: movieDetailManager.accountState?.watchlistStatus ?? false)
+            updateUI()
+
+            self.castDataSource.items = movieDetails.cast
+            self.detailView.castCollectionView.reloadData()
+        case .didFailWithError(let error):
+            ErrorHandler.shared.handle(error: .generic, authorizationError: signedIn)
+        case .didStartLoading:
+            break
+        }
+    }
+
+    //           similarMoviesDataSource.items = similarMoviesManager.firstPage
+    //        //            detailView.similarMovieCollectionView.reloadData(
+    //                    detailView.seeAllButton.isHidden = similarMoviesDataSource.isEmpty
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = true
-        
-        let loadingSelector = #selector(MovieDetailViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(MovieDetailViewController.dataManagerDidUpdate(notification:))
-//        similarMoviesManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
 
-        // Moe simulr moies and casts etc into a child view controller. 
         similarMoviesManager.reloadIfNeeded()
+        movieDetailManager.reloadIfNeeded()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -92,8 +116,6 @@ final class MovieDetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
-        
-        similarMoviesManager.remove(observer: self)
 
         view.window?.windowScene?.userActivity = nil
     }
@@ -108,30 +130,14 @@ final class MovieDetailViewController: BaseViewController {
         }
     }
 
-    // MARK: - Notifications
-    
-    override func dataManagerDidUpdate(notification: Notification) {
-        similarMoviesDataSource.items = similarMoviesManager.firstPage
-        detailView.similarMovieCollectionView.reloadData()
-        detailView.seeAllButton.isHidden = similarMoviesDataSource.isEmpty
-    }
-    
-    // MARK: - DataManagerFailureDelegate
-    
-//    override func dataManager(_ manager: AnyObject, didFailWithError error: APIError) {
-//        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-//        detailView.similarMovieCollectionView.reloadData()
-//        detailView.castCollectionView.reloadData()
-//    }
-
     // MARK: - Actions
     
     @IBAction func favoriteButtontap(_ sender: FavouriteButton) {
-       movieInfoManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
+       movieDetailManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
     }
     
     @IBAction func watchListButtonTap(_ sender: WatchListButton) {
-       movieInfoManager.toggleStatusOfMovieInList(.watchlist, status: sender.isSelected)
+       movieDetailManager.toggleStatusOfMovieInList(.watchlist, status: sender.isSelected)
     }
 
     @IBAction func reviewsButtonTap(_ sender: UIButton) {
@@ -140,7 +146,7 @@ final class MovieDetailViewController: BaseViewController {
     }
     
     @IBAction func playButtonTap(_ sender: UIButton) {
-        guard let trailer = trailer else { return }
+        guard let trailer = movieDetailManager.movieInfo?.trailer else { return }
         let videoViewController = VideoViewController(video: trailer)
         videoViewController.delegate = self
         let navigationController = BaseNavigationController(rootViewController: videoViewController)
@@ -210,30 +216,6 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-}
-
-// MARK: - MovieDetailManagerDelegate
-
-extension MovieDetailViewController {
-    
-//    func movieInfoManager(_ manager: MovieDetailManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
-//        movie = info.movie
-//        trailer = info.trailer
-//
-//        detailView.configure(forDirector: info.director)
-//        updateUI()
-//
-//        castDataSource.items = info.cast
-//        detailView.castCollectionView.reloadData()
-//    }
-//
-//    func movieInfoManager(_ manager: MovieDetailManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
-//        detailView.configureWithState(inFavorites, inWatchList: inWatchList)
-//    }
-//
-//    func movieInfoManager(_ manager: MovieDetailManager, didFailWithErorr error: APIError) {
-//        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-//    }
 }
 
 // MARK: - VideoViewControllerDelegate

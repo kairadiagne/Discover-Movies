@@ -171,7 +171,7 @@ final class MovieDetailView: UIView {
         header.image = UIImage.placeholderImage()
     }
     
-    func configureWithState(_ inFavorites: Bool, inWatchList: Bool) {
+    func configureWithState(inFavorites: Bool, inWatchList: Bool) {
         favouriteControl.setSelectedState(inFavorites)
         watchListControl.setSelectedState(inWatchList)
     }

@@ -22,8 +22,9 @@ public enum DataManagerUpdateEvent {
 
     public static let dataManagerUpdateNotificationName = Notification.Name(rawValue: "DataManagerUpdateEvent")
 
-    /// Posts a notification to notify subscribers of the update event.
-    public func post() {
-        NotificationCenter.default.post(name: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: self)
+    public static let updateNotificationKey = "value"
+
+    var userInfo: [AnyHashable: Any] {
+        return [DataManagerUpdateEvent.updateNotificationKey: self]
     }
 }

@@ -36,6 +36,6 @@ public class ListDataManager<ItemType: Codable>: DataManager<List<ItemType>> {
             cachedData.data?.update(withNetxPage: data.page, pageCount: data.pageCount, resultCount: data.resultCount, items: data.items)
         }
     
-        DataManagerUpdateEvent.didUpdate.post()
+        post(event: .didUpdate)
     }
 }

@@ -181,7 +181,7 @@ final class AuthenticationSessionMock: ASWebAuthenticationSession {
     }
 }
 
-final class SessionStorageMock: SessionInfoContaining {
+final class SessionStorageMock: AccessTokenStoring {
 
     private(set) var storeAccessTokenCallCount = 0
     private(set) var deleteAccessTokenCallCount = 0

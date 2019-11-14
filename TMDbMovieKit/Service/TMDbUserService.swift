@@ -20,15 +20,15 @@ public final class TMDbUserService {
     
     public weak var delegate: TMDbUserServiceDelegate?
     
-    private let sessionInfoStorage: SessionInfoContaining
+    private let sessionInfoStorage: AccessTokenManaging
     
     // MARK: - Initialize
 
     public convenience init() {
-        self.init(sessionInfoStorage: SessionInfoStorage())
+        self.init(sessionInfoStorage: AccessTokenStore())
     }
 
-    init(sessionInfoStorage: SessionInfoStorage) {
+    init(sessionInfoStorage: AccessTokenStore) {
         self.sessionInfoStorage = sessionInfoStorage
     }
     

@@ -29,9 +29,9 @@ public struct Movie: MovieRepresentable, Codable {
     public let backDropPath: String
     public let genres: [Int]
     
-    public var mainGenre: TMDbGenre? {
+    public var mainGenre: Genre? {
         guard let rawValue = genres.first else { return nil }
-        return TMDbGenre(rawValue: rawValue)
+        return Genre(rawValue: rawValue)
     }
 
     // MARK: Codable

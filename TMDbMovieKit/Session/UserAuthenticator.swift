@@ -39,8 +39,8 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
     /// The session manager responsible for handling the API requests.
     private let sessionManager: SessionManager
 
-    /// The session storage used to persist the session ID.
-    private let sessionStorage: SessionInfoContaining
+    /// The store used to persist the The movie database access token.
+    private let accessTokenStore: AccessTokenManaging
 
     /// A closure used to create a new Authentication session instance.
     private var authenticationSessionFactory: AuthenticationSessionFactory
@@ -48,13 +48,13 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
     // MARK: - Initialize
 
     public convenience override init() {
-        let storage = SessionInfoStorage()
+        let accessTokenStore = AccessTokenStore()
         let sessionManager = DiscoverMoviesKit.shared.sessionManager
-        self.init(sessionInfoStorage: storage, sessionManager: sessionManager)
+        self.init(accessTokenStore: accessTokenStore, sessionManager: sessionManager)
     }
 
-    init(sessionInfoStorage: SessionInfoContaining, sessionManager: SessionManager, authenticationSessionFactory: @escaping AuthenticationSessionFactory = ASWebAuthenticationSession.init) {
-        self.sessionStorage = sessionInfoStorage
+    init(accessTokenStore: AccessTokenManaging, sessionManager: SessionManager, authenticationSessionFactory: @escaping AuthenticationSessionFactory = ASWebAuthenticationSession.init) {
+        self.accessTokenStore = accessTokenStore
         self.sessionManager = sessionManager
         self.authenticationSessionFactory = authenticationSessionFactory
     }
@@ -104,8 +104,12 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
         sessionManager.request(accessTokenRequest).validate().responseObject { (response: DataResponse<AccessToken>) in
             switch response.result {
             case .success(let token):
-                self.sessionStorage.storeAccessToken(token.value)
-                completion(.success(()))
+                do {
+                    try self.accessTokenStore.storeAccessToken(token.value)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }

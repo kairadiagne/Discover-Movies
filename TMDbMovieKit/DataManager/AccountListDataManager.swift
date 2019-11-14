@@ -14,16 +14,16 @@ public final class AccountListDataManager: ListDataManager<Movie> {
     
     private let list: TMDbAccountList
     
-    private let sessionInfoStorage: SessionInfoContaining
+    private let sessionInfoStorage: AccessTokenManaging
 
     // MARK: - Initialize
     
     public convenience init(list: TMDbAccountList) {
-        let sessionInfoStorage = SessionInfoStorage()
+        let sessionInfoStorage = AccessTokenStore()
         self.init(list: list, sessionInfoProvider: sessionInfoStorage)
     }
     
-    init(list: TMDbAccountList, sessionInfoProvider: SessionInfoContaining) {
+    init(list: TMDbAccountList, sessionInfoProvider: AccessTokenManaging) {
         self.list = list
         self.sessionInfoStorage = sessionInfoProvider
 //        let userID = sessionInfoStorage.user?.identifier ?? 1

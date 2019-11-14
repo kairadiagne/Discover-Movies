@@ -28,15 +28,15 @@ public final class UserSessionManager {
     
     public var currentState: SessionState = .loggedOut
 
-    private let sessionInfoStorage: SessionInfoContaining
+    private let sessionInfoStorage: AccessTokenManaging
 
     // MARK: - Initialize
 
     public convenience init() {
-        self.init(storage: SessionInfoStorage())
+        self.init(storage: AccessTokenStore())
     }
     
-    init(storage: SessionInfoStorage) {
+    init(storage: AccessTokenStore) {
         self.sessionInfoStorage = storage
 
         // Calculate the initial state

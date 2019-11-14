@@ -9,6 +9,10 @@
 import Foundation
 
 public enum TMDbImageRouter {
+
+    static let imageBaseURL = "https://image.tmdb.org/t/p/"
+    static let gravatarBaseURLString = "https://www.gravatar.com/avatar/"
+
     case backDropSmall(path: String)
     case backDropMedium(path: String)
     case backdropLarge(path: String)
@@ -50,9 +54,9 @@ public enum TMDbImageRouter {
         
         switch self {
         case .profileLarge, .profileOriginal:
-             urlString = TMDbAPI.GravatarBaseURLString + "\(path)?s=\(size)"
+            urlString = TMDbImageRouter.gravatarBaseURLString + "\(path)?s=\(size)"
         default:
-             urlString = TMDbAPI.ImageBaseURL + "\(size)/\(path)"
+            urlString = TMDbImageRouter.imageBaseURL + "\(size)/\(path)"
         }
         
         return URL(string: urlString) ?? nil

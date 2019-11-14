@@ -1,5 +1,5 @@
 //
-//  Genres.swift
+//  Genre.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 28-03-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TMDbGenre: Int {
+public enum Genre: Int {
     case action = 28
     case adventure = 12
     case animation = 16

@@ -1,5 +1,5 @@
 //
-//  SessionInfoStorage.swift
+//  AccessTokenStore.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 10/05/16.
@@ -8,19 +8,21 @@
 
 import Foundation
 
-protocol SessionInfoContaining: class {
+/// Types conforming to `AccessTokenManaging` provide access to an access token.
+protocol AccessTokenManaging: class {
 
-    ///
+    /// The access token needed to make authenticated calls with an API.
     var accessToken: String? { get }
 
-    ///
-    func storeAccessToken(_ accessToken: String)
+    /// Stores the access token in the keychain.
+    /// - Parameter accessToken: The access token to store in the keychain.
+    func storeAccessToken(_ accessToken: String) throws
 
-    ///
-    func deleteAccessToken()
+    /// Deletes the access token from the keychain.
+    func deleteAccessToken() throws
 }
 
-final class SessionInfoStorage: SessionInfoContaining {
+final class AccessTokenStore: AccessTokenManaging {
     
     // MARK: - Types
     
@@ -49,18 +51,19 @@ final class SessionInfoStorage: SessionInfoContaining {
         let freshInstall = keyValueStorage.object(forKey: Constants.FreshInstallKey) as? Bool == false
         if freshInstall {
             keyValueStorage.set(true, forKey: Constants.FreshInstallKey)
-            deleteAccessToken()
+            try? deleteAccessToken()
         }
     }
     
     // MARK: - SessionInfoContaining
     
-    func storeAccessToken(_ accessToken: String) {
-        try? keychain.addOrUpdatePassword(accessToken, server: Constants.server, account: Constants.account)
-        
+    func storeAccessToken(_ accessToken: String) throws {
+        try keychain.addOrUpdatePassword(accessToken, server: Constants.server, account: Constants.account)
+        self.accessToken = accessToken
     }
 
-    func deleteAccessToken() {
-        try? keychain.deletePasssword(server: Constants.server, account: Constants.account)
+    func deleteAccessToken() throws {
+        try keychain.deletePasssword(server: Constants.server, account: Constants.account)
+        accessToken = nil
     }
 }

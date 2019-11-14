@@ -32,7 +32,7 @@ final class Repository {
     private let path: String
 
     /// A background dispatch queue on which all interactions with the file system are executed. It supports concurrent reads, writes are always done serially.
-    private let fileAccessQueue = DispatchQueue(label: "com.tmdbmoviekit.repository.serial", qos: .background)
+    private let fileAccessQueue = DispatchQueue(label: "com.tmdbmoviekit.repository.serial", qos: .background, attributes: .concurrent)
 
     /// The object responsible for handling all the interaction with the iOS filesystem.
     private let fileManager: FileManaging
@@ -88,7 +88,7 @@ final class Repository {
     func clearData(withIdentifier identifier: String) {
         let path = self.url(identifier: identifier).path
 
-        fileAccessQueue.async {
+        fileAccessQueue.async(flags: .barrier) {
             do {
                 try self.fileManager.removeItem(atPath: path)
             } catch {

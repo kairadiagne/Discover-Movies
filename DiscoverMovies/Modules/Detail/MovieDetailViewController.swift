@@ -61,8 +61,6 @@ final class MovieDetailViewController: BaseViewController {
         
         detailView.scrollView.delegate = self
         
-        movieInfoManager.delegate = self
-        
         movieInfoManager.loadAdditionalInfo()
         movieInfoManager.loadAccountState()
         
@@ -216,26 +214,26 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - MovieDetailManagerDelegate
 
-extension MovieDetailViewController: MovieDetailManagerDelegate {
+extension MovieDetailViewController {
     
-    func movieInfoManager(_ manager: MovieDetailManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
-        movie = info.movie
-        trailer = info.trailer
-        
-        detailView.configure(forDirector: info.director)
-        updateUI()
-        
-        castDataSource.items = info.cast
-        detailView.castCollectionView.reloadData()
-    }
-    
-    func movieInfoManager(_ manager: MovieDetailManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
-        detailView.configureWithState(inFavorites, inWatchList: inWatchList)
-    }
-    
-    func movieInfoManager(_ manager: MovieDetailManager, didFailWithErorr error: APIError) {
-        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-    }
+//    func movieInfoManager(_ manager: MovieDetailManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int) {
+//        movie = info.movie
+//        trailer = info.trailer
+//
+//        detailView.configure(forDirector: info.director)
+//        updateUI()
+//
+//        castDataSource.items = info.cast
+//        detailView.castCollectionView.reloadData()
+//    }
+//
+//    func movieInfoManager(_ manager: MovieDetailManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool) {
+//        detailView.configureWithState(inFavorites, inWatchList: inWatchList)
+//    }
+//
+//    func movieInfoManager(_ manager: MovieDetailManager, didFailWithErorr error: APIError) {
+//        ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
+//    }
 }
 
 // MARK: - VideoViewControllerDelegate

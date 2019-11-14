@@ -7,40 +7,28 @@
 //
 
 import Foundation
-import Alamofire
-
-public protocol MovieDetailManagerDelegate: class {
-    func movieInfoManager(_ manager: MovieDetailManager, didLoadInfo info: MovieInfo, forMovieWIthID id: Int)
-    func movieInfoManager(_ manager: MovieDetailManager, movieWithID: Int, inFavorites: Bool, inWatchList: Bool)
-    func movieInfoManager(_ manager: MovieDetailManager, didFailWithErorr error: APIError)
-}
 
 public final class MovieDetailManager {
     
     // MARK: - Properties
-    
-    public weak var delegate: MovieDetailManagerDelegate?
-    
+
+    /// The identifier of the movie for which to get the details.
     public let movieID: Int
-    
-    private let sessionInfoProvider: SessionInfoContaining
-    
+
     // MARK: - Initialize
     
-    public convenience init(movieID: Int) {
-        let sessionInfoStorage = SessionInfoStorage()
-        self.init(movieID: movieID, sessionInfoProvider: sessionInfoStorage)
-    }
-    
-    init(movieID: Int, sessionInfoProvider: SessionInfoContaining) {
+    public init(movieID: Int) {
         self.movieID = movieID
-        self.sessionInfoProvider = sessionInfoProvider
     }
     
     // MARK: - API Calls
     
     public func loadAdditionalInfo() {
         let request = ApiRequest.movieDetail(movieID: movieID)
+
+//        session
+
+
         
 //        Alamofire.request(request)
 ////            .responseObject { (response: DataResponse<MovieInfo>) in
@@ -77,26 +65,26 @@ public final class MovieDetailManager {
     }
 
     public func loadAccountState() {
-        guard let sessionID = sessionInfoProvider.accessToken else {
-            delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
-            return
-        }
-        
-        let request = ApiRequest.accountState(movieID: movieID, sessionID: sessionID)
-        
-        Alamofire.request(request)
-            .responseObject { (response: DataResponse<AccountState>) in
-
-                switch response.result {
-                case .success(let data):
-                    self.delegate?.movieInfoManager(self, movieWithID: self.movieID, inFavorites: data.favoriteStatus, inWatchList: data.watchlistStatus)
-                case .failure(let error):
-                    if let error = error as? APIError {
-                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
-                    } else {
-                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
-                    }
-                }
-        }
+//        guard let sessionID = sessionInfoProvider.accessToken else {
+//            delegate?.movieInfoManager(self, didFailWithErorr: .unAuthorized)
+//            return
+//        }
+//        
+//        let request = ApiRequest.accountState(movieID: movieID, sessionID: sessionID)
+//        
+//        Alamofire.request(request)
+//            .responseObject { (response: DataResponse<AccountState>) in
+//
+//                switch response.result {
+//                case .success(let data):
+//                    self.delegate?.movieInfoManager(self, movieWithID: self.movieID, inFavorites: data.favoriteStatus, inWatchList: data.watchlistStatus)
+//                case .failure(let error):
+//                    if let error = error as? APIError {
+//                        self.delegate?.movieInfoManager(self, didFailWithErorr: error)
+//                    } else {
+//                        self.delegate?.movieInfoManager(self, didFailWithErorr: .generic)
+//                    }
+//                }
+//        }
     }
 }

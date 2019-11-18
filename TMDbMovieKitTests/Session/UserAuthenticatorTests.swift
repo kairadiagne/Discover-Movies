@@ -13,7 +13,7 @@ import AuthenticationServices
 final class UserAuthenticatorTests: BaseTestCase {
 
     private var sut: UserAuthenticator!
-    private var sessionStorageMock: SessionStorageMock!
+    private var accessTokenStoreMock: AccessTokenStoreMock!
     private var authenticationContextProviderMock: AuthenticationContextProviderMock!
 
     private lazy var redirectScheme = "redirect:"
@@ -22,13 +22,13 @@ final class UserAuthenticatorTests: BaseTestCase {
     override func setUp() {
         super.setUp()
 
-        sessionStorageMock = SessionStorageMock()
+        accessTokenStoreMock = AccessTokenStoreMock()
         authenticationContextProviderMock = AuthenticationContextProviderMock()
     }
 
     override func tearDown() {
         sut = nil
-        sessionStorageMock = nil
+        accessTokenStoreMock = nil
         authenticationContextProviderMock = nil
         AuthenticationSessionMock.reset()
 
@@ -37,7 +37,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
     /// It should complete with an error when it fails to retrieve a request token.
     func testCompletesWithErrorWhenRequestTokenFails() throws {
-        sut = UserAuthenticator(sessionInfoStorage: sessionStorageMock, sessionManager: sessionManager)
+        sut = UserAuthenticator(accessTokenStore: accessTokenStoreMock, sessionManager: sessionManager)
         try Mock(apiRequest: ApiRequest.requestToken(redirectURL: redirectScheme), statusCode: 401, data: Data()).register()
 
         let expectation = self.expectation(description: "It should complete with an error")
@@ -52,7 +52,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
     /// It should start an authentication session after obtaining a request token.
     func testStartsAuthenticationSessionWhenObtainedRequestToken() throws {
-        sut = UserAuthenticator(sessionInfoStorage: sessionStorageMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
+        sut = UserAuthenticator(accessTokenStore: accessTokenStoreMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
         try Mock(apiRequest: ApiRequest.requestToken(redirectURL: redirectScheme), statusCode: 200, data: MockedData.requestTokenResponse).register()
 
         let expectation = self.expectation(description: "It should complete with an error")
@@ -71,7 +71,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
     /// It should complete with an appropiate error when the authentication session gets cancelled.
     func testCompletesWithErrorWhenCancelled() throws {
-        sut = UserAuthenticator(sessionInfoStorage: sessionStorageMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
+        sut = UserAuthenticator(accessTokenStore: accessTokenStoreMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
         try Mock(apiRequest: ApiRequest.requestToken(redirectURL: redirectScheme), statusCode: 200, data: MockedData.requestTokenResponse).register()
         AuthenticationSessionMock.errorToReturn = ASWebAuthenticationSessionError(.canceledLogin)
 
@@ -87,7 +87,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
     /// It should complete with an error when the call back scheme is not recognized.
     func testCompletesWithErrorWhenCallBackSchemeIsNotRecognized() throws {
-        sut = UserAuthenticator(sessionInfoStorage: sessionStorageMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
+        sut = UserAuthenticator(accessTokenStore: accessTokenStoreMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
         try Mock(apiRequest: ApiRequest.requestToken(redirectURL: redirectScheme), statusCode: 200, data: MockedData.requestTokenResponse).register()
         AuthenticationSessionMock.urlToReturn = URL(string: "wrongscheme:")
 
@@ -103,7 +103,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
     /// It should request and store an access token when the flow succeeds.
     func testStoresAccessTokenWhenFlowSucceeds() throws {
-        sut = UserAuthenticator(sessionInfoStorage: sessionStorageMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
+        sut = UserAuthenticator(accessTokenStore: accessTokenStoreMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
         try Mock(apiRequest: ApiRequest.requestToken(redirectURL: redirectScheme), statusCode: 200, data: MockedData.requestTokenResponse).register()
         try Mock(apiRequest: ApiRequest.createAccessToken(requestToken: requestToken), statusCode: 200, data: MockedData.accessTokenResponse).register()
         AuthenticationSessionMock.urlToReturn = URL(string: redirectScheme)
@@ -112,8 +112,8 @@ final class UserAuthenticatorTests: BaseTestCase {
 
         sut.authenticate(callbackURLScheme: redirectScheme, presentationContextprovider: authenticationContextProviderMock) { result in
             XCTAssertNil(result.error)
-            XCTAssertEqual(self.sessionStorageMock.storeAccessTokenCallCount, 1)
-            XCTAssertEqual(self.sessionStorageMock.accessToken, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzEzNDkwNzcsInN1YiI6IjU4NjEzYjZiOTI1MTQxMTViZTAyZWZkZiIsImp0aSI6IjE2MDcyODIiLCJhdWQiOiJiMjNiMGFkN2E2YzExNjQwZTRlMjMyNTI3ZjJlNmQ2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCIsImFwaV93cml0ZSJdLCJ2ZXJzaW9uIjoxfQ.ScEaszTc_hVhuReYhP6bOfHoAFJxNmqrotvUHEl10I4")
+            XCTAssertEqual(self.accessTokenStoreMock.storeAccessTokenCallCount, 1)
+            XCTAssertEqual(self.accessTokenStoreMock.accessToken, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1NzEzNDkwNzcsInN1YiI6IjU4NjEzYjZiOTI1MTQxMTViZTAyZWZkZiIsImp0aSI6IjE2MDcyODIiLCJhdWQiOiJiMjNiMGFkN2E2YzExNjQwZTRlMjMyNTI3ZjJlNmQ2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCIsImFwaV93cml0ZSJdLCJ2ZXJzaW9uIjoxfQ.ScEaszTc_hVhuReYhP6bOfHoAFJxNmqrotvUHEl10I4")
             expectation.fulfill()
         }
 
@@ -122,7 +122,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
     /// It should complete with an error if it can't retrieve an accss token.
     func testCompletesWithErrorWhenAccessTokenRequestFails() throws {
-        sut = UserAuthenticator(sessionInfoStorage: sessionStorageMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
+        sut = UserAuthenticator(accessTokenStore: accessTokenStoreMock, sessionManager: sessionManager, authenticationSessionFactory: AuthenticationSessionMock.init)
         try Mock(apiRequest: ApiRequest.requestToken(redirectURL: redirectScheme), statusCode: 200, data: MockedData.requestTokenResponse).register()
         try Mock(apiRequest: ApiRequest.createAccessToken(requestToken: requestToken), statusCode: 401, data: Data()).register()
         AuthenticationSessionMock.urlToReturn = URL(string: redirectScheme)
@@ -131,7 +131,7 @@ final class UserAuthenticatorTests: BaseTestCase {
 
         sut.authenticate(callbackURLScheme: redirectScheme, presentationContextprovider: authenticationContextProviderMock) { result in
             XCTAssertNotNil(result.error)
-            XCTAssertEqual(self.sessionStorageMock.storeAccessTokenCallCount, 0)
+            XCTAssertEqual(self.accessTokenStoreMock.storeAccessTokenCallCount, 0)
             expectation.fulfill()
         }
 
@@ -181,7 +181,7 @@ final class AuthenticationSessionMock: ASWebAuthenticationSession {
     }
 }
 
-final class SessionStorageMock: AccessTokenStoring {
+final class AccessTokenStoreMock: AccessTokenManaging {
 
     private(set) var storeAccessTokenCallCount = 0
     private(set) var deleteAccessTokenCallCount = 0

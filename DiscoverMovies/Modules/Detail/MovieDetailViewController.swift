@@ -80,7 +80,7 @@ final class MovieDetailViewController: BaseViewController {
 
             movie = movieDetails.movie
             detailView.configure(forDirector: movieDetails.director)
-            detailView.configureWithState(inFavorites: movieDetailManager.accountState?.favoriteStatus ?? false, inWatchList: movieDetailManager.accountState?.watchlistStatus ?? false)
+            detailView.configureWithState(inFavorites: true, inWatchList: movieDetailManager.accountState?.watchlistStatus ?? false)
             updateUI()
 
             self.castDataSource.items = movieDetails.cast
@@ -109,7 +109,7 @@ final class MovieDetailViewController: BaseViewController {
         super.viewDidAppear(animated)
 
         guard let movie = movie as? Movie else { return }
-        view.window?.windowScene?.userActivity = movie.openMovieDetailUseractivity
+        view.window?.windowScene?.userActivity = NSUserActivity.detailActivity(for: movie)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -133,6 +133,8 @@ final class MovieDetailViewController: BaseViewController {
     // MARK: - Actions
     
     @IBAction func favoriteButtontap(_ sender: FavouriteButton) {
+        // swiftlint:disable:next force_cast SceneSessionsManager().openScene(for: movie as! Movie, sourceScene: UIApplication.shared.connectedScenes.first! as! UIWindowScene)
+       return
        movieDetailManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
     }
     
@@ -141,6 +143,10 @@ final class MovieDetailViewController: BaseViewController {
     }
 
     @IBAction func reviewsButtonTap(_ sender: UIButton) {
+        
+        // swiftlint:disable:next force_cast
+        SceneSessionsManager().openScene(for: movie as! Movie, sourceScene: UIApplication.shared.connectedScenes.first as! UIWindowScene)
+        return
         let reviewViewController = ReviewViewController(movie: movie, signedIn: signedIn)
         navigationController?.pushViewController(reviewViewController, animated: true)
     }

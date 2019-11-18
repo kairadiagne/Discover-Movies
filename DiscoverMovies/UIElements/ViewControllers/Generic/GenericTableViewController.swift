@@ -135,7 +135,7 @@ extension GenericTableViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let selectedMovie = dataSource.item(atIndex: indexPath.row) else { return [] }
 
-        let userActivity = selectedMovie.openMovieDetailUseractivity
+        let userActivity = NSUserActivity.detailActivity(for: selectedMovie)
         let itemProvider = NSItemProvider(object: userActivity)
 
         let dragItem = UIDragItem(itemProvider: itemProvider)

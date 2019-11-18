@@ -107,6 +107,7 @@
 		11C9A8242300515300BE3B7F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8232300515300BE3B7F /* FileManager.swift */; };
 		11C9A826230207CA00BE3B7F /* CachedDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A825230207CA00BE3B7F /* CachedDataTests.swift */; };
 		11C9A8282302082300BE3B7F /* DateGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */; };
+		11CAFF91237F41ED009A31A5 /* SceneSessionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAFF90237F41ED009A31A5 /* SceneSessionsManager.swift */; };
 		11CDBA5E2351D23E00095B8E /* UserAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CDBA5D2351D23E00095B8E /* UserAuthenticatorTests.swift */; };
 		11CDBA602351DB9200095B8E /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CDBA5F2351DB9200095B8E /* MockData.swift */; };
 		11CDBA662351E40700095B8E /* Mock+APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CDBA652351E40700095B8E /* Mock+APIRequest.swift */; };
@@ -137,7 +138,7 @@
 		11E923E11FE07938001F6530 /* UILayoutPriority+AddSubtract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */; };
 		11F7A1691DC6A6F600296259 /* Acknowledgement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7A1681DC6A6F600296259 /* Acknowledgement.swift */; };
 		11FA2D05235F946C0029738C /* MovieDetailSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */; };
-		11FA2D0B235FA1920029738C /* Movie+NSUserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA2D0A235FA1920029738C /* Movie+NSUserActivity.swift */; };
+		11FA2D0B235FA1920029738C /* NSUserActivity+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA2D0A235FA1920029738C /* NSUserActivity+Builder.swift */; };
 		11FA2D382362210D0029738C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 11FA2D372362210D0029738C /* Alamofire */; };
 		11FA2D3B236222740029738C /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 11FA2D3A236222740029738C /* SDWebImage */; };
 		E431D5D70276EF94A93A4C00 /* Pods_DiscoverMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B189A7BA1C64D7F17ADCDF9 /* Pods_DiscoverMovies.framework */; };
@@ -350,6 +351,7 @@
 		11C9A8232300515300BE3B7F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		11C9A825230207CA00BE3B7F /* CachedDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDataTests.swift; sourceTree = "<group>"; };
 		11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGeneratorMock.swift; sourceTree = "<group>"; };
+		11CAFF90237F41ED009A31A5 /* SceneSessionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneSessionsManager.swift; sourceTree = "<group>"; };
 		11CDBA5D2351D23E00095B8E /* UserAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthenticatorTests.swift; sourceTree = "<group>"; };
 		11CDBA5F2351DB9200095B8E /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		11CDBA652351E40700095B8E /* Mock+APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mock+APIRequest.swift"; sourceTree = "<group>"; };
@@ -379,7 +381,7 @@
 		11E923E01FE07938001F6530 /* UILayoutPriority+AddSubtract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayoutPriority+AddSubtract.swift"; sourceTree = "<group>"; };
 		11F7A1681DC6A6F600296259 /* Acknowledgement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acknowledgement.swift; sourceTree = "<group>"; };
 		11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailSceneDelegate.swift; sourceTree = "<group>"; };
-		11FA2D0A235FA1920029738C /* Movie+NSUserActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+NSUserActivity.swift"; sourceTree = "<group>"; };
+		11FA2D0A235FA1920029738C /* NSUserActivity+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+Builder.swift"; sourceTree = "<group>"; };
 		13D8535EC1FD0A652AB2C504 /* Pods_TMDbMovieKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDbMovieKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25EF27C2B6BF80FF7BEB7179 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F6360DB7F9FC7955C98533 /* Pods_TMDbMovieKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDbMovieKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -524,7 +526,6 @@
 				111942841CCB8D13001CF39B /* Extensions */,
 				11E923DE1FE06DD7001F6530 /* Resources */,
 				111942861CCB8D2B001CF39B /* Supporting files */,
-				11FA2D0A235FA1920029738C /* Movie+NSUserActivity.swift */,
 			);
 			path = DiscoverMovies;
 			sourceTree = "<group>";
@@ -998,6 +999,8 @@
 		11FA2D0C235FAA390029738C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				11FA2D0A235FA1920029738C /* NSUserActivity+Builder.swift */,
+				11CAFF90237F41ED009A31A5 /* SceneSessionsManager.swift */,
 				116473BD235A5279008B5536 /* SceneDelegate.swift */,
 				11FA2D04235F946C0029738C /* MovieDetailSceneDelegate.swift */,
 			);
@@ -1505,6 +1508,7 @@
 				111942BA1CCB8DE5001CF39B /* DiscoverListCell.swift in Sources */,
 				EA6487C21CE4E55500452DD0 /* SignInView.swift in Sources */,
 				11F7A1691DC6A6F600296259 /* Acknowledgement.swift in Sources */,
+				11CAFF91237F41ED009A31A5 /* SceneSessionsManager.swift in Sources */,
 				EADA5AA61CEA664300C2FAE8 /* MovieCollectionDataSource.swift in Sources */,
 				11027BCE1DAC338D004223F6 /* SearchTableViewCell.swift in Sources */,
 				114471741E167A5800A0C6DD /* VideoView.swift in Sources */,
@@ -1545,7 +1549,7 @@
 				11027BC91DAC2CB4004223F6 /* NoDataCollectionViewCell.swift in Sources */,
 				111942A11CCB8DD4001CF39B /* UIImage+Defaults.swift in Sources */,
 				11C3CC051DB80B550009D6D7 /* GenericTableViewController.swift in Sources */,
-				11FA2D0B235FA1920029738C /* Movie+NSUserActivity.swift in Sources */,
+				11FA2D0B235FA1920029738C /* NSUserActivity+Builder.swift in Sources */,
 				113E92E01E36B76D00C10ADE /* Date+Age.swift in Sources */,
 				1167E7781DC65658003400B7 /* AboutTableViewCell.swift in Sources */,
 				11DC09B01DC7EE1E008CA93C /* BaseView.swift in Sources */,

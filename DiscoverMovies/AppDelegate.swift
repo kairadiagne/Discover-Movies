@@ -31,12 +31,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         let configurationName: String
 
+        // This is where you implement additional logic to open up the scene
+
         // Determine which scene to open
-        if options.userActivities.first?.activityType == Movie.OpenMovieDetailActivityType {
+        if options.userActivities.first?.activityType == NSUserActivity.ActivityType.movieDetail.rawValue {
             configurationName = "Movie Detail Configuration"
         } else {
             configurationName = "Default Configuration"
         }
+
         return .init(name: configurationName, sessionRole: connectingSceneSession.role)
     }
 

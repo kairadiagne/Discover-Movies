@@ -13,7 +13,9 @@ final class MovieDetailSceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    // Implementing this method tells the system that the sample supports user-activity-based state restoration.
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        // This is the NSUserActivity that will be used to restore state when the scene reconnects.
         return scene.userActivity
     }
 
@@ -21,22 +23,19 @@ final class MovieDetailSceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else {
             return
         }
-        
-        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else {
-            return
-        }
-
-        guard let movieData = userActivity.userInfo?[Movie.OpenMovieDetailInfoKey] as? Data else {
-            return
-        }
-
-        guard let movie = try? JSONDecoder().decode(Movie.self, from: movieData) else {
-            return
-        }
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.backgroundColor = .backgroundColor()
+
+        /// Grab the most relevant activiy from the system (Handoff or shortcut or notification) otherwise restore the previous state.
+        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity,
+            let movieData = userActivity.userInfo?[NSUserActivity.MovieDetailDataKey] as? Data,
+            let movie = try? JSONDecoder().decode(Movie.self, from: movieData) else {
+                // We could add functionality to the movie detail view controller to be initialized with just the id of a movie.
+                // Then it could fetch data if needed.
+                fatalError("We should have the data to show the details of a movie")
+        }
 
         let navigationController = UINavigationController(rootViewController: MovieDetailViewController(movie: movie, signedIn: false))
         window?.rootViewController = navigationController

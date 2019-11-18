@@ -61,10 +61,6 @@ final class PersonDetailViewController: BaseViewController {
         
         navigationController?.navigationBar.isHidden = true
         
-        let loadingSelector = #selector(PersonDetailViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(PersonDetailViewController.dataManagerDidUpdate(notification:))
-//        personDataManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
-        
         personDataManager.reloadIfNeeded()
     }
     

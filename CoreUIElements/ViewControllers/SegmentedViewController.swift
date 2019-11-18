@@ -60,7 +60,7 @@ public class SegmentedViewController: UIViewController {
         setupPageViewController()
         navigationItem.titleView = segmentedControl
 
-        pageViewController.setViewControllers([viewControllers.first!], direction: .forward, animated: false, completion: nil)
+        pageViewController.setViewControllers([viewControllers[0]], direction: .forward, animated: false, completion: nil)
         set(selectedIndex: 0)
     }
 
@@ -71,8 +71,8 @@ public class SegmentedViewController: UIViewController {
     }
 
     private func setupSegmentedControl() {
-        for (index, vc) in viewControllers.enumerated() {
-            segmentedControl.insertSegment(withTitle: vc.title, at: index, animated: false)
+        for (index, viewController) in viewControllers.enumerated() {
+            segmentedControl.insertSegment(withTitle: viewController.title, at: index, animated: false)
         }
     }
 

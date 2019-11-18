@@ -48,8 +48,7 @@ final class SearchViewController: BaseViewController {
         
         searchController.delegate = self
         searchController.searchBar.delegate = self
-        
-        searchController.dimsBackgroundDuringPresentation = false
+
         searchController.hidesNavigationBarDuringPresentation = false
         definesPresentationContext = true
         
@@ -67,10 +66,6 @@ final class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let loadingSelector = #selector(SearchViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(SearchViewController.dataManagerDidUpdate(notification:))
-//        searchManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
     }
     
     override func viewDidAppear(_ animated: Bool) {

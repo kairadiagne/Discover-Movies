@@ -61,10 +61,6 @@ final class AccountListController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let loadingSelector = #selector(AccountListController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(AccountListController.dataManagerDidUpdate(notification:))
-        // accountListManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
 
         // Try to preload data from cache
         dataSource.items = accountListManager.allItems

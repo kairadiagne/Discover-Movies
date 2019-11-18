@@ -23,9 +23,9 @@ final class CrossDissolveAnimatedTransitioning: NSObject, UIViewControllerAnimat
             var fromView: UIView
             var toView: UIView
             
-            if let from = transitionContext.view(forKey: .from), let to = transitionContext.view(forKey: .to) {
-                fromView = from
-                toView = to
+            if let fromViewController = transitionContext.view(forKey: .from), let toViewController = transitionContext.view(forKey: .to) {
+                fromView = fromViewController
+                toView = toViewController
             } else {
                 fromView = fromVC.view
                 toView = toVC.view

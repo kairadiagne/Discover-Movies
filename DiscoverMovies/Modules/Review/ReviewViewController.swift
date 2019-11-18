@@ -60,9 +60,6 @@ final class ReviewViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let loadingSelector = #selector(ReviewViewController.dataManagerDidStartLoading(notification:))
-        let updateSelector = #selector(ReviewViewController.dataManagerDidUpdate(notification:))
-//        reviewManager.add(observer: self, loadingSelector: loadingSelector, updateSelector: updateSelector)
         reviewManager.reloadIfNeeded()
     }
     

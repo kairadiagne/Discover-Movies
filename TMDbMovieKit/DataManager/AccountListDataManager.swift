@@ -26,7 +26,6 @@ public final class AccountListDataManager: ListDataManager<Movie> {
     init(list: TMDbAccountList, sessionInfoProvider: AccessTokenManaging) {
         self.list = list
         self.sessionInfoStorage = sessionInfoProvider
-//        let userID = sessionInfoStorage.user?.identifier ?? 1
         let userID = 1
         let sessionID = sessionInfoStorage.accessToken ?? ""
         super.init(request: ApiRequest.accountList(list, userID: userID, sessionID: sessionID), refreshTimeOut: 0, cacheIdentifier: list.name)

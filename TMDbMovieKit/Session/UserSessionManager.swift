@@ -17,16 +17,11 @@ public final class UserSessionManager {
 
         /// The user is logged in with a the Movie Database account.
         case loggedIn
-
-        public static let sessionStateDidChange = Notification.Name(rawValue: "SessionState")
-
-        /// Posts a notification to notify observers of State change.
-        public func post() {
-            NotificationCenter.default.post(name: SessionState.sessionStateDidChange, object: self)
-        }
     }
     
-    public var currentState: SessionState = .loggedOut
+    public var currentState: SessionState {
+        return sessionInfoStorage.accessToken != nil ? .loggedIn : .loggedOut
+    }
 
     private let sessionInfoStorage: AccessTokenManaging
 
@@ -38,20 +33,5 @@ public final class UserSessionManager {
     
     init(storage: AccessTokenStore) {
         self.sessionInfoStorage = storage
-
-        // Calculate the initial state
-        calculateState()
-    }
-
-    private func calculateState() {
-        let prevState = currentState
-        currentState = sessionInfoStorage.accessToken != nil ? .loggedIn : .loggedOut
-
-        guard prevState != currentState else {
-            return
-        }
-
-        /// Notify all observers about the state change. 
-        currentState.post()
     }
 }

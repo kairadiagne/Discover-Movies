@@ -45,12 +45,6 @@ final class SignInViewController: UIViewController {
         return .portrait
     }
     
-    // MARK: - Status Bar 
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     // MARK: - Actions
     
     @IBAction func signInButtonClick(_ sender: UIButton) {

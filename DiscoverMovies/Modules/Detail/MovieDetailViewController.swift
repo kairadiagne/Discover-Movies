@@ -14,6 +14,8 @@ final class MovieDetailViewController: BaseViewController {
     // MARK: - Properties
     
     @IBOutlet weak var detailView: MovieDetailView!
+
+    private(set) var movie: MovieRepresentable
     
     private let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
 
@@ -22,9 +24,7 @@ final class MovieDetailViewController: BaseViewController {
     private let movieDetailManager: MovieDetailManager
     
     private let similarMoviesManager: SimilarMoviesDataManager
-    
-    private var movie: MovieRepresentable
-    
+
     private let signedIn: Bool
 
     private var observation: NSObjectProtocol?
@@ -86,16 +86,16 @@ final class MovieDetailViewController: BaseViewController {
             self.castDataSource.items = movieDetails.cast
             self.detailView.castCollectionView.reloadData()
         case .didFailWithError(let error):
-            ErrorHandler.shared.handle(error: .generic, authorizationError: signedIn)
+            return
+//            ErrorHandler.shared.handle(error: .generic, authorizationError: signedIn)
+            //           similarMoviesDataSource.items = similarMoviesManager.firstPage
+            //        //            detailView.similarMovieCollectionView.reloadData(
+            //                    detailView.seeAllButton.isHidden = similarMoviesDataSource.isEmpty
         case .didStartLoading:
             break
         }
     }
 
-    //           similarMoviesDataSource.items = similarMoviesManager.firstPage
-    //        //            detailView.similarMovieCollectionView.reloadData(
-    //                    detailView.seeAllButton.isHidden = similarMoviesDataSource.isEmpty
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -116,7 +116,6 @@ final class MovieDetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
-
         view.window?.windowScene?.userActivity = nil
     }
     
@@ -133,8 +132,6 @@ final class MovieDetailViewController: BaseViewController {
     // MARK: - Actions
     
     @IBAction func favoriteButtontap(_ sender: FavouriteButton) {
-        // swiftlint:disable:next force_cast SceneSessionsManager().openScene(for: movie as! Movie, sourceScene: UIApplication.shared.connectedScenes.first! as! UIWindowScene)
-       return
        movieDetailManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
     }
     
@@ -143,10 +140,6 @@ final class MovieDetailViewController: BaseViewController {
     }
 
     @IBAction func reviewsButtonTap(_ sender: UIButton) {
-        
-        // swiftlint:disable:next force_cast
-        SceneSessionsManager().openScene(for: movie as! Movie, sourceScene: UIApplication.shared.connectedScenes.first as! UIWindowScene)
-        return
         let reviewViewController = ReviewViewController(movie: movie, signedIn: signedIn)
         navigationController?.pushViewController(reviewViewController, animated: true)
     }

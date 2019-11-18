@@ -21,7 +21,9 @@ extension NSUserActivity {
     static let MovieDetailDataKey = "movie"
 
     /// Creates a `NSUserActivity` object for the specified movie.
-    /// - Parameter movie: The movie to create the user acvitiy for.
+    /// - Parameters:
+    ///   - movie: The movie to create the user acvitiy for.
+    ///   - selectedTabIndex: The index of the current selected tab in the tab bar controller
     static func detailActivity(for movie: Movie) -> NSUserActivity {
         let userActivity = NSUserActivity(activityType: ActivityType.movieDetail.rawValue)
         userActivity.title = MovieDetailTitle

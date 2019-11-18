@@ -29,23 +29,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        let configurationName: String
-
-        // This is where you implement additional logic to open up the scene
-
-        // Determine which scene to open
-        if options.userActivities.first?.activityType == NSUserActivity.ActivityType.movieDetail.rawValue {
-            configurationName = "Movie Detail Configuration"
-        } else {
-            configurationName = "Default Configuration"
-        }
-
+        let configurationName = "Default Configuration"
         return .init(name: configurationName, sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 }

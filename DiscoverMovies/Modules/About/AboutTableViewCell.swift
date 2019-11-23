@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AcknowledgementCell: UITableViewCell, NibReusabelCell {
+final class AcknowledgementCell: UITableViewCell, NibReusable {
     
     // MARK: - Properties
     

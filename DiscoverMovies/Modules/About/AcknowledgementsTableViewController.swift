@@ -20,8 +20,8 @@ final class AcknowledgementsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         title = "aboutAcknowledgements".localized
-        
-        tableView.register(AcknowledgementCell.nib, forCellReuseIdentifier: AcknowledgementCell.reuseId)
+
+        tableView.register(nibReusableCell: AcknowledgementCell.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +58,7 @@ final class AcknowledgementsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable force_cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: AcknowledgementCell.reuseId, for: indexPath) as! AcknowledgementCell
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as AcknowledgementCell
         let acknowledgement = acknowledgements[indexPath.row]
         cell.configure(with: acknowledgement)
         return cell

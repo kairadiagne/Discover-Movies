@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionViewCell>: NSObject, UICollectionViewDataSource {
+class BaseCollectionViewDataSource<Item, Cell: Reusable & UICollectionViewCell>: NSObject, UICollectionViewDataSource {
     
     typealias ItemType = Item
     typealias NoDataCellType = NoDataCollectionViewCell
@@ -18,11 +18,11 @@ class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionVie
     
     var items: [ItemType] = []
     
-    private(set) var emptyMessage: String
+    private(set) var emptyMessage: String?
     
     // MARK: - Initialize
     
-    init(emptyMessage: String) {
+    init(emptyMessage: String?) {
         self.emptyMessage = emptyMessage
         super.init()
     }
@@ -34,14 +34,14 @@ class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isEmpty {
+        if shouldShowEmptyMessage {
             // swiftlint:disable force_cast
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoDataCellType.reuseId, for: indexPath) as! NoDataCellType
-            cell.configure(with: emptyMessage)
+            let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as NoDataCellType
+            cell.configure(with: emptyMessage ?? "")
             return cell
         } else {
             // swiftlint:disable force_cast
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellType.reuseId, for: indexPath) as! CellType
+            let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as CellType
             configure(cell, atIndexPath: indexPath)
             return cell
         }
@@ -52,8 +52,8 @@ class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionVie
         fatalError("Designated for subclass")
     }
 
-    var isEmpty: Bool {
-        return items.isEmpty
+    var shouldShowEmptyMessage: Bool {
+        return items.isEmpty && emptyMessage != nil
     }
 
     var itemCount: Int {
@@ -61,11 +61,11 @@ class BaseCollectionViewDataSource<Item, Cell: NibReusabelCell & UICollectionVie
     }
 
     var numberOfItems: Int {
-        return isEmpty ? 1 : itemCount
+        return shouldShowEmptyMessage ? 1 : itemCount
     }
 
     func item(atIndex index: Int) -> ItemType? {
-        guard index >= 0 && index <= itemCount && !isEmpty else { return nil }
+        guard index >= 0 && index <= itemCount && !shouldShowEmptyMessage else { return nil }
         return items[index]
     }
 

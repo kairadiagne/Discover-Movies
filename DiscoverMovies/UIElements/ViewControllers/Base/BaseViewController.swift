@@ -18,15 +18,7 @@ class BaseViewController: UIViewController {
     
         navigationController?.delegate = self
     }
-    
-    // MARK: - DataManagerNotifications
-    
-    @objc func dataManagerDidStartLoading(notification: Notification) {
-    }
-    
-    @objc func dataManagerDidUpdate(notification: Notification) {
-    }
-    
+
     // MARK: - Navigation 
     
     func showDetailViewController(for movie: MovieRepresentable, signedIn: Bool) {

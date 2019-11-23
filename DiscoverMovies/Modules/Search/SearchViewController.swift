@@ -83,10 +83,10 @@ final class SearchViewController: BaseViewController {
     
     // MARK: - Notifications
     
-    override func dataManagerDidUpdate(notification: Notification) {
-        dataSource.items = searchManager.allItems
-        searchView.tableView.reloadData()
-    }
+//    override func detailManagerDidUpdate(notification: Notification) {
+//        dataSource.items = searchManager.allItems
+//        searchView.tableView.reloadData()
+//    }
     
     // MARK: - FailureDelegate
     

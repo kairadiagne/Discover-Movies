@@ -27,11 +27,10 @@ public struct Movie: MovieRepresentable, Codable {
     public let adult: Bool
     public let posterPath: String
     public let backDropPath: String
-    public let genres: [Int]
+    public let genres: [Genre]
     
     public var mainGenre: Genre? {
-        guard let rawValue = genres.first else { return nil }
-        return Genre(rawValue: rawValue)
+        return genres.first
     }
 
     // MARK: Codable
@@ -46,7 +45,7 @@ public struct Movie: MovieRepresentable, Codable {
         case posterPath = "poster_path"
         case backDropPath = "backdrop_path"
         case genres = "genres"
-        case genreIDs = "genere_ids"
+        case genreIDs = "genre_ids"
     }
 
     public init(from decoder: Decoder) throws {
@@ -54,12 +53,18 @@ public struct Movie: MovieRepresentable, Codable {
         identifier = try values.decode(Int.self, forKey: CodingKeys.identifier)
         title = try values.decode(String.self, forKey: CodingKeys.title)
         overview = try values.decode(String.self, forKey: CodingKeys.overview)
-        releaseDate = try values.decode(String.self, forKey: CodingKeys.overview)
+        releaseDate = try values.decode(String.self, forKey: CodingKeys.releaseDate)
         rating = try values.decode(Double.self, forKey: CodingKeys.rating)
         adult = try values.decode(Bool.self, forKey: CodingKeys.adult)
         posterPath = try values.decode(String.self, forKey: CodingKeys.posterPath)
         backDropPath = try values.decode(String.self, forKey: CodingKeys.backDropPath)
-        genres = (try? values.decodeIfPresent([Int].self, forKey: CodingKeys.genreIDs) ?? values.decodeIfPresent([Int].self, forKey: .genres)) ?? []
+        if let genres = try? values.decode([Genre].self, forKey: CodingKeys.genreIDs) {
+            self.genres = genres
+        } else if let genres = try? values.decode([Genre].self, forKey: CodingKeys.genres) {
+            self.genres = genres
+        } else {
+            genres = []
+        }
     }
 
     public func encode(to encoder: Encoder) throws {

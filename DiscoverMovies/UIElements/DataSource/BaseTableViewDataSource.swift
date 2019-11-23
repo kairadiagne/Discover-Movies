@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableViewDataSource<Item, Cell: NibReusabelCell & UITableViewCell>: NSObject, UITableViewDataSource {
+class BaseTableViewDataSource<Item, Cell: NibReusable & UITableViewCell>: NSObject, UITableViewDataSource {
     
     typealias ItemType = Item
     typealias NoDataCellType = NoDataCell
@@ -40,7 +40,7 @@ class BaseTableViewDataSource<Item, Cell: NibReusabelCell & UITableViewCell>: NS
             cell.configure(with: emptyMessage)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellType.reuseId, for: indexPath) as! CellType
+            let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as CellType
             configure(cell, atIndexPath: indexPath)
             return cell
         }

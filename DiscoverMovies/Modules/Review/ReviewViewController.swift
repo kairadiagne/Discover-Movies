@@ -73,15 +73,15 @@ final class ReviewViewController: BaseViewController {
     
     // MARK: - DataManagerNotifications
     
-    override func dataManagerDidStartLoading(notification: Notification) {
-        reviewView.set(state: .loading)
-    }
-    
-    override func dataManagerDidUpdate(notification: Notification) {
-        reviewView.set(state: .idle)
-        reviewDataSource.items = reviewManager.allItems
-        reviewView.tableView.reloadData()
-    }
+//    override func dataManagerDidStartLoading(notification: Notification) {
+//        reviewView.set(state: .loading)
+//    }
+//    
+//    override func detailManagerDidUpdate(notification: Notification) {
+//        reviewView.set(state: .idle)
+//        reviewDataSource.items = reviewManager.allItems
+//        reviewView.tableView.reloadData()
+//    }
     
     // MARK: - DataManagerFailureDelegate
     

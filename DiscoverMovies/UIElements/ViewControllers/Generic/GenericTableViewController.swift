@@ -10,27 +10,27 @@ import UIKit
 import TMDbMovieKit
 
 // Convert into a `UICollectionViewController` with a flow layout that has two three or one column based on the size of the window.
-class GenericTableViewController: BaseViewController {
-    
-    // MARK: - Types
-    
-    private struct Constants {
-        static let CellHeight: CGFloat = 250
-    }
-    
+final class GenericTableViewController: BaseViewController {
+
     // MARK: - Properties
-    
-    var genericView: GenericTableView {
-        // swiftlint:disable force_cast
-        return view as! GenericTableView
-    }
+
+    private lazy var collectionView: UICollectionView = {
+        return UICollectionView(frame: .zero, collectionViewLayout: ColumnFlowLayout())
+    }()
+
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl(frame: .zero)
+        refreshControl.tintColor = .white
+        refreshControl.addTarget(self, action: #selector(refresh(control:)), for: .valueChanged)
+        return refreshControl
+    }()
 
     private let dataManager: ListDataManager<Movie>
     
     private let dataSource = MovieListDataSource()
 
     private var notificationToken: NSObjectProtocol?
-    
+
     private let signedIn: Bool
     
     // MARK: - Initialize
@@ -41,27 +41,30 @@ class GenericTableViewController: BaseViewController {
         super.init(nibName: nil, bundle: nil)
         self.title = titleString
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Life cycle
-    
-    override func loadView() {
-        view = GenericTableView(frame: UIScreen.main.bounds)
+
+    private func setupView() {
+        view.embed(subView: collectionView)
+
+        // Register cells
+        collectionView.registerReusableCell(MovieBackdropCell.self)
+        collectionView.registerReusableCell(NoDataCollectionViewCell.self)
+
+        collectionView.delegate = self
+        collectionView.dragDelegate = self
+        collectionView.dataSource = dataSource
+        collectionView.refreshControl = refreshControl
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        genericView.tableView.register(DiscoverListCell.nib, forCellReuseIdentifier: DiscoverListCell.reuseId)
-        genericView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
-        genericView.tableView.delegate = self
-        genericView.tableView.dragDelegate = self
-        genericView.tableView.dataSource = dataSource
-        
-        genericView.refreshControl.addTarget(self, action: #selector(GenericTableViewController.refresh(control:)), for: .valueChanged)
+
+        setupView()
 
         notificationToken = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: dataManager, queue: .main) { [weak self] notification in
             guard let self = self, let updateEvent = notification.userInfo?[DataManagerUpdateEvent.updateNotificationKey] as? DataManagerUpdateEvent else { return }
@@ -83,8 +86,7 @@ class GenericTableViewController: BaseViewController {
     
     private func loadData() {
         dataSource.items = dataManager.allItems
-        genericView.tableView.reloadData()
-        
+        collectionView.reloadData()
         dataManager.reloadIfNeeded()
     }
     
@@ -93,14 +95,12 @@ class GenericTableViewController: BaseViewController {
     private func handleUpdateEvent(_ updateEvent: DataManagerUpdateEvent) {
         switch updateEvent {
         case .didStartLoading:
-            genericView.set(state: .loading)
+            break
         case .didUpdate:
-            genericView.set(state: .idle)
             dataSource.items = dataManager.allItems
-            genericView.tableView.reloadData()
+            collectionView.reloadData()
         case .didFailWithError(let error):
-            genericView.set(state: .idle)
-            genericView.tableView.reloadData()
+            collectionView.reloadData()
             guard let error = error as? APIError else { return }
             ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
         }
@@ -109,30 +109,18 @@ class GenericTableViewController: BaseViewController {
 
 // MARK: - UITableViewDelegate
 
-extension GenericTableViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return !dataSource.isEmpty ? Constants.CellHeight : tableView.bounds.height
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension GenericTableViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
         showDetailViewController(for: movie, signedIn: signedIn)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if genericView.state == .loading && dataSource.isEmpty {
-            cell.isHidden = true
-        } else if dataSource.itemCount - 10 == indexPath.row {
-            dataManager.loadMore()
-        }
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
-extension GenericTableViewController: UITableViewDragDelegate {
+extension GenericTableViewController: UICollectionViewDragDelegate {
 
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let selectedMovie = dataSource.item(atIndex: indexPath.row) else { return [] }
 
         let userActivity = NSUserActivity.detailActivity(for: selectedMovie)

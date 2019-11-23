@@ -74,25 +74,25 @@ final class PersonDetailViewController: BaseViewController {
     
     // MARK: - Notifications
     
-    override func dataManagerDidStartLoading(notification: Notification) {
-         personDetailView.set(state: .loading)
-    }
-    
-    override func dataManagerDidUpdate(notification: Notification) {
-        if let person = personDataManager.person {
-            
-            // Collection view
-            if person.movieCredits.count > 0 {
-                dataSource.items = person.movieCredits
-                personDetailView.moviesCollectionView.reloadData()
-                personDetailView.moviesStackView.isHidden = false
-            }
-            
-            // View
-            personDetailView.set(state: .idle)
-            personDetailView.configure(person: person)
-        }
-    }
+//    override func dataManagerDidStartLoading(notification: Notification) {
+//         personDetailView.set(state: .loading)
+//    }
+//    
+//    override func detailManagerDidUpdate(notification: Notification) {
+//        if let person = personDataManager.person {
+//            
+//            // Collection view
+//            if person.movieCredits.count > 0 {
+//                dataSource.items = person.movieCredits
+//                personDetailView.moviesCollectionView.reloadData()
+//                personDetailView.moviesStackView.isHidden = false
+//            }
+//            
+//            // View
+//            personDetailView.set(state: .idle)
+//            personDetailView.configure(person: person)
+//        }
+//    }
     
     // MARK: - Actions
     
@@ -147,7 +147,7 @@ extension PersonDetailViewController: UICollectionViewDelegate {
 extension PersonDetailViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return !dataSource.isEmpty ? CGSize(width: 78, height: 130): personDetailView.moviesCollectionView.bounds.size
+        return !dataSource.shouldShowEmptyMessage ? CGSize(width: 78, height: 130): personDetailView.moviesCollectionView.bounds.size
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

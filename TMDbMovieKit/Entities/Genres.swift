@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Genre: Int {
+public enum Genre: Int, Codable {
     case action = 28
     case adventure = 12
     case animation = 16

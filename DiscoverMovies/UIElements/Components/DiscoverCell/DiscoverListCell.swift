@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-final class DiscoverListCell: UITableViewCell, NibReusabelCell {
+final class DiscoverListCell: UITableViewCell, NibReusable {
     
     // MARK: - Properties
     

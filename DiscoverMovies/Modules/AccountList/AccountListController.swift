@@ -45,8 +45,8 @@ final class AccountListController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        accountListView.tableView.register(AccountListTableViewCell.nib, forCellReuseIdentifier: AccountListTableViewCell.reuseId)
-        accountListView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
+        accountListView.tableView.register(nibReusableCell: AccountListTableViewCell.self)
+        accountListView.tableView.register(nibReusableCell: NoDataCell.self)
         accountListView.tableView.delegate = self
         accountListView.tableView.dataSource = dataSource
         
@@ -82,15 +82,15 @@ final class AccountListController: BaseViewController {
     
     // MARK: - Notifications
     
-    override func dataManagerDidUpdate(notification: Notification) {
-        accountListView.set(state: .idle)
-        dataSource.items = accountListManager.allItems
-        accountListView.tableView.reloadData()
-    }
+//    override func detailManagerDidUpdate(notification: Notification) {
+//        accountListView.set(state: .idle)
+//        dataSource.items = accountListManager.allItems
+//        accountListView.tableView.reloadData()
+//    }
     
-    override func dataManagerDidStartLoading(notification: Notification) {
-        accountListView.set(state: .loading)
-    }
+//    override func dataManagerDidStartLoading(notification: Notification) {
+//        accountListView.set(state: .loading)
+//    }
     
     // MARK: - Failuredelegate
     

@@ -27,7 +27,9 @@ final class MovieDetailViewController: BaseViewController {
 
     private let signedIn: Bool
 
-    private var observation: NSObjectProtocol?
+    private var detailManagerObservation: NSObjectProtocol?
+
+    private var similarMoviesManagerObservation: NSObjectProtocol?
 
     // MARK: - Initialize
     
@@ -41,6 +43,11 @@ final class MovieDetailViewController: BaseViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(detailManagerObservation as Any)
+        NotificationCenter.default.removeObserver(similarMoviesManagerObservation as Any)
     }
 
     // MARK: - Life Cycle
@@ -64,12 +71,22 @@ final class MovieDetailViewController: BaseViewController {
         detailView.configure(forSignIn: signedIn)
         updateUI()
 
-        observation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: movieDetailManager, queue: .main) { [weak self] notification in
-            self?.dataManagerDidUpdate(notification: notification)
+        detailManagerObservation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: movieDetailManager, queue: .main) { [weak self] notification in
+            self?.detailManagerDidUpdate(notification: notification)
+        }
+
+        similarMoviesManagerObservation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: similarMoviesManager, queue: .main) { [weak self] notification in
+            self?.similarMoviewsManagerDidUpdate(notification: notification)
         }
     }
 
-    override func dataManagerDidUpdate(notification: Notification) {
+    func similarMoviewsManagerDidUpdate(notification: Notification) {
+        similarMoviesDataSource.items = similarMoviesManager.firstPage
+        detailView.similarMovieCollectionView.reloadData()
+        detailView.seeAllButton.isHidden = similarMoviesDataSource.shouldShowEmptyMessage
+    }
+
+    func detailManagerDidUpdate(notification: Notification) {
         guard let update = notification.userInfo?[DataManagerUpdateEvent.updateNotificationKey] as? DataManagerUpdateEvent else {
             return
         }
@@ -83,14 +100,13 @@ final class MovieDetailViewController: BaseViewController {
             detailView.configureWithState(inFavorites: true, inWatchList: movieDetailManager.accountState?.watchlistStatus ?? false)
             updateUI()
 
-            self.castDataSource.items = movieDetails.cast
-            self.detailView.castCollectionView.reloadData()
+            castDataSource.items = movieDetails.cast
+            detailView.castCollectionView.reloadData()
+
         case .didFailWithError(let error):
             return
 //            ErrorHandler.shared.handle(error: .generic, authorizationError: signedIn)
-            //           similarMoviesDataSource.items = similarMoviesManager.firstPage
-            //        //            detailView.similarMovieCollectionView.reloadData(
-            //                    detailView.seeAllButton.isHidden = similarMoviesDataSource.isEmpty
+
         case .didStartLoading:
             break
         }
@@ -195,9 +211,9 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout {
     // Size of the specified item's cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView === detailView.similarMovieCollectionView {
-            return !similarMoviesDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.similarMovieCollectionView.bounds.size
+            return !similarMoviesDataSource.shouldShowEmptyMessage ? CGSize(width: 78, height: 130): detailView.similarMovieCollectionView.bounds.size
         } else {
-            return !castDataSource.isEmpty ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
+            return !castDataSource.shouldShowEmptyMessage ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
         }
     }
     

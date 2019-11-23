@@ -56,7 +56,7 @@ final class DiscoverTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if DependencyContainer.shared.sessionManager.currentState != .loggedIn {
+        if DependencyContainer.shared.sessionManager.currentState == .loggedIn {
             let signInViewController = SignInViewControllerFactory.create(with: dependencyContainer)
             signInViewController.delegate = self
             present(signInViewController, animated: true, completion: nil)

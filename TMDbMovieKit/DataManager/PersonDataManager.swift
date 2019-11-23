@@ -9,13 +9,13 @@
 import Foundation
 import Alamofire
 
-public final class PersonDataManager: DataManager<Person> {
+public final class PersonDataManager: DataManager<TMDBPerson> {
     
     // MARK: - Properties
     
     let personID: Int
     
-    public var person: Person? {
+    public var person: TMDBPerson? {
         return cachedData.data
     }
     

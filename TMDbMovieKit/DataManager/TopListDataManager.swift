@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class TopListDataManager: ListDataManager<Movie> {
+public final class TopListDataManager: ListDataManager<TMDBMovie> {
     
     let list: TMDbList
     

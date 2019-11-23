@@ -1,5 +1,5 @@
 //
-//  AccountState.swift
+//  TMDBAccountState.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 24/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AccountState: Codable {
+public struct TMDBAccountState: Codable {
 
     // MARK: Properties
 

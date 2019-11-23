@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class ListDataManager<ItemType: Codable>: DataManager<List<ItemType>> {
+public class ListDataManager<ItemType: Codable>: DataManager<TMDBList<ItemType>> {
     
     // MARK: - Properties
     
@@ -27,7 +27,7 @@ public class ListDataManager<ItemType: Codable>: DataManager<List<ItemType>> {
     
     // MARK: - Response
     
-    override func handle(data: List<ItemType>) {
+    override func handle(data: TMDBList<ItemType>) {
         if data.page == 0 {
             print("Page 0 so page is empty")
         } else if data.page == 1 {

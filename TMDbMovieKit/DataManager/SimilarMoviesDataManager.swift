@@ -8,13 +8,13 @@
 
 import Foundation
 
-public final class SimilarMoviesDataManager: ListDataManager<Movie> {
+public final class SimilarMoviesDataManager: ListDataManager<TMDBMovie> {
     
     // MARK: - Properties
     
     let movieID: Int
     
-    public var firstPage: [Movie] {
+    public var firstPage: [TMDBMovie] {
         return allItems.prefix(20) + []
     }
     

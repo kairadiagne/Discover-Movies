@@ -1,5 +1,5 @@
 //
-//  Review.swift
+//  TMDBReview.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 13-04-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Review: Codable {
+public struct TMDBReview: Codable {
 
     // MARK: Properties
 

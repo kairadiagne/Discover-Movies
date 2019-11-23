@@ -1,5 +1,5 @@
 //
-//  MovieCredit.swift
+//  TMDBMovieCredit.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 25-01-17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MovieCredit: MovieRepresentable, Codable {
+public struct TMDBMovieCredit: MovieRepresentable, Codable {
 
     // MARK: Properties
 

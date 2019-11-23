@@ -1,5 +1,5 @@
 //
-//  CrewMember.swift
+//  TMDBCrewMember.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 15/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CrewMember: PersonRepresentable, Codable {
+public struct TMDBCrewMember: PersonRepresentable, Codable {
 
     // MARK: Properties
 

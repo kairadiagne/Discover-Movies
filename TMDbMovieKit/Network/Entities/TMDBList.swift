@@ -1,5 +1,5 @@
 //
-//  List.swift
+//  TMDBList.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 09/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct List<ModelType: Codable>: Codable {
+public struct TMDBList<ModelType: Codable>: Codable {
     
     // MARK: Properties
     

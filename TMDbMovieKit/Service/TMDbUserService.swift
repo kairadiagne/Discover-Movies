@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 public protocol TMDbUserServiceDelegate: class {
-    func user(service: TMDbUserService, didLoadUserInfo user: User)
+    func user(service: TMDbUserService, didLoadUserInfo user: TMDBUser)
     func user(service: TMDbUserService, didFailWithError error: APIError)
 }
 

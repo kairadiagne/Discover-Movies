@@ -1,5 +1,5 @@
 //
-//  Video.swift
+//  TMDBVideo.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 17-04-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Video: Codable {
+public struct TMDBVideo: Codable {
 
     // MARK: Properties
 

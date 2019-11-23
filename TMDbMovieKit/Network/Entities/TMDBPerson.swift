@@ -1,5 +1,5 @@
 //
-//  PersonInfo.swift
+//  TMDBPerson.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 17-01-17.
@@ -14,7 +14,7 @@ public protocol PersonRepresentable {
     var profilePath: String? { get }
 }
 
-public struct Person: PersonRepresentable, Codable {
+public struct TMDBPerson: PersonRepresentable, Codable {
 
     // MARK: Properties
 
@@ -29,10 +29,10 @@ public struct Person: PersonRepresentable, Codable {
     public var biography: String?
     public var homepage: URL?
     public var profilePath: String?
-    public var cast: [MovieCredit]
-    public var crew: [MovieCredit]
+    public var cast: [TMDBMovieCredit]
+    public var crew: [TMDBMovieCredit]
 
-    public var movieCredits: [MovieCredit] {
+    public var movieCredits: [TMDBMovieCredit] {
         return cast + crew
     }
 
@@ -72,8 +72,8 @@ public struct Person: PersonRepresentable, Codable {
         homepage = try values.decodeIfPresent(URL.self, forKey: CodingKeys.homepage)
         profilePath = try values.decode(String.self, forKey: CodingKeys.profilePath)
         let movieCredits = try values.nestedContainer(keyedBy: MovieCreditsKeys.self, forKey: .movieCredits)
-        cast = try movieCredits.decodeIfPresent([MovieCredit].self, forKey: .cast) ?? []
-        crew = try movieCredits.decodeIfPresent([MovieCredit].self, forKey: .crew) ?? []
+        cast = try movieCredits.decodeIfPresent([TMDBMovieCredit].self, forKey: .cast) ?? []
+        crew = try movieCredits.decodeIfPresent([TMDBMovieCredit].self, forKey: .crew) ?? []
     }
 
     public func encode(to encoder: Encoder) throws {

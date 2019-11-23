@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  TMDBUser.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 16-04-16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct User: Codable {
+public struct TMDBUser: Codable {
 
     // MARK: Properties
 

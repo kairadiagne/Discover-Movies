@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class MovieReviewManager: ListDataManager<Review> {
+public final class MovieReviewManager: ListDataManager<TMDBReview> {
     
     // MARK: - Properties
 

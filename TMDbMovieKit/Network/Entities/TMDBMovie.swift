@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  TMDBMovie.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 13-04-16.
@@ -15,7 +15,7 @@ public protocol MovieRepresentable {
     var posterPath: String { get }
 }
 
-public struct Movie: MovieRepresentable, Codable {
+public struct TMDBMovie: MovieRepresentable, Codable {
 
     // MARK: Properties
 
@@ -24,14 +24,9 @@ public struct Movie: MovieRepresentable, Codable {
     public let overview: String
     public let releaseDate: String
     public let rating: Double
-    public let adult: Bool
     public let posterPath: String
     public let backDropPath: String
     public let genres: [Genre]
-    
-    public var mainGenre: Genre? {
-        return genres.first
-    }
 
     // MARK: Codable
 
@@ -41,7 +36,6 @@ public struct Movie: MovieRepresentable, Codable {
         case overview
         case releaseDate = "release_date"
         case rating = "vote_average"
-        case adult
         case posterPath = "poster_path"
         case backDropPath = "backdrop_path"
         case genres = "genres"
@@ -55,7 +49,6 @@ public struct Movie: MovieRepresentable, Codable {
         overview = try values.decode(String.self, forKey: CodingKeys.overview)
         releaseDate = try values.decode(String.self, forKey: CodingKeys.releaseDate)
         rating = try values.decode(Double.self, forKey: CodingKeys.rating)
-        adult = try values.decode(Bool.self, forKey: CodingKeys.adult)
         posterPath = try values.decode(String.self, forKey: CodingKeys.posterPath)
         backDropPath = try values.decode(String.self, forKey: CodingKeys.backDropPath)
         if let genres = try? values.decode([Genre].self, forKey: CodingKeys.genreIDs) {
@@ -74,7 +67,6 @@ public struct Movie: MovieRepresentable, Codable {
         try container.encode(overview, forKey: CodingKeys.overview)
         try container.encode(releaseDate, forKey: CodingKeys.releaseDate)
         try container.encode(rating, forKey: CodingKeys.rating)
-        try container.encode(adult, forKey: CodingKeys.adult)
         try container.encode(posterPath, forKey: CodingKeys.posterPath)
         try container.encode(backDropPath, forKey: CodingKeys.backDropPath)
         try container.encode(genres, forKey: CodingKeys.genres)

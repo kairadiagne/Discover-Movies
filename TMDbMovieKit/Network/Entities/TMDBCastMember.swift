@@ -1,5 +1,5 @@
 //
-//  CastMember.swift
+//  TMDBCastMember.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 15/05/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CastMember: PersonRepresentable, Codable {
+public struct TMDBCastMember: PersonRepresentable, Codable {
 
     // MARK: Properties
 

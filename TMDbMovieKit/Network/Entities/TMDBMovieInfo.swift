@@ -1,5 +1,5 @@
 //
-//  MovieCredit.swift
+//  TMDBMovieInfo.swift
 //  DiscoverMovies
 //
 //  Created by Kaira Diagne on 12/05/16.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-public struct MovieInfo: Codable {
+public struct TMDBMovieInfo: Codable {
 
     // MARK: Properties
 
-    public let movie: Movie
+    public let movie: TMDBMovie
     public let trailers: [Video]
     public let cast: [CastMember]
     public let crew: [CrewMember]
@@ -41,10 +41,10 @@ public struct MovieInfo: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        if let movie = try? values.decodeIfPresent(Movie.self, forKey: .movie) {
+        if let movie = try? values.decodeIfPresent(TMDBMovie.self, forKey: .movie) {
             self.movie = movie
         } else {
-            movie = try Movie(from: decoder)
+            movie = try TMDBMovie(from: decoder)
         }
 
         trailers = (try? values.decodeIfPresent([Video].self, forKey: .trailers)) ?? []

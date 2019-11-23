@@ -8,16 +8,16 @@
 
 import Foundation
 
-public final class MovieDetailManager: DataManager<MovieInfo> {
+public final class MovieDetailManager: DataManager<TMDBMovieInfo> {
     
     // MARK: - Properties
 
-    public var movieInfo: MovieInfo? {
+    public var movieInfo: TMDBMovieInfo? {
         return cachedData.data
     }
 
     /// The state of the movie in the favorites and watch list.
-    public private(set) var accountState: AccountState?
+    public private(set) var accountState: TMDBAccountState?
 
     /// The identifier of the movie for which to get the details.
     private let movieID: Int

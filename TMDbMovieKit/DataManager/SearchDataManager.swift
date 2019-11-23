@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class SearchDataManager: ListDataManager<Movie> {
+public final class SearchDataManager: ListDataManager<TMDBMovie> {
     
     // MARK: - Initialize 
     

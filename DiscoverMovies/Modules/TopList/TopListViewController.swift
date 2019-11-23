@@ -20,10 +20,10 @@ final class TopListViewController: SegmentedViewController {
          upcomingListManager: TopListDataManager,
          signedIn: Bool) {
         
-        let topListVCs = [GenericTableViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),
-                          GenericTableViewController(dataManager: nowPlayingListManager, titleString: "nowPlaying".localized, signedIn: signedIn),
-                          GenericTableViewController(dataManager: topRatedListManager, titleString: "topRated".localized, signedIn: signedIn),
-                          GenericTableViewController(dataManager: upcomingListManager, titleString: "upcoming".localized, signedIn: signedIn)]
+        let topListVCs = [MovieListViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),
+                          MovieListViewController(dataManager: nowPlayingListManager, titleString: "nowPlaying".localized, signedIn: signedIn),
+                          MovieListViewController(dataManager: topRatedListManager, titleString: "topRated".localized, signedIn: signedIn),
+                          MovieListViewController(dataManager: upcomingListManager, titleString: "upcoming".localized, signedIn: signedIn)]
         super.init(viewControllers: topListVCs, title: "topListVCTitle".localized)
     }
     

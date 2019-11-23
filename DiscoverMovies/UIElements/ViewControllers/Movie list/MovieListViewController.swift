@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 
 // Convert into a `UICollectionViewController` with a flow layout that has two three or one column based on the size of the window.
-final class GenericTableViewController: BaseViewController {
+final class MovieListViewController: BaseViewController {
 
     // MARK: - Properties
 
@@ -109,7 +109,7 @@ final class GenericTableViewController: BaseViewController {
 
 // MARK: - UITableViewDelegate
 
-extension GenericTableViewController: UICollectionViewDelegate {
+extension MovieListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
@@ -118,7 +118,7 @@ extension GenericTableViewController: UICollectionViewDelegate {
     }
 }
 
-extension GenericTableViewController: UICollectionViewDragDelegate {
+extension MovieListViewController: UICollectionViewDragDelegate {
 
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard let selectedMovie = dataSource.item(atIndex: indexPath.row) else { return [] }

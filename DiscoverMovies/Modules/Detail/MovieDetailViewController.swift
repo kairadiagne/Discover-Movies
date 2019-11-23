@@ -174,7 +174,7 @@ final class MovieDetailViewController: BaseViewController {
     
     @IBAction func seeAllButtonClick(_ sender: UIButton) {
         let title = "similarMoviesVCTitle".localized
-        let similarMovieListController = GenericTableViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
+        let similarMovieListController = MovieListViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
         navigationController?.pushViewController(similarMovieListController, animated: true)
     }
 }

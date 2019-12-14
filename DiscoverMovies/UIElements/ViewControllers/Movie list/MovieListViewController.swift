@@ -25,18 +25,16 @@ final class MovieListViewController: BaseViewController {
         return refreshControl
     }()
 
-    private let dataManager: ListDataManager<Movie>
-    
-    private let dataSource = MovieListDataSource()
+    private let dataProvider: MovieListDataProvider
 
-    private var notificationToken: NSObjectProtocol?
+    private var dataSource: CollectionViewFetchedResultsDataSource<MovieListData>!
 
     private let signedIn: Bool
     
     // MARK: - Initialize
     
-    init(dataManager: ListDataManager<Movie>, titleString: String, signedIn: Bool) {
-        self.dataManager = dataManager
+    init(dataProvider: MovieListDataProvider, titleString: String, signedIn: Bool) {
+        self.dataProvider = dataProvider
         self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
         self.title = titleString
@@ -48,62 +46,44 @@ final class MovieListViewController: BaseViewController {
     
     // MARK: - Life cycle
 
-    private func setupView() {
-        view.embed(subView: collectionView)
-
-        // Register cells
-        collectionView.registerReusableCell(MovieBackdropCell.self)
-        collectionView.registerReusableCell(NoDataCollectionViewCell.self)
-
-        collectionView.delegate = self
-        collectionView.dragDelegate = self
-        collectionView.dataSource = dataSource
-        collectionView.refreshControl = refreshControl
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
-
-        notificationToken = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: dataManager, queue: .main) { [weak self] notification in
-            guard let self = self, let updateEvent = notification.userInfo?[DataManagerUpdateEvent.updateNotificationKey] as? DataManagerUpdateEvent else { return }
-            self.handleUpdateEvent(updateEvent)
-        }
+        setupDataSource()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadData()
+        dataProvider.reloadIfNeeded()
+    }
+
+    private func setupView() {
+         view.embed(subView: collectionView)
+
+         collectionView.registerReusableCell(MovieBackdropCell.self)
+
+         collectionView.delegate = self
+         collectionView.dataSource = dataSource
+         collectionView.refreshControl = refreshControl
+     }
+
+    private func setupDataSource() {
+        dataSource = CollectionViewFetchedResultsDataSource(collectionView: collectionView, fetchedResultsController: dataProvider.fetchedResultsController, cellProvider: { [weak self] indexPath -> UICollectionViewCell? in
+            guard let self = self else { return nil }
+            let object = self.dataSource.objectAtIndexPath(indexPath).movie
+            let cell = self.collectionView.dequeueReusableCell(forIndexPath: indexPath) as MovieBackdropCell
+            let viewModel = MovieBackDropCellViewModel(movie: object)
+            cell.configure(with: viewModel)
+            return cell
+        })
     }
     
     // MARK: - Actions
     
     @objc private func refresh(control: UIRefreshControl) {
-        dataManager.reloadIfNeeded(forceOnline: true)
-    }
-    
-    private func loadData() {
-        dataSource.items = dataManager.allItems
-        collectionView.reloadData()
-        dataManager.reloadIfNeeded()
-    }
-    
-    // MARK: - Notifications
-    
-    private func handleUpdateEvent(_ updateEvent: DataManagerUpdateEvent) {
-        switch updateEvent {
-        case .didStartLoading:
-            break
-        case .didUpdate:
-            dataSource.items = dataManager.allItems
-            collectionView.reloadData()
-        case .didFailWithError(let error):
-            collectionView.reloadData()
-            guard let error = error as? APIError else { return }
-            ErrorHandler.shared.handle(error: error, authorizationError: signedIn)
-        }
+        dataProvider.reloadIfNeeded(forceOnline: true)
     }
 }
 
@@ -112,23 +92,26 @@ final class MovieListViewController: BaseViewController {
 extension MovieListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-        showDetailViewController(for: movie, signedIn: signedIn)
-        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
-extension MovieListViewController: UICollectionViewDragDelegate {
+//extension MovieListViewController: UICollectionViewDragDelegate {
 
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard let selectedMovie = dataSource.item(atIndex: indexPath.row) else { return [] }
+//    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+////        guard let selectedMovie = dataSource.item(atIndex: indexPath.row) else { return [] }
+////
+////        let userActivity = NSUserActivity.detailActivity(for: selectedMovie)
+////        let itemProvider = NSItemProvider(object: userActivity)
+////
+////        let dragItem = UIDragItem(itemProvider: itemProvider)
+////        dragItem.localObject = selectedMovie
+////
+////        return [dragItem]
+//    }
+//}
 
-        let userActivity = NSUserActivity.detailActivity(for: selectedMovie)
-        let itemProvider = NSItemProvider(object: userActivity)
+//        guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
+//        showDetailViewController(for: movie, signedIn: signedIn)
+//        collectionView.deselectItem(at: indexPath, animated: true)
 
-        let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = selectedMovie
-
-        return [dragItem]
-    }
-}
+//

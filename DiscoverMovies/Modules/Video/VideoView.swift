@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import youtube_ios_player_helper
-
+//import youtube_ios_player_helper
+//
 final class VideoView: UIView {
     
     // MARK: - Properties 
     
-    @IBOutlet weak var youtubePlayerView: YTPlayerView!
+//    @IBOutlet weak var youtubePlayerView: YTPlayerView!
     @IBOutlet weak var loadingOverlayView: UIView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     

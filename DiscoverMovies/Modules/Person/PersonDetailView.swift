@@ -126,64 +126,64 @@ final class PersonDetailView: BaseView {
         profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
     }
     
-    func configure(person: Person) {
-        // Name
-        nameLabel.text = person.name
-        infoLabelsStackView.isHidden = false
-        
-        // Profile Image 
-        let path = person.profilePath ?? ""
-        let imageURL = TMDbImageRouter.posterLarge(path: path).url
-        profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
-        profileImageView.isHidden = false
-        
-        // Birth
-        if let birthday = person.birthDay {
-            var birthInfo = birthday
-            
-            if let age = birthday.toDate()?.age {
-                // swiftlint:disable shorthand_operator
-                birthInfo = birthInfo + " " + "(" + "\(age)" + ")"
-            }
-            
-            if let birthPlace = person.birthPlace {
-                // swiftlint:disable shorthand_operator
-                birthInfo = birthInfo + "\n\(birthPlace)"
-            }
-            
-            bornLabel.text = birthInfo
-            bornLabel.isHidden = false
-        } else {
-            bornLabel.isHidden = true
-        }
-        
-        // DeathDay
-        if let deathDay = person.deathDay {
-            diedLabel.text = deathDay
-            diedLabel.isHidden = false
-            infoLabelsStackView.isHidden = false
-        } else {
-            diedLabel.isHidden = true 
-        }
-        
-        // Biography
-        if let biography = person.biography {
-            biograhphyLabel.text = biography
-            biograhphyLabel.isHidden = false
-            disclosureButton.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
-            disclosureButtonStackView.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
-            biographyLabelsStackView.isHidden = false
-        } else {
-            biographyStackViewTop.priority = UILayoutPriority(rawValue: 250)
-            profileImageBottomToMovieStackViewTop.priority = UILayoutPriority(rawValue: 750)
-        }
-        
-        // Homepage
-        if person.homepage == nil {
-            homepageButton.isHidden = true
-            homePageButtonStackView.isHidden = true
-        }
-    }
+//    func configure(person: Person) {
+//        // Name
+//        nameLabel.text = person.name
+//        infoLabelsStackView.isHidden = false
+//        
+//        // Profile Image 
+//        let path = person.profilePath ?? ""
+//        let imageURL = TMDbImageRouter.posterLarge(path: path).url
+//        profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderProfileImage())
+//        profileImageView.isHidden = false
+//        
+//        // Birth
+//        if let birthday = person.birthDay {
+//            var birthInfo = birthday
+//            
+//            if let age = birthday.toDate()?.age {
+//                // swiftlint:disable shorthand_operator
+//                birthInfo = birthInfo + " " + "(" + "\(age)" + ")"
+//            }
+//            
+//            if let birthPlace = person.birthPlace {
+//                // swiftlint:disable shorthand_operator
+//                birthInfo = birthInfo + "\n\(birthPlace)"
+//            }
+//            
+//            bornLabel.text = birthInfo
+//            bornLabel.isHidden = false
+//        } else {
+//            bornLabel.isHidden = true
+//        }
+//        
+//        // DeathDay
+//        if let deathDay = person.deathDay {
+//            diedLabel.text = deathDay
+//            diedLabel.isHidden = false
+//            infoLabelsStackView.isHidden = false
+//        } else {
+//            diedLabel.isHidden = true 
+//        }
+//        
+//        // Biography
+//        if let biography = person.biography {
+//            biograhphyLabel.text = biography
+//            biograhphyLabel.isHidden = false
+//            disclosureButton.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
+//            disclosureButtonStackView.isHidden = person.biography == nil || biograhphyLabel.currentNumberOfLines < 5
+//            biographyLabelsStackView.isHidden = false
+//        } else {
+//            biographyStackViewTop.priority = UILayoutPriority(rawValue: 250)
+//            profileImageBottomToMovieStackViewTop.priority = UILayoutPriority(rawValue: 750)
+//        }
+//        
+//        // Homepage
+//        if person.homepage == nil {
+//            homepageButton.isHidden = true
+//            homePageButtonStackView.isHidden = true
+//        }
+//    }
    
     // MARK: - Utils
     

@@ -31,12 +31,12 @@ extension ApiRequest {
 
     // MARK: - Movie List
 
-    static func topList(list: TMDbList) -> ApiRequest {
-        return ApiRequest(base: tmdbBaseURLV3, path: "movie/\(list.name)")
+    static func topList(list: String) -> ApiRequest {
+        return ApiRequest(base: tmdbBaseURLV3, path: "movie/\(list)")
     }
 
-    static func accountList(_ list: TMDbAccountList, userID: Int, sessionID: String) -> ApiRequest {
-        return ApiRequest(base: tmdbBaseURLV3, path: "account/\(userID)/\(list.name)/movies", paramaters: ["session_id": sessionID as AnyObject])
+    static func accountList(_ list: String, userID: Int, sessionID: String) -> ApiRequest {
+        return ApiRequest(base: tmdbBaseURLV3, path: "account/\(userID)/\(list)/movies", paramaters: ["session_id": sessionID as AnyObject])
     }
 
     static func similarMovies(movieID: Int) -> ApiRequest {
@@ -62,10 +62,10 @@ extension ApiRequest {
         return ApiRequest(base: tmdbBaseURLV3, path: "movie/\(movieID)/account_states", paramaters: params)
     }
 
-    static func setMovieStatus(status: Bool, movieID: Int, in list: TMDbAccountList, userID: Int, sessionID: String) -> ApiRequest {
+    static func setMovieStatus(status: Bool, movieID: Int, in list: String, userID: Int, sessionID: String) -> ApiRequest {
         let params: [String: AnyObject] = ["session_id": sessionID as AnyObject]
-        let body: [String: AnyObject] = ["media_type": "movie" as AnyObject, "media_id": movieID as AnyObject, list.name: status as AnyObject]
-        return ApiRequest(base: tmdbBaseURLV3, path: "account/\(userID)/\(list.name)", paramaters: params, body: body)
+        let body: [String: AnyObject] = ["media_type": "movie" as AnyObject, "media_id": movieID as AnyObject, list: status as AnyObject]
+        return ApiRequest(base: tmdbBaseURLV3, path: "account/\(userID)/\(list)", paramaters: params, body: body)
     }
 
     static func person(with personID: Int) -> ApiRequest {

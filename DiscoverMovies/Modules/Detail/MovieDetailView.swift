@@ -142,31 +142,31 @@ final class MovieDetailView: UIView {
     
     func configure(forMovie movie: Movie) {
         titleLabel.text = movie.title
-        descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : "noDescriptionText".localized
-        genreValueLabel.text = movie.genres.first?.name ?? "unknownGenreText".localized
-        ratingValueLabel.text =  "\(movie.rating)\\10.0"
-        
-        if let releaseYear = movie.releaseDate.toDate()?.year() {
-            releaseValueLabel.text = "\(releaseYear)"
-        } else {
-            releaseValueLabel.text = "unknownReleaseText".localized
-        }
-        
-        if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
-            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
-        } else {
-            header.image = UIImage.placeholderImage()
-        }
+//        descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : "noDescriptionText".localized
+//        genreValueLabel.text = movie.genres.first?.name ?? "unknownGenreText".localized
+//        ratingValueLabel.text =  "\(movie.rating)\\10.0"
+//        
+//        if let releaseYear = movie.releaseDate.toDate()?.year() {
+//            releaseValueLabel.text = "\(releaseYear)"
+//        } else {
+//            releaseValueLabel.text = "unknownReleaseText".localized
+//        }
+//        
+//        if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
+//            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+//        } else {
+//            header.image = UIImage.placeholderImage()
+//        }
     }
     
     func configure(forMovieCredit credit: MovieCredit) {
         titleLabel.text = credit.title
         
-        if let releaseYear = credit.releaseDate.toDate()?.year() {
-            releaseValueLabel.text = "\(releaseYear)"
-        } else {
-            releaseValueLabel.text = "unknownReleaseText".localized
-        }
+//        if let releaseYear = credit.releaseDate.toDate()?.year() {
+//            releaseValueLabel.text = "\(releaseYear)"
+//        } else {
+//            releaseValueLabel.text = "unknownReleaseText".localized
+//        }
         
         header.image = UIImage.placeholderImage()
     }

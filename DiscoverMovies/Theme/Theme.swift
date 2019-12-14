@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import youtube_ios_player_helper
 
 final class Theme {
     

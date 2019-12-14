@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CastMember" representedClassName=".CastMember" syncable="YES">
+        <attribute name="castIdentifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="character" optional="YES" attributeType="String"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="profilePath" optional="YES" attributeType="String"/>
+        <relationship name="movies" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="cast" inverseEntity="Movie"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CrewMember" representedClassName=".CrewMember" syncable="YES">
+        <attribute name="creditIdentifier" attributeType="String"/>
+        <attribute name="department" attributeType="String"/>
+        <attribute name="identifier" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="job" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="profilePath" optional="YES" attributeType="String"/>
+        <relationship name="movies" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="crew" inverseEntity="Movie"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="List" representedClassName=".List" syncable="YES">
+        <attribute name="page" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="resultCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalPages" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="movies" toMany="YES" deletionRule="Cascade" destinationEntity="MovieListData" inverseName="list" inverseEntity="MovieListData"/>
+    </entity>
+    <entity name="Movie" representedClassName=".Movie" syncable="YES">
+        <attribute name="backdropPath" attributeType="String"/>
+        <attribute name="genres" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="identifier" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="overview" attributeType="String"/>
+        <attribute name="posterPath" attributeType="String"/>
+        <attribute name="rating" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="releaseDate" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="cast" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CastMember" inverseName="movies" inverseEntity="CastMember"/>
+        <relationship name="crew" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CrewMember" inverseName="movies" inverseEntity="CrewMember"/>
+        <relationship name="lists" toMany="YES" deletionRule="Nullify" destinationEntity="MovieListData" inverseName="movie" inverseEntity="MovieListData"/>
+        <relationship name="trailers" toMany="YES" deletionRule="Cascade" destinationEntity="Video" inverseName="movie" inverseEntity="Video"/>
+    </entity>
+    <entity name="MovieCredit" representedClassName=".MovieCredit" syncable="YES">
+        <attribute name="creditIdentifier" attributeType="String"/>
+        <attribute name="identifier" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="posterPath" attributeType="String"/>
+        <attribute name="releaseData" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="MovieListData" representedClassName=".MovieListData" syncable="YES">
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="list" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="movies" inverseEntity="List"/>
+        <relationship name="movie" maxCount="1" deletionRule="Nullify" destinationEntity="Movie" inverseName="lists" inverseEntity="Movie"/>
+    </entity>
+    <entity name="Video" representedClassName=".Video" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="size" attributeType="String"/>
+        <attribute name="source" attributeType="String"/>
+        <attribute name="type" attributeType="String"/>
+        <relationship name="movie" maxCount="1" deletionRule="Nullify" destinationEntity="Movie" inverseName="trailers" inverseEntity="Movie"/>
+    </entity>
+    <elements>
+        <element name="CastMember" positionX="-141.1640625" positionY="-159.85546875" width="128" height="148"/>
+        <element name="CrewMember" positionX="-146.18359375" positionY="37.4921875" width="128" height="148"/>
+        <element name="List" positionX="-699.33203125" positionY="-84.6484375" width="128" height="118"/>
+        <element name="Movie" positionX="-386.328125" positionY="-114.828125" width="128" height="223"/>
+        <element name="MovieCredit" positionX="434.609375" positionY="468.96875" width="128" height="118"/>
+        <element name="MovieListData" positionX="-543.13671875" positionY="-66.12109375" width="128" height="88"/>
+        <element name="Video" positionX="-139.96484375" positionY="212.57421875" width="128" height="118"/>
+    </elements>
+</model>

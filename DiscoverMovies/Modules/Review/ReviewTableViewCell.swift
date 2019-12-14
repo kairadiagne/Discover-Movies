@@ -29,10 +29,10 @@ final class ReviewTableViewCell: UITableViewCell, NibReusable {
     }
     
     // MARK: - Awake
-    
-    func configure(_ review: Review) {
-        
-        authorLabel?.text = "authorLabelPrefixText".localized + " \(review.author)"
-        contentLabel?.text = review.content
-    }
+//    
+//    func configure(_ review: Review) {
+//        
+//        authorLabel?.text = "authorLabelPrefixText".localized + " \(review.author)"
+//        contentLabel?.text = review.content
+//    }
 }

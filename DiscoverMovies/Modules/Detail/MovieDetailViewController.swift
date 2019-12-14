@@ -19,7 +19,7 @@ final class MovieDetailViewController: BaseViewController {
     
     private let similarMoviesDataSource = MovieCollectionDataSource(emptyMessage: "noSimilarMoviesText".localized)
 
-    private let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
+//    private let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
 
     private let movieDetailManager: MovieDetailManager
     
@@ -60,7 +60,7 @@ final class MovieDetailViewController: BaseViewController {
         detailView.castCollectionView.register(PosterImageCollectionViewCell.nib, forCellWithReuseIdentifier: PosterImageCollectionViewCell.reuseId)
         detailView.castCollectionView.register(NoDataCollectionViewCell.nib, forCellWithReuseIdentifier: NoDataCollectionViewCell.reuseId)
         
-        detailView.castCollectionView.dataSource = castDataSource
+//        detailView.castCollectionView.dataSource = castDataSource
         detailView.castCollectionView.delegate = self
         
         detailView.similarMovieCollectionView.dataSource = similarMoviesDataSource
@@ -96,11 +96,11 @@ final class MovieDetailViewController: BaseViewController {
             guard let movieDetails = movieDetailManager.movieInfo else { return }
 
             movie = movieDetails.movie
-            detailView.configure(forDirector: movieDetails.director)
+//            detailView.configure(forDirector: movieDetails.director)
             detailView.configureWithState(inFavorites: true, inWatchList: movieDetailManager.accountState?.watchlistStatus ?? false)
             updateUI()
 
-            castDataSource.items = movieDetails.cast
+//            castDataSource.items = movieDetails.cast
             detailView.castCollectionView.reloadData()
 
         case .didFailWithError(let error):
@@ -116,9 +116,6 @@ final class MovieDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = true
-
-        similarMoviesManager.reloadIfNeeded()
-        movieDetailManager.reloadIfNeeded()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -148,11 +145,11 @@ final class MovieDetailViewController: BaseViewController {
     // MARK: - Actions
     
     @IBAction func favoriteButtontap(_ sender: FavouriteButton) {
-       movieDetailManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
+//       movieDetailManager.toggleStatusOfMovieInList(.favorite, status: sender.isSelected)
     }
     
     @IBAction func watchListButtonTap(_ sender: WatchListButton) {
-       movieDetailManager.toggleStatusOfMovieInList(.watchlist, status: sender.isSelected)
+//       movieDetailManager.toggleStatusOfMovieInList(.watchlist, status: sender.isSelected)
     }
 
     @IBAction func reviewsButtonTap(_ sender: UIButton) {
@@ -161,11 +158,11 @@ final class MovieDetailViewController: BaseViewController {
     }
     
     @IBAction func playButtonTap(_ sender: UIButton) {
-        guard let trailer = movieDetailManager.movieInfo?.trailer else { return }
-        let videoViewController = VideoViewController(video: trailer)
-        videoViewController.delegate = self
-        let navigationController = BaseNavigationController(rootViewController: videoViewController)
-        present(navigationController, animated: true, completion: nil)
+//        guard let trailer = movieDetailManager.movieInfo?.trailer else { return }
+//        let videoViewController = VideoViewController(video: trailer)
+//        videoViewController.delegate = self
+//        let navigationController = BaseNavigationController(rootViewController: videoViewController)
+//        present(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func backButtonTap(_ sender: UIButton) {
@@ -174,8 +171,8 @@ final class MovieDetailViewController: BaseViewController {
     
     @IBAction func seeAllButtonClick(_ sender: UIButton) {
         let title = "similarMoviesVCTitle".localized
-        let similarMovieListController = MovieListViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
-        navigationController?.pushViewController(similarMovieListController, animated: true)
+//        let similarMovieListController = MovieListViewController(dataManager: similarMoviesManager, titleString: title, signedIn: signedIn)
+//        navigationController?.pushViewController(similarMovieListController, animated: true)
     }
 }
 
@@ -197,9 +194,9 @@ extension MovieDetailViewController: UICollectionViewDelegate {
             guard let movie = similarMoviesDataSource.item(atIndex: indexPath.row) else { return }
             showDetailViewController(for: movie, signedIn: signedIn)
         } else if collectionView == detailView.castCollectionView {
-            guard let person = castDataSource.item(atIndex: indexPath.row) else { return }
-            let personDetailViewController = PersonDetailViewController(person: person, signedIn: signedIn)
-            navigationController?.pushViewController(personDetailViewController, animated: true)
+//            guard let person = castDataSource.item(atIndex: indexPath.row) else { return }
+//            let personDetailViewController = PersonDetailViewController(person: person, signedIn: signedIn)
+//            navigationController?.pushViewController(personDetailViewController, animated: true)
         }
     }
 }
@@ -213,7 +210,8 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout {
         if collectionView === detailView.similarMovieCollectionView {
             return !similarMoviesDataSource.shouldShowEmptyMessage ? CGSize(width: 78, height: 130): detailView.similarMovieCollectionView.bounds.size
         } else {
-            return !castDataSource.shouldShowEmptyMessage ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
+            return .zero
+//            return !castDataSource.shouldShowEmptyMessage ? CGSize(width: 78, height: 130): detailView.castCollectionView.bounds.size
         }
     }
     

@@ -37,15 +37,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func setupScene(with userActivity: NSUserActivity) {
-        guard let moviedData = userActivity.userInfo?[NSUserActivity.MovieDetailDataKey] as? Data,
-            let movie = try? JSONDecoder().decode(Movie.self, from: moviedData),
-            let navigationControler = tabBarController.viewControllers?.first as? UINavigationController else {
-                return
-        }
-
-        tabBarController.selectedIndex = 0
-        let movieDetailViewController = MovieDetailViewController(movie: movie, signedIn: false)
-        navigationControler.pushViewController(movieDetailViewController, animated: false)
+//        guard let moviedData = userActivity.userInfo?[NSUserActivity.MovieDetailDataKey] as? Data,
+//            let movie = try? JSONDecoder().decode(Movie.self, from: moviedData),
+//            let navigationControler = tabBarController.viewControllers?.first as? UINavigationController else {
+//                return
+//        }
+//
+//        tabBarController.selectedIndex = 0
+//        let movieDetailViewController = MovieDetailViewController(movie: movie, signedIn: false)
+//        navigationControler.pushViewController(movieDetailViewController, animated: false)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

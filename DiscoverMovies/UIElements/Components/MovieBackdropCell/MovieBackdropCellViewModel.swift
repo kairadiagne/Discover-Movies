@@ -25,7 +25,7 @@ struct MovieBackDropCellViewModel {
     }
 
     var imageURL: URL? {
-        return TMDbImageRouter.backDropMedium(path: movie.backDropPath).url
+        return TMDbImageRouter.backDropMedium(path: movie.backdropPath).url
     }
 
     private let movie: Movie

@@ -8,23 +8,12 @@
 
 import CoreData
 
-final class MovieKitPersistentContainer: NSPersistentContainer {
+public final class MovieKitPersistentContainer: NSPersistentContainer {
 
     // MARK: Properties
 
-    lazy var backgroundcontext: NSManagedObjectContext = {
-        let backgroundContext = newBackgroundContext()
-        backgroundContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-        return backgroundContext
-    }()
-
-    // MARK: Initialize
-
-    override init(name: String, managedObjectModel model: NSManagedObjectModel) {
-        super.init(name: name, managedObjectModel: model)
-
-        viewContext.automaticallyMergesChangesFromParent = true
-    }
+    /// The background context used for writing to the persistent store.
+    public lazy var backgroundcontext = newBackgroundContext()
 
     /// Creates an instance of `PersistentContainer` and loads the underlying Persistent store of type SQLite.
     ///
@@ -37,7 +26,16 @@ final class MovieKitPersistentContainer: NSPersistentContainer {
                 // The best way to handle errors that occur at this stage depenends on the specifics of the app.
                 assertionFailure("Unresovled errror loading store with description: \(description), reason: \(error.localizedDescription)")
                 // completion(error)
+                // TODO: - Handle migration 
+                //            }
             }
+
+            print(container.persistentStoreDescriptions.first)
+
+            // Setup the view context
+            container.viewContext.automaticallyMergesChangesFromParent = true
+            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
             completion(container)
         }
     }

@@ -1,0 +1,35 @@
+//
+//  PeopleDataManager.swift
+//  Discover
+//
+//  Created by Kaira Diagne on 03-12-16.
+//  Copyright © 2016 Kaira Diagne. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+
+public final class TopListDataManager {
+
+    public init(list: String) {
+        print(list)
+    }
+}
+
+public final class PersonDataManager {
+    
+    // MARK: - Properties
+
+    let personID: Int
+
+    public var person: TMDBPerson? {
+        return nil
+    }
+
+    // MARK: - Initialize
+
+    public init(personID: Int) {
+        self.personID = personID
+//        super.init(request: ApiRequest.person(with: personID), refreshTimeOut: 600)
+    }
+}

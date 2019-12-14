@@ -8,7 +8,7 @@
 
 import TMDbMovieKit
 
-struct DependencyContainer {
+final class DependencyContainer {
 
     // MARK: - Properties
 
@@ -16,15 +16,17 @@ struct DependencyContainer {
 
     private(set) var sessionManager = UserSessionManager()
 
-    private(set) var popularListManager = TopListDataManager(list: .popular)
+    var persistentContainer: MovieKitPersistentContainer!
 
-    private(set) var nowPlayingListManager = TopListDataManager(list: .nowPlaying)
+    private(set) var popularListManager = TopListDataManager(list: "popular")
 
-    private(set) var topratedListManager = TopListDataManager(list: .topRated)
+    private(set) var nowPlayingListManager = TopListDataManager(list: "nowPlaying")
 
-    private(set) var upcomingListManager = TopListDataManager(list: .upcoming)
+    private(set) var topratedListManager = TopListDataManager(list: "topRated")
 
-    private(set) var favoritesManager = AccountListDataManager(list: .favorite)
+    private(set) var upcomingListManager = TopListDataManager(list: "upcoming")
 
-    private(set) var watchListManager = AccountListDataManager(list: .watchlist)
+    private(set) var favoritesManager = AccountListDataManager(list: "favorite")
+
+    private(set) var watchListManager = AccountListDataManager(list: "watchlist")
 }

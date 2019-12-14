@@ -76,11 +76,6 @@ final class SearchViewController: BaseViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        searchManager.remove(observer: self)
-    }
-    
     // MARK: - Notifications
     
 //    override func detailManagerDidUpdate(notification: Notification) {
@@ -110,13 +105,13 @@ extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-        showDetailViewController(for: movie, signedIn: signedIn)
+//        showDetailViewController(for: movie, signedIn: signedIn)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if dataSource.itemCount - 10 == indexPath.row {
-            searchManager.loadMore()
+//            searchManager.loadMore()
         }
     }
 }

@@ -27,14 +27,15 @@ extension NSUserActivity {
     static func detailActivity(for movie: Movie) -> NSUserActivity {
         let userActivity = NSUserActivity(activityType: ActivityType.movieDetail.rawValue)
         userActivity.title = MovieDetailTitle
+        return userActivity
 
-        do {
-            let movieData = try JSONEncoder().encode(movie)
-            userActivity.userInfo = [MovieDetailDataKey: movieData]
-            return userActivity
-        } catch let error {
-            print(error)
-            return userActivity
-        }
+//        do {
+//            let movieData = try JSONEncoder().encode(movie)
+//            userActivity.userInfo = [MovieDetailDataKey: movieData]
+//            return userActivity
+//        } catch let error {
+//            print(error)
+//            return userActivity
+//        }
     }
 }

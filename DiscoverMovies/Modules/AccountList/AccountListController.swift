@@ -24,13 +24,13 @@ final class AccountListController: BaseViewController {
     
     private let dataSource = AccountListDataSource()
     
-    private let accountList: TMDbAccountList
+    private let accountList: String
     
     private let accountListManager: AccountListDataManager
     
     // MARK: - Initialize
     
-    init(list aList: TMDbAccountList, manager: AccountListDataManager) {
+    init(list aList: String, manager: AccountListDataManager) {
         self.accountList = aList
         self.accountListManager = manager
         super.init(nibName: nil, bundle: nil)
@@ -52,32 +52,15 @@ final class AccountListController: BaseViewController {
         
         accountListView.refreshControl.addTarget(self, action: #selector(AccountListController.refresh(_:)), for: .valueChanged)
         
-        if accountList == .favorite {
+        if accountList == "favorite" {
             title = "favoriteVCTitle".localized
         } else {
             title = "watchListVCTitle".localized
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        // Try to preload data from cache
-        dataSource.items = accountListManager.allItems
-        accountListView.tableView.reloadData()
-        
-        accountListManager.reloadIfNeeded(forceOnline: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        accountListManager.remove(observer: self)
-    }
-    
     // MARK: - Refresh
     
     @objc private func refresh(_ sender: UIRefreshControl) {
-        accountListManager.reloadIfNeeded(forceOnline: true)
     }
     
     // MARK: - Notifications
@@ -107,7 +90,7 @@ extension AccountListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-        showDetailViewController(for: movie, signedIn: true)
+//        showDetailViewController(for: movie, signedIn: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -115,7 +98,7 @@ extension AccountListController: UITableViewDelegate {
         if accountListView.state == .loading && dataSource.isEmpty {
             cell.isHidden = true
         } else if dataSource.itemCount - 5 == indexPath.row {
-            accountListManager.loadMore()
+//            accountListManager.loadMore()
         }
     }
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import TMDbMovieKit
-import BRYXBanner
 import MessageUI
 import SafariServices
 

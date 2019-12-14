@@ -60,16 +60,12 @@ final class PersonDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = true
-        
-        personDataManager.reloadIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
-        
-        personDataManager.remove(observer: self)
     }
     
     // MARK: - Notifications

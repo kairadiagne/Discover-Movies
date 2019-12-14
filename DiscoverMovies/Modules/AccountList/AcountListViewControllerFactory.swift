@@ -11,11 +11,11 @@ import Foundation
 struct AcountListViewControllerFactory {
 
     static func createFavorites(with container: DependencyContainer) -> AccountListController {
-        return AccountListController(list: .favorite, manager: container.favoritesManager)
+        return AccountListController(list: "favorite", manager: container.favoritesManager)
     }
 
     static func createWatchList(with container: DependencyContainer) -> AccountListController {
-        return AccountListController(list: .watchlist, manager: container.watchListManager)
+        return AccountListController(list: "watchlist", manager: container.watchListManager)
     }
 
 }

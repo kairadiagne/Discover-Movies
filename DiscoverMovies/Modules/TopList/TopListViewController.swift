@@ -13,18 +13,13 @@ import TMDbMovieKit
 final class TopListViewController: SegmentedViewController {
 
     // MARK: - Initialize
-    
-    init(popularListManager: TopListDataManager,
-         nowPlayingListManager: TopListDataManager,
-         topRatedListManager: TopListDataManager,
-         upcomingListManager: TopListDataManager,
-         signedIn: Bool) {
-        
-        let topListVCs = [MovieListViewController(dataManager: popularListManager, titleString: "popular".localized, signedIn: signedIn),
-                          MovieListViewController(dataManager: nowPlayingListManager, titleString: "nowPlaying".localized, signedIn: signedIn),
-                          MovieListViewController(dataManager: topRatedListManager, titleString: "topRated".localized, signedIn: signedIn),
-                          MovieListViewController(dataManager: upcomingListManager, titleString: "upcoming".localized, signedIn: signedIn)]
-        super.init(viewControllers: topListVCs, title: "topListVCTitle".localized)
+
+    init(persistentContainer: MovieKitPersistentContainer) {
+        let popular = MovieListViewController(dataProvider: MovieListDataProvider(listType: .popular, persistentContainer: persistentContainer), titleString: "popular".localized, signedIn: false)
+        let nowPlaying = MovieListViewController(dataProvider: MovieListDataProvider(listType: .nowPlaying, persistentContainer: persistentContainer), titleString: "nowPlaying".localized, signedIn: false)
+        let topRated = MovieListViewController(dataProvider: MovieListDataProvider(listType: .topRated, persistentContainer: persistentContainer), titleString: "topRated".localized, signedIn: false)
+        let upcoming = MovieListViewController(dataProvider: MovieListDataProvider(listType: .upcoming, persistentContainer: persistentContainer), titleString: "upcoming".localized, signedIn: false)
+        super.init(viewControllers: [popular, nowPlaying, topRated, upcoming], title: "topListVCTitle".localized)
     }
     
     required init?(coder aDecoder: NSCoder) {

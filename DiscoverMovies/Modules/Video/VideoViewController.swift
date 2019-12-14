@@ -8,7 +8,7 @@
 
 import UIKit
 import TMDbMovieKit
-import youtube_ios_player_helper
+//import youtube_ios_player_helper
 
 protocol VideoViewControllerDelegate: class {
     func videoViewControllerDidFinish(_ controller: VideoViewController)
@@ -43,10 +43,10 @@ final class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        videoView.youtubePlayerView.delegate = self
+//        videoView.youtubePlayerView.delegate = self
         
         let playerVars = ["playsinline": 0]
-        videoView.youtubePlayerView.load(withVideoId: video.source, playerVars: playerVars)
+//        videoView.youtubePlayerView.load(withVideoId: video.source, playerVars: playerVars)
         
         navigationController?.navigationBar.barTintColor = .black
         
@@ -71,28 +71,28 @@ final class VideoViewController: UIViewController {
     
     @objc private func doneButtonCLick(button: UIBarButtonItem) {
         // Reset video
-        videoView.youtubePlayerView.stopVideo()
+//        videoView.youtubePlayerView.stopVideo()
         delegate?.videoViewControllerDidFinish(self)
     }
 }
 
-extension VideoViewController: YTPlayerViewDelegate {
-    
-    public func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        videoView.stopLoading()
-        videoView.youtubePlayerView.playVideo()
-    }
-    
-    public func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
-        delegate?.videoViewControllerDidFinish(self)
-    }
-    
-    public func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
-        return .black
-    }
-    
-    public func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
-        videoView.startLoading()
-        return videoView.loadingOverlayView
-    }
-}
+//extension VideoViewController: YTPlayerViewDelegate {
+//
+//    public func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+//        videoView.stopLoading()
+////        videoView.youtubePlayerView.playVideo()
+//    }
+//
+//    public func playerView(_ playerView: YTPlayerView, receivedError error: YTPlayerError) {
+//        delegate?.videoViewControllerDidFinish(self)
+//    }
+//
+//    public func playerViewPreferredWebViewBackgroundColor(_ playerView: YTPlayerView) -> UIColor {
+//        return .black
+//    }
+//
+//    public func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
+//        videoView.startLoading()
+//        return videoView.loadingOverlayView
+//    }
+//}

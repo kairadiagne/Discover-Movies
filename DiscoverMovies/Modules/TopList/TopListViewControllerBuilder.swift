@@ -7,14 +7,11 @@
 //
 
 import UIKit
+import TMDbMovieKit
 
 struct TopListViewControllerFactory {
 
     static func create(with container: DependencyContainer) -> TopListViewController {
-        return TopListViewController(popularListManager: container.popularListManager,
-                                                     nowPlayingListManager: container.nowPlayingListManager,
-                                                     topRatedListManager: container.topratedListManager,
-                                                     upcomingListManager: container.upcomingListManager,
-                                                     signedIn: false)
+        return TopListViewController(persistentContainer: container.persistentContainer)
     }
 }

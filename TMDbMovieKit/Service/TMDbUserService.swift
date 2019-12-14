@@ -41,7 +41,7 @@ public final class TMDbUserService {
         }
         
         Alamofire.request(ApiRequest.getUser(sessionID: sessionID))
-            .validate().responseObject { (response: DataResponse<User>) in
+            .validate().responseObject { (response: DataResponse<TMDBUser>) in
                 
                 switch response.result {
                 case .success(let user):

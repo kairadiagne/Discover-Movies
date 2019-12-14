@@ -23,7 +23,7 @@ final class ReviewViewController: BaseViewController {
     
     private let movie: MovieRepresentable
  
-    private let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
+//    private let reviewDataSource = ReviewDataSource(emptyMessage: "noReviewMessage".localized)
     
     private let reviewManager: MovieReviewManager
     
@@ -49,7 +49,7 @@ final class ReviewViewController: BaseViewController {
         
         reviewView.tableView.register(ReviewTableViewCell.nib, forCellReuseIdentifier: ReviewTableViewCell.reuseId)
         reviewView.tableView.register(NoDataCell.nib, forCellReuseIdentifier: NoDataCell.reuseId)
-        reviewView.tableView.dataSource = reviewDataSource
+//        reviewView.tableView.dataSource = reviewDataSource
         reviewView.tableView.delegate = self
         
         reviewView.refreshControl.addTarget(self, action: #selector(ReviewViewController.refresh), for: .valueChanged)
@@ -57,18 +57,7 @@ final class ReviewViewController: BaseViewController {
         title = "reviewvcTitle".localized
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        reviewManager.reloadIfNeeded()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        reviewManager.remove(observer: self)
-    }
-    
     @objc private func refresh() {
-        reviewManager.reloadIfNeeded(forceOnline: true)
     }
     
     // MARK: - DataManagerNotifications
@@ -101,17 +90,19 @@ extension ReviewViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return !reviewDataSource.isEmpty ? UITableView.automaticDimension : tableView.bounds.height
+        return 0
+//        return !reviewDataSource.isEmpty ? UITableView.automaticDimension : tableView.bounds.height
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if reviewView.state == .loading && reviewDataSource.isEmpty {
-            cell.isHidden = true
-        } else if reviewDataSource.isEmpty {
-            cell.separatorInset.left = view.bounds.width
-        } else if reviewDataSource.itemCount - 5 == indexPath.row {
-            reviewManager.loadMore()
-        }
+        return
+//        if reviewView.state == .loading && reviewDataSource.isEmpty {
+//            cell.isHidden = true
+//        } else if reviewDataSource.isEmpty {
+//            cell.separatorInset.left = view.bounds.width
+//        } else if reviewDataSource.itemCount - 5 == indexPath.row {
+////            reviewManager.loadMore()
+//        }
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {

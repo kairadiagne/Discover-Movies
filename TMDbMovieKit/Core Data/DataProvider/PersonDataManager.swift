@@ -9,13 +9,6 @@
 import Foundation
 import Alamofire
 
-public final class TopListDataManager {
-
-    public init(list: String) {
-        print(list)
-    }
-}
-
 public final class PersonDataManager {
     
     // MARK: - Properties

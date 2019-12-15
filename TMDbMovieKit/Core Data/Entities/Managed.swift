@@ -23,7 +23,7 @@ extension Managed where Self: NSManagedObject {
         return NSFetchRequest<Self>(entityName: entityName)
     }
 
-    static func fetchSingleObject(in context: NSManagedObjectContext, configure: (NSFetchRequest<Self>) -> ()) -> Self? {
+    static func fetchSingleObject(in context: NSManagedObjectContext, configure: (NSFetchRequest<Self>) -> Void) -> Self? {
         let result = fetch(in: context) { request in
             configure(request)
             request.fetchLimit = 2
@@ -39,7 +39,7 @@ extension Managed where Self: NSManagedObject {
         }
     }
 
-    static func fetch(in context: NSManagedObjectContext, configurationBlock: (NSFetchRequest<Self>) -> () = { _ in }) -> [Self] {
+    static func fetch(in context: NSManagedObjectContext, configurationBlock: (NSFetchRequest<Self>) -> Void = { _ in }) -> [Self] {
         let request = NSFetchRequest<Self>(entityName: Self.entityName)
         configurationBlock(request)
         return try! context.fetch(request)

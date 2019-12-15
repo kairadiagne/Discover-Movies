@@ -18,14 +18,6 @@ final class DependencyContainer {
 
     var persistentContainer: MovieKitPersistentContainer!
 
-    private(set) var popularListManager = TopListDataManager(list: "popular")
-
-    private(set) var nowPlayingListManager = TopListDataManager(list: "nowPlaying")
-
-    private(set) var topratedListManager = TopListDataManager(list: "topRated")
-
-    private(set) var upcomingListManager = TopListDataManager(list: "upcoming")
-
     private(set) var favoritesManager = AccountListDataManager(list: "favorite")
 
     private(set) var watchListManager = AccountListDataManager(list: "watchlist")

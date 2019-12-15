@@ -563,7 +563,6 @@
 				111943391CCB90BE001CF39B /* Network */,
 				11924C881D69C82500B1022E /* Session */,
 				11455D0C2389609F00FBC606 /* Core Data */,
-				11924C841D68D3EF00B1022E /* Service */,
 				1119433A1CCB90C8001CF39B /* Extensions */,
 				1187032E23999FF300879D41 /* OLD */,
 				1119430D1CCB8EF6001CF39B /* TMDbImageRouter.swift */,
@@ -853,6 +852,8 @@
 		1187032E23999FF300879D41 /* OLD */ = {
 			isa = PBXGroup;
 			children = (
+				EA288F291CF58D42004FAEEF /* TMDbUserService.swift */,
+				11C9A8232300515300BE3B7F /* FileManager.swift */,
 				1118370F1D8748B200C58DF3 /* Repository.swift */,
 				11AAA67423512201007E782F /* DataManagerUpdateEvent.swift */,
 			);
@@ -882,14 +883,6 @@
 			path = DataProvider;
 			sourceTree = "<group>";
 		};
-		11924C841D68D3EF00B1022E /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				EA288F291CF58D42004FAEEF /* TMDbUserService.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		11924C881D69C82500B1022E /* Session */ = {
 			isa = PBXGroup;
 			children = (
@@ -906,7 +899,6 @@
 			children = (
 				11C9A8212300388300BE3B7F /* DateGenerator.swift */,
 				1120B29322FE0F3500F28E7C /* KeyValueStorage.swift */,
-				11C9A8232300515300BE3B7F /* FileManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";

@@ -770,6 +770,7 @@
 				11455D102389A5E600FBC606 /* MovieKitPersistentContainer.swift */,
 				11870356239B0F2B00879D41 /* Model */,
 				11455D122389A64800FBC606 /* Entities */,
+				11AAA676235126DC007E782F /* Cache */,
 				11870357239B0F3900879D41 /* DataProvider */,
 			);
 			path = "Core Data";
@@ -871,7 +872,6 @@
 		11870357239B0F3900879D41 /* DataProvider */ = {
 			isa = PBXGroup;
 			children = (
-				11AAA676235126DC007E782F /* Cache */,
 				11DECAAA1D04CEC200FFEAB4 /* MovieListDataProvider.swift */,
 				EA782B7E1CE0C50000DC38AD /* AccountListDataManager.swift */,
 				EA6487B51CE4AF0D00452DD0 /* MovieDetailManager.swift */,

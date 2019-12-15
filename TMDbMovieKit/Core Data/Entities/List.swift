@@ -29,7 +29,7 @@ public class List: NSManagedObject, Managed {
     // MARK: Properties
 
     /// The type of the list for example the users favorite list.
-    @NSManaged public private(set) var type: ListType
+    @NSManaged private(set) var type: ListType
 
     /// Defines the last page that was persisted.
     @NSManaged public private(set) var page: Int64
@@ -44,21 +44,14 @@ public class List: NSManagedObject, Managed {
     @NSManaged public private(set) var movies: NSOrderedSet
 
     var nextPage: Int64? {
-         return page < resultCount ? page + 1 : nil
-     }
-
-    // MARK: Primitive properties
-
-    @NSManaged private var primitivePage: Int64
-    @NSManaged private var primitiveResultCount: Int64
-    @NSManaged private var primitiveTotalPages: Int64
-    @NSManaged private var primitiveMovies: NSSet
+        return page < resultCount ? page + 1 : nil
+    }
 
     // MARK: Initialize
 
     static func list(ofType type: List.ListType, in context: NSManagedObjectContext) -> List {
         guard let existingList = List.fetchSingleObject(in: context, configure: { fetchRequest in
-            fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(List.type), type.rawValue)
+            fetchRequest.predicate = NSPredicate(format: "%K == %ld", #keyPath(List.type), type.rawValue)
         }) else {
             return insert(into: context, type: type)
         }
@@ -77,10 +70,9 @@ public class List: NSManagedObject, Managed {
     override public func awakeFromInsert() {
         super.awakeFromInsert()
 
-        primitivePage = 0
-        primitiveResultCount = 0
-        primitiveTotalPages = 0
-        primitiveMovies = []
+        setPrimitiveValue(0, forKey: #keyPath(List.page))
+        setPrimitiveValue(0, forKey: #keyPath(List.resultCount))
+        setPrimitiveValue(0, forKey: #keyPath(List.totalPages))
     }
 
     // MARK: Convenience

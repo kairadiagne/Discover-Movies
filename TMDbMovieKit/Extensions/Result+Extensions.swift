@@ -19,4 +19,14 @@ extension Result {
             return nil
         }
     }
+
+    /// Returns the associated value in case Result is success.
+    var value: Success? {
+        switch self {
+        case .success(let success):
+            return success
+        default:
+            return nil
+        }
+    }
 }

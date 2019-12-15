@@ -40,7 +40,7 @@ extension Managed where Self: NSManagedObject {
     }
 
     static func fetch(in context: NSManagedObjectContext, configurationBlock: (NSFetchRequest<Self>) -> Void = { _ in }) -> [Self] {
-        let request = NSFetchRequest<Self>(entityName: Self.entityName)
+        let request = Self.defaultFetchRequest()
         configurationBlock(request)
         return try! context.fetch(request)
     }

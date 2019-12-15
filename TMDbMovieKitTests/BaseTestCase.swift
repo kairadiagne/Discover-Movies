@@ -7,18 +7,26 @@
 //
 
 import XCTest
-import Mocker
 import Alamofire
+import CoreData
+import Mocker
 @testable import TMDbMovieKit
 
 class BaseTestCase: XCTestCase {
 
     private(set) var sessionManager: SessionManager!
+    private(set) var persistentContainer: MovieKitPersistentContainer!
+
+    var viewContext: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
 
     private(set) var apiKey: String!
     private(set) var readOnlyAPIKey: String!
 
     override func setUp() {
+        super.setUp()
+
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockingURLProtocol.self]
         sessionManager = SessionManager(configuration: configuration)
@@ -27,11 +35,15 @@ class BaseTestCase: XCTestCase {
         readOnlyAPIKey = UUID().uuidString
 
         DiscoverMoviesKit.configure(apiKey: apiKey, readOnlyApiKey: readOnlyAPIKey)
+
+        MovieKitPersistentContainer.createInMemoryContainer { result in
+            XCTAssertNil(result.error)
+            self.persistentContainer = result.value
+        }
     }
 
     override func tearDown() {
         sessionManager = nil
-
-        // Remove all mocks
+        persistentContainer = nil
     }
 }

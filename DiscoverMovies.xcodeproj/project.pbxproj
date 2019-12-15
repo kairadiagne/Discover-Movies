@@ -88,7 +88,6 @@
 		11870327239993B400879D41 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 11870326239993B400879D41 /* Alamofire */; };
 		11870350239AFDBB00879D41 /* MovieListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1187034F239AFDBB00879D41 /* MovieListData.swift */; };
 		11870352239B03E200879D41 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11870351239B03E200879D41 /* Managed.swift */; };
-		11870355239B0E6500879D41 /* ListType+name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11870354239B0E6500879D41 /* ListType+name.swift */; };
 		118C930A236236180061DF43 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118C9309236236180061DF43 /* KeychainWrapper.swift */; };
 		118E238C1DE11E1B00324DEF /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118E238B1DE11E1B00324DEF /* MenuItem.swift */; };
 		11924C811D68B38A00B1022E /* AlamofireDataRequest+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C801D68B38A00B1022E /* AlamofireDataRequest+Codable.swift */; };
@@ -114,6 +113,7 @@
 		11C094B223A63F600086531E /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 11C094B123A63F600086531E /* Mocker */; };
 		11C094B323A642740086531E /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A1F3D1D415B0D00AC61C7 /* CacheManager.swift */; };
 		11C094B823A6431A0086531E /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C094B723A6431A0086531E /* ListTests.swift */; };
+		11C094BA23A657560086531E /* ListType+name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C094B923A657560086531E /* ListType+name.swift */; };
 		11C3CC051DB80B550009D6D7 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3CC031DB80B550009D6D7 /* MovieListViewController.swift */; };
 		11C5014F1E4F3B1C0093DE9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11C5014E1E4F3B1C0093DE9E /* Assets.xcassets */; };
 		11C67C3C230488DC00F3FC1B /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C67C3B230488DC00F3FC1B /* RepositoryTests.swift */; };
@@ -348,7 +348,6 @@
 		1179FC701DA18C1C00CA1E6D /* UITableView+HideEmptyRows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+HideEmptyRows.swift"; sourceTree = "<group>"; };
 		1187034F239AFDBB00879D41 /* MovieListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListData.swift; sourceTree = "<group>"; };
 		11870351239B03E200879D41 /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
-		11870354239B0E6500879D41 /* ListType+name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListType+name.swift"; sourceTree = "<group>"; };
 		118C9309236236180061DF43 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		118E238B1DE11E1B00324DEF /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		11924C801D68B38A00B1022E /* AlamofireDataRequest+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireDataRequest+Codable.swift"; sourceTree = "<group>"; };
@@ -367,6 +366,7 @@
 		11AAA67423512201007E782F /* DataManagerUpdateEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerUpdateEvent.swift; sourceTree = "<group>"; };
 		11C094A223A4E5DE0086531E /* f.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = f.swift; sourceTree = "<group>"; };
 		11C094B723A6431A0086531E /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
+		11C094B923A657560086531E /* ListType+name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ListType+name.swift"; sourceTree = "<group>"; };
 		11C3CC031DB80B550009D6D7 /* MovieListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		11C5014C1E4F34C90093DE9E /* DiscoverMovies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiscoverMovies.entitlements; sourceTree = "<group>"; };
 		11C5014D1E4F37550093DE9E /* DiscoverMovies-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DiscoverMovies-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -782,9 +782,9 @@
 		11455D122389A64800FBC606 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				11C094B923A657560086531E /* ListType+name.swift */,
 				11870351239B03E200879D41 /* Managed.swift */,
 				1173B4C62389B5BE0032D4D5 /* List.swift */,
-				11870354239B0E6500879D41 /* ListType+name.swift */,
 				1173B4CA2389B5BE0032D4D5 /* Movie.swift */,
 				1187034F239AFDBB00879D41 /* MovieListData.swift */,
 				1173B4C12389B5BE0032D4D5 /* CrewMember.swift */,
@@ -1626,6 +1626,7 @@
 				1173B4D82389B5BF0032D4D5 /* Movie.swift in Sources */,
 				EA782B8F1CE0E26C00DC38AD /* TMDBResult.swift in Sources */,
 				1119430A1CCB8EE4001CF39B /* TMDBVideo.swift in Sources */,
+				11C094BA23A657560086531E /* ListType+name.swift in Sources */,
 				11C9A8222300388300BE3B7F /* DateGenerator.swift in Sources */,
 				11AAA6792351278F007E782F /* DataManagerUpdateEvent.swift in Sources */,
 				11C985701DD8F8800044C23B /* SimilarMoviesDataManager.swift in Sources */,
@@ -1640,7 +1641,6 @@
 				1173B4D32389B5BF0032D4D5 /* CastMember.swift in Sources */,
 				11924C921D73037500B1022E /* Dictionary+merge.swift in Sources */,
 				11870350239AFDBB00879D41 /* MovieListData.swift in Sources */,
-				11870355239B0E6500879D41 /* ListType+name.swift in Sources */,
 				115B312D23088F2E00E23BDF /* UserAuthenticator.swift in Sources */,
 				11D90F8F2357BA56006A040B /* AccessToken.swift in Sources */,
 				EA288F2A1CF58D42004FAEEF /* TMDbUserService.swift in Sources */,

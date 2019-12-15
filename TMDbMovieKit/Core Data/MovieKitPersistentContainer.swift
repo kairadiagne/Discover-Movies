@@ -10,33 +10,54 @@ import CoreData
 
 public final class MovieKitPersistentContainer: NSPersistentContainer {
 
+    private static let name = "MovieKit"
+
     // MARK: Properties
 
     /// The background context used for writing to the persistent store.
     public lazy var backgroundcontext = newBackgroundContext()
 
-    /// Creates an instance of `PersistentContainer` and loads the underlying Persistent store of type SQLite.
-    ///
-    /// - Parameter completion: The completion handler that gets called when the persistent store has loaded.
+    /// Creates an instance of `NSPersistentContainer` and loads the underlying Persistent store of type SQLite.
+    /// - Parameter completion: The completion handler that gets called when the persistent store finished loading.
     public static func createDefaultContainer(completion: @escaping (MovieKitPersistentContainer) -> Void) {
-        let container = MovieKitPersistentContainer(name: "MovieKit")
+        let container = MovieKitPersistentContainer(name: MovieKitPersistentContainer.name)
         container.loadPersistentStores { (description, error) in
             if let error = error {
-                // In a production app we need to handle this error gracefully.
-                // The best way to handle errors that occur at this stage depenends on the specifics of the app.
+                // TODO: - Handle migration error
                 assertionFailure("Unresovled errror loading store with description: \(description), reason: \(error.localizedDescription)")
-                // completion(error)
-                // TODO: - Handle migration 
-                //            }
             }
 
-            print(container.persistentStoreDescriptions.first)
-
-            // Setup the view context
-            container.viewContext.automaticallyMergesChangesFromParent = true
-            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
+            print(container.persistentStoreDescriptions.first!)
+            container.setupContainer()
             completion(container)
         }
+    }
+
+    /// Creates an instance of `NSPersistentContainer` that is backed by a in memory store.
+    /// - Parameter completion: The completion handler that gets called when the persistent store finished loading.
+    public static func createInMemoryContainer(completion: @escaping (Result<MovieKitPersistentContainer, Error>) -> Void) {
+        let container = MovieKitPersistentContainer(name: MovieKitPersistentContainer.name)
+        container.persistentStoreDescriptions[0].url = URL(fileURLWithPath: "/dev/null")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print("Unresovled errror loading store with description: \(description), reason: \(error.localizedDescription)")
+                completion(.failure(error))
+                return
+            }
+
+            container.setupContainer()
+            completion(.success(container))
+        }
+    }
+
+    private func setupContainer() {
+        viewContext.automaticallyMergesChangesFromParent = true
+        viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        viewContext.undoManager = nil
+        viewContext.shouldDeleteInaccessibleFaults = true
+
+        backgroundcontext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        backgroundcontext.undoManager = nil
+        backgroundcontext.shouldDeleteInaccessibleFaults = true
     }
 }

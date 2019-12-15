@@ -90,7 +90,7 @@ public class List: NSManagedObject, Managed {
         resultCount = Int64(result.resultCount)
         totalPages = Int64(result.pageCount)
 
-        for (index, movieData) in result.items.reversed().enumerated() {
+        for (index, movieData) in result.items.enumerated() {
             let movie = Movie.insert(into: managedObjectContext, list: self, movie: movieData)
             let movieListData = MovieListData.insert(into: managedObjectContext, list: self, order: Int64(index), movie: movie)
             addToMovies(movieListData)

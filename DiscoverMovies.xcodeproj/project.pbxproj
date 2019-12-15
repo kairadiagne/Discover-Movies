@@ -122,7 +122,7 @@
 		11C9A8202300269500BE3B7F /* Gravatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A81F2300269500BE3B7F /* Gravatar.swift */; };
 		11C9A8222300388300BE3B7F /* DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8212300388300BE3B7F /* DateGenerator.swift */; };
 		11C9A8242300515300BE3B7F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8232300515300BE3B7F /* FileManager.swift */; };
-		11C9A826230207CA00BE3B7F /* CachedDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A825230207CA00BE3B7F /* CachedDataTests.swift */; };
+		11C9A826230207CA00BE3B7F /* CacheManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A825230207CA00BE3B7F /* CacheManagerTests.swift */; };
 		11C9A8282302082300BE3B7F /* DateGeneratorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */; };
 		11CDBA5E2351D23E00095B8E /* UserAuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CDBA5D2351D23E00095B8E /* UserAuthenticatorTests.swift */; };
 		11CDBA602351DB9200095B8E /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CDBA5F2351DB9200095B8E /* MockData.swift */; };
@@ -376,7 +376,7 @@
 		11C9A81F2300269500BE3B7F /* Gravatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gravatar.swift; sourceTree = "<group>"; };
 		11C9A8212300388300BE3B7F /* DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGenerator.swift; sourceTree = "<group>"; };
 		11C9A8232300515300BE3B7F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		11C9A825230207CA00BE3B7F /* CachedDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDataTests.swift; sourceTree = "<group>"; };
+		11C9A825230207CA00BE3B7F /* CacheManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerTests.swift; sourceTree = "<group>"; };
 		11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGeneratorMock.swift; sourceTree = "<group>"; };
 		11CDBA5D2351D23E00095B8E /* UserAuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthenticatorTests.swift; sourceTree = "<group>"; };
 		11CDBA5F2351DB9200095B8E /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -1001,7 +1001,7 @@
 		11CDBA642351E38E00095B8E /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				11C9A825230207CA00BE3B7F /* CachedDataTests.swift */,
+				11C9A825230207CA00BE3B7F /* CacheManagerTests.swift */,
 				11C67C3B230488DC00F3FC1B /* RepositoryTests.swift */,
 			);
 			path = Cache;
@@ -1644,7 +1644,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11C9A826230207CA00BE3B7F /* CachedDataTests.swift in Sources */,
+				11C9A826230207CA00BE3B7F /* CacheManagerTests.swift in Sources */,
 				11CDBA602351DB9200095B8E /* MockData.swift in Sources */,
 				11C67C3E2304897800F3FC1B /* FileManagerMock.swift in Sources */,
 				11CDBA5E2351D23E00095B8E /* UserAuthenticatorTests.swift in Sources */,

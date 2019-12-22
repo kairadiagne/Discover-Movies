@@ -142,12 +142,10 @@ final class PersonDetailView: BaseView {
 //            var birthInfo = birthday
 //            
 //            if let age = birthday.toDate()?.age {
-//                // swiftlint:disable shorthand_operator
 //                birthInfo = birthInfo + " " + "(" + "\(age)" + ")"
 //            }
 //            
 //            if let birthPlace = person.birthPlace {
-//                // swiftlint:disable shorthand_operator
 //                birthInfo = birthInfo + "\n\(birthPlace)"
 //            }
 //            

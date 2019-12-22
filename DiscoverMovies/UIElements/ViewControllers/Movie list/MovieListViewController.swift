@@ -28,14 +28,11 @@ final class MovieListViewController: BaseViewController {
     private let dataProvider: MovieListDataProvider
 
     private var dataSource: CollectionViewFetchedResultsDataSource<MovieListData>!
-
-    private let signedIn: Bool
     
     // MARK: - Initialize
     
     init(dataProvider: MovieListDataProvider, titleString: String, signedIn: Bool) {
         self.dataProvider = dataProvider
-        self.signedIn = signedIn
         super.init(nibName: nil, bundle: nil)
         self.title = titleString
     }
@@ -83,7 +80,13 @@ final class MovieListViewController: BaseViewController {
     // MARK: - Actions
     
     @objc private func refresh(control: UIRefreshControl) {
-        dataProvider.reloadIfNeeded(forceOnline: true)
+        dataProvider.reloadIfNeeded(forceOnline: true) { [weak self] result in
+            guard let self = self else { return }
+
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+            }
+        }
     }
 }
 

@@ -57,7 +57,7 @@ struct ApiRequest: URLRequestConvertible {
 
         var paramsCopy = paramaters
         if let additionalParamaters = additionalParamaters {
-            paramsCopy = paramsCopy.merge(additionalParamaters)
+            paramsCopy.merge(additionalParamaters) { _, new in new }
         }
 
         if !paramsCopy.isEmpty {

@@ -13,6 +13,7 @@ final class MockedData {
     static let requestTokenResponse = Bundle(for: MockedData.self).url(forResource: "RequestToken", withExtension: "json")!.data
     static let accessTokenResponse = Bundle(for: MockedData.self).url(forResource: "AccessToken", withExtension: "json")!.data
     static let movieListResponse = Bundle(for: MockedData.self).url(forResource: "MovieListResponse", withExtension: "json")!.data
+    static let movieListResponsePageTwo = Bundle(for: MockedData.self).url(forResource: "MovieListResponsePageTwo", withExtension: "json")!.data
 }
 
 extension URL {

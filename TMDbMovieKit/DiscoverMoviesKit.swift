@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public struct DiscoverMoviesKit {
+public final class DiscoverMoviesKit {
 
     static var shared: DiscoverMoviesKit {
         guard let shared = _shared else {
@@ -35,6 +35,17 @@ public struct DiscoverMoviesKit {
         sessionManager.adapter = MovieDBRequestAdapter()
         return sessionManager
     }()
+
+    private(set) var persistentContainer: MovieKitPersistentContainer!
+
+    init(apiKey: String, readOnlyApiKey: String) {
+        self.apiKey = apiKey
+        self.readOnlyApiKey = readOnlyApiKey
+    }
+
+    func register(persistentContainer: MovieKitPersistentContainer) {
+        self.persistentContainer = persistentContainer
+    }
 
     /// Configures the shared instance of `Configuration` with a specified API key.
     ///

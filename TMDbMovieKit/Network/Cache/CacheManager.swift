@@ -8,11 +8,6 @@
 
 import Foundation
 
-// Document and write test for the cache
-// The cache for a list should be 24 hours as they are refreshed only once in 24 hours.
-// Pull to refresh should only be available when the list is empty
-// Extract responsibilties of the cache in the 
-
 /// Manages the cache lifetime of objects in the database.
 protocol CacheManaging {
     func cache(cacheKey: String, lastUpdate: Date)

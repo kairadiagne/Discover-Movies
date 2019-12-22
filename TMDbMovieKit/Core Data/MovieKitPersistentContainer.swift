@@ -19,7 +19,7 @@ public final class MovieKitPersistentContainer: NSPersistentContainer {
 
     /// Creates an instance of `NSPersistentContainer` and loads the underlying Persistent store of type SQLite.
     /// - Parameter completion: The completion handler that gets called when the persistent store finished loading.
-    public static func createDefaultContainer(completion: @escaping (MovieKitPersistentContainer) -> Void) {
+    public static func createDefaultContainer(completion: @escaping () -> Void) {
         let container = MovieKitPersistentContainer(name: MovieKitPersistentContainer.name)
         container.loadPersistentStores { (description, error) in
             if let error = error {
@@ -29,7 +29,8 @@ public final class MovieKitPersistentContainer: NSPersistentContainer {
 
             print(container.persistentStoreDescriptions.first!)
             container.setupContainer()
-            completion(container)
+            DiscoverMoviesKit.shared.register(persistentContainer: container)
+            completion()
         }
     }
 

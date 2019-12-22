@@ -12,6 +12,6 @@ import TMDbMovieKit
 struct TopListViewControllerFactory {
 
     static func create(with container: DependencyContainer) -> TopListViewController {
-        return TopListViewController(persistentContainer: container.persistentContainer)
+        return TopListViewController()
     }
 }

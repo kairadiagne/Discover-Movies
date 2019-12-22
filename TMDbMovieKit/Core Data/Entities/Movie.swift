@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-public class Movie: NSManagedObject {
+public class Movie: NSManagedObject, Managed {
     
     // MARK: Properties
 
@@ -28,7 +28,7 @@ public class Movie: NSManagedObject {
 
     // MARK: Initialize
 
-    static func insert(into context: NSManagedObjectContext, list: List, movie: TMDBMovie) -> Movie {
+    static func insert(into context: NSManagedObjectContext, movie: TMDBMovie) -> Movie {
         let newMovie = Movie(context: context)
         newMovie.identifier = Int64(movie.identifier)
         newMovie.title = movie.title
@@ -48,6 +48,15 @@ public class Movie: NSManagedObject {
 
         // Delete all crew members which don't belong to the crew of other movies
         // Delete all cast members which don;t belong to the crew of other movies. 
+    }
+
+    // MARK: Fetch requests
+
+    static func movie(with id: Int64) -> NSFetchRequest<Movie> {
+        let fetchRequest = Movie.defaultFetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "%K == %ld", #keyPath(Movie.identifier), id)
+        fetchRequest.fetchLimit = 1
+        return fetchRequest
     }
 }
 
@@ -154,5 +163,3 @@ extension Movie {
     @NSManaged public func removeFromLists(_ values: NSSet)
 
 }
-
-

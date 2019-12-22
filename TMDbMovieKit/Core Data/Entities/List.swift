@@ -29,22 +29,22 @@ public class List: NSManagedObject, Managed {
     // MARK: Properties
 
     /// The type of the list for example the users favorite list.
-    @NSManaged private(set) var type: ListType
+    @NSManaged public var type: ListType
 
     /// Defines the last page that was persisted.
-    @NSManaged public private(set) var page: Int64
+    @NSManaged public var page: Int64
 
     /// The total amount of movies in the list.
-    @NSManaged public private(set) var resultCount: Int64
+    @NSManaged public var resultCount: Int64
 
     /// The total amount of pages that can be fetched from the backend.
-    @NSManaged public private(set) var totalPages: Int64
+    @NSManaged public var totalPages: Int64
 
     /// All the movies belonging to the list.
-    @NSManaged public private(set) var movies: NSOrderedSet
+    @NSManaged public var movies: NSOrderedSet
 
     var nextPage: Int64? {
-        return page < resultCount ? page + 1 : nil
+        return page < totalPages ? page + 1 : nil
     }
 
     // MARK: Initialize
@@ -77,26 +77,35 @@ public class List: NSManagedObject, Managed {
 
     // MARK: Convenience
 
-    func deleteAllMovies() {
-        for movie in movies {
-            managedObjectContext!.delete(movie as! MovieListData)
-        }
-    }
-
-    func update(with result: TMDBResult<TMDBMovie>) {
-        let managedObjectContext = self.managedObjectContext!
-
-        page = Int64(result.page)
-        resultCount = Int64(result.resultCount)
-        totalPages = Int64(result.pageCount)
-
-        for (index, movieData) in result.items.enumerated() {
-            let movie = Movie.insert(into: managedObjectContext, list: self, movie: movieData)
-            let movieListData = MovieListData.insert(into: managedObjectContext, list: self, order: Int64(index), movie: movie)
-            addToMovies(movieListData)
-        }
-    }
+//    // Move to list updater
+//    func deleteAllMovies() {
+//        for movie in movies {
+//            managedObjectContext!.delete(movie as! MovieListData)
+//        }
+//    }
+//
+//    // Move to list updater
+//    func update(with result: TMDBResult<TMDBMovie>) {
+//        let managedObjectContext = self.managedObjectContext!
+//
+//        page = Int64(result.page)
+//        resultCount = Int64(result.resultCount)
+//        totalPages = Int64(result.pageCount)
+//
+//        let movieCount = movies.count
+//        for (index, movieData) in result.items.enumerated() {
+//            let movie = List.existingMovie(withID: Int64(movieData.identifier), context: managedObjectContext) ?? Movie.insert(into: managedObjectContext, movie: movieData)
+//            let movieListData = MovieListData.insert(into: managedObjectContext, list: self, order: Int64(movieCount + index), movie: movie)
+//            addToMovies(movieListData)
+//        }
+//    }
+//
+//    private static func existingMovie(withID ID: Int64, context: NSManagedObjectContext) -> Movie? {
+//        let fetchRequest = Movie.movie(with: ID)
+//        return try? context.fetch(fetchRequest).first
+//    }
 }
+
 
 // MARK: Generated accessors for movies
 extension List {
@@ -104,31 +113,12 @@ extension List {
     @objc(insertObject:inMoviesAtIndex:)
     @NSManaged public func insertIntoMovies(_ value: MovieListData, at idx: Int)
 
-    @objc(removeObjectFromMoviesAtIndex:)
-    @NSManaged public func removeFromMovies(at idx: Int)
-
     @objc(insertMovies:atIndexes:)
     @NSManaged public func insertIntoMovies(_ values: [MovieListData], at indexes: NSIndexSet)
-
-    @objc(removeMoviesAtIndexes:)
-    @NSManaged public func removeFromMovies(at indexes: NSIndexSet)
-
-    @objc(replaceObjectInMoviesAtIndex:withObject:)
-    @NSManaged public func replaceMovies(at idx: Int, with value: MovieListData)
-
-    @objc(replaceMoviesAtIndexes:withMovies:)
-    @NSManaged public func replaceMovies(at indexes: NSIndexSet, with values: [MovieListData])
 
     @objc(addMoviesObject:)
     @NSManaged public func addToMovies(_ value: MovieListData)
 
-    @objc(removeMoviesObject:)
-    @NSManaged public func removeFromMovies(_ value: MovieListData)
-
     @objc(addMovies:)
     @NSManaged public func addToMovies(_ values: NSSet)
-
-    @objc(removeMovies:)
-    @NSManaged public func removeFromMovies(_ values: NSSet)
-
 }

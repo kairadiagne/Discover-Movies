@@ -9,73 +9,71 @@
 import CoreData
 import Alamofire
 
-/// `DataManager` is an abstract class managing data conforming to `Codable` that is persisteted to the user's caches folder.
+/// `MovieListDataProvider` is a class that fetches a paginated movie list andsaves it to the Core Data store.
 public class MovieListDataProvider {
 
     public typealias Completion = (Swift.Result<Void, Error>) -> Void
     
     // MARK: Properties
 
-    /// A `NSFetchedResultsController` used to update the UI about changes in the list.
-    public lazy var fetchedResultsController: NSFetchedResultsController<MovieListData> = {
-        let fetchRequest = MovieListData.moviesSortedIn(listOf: listType)
-        let context = persistentContainer.viewContext
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-    }()
+    /// The cache manager that manages the cache life time of the resource.
+    private let cacheManager = CacheManager()
+
+    /// The session manager used for performing network requests.
+    private let sessionManager: SessionManager
 
     /// The persistent container that encapsulates the Core Data Stack.
     private let persistentContainer: MovieKitPersistentContainer
 
-    /// The cache manager that manages the cache life time of the resource.
-    private let cacheManager = CacheManager()
-
-    /// The session manager responsible for all network requests.
-    private let sessionManager: SessionManager
-
-    /// The API request through with which to retrieve the resource that is managed by this class.
-    private var request: ApiRequest
+    /// Responsible for updating the list managed object with the result of the api call.
+    private let listController: ListController
 
     /// The type of list that is managed by this data provider.
     private var listType: List.ListType
 
+    /// The API request through with which to retrieve the resource that is managed by this class.
+    private var request: ApiRequest
+
     // MARK: Initialize
 
-    public convenience init(listType: List.ListType, persistentContainer: MovieKitPersistentContainer) {
+    public convenience init(listType: List.ListType) {
         let request = ApiRequest.topList(list: listType.name)
-        self.init(listType: listType, request: request, persistentContainer: persistentContainer, sessionManager: DiscoverMoviesKit.shared.sessionManager)
+        let listController = ListController(backgroundContext: DiscoverMoviesKit.shared.persistentContainer.backgroundcontext)
+        self.init(listType: listType, request: request, persistentContainer: DiscoverMoviesKit.shared.persistentContainer, sessionManager: DiscoverMoviesKit.shared.sessionManager, listController: listController)
     }
 
-    init(listType: List.ListType, request: ApiRequest, persistentContainer: MovieKitPersistentContainer, sessionManager: SessionManager) {
+    init(listType: List.ListType, request: ApiRequest, persistentContainer: MovieKitPersistentContainer, sessionManager: SessionManager, listController: ListController) {
+        self.listType = listType
+        self.request = request
         self.persistentContainer = persistentContainer
         self.sessionManager = sessionManager
-        self.request = request
-        self.listType = listType
+        self.listController = listController
     }
 
     // MARK: Public API
 
     public func reloadIfNeeded(forceOnline: Bool = false, completion: Completion? = nil) {
-        persistentContainer.backgroundcontext.perform {
-            guard forceOnline || self.cacheManager.needsRefresh(cacheKey: self.listType.name, refreshTimeout: 3600) else {
-                completion?(.success(()))
-                return
-            }
-
-            self.loadOnline(completion: completion)
+        guard forceOnline || cacheManager.needsRefresh(cacheKey: listType.name, refreshTimeout: 86400) else {
+            completion?(.success(()))
+            return
         }
+
+        loadOnline(completion: completion)
     }
 
     public func loadMore(completion: Completion? = nil) {
-        persistentContainer.backgroundcontext.perform {
+        var nextPage: Int64?
+        persistentContainer.backgroundcontext.performAndWait {
             let list = List.list(ofType: self.listType, in: self.persistentContainer.backgroundcontext)
-
-            guard let nextPage = list.nextPage else {
-                completion?(.success(()))
-                return
-            }
-
-            self.loadOnline(page: nextPage, completion: completion)
+            nextPage = list.nextPage
         }
+
+        guard let page = nextPage else {
+            completion?(.success(()))
+            return
+        }
+
+        loadOnline(page: page, completion: completion)
     }
 
     // MARK: - Networking
@@ -98,24 +96,21 @@ public class MovieListDataProvider {
     }
 
     func persist(data: TMDBResult<TMDBMovie>, completion: Completion? = nil) {
-        persistentContainer.backgroundcontext.performAndWait {
-            let list = List.list(ofType: self.listType, in: self.persistentContainer.backgroundcontext)
-
-            if data.page == 1 {
-                list.deleteAllMovies()
-                list.update(with: data)
-            } else if data.page > list.page {
-                list.update(with: data)
-            }
-
-            cacheManager.cache(cacheKey: listType.name, lastUpdate: Date())
-
-            do {
-                try self.persistentContainer.backgroundcontext.save()
+        listController.updateList(of: listType, with: data) { result in
+            switch result {
+            case .success:
+                self.cacheManager.cache(cacheKey: self.listType.name, lastUpdate: Date())
                 completion?(.success(()))
-            } catch {
+            case .failure(let error):
                 completion?(.failure(error))
             }
         }
     }
+
+    /// A `NSFetchedResultsController` used to update the UI about changes in the list.
+     public lazy var fetchedResultsController: NSFetchedResultsController<MovieListData> = {
+         let fetchRequest = MovieListData.moviesSortedIn(listOf: listType)
+         let context = persistentContainer.viewContext
+         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+     }()
 }

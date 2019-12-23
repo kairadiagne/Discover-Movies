@@ -22,8 +22,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Failed to read tmdb api key from the plist file")
         }
 
+        // Needs to be called before anything else
         DiscoverMoviesKit.configure(apiKey: apiKey, readOnlyApiKey: readOnlyAPIKey)
 
+        // Creates the default container inside of the moviekit framwork.
         MovieKitPersistentContainer.createDefaultContainer { }
         
         return true

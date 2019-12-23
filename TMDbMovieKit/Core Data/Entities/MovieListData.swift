@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+/// Contains additional information about a movie which belongs to a list.
 public class MovieListData: NSManagedObject, Managed {
 
     // MARK: Properties
@@ -32,9 +33,9 @@ public class MovieListData: NSManagedObject, Managed {
     override public func prepareForDeletion() {
         super.prepareForDeletion()
 
-        if movie.lists.count == 1 {
-            managedObjectContext?.delete(movie)
-        }
+        guard movie.lists.count == 1 else { return }
+
+        managedObjectContext?.delete(movie)
     }
 
     // MARK: Fetch requests

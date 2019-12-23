@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+/// Contains all the information about a particular list of movies.
 public class List: NSManagedObject, Managed {
 
     @objc public enum ListType: Int64 {

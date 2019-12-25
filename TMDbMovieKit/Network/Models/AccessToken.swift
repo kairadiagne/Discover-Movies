@@ -13,7 +13,6 @@ struct AccessToken: Decodable {
     // MARK: Properties
 
     let value: String
-
     let accountIdentifier: String
 
     // MARK: Codable

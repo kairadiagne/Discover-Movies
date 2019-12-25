@@ -1,5 +1,5 @@
 //
-//  ListController.swift
+//  ListUpdater.swift
 //  TMDbMovieKit
 //
 //  Created by Kaira Diagne on 20/12/2019.
@@ -8,22 +8,32 @@
 
 import CoreData
 
-final class ListController {
+protocol ListUpdating {
+    func updateList(of type: List.ListType, with result: TMDBResult<TMDBMovie>) throws
+}
 
-    typealias Completion = (Result<Void, Error>) -> Void
+struct ListUpdater: ListUpdating {
+
+    // MARK: Properties
 
     private let backgroundContext: NSManagedObjectContext
+
+    // MARK: Initialize
 
     init(backgroundContext: NSManagedObjectContext) {
         self.backgroundContext = backgroundContext
     }
 
-    func updateList(of type: List.ListType, with result: TMDBResult<TMDBMovie>, completion: @escaping Completion) {
-        backgroundContext.perform {
+    // MARK: ListUpdating
+
+    func updateList(of type: List.ListType, with result: TMDBResult<TMDBMovie>) throws {
+        var errorToThrow: Error?
+
+        backgroundContext.performAndWait {
             let list = List.list(ofType: type, in: self.backgroundContext)
 
             if result.page == 1 {
-                self.deleteAllMovies(in: list)
+                self.deleteAllMoviesInListIfNeeded(list)
                 self.update(list: list, with: result)
             } else if result.page > list.page {
                 self.update(list: list, with: result)
@@ -31,17 +41,31 @@ final class ListController {
 
             do {
                 try self.backgroundContext.save()
-                completion(.success(()))
             } catch {
-                completion(.failure(error))
+                errorToThrow = error
             }
+        }
+
+        if let error = errorToThrow {
+            throw error
         }
     }
 
-    private func deleteAllMovies(in list: List) {
-        for movie in list.movies {
-            backgroundContext.delete(movie as! MovieListData)
+    // MARK: Helper
+
+    private func deleteAllMoviesInListIfNeeded(_ list: List) {
+        guard list.movies.count > 0 else {
+            return
         }
+
+        let movies = list.movies.set as NSSet
+
+        movies.forEach { movieListData in
+            let movieListData = movieListData as! MovieListData
+            backgroundContext.delete(movieListData)
+        }
+
+        list.removeFromMovies(movies)
     }
 
     private func update(list: List, with result: TMDBResult<TMDBMovie>) {

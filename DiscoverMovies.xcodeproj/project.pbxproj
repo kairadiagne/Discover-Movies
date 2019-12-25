@@ -94,8 +94,7 @@
 		11924C8C1D69E33700B1022E /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C8B1D69E33700B1022E /* ProfileImageView.swift */; };
 		11924C901D72F1D600B1022E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11924C8F1D72F1D600B1022E /* Keys.plist */; };
 		11924C941D731AC100B1022E /* APIErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C931D731AC100B1022E /* APIErrorHandler.swift */; };
-		119396A623AD6EBD00F2BC4C /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119396A523AD6EBD00F2BC4C /* ListController.swift */; };
-		119396A923AD75DF00F2BC4C /* ListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119396A823AD75DF00F2BC4C /* ListControllerTests.swift */; };
+		119396A923AD75DF00F2BC4C /* ListUpdaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119396A823AD75DF00F2BC4C /* ListUpdaterTests.swift */; };
 		119396AF23B0F00F00F2BC4C /* MovieListDataTess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119396AE23B0F00F00F2BC4C /* MovieListDataTess.swift */; };
 		119396B123B0F11800F2BC4C /* Movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 119396B023B0F11800F2BC4C /* Movie.json */; };
 		1195B4AE1D30F4B2004287A3 /* MovieDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1195B4AD1D30F4B2004287A3 /* MovieDetailViewController.xib */; };
@@ -104,6 +103,7 @@
 		11A479111EF8F04A0067E85F /* BaseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479101EF8F04A0067E85F /* BaseTableViewDataSource.swift */; };
 		11A479131EF8F0560067E85F /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A479121EF8F0560067E85F /* BaseCollectionViewDataSource.swift */; };
 		11A4FDAB1D906C8500CA7F07 /* TopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4FDA91D906C8500CA7F07 /* TopListViewController.swift */; };
+		11A6DB1523B412BF00A172F9 /* ListUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119396A523AD6EBD00F2BC4C /* ListUpdater.swift */; };
 		11A6DB1723B4158600A172F9 /* Genre+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A6DB1623B4158600A172F9 /* Genre+Name.swift */; };
 		11AAA6782351278F007E782F /* MovieListDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DECAAA1D04CEC200FFEAB4 /* MovieListDataProvider.swift */; };
 		11AAA6792351278F007E782F /* DataManagerUpdateEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AAA67423512201007E782F /* DataManagerUpdateEvent.swift */; };
@@ -359,8 +359,8 @@
 		11924C8B1D69E33700B1022E /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		11924C8F1D72F1D600B1022E /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		11924C931D731AC100B1022E /* APIErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIErrorHandler.swift; sourceTree = "<group>"; };
-		119396A523AD6EBD00F2BC4C /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
-		119396A823AD75DF00F2BC4C /* ListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListControllerTests.swift; sourceTree = "<group>"; };
+		119396A523AD6EBD00F2BC4C /* ListUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUpdater.swift; sourceTree = "<group>"; };
+		119396A823AD75DF00F2BC4C /* ListUpdaterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUpdaterTests.swift; sourceTree = "<group>"; };
 		119396AE23B0F00F00F2BC4C /* MovieListDataTess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDataTess.swift; sourceTree = "<group>"; };
 		119396B023B0F11800F2BC4C /* Movie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Movie.json; sourceTree = "<group>"; };
 		1195B4AD1D30F4B2004287A3 /* MovieDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MovieDetailViewController.xib; path = DiscoverMovies/Modules/Detail/MovieDetailViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -910,7 +910,7 @@
 		119396A423AD6DDC00F2BC4C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				119396A523AD6EBD00F2BC4C /* ListController.swift */,
+				119396A523AD6EBD00F2BC4C /* ListUpdater.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -918,7 +918,7 @@
 		119396A723AD75BC00F2BC4C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				119396A823AD75DF00F2BC4C /* ListControllerTests.swift */,
+				119396A823AD75DF00F2BC4C /* ListUpdaterTests.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1678,7 +1678,6 @@
 				EA288F2A1CF58D42004FAEEF /* TMDbUserService.swift in Sources */,
 				EA782B871CE0CA4500DC38AD /* MovieReviewManager.swift in Sources */,
 				115B31292308873900E23BDF /* DiscoverMoviesKit.swift in Sources */,
-				119396A623AD6EBD00F2BC4C /* ListController.swift in Sources */,
 				EAE605C81CEA72C500D904EB /* AccessTokenStore.swift in Sources */,
 				11C9A8242300515300BE3B7F /* FileManager.swift in Sources */,
 				11455D112389A5E600FBC606 /* MovieKitPersistentContainer.swift in Sources */,
@@ -1689,6 +1688,7 @@
 				11870352239B03E200879D41 /* Managed.swift in Sources */,
 				EA288F231CF57955004FAEEF /* RequestToken.swift in Sources */,
 				111943111CCB8EF6001CF39B /* TMDbImageRouter.swift in Sources */,
+				11A6DB1523B412BF00A172F9 /* ListUpdater.swift in Sources */,
 				116C2A8F1E2EA82A00E4C487 /* TMDBPerson.swift in Sources */,
 				11D5506E1DE1044400AAEA4E /* APIRequest.swift in Sources */,
 				11924C941D731AC100B1022E /* APIErrorHandler.swift in Sources */,
@@ -1712,7 +1712,7 @@
 				11CDBA682351E6AF00095B8E /* BaseTestCase.swift in Sources */,
 				11C9A8282302082300BE3B7F /* DateGeneratorMock.swift in Sources */,
 				119396AF23B0F00F00F2BC4C /* MovieListDataTess.swift in Sources */,
-				119396A923AD75DF00F2BC4C /* ListControllerTests.swift in Sources */,
+				119396A923AD75DF00F2BC4C /* ListUpdaterTests.swift in Sources */,
 				11CDBA782353311C00095B8E /* URL+AppendQuetryItemTests.swift in Sources */,
 				11CDBA662351E40700095B8E /* Mock+APIRequest.swift in Sources */,
 				11CDBA7123531D6000095B8E /* MovieDBRequestAdapterTests.swift in Sources */,

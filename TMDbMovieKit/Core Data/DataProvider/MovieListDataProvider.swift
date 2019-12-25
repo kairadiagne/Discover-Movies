@@ -26,7 +26,7 @@ public class MovieListDataProvider {
     private let persistentContainer: MovieKitPersistentContainer
 
     /// Responsible for updating the list managed object with the result of the api call.
-    private let listController: ListController
+    private let listUpdater: ListUpdating
 
     /// The type of list that is managed by this data provider.
     private var listType: List.ListType
@@ -38,16 +38,16 @@ public class MovieListDataProvider {
 
     public convenience init(listType: List.ListType) {
         let request = ApiRequest.topList(list: listType.name)
-        let listController = ListController(backgroundContext: DiscoverMoviesKit.shared.persistentContainer.backgroundcontext)
-        self.init(listType: listType, request: request, persistentContainer: DiscoverMoviesKit.shared.persistentContainer, sessionManager: DiscoverMoviesKit.shared.sessionManager, listController: listController)
+        let listUpdater = ListUpdater(backgroundContext: DiscoverMoviesKit.shared.persistentContainer.backgroundcontext)
+        self.init(listType: listType, request: request, persistentContainer: DiscoverMoviesKit.shared.persistentContainer, sessionManager: DiscoverMoviesKit.shared.sessionManager, listUpdater: listUpdater)
     }
 
-    init(listType: List.ListType, request: ApiRequest, persistentContainer: MovieKitPersistentContainer, sessionManager: SessionManager, listController: ListController) {
+    init(listType: List.ListType, request: ApiRequest, persistentContainer: MovieKitPersistentContainer, sessionManager: SessionManager, listUpdater: ListUpdating) {
         self.listType = listType
         self.request = request
         self.persistentContainer = persistentContainer
         self.sessionManager = sessionManager
-        self.listController = listController
+        self.listUpdater = listUpdater
     }
 
     // MARK: Public API
@@ -96,14 +96,12 @@ public class MovieListDataProvider {
     }
 
     func persist(data: TMDBResult<TMDBMovie>, completion: Completion? = nil) {
-        listController.updateList(of: listType, with: data) { result in
-            switch result {
-            case .success:
-                self.cacheManager.cache(cacheKey: self.listType.name, lastUpdate: Date())
-                completion?(.success(()))
-            case .failure(let error):
-                completion?(.failure(error))
-            }
+        do {
+            try listUpdater.updateList(of: listType, with: data)
+            cacheManager.cache(cacheKey: listType.name, lastUpdate: Date())
+            completion?(.success(()))
+        } catch {
+            completion?(.failure(error))
         }
     }
 

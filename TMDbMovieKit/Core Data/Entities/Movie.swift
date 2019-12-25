@@ -57,7 +57,7 @@ public class Movie: NSManagedObject, Managed {
         newMovie.title = movie.title
         newMovie.overview = movie.overview
         newMovie.releaseDate = movie.releaseDate
-        newMovie.genres =  movie.genres.map { Int64($0.hashValue) }
+        newMovie.genres =  movie.genres.map{ Int64($0) }
         newMovie.rating = movie.rating
         newMovie.posterPath = movie.posterPath
         newMovie.backdropPath = movie.backDropPath

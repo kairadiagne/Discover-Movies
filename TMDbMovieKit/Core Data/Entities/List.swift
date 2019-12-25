@@ -68,4 +68,10 @@ extension List {
 
     @objc(addMoviesObject:)
     @NSManaged public func addToMovies(_ value: MovieListData)
+
+    @objc(removeMoviesObject:)
+    @NSManaged public func removeFromMovies(_ value: MovieListData)
+
+    @objc(removeMovies:)
+    @NSManaged public func removeFromMovies(_ values: NSSet)
 }

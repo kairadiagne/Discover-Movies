@@ -10,14 +10,37 @@ import Foundation
 import CoreData
 
 public class Movie: NSManagedObject, Managed {
-    
+
+    @objc public enum Genre: Int64 {
+        case action = 28
+        case adventure = 12
+        case animation = 16
+        case comedy = 35
+        case crime = 80
+        case documentary = 99
+        case drama = 18
+        case family = 10751
+        case fantasy = 14
+        case foreign = 10769
+        case history = 36
+        case horror = 27
+        case music = 10402
+        case mystery = 9648
+        case romance = 10749
+        case scienceFiction = 878
+        case tvMovie = 10770
+        case thriller = 53
+        case war = 10752
+        case western = 37
+    }
+
     // MARK: Properties
 
     @NSManaged public private(set) var identifier: Int64
     @NSManaged public private(set) var title: String
     @NSManaged public private(set) var overview: String
     @NSManaged public private(set) var releaseDate: String
-    @NSManaged public private(set) var genres: Int64
+    @NSManaged public private(set) var genres: [Int64]
     @NSManaged public private(set) var rating: Double
     @NSManaged public private(set) var posterPath: String
     @NSManaged public private(set) var backdropPath: String
@@ -34,7 +57,7 @@ public class Movie: NSManagedObject, Managed {
         newMovie.title = movie.title
         newMovie.overview = movie.overview
         newMovie.releaseDate = movie.releaseDate
-        newMovie.genres =  1 // Int64(movie.genres.first ?? 1) // Fix
+        newMovie.genres =  movie.genres.map { Int64($0.hashValue) }
         newMovie.rating = movie.rating
         newMovie.posterPath = movie.posterPath
         newMovie.backdropPath = movie.backDropPath

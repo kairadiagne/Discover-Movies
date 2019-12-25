@@ -1,35 +1,15 @@
 //
-//  Genre.swift
-//  DiscoverMovies
+//  Genre+Name.swift
+//  TMDbMovieKit
 //
-//  Created by Kaira Diagne on 28-03-16.
-//  Copyright © 2016 Kaira Diagne. All rights reserved.
+//  Created by Kaira Diagne on 25/12/2019.
+//  Copyright © 2019 Kaira Diagne. All rights reserved.
 //
 
 import Foundation
 
-public enum Genre: Int, Codable {
-    case action = 28
-    case adventure = 12
-    case animation = 16
-    case comedy = 35
-    case crime = 80
-    case documentary = 99
-    case drama = 18
-    case family = 10751
-    case fantasy = 14
-    case foreign = 10769
-    case history = 36
-    case horror = 27
-    case music = 10402
-    case mystery = 9648
-    case romance = 10749
-    case scienceFiction = 878
-    case tvMovie = 10770
-    case thriller = 53
-    case war = 10752
-    case western = 37
-    
+extension Movie.Genre {
+
     public var name: String? {
         switch self {
         case .action:
@@ -75,4 +55,3 @@ public enum Genre: Int, Codable {
         }
     }
 }
-    

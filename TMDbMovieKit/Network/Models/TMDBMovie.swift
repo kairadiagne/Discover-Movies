@@ -26,7 +26,7 @@ public struct TMDBMovie: MovieRepresentable, Codable {
     public let rating: Double
     public let posterPath: String
     public let backDropPath: String
-    public let genres: [Genre]
+    public let genres: [Int]
 
     // MARK: Codable
 
@@ -51,9 +51,9 @@ public struct TMDBMovie: MovieRepresentable, Codable {
         rating = try values.decode(Double.self, forKey: CodingKeys.rating)
         posterPath = try values.decode(String.self, forKey: CodingKeys.posterPath)
         backDropPath = try values.decode(String.self, forKey: CodingKeys.backDropPath)
-        if let genres = try? values.decode([Genre].self, forKey: CodingKeys.genreIDs) {
+        if let genres = try? values.decode([Int].self, forKey: CodingKeys.genreIDs) {
             self.genres = genres
-        } else if let genres = try? values.decode([Genre].self, forKey: CodingKeys.genres) {
+        } else if let genres = try? values.decode([Int].self, forKey: CodingKeys.genres) {
             self.genres = genres
         } else {
             genres = []

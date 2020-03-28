@@ -11,6 +11,8 @@ import CoreData
 
 public class CrewMember: NSManagedObject {
 
+    // MARK: Properties
+
     @NSManaged public var identifier: Int64
     @NSManaged public var creditIdentifier: String
     @NSManaged public var name: String

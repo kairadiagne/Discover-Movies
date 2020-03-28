@@ -21,7 +21,7 @@ final class MovieDetailViewController: BaseViewController {
 
 //    private let castDataSource = CastDataSource(emptyMessage: "noCastmembersText".localized)
 
-    private let movieDetailManager: MovieDetailManager
+    private let movieDetailManager: MovieDetailDataProvider
     
     private let similarMoviesManager: SimilarMoviesDataManager
 
@@ -34,7 +34,7 @@ final class MovieDetailViewController: BaseViewController {
     // MARK: - Initialize
     
     init(movie: MovieRepresentable, signedIn: Bool) {
-        self.movieDetailManager = MovieDetailManager(movieID: movie.identifier)
+        self.movieDetailManager = MovieDetailDataProvider(movieID: movie.identifier)
         self.similarMoviesManager = SimilarMoviesDataManager(movieID: movie.identifier)
         self.movie = movie
         self.signedIn = signedIn
@@ -71,13 +71,13 @@ final class MovieDetailViewController: BaseViewController {
         detailView.configure(forSignIn: signedIn)
         updateUI()
 
-        detailManagerObservation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: movieDetailManager, queue: .main) { [weak self] notification in
-            self?.detailManagerDidUpdate(notification: notification)
-        }
-
-        similarMoviesManagerObservation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: similarMoviesManager, queue: .main) { [weak self] notification in
-            self?.similarMoviewsManagerDidUpdate(notification: notification)
-        }
+//        detailManagerObservation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: movieDetailManager, queue: .main) { [weak self] notification in
+//            self?.detailManagerDidUpdate(notification: notification)
+//        }
+//
+//        similarMoviesManagerObservation = NotificationCenter.default.addObserver(forName: DataManagerUpdateEvent.dataManagerUpdateNotificationName, object: similarMoviesManager, queue: .main) { [weak self] notification in
+//            self?.similarMoviewsManagerDidUpdate(notification: notification)
+//        }
     }
 
     func similarMoviewsManagerDidUpdate(notification: Notification) {
@@ -86,31 +86,31 @@ final class MovieDetailViewController: BaseViewController {
         detailView.seeAllButton.isHidden = similarMoviesDataSource.shouldShowEmptyMessage
     }
 
-    func detailManagerDidUpdate(notification: Notification) {
-        guard let update = notification.userInfo?[DataManagerUpdateEvent.updateNotificationKey] as? DataManagerUpdateEvent else {
-            return
-        }
-
-        switch update {
-        case .didUpdate:
-            guard let movieDetails = movieDetailManager.movieInfo else { return }
-
-            movie = movieDetails.movie
-//            detailView.configure(forDirector: movieDetails.director)
-            detailView.configureWithState(inFavorites: true, inWatchList: movieDetailManager.accountState?.watchlistStatus ?? false)
-            updateUI()
-
-//            castDataSource.items = movieDetails.cast
-            detailView.castCollectionView.reloadData()
-
-        case .didFailWithError(let error):
-            return
-//            ErrorHandler.shared.handle(error: .generic, authorizationError: signedIn)
-
-        case .didStartLoading:
-            break
-        }
-    }
+//    func detailManagerDidUpdate(notification: Notification) {
+//        guard let update = notification.userInfo?[DataManagerUpdateEvent.updateNotificationKey] as? DataManagerUpdateEvent else {
+//            return
+//        }
+//
+//        switch update {
+//        case .didUpdate:
+//            guard let movieDetails = movieDetailManager.movieInfo else { return }
+//
+//            movie = movieDetails.movie
+////            detailView.configure(forDirector: movieDetails.director)
+//            detailView.configureWithState(inFavorites: true, inWatchList: movieDetailManager.accountState?.watchlistStatus ?? false)
+//            updateUI()
+//
+////            castDataSource.items = movieDetails.cast
+//            detailView.castCollectionView.reloadData()
+//
+//        case .didFailWithError(let error):
+//            return
+////            ErrorHandler.shared.handle(error: .generic, authorizationError: signedIn)
+//
+//        case .didStartLoading:
+//            break
+//        }
+//    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

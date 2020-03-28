@@ -57,7 +57,7 @@ public class Movie: NSManagedObject, Managed {
         newMovie.title = movie.title
         newMovie.overview = movie.overview
         newMovie.releaseDate = movie.releaseDate
-        newMovie.genres =  movie.genres.map{ Int64($0) }
+        newMovie.genres =  movie.genres.map { Int64($0) }
         newMovie.rating = movie.rating
         newMovie.posterPath = movie.posterPath
         newMovie.backdropPath = movie.backDropPath
@@ -75,9 +75,9 @@ public class Movie: NSManagedObject, Managed {
 
     // MARK: Fetch requests
 
-    static func movie(with id: Int64) -> NSFetchRequest<Movie> {
+    static func movie(with identifier: Int64) -> NSFetchRequest<Movie> {
         let fetchRequest = Movie.defaultFetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%K == %ld", #keyPath(Movie.identifier), id)
+        fetchRequest.predicate = NSPredicate(format: "%K == %ld", #keyPath(Movie.identifier), identifier)
         fetchRequest.fetchLimit = 1
         return fetchRequest
     }

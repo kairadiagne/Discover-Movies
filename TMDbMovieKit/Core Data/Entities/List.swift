@@ -62,7 +62,6 @@ public class List: NSManagedObject, Managed {
     }
 }
 
-
 // MARK: Generated accessors for movies
 extension List {
 

@@ -67,7 +67,7 @@ final class MovieListViewController: BaseViewController {
      }
 
     private func setupDataSource() {
-        dataSource = CollectionViewFetchedResultsDataSource(collectionView: collectionView, fetchedResultsController: dataProvider.fetchedResultsController, cellProvider: { [weak self] indexPath -> UICollectionViewCell? in
+        dataSource = CollectionViewFetchedResultsDataSource(collectionView: collectionView, fetchedResultsController: dataProvider.fetchedResultsController(), cellProvider: { [weak self] indexPath -> UICollectionViewCell? in
             guard let self = self else { return nil }
             let object = self.dataSource.objectAtIndexPath(indexPath).movie
             let cell = self.collectionView.dequeueReusableCell(forIndexPath: indexPath) as MovieBackdropCell
@@ -80,7 +80,7 @@ final class MovieListViewController: BaseViewController {
     // MARK: - Actions
     
     @objc private func refresh(control: UIRefreshControl) {
-        dataProvider.reloadIfNeeded(forceOnline: true) { [weak self] result in
+        dataProvider.reloadIfNeeded(forceOnline: true) { [weak self] _ in
             guard let self = self else { return }
 
             DispatchQueue.main.async {
@@ -95,6 +95,11 @@ final class MovieListViewController: BaseViewController {
 extension MovieListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard dataSource.itemCount - 10 == indexPath.row else { return }
+        dataProvider.loadMore()
     }
 }
 

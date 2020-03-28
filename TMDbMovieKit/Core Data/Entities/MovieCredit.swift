@@ -11,6 +11,8 @@ import CoreData
 
 public class MovieCredit: NSManagedObject {
 
+    // MARK: Properties
+
     @NSManaged public var creditIdentifier: String
     @NSManaged public var identifier: Int64
     @NSManaged public var posterPath: String

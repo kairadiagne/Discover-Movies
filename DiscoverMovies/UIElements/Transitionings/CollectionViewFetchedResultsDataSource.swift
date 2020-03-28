@@ -52,6 +52,10 @@ class CollectionViewFetchedResultsDataSource<ModelType: NSManagedObject>: NSObje
 
     // MARK: Access
 
+    var itemCount: Int {
+        return fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+
     /// Returns the object of type `ModelType` at the given IndexPath
     ///
     /// - Paramater indexPath: The indexPath that specifies the location of the requested object.

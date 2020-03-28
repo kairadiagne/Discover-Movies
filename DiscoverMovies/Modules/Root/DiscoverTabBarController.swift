@@ -21,7 +21,7 @@ final class DiscoverTabBarController: UITabBarController {
 
         super.init(nibName: nil, bundle: nil)
 
-        let topListViewController = TopListViewControllerFactory.create(with: dependencyContainer)
+        let topListViewController = TopListViewController()
         topListViewController.tabBarItem = UITabBarItem(title: "topListMenuItemText".localized, image: UIImage(named: "Discover"), selectedImage: nil)
         let topListNavigationController = freshNavigationController(rootViewController: topListViewController)
 

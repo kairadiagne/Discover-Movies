@@ -81,8 +81,8 @@ struct ListUpdater: ListUpdating {
         }
     }
 
-    private func existingMovie(withID ID: Int64, context: NSManagedObjectContext) -> Movie? {
-        let fetchRequest = Movie.movie(with: ID)
+    private func existingMovie(withID identifier: Int64, context: NSManagedObjectContext) -> Movie? {
+        let fetchRequest = Movie.movie(with: identifier)
         return try? context.fetch(fetchRequest).first
     }
 }

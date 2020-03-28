@@ -11,6 +11,8 @@ import CoreData
 
 public class Video: NSManagedObject {
 
+    // MARK: Properties
+
     @NSManaged public var name: String
     @NSManaged public var size: String
     @NSManaged public var source: String

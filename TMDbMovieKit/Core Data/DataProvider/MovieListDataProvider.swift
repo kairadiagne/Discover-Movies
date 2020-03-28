@@ -9,7 +9,7 @@
 import CoreData
 import Alamofire
 
-/// `MovieListDataProvider` is a class that fetches a paginated movie list andsaves it to the Core Data store.
+/// `MovieListDataProvider` is a class that fetches a paginated movie list and saves it to the Core Data store.
 public class MovieListDataProvider {
 
     public typealias Completion = (Swift.Result<Void, Error>) -> Void
@@ -76,6 +76,13 @@ public class MovieListDataProvider {
         loadOnline(page: page, completion: completion)
     }
 
+    /// Returns a `NSFetchedResultsController` used to update the UI about changes in the list.
+    public func fetchedResultsController() -> NSFetchedResultsController<MovieListData> {
+        let fetchRequest = MovieListData.moviesSortedIn(listOf: listType)
+        let context = persistentContainer.viewContext
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }
+
     // MARK: - Networking
 
     func loadOnline(page: Int64 = 1, completion: Completion? = nil) {
@@ -104,11 +111,4 @@ public class MovieListDataProvider {
             completion?(.failure(error))
         }
     }
-
-    /// A `NSFetchedResultsController` used to update the UI about changes in the list.
-     public lazy var fetchedResultsController: NSFetchedResultsController<MovieListData> = {
-         let fetchRequest = MovieListData.moviesSortedIn(listOf: listType)
-         let context = persistentContainer.viewContext
-         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-     }()
 }

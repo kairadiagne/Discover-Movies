@@ -16,14 +16,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         guard
             let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
             let dictionary = NSDictionary(contentsOfFile: path) as? [String: AnyObject],
-            let apiKey = dictionary["APIKey"] as? String,
             let readOnlyAPIKey = dictionary["APIKeyV4"] as? String
             else {
                 fatalError("Failed to read tmdb api key from the plist file")
         }
 
         // Needs to be called before anything else
-        DiscoverMoviesKit.configure(apiKey: apiKey, readOnlyApiKey: readOnlyAPIKey)
+        DiscoverMoviesKit.configure(apiReadOnlyAccessToken: readOnlyAPIKey)
 
         // Creates the default container inside of the moviekit framwork.
         MovieKitPersistentContainer.createDefaultContainer { }

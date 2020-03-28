@@ -14,5 +14,4 @@ protocol KeyValueStorage {
     func set(_ value: Any?, forKey defaultName: String)
 }
 
-extension UserDefaults: KeyValueStorage {
-}
+extension UserDefaults: KeyValueStorage { }

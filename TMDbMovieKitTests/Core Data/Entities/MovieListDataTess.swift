@@ -14,8 +14,8 @@ final class MovieListDataTess: BaseTestCase {
     /// It should cascade a delete to its movie object when that movie does not belong to any other lists.
     func testDeletesMovieIfNotInAnyOtherList() throws {
         let popularList = List.list(ofType: .popular, in: viewContext)
-        let rawMovie = try MockedData.movie.mapToModel(of: TMDBMovie.self)
-        let movieEntity = Movie.insert(into: viewContext, movie: rawMovie)
+        let networkMovie = try MockedData.movie.mapToModel(of: TMDBMovie.self)
+        let movieEntity = Movie.insert(into: viewContext, movie: networkMovie)
         let movieListData = MovieListData.insert(into: viewContext, list: popularList, order: 1, movie: movieEntity)
 
         try viewContext.save()
@@ -29,16 +29,33 @@ final class MovieListDataTess: BaseTestCase {
         let popularList = List.list(ofType: .popular, in: viewContext)
         let upcomingList = List.list(ofType: .nowPlaying, in: viewContext)
 
-        let rawMovie = try MockedData.movie.mapToModel(of: TMDBMovie.self)
-        let movieEntity = Movie.insert(into: viewContext, movie: rawMovie)
+        let networkMovie = try MockedData.movie.mapToModel(of: TMDBMovie.self)
+        let movieEntity = Movie.insert(into: viewContext, movie: networkMovie)
 
-        let movieListData = MovieListData.insert(into: viewContext, list: popularList, order: 1, movie: movieEntity)
+        let movieListData = MovieListData.insert(into: viewContext, list: popularList, order: 0, movie: movieEntity)
         _ = MovieListData.insert(into: viewContext, list: upcomingList, order: 1, movie: movieEntity)
 
         try viewContext.save()
         viewContext.delete(movieListData)
 
         assert(deletesMovie: false, movie: movieEntity)
+    }
+    
+    /// It should sort fetched movie list data in ascending order.
+    func testSortedFetchRequest() throws {
+        let popularList = List.list(ofType: .popular, in: viewContext)
+        let movieList = try MockedData.movieListResponse.mapToModel(of: TMDBResult<TMDBMovie>.self)
+        let movieEntity = Movie.insert(into: viewContext, movie: movieList.items[0])
+        let otherMovieEntity = Movie.insert(into: viewContext, movie: movieList.items[1])
+        
+        let movieListData = MovieListData.insert(into: viewContext, list: popularList, order: 0, movie: movieEntity)
+        let otherMovieListData = MovieListData.insert(into: viewContext, list: popularList, order: 1, movie: otherMovieEntity)
+        
+        let fetchRequest = MovieListData.moviesSortedIn(listOf: .popular)
+        let movies = try viewContext.fetch(fetchRequest)
+        
+        XCTAssertEqual(movies.first?.order, movieListData.order)
+        XCTAssertEqual(movies[1].order, otherMovieListData.order)
     }
 
     // MARK: Helpers

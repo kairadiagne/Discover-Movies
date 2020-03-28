@@ -43,7 +43,7 @@ public class MovieListData: NSManagedObject, Managed {
     static func moviesSortedIn(listOf listType: List.ListType) -> NSFetchRequest<MovieListData> {
         let fetchRequest = MovieListData.defaultFetchRequest()
         fetchRequest.predicate = NSPredicate(format: "%K == %ld", #keyPath(MovieListData.list.type), listType.rawValue)
-        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \MovieListData.order, ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \MovieListData.order, ascending: true)]
         return fetchRequest
     }
 }

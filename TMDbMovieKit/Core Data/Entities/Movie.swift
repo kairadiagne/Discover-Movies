@@ -68,9 +68,30 @@ public class Movie: NSManagedObject, Managed {
 
     override public func prepareForDeletion() {
         super.prepareForDeletion()
-
-        // Delete all crew members which don't belong to the crew of other movies
-        // Delete all cast members which don;t belong to the crew of other movies. 
+        
+        crew.forEach { crewMember in
+            deleteCrewMemberIfNeeded(crewMember as! CrewMember)
+        }
+        
+        cast.forEach { castMember in
+            deletCastMemberIfNeeded(castMember as! CastMember)
+        }
+    }
+    
+    private func deleteCrewMemberIfNeeded(_ crewMember: CrewMember) {
+        guard crewMember.movies.count == 1 else {
+            return
+        }
+        
+        managedObjectContext?.delete(crewMember)
+    }
+    
+    private func deletCastMemberIfNeeded(_ castMember: CastMember) {
+        guard castMember.movies.count == 1 else {
+            return
+        }
+        
+        managedObjectContext?.delete(castMember)
     }
 
     // MARK: Fetch requests

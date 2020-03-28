@@ -21,19 +21,19 @@ public final class MovieDetailDataProvider {
     /// The persistent container that encapsulates the Core Data Stack.
     private let persistentContainer: MovieKitPersistentContainer
 
-    /// The session manager used to make requests to the movie database API.
-    private let sessionManager: SessionManager
+    /// The session used to make requests to the movie database API.
+    private let session: Session
 
     // MARK: Initialize
 
     public convenience init (movieID: Int) {
-        self.init(movieID: Int64(movieID), persistentContainer: DiscoverMoviesKit.shared.persistentContainer, sessionManager: DiscoverMoviesKit.shared.sessionManager)
+        self.init(movieID: Int64(movieID), persistentContainer: DiscoverMoviesKit.shared.persistentContainer, session: DiscoverMoviesKit.shared.session)
     }
 
-    init(movieID: Int64, persistentContainer: MovieKitPersistentContainer, sessionManager: SessionManager) {
+    init(movieID: Int64, persistentContainer: MovieKitPersistentContainer, session: Session) {
         self.movieID = movieID
         self.persistentContainer = persistentContainer
-        self.sessionManager = sessionManager
+        self.session = session
     }
 
     // MARK: Public API

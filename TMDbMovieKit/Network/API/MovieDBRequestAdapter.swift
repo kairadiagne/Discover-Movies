@@ -8,36 +8,34 @@
 
 import Alamofire
 
-/// Adapts requests that are intended for the Movie Database v3 and v4 API.
-final class MovieDBRequestAdapter: RequestAdapter {
+/// Adapts requests to the Movie Database API with an access token.
+final class MovieDBRequestAdapter: RequestInterceptor {
+    
+    // MARK: Properties
+    
+    /// The access token which provides read only access to the Movie Database v3 and v4 API.
+    let apiReadOnlyAccessToken: String
+    
+    private let accessTokenStore: AccessTokenManaging
 
-    // MARK: - Properties
+    // MARK: Initialize
 
-    var apiKey: String {
-        return DiscoverMoviesKit.shared.apiKey
+    init(accessTokenStore: AccessTokenManaging, readOnlyAccessToken: String) {
+        self.accessTokenStore = accessTokenStore
+        self.apiReadOnlyAccessToken = readOnlyAccessToken
     }
 
-    var accessToken: String {
-        // Later this should be either the readable api key or if access token is present that one.
-        return DiscoverMoviesKit.shared.apiKey
-    }
-
-    // MARK: - RequestAdapter
-
-    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        guard let url = urlRequest.url else {
-            return urlRequest
+    // MARK: RequestAdapter
+    
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        guard let url = urlRequest.url, url.absoluteString.hasPrefix("https://api.themoviedb.org/") else {
+            completion(.success(urlRequest))
+            return
         }
 
+        let accessToken = accessTokenStore.cachedAccessToken ?? apiReadOnlyAccessToken
         var urlRequest = urlRequest
-
-        if url.absoluteURL.absoluteString.hasPrefix("https://api.themoviedb.org/4") {
-            urlRequest.setValue("Bearer \(DiscoverMoviesKit.shared.readOnlyApiKey)", forHTTPHeaderField: "Authorization")
-        } else if url.absoluteURL.absoluteString.hasPrefix("https://api.themoviedb.org/3") {
-            let apiKeyQueryItem = URLQueryItem(name: "api_key", value: DiscoverMoviesKit.shared.apiKey)
-            urlRequest.url = url.appending(queryItem: apiKeyQueryItem) ?? urlRequest.url
-        }
-
-        return urlRequest
+        urlRequest.headers.add(.authorization(bearerToken: accessToken))
+        completion(.success(urlRequest))
     }
 }

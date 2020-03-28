@@ -20,13 +20,16 @@ public class MovieListDataProvider {
     private let cacheManager = CacheManager()
 
     /// The session manager used for performing network requests.
-    private let sessionManager: SessionManager
+    private let session: Session
 
     /// The persistent container that encapsulates the Core Data Stack.
     private let persistentContainer: MovieKitPersistentContainer
 
     /// Responsible for updating the list managed object with the result of the api call.
     private let listUpdater: ListUpdating
+    
+    ///
+    private let responseQueue = DispatchQueue(label: "")
 
     /// The type of list that is managed by this data provider.
     private var listType: List.ListType
@@ -38,15 +41,16 @@ public class MovieListDataProvider {
 
     public convenience init(listType: List.ListType) {
         let request = ApiRequest.topList(list: listType.name)
+        let session = DiscoverMoviesKit.shared.session
         let listUpdater = ListUpdater(backgroundContext: DiscoverMoviesKit.shared.persistentContainer.backgroundcontext)
-        self.init(listType: listType, request: request, persistentContainer: DiscoverMoviesKit.shared.persistentContainer, sessionManager: DiscoverMoviesKit.shared.sessionManager, listUpdater: listUpdater)
+        self.init(listType: listType, request: request, persistentContainer: DiscoverMoviesKit.shared.persistentContainer, session: session, listUpdater: listUpdater)
     }
 
-    init(listType: List.ListType, request: ApiRequest, persistentContainer: MovieKitPersistentContainer, sessionManager: SessionManager, listUpdater: ListUpdating) {
+    init(listType: List.ListType, request: ApiRequest, persistentContainer: MovieKitPersistentContainer, session: Session, listUpdater: ListUpdating) {
         self.listType = listType
         self.request = request
         self.persistentContainer = persistentContainer
-        self.sessionManager = sessionManager
+        self.session = session
         self.listUpdater = listUpdater
     }
 
@@ -62,6 +66,7 @@ public class MovieListDataProvider {
     }
 
     public func loadMore(completion: Completion? = nil) {
+        // TODO: - We need an object that manages the pages that need to be fetched.
         var nextPage: Int64?
         persistentContainer.backgroundcontext.performAndWait {
             let list = List.list(ofType: self.listType, in: self.persistentContainer.backgroundcontext)
@@ -76,7 +81,7 @@ public class MovieListDataProvider {
         loadOnline(page: page, completion: completion)
     }
 
-    /// Returns a `NSFetchedResultsController` used to update the UI about changes in the list.
+    /// Returns an instance of `NSFetchedResultsController` that is configured to listen to changes in the list.
     public func fetchedResultsController() -> NSFetchedResultsController<MovieListData> {
         let fetchRequest = MovieListData.moviesSortedIn(listOf: listType)
         let context = persistentContainer.viewContext
@@ -88,17 +93,19 @@ public class MovieListDataProvider {
     func loadOnline(page: Int64 = 1, completion: Completion? = nil) {
         let params = ["page": page as AnyObject]
         request.add(paramaters: params)
-
+        
         let responseQueue = DispatchQueue.global(qos: .background)
-        sessionManager.request(request).validate().responseObject(queue: responseQueue) { [weak self] (response: DataResponse<TMDBResult<TMDBMovie>>) in
-            guard let self = self else { return }
-
-            switch response.result {
-            case .success(let data):
-                self.persist(data: data)
-            case .failure(let error):
-                completion?(.failure(error))
-            }
+        session.request(request)
+            .validate()
+            .responseDecodable(of: TMDBResult<TMDBMovie>.self, queue: responseQueue) { [weak self] response in
+                guard let self = self else { return }
+                
+                switch response.result {
+                case .success(let data):
+                    self.persist(data: data)
+                case .failure(let error):
+                    completion?(.failure(error))
+                }
         }
     }
 

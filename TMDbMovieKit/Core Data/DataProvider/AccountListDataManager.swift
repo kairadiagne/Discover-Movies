@@ -26,7 +26,7 @@ public final class AccountListDataManager {
     init(list: String, sessionInfoProvider: AccessTokenManaging) {
         self.sessionInfoStorage = sessionInfoProvider
         let userID = 1
-        let sessionID = sessionInfoStorage.accessToken ?? ""
+        let sessionID = sessionInfoStorage.cachedAccessToken ?? ""
 //        super.init(request: ApiRequest.accountList(list, userID: userID, sessionID: sessionID), refreshTimeOut: 0, cacheIdentifier: list.name)
     }
 }

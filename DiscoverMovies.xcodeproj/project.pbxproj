@@ -11,6 +11,7 @@
 		11027BCA1DAC2CB4004223F6 /* NoDataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11027BC81DAC2CB4004223F6 /* NoDataCollectionViewCell.xib */; };
 		110F02D41E11795C005ADC4A /* DiscoverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F02D31E11795C005ADC4A /* DiscoverUITests.swift */; };
 		110F02DC1E117A79005ADC4A /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F02DB1E117A79005ADC4A /* SnapshotHelper.swift */; };
+		1115F3B1242FAEB100AE3940 /* AccessTokenStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1115F3B0242FAEB100AE3940 /* AccessTokenStoreMock.swift */; };
 		111942671CCB8CBE001CF39B /* TMDbMovieKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 111942661CCB8CBE001CF39B /* TMDbMovieKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1119428B1CCB8DBF001CF39B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1119428A1CCB8DBF001CF39B /* AppDelegate.swift */; };
 		1119429E1CCB8DD4001CF39B /* Date+Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111942911CCB8DD4001CF39B /* Date+Year.swift */; };
@@ -80,7 +81,6 @@
 		11870352239B03E200879D41 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11870351239B03E200879D41 /* Managed.swift */; };
 		118C930A236236180061DF43 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118C9309236236180061DF43 /* KeychainWrapper.swift */; };
 		118E238C1DE11E1B00324DEF /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118E238B1DE11E1B00324DEF /* MenuItem.swift */; };
-		11924C811D68B38A00B1022E /* AlamofireDataRequest+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C801D68B38A00B1022E /* AlamofireDataRequest+Codable.swift */; };
 		11924C8A1D69D7C400B1022E /* String+ToDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C891D69D7C400B1022E /* String+ToDate.swift */; };
 		11924C8C1D69E33700B1022E /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11924C8B1D69E33700B1022E /* ProfileImageView.swift */; };
 		11924C901D72F1D600B1022E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11924C8F1D72F1D600B1022E /* Keys.plist */; };
@@ -253,6 +253,7 @@
 		110F02D31E11795C005ADC4A /* DiscoverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverUITests.swift; sourceTree = "<group>"; };
 		110F02D51E11795C005ADC4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		110F02DB1E117A79005ADC4A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		1115F3B0242FAEB100AE3940 /* AccessTokenStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStoreMock.swift; sourceTree = "<group>"; };
 		1119423C1CCB8CA0001CF39B /* DiscoverMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1119424B1CCB8CA0001CF39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		111942501CCB8CA0001CF39B /* DiscoverMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -331,7 +332,6 @@
 		11870351239B03E200879D41 /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
 		118C9309236236180061DF43 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		118E238B1DE11E1B00324DEF /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
-		11924C801D68B38A00B1022E /* AlamofireDataRequest+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireDataRequest+Codable.swift"; sourceTree = "<group>"; };
 		11924C891D69D7C400B1022E /* String+ToDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ToDate.swift"; sourceTree = "<group>"; };
 		11924C8B1D69E33700B1022E /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		11924C8F1D72F1D600B1022E /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -642,7 +642,6 @@
 		1119433A1CCB90C8001CF39B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				11924C801D68B38A00B1022E /* AlamofireDataRequest+Codable.swift */,
 				11C67C3F2304935A00F3FC1B /* Result+Extensions.swift */,
 				11CDBA722353300300095B8E /* URL+AppendQueryItem.swift */,
 				11C094B923A657560086531E /* ListType+name.swift */,
@@ -958,6 +957,7 @@
 			isa = PBXGroup;
 			children = (
 				11C9A8272302082300BE3B7F /* DateGeneratorMock.swift */,
+				1115F3B0242FAEB100AE3940 /* AccessTokenStoreMock.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -1568,7 +1568,6 @@
 				111943081CCB8EE4001CF39B /* TMDBReview.swift in Sources */,
 				11CDBA732353300300095B8E /* URL+AppendQueryItem.swift in Sources */,
 				11C094B323A642740086531E /* CacheManager.swift in Sources */,
-				11924C811D68B38A00B1022E /* AlamofireDataRequest+Codable.swift in Sources */,
 				11AAA6782351278F007E782F /* MovieListDataProvider.swift in Sources */,
 				EA6487B81CE4BC9D00452DD0 /* TMDBMovieInfo.swift in Sources */,
 				11CDBA6C23531A7700095B8E /* APIRequest+TMDB.swift in Sources */,
@@ -1625,6 +1624,7 @@
 				11CDBA682351E6AF00095B8E /* BaseTestCase.swift in Sources */,
 				11C9A8282302082300BE3B7F /* DateGeneratorMock.swift in Sources */,
 				119396AF23B0F00F00F2BC4C /* MovieListDataTess.swift in Sources */,
+				1115F3B1242FAEB100AE3940 /* AccessTokenStoreMock.swift in Sources */,
 				119396A923AD75DF00F2BC4C /* ListUpdaterTests.swift in Sources */,
 				11CDBA782353311C00095B8E /* URL+AppendQuetryItemTests.swift in Sources */,
 				11CDBA662351E40700095B8E /* Mock+APIRequest.swift in Sources */,
@@ -2231,7 +2231,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.9.1;
+				minimumVersion = 5.0.0;
 			};
 		};
 		118703282399940600879D41 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {

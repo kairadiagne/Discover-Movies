@@ -37,7 +37,7 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
     // MARK: - Properties
 
     /// The session manager responsible for handling the API requests.
-    private let sessionManager: SessionManager
+    private let session: Session
 
     /// The store used to persist the The movie database access token.
     private let accessTokenStore: AccessTokenManaging
@@ -49,13 +49,13 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
 
     public convenience override init() {
         let accessTokenStore = AccessTokenStore()
-        let sessionManager = DiscoverMoviesKit.shared.sessionManager
-        self.init(accessTokenStore: accessTokenStore, sessionManager: sessionManager)
+        let session = DiscoverMoviesKit.shared.session
+        self.init(accessTokenStore: accessTokenStore, session: session)
     }
 
-    init(accessTokenStore: AccessTokenManaging, sessionManager: SessionManager, authenticationSessionFactory: @escaping AuthenticationSessionFactory = ASWebAuthenticationSession.init) {
+    init(accessTokenStore: AccessTokenManaging, session: Session, authenticationSessionFactory: @escaping AuthenticationSessionFactory = ASWebAuthenticationSession.init) {
         self.accessTokenStore = accessTokenStore
-        self.sessionManager = sessionManager
+        self.session = session
         self.authenticationSessionFactory = authenticationSessionFactory
     }
 
@@ -64,9 +64,9 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
     public func authenticate(callbackURLScheme: String, presentationContextprovider: ASWebAuthenticationPresentationContextProviding, completion: @escaping AuthenticationCallBack) {
         let request = ApiRequest.requestToken(redirectURL: callbackURLScheme)
 
-        sessionManager.request(request).validate().responseObject { [weak self] (response: DataResponse<RequestToken>) in
+        session.request(request).validate().responseDecodable(of: RequestToken.self) { [weak self] response in
             guard let self = self else { return }
-
+            
             switch response.result {
             case .success(let token):
                 self.startAuthenticationSession(callBackURLScheme: callbackURLScheme, presentationContextProvier: presentationContextprovider, requestToken: token, completion: completion)
@@ -101,11 +101,13 @@ public final class UserAuthenticator: NSObject, UserAuthenticating {
     private func requestAccessToken(requestToken: RequestToken, completion: @escaping AuthenticationCallBack) {
         let accessTokenRequest = ApiRequest.createAccessToken(requestToken: requestToken.value)
 
-        sessionManager.request(accessTokenRequest).validate().responseObject { (response: DataResponse<AccessToken>) in
+        session.request(accessTokenRequest).validate().responseDecodable(of: AccessToken.self) { [weak self] response in
+            guard let self = self else { return }
+            
             switch response.result {
-            case .success(let token):
+            case .success(let accessToken):
                 do {
-                    try self.accessTokenStore.storeAccessToken(token.value)
+                    try self.accessTokenStore.storeAccessToken(accessToken.value)
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))

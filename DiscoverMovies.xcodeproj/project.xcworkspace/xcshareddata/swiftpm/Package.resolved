@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "747c8db8d57b68d5e35275f10c92d55f982adbd4",
-          "version": "4.9.1"
+          "revision": "59037bfd28aa963a7916f1eb22a74107a3522f16",
+          "version": "5.0.5"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/WeTransfer/Mocker",
         "state": {
           "branch": null,
-          "revision": "fc74faca0954b3f09be8de335050d1258a8b4c0a",
-          "version": "2.0.0"
+          "revision": "c7cc3c9a4c086dc952bef6a1a16b60e1e2820f1b",
+          "version": "2.1.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "1f801b44effa48efe72deab39cdb1140935901d2",
-          "version": "5.3.3"
+          "revision": "2dcf1b65994d92ef8806f52dc41aa6fdd677489c",
+          "version": "5.6.1"
         }
       }
     ]

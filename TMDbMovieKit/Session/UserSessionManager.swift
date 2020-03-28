@@ -20,10 +20,10 @@ public final class UserSessionManager {
     }
     
     public var currentState: SessionState {
-        return sessionInfoStorage.accessToken != nil ? .loggedIn : .loggedOut
+        return accessTokenStore.cachedAccessToken != nil ? .loggedIn : .loggedOut
     }
 
-    private let sessionInfoStorage: AccessTokenManaging
+    private let accessTokenStore: AccessTokenManaging
 
     // MARK: - Initialize
 
@@ -32,6 +32,6 @@ public final class UserSessionManager {
     }
     
     init(storage: AccessTokenStore) {
-        self.sessionInfoStorage = storage
+        self.accessTokenStore = storage
     }
 }

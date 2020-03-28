@@ -6,22 +6,21 @@
 //  Copyright © 2019 Kaira Diagne. All rights reserved.
 //
 
-import XCTest
 import Alamofire
 import CoreData
 import Mocker
+import XCTest
 @testable import TMDbMovieKit
 
 class BaseTestCase: XCTestCase {
 
-    private(set) var sessionManager: SessionManager!
+    private(set) var session: Session!
     private(set) var persistentContainer: MovieKitPersistentContainer!
 
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
 
-    private(set) var apiKey: String!
     private(set) var readOnlyAPIKey: String!
 
     override func setUp() {
@@ -29,12 +28,10 @@ class BaseTestCase: XCTestCase {
 
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockingURLProtocol.self]
-        sessionManager = SessionManager(configuration: configuration)
+        session = Session(configuration: configuration)
 
-        apiKey = UUID().uuidString
         readOnlyAPIKey = UUID().uuidString
-
-        DiscoverMoviesKit.configure(apiKey: apiKey, readOnlyApiKey: readOnlyAPIKey)
+        DiscoverMoviesKit.configure(apiReadOnlyAccessToken: readOnlyAPIKey)
 
         MovieKitPersistentContainer.createInMemoryContainer { result in
             XCTAssertNil(result.error)
@@ -43,7 +40,9 @@ class BaseTestCase: XCTestCase {
     }
 
     override func tearDown() {
-        sessionManager = nil
+        session = nil
         persistentContainer = nil
+        
+        super.tearDown()
     }
 }

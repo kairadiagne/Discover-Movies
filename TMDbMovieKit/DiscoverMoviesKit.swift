@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 public final class DiscoverMoviesKit {
-
+    
     static var shared: DiscoverMoviesKit {
         guard let shared = _shared else {
             fatalError("DiscoverMoviesKit not setup, call `Configuration.Configure(apiKey:)` before using the framwork.")
@@ -21,26 +21,24 @@ public final class DiscoverMoviesKit {
 
     private static var _shared: DiscoverMoviesKit!
 
-    /// The API key used to authenticate with the The Movie Database API v3.
-    let apiKey: String
+    // MARK: Dependencies
 
-    /// The API key for read only access with The Movie Database API v4.
-    let readOnlyApiKey: String
+    /// The session used through the app to perform network request.
+    let session: Session
+    
+    /// The persistent container that serves as the Core Data stack of the app.
+    private(set) var persistentContainer: MovieKitPersistentContainer!
+        
+    /// The access token store instance used throughout the app to provide acces to the token.
+    let accessTokenStore = AccessTokenStore()
+      
+    // MARK: Initialize
 
-    /// The session manager responsible for creating and managing the requests in the app.
-    let sessionManager: SessionManager = {
+    init(apiReadOnlyAccessToken: String) {
         let config = URLSessionConfiguration.default
         config.urlCache = nil
-        let sessionManager = SessionManager(configuration: config)
-        sessionManager.adapter = MovieDBRequestAdapter()
-        return sessionManager
-    }()
-
-    private(set) var persistentContainer: MovieKitPersistentContainer!
-
-    init(apiKey: String, readOnlyApiKey: String) {
-        self.apiKey = apiKey
-        self.readOnlyApiKey = readOnlyApiKey
+        let requestAdapter = MovieDBRequestAdapter(accessTokenStore: self.accessTokenStore, readOnlyAccessToken: apiReadOnlyAccessToken)
+        session = Session(configuration: config, interceptor: requestAdapter)
     }
 
     func register(persistentContainer: MovieKitPersistentContainer) {
@@ -49,8 +47,9 @@ public final class DiscoverMoviesKit {
 
     /// Configures the shared instance of `Configuration` with a specified API key.
     ///
-    /// - Parameter apiKey: The API key uses to authenticate with the The Movie Database API.
-    public static func configure(apiKey: String, readOnlyApiKey: String) {
-        _shared = DiscoverMoviesKit(apiKey: apiKey, readOnlyApiKey: readOnlyApiKey)
+    /// - Parameter apiReadOnlyAccessToken: The read only access token used for read only access to the Movie Databse v3 and v4 API.
+    public static func configure(apiReadOnlyAccessToken: String) {
+        _shared = DiscoverMoviesKit(apiReadOnlyAccessToken: apiReadOnlyAccessToken)
     }
 }
+

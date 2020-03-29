@@ -83,6 +83,7 @@
 		117B5145243078F400C6751B /* VideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B5144243078F400C6751B /* VideoTests.swift */; };
 		117B514724307AC400C6751B /* AccessTokenStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B514624307AC400C6751B /* AccessTokenStoreTests.swift */; };
 		117B514924307BF700C6751B /* KeyValueStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B514824307BF700C6751B /* KeyValueStorageMock.swift */; };
+		117B514B2430831C00C6751B /* Result+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B514A2430831C00C6751B /* Result+ExtensionsTests.swift */; };
 		11870327239993B400879D41 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 11870326239993B400879D41 /* Alamofire */; };
 		11870350239AFDBB00879D41 /* MovieListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1187034F239AFDBB00879D41 /* MovieListData.swift */; };
 		11870352239B03E200879D41 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11870351239B03E200879D41 /* Managed.swift */; };
@@ -342,6 +343,7 @@
 		117B5144243078F400C6751B /* VideoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTests.swift; sourceTree = "<group>"; };
 		117B514624307AC400C6751B /* AccessTokenStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStoreTests.swift; sourceTree = "<group>"; };
 		117B514824307BF700C6751B /* KeyValueStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStorageMock.swift; sourceTree = "<group>"; };
+		117B514A2430831C00C6751B /* Result+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		1187034F239AFDBB00879D41 /* MovieListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListData.swift; sourceTree = "<group>"; };
 		11870351239B03E200879D41 /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
 		118C9309236236180061DF43 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
@@ -1025,6 +1027,7 @@
 			isa = PBXGroup;
 			children = (
 				11CDBA772353311C00095B8E /* URL+AppendQuetryItemTests.swift */,
+				117B514A2430831C00C6751B /* Result+ExtensionsTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1650,6 +1653,7 @@
 				1115F3B7242FBBA100AE3940 /* CastMemberTests.swift in Sources */,
 				119396AF23B0F00F00F2BC4C /* MovieListDataTess.swift in Sources */,
 				1115F3B1242FAEB100AE3940 /* AccessTokenStoreMock.swift in Sources */,
+				117B514B2430831C00C6751B /* Result+ExtensionsTests.swift in Sources */,
 				119396A923AD75DF00F2BC4C /* ListUpdaterTests.swift in Sources */,
 				11CDBA782353311C00095B8E /* URL+AppendQuetryItemTests.swift in Sources */,
 				1115F3B5242FBB9800AE3940 /* CrewMemberTests.swift in Sources */,

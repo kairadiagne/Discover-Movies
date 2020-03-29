@@ -39,16 +39,17 @@ final class AccessTokenStore: AccessTokenManaging {
 
     // MARK: Initialize
 
-    init(keychain: KeychainWrapper = KeychainWrapper(), storage: KeyValueStorage = UserDefaults.standard) {
+    init(keychain: KeychainPassswordStoring = KeychainWrapper(), storage: KeyValueStorage = UserDefaults.standard) {
         self.keychain = keychain
         self.keyValueStorage = storage
-        self.cachedAccessToken = try? keychain.readPassword(server: Constants.server, account: Constants.account)
 
         // If this is the first lauch after a fresh install we clear the keychain to make sure there is no data from a previous install
-        let freshInstall = keyValueStorage.object(forKey: Constants.FreshInstallKey) as? Bool == false
+        let freshInstall = keyValueStorage.bool(forKey: Constants.FreshInstallKey) == false
         if freshInstall {
             keyValueStorage.set(true, forKey: Constants.FreshInstallKey)
             try? deleteAccessToken()
+        } else {
+            cachedAccessToken = try? keychain.readPassword(server: Constants.server, account: Constants.account)
         }
     }
     

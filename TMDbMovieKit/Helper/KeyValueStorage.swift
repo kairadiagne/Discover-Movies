@@ -9,7 +9,7 @@
 import Foundation
 
 protocol KeyValueStorage {
-    func object(forKey defaultName: String) -> Any?
+    func bool(forKey defaultName: String) -> Bool
     func string(forKey defaultName: String) -> String?
     func set(_ value: Any?, forKey defaultName: String)
 }

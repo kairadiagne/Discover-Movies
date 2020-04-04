@@ -6,7 +6,6 @@
 //
 //
 
-import Foundation
 import CoreData
 
 public class MovieCredit: NSManagedObject {

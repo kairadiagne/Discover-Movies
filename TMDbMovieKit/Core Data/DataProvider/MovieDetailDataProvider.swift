@@ -12,11 +12,9 @@ import CoreData
 public final class MovieDetailDataProvider {
     
     // MARK: - Properties
-
-    /// property througg which the movie can be observed
-
-    /// The identifier of the movie for which to get the details.
-    private let movieID: Int64
+    
+    /// The movie for which this provider manages the details.
+    public var movie: Movie?
 
     /// The persistent container that encapsulates the Core Data Stack.
     private let persistentContainer: MovieKitPersistentContainer
@@ -25,18 +23,59 @@ public final class MovieDetailDataProvider {
     private let session: Session
 
     // MARK: Initialize
-
-    public convenience init (movieID: Int) {
-        self.init(movieID: Int64(movieID), persistentContainer: DiscoverMoviesKit.shared.persistentContainer, session: DiscoverMoviesKit.shared.session)
+    
+    public convenience init(managedObjectID: NSManagedObjectID) {
+        self.init(managedObjectID: managedObjectID, persistentContainer: DiscoverMoviesKit.shared.persistentContainer, session: DiscoverMoviesKit.shared.session)
     }
-
-    init(movieID: Int64, persistentContainer: MovieKitPersistentContainer, session: Session) {
-        self.movieID = movieID
+    
+    init(managedObjectID: NSManagedObjectID, persistentContainer: MovieKitPersistentContainer, session: Session) {
         self.persistentContainer = persistentContainer
         self.session = session
+        self.movie = try? persistentContainer.viewContext.existingObject(with: managedObjectID) as? Movie
     }
 
     // MARK: Public API
+    
+    public func fetchAdditionalDetails(completion: @escaping () -> Void) {
+        guard let movie = movie else {
+            completion()
+            return
+        }
+        
+        let objectID = movie.objectID
+        
+        let context = persistentContainer.backgroundcontext
+        
+        let endpoint = ApiRequest.movieDetail(movieID: Int(movie.identifier))
+        session.request(endpoint).validate().responseDecodable(of: TMDBMovieInfo.self) { response in
+            switch response.result {
+            case .success(let movieInfo):
+                self.persistentContainer.backgroundcontext.perform {
+                    guard let movie = try? self.persistentContainer.backgroundcontext.existingObject(with: objectID) as? Movie else {
+                        DispatchQueue.main.async {
+                            completion()
+                        }
+                        return
+                    }
+                    // In case of moview credit support we also have to save the movie.
+                    _ = movieInfo.trailers.compactMap { Video.insert(into: context, video: $0, movie: movie) }
+                    _ = movieInfo.cast.compactMap { CastMember.insert(into: context, castMember: $0, movie: movie) }
+                    _ = movieInfo.crew.compactMap { CrewMember.insert(into: context, crewMember: $0, movie: movie) }
+                    
+                    try! self.persistentContainer.backgroundcontext.save()
+                }
+                
+                DispatchQueue.main.async {
+                    completion()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    print(error)
+                    completion()
+                }
+            }
+        }
+    }
 
     /// Changes the status of the movie in the specified list.
     /// - Parameter list: The list to add or remove the movie to.
@@ -47,15 +86,6 @@ public final class MovieDetailDataProvider {
     /// Loads the status fo the movie in the watchlist and favoriteslist.
     public func loadAccountState() {
     }
-
-    // MARK: Old
-
-    public var movieInfo: TMDBMovieInfo? {
-        return nil
-    }
-
-    /// The state of the movie in the favorites and watch list.
-    public private(set) var accountState: TMDBAccountState?
-
-    //        super.init(request: ApiRequest.movieDetail(movieID: movieID), refreshTimeOut: 0, cacheIdentifier: "\(movieID)")
+    
+    //  super.init(request: ApiRequest.movieDetail(movieID: movieID), refreshTimeOut: 0, cacheIdentifier: "\(movieID)")
 }

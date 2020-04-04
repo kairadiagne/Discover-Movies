@@ -6,7 +6,6 @@
 //
 //
 
-import Foundation
 import CoreData
 
 public class CrewMember: NSManagedObject {
@@ -18,8 +17,22 @@ public class CrewMember: NSManagedObject {
     @NSManaged public var name: String
     @NSManaged public var job: String
     @NSManaged public var department: String
-    @NSManaged public var profilePath: String
+    @NSManaged public var profilePath: String?
     @NSManaged public var movies: NSSet
+    
+    // MARK: Initialize
+    
+    static func insert(into context: NSManagedObjectContext, crewMember: TMDBCrewMember, movie: Movie) -> CrewMember {
+        let crewMemberEntity = CrewMember(context: context)
+        crewMemberEntity.identifier = Int64(crewMember.identifier)
+        crewMemberEntity.creditIdentifier = crewMember.creditID
+        crewMemberEntity.name = crewMember.name
+        crewMemberEntity.job = crewMember.job
+        crewMemberEntity.department = crewMember.department
+        crewMemberEntity.profilePath = crewMember.profilePath
+        crewMemberEntity.addToMovies(movie)
+        return crewMemberEntity
+    }
 }
 
 // MARK: Generated accessors for movies

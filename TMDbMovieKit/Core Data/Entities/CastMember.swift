@@ -6,7 +6,6 @@
 //
 //
 
-import Foundation
 import CoreData
 
 public final class CastMember: NSManagedObject {
@@ -20,14 +19,17 @@ public final class CastMember: NSManagedObject {
     @NSManaged public var order: Int64
     @NSManaged public var profilePath: String?
     @NSManaged public var movies: NSSet
+    
+    // MARK: Initialize
 
-    static func insert(into context: NSManagedObjectContext, castMember: TMDBCastMember) -> CastMember {
+    static func insert(into context: NSManagedObjectContext, castMember: TMDBCastMember, movie: Movie) -> CastMember {
         let newCastMember = CastMember(context: context)
         newCastMember.identifier = Int64(castMember.identifier)
         newCastMember.castIdentifier = Int64(castMember.castID)
         newCastMember.character = castMember.character
         newCastMember.order = Int64(castMember.order)
         newCastMember.profilePath = castMember.profilePath
+        newCastMember.addToMovies(movie)
         return newCastMember
     }
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2019 Kaira Diagne. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 /// Contains additional information about a movie which belongs to a list.

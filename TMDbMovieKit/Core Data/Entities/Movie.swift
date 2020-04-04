@@ -6,7 +6,6 @@
 //
 //
 
-import Foundation
 import CoreData
 
 public class Movie: NSManagedObject, Managed {
@@ -48,20 +47,24 @@ public class Movie: NSManagedObject, Managed {
     @NSManaged public private(set) var crew: NSOrderedSet
     @NSManaged public private(set) var lists: NSSet
     @NSManaged public private(set) var trailers: NSSet
+    
+    public var director: CrewMember? {
+        return crew.first(where: { ($0 as! CrewMember).job == "Director" }) as? CrewMember
+    }
 
     // MARK: Initialize
 
     static func insert(into context: NSManagedObjectContext, movie: TMDBMovie) -> Movie {
-        let newMovie = Movie(context: context)
-        newMovie.identifier = Int64(movie.identifier)
-        newMovie.title = movie.title
-        newMovie.overview = movie.overview
-        newMovie.releaseDate = movie.releaseDate
-        newMovie.genres =  movie.genres.map { Int64($0) }
-        newMovie.rating = movie.rating
-        newMovie.posterPath = movie.posterPath
-        newMovie.backdropPath = movie.backDropPath
-        return newMovie
+        let movieEntity = Movie(context: context)
+        movieEntity.identifier = Int64(movie.identifier)
+        movieEntity.title = movie.title
+        movieEntity.overview = movie.overview
+        movieEntity.releaseDate = movie.releaseDate
+        movieEntity.genres =  movie.genres.map { Int64($0) }
+        movieEntity.rating = movie.rating
+        movieEntity.posterPath = movie.posterPath
+        movieEntity.backdropPath = movie.backDropPath
+        return movieEntity
     }
 
     // MARK: Lifecycle

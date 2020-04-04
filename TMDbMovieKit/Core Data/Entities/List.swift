@@ -6,7 +6,6 @@
 //
 //
 
-import Foundation
 import CoreData
 
 /// Contains all the information about a particular list of movies.

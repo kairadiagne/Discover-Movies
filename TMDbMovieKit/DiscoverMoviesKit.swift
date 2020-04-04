@@ -52,4 +52,3 @@ public final class DiscoverMoviesKit {
         _shared = DiscoverMoviesKit(apiReadOnlyAccessToken: apiReadOnlyAccessToken)
     }
 }
-

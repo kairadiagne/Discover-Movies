@@ -12,10 +12,10 @@ import UIKit
 final class ColumnFlowLayout: UICollectionViewFlowLayout {
 
     /// The minimum heigt a column should have.
-    private let minColumnWidth: CGFloat = 375
+    private let minColumnWidth: CGFloat = 414
 
     /// The minimum height a cell should have.
-    private let minColumHeight: CGFloat = 212
+    private let minColumHeight: CGFloat = 234
 
     // MARK: Layout
 
@@ -23,16 +23,17 @@ final class ColumnFlowLayout: UICollectionViewFlowLayout {
         super.prepare()
 
         guard let collectionView = collectionView else { return }
-
-        let availableWidth = collectionView.bounds.inset(by: collectionView.layoutMargins).width
-        let maxNumberOfColumns = Int(availableWidth / minColumnWidth)
-        let widthForCells = availableWidth - minimumInteritemSpacing * CGFloat(maxNumberOfColumns)
-        let cellWidth = widthForCells / CGFloat(maxNumberOfColumns).rounded(.down)
-        let heightToWidthRatio = minColumHeight / minColumnWidth
-        let cellHeight = heightToWidthRatio * cellWidth
-
-        itemSize = CGSize(width: cellWidth, height: cellHeight)
+        
         sectionInset = UIEdgeInsets(top: minimumInteritemSpacing, left: minimumInteritemSpacing, bottom: minimumInteritemSpacing, right: minimumInteritemSpacing)
         sectionInsetReference = .fromSafeArea
+        
+        let availableWidth = collectionView.bounds.width - sectionInset.left - sectionInset.right
+        let maxNumColumns = max(1, ceil(availableWidth / minColumnWidth))
+        let availableWidthForCells = availableWidth - CGFloat(maxNumColumns - 1) * minimumInteritemSpacing
+        let cellWidth = (availableWidthForCells / CGFloat(maxNumColumns)).rounded(.down)
+        let heightToWidthRatio = minColumHeight / minColumnWidth
+        let cellHeight = heightToWidthRatio * cellWidth
+        
+        itemSize = CGSize(width: cellWidth, height: cellHeight)
     }
 }

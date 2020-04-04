@@ -39,7 +39,7 @@ final class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
             
             // Fade in detailVC headerImage
             UIView.animate(withDuration: 0.5, delay: 0.3, options: [.curveLinear], animations: {
-                detailVC.detailView.header.alpha = 1.0
+                detailVC.detailView.headerImageView.alpha = 1.0
             }, completion: nil)
             
             // Fade in detaiLVC playbutton

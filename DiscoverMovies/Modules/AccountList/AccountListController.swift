@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SDWebImage
 
-final class AccountListController: BaseViewController {
+final class AccountListController: UIViewController {
     
     // MARK: - Types
     

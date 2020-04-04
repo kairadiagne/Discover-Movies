@@ -9,14 +9,9 @@
 import UIKit
 import TMDbMovieKit
 
-// Convert into a `UICollectionViewController` with a flow layout that has two three or one column based on the size of the window.
-final class MovieListViewController: BaseViewController {
+final class MovieListViewController: UICollectionViewController {
 
-    // MARK: - Properties
-
-    private lazy var collectionView: UICollectionView = {
-        return UICollectionView(frame: .zero, collectionViewLayout: ColumnFlowLayout())
-    }()
+    // MARK: Properties
 
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl(frame: .zero)
@@ -26,14 +21,13 @@ final class MovieListViewController: BaseViewController {
     }()
 
     private let dataProvider: MovieListDataProvider
-
     private var dataSource: CollectionViewFetchedResultsDataSource<MovieListData>!
     
-    // MARK: - Initialize
+    // MARK: Initialize
     
     init(dataProvider: MovieListDataProvider, titleString: String, signedIn: Bool) {
         self.dataProvider = dataProvider
-        super.init(nibName: nil, bundle: nil)
+        super.init(collectionViewLayout: ColumnFlowLayout())
         self.title = titleString
     }
 
@@ -41,7 +35,7 @@ final class MovieListViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Life cycle
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,18 +51,17 @@ final class MovieListViewController: BaseViewController {
     }
 
     private func setupView() {
-         view.embed(subView: collectionView)
-
-         collectionView.registerReusableCell(MovieBackdropCell.self)
-
-         collectionView.delegate = self
-         collectionView.dataSource = dataSource
-         collectionView.refreshControl = refreshControl
-     }
+        collectionView.registerReusableCell(MovieBackdropCell.self)
+        collectionView.delegate = self
+        collectionView.dataSource = dataSource
+        collectionView.refreshControl = refreshControl
+        collectionView.backgroundColor = UIColor.secondarySystemBackground
+    }
 
     private func setupDataSource() {
         dataSource = CollectionViewFetchedResultsDataSource(collectionView: collectionView, fetchedResultsController: dataProvider.fetchedResultsController(), cellProvider: { [weak self] indexPath -> UICollectionViewCell? in
             guard let self = self else { return nil }
+            
             let object = self.dataSource.objectAtIndexPath(indexPath).movie
             let cell = self.collectionView.dequeueReusableCell(forIndexPath: indexPath) as MovieBackdropCell
             let viewModel = MovieBackDropCellViewModel(movie: object)
@@ -77,49 +70,32 @@ final class MovieListViewController: BaseViewController {
         })
     }
     
+    private func loadEmptyStateIfNeeded() {
+        // Load empty state
+        // Enable or disable refresh control
+    }
+    
+    // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = dataSource.objectAtIndexPath(indexPath).movie
+        let movieDetailViewController = MovieDetailViewController(movieObjectID: movie.objectID, signedIn: false)
+        navigationController?.delegate = movieDetailViewController
+        navigationController?.pushViewController(movieDetailViewController, animated: true)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard dataSource.itemCount - 10 == indexPath.row else { return }
+        dataProvider.loadMore()
+    }
+    
     // MARK: - Actions
     
     @objc private func refresh(control: UIRefreshControl) {
         dataProvider.reloadIfNeeded(forceOnline: true) { [weak self] _ in
-            guard let self = self else { return }
-
             DispatchQueue.main.async {
-                self.refreshControl.endRefreshing()
+                self?.refreshControl.endRefreshing()
             }
         }
     }
 }
-
-// MARK: - UITableViewDelegate
-
-extension MovieListViewController: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
-
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard dataSource.itemCount - 10 == indexPath.row else { return }
-        dataProvider.loadMore()
-    }
-}
-
-//extension MovieListViewController: UICollectionViewDragDelegate {
-
-//    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-////        guard let selectedMovie = dataSource.item(atIndex: indexPath.row) else { return [] }
-////
-////        let userActivity = NSUserActivity.detailActivity(for: selectedMovie)
-////        let itemProvider = NSItemProvider(object: userActivity)
-////
-////        let dragItem = UIDragItem(itemProvider: itemProvider)
-////        dragItem.localObject = selectedMovie
-////
-////        return [dragItem]
-//    }
-//}
-
-//        guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-//        showDetailViewController(for: movie, signedIn: signedIn)
-//        collectionView.deselectItem(at: indexPath, animated: true)
-
-//

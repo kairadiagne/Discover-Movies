@@ -10,48 +10,74 @@ import UIKit
 
 final class GradientImageView: UIImageView {
     
-    // MARK: - Properties
+    // MARK: Properties
 
     private var gradientLayer = CAGradientLayer()
     
-    var colors: [CGColor] = [UIColor.clear.cgColor, UIColor.backgroundColor().cgColor] {
+    var colors: [UIColor] = [UIColor.clear, UIColor.black] {
         didSet {
-            self.gradientLayer.colors = colors
+            gradientLayer.setNeedsDisplay()
         }
     }
     
-    var startPoint = CGPoint.zero {
+    var startPoint: CGPoint = .zero {
         didSet {
-            self.gradientLayer.startPoint = startPoint
+            gradientLayer.startPoint = startPoint
         }
     }
     
-    var endPoint = CGPoint(x: 0, y: 1) {
+    var endPoint: CGPoint = CGPoint(x: 0, y: 1) {
         didSet {
-            self.gradientLayer.endPoint = endPoint
+            gradientLayer.endPoint = endPoint
         }
     }
     
-    // MARK: - Initialize
+    private var currentBounds: CGRect = .zero
+    private var currentColors: [CGColor] = []
+    
+    // MARK: Initialize
+    
+    init(frame: CGRect, colors: [UIColor]) {
+        super.init(frame: frame)
+        
+        self.colors = colors
+        commonInit()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.gradientLayer.colors = colors
-        self.gradientLayer.startPoint = startPoint
-        self.gradientLayer.endPoint = endPoint
-        self.layer.addSublayer(self.gradientLayer)
+        
+        commonInit()
     }
     
-    // MARK: - Life Cycle
+    private func commonInit() {
+        layer.addSublayer(gradientLayer)
+        gradientLayer.colors = colors
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+    }
+    
+    // MARK: Life Cycle
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // Override default animation of properties layer.
-        CATransaction.begin()
-        // Actions triggered as a result of property changes made within this transaction group are supressed.
-        CATransaction.setDisableActions(true)
-        self.gradientLayer.frame = self.bounds
-        // Commit all changes made during the current transaction
-        CATransaction.commit()
+        
+        if currentBounds != bounds {
+            currentBounds = bounds
+            
+            // Override default animation of properties layer.
+            CATransaction.begin()
+            // Actions triggered as a result of property changes made within this transaction group are supressed.
+            CATransaction.setDisableActions(true)
+            self.gradientLayer.frame = self.bounds
+            // Commit all changes made during the current transaction
+            CATransaction.commit()
+        }
+                    
+        traitCollection.performAsCurrent {
+            let newResolvedColors = self.colors.compactMap { $0.cgColor }
+            guard currentColors != newResolvedColors else { return }
+            self.gradientLayer.colors = newResolvedColors
+        }
     }
 }

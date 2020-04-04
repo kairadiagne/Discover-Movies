@@ -8,13 +8,13 @@
 
 import UIKit
 
-final class DiscoverTabBarController: UITabBarController {
+final class DiscoverTabBarController: UITabBarController { // RootTabBarController
 
-    // MARK: - Properties
+    // MARK: Properties
 
     private let dependencyContainer: DependencyContainer
 
-    // MARK: - Initialize
+    // MARK: Initialize
 
     init(dependencyContainer: DependencyContainer) {
         self.dependencyContainer = dependencyContainer
@@ -44,14 +44,7 @@ final class DiscoverTabBarController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Life Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tabBar.barTintColor = .backgroundColor()
-        tabBar.tintColor = .buttonColor()
-    }
+    // MARK: Life Cycle
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -64,8 +57,7 @@ final class DiscoverTabBarController: UITabBarController {
     }
 
     private func freshNavigationController(rootViewController: UIViewController) -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        navigationController.navigationBar.barTintColor = .backgroundColor()
+        let navigationController = BaseNavigationController(rootViewController: rootViewController)
         return navigationController
     }
 }

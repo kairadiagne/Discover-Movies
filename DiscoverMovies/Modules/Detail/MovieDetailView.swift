@@ -12,7 +12,7 @@ import SDWebImage
 
 final class MovieDetailView: UIView {
     
-    // MARK: - Properties
+    // MARK: Properties
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -34,73 +34,28 @@ final class MovieDetailView: UIView {
     @IBOutlet weak var readReviewsButton: DiscoverButton!
     @IBOutlet weak var favouriteControl: FavouriteButton!
     @IBOutlet weak var watchListControl: WatchListButton!
-    @IBOutlet weak var header: GradientImageView!
+    @IBOutlet weak var headerImageView: GradientImageView!
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     
-    @IBOutlet weak var scrollTop: NSLayoutConstraint!
     @IBOutlet weak var headerTop: NSLayoutConstraint!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var animationConstraint: NSLayoutConstraint!
-   
+    
     private var contentInsetTop: CGFloat = 0
-    
     private var defaultHeaderheight: CGFloat = 0
-    
     private var didSetContentInset = false
     
-    // MARK: - Awake
-
+    // MARK: Awake
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .backgroundColor()
-        contentView.backgroundColor = .backgroundColor()
-        
-        titleLabel.font = UIFont.H1()
-        titleLabel.textColor = .white
-        
-        descriptionLabel.font = UIFont.Body()
-        descriptionLabel.textColor = UIColor.white
-        
-        directorLabel.font = UIFont.H2()
-        directorLabel.textColor = .white
-        
-        directorValueLabel.font = UIFont.Caption()
-        directorValueLabel.textColor = .white
-
-        releaseLabel.font = UIFont.H2()
-        releaseLabel.textColor = .white
-        
-        releaseValueLabel.font = UIFont.Caption()
-        releaseValueLabel.textColor = .white
-        
-        genreLabel.font = UIFont.H2()
-        genreLabel.textColor = .white
-        
-        genreValueLabel.font = UIFont.Caption()
-        genreValueLabel.textColor = .white
-        
-        ratingLabel.font = UIFont.H2()
-        ratingLabel.textColor = .white
-        
-        ratingValueLabel.font = UIFont.Caption()
-        ratingValueLabel.textColor = .white
-        
-        castLabel.font = UIFont.H2()
-        castLabel.textColor = .white
-        
-        similarLabel.font = UIFont.H2()
-        similarLabel.textColor = .white
+        headerImageView.colors = [UIColor.clear, UIColor.systemBackground]
         
         favouriteControl.lineColor = .buttonColor()
         favouriteControl.fillColor = .buttonColor()
         watchListControl.lineColor = .buttonColor()
         watchListControl.fillColor = .buttonColor()
-        
-        backButton.tintColor = .white
-        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        backButton.setTitle("backButtonTitle".localized, for: .normal)
         
         directorLabel.text = "directorLabelText".localized
         genreLabel.text = "genreLabelText".localized
@@ -111,29 +66,25 @@ final class MovieDetailView: UIView {
         seeAllButton.setTitleColor(.white, for: .normal)
         seeAllButton.isHidden = true
         
-        header.clipsToBounds = true 
-        
         // For animation
-        header.alpha = 0.3
+        headerImageView.alpha = 0.3
         playButton.alpha = 0.3
-        
-        scrollView.contentInset.top = contentInsetTop
     }
     
-    // MARK: - LifeCycle
-   
+    // MARK: Life Cycle
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         if !didSetContentInset {
             didSetContentInset = true
             defaultHeaderheight = headerHeightConstraint.constant
-            contentInsetTop = ceil(headerHeightConstraint.constant - scrollTop.constant)
+            contentInsetTop = headerHeightConstraint.constant - safeAreaInsets.top
             scrollView.contentInset.top = contentInsetTop
         }
     }
     
-    // MARK: - Configure
+    // MARK: Configure
     
     func configure(forSignIn signedIn: Bool) {
         favouriteControl.isHidden = !signedIn
@@ -141,34 +92,23 @@ final class MovieDetailView: UIView {
     }
     
     func configure(forMovie movie: Movie) {
+        if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backdropPath).url {
+            headerImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
+        } else {
+            headerImageView.image = UIImage.placeholderImage()
+        }
+        
         titleLabel.text = movie.title
-//        descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : "noDescriptionText".localized
-//        genreValueLabel.text = movie.genres.first?.name ?? "unknownGenreText".localized
-//        ratingValueLabel.text =  "\(movie.rating)\\10.0"
-//        
-//        if let releaseYear = movie.releaseDate.toDate()?.year() {
-//            releaseValueLabel.text = "\(releaseYear)"
-//        } else {
-//            releaseValueLabel.text = "unknownReleaseText".localized
-//        }
-//        
-//        if let imageURL = TMDbImageRouter.backDropMedium(path: movie.backDropPath).url {
-//            header.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholderImage())
-//        } else {
-//            header.image = UIImage.placeholderImage()
-//        }
-    }
-    
-    func configure(forMovieCredit credit: MovieCredit) {
-        titleLabel.text = credit.title
+        descriptionLabel.text = !movie.overview.isEmpty ? movie.overview : "noDescriptionText".localized
+        directorValueLabel.text = movie.director?.name ?? "unknownDirectorText".localized
+        //        genreValueLabel.text = movie.genres.first?.name ?? "unknownGenreText".localized
+        ratingValueLabel.text =  "\(movie.rating)\\10.0"
         
-//        if let releaseYear = credit.releaseDate.toDate()?.year() {
-//            releaseValueLabel.text = "\(releaseYear)"
-//        } else {
-//            releaseValueLabel.text = "unknownReleaseText".localized
-//        }
-        
-        header.image = UIImage.placeholderImage()
+        if let releaseYear = movie.releaseDate.toDate()?.year() {
+            releaseValueLabel.text = "\(releaseYear)"
+        } else {
+            releaseValueLabel.text = "unknownReleaseText".localized
+        }
     }
     
     func configureWithState(inFavorites: Bool, inWatchList: Bool) {
@@ -176,16 +116,12 @@ final class MovieDetailView: UIView {
         watchListControl.setSelectedState(inWatchList)
     }
     
-    func configure(forDirector director: CrewMember?) {
-        directorValueLabel.text = director?.name ?? "unknownDirectorText".localized
-    }
-    
     // MARK: - Header
     
     func moveHeaderOnScroll() {
         let contentOffSetY = scrollView.contentOffset.y
         
-        // Calculate the position of the header 
+        // Calculate the position of the header
         // 1 means the header has collapsed
         // 0 Means the header is fully expanded
         let position = (contentInsetTop + contentOffSetY) / contentInsetTop
@@ -204,5 +140,4 @@ final class MovieDetailView: UIView {
         // Adjust alpha play button
         playButton.alpha = -openHeader + 1
     }
-    
 }

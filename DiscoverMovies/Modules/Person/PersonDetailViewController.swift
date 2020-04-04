@@ -10,7 +10,7 @@ import UIKit
 import TMDbMovieKit
 import SafariServices
 
-final class PersonDetailViewController: BaseViewController {
+final class PersonDetailViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -132,9 +132,9 @@ final class PersonDetailViewController: BaseViewController {
 extension PersonDetailViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
-         let detailViewController = MovieDetailViewController(movie: movie, signedIn: signedIn)
-         navigationController?.pushViewController(detailViewController, animated: true)
+//         guard let movie = dataSource.item(atIndex: indexPath.row) else { return }
+//         let detailViewController = MovieDetailViewController(movieObjectID: movie, signedIn: signedIn)
+//         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 

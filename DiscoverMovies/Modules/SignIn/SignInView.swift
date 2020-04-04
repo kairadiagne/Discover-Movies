@@ -10,7 +10,7 @@ import UIKit
 
 final class SignInView: BaseView {
     
-    // MARK: - Properties
+    // MARK: Properties
     
     @IBOutlet weak var signInDescription: UILabel!
     @IBOutlet weak var signupLabel: UILabel!
@@ -19,7 +19,7 @@ final class SignInView: BaseView {
     @IBOutlet weak var signInLaterButton: UIButton!
     @IBOutlet weak var orLabel: UILabel!
     
-    // MARK: - Awake
+    // MARK: Awake
 
     override func awakeFromNib() {
         super.awakeFromNib()

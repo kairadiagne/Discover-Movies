@@ -49,10 +49,6 @@ final class PersonDetailView: BaseView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .backgroundColor()
-        scrollView.backgroundColor = .backgroundColor()
-        contentView.backgroundColor = .backgroundColor()
-        
         nameLabel.font = UIFont.H2()
         nameLabel.textColor = .white
         nameLabel.numberOfLines = 0

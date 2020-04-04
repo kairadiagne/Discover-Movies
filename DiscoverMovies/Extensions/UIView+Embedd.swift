@@ -16,9 +16,9 @@ extension UIView {
         subView.translatesAutoresizingMaskIntoConstraints = false
 
         let constraints = [
-            subView.topAnchor.constraint(equalTo: topAnchor),
+            subView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             subView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            subView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            subView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             subView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ]
 

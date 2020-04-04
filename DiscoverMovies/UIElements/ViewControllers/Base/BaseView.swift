@@ -34,8 +34,6 @@ class BaseView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .backgroundColor()
-        
         activityIndicator = UIActivityIndicatorView(frame: .zero)
         activityIndicator?.style = .large
         activityIndicator?.color = .gray

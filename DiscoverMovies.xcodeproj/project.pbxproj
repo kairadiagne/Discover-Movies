@@ -538,7 +538,7 @@
 				1119428A1CCB8DBF001CF39B /* AppDelegate.swift */,
 				11FA2D0C235FAA390029738C /* Scenes */,
 				11D099FE1D966B2500FEDB21 /* UIElements */,
-				EAD2A8211CDC9D000005264B /* Modules */,
+				EAD2A8211CDC9D000005264B /* Screens */,
 				111942881CCB8D6F001CF39B /* Theme */,
 				111942841CCB8D13001CF39B /* Extensions */,
 				11E923DE1FE06DD7001F6530 /* Resources */,
@@ -1111,7 +1111,7 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		EAD2A8211CDC9D000005264B /* Modules */ = {
+		EAD2A8211CDC9D000005264B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				1179FC6C1DA1165D00CA1E6D /* Launch */,
@@ -1126,7 +1126,7 @@
 				1167E7691DC648C7003400B7 /* About */,
 				EAD2A8341CDC9EF30005264B /* Menu */,
 			);
-			path = Modules;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		EAD2A82F1CDC9E910005264B /* AccountList */ = {

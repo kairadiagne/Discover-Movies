@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Find a different way to make this the default transitioning of the view controller
+
 final class DetailAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: - UIViewControllerAnimatedTransitioning

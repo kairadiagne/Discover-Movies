@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RequestToken: Codable {
+struct RequestToken: Decodable {
 
     // MARK: Properties
 

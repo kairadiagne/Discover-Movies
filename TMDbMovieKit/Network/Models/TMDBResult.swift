@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TMDBResult<ModelType: Codable>: Codable {
+public struct TMDBResult<ModelType: Decodable>: Decodable {
 
     // MARK: Properties
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TMDBMovieInfo: Codable {
+public struct TMDBMovieInfo: Decodable {
 
     // MARK: Properties
 
@@ -16,14 +16,6 @@ public struct TMDBMovieInfo: Codable {
     public let trailers: [TMDBVideo]
     public let cast: [TMDBCastMember]
     public let crew: [TMDBCrewMember]
-    
-    public var trailer: TMDBVideo? {
-        return trailers.filter { $0.type == "Trailer" }.first
-    }
-    
-    public var director: TMDBCrewMember? {
-        return crew.filter { return $0.job == "Director" }.first ?? nil
-    }
 
     // MARK: Codable
 
@@ -37,6 +29,10 @@ public struct TMDBMovieInfo: Codable {
         case cast
         case crew
     }
+    
+    enum TrailerKeys: String, CodingKey {
+        case youtube
+    }
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -47,18 +43,11 @@ public struct TMDBMovieInfo: Codable {
             movie = try TMDBMovie(from: decoder)
         }
 
-        trailers = (try? values.decodeIfPresent([TMDBVideo].self, forKey: .trailers)) ?? []
-        let credits = try values.nestedContainer(keyedBy: CreditKeys.self, forKey: .credits)
-        crew = try credits.decodeIfPresent([TMDBCrewMember].self, forKey: .crew) ?? []
-        cast = try credits.decodeIfPresent([TMDBCastMember].self, forKey: .cast) ?? []
+        let trailersValues = try values.nestedContainer(keyedBy: TrailerKeys.self, forKey: .trailers)
+        trailers = (try? trailersValues.decodeIfPresent([TMDBVideo].self, forKey: .youtube)) ?? []
+        
+        let creditValues = try values.nestedContainer(keyedBy: CreditKeys.self, forKey: .credits)
+        crew = try creditValues.decodeIfPresent([TMDBCrewMember].self, forKey: .crew) ?? []
+        cast = try creditValues.decodeIfPresent([TMDBCastMember].self, forKey: .cast) ?? []
     }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(movie, forKey: CodingKeys.movie)
-        try container.encode(trailers, forKey: CodingKeys.trailers)
-        var nestedContainer = container.nestedContainer(keyedBy: CreditKeys.self, forKey: .credits)
-        try nestedContainer.encode(cast, forKey: CreditKeys.cast)
-        try nestedContainer.encode(crew, forKey: CreditKeys.crew)
-    }    
 }

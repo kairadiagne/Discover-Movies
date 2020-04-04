@@ -14,7 +14,7 @@ public protocol PersonRepresentable {
     var profilePath: String? { get }
 }
 
-public struct TMDBPerson: PersonRepresentable, Codable {
+public struct TMDBPerson: PersonRepresentable, Decodable {
 
     // MARK: Properties
 
@@ -74,23 +74,5 @@ public struct TMDBPerson: PersonRepresentable, Codable {
         let movieCredits = try values.nestedContainer(keyedBy: MovieCreditsKeys.self, forKey: .movieCredits)
         cast = try movieCredits.decodeIfPresent([TMDBMovieCredit].self, forKey: .cast) ?? []
         crew = try movieCredits.decodeIfPresent([TMDBMovieCredit].self, forKey: .crew) ?? []
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(identifier, forKey: CodingKeys.identifier)
-        try container.encode(imdbId, forKey: CodingKeys.imdbId)
-        try container.encode(name, forKey: CodingKeys.name)
-        try container.encode(gender, forKey: CodingKeys.gender)
-        try container.encode(adult, forKey: CodingKeys.adult)
-        try container.encodeIfPresent(birthDay, forKey: CodingKeys.birthDay)
-        try container.encodeIfPresent(birthPlace, forKey: CodingKeys.birthPlace)
-        try container.encodeIfPresent(deathDay, forKey: CodingKeys.deathDay)
-        try container.encodeIfPresent(biography, forKey: CodingKeys.biography)
-        try container.encodeIfPresent(homepage, forKey: CodingKeys.homepage)
-        try container.encodeIfPresent(profilePath, forKey: CodingKeys.profilePath)
-        var movieCredits = container.nestedContainer(keyedBy: MovieCreditsKeys.self, forKey: .movieCredits)
-        try movieCredits.encode(cast, forKey: .cast)
-        try movieCredits.encode(crew.self, forKey: .crew)
     }
 }

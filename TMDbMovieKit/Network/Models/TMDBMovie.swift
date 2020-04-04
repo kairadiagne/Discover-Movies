@@ -15,7 +15,7 @@ public protocol MovieRepresentable {
     var posterPath: String { get }
 }
 
-public struct TMDBMovie: MovieRepresentable, Codable {
+public struct TMDBMovie: MovieRepresentable, Decodable {
 
     // MARK: Properties
 
@@ -58,17 +58,5 @@ public struct TMDBMovie: MovieRepresentable, Codable {
         } else {
             genres = []
         }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(identifier, forKey: CodingKeys.identifier)
-        try container.encode(title, forKey: CodingKeys.title)
-        try container.encode(overview, forKey: CodingKeys.overview)
-        try container.encode(releaseDate, forKey: CodingKeys.releaseDate)
-        try container.encode(rating, forKey: CodingKeys.rating)
-        try container.encode(posterPath, forKey: CodingKeys.posterPath)
-        try container.encode(backDropPath, forKey: CodingKeys.backDropPath)
-        try container.encode(genres, forKey: CodingKeys.genres)
     }
 }

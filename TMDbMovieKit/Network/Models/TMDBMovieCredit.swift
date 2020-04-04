@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TMDBMovieCredit: MovieRepresentable, Codable {
+public struct TMDBMovieCredit: MovieRepresentable, Decodable {
 
     // MARK: Properties
 

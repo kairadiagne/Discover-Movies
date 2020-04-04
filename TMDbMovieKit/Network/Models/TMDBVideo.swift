@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct TMDBVideo: Codable {
+public struct TMDBVideo: Decodable {
 
     // MARK: Properties
 
     public let name: String
-    public let source: String
     public let size: String
+    public let source: String
     public let type: String
 }

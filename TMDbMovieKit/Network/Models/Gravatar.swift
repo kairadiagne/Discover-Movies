@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Gravatar: Codable {
+public struct Gravatar: Decodable {
 
     // MARK: Properties
 

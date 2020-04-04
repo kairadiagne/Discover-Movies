@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TMDBCastMember: PersonRepresentable, Codable {
+public struct TMDBCastMember: PersonRepresentable, Decodable {
 
     // MARK: Properties
 

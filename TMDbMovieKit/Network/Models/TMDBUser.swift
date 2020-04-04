@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TMDBUser: Codable {
+public struct TMDBUser: Decodable {
 
     // MARK: Properties
 
